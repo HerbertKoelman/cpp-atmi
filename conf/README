@@ -1,0 +1,9 @@
+Taylor envfile and ubbconfig to run sample code. You'll need to create a queue space TSPACE (Test SPACE) with the following queues:
+
+  Queue qerr: 0 Persistent Messages using 0 pages.
+            0 Nonpersistent Messages using 0 bytes.
+            0 Messages in total using 0 bytes.
+  Queue persist: 0 Persistent Messages using 0 pages.
+               0 Nonpersistent Messages using 0 bytes.
+               0 Messages in total using 0 bytes.
+

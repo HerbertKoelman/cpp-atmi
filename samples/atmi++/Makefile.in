@@ -1,0 +1,77 @@
+# $Revision: 44 $ $Author: hkoelman $
+#
+# builds simple application server and clients
+
+.SUFFIXES:.V .v
+# Build client -> bcl
+.SUFFIXES:.bcl
+# Build server -> bsr
+.SUFFIXES:.bsr
+
+BASEDIR=../../
+XREFDIR=${BASEDIR}/xref/
+UDATAOBJ=$(BASEDIR)/udataobj/
+BINDIR=$(BASEDIR)/bin/
+APPDIR=$(BASEDIR)/app/
+INCDIR=$(BASEDIR)/include/
+LIBDIR=$(BASEDIR)/lib/
+LOCALEDIR=${BASEDIR}/locale
+
+# Tuxedo
+TUXLIB=$(TUXDIR)/lib
+TUXINC=$(TUXDIR)/include
+
+INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
+LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
+
+CC=@CC@
+CCC=@CXX@
+RANLIB=@RANLIB@
+RM=rm -f
+AR=@AR@
+
+DEBUG=-g -bnoquiet
+
+CFLAGS=@CFLAGS@
+CXXFLAGS=@CXXFLAGS@
+CCFLAGS=@CXXFLAGS@
+LDFLAGS=@LDFLAGS@ @LIBS@
+
+TARGETS=qexport qimport qtest btest tptest SIMPSERV SIMPSERV++
+
+all:${TARGETS}
+
+clean:
+	${RM} *.o core *.a
+
+globber:
+	${RM} *.o core *.a
+	${RM} ${TARGETS}
+
+cxref:
+	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
+
+beautify:
+	indent -l1024 -kr *.c *.cpp *.cc *.h *.hpp
+
+# Build a simple Tuxedo client program (buildclient)
+.bcl:
+	CC=@CXX@ \
+	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	buildclient -v \
+	-o $@ \
+	-f $< \
+	-l -lfml++ \
+	-l -lcltatmi++ \
+	-l -latmiutl++
+
+# Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
+.bsr:
+	CC=@CXX@ \
+	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	buildserver -s @$@.func \
+	-o $@ \
+	-f $< \
+	-l -lfml++ \
+	-l -lcltatmi++ \
+	-l -latmiutl++

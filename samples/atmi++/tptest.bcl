@@ -1,0 +1,97 @@
+/* $Id: tptest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <string.h>
+#include <iostream>
+#include <atmi++.h>
+
+using namespace std;
+using namespace atmi;
+
+class TPtest : public AbstractClient {
+public:
+
+  TPtest () : AbstractClient ("tptest"){
+  };
+
+  int run ( int argc, char **argv ) {
+
+    int ret = -1;
+    cout << "Starting client program tptest." << endl;
+
+    try {
+
+      Tp tp ( "TOUPPER" );
+      int urcode = 0;
+
+      try {
+
+
+        Buffer buffer;
+
+        TField<string> name ( "EMPNAME" );
+        name = (string) "Herbert";
+
+        buffer.add ( &name );
+
+        cout << "  Calling service TOUPPER (" << name  << ")." << endl;
+
+        //switch ((ret = tp.call ( message, len, (char **)&message, (long *)&len, (int *)&urcode, 1, 1 ))) {
+        //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
+        //switch ((ret = tp.call ( message, len, &message, &len ))) {
+        //ret = tp.acall ( &buffer );
+        //switch ((ret =tp.reply ( &buffer, NULL, &ret))) {
+        switch ((ret = tp.call ( &buffer ))) {
+          case 0:
+            break;
+          case -1:
+            cerr << "  TOUPPER returned TPFAIL." << endl;
+            break;
+          default:
+            cerr << "  TOUPPER returned URCODE: " << ret << endl;
+            cout << "  Call returned: " << endl;
+						buffer.print() ;
+        }
+
+        buffer.get ( &name );
+        cout << "  Call returned: " << name << "." << endl;
+
+      } catch ( ServiceException& serr ) {
+        cerr << "  Service Exception catched. tpcall failed." << endl;
+        cerr << "  What: " << serr.what () << endl;
+      } catch ( TuxedoException& terr ) {
+        cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
+        cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+      };
+
+      cout << "Ending program." << endl;
+    } catch ( TuxedoException& terr ) {
+      cerr << terr.what () << endl;
+    } catch (BufferException berr ) {
+      cerr << berr.what() << endl;
+    };
+
+    return ret;
+  };
+};
+
+int main ( int argc, char **argv ) {
+
+  int ret = 0;
+
+  try {
+
+		cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    TPtest tp;
+    ret = tp.run ( argc, argv );
+
+  } catch ( Exception& err ) {
+    cerr << err.what () << endl;
+  } catch (exception uerr ) {
+    cerr << uerr.what() << endl;
+  };
+
+  return ret;
+}

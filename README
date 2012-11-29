@@ -1,0 +1,68 @@
+atmi++ v0.2 (herbert koelman)
+$Id$
+-------------------------------------------------------------------
+
+Relese 0.2 of the atmi++ library. It has been mostly tested on Linux 
+C6 using Tuxedo 8.1. Some basic testings have been done on AIX 5.3 again 
+with Tuxedo 8.1.
+
+To use in your project you will need :
+- content of include/ directory.
+- content of lib/ directory
+- link your code with -latmi++ and -latmiutl++
+
+Bugs can be reported at issues@atmiplusplus.projects.dev2dev.bea.com
+
+ ATMI++ is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ ATMI++ is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with ATMI++; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301  USA
+
+Build
+-------------------------------------------------------------------
+
+Un tar atmi++-0.2.tar.gz and run:
+	prompt$ cd atmi++-0.2
+	prompt$ configure
+	prompt$ make
+
+This will build:
+- lib/libatmi++.a
+- lib/libatmiutl++.a
+- bin/tptest
+- bin/qtest
+- app/SIMPSERV
+- app/SIMPSERV++
+
+If you have installed doxygen (http://www.doxygen.org/ then you can build 
+an online documentation of atmi++'s classes and sample code.
+  prompt$ make doxygen
+
+Autoconf
+-------------------------------------------------------------------
+
+Autoconf was usage reminder:
+  prompt$ autoscan
+
+Rename and taylor configure.scan into configure.ac. Run autoheader:
+  promtp$ autoheader
+
+Create configure script
+  prompt$ autoconf
+
+Voila you should be done.
+
+If you need more so to http://www.gnu.org/software/autoconf/
+
+-------------------------------------------------------------------
+Copyright (C) 2006 - herbert koelman

@@ -1,0 +1,102 @@
+# $Id: ubbconfig 8 2006-09-29 08:44:39Z hkoelman $
+
+#Skeleton UBBCONFIG file for the TUXEDO Simple Application.
+#
+#Replace the items with the appropriate values.
+# /share/home/herbert/wa/atmi++ : where you installed the sample
+# 32769 : must be greater then 32768  
+# hera : your server name (you might use hostname to get if)
+
+
+#---------------------------------------------------------------------
+*RESOURCES
+IPCKEY		    32769
+
+DOMAINID	    ATMICPP
+MASTER		    CHATELET
+MAXACCESSERS	100
+MAXSERVERS	  100
+MAXSERVICES	  200
+MAXTRANTIME   5 
+MODEL		      SHM
+LDBAL		      Y
+SCANUNIT      5
+SANITYSCAN    3
+BLOCKTIME     3
+DBBLWAIT      1
+PERM          0600
+
+#---------------------------------------------------------------------
+*MACHINES
+DEFAULT:
+  APPDIR="/share/home/herbert/wa/atmi++/trunk/app"
+  TUXCONFIG="/share/home/herbert/wa/atmi++/trunk/conf/ubbconfig.bin"
+  TUXDIR="/opt/bea/tuxedo11gR1"
+  ULOGPFX="/share/home/herbert/tmp/atmi++ulog"
+
+"chatelet"	LMID=CHATELET
+  TLOGDEVICE="/share/home/herbert/tmp/ATMI++TLOG.000"
+  ENVFILE="/share/home/herbert/wa/atmi++/trunk/conf/envfile"
+  SPINCOUNT=4000
+
+#---------------------------------------------------------------------
+*GROUPS
+SYS      LMID=CHATELET    GRPNO=2
+LMSGRP   LMID=CHATELET    GRPNO=3
+SERV     LMID=CHATELET    GRPNO=5
+XASERV   LMID=CHATELET    GRPNO=6
+  TMSNAME=TMS
+
+# CHATELET queue space (TSPACE)
+TSPACE      LMID=CHATELET    GRPNO=7
+  TMSNAME=TMS_QM
+  OPENINFO="TUXEDO/QM:/pwa/tux/herbert/atmi++queues.000:TSPACE"
+
+#---------------------------------------------------------------------
+*SERVERS
+DEFAULT:
+  CONV=N
+  SEQUENCE=50
+  CLOPT="-A --"
+  MAXGEN=5 GRACE=30 RESTART=Y
+  REPLYQ=Y
+  MIN=1   MAX=50
+
+#LMS SRVGRP=LMSGRP SRVID=100
+#  MINDISPATCHTHREADS=1 
+#  MAXDISPATCHTHREADS=5 
+#  CLOPT="-A -- -l hera:8080/tsam/dataserver"
+
+SIMPSERV   SRVGRP=SERV SRVID=100
+  CLOPT="-r -s TOUPPER -s HELLO"
+  MIN=2 MAX=20
+  REPLYQ=Y
+
+"SIMPSERV++" SRVGRP=XASERV SRVID=100
+  CLOPT="-r -s TOUPPER -s persist:TOUPPER"
+  REPLYQ=Y
+  MINDISPATCHTHREADS=2 MAXDISPATCHTHREADS=20
+
+SIMPSERV   SRVGRP=XASERV SRVID=200
+  CLOPT="-r -s persist:TOUPPER"
+  RQADDR="SIMPSERV"
+  REPLYQ=Y
+  MIN=2
+
+TMQUEUE SRVGRP=TSPACE SRVID=100
+  CLOPT="-s TSPACE:TMQUEUE"
+  MIN=3
+
+# WARNING no reply queue for this server
+TMQFORWARD  SRVGRP=TSPACE SRVID=200
+  CLOPT="-- -q persist"
+  REPLYQ=N
+  MIN=3
+
+#---------------------------------------------------------------------
+*SERVICES
+DEFAULT:
+  SVCTIMEOUT=1
+
+TOUPPER
+TSPACE

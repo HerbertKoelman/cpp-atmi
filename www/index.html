@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>ATMI++</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.0  (Linux)">
+	<META NAME="AUTHOR" CONTENT="herbert koelman">
+	<META NAME="CREATED" CONTENT="20070602;9274400">
+	<META NAME="CHANGEDBY" CONTENT="herbert koelman">
+	<META NAME="CHANGED" CONTENT="20070814;2130300">
+	<META NAME="CLASSIFICATION" CONTENT="C++ wrapper for ATMI">
+	<STYLE>
+	<!--
+		@page { size: 21.01cm 29.69cm; margin-left: 0.81cm; margin-right: 1.25cm; margin-top: 2.01cm; margin-bottom: 2.01cm }
+		TD P { margin-bottom: 0.2cm }
+		P { margin-bottom: 0.2cm }
+		H4 { margin-bottom: 0.2cm }
+		H4.western { font-family: "Albany", sans-serif; font-size: 11pt; font-style: italic }
+		H4.cjk { font-family: "HG Mincho Light J"; font-size: 11pt; font-style: italic }
+		H4.ctl { font-family: "Arial Unicode MS"; font-size: 11pt; font-style: italic }
+		H5 { text-decoration: underline; page-break-before: auto; page-break-after: auto }
+		H5.western { font-family: "Albany", sans-serif; font-size: 11pt; font-style: italic; font-weight: medium }
+		H5.cjk { font-family: "HG Mincho Light J"; font-size: 14pt; font-weight: medium }
+		H5.ctl { font-family: "Arial Unicode MS"; font-size: 14pt; font-weight: medium }
+		TH P { margin-bottom: 0.2cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="fr-FR" DIR="LTR">
+<H4 CLASS="western">What it does</H4>
+<P>This project simply offers a C++ wrappers for the ATMI C library,
+making it easier to write fast and rock solid Tuxedo software.</P>
+<P>The targeted implementation should be thread safe and offer
+multi-context capabilities. The ATMI++ comes as the following list of
+libraries:</P>
+<UL>
+	<LI><P>atmi++.a : set of classes to handle ATMI calls in C++
+	programs</P>
+	<UL>
+		<LI><P>Tuxedo class : base class offers access to common function
+		(like memory allocation).</P>
+		<LI><P>Tp class: extends Tuxedo class with calls dedicated to
+		transaction processing</P>
+		<LI><P>Queue class : extends Tuxedo class with calls dedicated to
+		queuing operations.</P>
+	</UL>
+	<LI><P>atmiutl++.a : set of helper classes to handle concurrency and
+	multithreading</P>
+	<UL>
+		<LI><P>Thread class: wrapper of the POSIX Threading library</P>
+		<LI><P>Mutes class: wrapper to POSIX Mutex handling functions.</P>
+		<LI><P>Condition class: wrapper to POSIX Condition handling
+		functions.</P>
+	</UL>
+</UL>
+<P>Documentation is <A HREF="doxygenerated/html/index.html">here</A> 
+</P>
+<H4 CLASS="western">How it works</H4>
+<P>ATMI calls are devided into three types:</P>
+<UL>
+	<LI><P>transaction processing (for example tpcall)</P>
+	<LI><P>event processing (for example tppost)</P>
+	<LI><P>uncoupled calls (for example tpdequeue)</P>
+</UL>
+<P>Following compares two code samples one in C and the other in C++.
+The C code sample comes with poor diagnostics, only error numbers are
+returned. On the other hand the C++ program comes with human readable
+error messages. Using exception makes it sure that code execution is
+interrupted if an error condition ariszes. The C++ program is written
+in fewer instruction then C.</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=256*>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<PRE>C code sample (26 lines in main no counting comments)</PRE>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<PRE>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;atmi.h&quot;               /* TUXEDO  Header File */
+
+
+int main(int argc, char *argv[])
+{
+
+        char *sendbuf;
+        long sendlen;
+        int ret;
+
+
+        /* Attach to System/T as a Client Process */
+        if (tpinit((TPINIT *) NULL) == -1) {
+                (void) fprintf(stderr, &quot;Tpinit failed\n&quot;);
+                exit(1);
+        }
+
+        sendlen = 100;
+
+        /* Allocate STRING buffers for the request and the reply */
+        if((sendbuf = (char *) tpalloc(&quot;STRING&quot;, NULL, sendlen+1)) == NULL) {
+                (void) fprintf(stderr,&quot;Error allocating send buffer\n&quot;);
+                tpterm();
+                exit(1);
+        }
+
+        (void) strcpy(sendbuf, &quot;hello&quot;);
+
+        /* Request the service TOUPPER, waiting for a reply */
+        ret = tpcall(&quot;TOUPPER&quot;, (char *)sendbuf, 0, (char **)&amp;sendbuf, &amp;sendlen, (long)0);
+
+        if(ret == -1) {
+                (void) fprintf(stderr, &quot;Can't send request to service TOUPPER\n&quot;);
+                (void) fprintf(stderr, &quot;Tperrno = %d\n&quot;, tperrno);
+                tpfree(sendbuf);
+                tpterm();
+                exit(1);
+        }
+
+        (void) fprintf(stdout, &quot;Returned string is: %s\n&quot;, sendbuf);
+
+        /* Free Buffers &amp; Detach from System/T */
+        tpfree(sendbuf);
+        tpterm();
+        return(0);
+}</PRE>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<PRE>C++ sample code (21 lines in main no counting comments)</PRE>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=100% VALIGN=TOP>
+			<PRE>#include &lt;string.h&gt;
+#include &lt;iostream&gt;
+#include &quot;Tuxedo.h&quot;
+
+using namespace std ;
+
+int main ( int argc, char **argv ) {
+
+  int ret = -1 ;
+  
+  try {
+
+    Tp tp ( &quot;TOUPPER&quot; );
+    char *message ;
+    long len = 100 ;
+
+    tp.init ();
+
+    message = tp.allocate ( &quot;STRING&quot;, NULL, len );
+    strcpy ( message , &quot;hello&quot; );
+
+    try {
+      // give it 1 chance with a 1 second delay between retries
+      ret = tp.call ( &amp;message, &amp;len, 1, 1 ); 
+      cout &lt;&lt; &quot;returned string si&quot; &lt;&lt; message &lt;&lt; endl;
+
+    } catch ( TuxedoException&amp; terr ) {
+      cerr &lt;&lt; &quot;Can't send request to TOUPPER.&quot;  ;
+      cerr &lt;&lt; terr.what () &lt;&lt; endl ; // detailed error descritpion
+    };
+
+    tp.free ( message );
+    tp.term();
+
+  } catch ( TuxedoException&amp; terr ) {
+    cerr &lt;&lt; terr.what () &lt;&lt; endl ;
+  };
+
+  return ret ;
+}</PRE>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P>The library is devided into a very simple set of classes: <B>Tuxedo</B>,
+<B>Tp</B>, <B>Event</B> and <B>Queue.</B> Each one is handling one
+category of ATMI calls.</P>
+<P>Base class <B>Tuxedo</B> implements all the common calls of ATMI
+(like tpinit). Specialized class <B>Tp</B> extends the base class
+<B>Tuxedo</B> with everything needed to call services. <B>Queue</B>
+class extends base class <B>Tuxedo</B> to offer functions to queue
+and dequeue messages. The <B>Event</B> class extends <B>Tuxedo</B>
+class with operations to send, post and broadcast events.</P>
+<P STYLE="font-weight: medium">ATMI errors handling is based upon C++
+exception classes. This way it makes much easier (and consistent) to
+handle errors conditions.</P>
+<H4 CLASS="western"><A HREF="https://atmiplusplus.projects.dev2dev.bea.com/source/browse/atmiplusplus/trunk/">Project
+directories layout</A></H4>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=0 CELLSPACING=0>
+	<COL WIDTH=58*>
+	<COL WIDTH=198*>
+	<TR VALIGN=TOP>
+		<TH WIDTH=23%>
+			<P>Directory</P>
+		</TH>
+		<TH WIDTH=77%>
+			<P>Content</P>
+		</TH>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>app</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Contains demo servers implemented using atmi++ library. It is
+			the Tuxedo APPDIR of the demo config. 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>bin</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Set of Tuxedo client prgrams written using atmi++.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>conf</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Template configuration files to help setup a running tuxedo
+			application (or domain).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>include</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Atmi++ header files. These are needed to build client or server
+			programs that are using atmi++ (see Makefile in bin and app
+			directory).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>lib</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Target directory of atmi++ atmiutl++ library files (see
+			makefiles in src/tuxedo and src/utl).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>log</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Used to write log files of demo Tuxedo domain.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>src</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Contains source code to build and package atmi++ libraries.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=23%>
+			<P>www</P>
+		</TD>
+		<TD WIDTH=77%>
+			<P>Dev2Dev online documentation.</P>
+		</TD>
+	</TR>
+</TABLE>
+<H4 CLASS="western">How you can participate</H4>
+<P>I'm looking for people to help making existing code more reliable
+by testing the library. The development of the Event class has yet to
+be started.</P>
+<P>I'm also interrested into people coding samples to illustrate the
+usage of this libary. Servers in app directory and clients in bin.
+Last, if anyone would consider porting this bit of code onto other
+UNIX flavors that would be great.</P>
+<P>It would nice to find someone to help build a shared object
+distrib as well.</P>
+<P>Anyone to toy with autoconf to help porting of the library on
+other Unix plate-forms ?</P>
+<H4 CLASS="western">How to install and execute</H4>
+<H5 CLASS="western">Linux installation and usage</H5>
+<P>The Linux release is build using gcc version 4.1.2 20070626 and
+was tested on Fedora Core 6. Programs were run by Tuxedo release 8.1.</P>
+<H5 CLASS="western">AIX installation and usage</H5>
+<P>Code will be published soon and an installation and usage
+instruction will be added here.</P>
+<P STYLE="border-top: none; border-bottom: 1.00pt solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.08cm; padding-left: 0cm; padding-right: 0cm">
+<BR><BR>
+</P>
+<P><FONT SIZE=2><I>Author: Herbert Koelman, last updated : <SDFIELD TYPE=DOCINFO SUBTYPE=CHANGE FORMAT=DATE SDNUM="1036;0;JJ/MM/AAAA">14/08/2007</SDFIELD></I></FONT></P>
+</BODY>
+</HTML>

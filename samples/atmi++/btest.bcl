@@ -1,0 +1,106 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include "atmi++.h"
+#include <nl_types.h>
+
+#include "sample_fml_table.h"
+
+using namespace std;
+using namespace atmi;
+
+class BTest : public AbstractClient {
+public:
+
+  int run ( int argc, char **argv ){
+    try {
+
+      nl_catd msg = catopen ("atmi++", 0 );
+      cout << catgets( msg, 1, 2, "Not in message catalog") << endl;
+      Buffer b (100), a;
+
+      cout << "Buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+
+      TField<long> empid ( EMPID );
+      TField<long> empzip ( EMPZIP );
+      TField<string> prenom ( EMPNAME );
+      TField<string> nom ( EMPNAME );
+      TField<char *> carray ( SRVCDAY );
+      TField<char *> copy ( SRVCDAY );
+
+      prenom = "herbert";
+      nom = "this is a char *";
+      empid = 2;
+      carray.setCarray("helloworld\0rray", sizeof ("helloworld\0rray"));
+      copy = carray;
+
+      cout << "Added fields: " << endl;
+      b.add ( &empid );
+      b.add ( &nom );
+      b.add ( &prenom );
+      b.add ( &carray );
+      b.add ( &copy );
+      b.print ();
+
+      cout << "get copy" << endl;
+      b.get ( &copy );
+
+      cout << copy.what() << endl;
+      long len = 5;                    //copy.length();
+      char *cav = new char[len];
+      copy.getCarray ( cav, len );
+      for ( int x = 0; x < len; x++ ) {
+        cout << "'"<< cav[x]<<"',";
+      }
+      cout << endl;
+
+      cout << "Setting empid value: " << endl;
+      empid = 22;
+      b.set ( &empid );
+      b.print ();
+
+      cout << "size : " << b.size();
+      b.pack ();
+      cout << ", after pack: " << b.size() << endl;
+
+      cout << "Buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+
+    }catch ( BufferException buffErr ) {
+      cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
+    } catch ( Exception err ) {
+      cerr << err.what() << endl;
+    } catch ( exception uerr ) {
+      cerr << uerr.what() << endl;
+    }
+
+    return 9999;
+  }
+
+};
+
+// program main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  try {
+
+    BTest btest;
+
+    btest.run ( argc, argv );
+
+  } catch ( Exception err ) {
+    cerr << err.what() << endl;
+  } catch ( exception uerr ) {
+    cerr << uerr.what() << endl;
+  }
+
+  return 9999;
+}
