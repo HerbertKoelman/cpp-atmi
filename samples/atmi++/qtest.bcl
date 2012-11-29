@@ -1,0 +1,246 @@
+/* $Id: qtest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <unistd.h>
+#include <libgen.h>
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <atmi++.h>
+#include <Thread.h>
+
+using namespace std;
+using namespace atmi;
+
+// Runner classes declarations -----------------------------------------
+
+class Runner : public Thread {
+public:
+  inline int isRunning () {
+    return running;
+  };
+  inline void setRunning ( int running ) {
+    this->running = running;
+  };
+  Runner ();
+
+protected:
+  int running;
+};
+
+class Queuer : public Runner {
+public:
+  Queuer ( int qty = 1 ){
+    quantity = qty;
+  }
+
+  void run ();
+
+private:
+  int quantity;
+
+};
+
+class Dequeuer : public Runner {
+public:
+  void run ();
+};
+
+// Runner classes implementations --------------------------------------
+
+Runner::Runner () {
+
+  this->running = 1;
+}
+
+void Dequeuer::run () {
+
+  cout << "Running Dequeuer thread." << endl;
+  try {
+    ofstream fout( "/tmp/results.txt", ios::app );
+
+    long len = 100;
+    Queue qreply ( "QCRO", "persist" );
+
+    char *message = qreply.allocate ( "STRING", NULL, len );
+
+    try {
+      while ( running ) {
+
+        qreply.begin ();
+
+        try {
+          if ( qreply.dequeue ( &message, &len ) != -1 ) {                              // it's ok we have a message
+            fout << "DEQUEUER dequeued : " << message << endl;
+            qreply.enqueueReply ( message, len );
+          }
+
+          qreply.commit ();
+
+        } catch ( BlockingException blocked ) {
+          qreply.abort ();
+          cerr << "  Dequeuer - " << blocked.what() << endl;
+          sleep ( 1 );
+        } catch ( TimeoutException timeout ) {
+          qreply.abort ();
+          cerr << "  Dequeuer - " << timeout.what() << endl;
+        }
+      }
+
+    } catch ( DiagnosticException& derr ) {
+      qreply.abort ();
+      cerr << "  Exit dequeuer loop (DiagnosticException). " << derr.what () << endl;
+    } catch ( TuxedoException& terr ) {
+      qreply.abort ();
+      cerr << "  Exit dequeuer loop (TuxedoException). " << terr.what () << endl;
+    };
+
+    cout << "  Dequeuer - Free dequeuing buffer." << endl;
+    qreply.free ( message );
+
+    cout << "  Dequeuer - Closing ouput file." << endl;
+    fout.close ();
+
+  } catch ( TuxedoException& terr ) {
+    cerr << terr.what () << endl;
+  };
+  cout << "Ended Dequeuer thread." << endl;
+}
+
+void Queuer::run () {
+
+  cout << "Running Queuer thread." << endl;
+  try {
+    long len = 100;
+    int count = quantity;
+    Queue qpersist ( "QCRO", "persist", "reply" );
+
+    char *message = qpersist.allocate ( "STRING", NULL,len );
+    strcpy ( message, "hello lowercase" );
+
+    try {
+      while ( running && ( count > 0 ) ) {
+        try {
+          qpersist.enqueue ( message, len );
+          count--;
+          cout << ".";
+          if ( count % 200 == 0 ) cout << endl;
+        } catch ( TimeoutException timeout ) {
+          sleep ( 1 );
+        };
+      }
+
+      cout << "  Queuer - job done." << endl;
+    } catch ( DiagnosticException& derr ) {
+      cerr << "  Exit dequeuer loop (DiagnosticException). " << derr.what () << endl;
+    }catch ( TuxedoException& terr ) {
+      cerr << "Exit queuer loop. " << terr.what () << endl;
+    };
+
+    cout << "  queuer - free queuing buffer." << endl;
+    qpersist.free ( message );
+
+  } catch ( TuxedoException& terr ) {
+    cerr << terr.what () << endl;
+  };
+
+  cout << "Ended Queuer thread." << endl;
+}
+
+class QTest : public AbstractClient {
+public:
+
+  QTest ( char *cltname ) : AbstractClient () {
+  };
+
+  int run ( int argc, char **argv ) {
+
+    int qty = 1, rc = EXIT_FAILURE;
+    string response;
+    Queuer qin ( qty );
+    Dequeuer qout;
+
+    if ( argc == 2 ) {
+      qty = atoi ( argv[1]);
+      cout << "Qty : " << qty << endl;
+    }
+
+    cout << "Starting client program qtest." << endl;
+    try {
+
+      cout << "Hit any key to interrupt." << endl;
+      qout.start ();
+      qin.start ();
+
+      getline (cin, response);
+      cout << "Ending qtest program." << endl;
+
+      qin.setRunning ( 0 );
+      qout.setRunning ( 0 );
+
+      qout.join ();
+      qin.join ();
+
+      rc = EXIT_SUCCESS;
+
+
+    } catch ( TuxedoException terr ) {
+      cerr << terr.what () << endl;
+    };
+
+    return rc;
+  }
+};
+
+// program main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  /*
+     try {
+     Buffer employee (1024);
+     employee.init();
+
+     TField<string> name (167782161); // "FML_CRD_NUM_CARTE" -> 167782161
+
+     Queue q ( "QCRO", "Q_ERR");
+
+     name = (string) "herbert" ;
+     employee.add ( &name );
+
+     cout << "enqueue" ;
+     q.enqueue ( &employee );
+     cout << ", changing name to " ;
+     name = (string) "koelman" ;
+     cout << name ;
+     q.dequeue ( &employee );
+     cout << ", dequeue" << endl;
+
+     cout << employee.get ( &name )->what() ;
+     cout << "Name : " <<  name << endl;
+
+     q.setQWait ( true );
+     cout << "Is waiting : " << q.isQWaiting () << endl ;
+     }catch ( BufferException berr ) {
+     cerr << "qtest failed. " << berr.what() << endl;
+     }catch ( Exception err ) {
+     cerr << "qtest failed. " << err.what() << endl;
+     }
+   */
+
+  try{
+    QTest qt ( basename ( argv [0]) );
+    qt.run ( argc, argv );
+
+  }catch ( BufferException berr ) {
+    cerr << "qtest failed. " << berr.what() << endl;
+  }catch ( Exception err ) {
+    cerr << "qtest failed. " << err.what() << endl;
+  }
+
+  cout << "That was it folks" << endl;
+  return 9999;
+}

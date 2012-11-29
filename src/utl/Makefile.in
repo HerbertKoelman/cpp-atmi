@@ -1,0 +1,69 @@
+# $Id: Makefile 28 2007-08-06 22:29:28Z hkoelman $
+# 
+# First created by: hkoelman (herbert.koelman@urbix.fr)
+#
+# builds simple application server and clients
+
+.SUFFIXES: .cl .V .srv .v .cc
+
+BASEDIR=../../
+UDATAOBJ=$(BASEDIR)/udataobj/
+BINDIR=$(BASEDIR)/bin/
+APPDIR=$(BASEDIR)/app/
+INCDIR=$(BASEDIR)/include/
+LIBDIR=$(BASEDIR)/lib/
+
+CC=@CC@
+CCC=@CXX@
+RANLIB=@RANLIB@
+RM=rm -f
+AR=@AR@
+
+DEBUG=-g -bnoquiet
+
+CFLAGS=@CFLAGS@
+CXXFLAGS=@CXXFLAGS@
+CCFLAGS=@CXXFLAGS@
+LDFLAGS=@LDFLAGS@ @LIBS@
+VFLAGS=-n
+
+OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o Socket.o ServerSocket.o ClientSocket.o
+
+all : libatmiutl++.a
+
+clean:
+	${RM} *.o core
+
+beautify:
+	uncrustify --no-backup -l CPP --replace -c ../crust.cfg *.C
+
+globber:
+	${RM} *.o core ../../lib/libatmiutl++.a
+
+libatmiutl++.a: $(OBJS) $(INCDIR)/Concurrency.h $(INCDIR)/Thread.h
+	${AR} ${LIBDIR}/$@ ${OBJS}
+	$(RANLIB) ${LIBDIR}/$@
+
+
+Hello:Hello.o
+	$(CCC) $(CCFLAGS) $(LDFLAGS) Hello.o -o $@ -L ../../lib -latmiutl++
+	
+testTP:Thread.o SlavedThread.o ThreadPool.o Condition.o
+	$(CCC) $(CCFLAGS) $(LDFLAGS) Thread.o SlavedThread.o ThreadPool.o Condition.o -o $@
+
+# Implicit rules  -----------------------------------------
+
+.cc:
+	$(CCC) $(CCFLAGS) $(LDFLAGS) $< -o $@
+
+.cc.o:
+	$(CCC) $(CCFLAGS) -c $<
+
+.cl: 
+	buildclient -o $@ -f $< -f *.o
+
+.srv: 
+	buildserver -o $@ -f $< -f *.o
+
+.v.V: 
+	viewc $(VFLAGS) -d $(UDATAOBJ) $@

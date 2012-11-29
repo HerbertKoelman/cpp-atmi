@@ -1,0 +1,7 @@
+BASEDIR=/share/home/herbert/wa/atmi++/trunk
+PWA=/share/home/herbert/tmp
+TUXCONFIG=${BASEDIR}/conf/ubbconfig.bin
+QMCONFIG=${PWA}/atmi++queues.000
+TLOGDEVICE=${PWA}/ATMI++TLOG.000
+FSCONFIG=${TLOGDEVICE}
+APPDIR=${BASEDIR}/app

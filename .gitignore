@@ -14,4 +14,12 @@
 
 # XCOde files
 *.xcodeproj
+
+# autoconf related
+Makefile
+*.log
+config.status
+include/config.h
+
+# misc
 .*
