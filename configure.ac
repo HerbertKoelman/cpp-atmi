@@ -5,7 +5,7 @@ AC_PREREQ(2.63)
 AC_INIT([atmi++],[2.1],[herbert.koelman@labanquepostale.fr],[http://redmine.lab.transactis.fr/projects/atmiplusplus])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
-AC_CONFIG_HEADERS([include/config.h])
+AC_CONFIG_HEADERS([include/atmi++.h])
 AC_DEFINE_UNQUOTED(ATMI_VERSION, ["v$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 AC_CHECK_PROG([RM],[rm],[rm -f])
 AC_CANONICAL_BUILD
