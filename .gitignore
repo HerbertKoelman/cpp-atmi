@@ -11,3 +11,9 @@
 *.lai
 *.la
 *.a
+
+# autoconf related
+Makefile
+*.log
+config.status
+include/config.h
