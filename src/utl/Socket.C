@@ -4,7 +4,6 @@
 #include <cerrno>
 #include <iostream>
 #include <fcntl.h>
-#include <string.h>
 
 /** Create a new socket descriptor (AF_INET, SOCK_STREAM)
  */

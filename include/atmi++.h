@@ -1,4 +1,3 @@
-/* include/atmi++.h.  Generated from atmi++.h.in by configure.  */
 /*
   $Id$
 
@@ -26,7 +25,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-/** @mainpage C++ implementation for ATMI - Tuxedo
+/** @mainpage C++ implementation for ATMI v2.1 - Tuxedo 9.1
  *
  * @author herbert koelman, eric belloni
  *
@@ -63,7 +62,8 @@
 #ifndef _ATMI_PLUS_PLUS_H_
 #define _ATMI_PLUS_PLUS_H_
 
-#include <atmi_config.h>
+/* #define ATMI_VERSION "v3.0 Aix 5.3TL12 SMP O5 Tuxedo 9.1 32bits" */
+#include <config.h>
 #include <Exceptions.h>
 #include <Tuxedo.h>
 #include <Buffers.h>
