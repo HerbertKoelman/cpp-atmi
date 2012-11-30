@@ -20,6 +20,9 @@ Makefile
 *.log
 config.status
 include/config.h
+include/atmi_config.h
+autom4te.cache
+locale
 
 # misc
 .*
