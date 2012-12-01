@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
+AC_INIT([atmi++],[trunk],[herbert.koelman@me.com])
 AC_CONFIG_SRCDIR([tptest.bcl])
 #AC_CONFIG_HEADERS([../../include/atmi++.h])
 

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[2.1],[herbert.koelman@labanquepostale.fr],[http://redmine.lab.transactis.fr/projects/atmiplusplus])
+AC_INIT([atmi++],[trunk],[herbert.koelman@me.com],[http://redmine.urbix-software.fr/projects/atmiplusplus])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/atmi_config.h])
