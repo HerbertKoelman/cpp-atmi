@@ -1,5 +1,6 @@
 Author: Herbert Koelman  
 Date: 29/11/2012  
+Version: v2.1 (see branch v2.1)
  
 Tuxedo ATMI C++ wrapper
 ============
