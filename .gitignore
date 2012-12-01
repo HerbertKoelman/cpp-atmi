@@ -18,6 +18,7 @@
 # autoconf related
 Makefile
 *.log
+confdefs.h
 config.status
 include/config.h
 include/atmi_config.h
