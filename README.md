@@ -5,7 +5,7 @@ Version: v2.1 (see branch v2.1)
 Tuxedo ATMI C++ wrapper
 ============
 
-The ATMI library comes as c set of libraries, ATMI++ offers a c++ wrapping of this library making it easier to write shorter and more robust Tuxedo code.
+The ATMI library comes as set of C libraries, ATMI++ offers a C++ wrapping of these libraries making it easier to write shorter and more robust Tuxedo code.
 
 Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 
