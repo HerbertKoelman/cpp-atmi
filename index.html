@@ -33,7 +33,7 @@
 <h3>Welcome to Tuxedo ATMI++ C++ library.</h3>
 
 <p>
-The ATMI library comes as a set of libraries, ATMI++ offers a c++ wrapping of these libraries. Using c++ makes it to write shorter and more robust Tuxedo code.
+The ATMI library comes as a set of libraries, ATMI++ offers a c++ wrapping of these libraries. Using c++ makes it easier to write Tuxedo transactions.
 <p>
 <a href="http://en.wikipedia.org/wiki/Tuxedo_(software)">Tuxedo (Transactions for Unix, Extended for Distributed Operations)</a> is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 <p>
@@ -91,14 +91,9 @@ int main ( int argc, char **argv ) {
 <B>Tp</B>, <B>Event</B> and <B>Queue.</B> Each one is handling one
 category of ATMI calls.</P>
 
-<P>Base class <B>Tuxedo</B> implements all the common calls of ATMI
-(like tpinit). Specialized class <B>Tp</B> extends the base class
-<B>Tuxedo</B> with everything needed to call services. <B>Queue</B>
-class extends base class <B>Tuxedo</B> to offer functions to queue
-and dequeue messages. The <B>Event</B> class extends <B>Tuxedo</B>
-class with operations to send, post and broadcast events.</P>
+<P>Base class <B>Tuxedo</B> implements all the common calls of ATMI (like tpinit). Specialized class <B>Tp</B> extends the base class <B>Tuxedo</B> with everything needed to call services. <B>Queue</B> class extends base class <B>Tuxedo</B> to offer functions to queue and dequeue messages. The <B>Event</B> class extends <B>Tuxedo</B> class with operations to send, post and broadcast events.</P>
 
-<P>ATMI errors handling is based upon C++ exception classes. This way it makes much easier (and consistent) to handle errors conditions.</P>
+<P>ATMI errors handling is based upon C++ exception classes. This way, it makes it much to handle errors conditions.</P>
 
 <H3>Getting started</A></H4>
 
