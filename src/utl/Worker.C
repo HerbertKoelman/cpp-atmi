@@ -1,6 +1,7 @@
 #include "ThreadPool.h"
 #include <iostream>
 #include <time.h>
+#include <unistd.h>
 
 /*
    Constructor
