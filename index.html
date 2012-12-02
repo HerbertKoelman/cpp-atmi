@@ -37,74 +37,9 @@ Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middlew
 <p>
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
 <p>
-<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=0>
-	<COL WIDTH=256*>
-	<TR>
-		<TD WIDTH=100% VALIGN=TOP>
-			<PRE>C code sample (26 lines in main no counting comments)</PRE>
-		</TD>
-	</TR>
-	<TR>
-		<TD WIDTH=100% VALIGN=TOP>
-			<PRE>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+C++ sample code (21 lines in main no counting comments)</PRE>
+<PRE><code>
 #include &lt;string.h&gt;
-#include &quot;atmi.h&quot;               /* TUXEDO  Header File */
-
-
-int main(int argc, char *argv[])
-{
-
-        char *sendbuf;
-        long sendlen;
-        int ret;
-
-
-        /* Attach to System/T as a Client Process */
-        if (tpinit((TPINIT *) NULL) == -1) {
-                (void) fprintf(stderr, &quot;Tpinit failed\n&quot;);
-                exit(1);
-        }
-
-        sendlen = 100;
-
-        /* Allocate STRING buffers for the request and the reply */
-        if((sendbuf = (char *) tpalloc(&quot;STRING&quot;, NULL, sendlen+1)) == NULL) {
-                (void) fprintf(stderr,&quot;Error allocating send buffer\n&quot;);
-                tpterm();
-                exit(1);
-        }
-
-        (void) strcpy(sendbuf, &quot;hello&quot;);
-
-        /* Request the service TOUPPER, waiting for a reply */
-        ret = tpcall(&quot;TOUPPER&quot;, (char *)sendbuf, 0, (char **)&amp;sendbuf, &amp;sendlen, (long)0);
-
-        if(ret == -1) {
-                (void) fprintf(stderr, &quot;Can't send request to service TOUPPER\n&quot;);
-                (void) fprintf(stderr, &quot;Tperrno = %d\n&quot;, tperrno);
-                tpfree(sendbuf);
-                tpterm();
-                exit(1);
-        }
-
-        (void) fprintf(stdout, &quot;Returned string is: %s\n&quot;, sendbuf);
-
-        /* Free Buffers &amp; Detach from System/T */
-        tpfree(sendbuf);
-        tpterm();
-        return(0);
-}</PRE>
-		</TD>
-	</TR>
-	<TR>
-		<TD WIDTH=100% VALIGN=TOP>
-			<PRE>C++ sample code (21 lines in main no counting comments)</PRE>
-		</TD>
-	</TR>
-	<TR>
-		<TD WIDTH=100% VALIGN=TOP>
-			<PRE>#include &lt;string.h&gt;
 #include &lt;iostream&gt;
 #include &quot;Tuxedo.h&quot;
 
@@ -144,9 +79,8 @@ int main ( int argc, char **argv ) {
 
   return ret ;
 }</PRE>
-		</TD>
-	</TR>
-</TABLE>
+</code>
+
 <pre><code>
 $ cd your_repo_root/repo_name
 $ git fetch origin
