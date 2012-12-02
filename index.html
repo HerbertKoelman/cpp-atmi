@@ -28,7 +28,8 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>Welcome to Tuxedo ATMI++ C++ library.</h3>
+          
+<h3>Welcome to Tuxedo ATMI++ C++ library.</h3>
 
 <p>
 The ATMI library comes as a set of libraries, ATMI++ offers a c++ wrapping of these librariesies. Using c++ makes it to write shorter and more robust Tuxedo code.
@@ -36,12 +37,14 @@ The ATMI library comes as a set of libraries, ATMI++ offers a c++ wrapping of th
 Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 <p>
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
-<p>
-C++ sample code (21 lines in main no counting comments)</PRE>
+
+<h3>Code sample</h3>
+
+C++ sample code (21 lines in main no counting comments)
 <PRE><code>
 #include &lt;string.h&gt;
 #include &lt;iostream&gt;
-#include &quot;Tuxedo.h&quot;
+#include &quot;atmi++.h&quot;
 
 using namespace std ;
 
@@ -81,29 +84,39 @@ int main ( int argc, char **argv ) {
 }</PRE>
 </code>
 
+<h3>Project's content</h4>
+
+<P>The library is devided into a very simple set of classes: <B>Tuxedo</B>,
+<B>Tp</B>, <B>Event</B> and <B>Queue.</B> Each one is handling one
+category of ATMI calls.</P>
+
+<P>Base class <B>Tuxedo</B> implements all the common calls of ATMI
+(like tpinit). Specialized class <B>Tp</B> extends the base class
+<B>Tuxedo</B> with everything needed to call services. <B>Queue</B>
+class extends base class <B>Tuxedo</B> to offer functions to queue
+and dequeue messages. The <B>Event</B> class extends <B>Tuxedo</B>
+class with operations to send, post and broadcast events.</P>
+
+<P>ATMI errors handling is based upon C++ exception classes. This way it makes much easier (and consistent) to handle errors conditions.</P>
+
+<H3>Getting started</A></H4>
+
 <pre><code>
-$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+$ git clone https://github.com/HerbertKoelman/atmiplusplus.git atmi++
+$ cd atmi++
+$ configure
+$ make
+$ make install
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
 <h3>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>@HerbertKoelman is chief software architect at La Banque Postale a is in charge of supervising some of the Tuxedo developments. He started ATMI++ in order to enhance the robustness of the Tuxedo code that was produced by IT Service providers.</p>
 
 <h3>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Having trouble with ATMI++ ? Send your suggestion or issues <a href="https://github.com/HerbertKoelman/atmiplusplus">here</a> or contact <a href="mailto:woodman.9167@me.com">woodman.9167@me.com</a> and I’ll help you sort it out.</p>
         </section>
 
         <aside id="sidebar">
@@ -116,7 +129,7 @@ $ git checkout gh-pages
             .tar.gz file
           </a>
 
-          <p class="repo-owner"><a href="https://github.com/HerbertKoelman/atmiplusplus"></a> is maintained by <a href="https://github.com/HerbertKoelman">HerbertKoelman</a>.</p>
+          <p class="repo-owner"><a href="https://github.com/HerbertKoelman/atmiplusplus"></a> is maintained by <a href="https://github.com/HerbertKoelman">Herbert Koelman</a>.</p>
 
           <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
