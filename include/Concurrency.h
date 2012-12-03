@@ -43,7 +43,7 @@ class ConcurrencyException : public exception {
 			msg = message ;
 		}
 
-		ConcurrencyException ( char *message ) {
+		ConcurrencyException ( const char *message ) {
 			msg = message ;
 		}
 

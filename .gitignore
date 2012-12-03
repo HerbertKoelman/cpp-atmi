@@ -25,5 +25,8 @@ include/atmi_config.h
 autom4te.cache
 locale
 
+# Tuxedo specific files
+*ULOG*
+
 # misc
 .*

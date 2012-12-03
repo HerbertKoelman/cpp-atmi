@@ -21,13 +21,13 @@ namespace atmi {
   Buffer::Buffer () : buffer (NULL), extent (0)  {
 
     extent = 1024;
-    buffer = (FBFR32 *)allocate ( FMLTYPE32, NULL, extent );
+    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
   Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
 
     this->extent = len;
-    buffer = (FBFR32 *)allocate ( FMLTYPE32, NULL, extent );
+    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
   Buffer::~Buffer () {
