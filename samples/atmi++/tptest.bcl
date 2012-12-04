@@ -13,7 +13,7 @@ using namespace atmi;
 class TPtest : public AbstractClient {
 public:
 
-  TPtest () : AbstractClient ("tptest"){
+  TPtest () : AbstractClient (const_cast<char *>("tptest")){
   };
 
   int run ( int argc, char **argv ) {

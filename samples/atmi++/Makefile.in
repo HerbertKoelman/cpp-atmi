@@ -37,9 +37,18 @@ CXXFLAGS=@CXXFLAGS@
 CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
-TARGETS=qexport qimport qtest btest tptest SIMPSERV SIMPSERV++
+TARGETS=fml_tables views qexport qimport qtest btest tptest SIMPSERV SIMPSERV++
 
 all:${TARGETS}
+
+views:
+	@echo "views build."
+
+fml_tables:sample_fml_table.h
+	@echo "fml tables build."
+
+sample_fml_table.h:sample_fml_table
+	mkfldhdr32 $<
 
 clean:
 	${RM} *.o core *.a
@@ -56,9 +65,10 @@ beautify:
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
+	@echo "bulding native client $@" 
 	CC=@CXX@ \
 	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
-	buildclient -v \
+	buildclient ${WSL} -v \
 	-o $@ \
 	-f $< \
 	-l -lfml++ \
