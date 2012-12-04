@@ -71,8 +71,8 @@ case "$CXX" in
   ;;
   g++)
 	CFLAGS="-+ $CFLAGS "
-	CXXFLAGS="-x c++ $CXXFLAGS "
-  AC_MSG_RESULT([-x c++ .])
+	CXXFLAGS="-x c++ -frtti $CXXFLAGS "
+  AC_MSG_RESULT([-x c++ -frtti .])
   ;;
   *)
   AC_MSG_RESULT(none found.)

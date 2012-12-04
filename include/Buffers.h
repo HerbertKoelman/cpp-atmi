@@ -46,8 +46,6 @@ namespace atmi {
   typedef char * Carray;
   typedef auto_ptr<Carray> ACarray;
 
- // class Tuxedo;
-
   /**
    * FML buffer
 	 * 
@@ -329,12 +327,14 @@ public:
      */
     TField ( FLDID32 fid ) {
 
-      setup ( fid );
+      /** This array is used to check that FML type matches template TField's type */
+      const char *TYPEID_NAMES[5] = { typeid(short).name(), typeid(long).name(), typeid(char).name(), typeid(float).name(), typeid(double).name() };
 
+      setup ( fid );
       // check type matching
       if ( type() > 5 ) {
-        throw Exception ( "This template doesn't support the give type TField<%s>.", tname ());
-      } else if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
+        throw Exception ( "This template doesn't support the given type TField<%s>.", tname ());
+      } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
         throw Exception ( "TField %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
       }
     }
@@ -445,7 +445,9 @@ protected:
     };
 
     T value;
+
   };
+
 
 /** Specialization of template TField which handles string typed fields.
  *

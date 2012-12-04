@@ -8,6 +8,7 @@ prefix=@prefix@
 INSTALL=@INSTALL@ 
 LOCALEDIR=@localedir@
 RM=@RM@
+DOXYGEN=@DOXYGEN@
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
 all: atmi++ utl
@@ -24,6 +25,9 @@ utl:
 
 pkg:
 	tar cf - include lib man www samples | gzip > ${PACKAGE}
+
+doxygen:
+	${DOXYGEN} www/doxygenerated/doxyconf
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a

@@ -8,6 +8,10 @@ AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/config.h])
 AC_DEFINE_UNQUOTED(ATMI_VERSION, ["v$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 AC_CHECK_PROG([RM],[rm],[rm -f])
+
+# Check for optional use of doxygen
+AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
+
 AC_CANONICAL_BUILD
 
 AC_MSG_CHECKING([whether target directory ./lib exists])
