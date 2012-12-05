@@ -12,7 +12,7 @@ Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middlew
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
 
 -------------------------------------------------------------------
- ATMI++ is free software; you can redistribute it and/or modify
+ ATMI++ is free software, you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
