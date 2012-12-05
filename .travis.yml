@@ -10,4 +10,5 @@ notifications:
   email:
     on_success: change
     on_failure: always
-script: configure
+script:
+  - ./configure
