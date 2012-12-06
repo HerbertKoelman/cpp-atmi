@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.63)
 AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
-AC_CONFIG_SRCDIR([Tuxedo.C])
+AC_CONFIG_SRCDIR([Tuxedo.cpp])
 #AC_CONFIG_HEADERS([../../include/atmi++.h])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])

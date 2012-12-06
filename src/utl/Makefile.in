@@ -4,7 +4,7 @@
 #
 # builds simple application server and clients
 
-.SUFFIXES: .cl .V .srv .v .cc
+.SUFFIXES: .cl .V .srv .v .cpp
 
 BASEDIR=../../
 UDATAOBJ=$(BASEDIR)/udataobj/
@@ -53,10 +53,10 @@ testTP:Thread.o SlavedThread.o ThreadPool.o Condition.o
 
 # Implicit rules  -----------------------------------------
 
-.cc:
+.cpp:
 	$(CCC) $(CCFLAGS) $(LDFLAGS) $< -o $@
 
-.cc.o:
+.cpp.o:
 	$(CCC) $(CCFLAGS) -c $<
 
 .cl: 

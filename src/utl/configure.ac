@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.63)
 AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
-AC_CONFIG_SRCDIR([Thread.C])
+AC_CONFIG_SRCDIR([Thread.cpp])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
