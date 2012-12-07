@@ -66,7 +66,7 @@ namespace atmi {
   class Tuxedo {
 public:
     Tuxedo ();
-    virtual ~Tuxedo() ;
+    virtual ~Tuxedo();
 
     /* Method moved into the constructor of AbstractClient
      * init() allows a client to join a BEA Tuxedo ATMI system application. Before a client can
@@ -227,7 +227,7 @@ protected:
     virtual int handleTperrno ( int, const char * = NULL, ... );
 
     long flags;
-    nl_catd  catd;
+    nl_catd catd;
 
 private:
     long errorno;

@@ -83,9 +83,9 @@ public:
      */
     virtual const char *what () throw ();
 
-		int get_errno () ;
+    int get_errno ();
 protected:
-    int error ;
+    int error;
   };
 
 /****************************************************************************

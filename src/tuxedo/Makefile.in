@@ -56,7 +56,7 @@ gencat:
 	gencat ${LOCALEDIR}/fr_FR/atmi++.cat atmi++fr_FR.msg
 
 beautify:
-	uncrustify --no-backup -l CPP --replace -c ../crust.cfg *.C $(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+	uncrustify --no-backup -l CPP --replace -c ./crust.cfg *.cpp $(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
 
 clean:
 	${RM} *.o core

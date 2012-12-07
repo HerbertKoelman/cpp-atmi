@@ -7,7 +7,7 @@
 #include <iostream>
 #include <atmi.h>
 #include <string>
-#include <nl_types.h> 
+#include <nl_types.h>
 #include <atmi++.h>
 
 #define CATD_ATMI_SET 100

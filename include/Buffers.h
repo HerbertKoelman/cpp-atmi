@@ -48,8 +48,8 @@ namespace atmi {
 
   /**
    * FML buffer
-	 * 
-	 * This class handles the content of FML buffer
+   *
+   * This class handles the content of FML buffer
    */
   class Buffer : public Tuxedo {
 
