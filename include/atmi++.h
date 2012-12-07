@@ -1,3 +1,4 @@
+/* include/atmi++.h.  Generated from atmi++.h.in by configure.  */
 /*
   $Id$
 
@@ -59,11 +60,85 @@
  * - mctest.C: multicontext sample code
  */
 
+/* set through configure.ac by autoheader.  */
+#define ATMI_VERSION "v2.1 compiled on Linux #1 SMP Wed Nov 23 13:07:52 UTC 2011.2.6.35.14-106.fc14.x86_64 for tuxedo11gR1"
+
+/* Define to 1 if you have the `gettimeofday' function. */
+/* #undef HAVE_GETTIMEOFDAY */
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+/* #undef HAVE_INTTYPES_H */
+
+/* Define to 1 if you have the `pthread' library (-lpthread). */
+/* #undef HAVE_LIBPTHREAD */
+
+/* Define to 1 if you have the `tux' library (-ltux). */
+/* #undef HAVE_LIBTUX */
+
+/* Define to 1 if you have the <memory.h> header file. */
+/* #undef HAVE_MEMORY_H */
+
+/* Define to 1 if you have the <stdint.h> header file. */
+/* #undef HAVE_STDINT_H */
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+/* #undef HAVE_STDLIB_H */
+
+/* Define to 1 if you have the <strings.h> header file. */
+/* #undef HAVE_STRINGS_H */
+
+/* Define to 1 if you have the <string.h> header file. */
+/* #undef HAVE_STRING_H */
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+/* #undef HAVE_SYS_STAT_H */
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+/* #undef HAVE_SYS_TIME_H */
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+/* #undef HAVE_SYS_TYPES_H */
+
+/* Define to 1 if you have the <unistd.h> header file. */
+/* #undef HAVE_UNISTD_H */
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT "herbert.koelman@me.com"
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "atmi++"
+
+/* Define to the full name and version of this package. */
+#define PACKAGE_STRING "atmi++ 2.1"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME "http://redmine.urbix-software.fr/projects/atmiplusplus"
+
+/* Define to the version of this package. */
+#define PACKAGE_VERSION "2.1"
+
+/* Define as the return type of signal handlers (`int' or `void'). */
+/* #undef RETSIGTYPE */
+
+/* Define to 1 if you have the ANSI C header files. */
+/* #undef STDC_HEADERS */
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+/* #undef TIME_WITH_SYS_TIME */
+
+/* Define to empty if `const' does not conform to ANSI C. */
+/* #undef const */
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+/* #undef inline */
+#endif
+
 #ifndef _ATMI_PLUS_PLUS_H_
 #define _ATMI_PLUS_PLUS_H_
 
-/* #define ATMI_VERSION "v3.0 Aix 5.3TL12 SMP O5 Tuxedo 9.1 32bits" */
-#include <config.h>
+/* #include <config.h> */
 #include <Exceptions.h>
 #include <Tuxedo.h>
 #include <Buffers.h>
