@@ -59,13 +59,6 @@
  * - mctest.C: multicontext sample code
  */
 
-#ifndef _ATMI_PLUS_PLUS_H_
-#define _ATMI_PLUS_PLUS_H_
-
-#include <config.h>
-#include <Exceptions.h>
-#include <Tuxedo.h>
-#include <Buffers.h>
 
 /* autoconf section ----------------------------------------------------------------------*/
 #undef ATMI_VERSION
@@ -141,5 +134,12 @@
 #ifndef __cplusplus
 #undef inline
 #endif
-#endif
 
+#ifndef _ATMI_PLUS_PLUS_H_
+#define _ATMI_PLUS_PLUS_H_
+
+#include <Exceptions.h>
+#include <Tuxedo.h>
+#include <Buffers.h>
+
+#endif

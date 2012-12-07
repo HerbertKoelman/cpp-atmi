@@ -24,7 +24,7 @@ utl:
 	cd src/utl ; $(MAKE) globber all clean
 
 pkg:
-	tar cf - locale include lib man www samples | gzip > ${PACKAGE}
+	tar cf - include lib man www samples | gzip > ${PACKAGE}
 
 doxygen:
 	${DOXYGEN} www/doxygenerated/doxyconf

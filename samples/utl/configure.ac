@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[trunk],[herbert.koelman@me.com])
+AC_INIT([atmi++],[2.1],[herbert.koelman@me.com])
 AC_CONFIG_SRCDIR([ssocket.C])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])

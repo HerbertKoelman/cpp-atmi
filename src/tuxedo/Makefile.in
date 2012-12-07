@@ -7,7 +7,6 @@
 #
 # Builds library libatmi++.a
 .SUFFIXES: .V .v .cpp
-
 prefix=@builddir@
 
 BASEDIR=../../
@@ -88,12 +87,6 @@ libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/Tuxedo.h $(INCDIR)/Exceptions.h
 
 .cpp.o:
 	$(CCC) $(CCFLAGS) -c $<
-
-.cl: 
-	buildclient -o $@ -f $< -f *.o
-
-.srv: 
-	buildserver -o $@ -f $< -f *.o
 
 .v.V: 
 	viewc $(VFLAGS) -d $(UDATAOBJ) $@

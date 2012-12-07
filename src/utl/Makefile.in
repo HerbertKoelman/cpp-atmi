@@ -27,7 +27,7 @@ CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 VFLAGS=-n
 
-OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o Socket.o ServerSocket.o ClientSocket.o
+OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o 
 
 all : libatmiutl++.a
 
