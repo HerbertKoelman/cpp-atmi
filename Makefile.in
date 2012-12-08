@@ -27,7 +27,7 @@ pkg:
 	tar cf - include lib man www samples | gzip > ${PACKAGE}
 
 doxygen:
-	${DOXYGEN} www/doxygenerated/doxyconf
+	${DOXYGEN} doxyconf
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
