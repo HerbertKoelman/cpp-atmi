@@ -26,6 +26,9 @@ utl:
 pkg:
 	tar cf - include lib man www samples | gzip > ${PACKAGE}
 
+globber:
+	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
+
 doxygen:
 	${DOXYGEN} doxyconf
 

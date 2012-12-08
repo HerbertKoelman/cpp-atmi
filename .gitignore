@@ -20,13 +20,14 @@ Makefile
 *.log
 confdefs.h
 config.status
-include/config.h
-include/atmi_config.h
+include/atmi++.h
 autom4te.cache
-locale
 
 # Tuxedo specific files
 *ULOG*
 
-# misc
+# misc and project created files
+locale
+html
+man
 .*
