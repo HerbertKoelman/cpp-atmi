@@ -35,7 +35,7 @@ clean:
 	${RM} *.o core
 
 beautify:
-	uncrustify --no-backup -l CPP --replace -c ../crust.cfg *.C
+	uncrustify --no-backup -l CPP --replace -c ./crust.cfg *.cpp 
 
 globber:
 	${RM} *.o core ../../lib/libatmiutl++.a
