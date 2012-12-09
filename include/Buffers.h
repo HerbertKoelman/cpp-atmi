@@ -47,9 +47,10 @@ namespace atmi {
   typedef auto_ptr<Carray> ACarray;
 
   /**
-   * FML buffer
+   * FML Buffer
    *
-   * This class handles the content of FML buffer
+   * A fielded buffer is composed of Fields of fixed length (for example, TField<long>, TField<short>), and field for varying length fields (for example TField<string>).
+   *
    */
   class Buffer : public Tuxedo {
 
@@ -191,9 +192,8 @@ private:
 // ---------------------------------------------------------------------------------
 
 
-//  class Buffer;
-
 /** Abstract class to manipulate a Field
+ *
  */
   class Field {
 
@@ -345,9 +345,9 @@ public:
      *
      * @param n the fml field name to setup (as defined in the FML tables)
      */
-    TField ( char *n ) {
+    TField ( const char *n ) {
 
-      setup ( (FLDID32) Fldid32 ( n ) );
+      setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
       // check type matching
       if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
@@ -478,9 +478,9 @@ public:
      *
      * @param n the fml field name to setup (as defined in the FML tables)
      */
-    TField ( char *n ) {
+    TField ( const char *n ) {
 
-      setup ( (FLDID32) Fldid32 ( n ) );
+      setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
       // check type matching
       if ( type() !=5 ) {
@@ -618,9 +618,9 @@ public:
      *
      * @param n the fml field name to setup (as defined in the FML tables)
      */
-    TField ( char *n ) : len (0), value (NULL) {
+    TField ( const char *n ) : len (0), value (NULL) {
 
-      setup ( (FLDID32) Fldid32 ( n ) );
+      setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
       // check type matching
       if ( type() != 6 ) {

@@ -27,11 +27,11 @@ void sig_handler(int sig)
     switch (sig) {
     case SIGHUP:
 			sleepy = ( sleepy == 0 ? 40 : 0 ); ;
-			userlog ((sleepy == 0 ? "No sleep" : "Sleeping sec." ));
+			userlog ((sleepy == 0 ? const_cast<char *>("No sleep") : const_cast<char *>("Sleeping sec.")));
 	break;
 
     default:
-	userlog("Handling an unknown signal (%d).", sig);
+	userlog(const_cast<char *>("Handling an unknown signal (%d)."), sig);
     }
 }
 
@@ -45,7 +45,7 @@ void sig_handler(int sig)
 int tpsvrinit(int argc, char *argv[])
 {
     /* userlog writes to the central TUXEDO message log */
-    userlog("Welcome to the simple server version $Revision: 50 $");
+    userlog((char *)"Welcome to the simple server version $Revision: 50 $");
     Usignal(SIGHUP, sig_handler);
 		
 	sleepy = 0 ;
@@ -58,7 +58,7 @@ int tpsvrinit(int argc, char *argv[])
 void tpsvrdone()
 {
 
-    userlog("server done");
+    userlog((char *)"server done");
 }
 
 /*
@@ -94,12 +94,12 @@ void TOUPPER(TPSVCINFO * rqst)
 	int i;
 
 	long len = 256 ;
-	char *buf = tpalloc ( "STRING", NULL, len ); 
+	char *buf = tpalloc ( (char *)"STRING", NULL, len ); 
 
 	for (i = 0; i < rqst->len; i++)
 	rqst->data[i] = toupper(rqst->data[i]);
 
-	cd = tpacall ( "HELLO", rqst->data, rqst->len, 0 );
+	cd = tpacall ( (char *)"HELLO", rqst->data, rqst->len, 0 );
 
 	if ( sleepy > 0 ) sleep ( sleepy );
 

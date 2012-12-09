@@ -16,6 +16,7 @@ APPDIR=$(BASEDIR)/app/
 INCDIR=$(BASEDIR)/include/
 LIBDIR=$(BASEDIR)/lib/
 LOCALEDIR=${BASEDIR}/locale
+BEAUTIFIER=@BEAUTIFIER@ -l CPP --replace -c ${BASEDIR}/crust.cfg
 
 # Tuxedo 
 TUXLIB=$(TUXDIR)/lib
@@ -55,8 +56,8 @@ gencat:
 	# French translation
 	gencat ${LOCALEDIR}/fr_FR/atmi++.cat atmi++fr_FR.msg
 
-beautify:
-	uncrustify --no-backup -l CPP --replace -c ./crust.cfg *.cpp $(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+beautifull:
+	${BEAUTIFIER} *.cpp $(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
 
 clean:
 	${RM} *.o core

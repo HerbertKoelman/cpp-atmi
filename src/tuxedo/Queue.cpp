@@ -47,7 +47,7 @@ private:
 
   };
 
-  Queue::Queue ( char *qspace, char *queue, char *reply ) {
+  Queue::Queue ( const char *qspace, const char *queue, const char *reply ) {
 
     /* Too restrictive
        if ( qspace == NULL || queue == NULL ) {
@@ -55,14 +55,14 @@ private:
        }
      */
 
-    this->qspace = qspace;
-    this->queue = queue;
+    this->qspace = const_cast<char *>(qspace);
+    this->queue = const_cast<char *>(queue);
 
     this->flags = TPNOFLAGS;
     qctl.flags = TPNOFLAGS;
 
     set_message_wait ( true );
-    setQoS( TPQQOSDEFAULTPERSIST );
+    set_quality_of_service( TPQQOSDEFAULTPERSIST );
 
     set_reply_queue ( reply );
   }
@@ -231,7 +231,7 @@ private:
 /* properties ------------------------------------------------*/
 
 
-  void Queue::set_reply_queue( char *reply ) {
+  void Queue::set_reply_queue( const char *reply ) {
     if ( reply != NULL ) {
       qctl.flags = set ( qctl.flags, TPQREPLYQ );
       strncpy(qctl.replyqueue, reply, TMQNAMELEN+1);
@@ -254,7 +254,7 @@ private:
     }
   }
 
-  void Queue::setQoS ( long qos ) {
+  void Queue::set_quality_of_service ( long qos ) {
 
     qctl.flags = unset( qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS );
 

@@ -116,7 +116,7 @@ public:
      *
      * @throw TuxedotException if something goes wrong.
      */
-    char *allocate ( char *type, char *subtype, long size );
+    char *allocate ( const char *type, const char *subtype, long size );
 
     /**
      * Routine to change the size of a typed buffer.
@@ -156,17 +156,29 @@ public:
      */
     int abort ();
 
-    inline long  getErrno () {
+    /**
+     * @return the current errno value
+     */
+    inline long  get_errno () {
       return errorno;
     };
-    inline char *getErrmsg () {
+    /**
+     * @return an error description string of the last errno
+     */
+    inline const char *get_errmsg () {
       return tpstrerror(errorno);
     };
 
-    inline int   getErrnodetail() {
+    /**
+     * @return the current error detail (if one exist).
+     */
+    inline int   get_errnodetail() {
       return errornodetail;
     };
-    inline char *getErrdetail () {
+    /**
+     * @return an error detail description string (if one exists).
+     */
+    inline const char *get_errdetail () {
       return tpstrerrordetail ( errornodetail, 0 );
     };
 
@@ -188,15 +200,26 @@ public:
       return context;
     };
 
-    inline long getFlags() {
+    /**
+     * @return Tuxedo flags used by this instance.
+     */
+    inline long get_flags() {
       return flags;
     };
 
-    inline void setFlags ( long flags ) {
+    /**
+     * Set some Tuxedo flags
+     */
+    inline void set_flags ( long flags ) {
       Tuxedo::set (this->flags, flags);
     };
-    inline void resetFlags ( long flags ) {
-      this->flags = TPNOFLAGS; Tuxedo::set (this->flags, flags);
+
+    /**
+     * Reset flag value to TPNOFLAGS
+     */
+    inline void reset_flags ( long flags ) {
+      this->flags = TPNOFLAGS;
+      Tuxedo::set (this->flags, flags);
     };
     inline void unsetFlags ( long flags ) {
       Tuxedo::unset (this->flags, flags);
@@ -271,26 +294,27 @@ public:
      * @param group is used to associate the client with a resource manager group name (default NULL)
      * @param tuxconf path to Tuxedo config file (same as TUXCONFIG en variable default NULL)
      */
-    AbstractClient ( char *cltname = NULL, char *usr = NULL, char *passwd = NULL, char *group = NULL, char *tuxconfig = NULL);
+    AbstractClient ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
 
     /** This method must overriden  to run the client application.
      *
      * @param argc number of command line option received when the program was started
      * @param argv actual value of command line arguments
+     * @deprecated
      */
-    virtual int run ( int argc, char **argv ) = 0;
+    virtual int run ( int argc, char **argv ) {};
 
     /** Creates an instance of Tp and set the client context to be used.
      *
      * @return  an auto_ptr to a new Tp instance
      */
-    ATp new_tp_class ( char *svc );
+    ATp new_tp_instance ( const char *svc );
 
     /** Creates an instance of Queue and set the client context to be used.
      *
      * @return  an auto_ptr to a new Queue instance
      */
-    AQueue new_queue_class ( char *qspace, char *queue );
+    AQueue new_queue_instance ( const char *qspace, const char *queue );
 
     TPCONTEXT_T get_context () {
       return context;
@@ -418,7 +442,7 @@ public:
      *
      * Input data buffer is used to as output data buffer.
      *
-     * @param idata a data buffer preveously allocated with tpalloc() and hols input data
+     * @param idata a data buffer preveously allocated with tpalloc() and holds input data
      * @param ilen  idata buffer lenght.
      * @param urcode user return code (see tpreturn)
      * @param retries call is attempted at most retries times.
@@ -497,7 +521,7 @@ public:
     /**
      * @param service service name (< 32 characters long)
      */
-    Tp ( char *service );
+    Tp ( const char *service );
 
 protected:
 
@@ -523,7 +547,7 @@ public:
      * @param queue the queue that will be manipulated
      * @param reply name of a reply
      */
-    Queue ( char *qspace = NULL, char *queue = NULL, char *reply = NULL );
+    Queue ( const char *qspace = NULL, const char *queue = NULL, const char *reply = NULL );
 
     /** enqueue a message
      *
@@ -570,11 +594,25 @@ public:
      */
     int enqueueReply ( char *data, long len );
 
-    void set_reply_queue ( char * );
+    /**
+     * indicate in wich queue the replies should be posted.
+     *
+     * @param q queue name
+     */
+    void set_reply_queue ( const char *q );
+
+    /**
+     * @return current reply queue name
+     */
     const char *get_reply_queue ();
 
-    inline void set_queue_space ( char *qs) {
-      this->qspace = qs;
+    /**
+     * Set the queuespace name to wich this queue associated.
+     *
+     * @param qs queue space name (32 characters max)
+     */
+    inline void set_queue_space ( const char *qs) {
+      this->qspace = const_cast<char *>(qs);
     };
     inline const char *get_queue_space () {
       return qspace;
@@ -599,6 +637,9 @@ public:
      * @param wait if true Queue waits for a message
      */
     void set_message_wait ( bool wait );
+
+    /** @deprecated use set_message_wait instead
+     */
     inline void setQWait ( bool wait ) {
       set_message_wait (wait);
     };
@@ -606,6 +647,7 @@ public:
     /** Check if QWait flag is set
      *
      * @return true if wait flag is set
+     * @deprecated use is_message_waiting instead
      */
     inline bool isQWaiting () {
       return is_message_waiting ();
@@ -623,7 +665,7 @@ public:
      *
      * @param qos desired flags
      */
-    void setQoS ( long qos);
+    void set_quality_of_service ( long qos);
 
     /** @return the diagnostic code returned by last call.
      */

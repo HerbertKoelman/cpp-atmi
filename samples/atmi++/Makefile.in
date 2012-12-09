@@ -37,7 +37,7 @@ CXXFLAGS=@CXXFLAGS@
 CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
-TARGETS=fml_tables views btest tptest SIMPSERV SIMPSERV++
+TARGETS=fml_tables views btest tptest qwriter SIMPSERV SIMPSERV++
 
 all:${TARGETS}
 

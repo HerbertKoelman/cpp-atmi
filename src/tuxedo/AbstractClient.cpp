@@ -32,7 +32,7 @@ namespace atmi {
     tpterm ();
   };
 
-  AbstractClient::AbstractClient ( char *cltname, char *usr, char *passwd, char *group, char *tuxconfig) {
+  AbstractClient::AbstractClient ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig) {
 
     int rc = -1;
 
@@ -44,7 +44,7 @@ namespace atmi {
 
       if ( tuxconfig != NULL ) {
         tpinfo->flags = TPMULTICONTEXTS;
-        tuxputenv(tuxconfig);
+        tuxputenv(const_cast<char *>(tuxconfig));
       }
 
       if ( usr != NULL ) strncpy ( tpinfo->usrname, usr, MAXTIDENT );
@@ -69,7 +69,7 @@ namespace atmi {
 
   }
 
-  ATp AbstractClient::new_tp_class ( char *svc ){
+  ATp AbstractClient::new_tp_instance ( const char *svc ){
 
     auto_ptr<Tp> ptr;
     ptr.reset ( new Tp ( svc ));
@@ -77,7 +77,7 @@ namespace atmi {
     return ptr;
   }
 
-  AQueue AbstractClient::new_queue_class ( char *qspace, char *queue ){
+  AQueue AbstractClient::new_queue_instance ( const char *qspace, const char *queue ){
 
     auto_ptr<Queue> ptr;
     ptr.reset ( new Queue ( qspace, queue ));

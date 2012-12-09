@@ -34,11 +34,11 @@ namespace atmi {
     errornodetail = tperrordetail ( 0 );
   };
 
-  char * Tuxedo::allocate ( char *type, char *subtype, long size ) {
+  char * Tuxedo::allocate ( const char *type, const char *subtype, long size ) {
 
     char *buffer = NULL;
 
-    buffer  = tpalloc( type, subtype, size );
+    buffer  = tpalloc( const_cast<char *>(type), const_cast<char *>(subtype), size );
 
     updateErrno ();
 

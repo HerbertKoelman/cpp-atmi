@@ -11,6 +11,7 @@ AC_CHECK_PROG([RM],[rm],[rm -f])
 
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
+AC_CHECK_PROG([BEAUTIFIER], [uncrustify], [uncrustify])
 
 AC_CANONICAL_BUILD
 

@@ -9,6 +9,7 @@ INSTALL=@INSTALL@
 LOCALEDIR=@localedir@
 RM=@RM@
 DOXYGEN=@DOXYGEN@
+BEAUTIFIER=@BEAUTIFIER@ --no-backup -l CPP --replace -c ./crust.cfg {} \;
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
 all: atmi++ utl
@@ -31,6 +32,11 @@ globber:
 
 doxygen:
 	${DOXYGEN} doxyconf
+
+beautifull:
+	cd src/tuxedo ;$(MAKE) beautifull
+	cd src/utl ;$(MAKE) beautifull
+	cd samples/atmi++ ;$(MAKE) beautifull
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a

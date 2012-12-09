@@ -13,10 +13,10 @@ using namespace atmi;
 class TPtest : public AbstractClient {
 public:
 
-  TPtest () : AbstractClient (const_cast<char *>("tptest")){
+  TPtest () : AbstractClient ("tptest"){
   };
 
-  int run ( int argc, char **argv ) {
+  int run () {
 
     int ret = -1;
     cout << "Starting client program tptest." << endl;
@@ -83,9 +83,9 @@ int main ( int argc, char **argv ) {
 
   try {
 
-		cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
     TPtest tp;
-    ret = tp.run ( argc, argv );
+    ret = tp.run ();
 
   } catch ( Exception& err ) {
     cerr << err.what () << endl;

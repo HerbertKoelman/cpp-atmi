@@ -1,0 +1,69 @@
+/* $Id: qwtest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <string.h>
+#include <iostream>
+#include <atmi++.h>
+
+using namespace std;
+using namespace atmi;
+
+class QWriter : public AbstractClient {
+public:
+
+  QWriter () : AbstractClient ("qwriter"){
+  };
+
+  int run () {
+
+    int ret = -1;
+    cout << "Starting client program qwriter." << endl;
+
+    try {
+        AQueue q = new_queue_instance ( "SAMPLES", "TOUPPER" );
+        Buffer buffer;
+
+        TField<string> name ( "EMPNAME" );
+        name = (string) "Herbert";
+
+        buffer.add ( &name );
+
+        cout << "  Posting a message." << endl;
+        q->enqueue ( &buffer );
+        cout << " Message posted." << endl ;
+
+    } catch ( ServiceException& serr ) {
+      cerr << "  Queue Exception catched. qwcall failed." << endl;
+      cerr << "  What: " << serr.what () << endl;
+    } catch ( TuxedoException& terr ) {
+      cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
+      cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+    } catch (BufferException berr ) {
+      cerr << berr.what() << endl;
+    };
+
+    cout << "Ending client qwritze." << endl ;
+    return ret;
+  };
+};
+
+int main ( int argc, char **argv ) {
+
+  int ret = 0;
+
+  try {
+
+	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    QWriter qw;
+    ret = qw.run ();
+
+  } catch ( Exception& err ) {
+    cerr << err.what () << endl;
+  } catch (exception uerr ) {
+    cerr << uerr.what() << endl;
+  };
+
+  return ret;
+}

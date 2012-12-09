@@ -14,7 +14,7 @@ using namespace std;
 
 namespace atmi {
 
-  Tp::Tp ( char *service ) {
+  Tp::Tp ( const char *service ) {
 
     // length 32 chars (see definition in atmi.h
     if ( strlen ( service ) > 32 ) throw TuxedoException ( 0, "Given service name '%s' is too long.", service );
