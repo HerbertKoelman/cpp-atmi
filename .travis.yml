@@ -1,7 +1,9 @@
 language: cpp
 compiler:
   - gcc
-branches:master
+branches:
+  only:
+    - master
 notifications:
   recipients:
     - herbert.koelman@me.com
