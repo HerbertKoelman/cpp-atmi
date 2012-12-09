@@ -19,7 +19,7 @@
 #include <string>
 #include <iostream>
 
-#include <sample_fml_table.h>
+#include "sample_fml_table.h"
 #include <atmi++.h>
 
 using namespace std ;
@@ -50,12 +50,12 @@ class SimpServ : public AbstractServer {
 
 				ret = TPSUCCESS ;
 
-			} catch ( Exception err ){
-				userlog ( "Service call TOUPPER failed. %s", err.what() );
-			} catch ( TuxedoException terr ){
-				userlog ( "Service call TOUPPER failed. %s", terr.what() );
-			} catch ( BufferException berr ){
-				userlog ( "Service call TOUPPER failed. %s", berr.what() );
+			} catch ( TuxedoException &terr ){
+				userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
+			} catch ( BufferException &berr ){
+				userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
+			} catch ( Exception &err ){
+				userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
 			};
 
 
@@ -82,7 +82,7 @@ void sig_handler(int sig) {
 			server->handle_sigterm ();
 			break;
 		default:
-			userlog("Handling an unknown signal (%d).", sig);
+			userlog((char *) "Handling an unknown signal (%d).", sig);
 	}
 }
 
@@ -95,7 +95,7 @@ void sig_handler(int sig) {
  */
 int tpsvrinit(int argc, char *argv[]) {
 	/* userlog writes to the central TUXEDO message log */
-	userlog("Welcome to the simple server version $Revision: 79 $");
+	userlog((char *)"Welcome to the simple server version $Revision: 79 $");
 
 	Usignal(SIGHUP, sig_handler);
 	Usignal(SIGTERM, sig_handler);
@@ -103,7 +103,7 @@ int tpsvrinit(int argc, char *argv[]) {
 	try {
 		server = new SimpServ ();
 	} catch ( ... ) {
-		userlog ( "Server init failed. Check ULOG for more." );
+		userlog ( (char *)"Server init failed. Check ULOG for more." );
 	};
 
 	return (0);
@@ -118,7 +118,7 @@ void tpsvrdone() {
 
 	delete server ;
 
-	userlog("server done");
+	userlog((char *)"server done");
 }
 
 /*
