@@ -28,6 +28,7 @@ pkg:
 	tar cf - include lib man www samples | gzip > ${PACKAGE}
 
 globber:
+	${RM} -R html man autom4te.cache
 	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
 	cd src/tuxedo ;$(MAKE) globber
 	cd src/utl ;$(MAKE) globber
