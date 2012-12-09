@@ -146,7 +146,9 @@ namespace atmi {
     return rc;
   };
 
-/** @return the size of the buffer (in bytes) */
+  /** 
+   * @return the size of the buffer (in bytes)
+   */
   long Buffer::size () {
     return ( buffer == NULL ? 0 : Fsizeof32 ( buffer ));
   };

@@ -37,7 +37,7 @@ CXXFLAGS=@CXXFLAGS@
 CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
-TARGETS=fml_tables views btest tptest qwriter SIMPSERV SIMPSERV++
+TARGETS=fml_tables views evtest btest tptest qwriter qtest mctest SIMPSERV SIMPSERV++
 
 all:${TARGETS}
 
@@ -71,8 +71,8 @@ beautify:
 	buildclient ${WSL} -v \
 	-o $@ \
 	-f $< \
-	-l -lfml++ \
 	-l -lcltatmi++ \
+	-l -lfml++ \
 	-l -latmiutl++
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.

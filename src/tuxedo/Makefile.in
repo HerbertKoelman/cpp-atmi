@@ -42,7 +42,7 @@ LDFLAGS=@LDFLAGS@ @LIBS@
 HEADERS=$(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=Tp.o Queue.o QueueStream.o Tuxedo.o Exception.o AbstractServer.o TuxedoException.o InterruptException.o \
+ATMI_SRV_OBJS=Event.o Tp.o Queue.o QueueStream.o Tuxedo.o Exception.o AbstractServer.o TuxedoException.o InterruptException.o \
 		 BlockingException.o TimeoutException.o ServiceException.o DiagnosticException.o NomsgException.o \
 		 AbortedException.o 
 

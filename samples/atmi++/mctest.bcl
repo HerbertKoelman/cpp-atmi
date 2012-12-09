@@ -20,7 +20,7 @@ using namespace atmi;
 class MultiContextClient : public AbstractClient {
 public:
 
-	MultiContextClient ( char *tuxconfig ) : AbstractClient ( "mctest", NULL, NULL, tuxconfig ) {
+	MultiContextClient ( const char *tuxconfig ) : AbstractClient ( "mctest", NULL, NULL, tuxconfig ) {
 	};
 
   int run ( int argc, char **argv ){
@@ -28,7 +28,7 @@ public:
 
 			cout << "Running in multicontext mode. Context is : " << get_context () << "." << endl ;
 
-			AQueue cro = new_queue_class ( "QCRO", "Q_ERR" );
+			AQueue cro = new_queue_instance ( "QCRO", "Q_ERR" );
 			char *message = (char *)cro->allocate ( "STRING", NULL, 10 );
 			strncpy (message, "hello",10);
 
