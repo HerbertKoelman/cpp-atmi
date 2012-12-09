@@ -29,6 +29,8 @@ pkg:
 
 globber:
 	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
+	cd src/tuxedo ;$(MAKE) globber
+	cd src/utl ;$(MAKE) globber
 
 doxygen:
 	${DOXYGEN} doxyconf
@@ -36,7 +38,6 @@ doxygen:
 beautifull:
 	cd src/tuxedo ;$(MAKE) beautifull
 	cd src/utl ;$(MAKE) beautifull
-	cd samples/atmi++ ;$(MAKE) beautifull
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a

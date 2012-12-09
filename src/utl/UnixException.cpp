@@ -10,14 +10,14 @@ using namespace std;
 
 int UnixException::get_errno () {
 
-	return error;
+  return error;
 }
 
 const char *UnixException::what() throw () {
 
-	message = message + ": " + strerror ( error );
+  message = message + ": " + strerror ( error );
 
-	return message.c_str();
+  return message.c_str();
 }
 
 UnixException::UnixException ( int err, const char *msg, ... ) throw () {
@@ -30,7 +30,7 @@ UnixException::UnixException ( int err, const char *msg, ... ) throw () {
     va_end (ap);
   }
 
-	this->error = ( err == 0 ? errno : err );;
+  this->error = ( err == 0 ? errno : err );;
 }
 
 UnixException::UnixException ( const char *msg, ... ) throw () {
@@ -43,32 +43,32 @@ UnixException::UnixException ( const char *msg, ... ) throw () {
     va_end (ap);
   }
 
-	this->error = errno;
+  this->error = errno;
 }
 
 void UnixException::setup_message ( const char *msg, va_list args ) {
 
-	if ( msg == NULL )
-		message = "Unix error occured.";
-	else {
-		int len = 100;
-		char *buff = new char[len];
+  if ( msg == NULL )
+    message = "Unix error occured.";
+  else {
+    int len = 100;
+    char *buff = new char[len];
 
-		// try to fit message into default buffer size
-		len = vsnprintf ( buff, len, msg, args );
+    // try to fit message into default buffer size
+    len = vsnprintf ( buff, len, msg, args );
 
-		if ( len > 100 ) {
+    if ( len > 100 ) {
 
-			// didn't fit into default buffer size.
-			delete[] buff;
+      // didn't fit into default buffer size.
+      delete[] buff;
 
-			len += 1;
-			buff = new char[len];
+      len += 1;
+      buff = new char[len];
 
-			vsnprintf ( buff, len, msg, args );
-		}
+      vsnprintf ( buff, len, msg, args );
+    }
 
-		message = buff;
-	}
+    message = buff;
+  }
 }
 

@@ -25,40 +25,41 @@
 #ifndef __UNIX_EXCEPTION__
 #define __UNIX_EXCEPTION__
 
-using namespace std ;
+using namespace std;
 
 /****************************************************************************
 *
 * Unix related exceptions
 *
 ****************************************************************************/
-  class UnixException : public exception {
-public:
-		/** Add a system message after the error message. The system message is returned by
-		* strerror. The last errno value is used to set the system message.
-		* @param msg user message.
-		*/
+class UnixException : public exception {
+  public:
+    /** Add a system message after the error message. The system message is returned by
+     * strerror. The last errno value is used to set the system message.
+     * @param msg user message.
+     */
     UnixException ( const char *msg = NULL, ... ) throw ();
 
-		/** Add a system message after the error message. The system message is returned by
-		* strerror.
-		* @param err error number (like errno).
-		* @param msg user message.
-		*/
+    /** Add a system message after the error message. The system message is returned by
+     * strerror.
+     * @param err error number (like errno).
+     * @param msg user message.
+     */
     UnixException ( int err=0, const char *msg = NULL, ... ) throw ();
 
-    virtual ~UnixException () throw () {};
+    virtual ~UnixException () throw () {
+    };
 
     /**
      * @return user friendly text message
      */
     virtual const char *what () throw ();
 
-		int get_errno () ;
-protected:
+    int get_errno ();
+  protected:
     void setup_message ( const char *msg, va_list args );
 
-    int error ;
-		string message ;
-  };
+    int error;
+    string message;
+};
 #endif

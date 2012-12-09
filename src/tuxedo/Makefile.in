@@ -38,6 +38,9 @@ CXXFLAGS=@CXXFLAGS@
 CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
+# Header files
+HEADERS=$(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
 ATMI_SRV_OBJS=Tp.o Queue.o QueueStream.o Tuxedo.o Exception.o AbstractServer.o TuxedoException.o InterruptException.o \
 		 BlockingException.o TimeoutException.o ServiceException.o DiagnosticException.o NomsgException.o \
@@ -57,13 +60,14 @@ gencat:
 	gencat ${LOCALEDIR}/fr_FR/atmi++.cat atmi++fr_FR.msg
 
 beautifull:
-	${BEAUTIFIER} *.cpp $(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+	${BEAUTIFIER} *.cpp $(HEADERS)
 
 clean:
 	${RM} *.o core
 
 globber:
 	$(RM) $(ATMI_CLT_OBJS) $(BUFF_OBJS) core $(LIBDIR)/libfml++.a $(LIBDIR)/libatmi++.a  $(LIBDIR)/libcltatmi++.a ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
+	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
 libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/Tuxedo.h $(INCDIR)/Exceptions.h
 	${AR} ${LIBDIR}/$@ $(ATMI_CLT_OBJS)

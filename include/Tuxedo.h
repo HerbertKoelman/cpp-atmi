@@ -64,200 +64,200 @@ namespace atmi {
  * @author Herbert Koelman
  */
   class Tuxedo {
-public:
-    Tuxedo ();
-    virtual ~Tuxedo();
+    public:
+      Tuxedo ();
+      virtual ~Tuxedo();
 
-    /* Method moved into the constructor of AbstractClient
-     * init() allows a client to join a BEA Tuxedo ATMI system application. Before a client can
-     * use any of the BEA Tuxedo ATMI system communication or transaction routines, it can
-     * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
-     * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-     * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
-     *
-     * @param cltname client program name
-     * @param usr user name
-     * @param passwd user's password.
-     *  int init ( char *cltname = NULL, char *usr = NULL, char *passwd = NULL) ;
-     */
+      /* Method moved into the constructor of AbstractClient
+       * init() allows a client to join a BEA Tuxedo ATMI system application. Before a client can
+       * use any of the BEA Tuxedo ATMI system communication or transaction routines, it can
+       * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
+       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
+       * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       *
+       * @param cltname client program name
+       * @param usr user name
+       * @param passwd user's password.
+       *  int init ( char *cltname = NULL, char *usr = NULL, char *passwd = NULL) ;
+       */
 
-    /* Method moved into the destructor of AbstractClient
-     * End any pending operation and free any alloated ressource. After this call any attempt at
-     * using ATMI will fail.
-     * int term () ;
-     */
+      /* Method moved into the destructor of AbstractClient
+       * End any pending operation and free any alloated ressource. After this call any attempt at
+       * using ATMI will fail.
+       * int term () ;
+       */
 
-    /**
-     * Allocate a new buffer of type. Depending on the type both subtype and
-     * len are optional.
-     *
-     *
-     * Buffer types provided by Tuxedo
-     * CARRAY	   Character array (possibly containing NULL characters) that is neither encoded nor decoded during transmission
-     * STRING	   NULL-terminated character array
-     * FML		   FML fielded buffer
-     * VIEW		   C structure or FML view
-     * X_OCTET   Equivalent to CARRAY; provided for XATMI compatibility
-     * X_C_TYPE  Equivalent to VIEW; provided for XATMI compatibility
-     * X_ COMMON Equivalent to VIEW; provided for XATMI compatibility
-     * FML32     FML32 fielded buffer, using 32-bit identifiers and offsets
-     * VIEW32    C structure or FML32 view, using 32-bit identifiers, counter variables, and size variables
-     * XML       Buffer for XML documents
-     * MBSTRING  Character array for multibyte characters
-     *
-     * Note that only the first eight bytes of type and the first 16 bytes
-     * of subtype are significant.
-     *
-     * @param type buffer type to allocate (STRING, VIEW, FML, ...)
-     * @param subtype buffer subtype. NULL means none
-     * @param size memory size to allocate.
-     *
-     * @return allocated buffer or NULL if failed
-     *
-     * @throw TuxedotException if something goes wrong.
-     */
-    char *allocate ( const char *type, const char *subtype, long size );
+      /**
+       * Allocate a new buffer of type. Depending on the type both subtype and
+       * len are optional.
+       *
+       *
+       * Buffer types provided by Tuxedo
+       * CARRAY	   Character array (possibly containing NULL characters) that is neither encoded nor decoded during transmission
+       * STRING	   NULL-terminated character array
+       * FML		   FML fielded buffer
+       * VIEW		   C structure or FML view
+       * X_OCTET   Equivalent to CARRAY; provided for XATMI compatibility
+       * X_C_TYPE  Equivalent to VIEW; provided for XATMI compatibility
+       * X_ COMMON Equivalent to VIEW; provided for XATMI compatibility
+       * FML32     FML32 fielded buffer, using 32-bit identifiers and offsets
+       * VIEW32    C structure or FML32 view, using 32-bit identifiers, counter variables, and size variables
+       * XML       Buffer for XML documents
+       * MBSTRING  Character array for multibyte characters
+       *
+       * Note that only the first eight bytes of type and the first 16 bytes
+       * of subtype are significant.
+       *
+       * @param type buffer type to allocate (STRING, VIEW, FML, ...)
+       * @param subtype buffer subtype. NULL means none
+       * @param size memory size to allocate.
+       *
+       * @return allocated buffer or NULL if failed
+       *
+       * @throw TuxedotException if something goes wrong.
+       */
+      char *allocate ( const char *type, const char *subtype, long size );
 
-    /**
-     * Routine to change the size of a typed buffer.
-     *
-     * @param buffer the buffer to resize (the return value maybe different)
-     * @param extent number of bytes to add
-     * @return reference to resized buffer
-     */
-    char *extend ( char *buffer, long extent );
+      /**
+       * Routine to change the size of a typed buffer.
+       *
+       * @param buffer the buffer to resize (the return value maybe different)
+       * @param extent number of bytes to add
+       * @return reference to resized buffer
+       */
+      char *extend ( char *buffer, long extent );
 
-    /**
-     * Free a preveously allocated tuxedo buffer.
-     */
-    void free ( char *buffer );
+      /**
+       * Free a preveously allocated tuxedo buffer.
+       */
+      void free ( char *buffer );
 
-    /**
-     * Starts an XA transaction.
-     *
-     * @param timeout max duration in seconds for a transaction to complete.
-     *
-     * @throw TransactionException is raised upon failure.
-     */
-    int begin ( int timeout = 0 );
+      /**
+       * Starts an XA transaction.
+       *
+       * @param timeout max duration in seconds for a transaction to complete.
+       *
+       * @throw TransactionException is raised upon failure.
+       */
+      int begin ( int timeout = 0 );
 
-    /**
-     * Commit XA transaction
-     *
-     * @throw TransactionException on failure.
-     */
-    int commit ();
+      /**
+       * Commit XA transaction
+       *
+       * @throw TransactionException on failure.
+       */
+      int commit ();
 
-    /**
-     * Abort XA transaction.
-     *
-     * Return:
-     * Upon failure an TransactionException is raised.
-     */
-    int abort ();
+      /**
+       * Abort XA transaction.
+       *
+       * Return:
+       * Upon failure an TransactionException is raised.
+       */
+      int abort ();
 
-    /**
-     * @return the current errno value
-     */
-    inline long  get_errno () {
-      return errorno;
-    };
-    /**
-     * @return an error description string of the last errno
-     */
-    inline const char *get_errmsg () {
-      return tpstrerror(errorno);
-    };
+      /**
+       * @return the current errno value
+       */
+      inline long  get_errno () {
+        return errorno;
+      };
+      /**
+       * @return an error description string of the last errno
+       */
+      inline const char *get_errmsg () {
+        return tpstrerror(errorno);
+      };
 
-    /**
-     * @return the current error detail (if one exist).
-     */
-    inline int   get_errnodetail() {
-      return errornodetail;
-    };
-    /**
-     * @return an error detail description string (if one exists).
-     */
-    inline const char *get_errdetail () {
-      return tpstrerrordetail ( errornodetail, 0 );
-    };
+      /**
+       * @return the current error detail (if one exist).
+       */
+      inline int   get_errnodetail() {
+        return errornodetail;
+      };
+      /**
+       * @return an error detail description string (if one exists).
+       */
+      inline const char *get_errdetail () {
+        return tpstrerrordetail ( errornodetail, 0 );
+      };
 
-    /** set the Tuxedo context to use when calling Tuxedo functions.
-     *
-     * When set, ATMI++ switches to this context (@tpsetctxt()@ ) before executing a Tuxedo call.
-     *
-     * @param c context to be used by this instance
-     */
-    inline void set_context ( TPCONTEXT_T c ) {
+      /** set the Tuxedo context to use when calling Tuxedo functions.
+       *
+       * When set, ATMI++ switches to this context (@tpsetctxt()@ ) before executing a Tuxedo call.
+       *
+       * @param c context to be used by this instance
+       */
+      inline void set_context ( TPCONTEXT_T c ) {
 
-      context = c;
-    };
+        context = c;
+      };
 
-    /** @return the current context
-     */
-    inline TPCONTEXT_T get_context () {
+      /** @return the current context
+       */
+      inline TPCONTEXT_T get_context () {
 
-      return context;
-    };
+        return context;
+      };
 
-    /**
-     * @return Tuxedo flags used by this instance.
-     */
-    inline long get_flags() {
-      return flags;
-    };
+      /**
+       * @return Tuxedo flags used by this instance.
+       */
+      inline long get_flags() {
+        return flags;
+      };
 
-    /**
-     * Set some Tuxedo flags
-     */
-    inline void set_flags ( long flags ) {
-      Tuxedo::set (this->flags, flags);
-    };
+      /**
+       * Set some Tuxedo flags
+       */
+      inline void set_flags ( long flags ) {
+        Tuxedo::set (this->flags, flags);
+      };
 
-    /**
-     * Reset flag value to TPNOFLAGS
-     */
-    inline void reset_flags ( long flags ) {
-      this->flags = TPNOFLAGS;
-      Tuxedo::set (this->flags, flags);
-    };
-    inline void unsetFlags ( long flags ) {
-      Tuxedo::unset (this->flags, flags);
-    };
+      /**
+       * Reset flag value to TPNOFLAGS
+       */
+      inline void reset_flags ( long flags ) {
+        this->flags = TPNOFLAGS;
+        Tuxedo::set (this->flags, flags);
+      };
+      inline void unsetFlags ( long flags ) {
+        Tuxedo::unset (this->flags, flags);
+      };
 
-    /** @return ATMI++ version number */
-    static inline const char *version () {
-      return ATMI_VERSION;
-    };
+      /** @return ATMI++ version number */
+      static inline const char *version () {
+        return ATMI_VERSION;
+      };
 
-    static const long FAILED = -1;
+      static const long FAILED = -1;
 
-protected:
+    protected:
 
-    /** If context is set (context != 0 ), then tpsetctxt is called. This method does nothing otherwise.
-     */
-    void switch_context ();
+      /** If context is set (context != 0 ), then tpsetctxt is called. This method does nothing otherwise.
+       */
+      void switch_context ();
 
-    /** Unset bits in second argument from first argument
-     */
-    static long unset ( long, long );
+      /** Unset bits in second argument from first argument
+       */
+      static long unset ( long, long );
 
-    /** set bits in second argument in first argument
-     */
-    static long set ( long, long );
+      /** set bits in second argument in first argument
+       */
+      static long set ( long, long );
 
-    void updateErrno ();
-    virtual int handleTperrno ( int, const char * = NULL, ... );
+      void updateErrno ();
+      virtual int handleTperrno ( int, const char * = NULL, ... );
 
-    long flags;
-    nl_catd catd;
+      long flags;
+      nl_catd catd;
 
-private:
-    long errorno;
-    long errornodetail;
+    private:
+      long errorno;
+      long errornodetail;
 
-    /* Moved into AbstractClient TPINIT *tpinfo ; */
-    TPCONTEXT_T context;
+      /* Moved into AbstractClient TPINIT *tpinfo ; */
+      TPCONTEXT_T context;
 
   };
 
@@ -269,63 +269,64 @@ private:
  * Extending this class ensures that tpterm  and tpinitis called when client program are run
  */
   class AbstractClient : public Tuxedo {
-public:
+    public:
 
-    /** Method moved into the destructor of AbstractClient
-     * End any pending operation and free any alloated ressource. After this call any attempt at
-     * using ATMI will fail.
-     * int term () ;
-     */
-    virtual ~AbstractClient ();
+      /** Method moved into the destructor of AbstractClient
+       * End any pending operation and free any alloated ressource. After this call any attempt at
+       * using ATMI will fail.
+       * int term () ;
+       */
+      virtual ~AbstractClient ();
 
-    /**
-     * The constructor allows a client to join a BEA Tuxedo ATMI system application by calling tpinit. Before a client can
-     * use any of the BEA Tuxedo ATMI system communication or transaction routines, it can
-     * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
-     * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-     * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
-     *
-     * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-     * should use factory methods  to build Queue and Tp objects.
-     *
-     * @param cltname client program name (default NULL)
-     * @param usr user name (default NULL)
-     * @param passwd user's password (default NULL)
-     * @param group is used to associate the client with a resource manager group name (default NULL)
-     * @param tuxconf path to Tuxedo config file (same as TUXCONFIG en variable default NULL)
-     */
-    AbstractClient ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
+      /**
+       * The constructor allows a client to join a BEA Tuxedo ATMI system application by calling tpinit. Before a client can
+       * use any of the BEA Tuxedo ATMI system communication or transaction routines, it can
+       * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
+       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
+       * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       *
+       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
+       * should use factory methods  to build Queue and Tp objects.
+       *
+       * @param cltname client program name (default NULL)
+       * @param usr user name (default NULL)
+       * @param passwd user's password (default NULL)
+       * @param group is used to associate the client with a resource manager group name (default NULL)
+       * @param tuxconf path to Tuxedo config file (same as TUXCONFIG en variable default NULL)
+       */
+      AbstractClient ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
 
-    /** This method must overriden  to run the client application.
-     *
-     * @param argc number of command line option received when the program was started
-     * @param argv actual value of command line arguments
-     * @deprecated
-     */
-    virtual int run ( int argc, char **argv ) {};
+      /** This method must overriden  to run the client application.
+       *
+       * @param argc number of command line option received when the program was started
+       * @param argv actual value of command line arguments
+       * @deprecated
+       */
+      virtual int run ( int argc, char **argv ) {
+      };
 
-    /** Creates an instance of Tp and set the client context to be used.
-     *
-     * @return  an auto_ptr to a new Tp instance
-     */
-    ATp new_tp_instance ( const char *svc );
+      /** Creates an instance of Tp and set the client context to be used.
+       *
+       * @return  an auto_ptr to a new Tp instance
+       */
+      ATp new_tp_instance ( const char *svc );
 
-    /** Creates an instance of Queue and set the client context to be used.
-     *
-     * @return  an auto_ptr to a new Queue instance
-     */
-    AQueue new_queue_instance ( const char *qspace, const char *queue );
+      /** Creates an instance of Queue and set the client context to be used.
+       *
+       * @return  an auto_ptr to a new Queue instance
+       */
+      AQueue new_queue_instance ( const char *qspace, const char *queue );
 
-    TPCONTEXT_T get_context () {
-      return context;
-    };
+      TPCONTEXT_T get_context () {
+        return context;
+      };
 
-protected:
+    protected:
 
-private:
+    private:
 
-    TPINIT *tpinfo;
-    TPCONTEXT_T context;
+      TPINIT *tpinfo;
+      TPCONTEXT_T context;
 
   };
 
@@ -336,52 +337,52 @@ private:
  *
  */
   class AbstractServer : public Tuxedo {
-public:
+    public:
 
-    /**
-     * Setup minimal requirements (mainly tpopen)
-     *
-     * @throw TuxedoException if tpopen failed.
-     */
-    AbstractServer ();
+      /**
+       * Setup minimal requirements (mainly tpopen)
+       *
+       * @throw TuxedoException if tpopen failed.
+       */
+      AbstractServer ();
 
-    /**
-     * minimal cleanup
-     */
-    ~AbstractServer ();
+      /**
+       * minimal cleanup
+       */
+      ~AbstractServer ();
 
-    /**
-     * Terminates a BEA Tuxedo ATMI server thread
-     */
-    virtual void tpsvrthrdone();
+      /**
+       * Terminates a BEA Tuxedo ATMI server thread
+       */
+      virtual void tpsvrthrdone();
 
-    /**
-     * Initializes a BEA Tuxedo ATMI server thread.
-     *
-     * @param argc CLOPT argument count.
-     * @param argv CLOPT user arguments
-     *
-     * @return A negative return value will cause the server dispatch thread to exit gracefully.
-     */
-    virtual int tpsvrthrinit( int argc, char **argv );
+      /**
+       * Initializes a BEA Tuxedo ATMI server thread.
+       *
+       * @param argc CLOPT argument count.
+       * @param argv CLOPT user arguments
+       *
+       * @return A negative return value will cause the server dispatch thread to exit gracefully.
+       */
+      virtual int tpsvrthrinit( int argc, char **argv );
 
-    /**
-     * Handles SIGHUP signals. It normaly expected that the server takes actions
-     * to re-initialize it's internal state.
-     *
-     * This method should be overloaded
-     */
-    virtual inline void handle_sighup ()  {                     /* not implemented */
-    };
+      /**
+       * Handles SIGHUP signals. It normaly expected that the server takes actions
+       * to re-initialize it's internal state.
+       *
+       * This method should be overloaded
+       */
+      virtual inline void handle_sighup ()  {                   /* not implemented */
+      };
 
-    /**
-     * Handles SIGTERM signals. A server should cleanup and prepare it's self to
-     * terminated.
-     *
-     * This method should be overloaded
-     */
-    virtual inline void handle_sigterm () {                     /* not implemented */
-    };
+      /**
+       * Handles SIGTERM signals. A server should cleanup and prepare it's self to
+       * terminated.
+       *
+       * This method should be overloaded
+       */
+      virtual inline void handle_sigterm () {                   /* not implemented */
+      };
 
   };
 
@@ -391,144 +392,144 @@ public:
  * Implement TP calls
  */
   class Tp : public Tuxedo {
-public:
-    /**
-     * call() sends a request and synchronously awaits its reply. A call to call () returns
-     * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-     * should be > 0. All other error conditions are handled through Exceptions.
-     *
-     * @param idata a data buffer preveously allocated with tpalloc() and hols input data
-     * @param ilen  idata buffer lenght.
-     * @param odata a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
-     * @param olen  reponse buffer length.
-     * @param urcode user return code (see tpreturn)
-     * @param retries call is attempted at most retries times.
-     * @param delay   delay in seconds between each retry.
-     *
-     * @return  tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
-     * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
-     * @return  0 TPSUCCESS is returned
-     *
-     * @throw  ServiceException Upon TPESVCERR.
-     * @throw  TimeoutException Upon TPETIME.
-     * @throw  TuxedoException thrown for the other error conditions.
-     */
-    int call( char *idata, long ilen, char **odata, long *olen, int *urcode = NULL,int retries = 0, int delay = 0 );
+    public:
+      /**
+       * call() sends a request and synchronously awaits its reply. A call to call () returns
+       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
+       * should be > 0. All other error conditions are handled through Exceptions.
+       *
+       * @param idata a data buffer preveously allocated with tpalloc() and hols input data
+       * @param ilen  idata buffer lenght.
+       * @param odata a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
+       * @param olen  reponse buffer length.
+       * @param urcode user return code (see tpreturn)
+       * @param retries call is attempted at most retries times.
+       * @param delay   delay in seconds between each retry.
+       *
+       * @return  tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
+       * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
+       * @return  0 TPSUCCESS is returned
+       *
+       * @throw  ServiceException Upon TPESVCERR.
+       * @throw  TimeoutException Upon TPETIME.
+       * @throw  TuxedoException thrown for the other error conditions.
+       */
+      int call( char *idata, long ilen, char **odata, long *olen, int *urcode = NULL,int retries = 0, int delay = 0 );
 
-    /**
-     * call() sends a request and synchronously awaits its reply. A call to call () returns
-     * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-     * should be > 0. All other error conditions are handled through Exceptions.
-     *
-     * @param buffer a data buffer preveously allocated
-     * @param urcode user return code (see tpreturn)
-     * @param retries call is attempted at most retries times.
-     * @param delay   delay in seconds between each retry.
-     *
-     * @return  tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
-     * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
-     * @return  0 TPSUCCESS is returned
-     *
-     * @throw  ServiceException Upon TPESVCERR.
-     * @throw  TimeoutException Upon TPETIME.
-     * @throw  TuxedoException thrown for the other error conditions.
-     */
-    int call( Buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
+      /**
+       * call() sends a request and synchronously awaits its reply. A call to call () returns
+       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
+       * should be > 0. All other error conditions are handled through Exceptions.
+       *
+       * @param buffer a data buffer preveously allocated
+       * @param urcode user return code (see tpreturn)
+       * @param retries call is attempted at most retries times.
+       * @param delay   delay in seconds between each retry.
+       *
+       * @return  tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
+       * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
+       * @return  0 TPSUCCESS is returned
+       *
+       * @throw  ServiceException Upon TPESVCERR.
+       * @throw  TimeoutException Upon TPETIME.
+       * @throw  TuxedoException thrown for the other error conditions.
+       */
+      int call( Buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
 
-    /**
-     * call() sends a request and synchronously awaits its reply. A call to call () returns
-     * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-     * should be > 0. All other error conditions are handled through Exceptions.
-     *
-     * Input data buffer is used to as output data buffer.
-     *
-     * @param idata a data buffer preveously allocated with tpalloc() and holds input data
-     * @param ilen  idata buffer lenght.
-     * @param urcode user return code (see tpreturn)
-     * @param retries call is attempted at most retries times.
-     * @param delay   delay in seconds between each retry.
-     *
-     * @return tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
-     * @return -1 is retuened upon service failure TPFAIL and tpurcode == 0
-     * @return 0 TPSUCCESS is returned
-     *
-     * @throw ServiceException Upon TPESVCERR.
-     * @throw TimeoutException Upon TPETIME.
-     * @throw TuxedoException thrown for the other error conditions.
-     */
-    int call( char **idata = NULL, long *ilen = 0, int *urcode = NULL, int retries = 0, int delay = 0 );
+      /**
+       * call() sends a request and synchronously awaits its reply. A call to call () returns
+       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
+       * should be > 0. All other error conditions are handled through Exceptions.
+       *
+       * Input data buffer is used to as output data buffer.
+       *
+       * @param idata a data buffer preveously allocated with tpalloc() and holds input data
+       * @param ilen  idata buffer lenght.
+       * @param urcode user return code (see tpreturn)
+       * @param retries call is attempted at most retries times.
+       * @param delay   delay in seconds between each retry.
+       *
+       * @return tpurcode if TPESVCFAIL a user returned code (tpurcode) > 0
+       * @return -1 is retuened upon service failure TPFAIL and tpurcode == 0
+       * @return 0 TPSUCCESS is returned
+       *
+       * @throw ServiceException Upon TPESVCERR.
+       * @throw TimeoutException Upon TPETIME.
+       * @throw TuxedoException thrown for the other error conditions.
+       */
+      int call( char **idata = NULL, long *ilen = 0, int *urcode = NULL, int retries = 0, int delay = 0 );
 
-    /**
-     * acall() sends a request message to the service named by svc.
-     *
-     * Parameters:
-     * idata - a data buffer preveously allocated with tpalloc() and hols input data
-     * ilen  - idata buffer lenght.
-     *
-     * @return call descriptor if call succeeded else -1
-     *
-     * @throw An exception is raised upon failure
-     */
-    int acall( char *idata = NULL, long ilen = 0 );
+      /**
+       * acall() sends a request message to the service named by svc.
+       *
+       * Parameters:
+       * idata - a data buffer preveously allocated with tpalloc() and hols input data
+       * ilen  - idata buffer lenght.
+       *
+       * @return call descriptor if call succeeded else -1
+       *
+       * @throw An exception is raised upon failure
+       */
+      int acall( char *idata = NULL, long ilen = 0 );
 
-    /**
-     * get reply from preveous acall().
-     *
-     * @param data - a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
-     * @param urcode - user return code
-     * @param len  - reponse buffer length.
-     * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
-     */
-    int reply ( char **data, long *len,int *urcode = NULL, int *cd = NULL );
+      /**
+       * get reply from preveous acall().
+       *
+       * @param data - a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
+       * @param urcode - user return code
+       * @param len  - reponse buffer length.
+       * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
+       */
+      int reply ( char **data, long *len,int *urcode = NULL, int *cd = NULL );
 
-    /**
-     * acall() sends a request message to the service named by svc.
-     *
-     * Parameters:
-     * buffer - a fielded buffer preveously allocated with tpalloc() and hols input data
-     *
-     * @return call descriptor if call succeeded else -1
-     *
-     * @throw An exception is raised upon failure
-     */
-    int acall( Buffer *buffer );
+      /**
+       * acall() sends a request message to the service named by svc.
+       *
+       * Parameters:
+       * buffer - a fielded buffer preveously allocated with tpalloc() and hols input data
+       *
+       * @return call descriptor if call succeeded else -1
+       *
+       * @throw An exception is raised upon failure
+       */
+      int acall( Buffer *buffer );
 
-    /**
-     * get reply from preveous acall().
-     *
-     * @param buffer - a fielded buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
-     * @param urcode - user return code
-     * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
-     */
-    int reply ( Buffer *buffer,int *urcode = NULL, int *cd = NULL );
+      /**
+       * get reply from preveous acall().
+       *
+       * @param buffer - a fielded buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
+       * @param urcode - user return code
+       * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
+       */
+      int reply ( Buffer *buffer,int *urcode = NULL, int *cd = NULL );
 
-    /**
-     * Cancel acall.
-     *
-     * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
-     */
-    int cancel ( int cd = 0 );
+      /**
+       * Cancel acall.
+       *
+       * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
+       */
+      int cancel ( int cd = 0 );
 
-    inline int getCallDesc () {
-      return calldesc;
-    };
-    inline string getService () {
-      return service;
-    };
+      inline int getCallDesc () {
+        return calldesc;
+      };
+      inline string getService () {
+        return service;
+      };
 
-    // contrucors/destructors -------------------------------------------------------
+      // contrucors/destructors -------------------------------------------------------
 
-    /**
-     * @param service service name (< 32 characters long)
-     */
-    Tp ( const char *service );
+      /**
+       * @param service service name (< 32 characters long)
+       */
+      Tp ( const char *service );
 
-protected:
+    protected:
 
-private:
+    private:
 
-    int calldesc;
-    string service;
+      int calldesc;
+      string service;
 
   };
 
@@ -538,162 +539,162 @@ private:
  * Handles /Q operations
  */
   class Queue : public Tuxedo {
-public:
+    public:
 
 
-    /** Creates an instance of Queue
-     *
-     * @param qspace qspace that handles the queue
-     * @param queue the queue that will be manipulated
-     * @param reply name of a reply
-     */
-    Queue ( const char *qspace = NULL, const char *queue = NULL, const char *reply = NULL );
+      /** Creates an instance of Queue
+       *
+       * @param qspace qspace that handles the queue
+       * @param queue the queue that will be manipulated
+       * @param reply name of a reply
+       */
+      Queue ( const char *qspace = NULL, const char *queue = NULL, const char *reply = NULL );
 
-    /** enqueue a message
-     *
-     * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
-     * @param len length of the Tuxedo buffer
-     */
-    int enqueue ( char *data, long len );
+      /** enqueue a message
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       * @param len length of the Tuxedo buffer
+       */
+      int enqueue ( char *data, long len );
 
-    /** dequeue a message
-     *
-     * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
-     * @param len length of the Tuxedo buffer
-     */
-    int dequeue ( char **data, long *len );
+      /** dequeue a message
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       * @param len length of the Tuxedo buffer
+       */
+      int dequeue ( char **data, long *len );
 
-    /** enqueue a message
-     *
-     * @param data Tuxedo FML32 buffer (allocated with Tuxedo::allocate)
-     */
-    int enqueue ( Buffer *data );
+      /** enqueue a message
+       *
+       * @param data Tuxedo FML32 buffer (allocated with Tuxedo::allocate)
+       */
+      int enqueue ( Buffer *data );
 
-    /** dequeue a message
-     *
-     * @param data Tuxedo FML32 buffer (allocated with Tuxedo::allocate)
-     */
-    int dequeue ( Buffer *data );
+      /** dequeue a message
+       *
+       * @param data Tuxedo FML32 buffer (allocated with Tuxedo::allocate)
+       */
+      int dequeue ( Buffer *data );
 
-    /** dequeue a reply message
-     *
-     * Reply must have been set when Queue instance was created.
-     *
-     * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
-     * @param len length of the Tuxedo buffer
-     */
-    int dequeueReply ( char **data, long *len );
+      /** dequeue a reply message
+       *
+       * Reply must have been set when Queue instance was created.
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       * @param len length of the Tuxedo buffer
+       */
+      int dequeueReply ( char **data, long *len );
 
-    /** enqueue a reply message
-     *
-     * The reply queue is identified through the Qctl structure. It is responability
-     * of the caller to set the reply queue value to use.
-     *
-     * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
-     * @param len length of the Tuxedo buffer
-     */
-    int enqueueReply ( char *data, long len );
+      /** enqueue a reply message
+       *
+       * The reply queue is identified through the Qctl structure. It is responability
+       * of the caller to set the reply queue value to use.
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       * @param len length of the Tuxedo buffer
+       */
+      int enqueueReply ( char *data, long len );
 
-    /**
-     * indicate in wich queue the replies should be posted.
-     *
-     * @param q queue name
-     */
-    void set_reply_queue ( const char *q );
+      /**
+       * indicate in wich queue the replies should be posted.
+       *
+       * @param q queue name
+       */
+      void set_reply_queue ( const char *q );
 
-    /**
-     * @return current reply queue name
-     */
-    const char *get_reply_queue ();
+      /**
+       * @return current reply queue name
+       */
+      const char *get_reply_queue ();
 
-    /**
-     * Set the queuespace name to wich this queue associated.
-     *
-     * @param qs queue space name (32 characters max)
-     */
-    inline void set_queue_space ( const char *qs) {
-      this->qspace = const_cast<char *>(qs);
-    };
-    inline const char *get_queue_space () {
-      return qspace;
-    };
+      /**
+       * Set the queuespace name to wich this queue associated.
+       *
+       * @param qs queue space name (32 characters max)
+       */
+      inline void set_queue_space ( const char *qs) {
+        this->qspace = const_cast<char *>(qs);
+      };
+      inline const char *get_queue_space () {
+        return qspace;
+      };
 
-    inline void set_queue ( char *q) {
-      this->queue = q;
-    };
-    inline const char *get_queue () {
-      return queue;
-    };
+      inline void set_queue ( char *q) {
+        this->queue = q;
+      };
+      inline const char *get_queue () {
+        return queue;
+      };
 
-    /**
-     * @return the current value of QCTL flags
-     */
-    inline long get_qctl_flags () {
-      return qctl.flags;
-    };
+      /**
+       * @return the current value of QCTL flags
+       */
+      inline long get_qctl_flags () {
+        return qctl.flags;
+      };
 
-    /** Wait until a message is enqueued.
-     *
-     * @param wait if true Queue waits for a message
-     */
-    void set_message_wait ( bool wait );
+      /** Wait until a message is enqueued.
+       *
+       * @param wait if true Queue waits for a message
+       */
+      void set_message_wait ( bool wait );
 
-    /** @deprecated use set_message_wait instead
-     */
-    inline void setQWait ( bool wait ) {
-      set_message_wait (wait);
-    };
+      /** @deprecated use set_message_wait instead
+       */
+      inline void setQWait ( bool wait ) {
+        set_message_wait (wait);
+      };
 
-    /** Check if QWait flag is set
-     *
-     * @return true if wait flag is set
-     * @deprecated use is_message_waiting instead
-     */
-    inline bool isQWaiting () {
-      return is_message_waiting ();
-    };
+      /** Check if QWait flag is set
+       *
+       * @return true if wait flag is set
+       * @deprecated use is_message_waiting instead
+       */
+      inline bool isQWaiting () {
+        return is_message_waiting ();
+      };
 
-    inline bool is_message_waiting () {
-      return ((qctl.flags & TPQWAIT) == TPQWAIT);
-    };
+      inline bool is_message_waiting () {
+        return ((qctl.flags & TPQWAIT) == TPQWAIT);
+      };
 
-    /** Set the desired persistence mode (memory, disk, default)
-     * Accepted values are :
-     * TPQQOSDEFAULTPERSIST: uses the persistence mode defined with queue
-     * TPQQOSPERSISTENT: message are written onto persistent storage
-     * TPQQOSNONPERSISTENT: message are written into memory only (message are lost if the queue manager is interrupted)
-     *
-     * @param qos desired flags
-     */
-    void set_quality_of_service ( long qos);
+      /** Set the desired persistence mode (memory, disk, default)
+       * Accepted values are :
+       * TPQQOSDEFAULTPERSIST: uses the persistence mode defined with queue
+       * TPQQOSPERSISTENT: message are written onto persistent storage
+       * TPQQOSNONPERSISTENT: message are written into memory only (message are lost if the queue manager is interrupted)
+       *
+       * @param qos desired flags
+       */
+      void set_quality_of_service ( long qos);
 
-    /** @return the diagnostic code returned by last call.
-     */
-    inline int get_diagno () {
-      return diagno;
-    };
+      /** @return the diagnostic code returned by last call.
+       */
+      inline int get_diagno () {
+        return diagno;
+      };
 
-protected:
-    int handleDiagnostics ( int _tperrno, int _diagno, const char *msg, ... );
+    protected:
+      int handleDiagnostics ( int _tperrno, int _diagno, const char *msg, ... );
 
-private:
+    private:
 
-    /** Utiliy method used to simplify the implementation of enqueue messages
-     */
-    int enqueue ( char *queue,  char *data, long len );
+      /** Utiliy method used to simplify the implementation of enqueue messages
+       */
+      int enqueue ( char *queue,  char *data, long len );
 
-    /** Utiliy method used to simplify the implementation of dequeue messages
-     */
-    int dequeue ( char *queue,  char **data, long *len );
+      /** Utiliy method used to simplify the implementation of dequeue messages
+       */
+      int dequeue ( char *queue,  char **data, long *len );
 
-    char *qspace;
-    char *queue;
+      char *qspace;
+      char *queue;
 
-    int diagno;
+      int diagno;
 
-    TPQCTL qctl;
+      TPQCTL qctl;
 
-    void setQCTL();
+      void setQCTL();
   };
 
 // ---------------------------------------------------------------------------------
@@ -703,41 +704,41 @@ private:
  *
  */
   class QueueStream : public Tuxedo {
-public:
+    public:
 
-    friend ostream& operator<<(ostream& out, QueueStream& qs);
-    friend istream& operator>>(istream& in, QueueStream& qs);
+      friend ostream& operator<<(ostream& out, QueueStream& qs);
+      friend istream& operator>>(istream& in, QueueStream& qs);
 
-    QueueStream ( Queue *q );
-    QueueStream ( Queue *q, long bs );
+      QueueStream ( Queue *q );
+      QueueStream ( Queue *q, long bs );
 
-    /** @return the number of messages handle by last IO operation
-     */
-    inline long getCount () {
-      return count;
-    };
+      /** @return the number of messages handle by last IO operation
+       */
+      inline long getCount () {
+        return count;
+      };
 
-    inline void setBuffSize ( long s ) {
-      buff_size = s;
-    };
-    inline long getBuffSize () {
-      return buff_size;
-    };
+      inline void setBuffSize ( long s ) {
+        buff_size = s;
+      };
+      inline long getBuffSize () {
+        return buff_size;
+      };
 
-    void encodeBase64( bool b);
+      void encodeBase64( bool b);
 
-protected:
+    protected:
 
-private:
-    /**
-     * Number of handled messages during last in/out operation.
-     */
-    long count;
-    long buff_size;
+    private:
+      /**
+       * Number of handled messages during last in/out operation.
+       */
+      long count;
+      long buff_size;
 
-    long flags;
+      long flags;
 
-    Queue *queue;
+      Queue *queue;
   };
 
 /** Global utility to stream out the content of a Queue

@@ -19,31 +19,31 @@ using namespace std;
 namespace atmi {
 
   class Sequence : private Mutex {
-public:
-    Sequence ( long min = 0, long max = 0 ){
-      cval = min;
-      this->min = min;
-      this->max = max;
-    };
+    public:
+      Sequence ( long min = 0, long max = 0 ){
+        cval = min;
+        this->min = min;
+        this->max = max;
+      };
 
-    long next () {
+      long next () {
 
-      long nval = 0;
+        long nval = 0;
 
-      lock();
-      nval = ++cval;                    // Increment and get next value
-      unlock();
+        lock();
+        nval = ++cval;                  // Increment and get next value
+        unlock();
 
-      return nval;
-    };
+        return nval;
+      };
 
-    long value () {
+      long value () {
 
-      return cval;
-    };
+        return cval;
+      };
 
-private:
-    long cval, min, max;
+    private:
+      long cval, min, max;
 
   };
 

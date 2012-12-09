@@ -18,6 +18,7 @@ CCC=@CXX@
 RANLIB=@RANLIB@
 RM=rm -f
 AR=@AR@
+BEAUTIFIER=@BEAUTIFIER@ -l CPP --replace -c ${BASEDIR}/crust.cfg
 
 DEBUG=-g -bnoquiet
 
@@ -27,6 +28,7 @@ CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 VFLAGS=-n
 
+HEADERS= $(INCDIR)/Concurrency.h $(INCDIR)/Thread.h $(INCDIR)/ThreadPool.h $(INCDIR)/UnixException.h
 OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o 
 
 all : libatmiutl++.a
@@ -34,11 +36,12 @@ all : libatmiutl++.a
 clean:
 	${RM} *.o core
 
-beautify:
-	uncrustify --no-backup -l CPP --replace -c ./crust.cfg *.cpp 
+beautifull:
+	${BEAUTIFIER} *.cpp $(HEADERS)
 
 globber:
 	${RM} *.o core ../../lib/libatmiutl++.a
+	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
 libatmiutl++.a: $(OBJS) $(INCDIR)/Concurrency.h $(INCDIR)/Thread.h
 	${AR} ${LIBDIR}/$@ ${OBJS}

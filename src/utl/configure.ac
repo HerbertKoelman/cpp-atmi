@@ -12,6 +12,7 @@ AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to poi
 AC_PROG_CXX
 AC_PROG_CC
 AC_CHECK_PROG([AR],[ar],[ar -rv])
+AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify])
 AC_PROG_RANLIB
 
 # Checks for libraries.

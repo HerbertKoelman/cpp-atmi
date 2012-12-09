@@ -46,27 +46,27 @@ namespace atmi {
  * Can be used to throw any kind of error message in a consitent way.
  */
   class Exception : public exception {
-public:
-    /** create a new instance
-     *
-     * @param msg error message
-     */
-    Exception ( const char *msg = NULL, ... ) throw ();
-    ~Exception () throw () {
-    };
+    public:
+      /** create a new instance
+       *
+       * @param msg error message
+       */
+      Exception ( const char *msg = NULL, ... ) throw ();
+      ~Exception () throw () {
+      };
 
-    /**
-     * @return user friendly text message
-     */
-    virtual const char *what () throw ();
+      /**
+       * @return user friendly text message
+       */
+      virtual const char *what () throw ();
 
-    /**
-     * helper to build string message using va_list.
-     */
-    void setup_message ( const char *, va_list );
+      /**
+       * helper to build string message using va_list.
+       */
+      void setup_message ( const char *, va_list );
 
-protected:
-    string message;
+    protected:
+      string message;
   };
 
 /****************************************************************************
@@ -75,17 +75,17 @@ protected:
 *
 ****************************************************************************/
   class UnixException : public Exception {
-public:
-    UnixException ( int err, const char *msg = NULL, ... ) throw ();
+    public:
+      UnixException ( int err, const char *msg = NULL, ... ) throw ();
 
-    /**
-     * @return user friendly text message
-     */
-    virtual const char *what () throw ();
+      /**
+       * @return user friendly text message
+       */
+      virtual const char *what () throw ();
 
-    int get_errno ();
-protected:
-    int error;
+      int get_errno ();
+    protected:
+      int error;
   };
 
 /****************************************************************************
@@ -94,31 +94,31 @@ protected:
 *
 ****************************************************************************/
   class BufferException : public Exception {
-public:
-    BufferException ( int err, const char *msg = NULL, ... ) throw ();
+    public:
+      BufferException ( int err, const char *msg = NULL, ... ) throw ();
 
-    /**
-     * @return tuxedo FML error number
-     */
-    int getFerror ();
+      /**
+       * @return tuxedo FML error number
+       */
+      int getFerror ();
 
-    /**
-     * @return tuxedo FML error message string
-     */
-    virtual const char *getFmlerrmsg ();
+      /**
+       * @return tuxedo FML error message string
+       */
+      virtual const char *getFmlerrmsg ();
 
-    /**
-     * @return error message.
-     */
-    virtual const char *getMessage();
+      /**
+       * @return error message.
+       */
+      virtual const char *getMessage();
 
-    /**
-     * @return user friendly text message
-     */
-    virtual const char *what() throw ();
+      /**
+       * @return user friendly text message
+       */
+      virtual const char *what() throw ();
 
-protected:
-    int ferror;
+    protected:
+      int ferror;
   };
 
 /****************************************************************************
@@ -128,55 +128,55 @@ protected:
 ****************************************************************************/
 
   class TuxedoException : public Exception {
-public:
-    /**
-     * Base class of Tuxedo exceptions.
-     *
-     * @param err value of tperr
-     * @param msg error message.
-     */
-    TuxedoException ( int err = 0, const char *msg = NULL, ... ) throw ();
-    ~TuxedoException () throw () {
-    };
+    public:
+      /**
+       * Base class of Tuxedo exceptions.
+       *
+       * @param err value of tperr
+       * @param msg error message.
+       */
+      TuxedoException ( int err = 0, const char *msg = NULL, ... ) throw ();
+      ~TuxedoException () throw () {
+      };
 
-    /**
-     * @return tperr that raise the exception
-     */
-    virtual inline int getErrno () {
-      return tuxerror;
-    };
+      /**
+       * @return tperr that raise the exception
+       */
+      virtual inline int getErrno () {
+        return tuxerror;
+      };
 
-    /**
-     * @return detail error number
-     */
-    virtual inline int getErrdetail () {
-      return errdetail;
-    };
+      /**
+       * @return detail error number
+       */
+      virtual inline int getErrdetail () {
+        return errdetail;
+      };
 
-    /**
-     * @return error message.
-     */
-    virtual const char *getMessage();
+      /**
+       * @return error message.
+       */
+      virtual const char *getMessage();
 
-    /**
-     * @return tuxedo error message string
-     */
-    virtual const char *getTperrmsg ();
+      /**
+       * @return tuxedo error message string
+       */
+      virtual const char *getTperrmsg ();
 
-    /**
-     * @return tuxedo error detail string
-     */
-    virtual const char *getTperrdetail ();
+      /**
+       * @return tuxedo error detail string
+       */
+      virtual const char *getTperrdetail ();
 
-    /**
-     * @return user friendly text message
-     */
-    virtual const char *what () throw ();
+      /**
+       * @return user friendly text message
+       */
+      virtual const char *what () throw ();
 
-protected:
+    protected:
 
-    int tuxerror;
-    int errdetail;
+      int tuxerror;
+      int errdetail;
 
   };
 
@@ -184,20 +184,20 @@ protected:
  * Thrown when a TPESVRERR is returned after a TP call.
  */
   class ServiceException : public TuxedoException {
-public:
-    ServiceException ( int err, const char *msg = NULL, ... ) throw ();
-    ~ServiceException () throw () {
-    };
+    public:
+      ServiceException ( int err, const char *msg = NULL, ... ) throw ();
+      ~ServiceException () throw () {
+      };
   };
 
 /**
  * Thrown when TPETIME is returned after a TP call.
  */
   class TimeoutException : public TuxedoException {
-public:
-    TimeoutException ( int err, const char *msg = NULL, ... ) throw ();
-    ~TimeoutException () throw (){
-    };
+    public:
+      TimeoutException ( int err, const char *msg = NULL, ... ) throw ();
+      ~TimeoutException () throw (){
+      };
   };
 
 /**
@@ -205,20 +205,20 @@ public:
  * exists.
  */
   class BlockingException : public TuxedoException {
-public:
-    BlockingException ( int err, const char *msg = NULL, ... ) throw ();
-    ~BlockingException () throw () {
-    };
+    public:
+      BlockingException ( int err, const char *msg = NULL, ... ) throw ();
+      ~BlockingException () throw () {
+      };
   };
 
 /**
  * Thrown when TPEGOSIG is returned after a signal was received.
  */
   class InterruptException : public TuxedoException {
-public:
-    InterruptException ( int err, const char *msg = NULL, ... ) throw ();
-    ~InterruptException () throw () {
-    };
+    public:
+      InterruptException ( int err, const char *msg = NULL, ... ) throw ();
+      ~InterruptException () throw () {
+      };
   };
 
 /****************************************************************************
@@ -228,57 +228,57 @@ public:
  ***************************************************************************/
 
   class DiagnosticException : public TuxedoException {
-public:
-    /**
-     * Constructs a Queue exeption
-     *
-     * @param err value of tperr
-     * @param diagno value of ctl.diagnostic
-     * @param msg error message.
-     */
-    DiagnosticException ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
-    ~DiagnosticException ()  throw () {
-    };
+    public:
+      /**
+       * Constructs a Queue exeption
+       *
+       * @param err value of tperr
+       * @param diagno value of ctl.diagnostic
+       * @param msg error message.
+       */
+      DiagnosticException ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
+      ~DiagnosticException ()  throw () {
+      };
 
-    /**
-     * @return tuxedo diagnostic error number
-     */
-    inline long getDiagno () {
-      return diagno;
-    };
+      /**
+       * @return tuxedo diagnostic error number
+       */
+      inline long getDiagno () {
+        return diagno;
+      };
 
-    /**
-     * @return diagnostic error message string
-     */
-    const char *getDiagmsg ();
+      /**
+       * @return diagnostic error message string
+       */
+      const char *getDiagmsg ();
 
-    /**
-     * @return user friendly text message
-     */
-    virtual const char *what () throw ();
+      /**
+       * @return user friendly text message
+       */
+      virtual const char *what () throw ();
 
-private:
-    long diagno;
+    private:
+      long diagno;
   };
 
 /**
  * Thrown when QMENOMSG is returned
  */
   class NomsgException : public DiagnosticException {
-public:
-    NomsgException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-    ~NomsgException () throw () {
-    };
+    public:
+      NomsgException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      ~NomsgException () throw () {
+      };
   };
 
 /**
  * Thrown when QMEABORTED is returned
  */
   class AbortedException : public DiagnosticException {
-public:
-    AbortedException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-    ~AbortedException () throw () {
-    };
+    public:
+      AbortedException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      ~AbortedException () throw () {
+      };
   };
 
 }
