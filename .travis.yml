@@ -1,0 +1,14 @@
+language: cpp
+compiler:
+  - gcc
+branches:
+  only:
+    - master
+notifications:
+  recipients:
+    - herbert.koelman@me.com
+  email:
+    on_success: change
+    on_failure: always
+script:
+  - echo "Just testing Travis v2.1".
