@@ -310,6 +310,7 @@ namespace atmi {
        * @deprecated
        */
       virtual int run ( int argc, char **argv ) {
+        return -1 ;
       };
 
       /** Creates an instance of Tp and set the client context to be used.
