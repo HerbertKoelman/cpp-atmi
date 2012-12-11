@@ -29,6 +29,7 @@ CCC=@CXX@
 RANLIB=@RANLIB@
 RM=rm -f
 AR=@AR@
+BEAUTIFIER=@BEAUTIFIER@
 
 DEBUG=-g -bnoquiet
 
@@ -56,12 +57,13 @@ clean:
 globber:
 	${RM} *.o core *.a
 	${RM} ${TARGETS}
+	$(RM) *unc-backup*~ *unc-backup*~
 
 cxref:
 	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
 
-beautify:
-	indent -l1024 -kr *.c *.cpp *.cc *.h *.hpp
+beautifull:
+	${BEAUTIFIER} *.bcl *.bsr
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
@@ -70,6 +72,15 @@ beautify:
 	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
 	buildclient ${WSL} -v \
 	-o $@ \
+	-f $< \
+	-l -lcltatmi++ \
+	-l -lfml++ \
+	-l -latmiutl++
+	@echo "bulding workstation client $@w" 
+	CC=@CXX@ \
+	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	buildclient -w -v \
+	-o $@w \
 	-f $< \
 	-l -lcltatmi++ \
 	-l -lfml++ \

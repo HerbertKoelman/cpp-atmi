@@ -3,6 +3,7 @@
    Sample Tuxedo client using ATMI++ libray.
 
  */
+#include <unistd.h>
 #include <string.h>
 #include <iostream>
 #include <atmi++.h>
@@ -13,16 +14,18 @@ using namespace atmi;
 class QWriter : public AbstractClient {
 public:
 
-  QWriter () : AbstractClient ("qwriter"){
+  QWriter ( const char *qs, const char *q, const char *r = NULL ) : AbstractClient ("qwriter"){
+      qspace =  qs;
+      queue =  q;
+      reply =  r;
   };
 
-  int run () {
+  void run () {
 
-    int ret = -1;
     cout << "Starting client program qwriter." << endl;
 
     try {
-        AQueue q = new_queue_instance ( "SAMPLES", "TOUPPER" );
+        AQueue q = new_queue_instance ( qspace, queue );
         Buffer buffer;
 
         TField<string> name ( "EMPNAME" );
@@ -30,7 +33,7 @@ public:
 
         buffer.add ( &name );
 
-        cout << "  Posting a message." << endl;
+        cout << " Posting a message." << endl;
         q->enqueue ( &buffer );
         cout << " Message posted." << endl ;
 
@@ -44,20 +47,45 @@ public:
       cerr << berr.what() << endl;
     };
 
-    cout << "Ending client qwritze." << endl ;
-    return ret;
+    cout << "Ending client qwrite." << endl ;
   };
+
+private:
+  const char *qspace;
+  const char *queue;
+  const char *reply;
 };
 
 int main ( int argc, char **argv ) {
 
-  int ret = 0;
+  int status = EXIT_FAILURE;
+  const char *qspace = NULL, *queue = NULL, *reply = NULL;
 
   try {
 
+    int c = 0;
+    while ( ( c = getopt ( argc, argv, "?Q:r:")) != -1 ) {
+
+        switch( c ) {
+          case 'Q':
+            qspace =  strtok ( optarg, ":");
+            queue  = strtok (NULL, ":");
+            break;
+          case 'r':
+            reply = optarg ;
+            break;
+
+          case '?':
+          default:
+            cout <<  "unkown command line option. usage:" << basename (argv[0]) << " [-r<replyqueue>]" << endl ;
+            exit (status);
+        }
+    }
+
 	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
-    QWriter qw;
-    ret = qw.run ();
+    QWriter qw(qspace, queue, reply );
+    qw.run ();
+    status = EXIT_SUCCESS ;
 
   } catch ( Exception& err ) {
     cerr << err.what () << endl;
@@ -65,5 +93,5 @@ int main ( int argc, char **argv ) {
     cerr << uerr.what() << endl;
   };
 
-  return ret;
+  return status;
 }

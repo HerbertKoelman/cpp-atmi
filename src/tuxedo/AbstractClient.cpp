@@ -47,7 +47,11 @@ namespace atmi {
         tuxputenv(const_cast<char *>(tuxconfig));
       }
 
-      if ( usr != NULL ) strncpy ( tpinfo->usrname, usr, MAXTIDENT );
+      if ( usr != NULL ) {
+          strncpy ( tpinfo->usrname, usr, MAXTIDENT );
+      } else {
+          strncpy ( tpinfo->usrname, (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")), MAXTIDENT );
+      }
       if ( passwd != NULL ) strncpy ( tpinfo->passwd,  passwd, MAXTIDENT );
       if ( group != NULL ) strncpy ( tpinfo->grpname,  group, MAXTIDENT );
       if ( cltname != NULL ) strncpy ( tpinfo->cltname, cltname, MAXTIDENT );

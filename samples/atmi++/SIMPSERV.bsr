@@ -1,6 +1,6 @@
 /*
  * #ident	"@(#) $Id: SIMPSERV.c,v 1.2 2006/09/22 07:07:04 herbert Exp
- * $" 
+ * $"
  */
 
 #include <sys/utsname.h>
@@ -11,28 +11,28 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include <atmi.h>		/* TUXEDO Header File */
-#include <userlog.h>		/* TUXEDO Header File */
+#include <atmi.h>               /* TUXEDO Header File */
+#include <userlog.h>            /* TUXEDO Header File */
 #include <signal.h>
 #include <Usignal.h>
 
-int sleepy ;
+int sleepy;
 
 /*
-  signal handler
-*/
+   signal handler
+ */
 void sig_handler(int sig)
 {
 
-    switch (sig) {
+  switch (sig) {
     case SIGHUP:
-			sleepy = ( sleepy == 0 ? 40 : 0 ); ;
-			userlog ((sleepy == 0 ? const_cast<char *>("No sleep") : const_cast<char *>("Sleeping sec.")));
-	break;
+      sleepy = ( sleepy == 0 ? 40 : 0 );;
+      userlog ((sleepy == 0 ? const_cast<char *>("No sleep") : const_cast<char *>("Sleeping sec.")));
+      break;
 
     default:
-	userlog(const_cast<char *>("Handling an unknown signal (%d)."), sig);
-    }
+      userlog(const_cast<char *>("Handling an unknown signal (%d)."), sig);
+  }
 }
 
 
@@ -40,31 +40,31 @@ void sig_handler(int sig)
  * tpsvrinit is executed when a server is booted, before it begins processing
  * requests.  It is not necessary to have this function. Also available is
  * tpsvrdone (not used in this example), which is called at server shutdown
- * time. 
+ * time.
  */
 int tpsvrinit(int argc, char *argv[])
 {
-    /* userlog writes to the central TUXEDO message log */
-    userlog((char *)"Welcome to the simple server version $Revision: 50 $");
-    Usignal(SIGHUP, sig_handler);
-		
-	sleepy = 0 ;
-    
-    tpopen ();
+  /* userlog writes to the central TUXEDO message log */
+  userlog((char *)"Welcome to the simple server version $Revision: 50 $");
+  Usignal(SIGHUP, sig_handler);
 
-    return (0);
+  sleepy = 0;
+
+  tpopen ();
+
+  return (0);
 }
 
 void tpsvrdone()
 {
 
-    userlog((char *)"server done");
+  userlog((char *)"server done");
 }
 
 /*
  * This function performs the actual service requested by the client. Its
  * argument is a structure containing among other things a pointer to the
- * data buffer, and the length of the data buffer. 
+ * data buffer, and the length of the data buffer.
  */
 #ifdef __cplusplus
 extern "C" void HELLO(TPSVCINFO * rqst)
@@ -72,17 +72,17 @@ extern "C" void HELLO(TPSVCINFO * rqst)
 void HELLO(TPSVCINFO * rqst)
 #endif
 {
-	int i;
+  int i;
 
   printf ("Hello world %s.\n", rqst->data );
 
-	tpreturn(TPSUCCESS, 0, rqst->data, rqst->len, 0);
+  tpreturn(TPSUCCESS, 0, rqst->data, rqst->len, 0);
 }
 
 /*
  * This function performs the actual service requested by the client. Its
  * argument is a structure containing among other things a pointer to the
- * data buffer, and the length of the data buffer. 
+ * data buffer, and the length of the data buffer.
  */
 #ifdef __cplusplus
 extern "C" void TOUPPER(TPSVCINFO * rqst)
@@ -90,25 +90,25 @@ extern "C" void TOUPPER(TPSVCINFO * rqst)
 void TOUPPER(TPSVCINFO * rqst)
 #endif
 {
-	int cd ;
-	int i;
+  int cd;
+  int i;
 
-	long len = 256 ;
-	char *buf = tpalloc ( (char *)"STRING", NULL, len ); 
+  long len = 256;
+  char *buf = tpalloc ( (char *)"STRING", NULL, len );
 
-	for (i = 0; i < rqst->len; i++)
-	rqst->data[i] = toupper(rqst->data[i]);
+  for (i = 0; i < rqst->len; i++)
+    rqst->data[i] = toupper(rqst->data[i]);
 
-	cd = tpacall ( (char *)"HELLO", rqst->data, rqst->len, 0 );
+  cd = tpacall ( (char *)"HELLO", rqst->data, rqst->len, 0 );
 
-	if ( sleepy > 0 ) sleep ( sleepy );
+  if ( sleepy > 0 ) sleep ( sleepy );
 
-	sleep ( 1 );
+  sleep ( 1 );
 
-	printf ( "TOUPPER - getrply %s.\n", rqst->data );
-	tpgetrply ( &cd, &buf, &len, 0 );
-	printf ( "TOUPPER - got rply %s.\n", rqst->data );
+  printf ( "TOUPPER - getrply %s.\n", rqst->data );
+  tpgetrply ( &cd, &buf, &len, 0 );
+  printf ( "TOUPPER - got rply %s.\n", rqst->data );
 
-	/* Return the transformed buffer to the requestor. */
-	tpreturn(TPSUCCESS, 0, rqst->data, rqst->len, 0);
+  /* Return the transformed buffer to the requestor. */
+  tpreturn(TPSUCCESS, 0, rqst->data, rqst->len, 0);
 }

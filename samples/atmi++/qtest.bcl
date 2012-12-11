@@ -18,35 +18,35 @@ using namespace atmi;
 // Runner classes declarations -----------------------------------------
 
 class Runner : public Thread {
-public:
-  inline int isRunning () {
-    return running;
-  };
-  inline void setRunning ( int running ) {
-    this->running = running;
-  };
-  Runner ();
+  public:
+    inline int isRunning () {
+      return running;
+    };
+    inline void setRunning ( int running ) {
+      this->running = running;
+    };
+    Runner ();
 
-protected:
-  int running;
+  protected:
+    int running;
 };
 
 class Queuer : public Runner {
-public:
-  Queuer ( int qty = 1 ){
-    quantity = qty;
-  }
+  public:
+    Queuer ( int qty = 1 ){
+      quantity = qty;
+    }
 
-  void run ();
+    void run ();
 
-private:
-  int quantity;
+  private:
+    int quantity;
 
 };
 
 class Dequeuer : public Runner {
-public:
-  void run ();
+  public:
+    void run ();
 };
 
 // Runner classes implementations --------------------------------------
@@ -151,48 +151,48 @@ void Queuer::run () {
 }
 
 class QTest : public AbstractClient {
-public:
+  public:
 
-  QTest ( char *cltname ) : AbstractClient () {
-  };
-
-  int run ( int argc, char **argv ) {
-
-    int qty = 1, rc = EXIT_FAILURE;
-    string response;
-    Queuer qin ( qty );
-    Dequeuer qout;
-
-    if ( argc == 2 ) {
-      qty = atoi ( argv[1]);
-      cout << "Qty : " << qty << endl;
-    }
-
-    cout << "Starting client program qtest." << endl;
-    try {
-
-      cout << "Hit any key to interrupt." << endl;
-      qout.start ();
-      qin.start ();
-
-      getline (cin, response);
-      cout << "Ending qtest program." << endl;
-
-      qin.setRunning ( 0 );
-      qout.setRunning ( 0 );
-
-      qout.join ();
-      qin.join ();
-
-      rc = EXIT_SUCCESS;
-
-
-    } catch ( TuxedoException terr ) {
-      cerr << terr.what () << endl;
+    QTest ( char *cltname ) : AbstractClient () {
     };
 
-    return rc;
-  }
+    int run ( int argc, char **argv ) {
+
+      int qty = 1, rc = EXIT_FAILURE;
+      string response;
+      Queuer qin ( qty );
+      Dequeuer qout;
+
+      if ( argc == 2 ) {
+        qty = atoi ( argv[1]);
+        cout << "Qty : " << qty << endl;
+      }
+
+      cout << "Starting client program qtest." << endl;
+      try {
+
+        cout << "Hit any key to interrupt." << endl;
+        qout.start ();
+        qin.start ();
+
+        getline (cin, response);
+        cout << "Ending qtest program." << endl;
+
+        qin.setRunning ( 0 );
+        qout.setRunning ( 0 );
+
+        qout.join ();
+        qin.join ();
+
+        rc = EXIT_SUCCESS;
+
+
+      } catch ( TuxedoException terr ) {
+        cerr << terr.what () << endl;
+      };
+
+      return rc;
+    }
 };
 
 // program main -------------------------------------------------

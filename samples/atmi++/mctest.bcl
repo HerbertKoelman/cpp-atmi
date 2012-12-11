@@ -18,37 +18,37 @@ using namespace std;
 using namespace atmi;
 
 class MultiContextClient : public AbstractClient {
-public:
+  public:
 
-	MultiContextClient ( const char *tuxconfig ) : AbstractClient ( "mctest", NULL, NULL, tuxconfig ) {
-	};
+    MultiContextClient ( const char *tuxconfig ) : AbstractClient ( "mctest", NULL, NULL, tuxconfig ) {
+    };
 
-  int run ( int argc, char **argv ){
-    try {
+    int run ( int argc, char **argv ){
+      try {
 
-			cout << "Running in multicontext mode. Context is : " << get_context () << "." << endl ;
+        cout << "Running in multicontext mode. Context is : " << get_context () << "." << endl;
 
-			AQueue cro = new_queue_instance ( "QCRO", "Q_ERR" );
-			char *message = (char *)cro->allocate ( "STRING", NULL, 10 );
-			strncpy (message, "hello",10);
+        AQueue cro = new_queue_instance ( "QCRO", "Q_ERR" );
+        char *message = (char *)cro->allocate ( "STRING", NULL, 10 );
+        strncpy (message, "hello",10);
 
-			cro->enqueue ( message, 10 );
-			cout << "enqueued message hello using context " << endl ;
+        cro->enqueue ( message, 10 );
+        cout << "enqueued message hello using context " << endl;
 
-    }catch ( BufferException buffErr ) {
-      cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
-    } catch ( DiagnosticException qerr ) {
-      cerr << qerr.what() << endl;
-    } catch ( TuxedoException terr ) {
-      cerr << terr.what() << endl;
-    } catch ( Exception err ) {
-      cerr << err.what() << endl;
-    } catch ( exception uerr ) {
-      cerr << uerr.what() << endl;
+      }catch ( BufferException buffErr ) {
+        cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
+      } catch ( DiagnosticException qerr ) {
+        cerr << qerr.what() << endl;
+      } catch ( TuxedoException terr ) {
+        cerr << terr.what() << endl;
+      } catch ( Exception err ) {
+        cerr << err.what() << endl;
+      } catch ( exception uerr ) {
+        cerr << uerr.what() << endl;
+      }
+
+      return 9999;
     }
-
-    return 9999;
-  }
 
 };
 
@@ -58,21 +58,21 @@ int main ( int argc, char **argv ) {
 
   try {
 
-		string line ;
+    string line;
 
-		{
-    MultiContextClient mc2 ("TUXCONFIG=/home/stcdadm/conf/tux/ubbconfig.green.bin");
-		{
-    MultiContextClient mc1 ("TUXCONFIG=/home/sggdgsae/conf/tux/ubbconfig.magenta.bin");
-    mc1.run ( argc, argv );
-		cout << "Ending context 1" ;
-		getline(cin, line);
-		}
+    {
+      MultiContextClient mc2 ("TUXCONFIG=/home/stcdadm/conf/tux/ubbconfig.green.bin");
+      {
+        MultiContextClient mc1 ("TUXCONFIG=/home/sggdgsae/conf/tux/ubbconfig.magenta.bin");
+        mc1.run ( argc, argv );
+        cout << "Ending context 1";
+        getline(cin, line);
+      }
 
-    mc2.run ( argc, argv );
-		cout << "Ending context 2" ;
-		getline(cin, line);
-		}
+      mc2.run ( argc, argv );
+      cout << "Ending context 2";
+      getline(cin, line);
+    }
 
   } catch ( Exception err ) {
     cerr << err.what() << endl;

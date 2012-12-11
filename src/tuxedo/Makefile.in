@@ -16,7 +16,7 @@ APPDIR=$(BASEDIR)/app/
 INCDIR=$(BASEDIR)/include/
 LIBDIR=$(BASEDIR)/lib/
 LOCALEDIR=${BASEDIR}/locale
-BEAUTIFIER=@BEAUTIFIER@ -l CPP --replace -c ${BASEDIR}/crust.cfg
+BEAUTIFIER=@BEAUTIFIER@
 
 # Tuxedo 
 TUXLIB=$(TUXDIR)/lib

@@ -1,6 +1,6 @@
 /*
  * #ident	"@(#) $Id: SIMPSERV.c,v 1.2 2006/09/22 07:07:04 herbert Exp
- * $" 
+ * $"
  */
 
 #include <sys/utsname.h>
@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include <stdio.h>
-#include <atmi.h>	
+#include <atmi.h>
 #include <userlog.h>
 #include <signal.h>
 #include <Usignal.h>
@@ -22,68 +22,68 @@
 #include "sample_fml_table.h"
 #include <atmi++.h>
 
-using namespace std ;
-using namespace atmi ;
+using namespace std;
+using namespace atmi;
 
 class SimpServ : public AbstractServer {
-	public:
-		SimpServ () : sleepy (0){
-		};
+  public:
+    SimpServ () : sleepy (0){
+    };
 
-		inline void handle_sighup () {
-			sleepy = ( sleepy == 0 ? 40 : 0 );
-			userlog ((sleepy == 0 ? (char *) "No sleep" : (char *) "Sleeping a few secs." ));
-		};
+    inline void handle_sighup () {
+      sleepy = ( sleepy == 0 ? 40 : 0 );
+      userlog ((sleepy == 0 ? (char *) "No sleep" : (char *) "Sleeping a few secs." ));
+    };
 
-		inline int TOUPPER ( TPSVCINFO *rqst ) {
+    inline int TOUPPER ( TPSVCINFO *rqst ) {
 
-			int ret = TPFAIL ;
+      int ret = TPFAIL;
 
-			try {
-  			Buffer buffer ;
-	  		buffer.set_buffer ( (FBFR32 *)rqst->data ) ;
+      try {
+        Buffer buffer;
+        buffer.set_buffer ( (FBFR32 *)rqst->data );
 
-	  		TField<string> name ( EMPNAME );
-	  		buffer.get ( &name );
-	  		name = "Hello world" ;
-	  		buffer.set ( &name );
+        TField<string> name ( EMPNAME );
+        buffer.get ( &name );
+        name = "Hello world";
+        buffer.set ( &name );
 
-				ret = TPSUCCESS ;
+        ret = TPSUCCESS;
 
-			} catch ( TuxedoException &terr ){
-				userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
-			} catch ( BufferException &berr ){
-				userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
-			} catch ( Exception &err ){
-				userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
-			};
+      } catch ( TuxedoException &terr ) {
+        userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
+      } catch ( BufferException &berr ) {
+        userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
+      } catch ( Exception &err ) {
+        userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
+      };
 
 
-			return(ret);
-		};
+      return(ret);
+    };
 
-	private:
-		int sleepy  ;
-} ;
+  private:
+    int sleepy;
+};
 
-SimpServ *server = NULL ;
+SimpServ *server = NULL;
 
 // ATMI / C++ Interface section --------------------------------------------
 
 /*
-  signal handler
-*/
+   signal handler
+ */
 void sig_handler(int sig) {
-	switch (sig) {
-		case SIGHUP:
-			server->handle_sighup();
-			break;
-		case SIGTERM:
-			server->handle_sigterm ();
-			break;
-		default:
-			userlog((char *) "Handling an unknown signal (%d).", sig);
-	}
+  switch (sig) {
+    case SIGHUP:
+      server->handle_sighup();
+      break;
+    case SIGTERM:
+      server->handle_sigterm ();
+      break;
+    default:
+      userlog((char *) "Handling an unknown signal (%d).", sig);
+  }
 }
 
 
@@ -91,22 +91,22 @@ void sig_handler(int sig) {
  * tpsvrinit is executed when a server is booted, before it begins processing
  * requests.  It is not necessary to have this function. Also available is
  * tpsvrdone (not used in this example), which is called at server->shutdown
- * time. 
+ * time.
  */
 int tpsvrinit(int argc, char *argv[]) {
-	/* userlog writes to the central TUXEDO message log */
-	userlog((char *)"Welcome to the simple server version $Revision: 79 $");
+  /* userlog writes to the central TUXEDO message log */
+  userlog((char *)"Welcome to the simple server version $Revision: 79 $");
 
-	Usignal(SIGHUP, sig_handler);
-	Usignal(SIGTERM, sig_handler);
+  Usignal(SIGHUP, sig_handler);
+  Usignal(SIGTERM, sig_handler);
 
-	try {
-		server = new SimpServ ();
-	} catch ( ... ) {
-		userlog ( (char *)"Server init failed. Check ULOG for more." );
-	};
+  try {
+    server = new SimpServ ();
+  } catch ( ... ) {
+    userlog ( (char *)"Server init failed. Check ULOG for more." );
+  };
 
-	return (0);
+  return (0);
 }
 
 /**
@@ -116,27 +116,27 @@ int tpsvrinit(int argc, char *argv[]) {
  */
 void tpsvrdone() {
 
-	delete server ;
+  delete server;
 
-	userlog((char *)"server done");
+  userlog((char *)"server done");
 }
 
 /*
  * This function performs the actual service requested by the client. Its
  * argument is a structure containing among other things a pointer to the
- * data buffer, and the length of the data buffer. 
+ * data buffer, and the length of the data buffer.
  */
 extern "C" void TOUPPER(TPSVCINFO * rqst)
 {
-	int ret = TPFAIL;
-	try {
+  int ret = TPFAIL;
+  try {
 
-		ret = server->TOUPPER ( rqst ) ;
+    ret = server->TOUPPER ( rqst );
 
-	} catch ( ... ) {
-		ret = TPFAIL ;
-	}
+  } catch ( ... ) {
+    ret = TPFAIL;
+  }
 
-	/* Return the transformed buffer to the requestor. */
-	tpreturn(ret, 0, rqst->data, rqst->len, 0);
+  /* Return the transformed buffer to the requestor. */
+  tpreturn(ret, 0, rqst->data, rqst->len, 0);
 }

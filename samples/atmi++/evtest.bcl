@@ -10,37 +10,37 @@ using namespace std;
 using namespace atmi;
 
 class EventPoster : public AbstractClient {
-public:
+  public:
 
-  EventPoster () : AbstractClient ("event_poster"){
-  };
+    EventPoster () : AbstractClient ("event_poster"){
+    };
 
-  int run () {
+    int run () {
 
-    int ret = -1;
-    cout << "Starting client program event poster." << endl;
+      int ret = -1;
+      cout << "Starting client program event poster." << endl;
 
-    try {
+      try {
         //Buffer b ;
 
         Event e ("sample/event" );
         cout << " Posting a message." << endl;
         e.post ();
-        cout << " Message posted." << endl ;
+        cout << " Message posted." << endl;
 
-    } catch ( ServiceException& serr ) {
-      cerr << "  Event Exception catched. qwcall failed." << endl;
-      cerr << "  What: " << serr.what () << endl;
-    } catch ( TuxedoException& terr ) {
-      cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
-      cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
-    } catch (BufferException berr ) {
-      cerr << berr.what() << endl;
+      } catch ( ServiceException& serr ) {
+        cerr << "  Event Exception catched. qwcall failed." << endl;
+        cerr << "  What: " << serr.what () << endl;
+      } catch ( TuxedoException& terr ) {
+        cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
+        cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+      } catch (BufferException berr ) {
+        cerr << berr.what() << endl;
+      };
+
+      cout << "Ending client qwritze." << endl;
+      return ret;
     };
-
-    cout << "Ending client qwritze." << endl ;
-    return ret;
-  };
 };
 
 int main ( int argc, char **argv ) {
@@ -49,7 +49,7 @@ int main ( int argc, char **argv ) {
 
   try {
 
-	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    cout << "using lib ATMI++ " << Tuxedo::version() << endl;
     EventPoster qw;
     ret = qw.run ();
 

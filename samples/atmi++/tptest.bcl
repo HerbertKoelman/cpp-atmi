@@ -5,76 +5,76 @@
  */
 #include <string.h>
 #include <iostream>
+#include <Thread.h>
 #include <atmi++.h>
 
 using namespace std;
 using namespace atmi;
 
-class TPtest : public AbstractClient {
-public:
+class TPtest : public AbstractClient, Thread {
+  public:
 
-  TPtest () : AbstractClient ("tptest"){
-  };
+    TPtest () : AbstractClient ("tptest"){
+    };
 
-  int run () {
+    void run () {
 
-    int ret = -1;
-    cout << "Starting client program tptest." << endl;
-
-    try {
-
-      Tp tp ( "TOUPPER" );
-      int urcode = 0;
+      int ret = -1;
+      cout << "Starting client program tptest." << endl;
 
       try {
 
+        Tp tp ( "TOUPPER" );
+        int urcode = 0;
 
-        Buffer buffer;
+        try {
 
-        TField<string> name ( "EMPNAME" );
-        name = (string) "Herbert";
 
-        buffer.add ( &name );
+          Buffer buffer;
 
-        cout << "  Calling service TOUPPER (" << name  << ")." << endl;
+          TField<string> name ( "EMPNAME" );
+          name = (string) "Herbert";
 
-        //switch ((ret = tp.call ( message, len, (char **)&message, (long *)&len, (int *)&urcode, 1, 1 ))) {
-        //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
-        //switch ((ret = tp.call ( message, len, &message, &len ))) {
-        //ret = tp.acall ( &buffer );
-        //switch ((ret =tp.reply ( &buffer, NULL, &ret))) {
-        switch ((ret = tp.call ( &buffer ))) {
-          case 0:
-            break;
-          case -1:
-            cerr << "  TOUPPER returned TPFAIL." << endl;
-            break;
-          default:
-            cerr << "  TOUPPER returned URCODE: " << ret << endl;
-            cout << "  Call returned: " << endl;
-						buffer.print() ;
-        }
+          buffer.add ( &name );
 
-        buffer.get ( &name );
-        cout << "  Call returned: " << name << "." << endl;
+          cout << "  Calling service TOUPPER (" << name  << "), context: " << get_context() << "." << endl;
 
-      } catch ( ServiceException& serr ) {
-        cerr << "  Service Exception catched. tpcall failed." << endl;
-        cerr << "  What: " << serr.what () << endl;
+          //switch ((ret = tp.call ( message, len, (char **)&message, (long *)&len, (int *)&urcode, 1, 1 ))) {
+          //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
+          //switch ((ret = tp.call ( message, len, &message, &len ))) {
+          //ret = tp.acall ( &buffer );
+          //switch ((ret =tp.reply ( &buffer, NULL, &ret))) {
+          switch ((ret = tp.call ( &buffer ))) {
+            case 0:
+              break;
+            case -1:
+              cerr << "  TOUPPER returned TPFAIL." << endl;
+              break;
+            default:
+              cerr << "  TOUPPER returned URCODE: " << ret << endl;
+              cout << "  Call returned: " << endl;
+              buffer.print();
+          }
+
+          buffer.get ( &name );
+          cout << "  Call returned: " << name << "." << endl;
+
+        } catch ( ServiceException& serr ) {
+          cerr << "  Service Exception catched. tpcall failed." << endl;
+          cerr << "  What: " << serr.what () << endl;
+        } catch ( TuxedoException& terr ) {
+          cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
+          cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+        };
+
+        cout << "Ending program." << endl;
       } catch ( TuxedoException& terr ) {
-        cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
-        cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+        cerr << terr.what () << endl;
+      } catch (BufferException berr ) {
+        cerr << berr.what() << endl;
       };
 
-      cout << "Ending program." << endl;
-    } catch ( TuxedoException& terr ) {
-      cerr << terr.what () << endl;
-    } catch (BufferException berr ) {
-      cerr << berr.what() << endl;
     };
-
-    return ret;
-  };
 };
 
 int main ( int argc, char **argv ) {
@@ -83,9 +83,9 @@ int main ( int argc, char **argv ) {
 
   try {
 
-	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    cout << "using lib ATMI++ " << Tuxedo::version() << endl;
     TPtest tp;
-    ret = tp.run ();
+    tp.run ();
 
   } catch ( Exception& err ) {
     cerr << err.what () << endl;

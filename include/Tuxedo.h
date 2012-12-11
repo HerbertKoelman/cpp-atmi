@@ -273,7 +273,15 @@ namespace atmi {
 /**
  * Helper class to implement Tuxedo application.
  *
- * Extending this class ensures that tpterm  and tpinitis called when client program are run
+ * Extending this class ensures that tpterm  and tpinit is called when client program are run.
+ *
+ * AbstractClient has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
+ * need to pass a valid TUXCONFIG file when constructing an AbstractClient instance. The multiconext mode is available
+ * only for native clients.
+ *
+ * Two factory methods are available to construct Tp and Queue class instances (new_tp_instance and new_queue_instance). These methods return ATp and AQueue
+ * which are auto pointers. which is probaly the best way to avoid memory leaks.
+ *  
  */
   class AbstractClient : public Tuxedo {
     public:
@@ -293,7 +301,7 @@ namespace atmi {
        * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build Queue and Tp objects.
+       * should use factory methods  to build AQueue and ATp objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
@@ -548,7 +556,6 @@ namespace atmi {
  */
   class Queue : public Tuxedo {
     public:
-
 
       /** Creates an instance of Queue
        *

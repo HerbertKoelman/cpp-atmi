@@ -18,79 +18,80 @@ using namespace std;
 using namespace atmi;
 
 class BTest : public AbstractClient {
-public:
-  BTest () : AbstractClient (const_cast<char *>("btest")){ };
+  public:
+    BTest () : AbstractClient (const_cast<char *>("btest")){
+    };
 
-  int run ( int argc, char **argv ){
-    try {
+    int run ( int argc, char **argv ){
+      try {
 
-      Buffer b (100), a;
-      /*
-      const char *types[5] = { typeid(short).name(), typeid(int).name() };
-      cout << "Stored: " << types[0] << endl;
-      cout << "Stored: " << types[1] << " is a " << endl;
-      if(strcmp ( typeid(int).name(), types[1]) == 0 ){
-        cout << "same type int." << endl;
+        Buffer b (100), a;
+        /*
+           const char *types[5] = { typeid(short).name(), typeid(int).name() };
+           cout << "Stored: " << types[0] << endl;
+           cout << "Stored: " << types[1] << " is a " << endl;
+           if(strcmp ( typeid(int).name(), types[1]) == 0 ){
+           cout << "same type int." << endl;
+           }
+           cout << "Type id " << typeid(long).name() << endl;
+         */
+
+        cout << "Buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+
+        TField<string> prenom ( EMPNAME );
+        TField<long> empid ( EMPID );
+        TField<long> empzip ( EMPZIP );
+        TField<string> nom ( EMPNAME );
+        TField<char *> carray ( SRVCDAY );
+        TField<char *> copy ( SRVCDAY );
+
+        prenom = "herbert";
+        nom = "this is a char *";
+        empid = 2;
+        carray.setCarray("helloworld\0rray", sizeof ("helloworld\0rray"));
+        copy = carray;
+
+        cout << "Added fields: " << endl;
+        b.add ( &empid );
+        b.add ( &nom );
+        b.add ( &prenom );
+        b.add ( &carray );
+        b.add ( &copy );
+        b.print ();
+
+        cout << "get copy" << endl;
+        b.get ( &copy );
+
+        cout << copy.what() << endl;
+        long len = 5;                  //copy.length();
+        char *cav = new char[len];
+        copy.getCarray ( cav, len );
+        for ( int x = 0; x < len; x++ ) {
+          cout << "'"<< cav[x]<<"',";
+        }
+        cout << endl;
+
+        cout << "Setting empid value: " << endl;
+        empid = 22;
+        b.set ( &empid );
+        b.print ();
+
+        cout << "size : " << b.size();
+        b.pack ();
+        cout << ", after pack: " << b.size() << endl;
+
+        cout << "Buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+
+      }catch ( BufferException buffErr ) {
+        cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
+      } catch ( Exception err ) {
+        cerr << err.what() << endl;
+      } catch ( exception uerr ) {
+        cerr << uerr.what() << endl;
       }
-      cout << "Type id " << typeid(long).name() << endl;
-      */
 
-      cout << "Buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
-
-      TField<string> prenom ( EMPNAME );
-      TField<long> empid ( EMPID );
-      TField<long> empzip ( EMPZIP );
-      TField<string> nom ( EMPNAME );
-      TField<char *> carray ( SRVCDAY );
-      TField<char *> copy ( SRVCDAY );
-
-      prenom = "herbert";
-      nom = "this is a char *";
-      empid = 2;
-      carray.setCarray("helloworld\0rray", sizeof ("helloworld\0rray"));
-      copy = carray;
-
-      cout << "Added fields: " << endl;
-      b.add ( &empid );
-      b.add ( &nom );
-      b.add ( &prenom );
-      b.add ( &carray );
-      b.add ( &copy );
-      b.print ();
-
-      cout << "get copy" << endl;
-      b.get ( &copy );
-
-      cout << copy.what() << endl;
-      long len = 5;                    //copy.length();
-      char *cav = new char[len];
-      copy.getCarray ( cav, len );
-      for ( int x = 0; x < len; x++ ) {
-        cout << "'"<< cav[x]<<"',";
-      }
-      cout << endl;
-
-      cout << "Setting empid value: " << endl;
-      empid = 22;
-      b.set ( &empid );
-      b.print ();
-
-      cout << "size : " << b.size();
-      b.pack ();
-      cout << ", after pack: " << b.size() << endl;
-
-      cout << "Buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
-
-    }catch ( BufferException buffErr ) {
-      cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
-    } catch ( Exception err ) {
-      cerr << err.what() << endl;
-    } catch ( exception uerr ) {
-      cerr << uerr.what() << endl;
+      return 9999;
     }
-
-    return 9999;
-  }
 
 };
 
@@ -100,7 +101,7 @@ int main ( int argc, char **argv ) {
 
   try {
 
-    cout << "Buffer sample program (" << Tuxedo::version() <<")." << endl ;
+    cout << "Buffer sample program (" << Tuxedo::version() <<")." << endl;
     BTest btest;
 
     btest.run ( argc, argv );
