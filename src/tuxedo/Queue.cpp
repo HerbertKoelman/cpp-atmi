@@ -95,18 +95,36 @@ namespace atmi {
     return rc;
   }
 
+  int Queue::dequeueReply ( Buffer *data ) {
+
+    return dequeueReply ( (char **) data->get_buffer(), 0 );
+  }
+
   int Queue::dequeueReply ( char **data, long *len ) {
 
     int rc = -1;
+
+    if ( qctl.replyqueue == NULL ) {
+      throw Exception ( catgets ( catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
+    }
 
     rc = dequeue ( qctl.replyqueue, data, len );
 
     return rc;
   }
 
+  int Queue::enqueueReply ( Buffer *data ) {
+
+    return enqueueReply ( (char *)data->get_buffer(), 0 );
+  }
+
   int Queue::enqueueReply ( char *data, long len ) {
 
     int rc = -1;
+
+    if ( qctl.replyqueue == NULL ) {
+      throw Exception ( catgets ( catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
+    }
 
     rc = enqueue ( qctl.replyqueue, data, len );
 

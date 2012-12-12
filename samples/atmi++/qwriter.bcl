@@ -43,7 +43,7 @@ class Sequence : private Mutex {
 class QWriter : public AbstractClient {
 public:
 
-  QWriter ( const char *qs, const char *q, const char *r = NULL ) : AbstractClient ("qwriter"){
+  QWriter ( const char *qs, const char *q, const char *r = NULL ) : reply(NULL), AbstractClient ("qwriter"){
       qspace =  qs;
       queue =  q;
       reply =  r;
@@ -54,7 +54,8 @@ public:
     cout << "Starting client program qwriter." << endl;
 
     try {
-        AQueue q = new_queue_instance ( qspace, queue );
+        cout << "Reply queue: " << reply << endl;
+        AQueue q = new_queue_instance ( qspace, queue, reply );
         Buffer buffer;
 
         TField<string> name ( "EMPNAME" );
@@ -66,11 +67,24 @@ public:
         q->enqueue ( &buffer );
         cout << " Message posted." << endl ;
 
+        cout << " Getting a message." << endl;
+        q->dequeue ( &buffer );
+        buffer.get ( &name );
+        cout << " Message was : " << (string) name << endl ;
+
+        cout << " Replying to message." << endl ;
+        name = (string) "francoise koelman";
+        buffer.set ( &name );
+        q->enqueueReply ( &buffer );
+        cout << " Reply message posted." << endl ;
+        q->dequeueReply ( &buffer );
+        cout << " Reply message dequeued." << endl ;
+
     } catch ( ServiceException& serr ) {
-      cerr << "  Queue Exception catched. qwcall failed." << endl;
+      cerr << "  Queue Exception catched. program failed." << endl;
       cerr << "  What: " << serr.what () << endl;
     } catch ( TuxedoException& terr ) {
-      cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
+      cerr << "  Tuxedo Exception catched. program failed." << endl;
       cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
     } catch (BufferException berr ) {
       cerr << berr.what() << endl;
@@ -111,7 +125,7 @@ int main ( int argc, char **argv ) {
         }
     }
 
-	cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
     QWriter qw(qspace, queue, reply );
     qw.run ();
     status = EXIT_SUCCESS ;

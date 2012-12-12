@@ -39,3 +39,4 @@ $ number		message
 37	L'export a échoué. Verifiez la taille de buffer demandé (par exemple %d bytes).
 38	L'import a échoué. Ce message a-t-il été export à l'aide tpexport ?
 39	Impossible de se raccorder au DOMAIN Tuxedo. Le domain est-il lancé ? Vérifiez si la variable TUXCONFIG a bien été positionnée.
+40  Enqueue a échoué, les propriétés qspa replyqueue (NULL) n'a pas été positionnées !!??

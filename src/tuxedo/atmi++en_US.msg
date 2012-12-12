@@ -39,3 +39,4 @@ $ number		message
 37	TPEXPORT failed. Check buffer size (last buffer size was %d bytes).
 38	TPIMPORT failed. Was this message exported using tpexport ?
 39	Failed to join DOMAIN. Is DOMAIN started ? Check TUXCONFIG env var and ULOG for more.
+40	Enqueue failed, replyqueue (NULL) properties have not been set !!??

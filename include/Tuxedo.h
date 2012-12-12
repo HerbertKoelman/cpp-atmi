@@ -331,7 +331,7 @@ namespace atmi {
        *
        * @return  an auto_ptr to a new Queue instance
        */
-      AQueue new_queue_instance ( const char *qspace, const char *queue );
+      AQueue new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
 
       TPCONTEXT_T get_context () {
         return context;
@@ -600,6 +600,14 @@ namespace atmi {
        */
       int dequeueReply ( char **data, long *len );
 
+      /** dequeue a reply message
+       *
+       * Reply must have been set when Queue instance was created.
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       */
+      int dequeueReply ( Buffer *data );
+
       /** enqueue a reply message
        *
        * The reply queue is identified through the Qctl structure. It is responability
@@ -609,6 +617,15 @@ namespace atmi {
        * @param len length of the Tuxedo buffer
        */
       int enqueueReply ( char *data, long len );
+
+      /** enqueue a reply message
+       *
+       * The reply queue is identified through the Qctl structure. It is responability
+       * of the caller to set the reply queue value to use.
+       *
+       * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
+       */
+      int enqueueReply ( Buffer *data );
 
       /**
        * indicate in wich queue the replies should be posted.
