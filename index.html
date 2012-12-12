@@ -95,8 +95,6 @@ public:
       int urcode = 0;
 
       try {
-
-
         Buffer buffer;
 
         TField<string> name ( "EMPNAME" );
@@ -106,23 +104,19 @@ public:
 
         cout << "  Calling service TOUPPER (" << name  << ")." << endl;
 
-        //switch ((ret = tp.call ( message, len, (char **)&message, (long *)&len, (int *)&urcode, 1, 1 ))) {
-        //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
-        //switch ((ret = tp.call ( message, len, &message, &len ))) {
-        //ret = tp.acall ( &buffer );
-        //switch ((ret =tp.reply ( &buffer, NULL, &ret))) {
-        switch ((ret = tp.call ( &buffer ))) {
+        switch ((urcode = tp.call ( &buffer ))) {
           case 0:
             break;
           case -1:
             cerr << "  TOUPPER returned TPFAIL." << endl;
             break;
           default:
-            cerr << "  TOUPPER returned URCODE: " << ret << endl;
+            cerr << "  TOUPPER returned URCODE: " << urcode << endl;
             cout << "  Call returned: " << endl;
-                                                buffer.print() ;
+            buffer.print() ;
         }
 
+        // Get modification back and print it out on stdout
         buffer.get ( &name );
         cout << "  Call returned: " << name << "." << endl;
 
