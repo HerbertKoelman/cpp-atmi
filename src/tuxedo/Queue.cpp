@@ -18,35 +18,6 @@ using namespace std;
 
 namespace atmi {
 
-  class Sequence : private Mutex {
-    public:
-      Sequence ( long min = 0, long max = 0 ){
-        cval = min;
-        this->min = min;
-        this->max = max;
-      };
-
-      long next () {
-
-        long nval = 0;
-
-        lock();
-        nval = ++cval;                  // Increment and get next value
-        unlock();
-
-        return nval;
-      };
-
-      long value () {
-
-        return cval;
-      };
-
-    private:
-      long cval, min, max;
-
-  };
-
   Queue::Queue ( const char *qspace, const char *queue, const char *reply ) {
 
     /* Too restrictive

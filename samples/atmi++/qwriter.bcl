@@ -4,12 +4,41 @@
 
  */
 #include <unistd.h>
+#include <limits.h>
 #include <string.h>
 #include <iostream>
 #include <atmi++.h>
+#include <Concurrency.h>
 
 using namespace std;
 using namespace atmi;
+
+class Sequence : private Mutex {
+    public:
+      Sequence ( long min = 0, long max = LONG_MAX ){
+        cval = min;
+        this->min = min;
+        this->max = max;
+      };  
+
+      long next () {
+
+        lock();
+        if ( ++cval > max ) cval = min;
+        unlock();
+
+        return cval;
+      };  
+
+      long value () {
+
+        return cval;
+      };  
+
+    private:
+      long cval, min, max;
+
+  };  
 
 class QWriter : public AbstractClient {
 public:
