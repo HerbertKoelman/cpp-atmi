@@ -36,6 +36,7 @@ echo "2.1 crdl"
 echo "2.2 boot -A"
 
 . $basedir/conf/envfile && echo "Loaded envfile" || exit -1
+tmloadcf $basedir/conf/ubbconfig || exit -1
 echo "initializing Tuxedo domain"
 tmadmin <<? 
 v

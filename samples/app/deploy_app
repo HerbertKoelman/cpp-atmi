@@ -3,14 +3,29 @@
 basedir=`pwd`
 sampledir=$basedir/../atmi++
 
+echo
+echo "---`date`----------------"
+tmshutdown -S -w 10
+
 for srv in SIMPSERV SIMPSERV++
 do
   cp -i $sampledir/$srv $basedir/app/ && echo "server $srv ready to be run." || echo "could not deploy server $srv. make sur you've run make demos."
 done
 
+FIELDTBLS32=
 for udata in sample_fml_table
 do
   cp -i $sampledir/$udata $basedir/udataobj/ && echo "user datar $udata ready to be used." || echo "could not deploy user data $udata. make sur you've run make demos."
+  if [ "$FIELDTBLS32" == "" ]
+  then
+    FIELDTBLS32=$udata
+  else
+    FIELDTBLS32=$FIELDTBLS32:$udata
+  fi
 done
+export FIELDTBLS32
+echo "exported FIELDTBLS32=$FIELDTBLS32"
 
-echo "restart servers to load new server versions (tmshutdown -S ; tmboot -S)"
+echo
+echo "---`date`----------------"
+tmboot -S
