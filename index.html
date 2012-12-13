@@ -69,12 +69,6 @@ C++ sample code
 #include &lt;iostream&gt;
 #include &quot;atmi++.h&quot;
 
-/* $Id: tptest.C 79 2007-08-18 17:30:26Z hkoelman $
-
-   Sample Tuxedo client using ATMI++ libray.
-
- */
-
 using namespace std;
 using namespace atmi;
 
@@ -99,11 +93,9 @@ public:
 
         TField<string> name ( "EMPNAME" );
         name = (string) "Herbert";
-
         buffer.add ( &name );
 
         cout << "  Calling service TOUPPER (" << name  << ")." << endl;
-
         switch ((urcode = tp.call ( &buffer ))) {
           case 0:
             break;
@@ -174,7 +166,7 @@ ATMI++ is distributed in the hope that it will be useful, but WITHOUT ANY WARRAN
 
 You should have received a copy of the GNU General Public License along with ATMI++; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 </p>
-<p>Having trouble with ATMI++ ? Send your suggestions or issues <a href="https://github.com/HerbertKoelman/atmiplusplus">here</a> or contact <a href="mailto:woodman.9167@me.com">woodman.9167@me.com</a> and I’ll help you sort it out.</p>
+
         </section>
 
         <aside id="sidebar">
