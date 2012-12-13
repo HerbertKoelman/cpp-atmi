@@ -32,7 +32,17 @@ namespace atmi {
     tpterm ();
   };
 
+  AbstractClient::AbstractClient ( bool tuxconfig, const char *cltname, const char *usr, const char *passwd, const char *group) {
+
+    string tc = string ("TUXCONFIG=") + getenv ("TUXCONFIG");
+    setup_client ( cltname, usr, passwd, group, tc.c_str() );
+  }
+
   AbstractClient::AbstractClient ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig) {
+    setup_client ( cltname, usr, passwd, group, tuxconfig );
+  }
+
+  void AbstractClient::setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
 
@@ -44,7 +54,9 @@ namespace atmi {
 
       if ( tuxconfig != NULL ) {
         tpinfo->flags = TPMULTICONTEXTS;
-        tuxputenv(const_cast<char *>(tuxconfig));
+        if ( tuxputenv(const_cast<char *>(tuxconfig)) != 0 ){
+          throw Exception ("failed to put env varaible %s", tuxconfig );
+        }
       }
 
       if ( usr != NULL ) {

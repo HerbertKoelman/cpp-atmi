@@ -4,6 +4,7 @@
 
  */
 #include <unistd.h>
+#include <libgen.h>
 #include <limits.h>
 #include <string.h>
 #include <iostream>

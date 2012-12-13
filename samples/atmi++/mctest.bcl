@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include "atmi++.h"
+#include <Thread.h>
 #include <nl_types.h>
 
 #include "sample_fml_table.h"
@@ -17,23 +18,24 @@
 using namespace std;
 using namespace atmi;
 
-class MultiContextClient : public AbstractClient {
+class MultiContextClient : public AbstractClient, Thread {
   public:
 
-    MultiContextClient ( const char *tuxconfig ) : AbstractClient ( "mctest", NULL, NULL, tuxconfig ) {
+    MultiContextClient () : AbstractClient ( true, "mctest" ) {
     };
 
-    int run ( int argc, char **argv ){
+    void run (){
       try {
 
         cout << "Running in multicontext mode. Context is : " << get_context () << "." << endl;
 
-        AQueue cro = new_queue_instance ( "QCRO", "Q_ERR" );
-        char *message = (char *)cro->allocate ( "STRING", NULL, 10 );
+        ATp TOUPPER = new_tp_instance ( "TOUPPER" );
+        char *message = (char *)TOUPPER->allocate ( "STRING", NULL, 10 );
         strncpy (message, "hello",10);
 
-        cro->enqueue ( message, 10 );
-        cout << "enqueued message hello using context " << endl;
+        long olen = 0;
+        TOUPPER->call ( message, 10, &message, &olen );
+        cout << "TOUPPER returned "  << message << endl;
 
       }catch ( BufferException buffErr ) {
         cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
@@ -46,8 +48,6 @@ class MultiContextClient : public AbstractClient {
       } catch ( exception uerr ) {
         cerr << uerr.what() << endl;
       }
-
-      return 9999;
     }
 
 };
@@ -59,21 +59,24 @@ int main ( int argc, char **argv ) {
   try {
 
     string line;
+    string tuxconfig;
 
     {
-      MultiContextClient mc2 ("TUXCONFIG=/home/stcdadm/conf/tux/ubbconfig.green.bin");
+      MultiContextClient mc2 ;
       {
-        MultiContextClient mc1 ("TUXCONFIG=/home/sggdgsae/conf/tux/ubbconfig.magenta.bin");
-        mc1.run ( argc, argv );
-        cout << "Ending context 1";
+        MultiContextClient mc1 ;
+        mc1.run ();
+        cout << "press any key to end context " << mc1.get_context() << endl;
         getline(cin, line);
       }
 
-      mc2.run ( argc, argv );
-      cout << "Ending context 2";
+      mc2.run ();
+      cout << "press any key to end context " << mc2.get_context() << endl ;
       getline(cin, line);
     }
 
+    cout << "press any key to end program " << endl ;
+    getline(cin, line);
   } catch ( Exception err ) {
     cerr << err.what() << endl;
   } catch ( exception uerr ) {

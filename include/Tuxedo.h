@@ -311,6 +311,24 @@ namespace atmi {
        */
       AbstractClient ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
 
+      /**
+       * The constructor allows a client to join a BEA Tuxedo ATMI system application by calling tpinit. Before a client can
+       * use any of the BEA Tuxedo ATMI system communication or transaction routines, it can
+       * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
+       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
+       * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       *
+       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
+       * should use factory methods  to build AQueue and ATp objects.
+       *
+       * @param cltname client program name (default NULL)
+       * @param usr user name (default NULL)
+       * @param passwd user's password (default NULL)
+       * @param group is used to associate the client with a resource manager group name (default NULL)
+       * @param multicontext if true start a multicontext client using the env TUXCONFIG
+       */
+      AbstractClient ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
+
       /** This method must overriden  to run the client application.
        *
        * @param argc number of command line option received when the program was started
@@ -338,8 +356,11 @@ namespace atmi {
       };
 
     protected:
-
     private:
+
+      /** Utility method that set's up a client instance.
+       */
+      void setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig);
 
       TPINIT *tpinfo;
       TPCONTEXT_T context;
