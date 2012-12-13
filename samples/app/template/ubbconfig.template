@@ -32,7 +32,7 @@ DEFAULT:
   APPDIR="<basedir>/app"
   TUXCONFIG="<basedir>/conf/ubbconfig.bin"
   TUXDIR="<tuxdir>"
-  ULOGPFX="<basedir>/log/ULOG."
+  ULOGPFX="<basedir>/log/ULOG"
 
 "<hostname>"	LMID=LOCALHOST
   TLOGDEVICE="<basedir>/log/TLOG"
