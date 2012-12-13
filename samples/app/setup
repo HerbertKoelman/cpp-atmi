@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# This scripts helps to setup the sample Tuxedo domain (application)
+basedir=`pwd`
+hostname=`hostname`
+
+echo "create directory layout..."
+for f in log queues conf app udataobj
+do
+  mkdir $basedir/$f > /dev/null 2<&1 && echo "creating $basedir/$f" || echo "directory $basedir/$f already exists"
+done
+
+echo
+echo "setting up $basedir/conf/ubbconfig:"
+echo " basedir: $basedir"
+echo " hostanme: $hostname"
+sed -e "s:<basedir>:$basedir:g" -e "s:<hostname>:$hostname:g" -e "s:<tuxdir:$TUXDIR:g" $basedir/template/ubbconfig.template $basedir/conf/ubbconfig > $basedir/conf/ubbconfig & echo "ubbconfig was generated here $basedir/conf/ubbconfig"
+
+echo
+echo "# generated on `date`" > $basedir/conf/envfile
+echo "TUXCONFIG=$basedir/conf/ubbconfig.bin" >> $basedir/conf/envfile
+echo "QMCONFIG=$basedir/queues/q.000" >> $basedir/conf/envfile
+echo "TLOGDEVICE=$basedir/log/TLOG" >> $basedir/conf/envfile
+echo "FSCONFIG=$basedir/log/TLOG" >> $basedir/conf/envfile
+echo "FLDTBLDIR32=$basedir/udataobj" >> $basedir/conf/envfile
+echo "VIEWDIR32=$basedir/udataobj" >> $basedir/conf/envfile
+echo "export VIEWDIR32 FLDTBLDIR32 TUXCONFIG QMCONFIG FSCONFIG TLOGDEVICE" >> $basedir/conf/envfile
+echo "envfile content:"
+cat $basedir/conf/envfile
+echo
+echo "add this line to .profile '. $basedir/conf/envfile'."
+echo "Now you needd to setup Tuxedo environment:"
+echo "1. tmloadcf conf/ubbconfig"
+echo "2. tmadmin"
+echo "2.1 crdl"
+echo "2.2 boot -A"

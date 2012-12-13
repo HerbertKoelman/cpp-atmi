@@ -1,0 +1,16 @@
+#!/bin/sh
+
+basedir=`pwd`
+sampledir=$basedir/../atmi++
+
+for srv in SIMPSERV SIMPSERV++
+do
+  cp -i $sampledir/$srv $basedir/app/ && echo "server $srv ready to be run." || echo "could not deploy server $srv. make sur you've run make demos."
+done
+
+for udata in sample_fml_table
+do
+  cp -i $sampledir/$udata $basedir/udataobj/ && echo "user datar $udata ready to be used." || echo "could not deploy user data $udata. make sur you've run make demos."
+done
+
+echo "restart servers to load new server versions (tmshutdown -S ; tmboot -S)"

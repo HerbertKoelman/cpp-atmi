@@ -5,7 +5,7 @@
 #Replace the items with the appropriate values.
 # /share/home/herbert/wa/atmi++ : where you installed the sample
 # 32769 : must be greater then 32768  
-# hera : your server name (you might use hostname to get if)
+# hera : your server name (you might use <hostname> to get if)
 
 
 #---------------------------------------------------------------------
@@ -13,7 +13,7 @@
 IPCKEY		    32769
 
 DOMAINID	    ATMICPP
-MASTER		    CHATELET
+MASTER		    LOCALHOST
 MAXACCESSERS	100
 MAXSERVERS	  100
 MAXSERVICES	  200
@@ -29,28 +29,28 @@ PERM          0600
 #---------------------------------------------------------------------
 *MACHINES
 DEFAULT:
-  APPDIR="/share/home/herbert/wa/atmi++/trunk/app"
-  TUXCONFIG="/share/home/herbert/wa/atmi++/trunk/conf/ubbconfig.bin"
-  TUXDIR="/opt/bea/tuxedo11gR1"
-  ULOGPFX="/share/home/herbert/tmp/atmi++ulog"
+  APPDIR="<basedir>/app"
+  TUXCONFIG="<basedir>/conf/ubbconfig.bin"
+  TUXDIR="<tuxdir>"
+  ULOGPFX="<basedir>/log/ULOG."
 
-"chatelet"	LMID=CHATELET
-  TLOGDEVICE="/share/home/herbert/tmp/ATMI++TLOG.000"
-  ENVFILE="/share/home/herbert/wa/atmi++/trunk/conf/envfile"
+"<hostname>"	LMID=LOCALHOST
+  TLOGDEVICE="<basedir>/log/TLOG"
+  ENVFILE="<basedir>/conf/envfile"
   SPINCOUNT=4000
 
 #---------------------------------------------------------------------
 *GROUPS
-SYS      LMID=CHATELET    GRPNO=2
-LMSGRP   LMID=CHATELET    GRPNO=3
-SERV     LMID=CHATELET    GRPNO=5
-XASERV   LMID=CHATELET    GRPNO=6
+SYS      LMID=LOCALHOST    GRPNO=2
+LMSGRP   LMID=LOCALHOST    GRPNO=3
+SERV     LMID=LOCALHOST    GRPNO=5
+XASERV   LMID=LOCALHOST    GRPNO=6
   TMSNAME=TMS
 
-# CHATELET queue space (TSPACE)
-TSPACE      LMID=CHATELET    GRPNO=7
+# LOCALHOST queue space (TSPACE)
+TSPACE      LMID=LOCALHOST    GRPNO=7
   TMSNAME=TMS_QM
-  OPENINFO="TUXEDO/QM:/pwa/tux/herbert/atmi++queues.000:TSPACE"
+  OPENINFO="TUXEDO/QM:<basedir>/queues/q.000:TSPACE"
 
 #---------------------------------------------------------------------
 *SERVERS
