@@ -7,11 +7,38 @@ Tuxedo ATMI C++ wrapper
 
 The ATMI library comes as set of C libraries, ATMI++ offers a C++ wrapping of these libraries making it easier to write shorter and more robust Tuxedo code.
 
+ATMI++ cames as open source code, so you can do with it whatever you feel like doing 8-)
+
 Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
 
+Project content
+============
+
+ATMI++ comes as as :
+* ```src``` directory which contains the source code. It is diveided into two subdirectories. One (```src/tuxedo```) whith the actual ATMI wrapper C++ code and a second with the usual utility classes.
+* ```samples``` directory which contains a directory ```samples/atmi++``` with sample client and server code. A directory ```samples/utl``` with sample code to illustrate how the utility classes can be used. Finally an ```samples/app``` directory that contains a sample Tuxedo DOMAIN setup.
+* ```include``` directory that contains everything you need to compile your code.
+
+The building of the libraries is based upon automake and autoconf functionalities. So to setup ATMI++ you can follow the next steps:
+```
+$ configure
+$ make
+$ make demos
+```
+
+This should get you started. At least on ```Fedora FC17``` and AIX 5.3 or later. When build was successfully you should end up with a ```locale``` directory which contains the message catalogues (currently French and English). If needed you can build the usage documentation this way:
+```
+$ make doxygen
+```
+
+This creates an ```html``` and ```man``` directory.
+
+It is also possible to deploy the library onto your system using de install/uninstall make targets.
+
 -------------------------------------------------------------------
+
  ATMI++ is free software, you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
