@@ -96,21 +96,34 @@ public:
         buffer.add ( &name );
 
         cout << "  Calling service TOUPPER (" << name  << ")." << endl;
-        switch ((urcode = tp.call ( &buffer ))) {
-          case 0:
-            break;
-          case -1:
-            cerr << "  TOUPPER returned TPFAIL." << endl;
-            break;
-          default:
-            cerr << "  TOUPPER returned URCODE: " << urcode << endl;
-            cout << "  Call returned: " << endl;
-            buffer.print() ;
-        }
+        try {
 
-        // Get modification back and print it out on stdout
-        buffer.get ( &name );
-        cout << "  Call returned: " << name << "." << endl;
+            tp.begin();
+
+            ret = tp.call ( &buffer );
+            switch (ret) {
+              case 0:
+                break;
+              case -1:
+                cerr << "  TOUPPER returned TPFAIL." << endl;
+                break;
+              default:
+                cerr << "  TOUPPER returned URCODE: " << ret << endl;
+                cout << "  Call returned: " << endl;
+                buffer.print();
+            }
+
+            buffer.get ( &name );
+            cout << "  Call returned: " << name << "." << endl;
+
+            tp.commit();
+            cout << "  Transcation was committed." << endl ;
+          } catch ( ... ){
+            tp.abort();
+            cout << "  Transcation was aborted." << endl ;
+            throw;
+          }
+
 
       } catch ( ServiceException& serr ) {
         cerr << "  Service Exception catched. tpcall failed." << endl;
