@@ -36,6 +36,7 @@ echo "2.1 crdl"
 echo "2.2 boot -A"
 
 . $basedir/conf/envfile && echo "Loaded envfile" || return -1
+tmshutdown || echo "tmshutdown failed. probably nothing was to be stoped."
 [ -e $TUXCONFIG ] && rm $TUXCONFIG && echo "Removed old $TUXCONFIG file."
 [ -e $TLOGDEVICE ] && rm $TLOGDEVICE && echo "Removed old $TLOGDEVICE file."
 tmloadcf $basedir/conf/ubbconfig || return -1
