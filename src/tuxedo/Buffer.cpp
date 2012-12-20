@@ -34,6 +34,16 @@ namespace atmi {
     free ( (char *) buffer );
   }
 
+  bool Buffer::is_fml32_buffer( FBFR32 *buffer){
+
+    char type[MAXTIDENT+1] ;
+    if ( tptypes ((char *) buffer, type, NULL ) == -1 ){
+      throw Exception ( tpstrerror(tperrno));
+    }
+
+    return (strncmp ( FMLTYPE32, type, 8) == 0 );
+  }
+
   Field *Buffer::set ( Field *f ){
 
     if ( f == NULL ) {

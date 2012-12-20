@@ -3,7 +3,9 @@
    Sample Tuxedo client using ATMI++ libray.
 
  */
-#include <string.h>
+#include <algorithm>
+#include <string>
+#include <cstring>
 #include <iostream>
 #include <Thread.h>
 #include <atmi++.h>
@@ -96,6 +98,9 @@ int main ( int argc, char **argv ) {
   int ret = 0;
 
   try {
+    string str = "Hello World";
+    transform(str.begin(), str.end(),str.begin(), ::toupper);
+    cout << "str is now " << str << endl ;
 
     cout << "using lib ATMI++ " << Tuxedo::version() << endl;
     TPtest tp;

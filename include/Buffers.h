@@ -76,6 +76,10 @@ namespace atmi {
       /** default destructor */
       ~Buffer ();
 
+      /** @return tru if it's a FML32 buffer type
+       */
+      static inline bool is_fml32_buffer( FBFR32 *buffer );
+
       /** @return the size of the buffer (in bytes) */
       long size ();
 
@@ -491,28 +495,155 @@ namespace atmi {
       virtual ~TField() {
       };
 
-      /** @return returns the string's length
+      /** @return the string's length
        */
       virtual FLDLEN32 length () {
 
         return (FLDLEN32)value.length();
       };
 
-      virtual TField<string> &operator= ( const char* v ) {
-
-        value = v;
-        return *this;
-      };
-
-      /** Assigns a value to the field
+      /** @return the string's size
        */
-      virtual TField<string> &operator= ( const string &v ) {
+      virtual FLDLEN32 size () {
+
+        return (FLDLEN32)value.size();
+      };
+
+      /** @return a C string (with \0) of current string's content.
+       */
+      const char* c_str ( ) const{
+         return value.c_str();
+      }
+
+      /** Appends a copy of the argument to the string.
+       *
+       * The new string content is the content existing in the string object before the call followed by the content of
+       * the argument.
+       *
+       * The append member function provides a similar functionality with additional options.
+       *
+       * @param str a copy of the content of this object is appended to the object's content.
+       * @return *this 
+       */
+      string& operator+= ( const string& str ){
+
+        return value += str ;
+      }
+
+      /** Appends a copy of the argument to the string.
+       *
+       * The new string content is the content existing in the string object before the call followed by the content of
+       * the argument.
+       *
+       * The append member function provides a similar functionality with additional options.
+       *
+       * @param  s  a pointer to an array containing a null-terminated character sequence (C string), which is appended to the object's content.
+       * @return *this 
+       */
+      string& operator+= ( const char* s ){
+
+        return value += s ;
+      }
+
+      /** Appends a copy of the argument to the string.
+       *
+       * The new string content is the content existing in the string object before the call followed by the content of
+       * the argument.
+       *
+       * The append member function provides a similar functionality with additional options.
+       *
+       * @param c   character. This single character is appended to the string object's content.
+       * @return *this 
+       */
+      string& operator+= ( char c ){
+        return value += c ;
+      }
+
+      /**
+       * Returns a reference the character at position pos in the string.
+       *
+       * The function actually returns data()[ pos ].
+       *
+       * The at member function has the same behavior as this operator function, except that at also performs a range
+       * check.
+       *
+       * @param pos position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @return The character at the specified position in the string.
+       */
+      const char& operator[] ( size_t pos ) const{
+
+        return value[pos];
+      }
+
+      /**
+       * Returns a reference the character at position pos in the string.
+       *
+       * The function actually returns data()[ pos ].
+       *
+       * The at member function has the same behavior as this operator function, except that at also performs a range
+       * check.
+       *
+       * @param pos position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @return The character at the specified position in the string.
+       */
+      char& operator[] ( size_t pos ){
+
+        return value[pos];
+      }
+
+      /**
+       * string& operator= ( char c );
+       *
+       * String assignment
+       * Sets a copy of the argument as the new content for the string object.
+       *
+       * The previous content is dropped.
+       *
+       * The assign member function provides a similar functionality with additional options.
+       *
+       * @param s   a pointer to an array containing a null-terminated character sequence (C string), which is copied as the new content for the object.
+       */
+      virtual TField<string> &operator= ( const char* s ) {
+
+        value = v;
+        return *this;
+      };
+
+      /**
+       * string& operator= ( char c );
+       *
+       * String assignment
+       * Sets a copy of the argument as the new content for the string object.
+       *
+       * The previous content is dropped.
+       *
+       * The assign member function provides a similar functionality with additional options.
+       *
+       * @param str a copy of the content of this object is used as the new content for the object.
+       */
+      virtual TField<string> &operator= ( const string &str ) {
 
         value = v;
 
         return *this;
       };
 
+      /**
+       * String assignment
+       * Sets a copy of the argument as the new content for the string object.
+       *
+       * The previous content is dropped.
+       *
+       * The assign member function provides a similar functionality with additional options.
+       *
+       * @param  c  the content is set to a single character. 
+       */
+      virtual TField<string> &operator= ( char &c ) {
+
+        value = c;
+
+        return *this;
+      };
       /** casts the field value
        */
       operator string(){
@@ -520,6 +651,12 @@ namespace atmi {
         return value;
       };
 
+      /** @return a null terminated const char *
+       */
+      operator const char*() {
+
+        return value.c_str();
+      };
 
     protected:
 
