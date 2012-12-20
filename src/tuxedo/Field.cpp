@@ -111,7 +111,7 @@ namespace atmi {
 
   ostream &operator<< ( ostream &out, TField<string> &f ){
 
-    return out << (string) f;
+    return out << f;
   };
 
 }

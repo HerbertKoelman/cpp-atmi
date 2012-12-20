@@ -605,7 +605,7 @@ namespace atmi {
        */
       virtual TField<string> &operator= ( const char* s ) {
 
-        value = v;
+        value = s;
         return *this;
       };
 
@@ -623,7 +623,7 @@ namespace atmi {
        */
       virtual TField<string> &operator= ( const string &str ) {
 
-        value = v;
+        value = str;
 
         return *this;
       };
