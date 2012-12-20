@@ -7,17 +7,20 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <string.h>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cctype>
+#include <iostream>
 
 #include <stdio.h>
+
+/*
 #include <atmi.h>
 #include <userlog.h>
 #include <signal.h>
 #include <Usignal.h>
-
-#include <cctype>
-#include <string>
-#include <iostream>
+*/
 
 #include "sample_fml_table.h"
 #include <atmi++.h>
@@ -45,7 +48,16 @@ class SimpServ : public AbstractServer {
 
         TField<string> name ( EMPNAME );
         buffer.get ( &name );
-        name = "Hello world";
+
+        userlog ( "converting %s to uppercase.", name.c_str() );
+
+        string upper = name;
+        transform(upper.begin(), upper.end(),upper.begin(), ::toupper);
+
+        // name = "should be uppercase.";
+        name = upper ;
+        userlog ( "name is now %s (%s).", name.c_str(), upper.c_str() );
+
         buffer.set ( &name );
 
         ret = TPSUCCESS;

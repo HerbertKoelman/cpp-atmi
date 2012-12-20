@@ -68,17 +68,17 @@ DEFAULT:
 #  CLOPT="-A -- -l hera:8080/tsam/dataserver"
 
 SIMPSERV   SRVGRP=SERV SRVID=100
-  CLOPT="-r -s TOUPPER -s HELLO"
+  CLOPT="-r -s TOUPPER -s HELLO -o <basedir>/log/simpserv.out"
   MIN=2 MAX=20
   REPLYQ=Y
 
 "SIMPSERV++" SRVGRP=XASERV SRVID=100
-  CLOPT="-r -s TOUPPER -s persist:TOUPPER"
+  CLOPT="-r -s TOUPPER -s persist:TOUPPER -o <basedir>/log/simpserv++.out"
   REPLYQ=Y
   MINDISPATCHTHREADS=2 MAXDISPATCHTHREADS=20
 
 SIMPSERV   SRVGRP=XASERV SRVID=200
-  CLOPT="-r -s persist:TOUPPER"
+  CLOPT="-r -s persist:TOUPPER -o <basedir>/log/simpservxa.out"
   RQADDR="SIMPSERV"
   REPLYQ=Y
   MIN=2

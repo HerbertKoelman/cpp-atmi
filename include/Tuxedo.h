@@ -249,7 +249,7 @@ namespace atmi {
       void updateErrno ();
 
       /**
-       * Triggers of exception according to the given tperrno passed. The exception will be initialized with msg.
+       * Triggers exceptions according to the given tperrno passed. The exception will be initialized with msg.
        *
        * @param tpe tperrno to handle
        * @param msg message to setup in thrown exception.

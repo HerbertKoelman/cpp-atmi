@@ -141,6 +141,10 @@
 #ifndef _ATMI_PLUS_PLUS_H_
 #define _ATMI_PLUS_PLUS_H_
 
+#include <userlog.h>
+#include <signal.h>
+#include <Usignal.h>
+
 #include <Exceptions.h>
 #include <Tuxedo.h>
 #include <Buffers.h>
