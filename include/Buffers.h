@@ -652,11 +652,11 @@ namespace atmi {
       };
 
       /** @return a null terminated const char *
-       */
       operator const char*() {
 
         return value.c_str();
       };
+       */
 
     protected:
 
