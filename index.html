@@ -78,69 +78,65 @@ public:
   TPtest () : AbstractClient ("tptest"){
   };
 
-  int run ( int argc, char **argv ) {
+    void run () {
 
-    int ret = -1;
-    cout << "Starting client program tptest." << endl;
-
-    try {
-
-      Tp tp ( "TOUPPER" );
-      int urcode = 0;
+      int ret = -1;
+      cout << "Starting client program tptest." << endl;
 
       try {
+
+        Tp tp ( "TOUPPER" );
+        int urcode = 0;
+
         Buffer buffer;
 
         TField<string> name ( "EMPNAME" );
-        name = (string) "Herbert";
+        name = "Herbert";
+
         buffer.add ( &name );
 
-        cout << "  Calling service TOUPPER (" << name  << ")." << endl;
+        cout << "  Calling service TOUPPER (" << name  << "), context: " << get_context() << "." << endl;
+
         try {
 
-            tp.begin();
+          tp.begin();
 
-            ret = tp.call ( &buffer );
-            switch (ret) {
-              case 0:
-                break;
-              case -1:
-                cerr << "  TOUPPER returned TPFAIL." << endl;
-                break;
-              default:
-                cerr << "  TOUPPER returned URCODE: " << ret << endl;
-                cout << "  Call returned: " << endl;
-                buffer.print();
-            }
-
-            buffer.get ( &name );
-            cout << "  Call returned: " << name << "." << endl;
-
-            tp.commit();
-            cout << "  Transcation was committed." << endl ;
-          } catch ( ... ){
-            tp.abort();
-            cout << "  Transcation was aborted." << endl ;
-            throw;
+          ret = tp.call ( &buffer );
+          switch (ret) {
+            case 0:
+              break;
+            case -1:
+              cerr << "  TOUPPER returned TPFAIL." << endl;
+              break;
+            default:
+              cerr << "  TOUPPER returned URCODE: " << ret << endl;
+              cout << "  Call returned: " << endl;
+              buffer.print();
           }
 
+          buffer.get ( &name );
+          cout << "  Call returned: " << name << "." << endl;
 
-      } catch ( ServiceException& serr ) {
-        cerr << "  Service Exception catched. tpcall failed." << endl;
-        cerr << "  What: " << serr.what () << endl;
-      } catch ( TuxedoException& terr ) {
-        cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
-        cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
-      };
+          tp.commit();
+          cout << "  Transcation was committed." << endl ;
+        } catch ( ... ){
+          tp.abort();
+          cout << "  Transcation was aborted." << endl ;
+          throw;
+        }
 
-      cout << "Ending program." << endl;
+    } catch ( ServiceException& serr ) {
+      cerr << "  Service Exception catched. tpcall failed." << endl;
+      cerr << "  What: " << serr.what () << endl;
     } catch ( TuxedoException& terr ) {
-      cerr << terr.what () << endl;
-    } catch (BufferException berr ) {
-      cerr << berr.what() << endl;
-    };
+      cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
+      cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+    } catch ( Exception &err ){
+      cerr << "  Exception catched. tpcall failed." << endl;
+      cerr << "  What: " << err.what () << "." << endl;
+    }
 
-    return ret;
+    cout << "Ending program." << endl;
   };
 };
 
