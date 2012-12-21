@@ -38,6 +38,19 @@ This creates an ```html``` and ```man``` directory.
 
 It is also possible to deploy the library onto your system using de install/uninstall make targets.
 
+Samples
+===========
+
+The samples directory contains a set of sample programs to illustrate how this is meant to be used. The directory samples/apphelps you setup a Tuxedo server (DOMAIN) to run the sample server implementations. To get things setup and running:
+```
+$ make demos
+$ cd samples/app
+$ . ./setup_app
+$ . ./deploy_app
+```
+
+Should be running :-)
+
 -------------------------------------------------------------------
 
  ATMI++ is free software, you can redistribute it and/or modify
