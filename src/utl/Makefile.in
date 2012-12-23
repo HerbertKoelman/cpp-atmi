@@ -28,8 +28,8 @@ CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 VFLAGS=-n
 
-HEADERS= $(INCDIR)/Concurrency.h $(INCDIR)/Thread.h $(INCDIR)/ThreadPool.h $(INCDIR)/UnixException.h
-OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o 
+HEADERS= $(INCDIR)/Concurrency.h $(INCDIR)/Thread.h $(INCDIR)/ThreadPool.h $(INCDIR)/UnixException.h $(INCDIR)/YamlParser.h
+OBJS = UnixException.o Thread.o Mutex.o Condition.o ThreadPool.o Pipe.o Worker.o YamlParser.o
 
 all : libatmiutl++.a
 

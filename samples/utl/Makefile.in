@@ -17,11 +17,19 @@ INCDIR=$(BASEDIR)/include/
 LIBDIR=$(BASEDIR)/lib/
 LOCALEDIR=${BASEDIR}/locale
 
+# Tuxedo
+TUXLIB=$(TUXDIR)/lib
+TUXINC=$(TUXDIR)/include
+
+INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
+LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
+
 CC=@CC@
 CCC=@CXX@
 RANLIB=@RANLIB@
 RM=rm -f
 AR=@AR@
+BEAUTIFIER=@BEAUTIFIER@
 
 DEBUG=-g -bnoquiet
 
@@ -30,9 +38,18 @@ CXXFLAGS=@CXXFLAGS@
 CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
-TARGETS=ssocket csocket
+TARGETS=load_config_file
 
 all:${TARGETS}
+
+views:
+	@echo "views build."
+
+fml_tables:sample_fml_table.h
+	@echo "fml tables build."
+
+sample_fml_table.h:sample_fml_table
+	mkfldhdr32 $<
 
 clean:
 	${RM} *.o core *.a
@@ -40,22 +57,33 @@ clean:
 globber:
 	${RM} *.o core *.a
 	${RM} ${TARGETS}
+	$(RM) *unc-backup*~ *unc-backup*~
 
 cxref:
-	cxref ${TARGETS} -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
+	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
 
-beautify:
-	uncrustify --no-backup -l CPP --replace -c crust.cfg *.C
+beautifull:
+	${BEAUTIFIER} *.bcl *.bsr
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
+	@echo "bulding native client $@" 
 	CC=@CXX@ \
 	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
-	buildclient -v \
+	buildclient ${WSL} -v \
 	-o $@ \
 	-f $< \
-	-l -lfml++ \
 	-l -lcltatmi++ \
+	-l -lfml++ \
+	-l -latmiutl++
+	@echo "bulding workstation client $@w" 
+	CC=@CXX@ \
+	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	buildclient -w -v \
+	-o $@w \
+	-f $< \
+	-l -lcltatmi++ \
+	-l -lfml++ \
 	-l -latmiutl++
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.

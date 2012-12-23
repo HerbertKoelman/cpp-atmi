@@ -52,7 +52,7 @@ namespace atmi {
        * @param msg error message
        */
       Exception ( const char *msg = NULL, ... ) throw ();
-      ~Exception () throw () {
+      virtual ~Exception () throw () {
       };
 
       /**
@@ -136,7 +136,7 @@ namespace atmi {
        * @param msg error message.
        */
       TuxedoException ( int err = 0, const char *msg = NULL, ... ) throw ();
-      ~TuxedoException () throw () {
+      virtual ~TuxedoException () throw () {
       };
 
       /**
@@ -186,7 +186,7 @@ namespace atmi {
   class ServiceException : public TuxedoException {
     public:
       ServiceException ( int err, const char *msg = NULL, ... ) throw ();
-      ~ServiceException () throw () {
+      virtual ~ServiceException () throw () {
       };
   };
 
@@ -196,7 +196,7 @@ namespace atmi {
   class TimeoutException : public TuxedoException {
     public:
       TimeoutException ( int err, const char *msg = NULL, ... ) throw ();
-      ~TimeoutException () throw (){
+      virtual ~TimeoutException () throw (){
       };
   };
 
@@ -207,7 +207,7 @@ namespace atmi {
   class BlockingException : public TuxedoException {
     public:
       BlockingException ( int err, const char *msg = NULL, ... ) throw ();
-      ~BlockingException () throw () {
+      virtual ~BlockingException () throw () {
       };
   };
 
@@ -217,7 +217,7 @@ namespace atmi {
   class InterruptException : public TuxedoException {
     public:
       InterruptException ( int err, const char *msg = NULL, ... ) throw ();
-      ~InterruptException () throw () {
+      virtual ~InterruptException () throw () {
       };
   };
 
@@ -237,7 +237,7 @@ namespace atmi {
        * @param msg error message.
        */
       DiagnosticException ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
-      ~DiagnosticException ()  throw () {
+      virtual ~DiagnosticException ()  throw () {
       };
 
       /**
@@ -267,7 +267,7 @@ namespace atmi {
   class NomsgException : public DiagnosticException {
     public:
       NomsgException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-      ~NomsgException () throw () {
+      virtual ~NomsgException () throw () {
       };
   };
 
@@ -277,7 +277,7 @@ namespace atmi {
   class AbortedException : public DiagnosticException {
     public:
       AbortedException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-      ~AbortedException () throw () {
+      virtual ~AbortedException () throw () {
       };
   };
 

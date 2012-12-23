@@ -8,6 +8,7 @@
 #include <cstring>
 #include <iostream>
 #include <Thread.h>
+#include <YamlParser.h>
 #include <atmi++.h>
 
 using namespace std;
@@ -98,11 +99,12 @@ int main ( int argc, char **argv ) {
   int ret = 0;
 
   try {
-    string str = "Hello World";
-    transform(str.begin(), str.end(),str.begin(), ::toupper);
-    cout << "str is now " << str << endl ;
-
     cout << "using lib ATMI++ " << Tuxedo::version() << endl;
+    YamlParser yp ("tuxedo.yml");
+    yp.parse("tptest");
+    map<string,string> p = yp.get_properties();
+    cout << "tptest.tuxconfig: " << p["tptest.tuxconfig"] << endl;
+
     TPtest tp;
     tp.run ();
 

@@ -18,6 +18,7 @@ AC_PROG_RANLIB
 
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create])
+AC_CHECK_LIB([yaml], [yaml_parser_initialize])
 
 # Setting things up for ATMI builds
 CFLAGS="$CFLAGS -I../../include "

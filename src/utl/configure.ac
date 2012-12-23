@@ -17,6 +17,7 @@ AC_PROG_RANLIB
 
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create])
+AC_CHECK_LIB([yaml], [yaml_parser_initialize])
 
 # Setting things up for ATMI builds
 CFLAGS=-I../../include
@@ -24,7 +25,7 @@ CXXFLAGS=$CFLAGS
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([limits.h nl_types.h stdlib.h string.h sys/time.h unistd.h])
+AC_CHECK_HEADERS([limits.h nl_types.h stdlib.h string.h sys/time.h unistd.h yaml.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST

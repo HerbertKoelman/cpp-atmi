@@ -4,8 +4,6 @@
  */
 
 /*
- * Thread
- *
  * Copyright (C) 2006 - herbert koelman
  *
  * Thread is free software; you can redistribute it and/or modify
@@ -26,11 +24,11 @@
 
 #include <pthread.h>
 #include <Concurrency.h>
+#include <vector>
 
 #ifndef __THREAD__
 #define __THREAD__
 
-#include <vector>
 using namespace std;
 
 /**
@@ -46,6 +44,7 @@ class Runnable {
 class Thread : public Runnable {
   public:
     // construct/copy/destruct
+
     /**
      * create a new thread
      *
