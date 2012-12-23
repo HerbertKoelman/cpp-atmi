@@ -1,0 +1,34 @@
+#  Tuxedo client configuration file
+# Client: atm/atmw
+
+basedir: /home/herbert/
+
+# Tuxedo onfiguration
+tuxconfig:
+  - /home/herbert/conf/ubbconfig.red.bin
+  - /home/herbert/conf/ubbconfig.blue.bin
+
+# Listens
+network:
+  - listen:
+      - //0.0.0.0:2000
+      - //0.0.0.0:2001
+
+# Database
+database:
+  url: database://hostname:1521/monitoring
+  user: dbuser
+  password: A1Q2W3
+
+# Queue Manager
+mqseries:
+  queuemanager: CLBPE
+  hostname: etoile
+  port: 141
+  queues:
+    - queries: LBP.OPO.Q
+    - responses: LBP.OPO.R
+  subscriptions:
+    opposition:
+      - notif.opo.reseau
+        notif.opo.bo
