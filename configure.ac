@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[TRUNK],[herbert.koelman@me.com],[http://redmine.urbix-software.fr/projects/atmiplusplus])
+AC_INIT([atmi++],[TRUNK],[herbert.koelman@me.com],[http://herbertkoelman.github.com/atmiplusplus/])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/atmi++.h])
@@ -12,6 +12,15 @@ AC_CHECK_PROG([RM],[rm],[rm -f])
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
 AC_CHECK_PROG([BEAUTIFIER], [uncrustify], [uncrustify])
+
+# Checks for libraries.
+AC_CHECK_LIB([pthread], [pthread_create],[],[
+  echo "you need libpthread, please check your distrib"
+    exit -1])
+
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
+  echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
+    exit -1])
 
 AC_CANONICAL_BUILD
 

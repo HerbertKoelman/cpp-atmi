@@ -16,28 +16,39 @@ AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify])
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create])
-AC_CHECK_LIB([yaml], [yaml_parser_initialize])
+AC_CHECK_LIB([pthread], [pthread_create],[],[
+  echo "you need libpthread, please check your distrib"
+  exit -1])
+
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
+  echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
+  exit -1])
+
 
 # Setting things up for ATMI builds
 CFLAGS=-I../../include
 CXXFLAGS=$CFLAGS
+
+# Checks for library functions.
+# AC_FUNC_ERROR_AT_LINE
+# AC_FUNC_MALLOC
+# AC_CHECK_FUNCS([gettimeofday memset])
 
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([limits.h nl_types.h stdlib.h string.h sys/time.h unistd.h yaml.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-AC_C_INLINE
-AC_HEADER_TIME
+#AC_C_CONST
+#AC_C_INLINE
+#AC_HEADER_TIME
 
 # Checks for library functions.
-AC_TYPE_SIGNAL
-AC_CHECK_FUNCS([gettimeofday])
+#AC_TYPE_SIGNAL
+#AC_CHECK_FUNCS([gettimeofday])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
+#AC_HEADER_STDBOOL
 
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
@@ -68,10 +79,6 @@ else
   AC_MSG_RESULT([../../locale created.])
 fi
 
-# Checks for library functions.
-AC_FUNC_ERROR_AT_LINE
-AC_FUNC_MALLOC
-AC_CHECK_FUNCS([gettimeofday memset])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

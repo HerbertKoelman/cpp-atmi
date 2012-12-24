@@ -4,7 +4,6 @@
 AC_PREREQ(2.63)
 AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
 AC_CONFIG_SRCDIR([Tuxedo.cpp])
-#AC_CONFIG_HEADERS([../../include/atmi++.h])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
@@ -17,10 +16,13 @@ AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../../cr
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create])
+AC_CHECK_LIB([pthread], [pthread_create],[],[
+  echo "you need libpthread, please check your distrib"
+  exit -1])
 
-# Setting things up for ATMI builds
-CFLAGS=-I../../include
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
+  echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
+  exit -1])
 
 AC_MSG_CHECKING([for tuxedo home directory])
 if test -n "$TUXDIR"
@@ -41,7 +43,8 @@ then
   CXXFLAGS="$CFLAGS"
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
-  AC_CHECK_LIB([tux], [tpcall])
+  # This cannot be checked here. The library doesn't exist until configure and make is run
+  # AC_CHECK_LIB([tux], [tpcall])
 
 else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
@@ -52,16 +55,17 @@ AC_HEADER_STDC
 AC_CHECK_HEADERS([limits.h nl_types.h stdlib.h string.h sys/time.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-AC_C_INLINE
-AC_HEADER_TIME
+#AC_C_CONST
+#AC_C_INLINE
+#AC_HEADER_TIME
 
 # Checks for library functions.
-AC_TYPE_SIGNAL
-AC_CHECK_FUNCS([gettimeofday])
+#AC_TYPE_SIGNAL
+#AC_FUNC_MALLOC
+#AC_CHECK_FUNCS([memset])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
+#AC_HEADER_STDBOOL
 
 AC_MSG_CHECKING([whether target directory ../../lib exists])
 if test -e ../../lib
@@ -91,11 +95,6 @@ case "$CXX" in
   *)
   AC_MSG_RESULT(none found.)
 esac
-
-# Checks for library functions.
-AC_FUNC_ERROR_AT_LINE
-AC_FUNC_MALLOC
-AC_CHECK_FUNCS([gettimeofday memset])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

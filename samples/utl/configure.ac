@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[subprj],[herbert.koelman@me.com])
-AC_CONFIG_SRCDIR([load_config_file.cpp])
+AC_INIT([atmi++],[utility samples],[herbert.koelman@me.com])
+#AC_CONFIG_SRCDIR([load_config_file.cpp])
 #AC_CONFIG_HEADERS([../../include/atmi++.h])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
@@ -17,8 +17,13 @@ AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../../cr
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create])
-AC_CHECK_LIB([yaml], [yaml_parser_initialize])
+AC_CHECK_LIB([pthread], [pthread_create],[],[
+  echo "you need libpthread, please check your distrib"
+  exit -1])
+
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
+  echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
+  exit -1])
 
 # Setting things up for ATMI builds
 CFLAGS="$CFLAGS -I../../include "
@@ -41,8 +46,6 @@ then
   CFLAGS="$CFLAGS -I$TUXINC "
   CXXFLAGS="$CFLAGS"
   LDFLAGS="$LDFLAGS -L$TUXLIB -L../../lib"
-
-  AC_CHECK_LIB([tux], [tpcall])
 
 else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
