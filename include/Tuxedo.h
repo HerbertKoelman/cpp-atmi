@@ -1,7 +1,5 @@
 /*
    $Id$
-
-   Helper class for dealing with tuxedo.
  */
 
 /*

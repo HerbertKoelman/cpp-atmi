@@ -34,6 +34,18 @@
  * simple C++ wrappers for the ATMI C library, making it easier to write fast and rock solid Tuxedo software. The targeted \
  * implementation should be thread safe and offer multi-context capabilities.
  *
+ * Setting things up:
+ *
+ *     $ configure
+ *     $ make
+ * 
+ * Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com">here</a>
+ *
+ * @section depends_on Dependencies
+ *
+ * The project depends on :
+ * - libyaml available <a href="http://pyyaml.org/wiki/LibYAML">here</a> 
+ *
  * @section what_it_implements What it implements
  *
  * The ATMI++ comes as the following list of libraries:
@@ -53,11 +65,9 @@
  *     - Mutex class: wrapper to POSIX Mutex handling functions.
  *     - Condition class: wrapper to POSIX Condition handling functions.
  *
- * The library comes with sample code that are gathered into the bin directory :
- * - btest.C: FML buffer sample
- * - qwriter.C: /Q access demo
- * - tptest.C: transactional calls samples
- * - mctest.C: multicontext sample code
+ * The library comes with sample code that are gathered into the samples directory. You can build them using 
+ * 
+ *     $ make demos
  *
  * This project is currently hosted <a href="http://herbertkoelman.github.com/atmiplusplus">here</a>.
  */
