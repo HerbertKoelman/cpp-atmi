@@ -56,6 +56,7 @@
  *  - atmiutl++.a : set of helper classes to handle concurrency and multithreading
  *     - Thread class: wrapper of the POSIX Threading library
  *     - ThreadPool class: pre-allocated Threads
+ *     - Pipe class: coordonated way to pass messages among Threads
  *     - Barrier class: handles a point of synchronization (rendez-vous) among Threads
  *     - Mutex class: wrapper to POSIX Mutex handling functions.
  *     - Condition class: wrapper to POSIX Condition handling functions.
