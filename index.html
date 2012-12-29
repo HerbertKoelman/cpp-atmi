@@ -32,13 +32,14 @@
           
 <h3>Welcome to Tuxedo ATMI++ C++ library.</h3>
 
-<p>
-The ATMI library comes as a set of libraries, ATMI++ offers a c++ wrapping of these libraries. Using c++ makes it easier to write Tuxedo transactions. You can download a binary version v2.1 for linux <a href="https://github.com/downloads/HerbertKoelman/atmiplusplus/atmi++-v2.1-linux-gnu.tar.gz">here</a>. The API documentation is available <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>.
-<p>
 <a href="http://en.wikipedia.org/wiki/Tuxedo_(software)">Tuxedo (Transactions for Unix, Extended for Distributed Operations)</a> is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 <p>
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
-
+<p>
+ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
+<p>
+You can download a binary version v2.1 for linux <a href="https://github.com/downloads/HerbertKoelman/atmiplusplus/atmi++-v2.1-linux-gnu.tar.gz">here</a>. The API documentation is available <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>.
+	
 <h3>Project's content</h4>
 
 <P>The library is divided into a very simple set of classes: <B>Tuxedo</B>,
