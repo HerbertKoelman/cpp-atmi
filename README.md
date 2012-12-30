@@ -1,6 +1,6 @@
 Author: Herbert Koelman  
 Date: 30/12/2012  
-Current stable version: v3.0
+Current version: v3.0
  
 Tuxedo ATMI C++ wrapper
 ============
