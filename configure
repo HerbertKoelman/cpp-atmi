@@ -558,7 +558,7 @@ MAKEFLAGS=
 
 # Identity of this package.
 PACKAGE_NAME='atmi++'
-PACKAGE_TARNAME='ihttps://github.com/HerbertKoelman/atmiplusplus'
+PACKAGE_TARNAME='https://github.com/HerbertKoelman/atmiplusplus'
 PACKAGE_VERSION='3.0'
 PACKAGE_STRING='atmi++ 3.0'
 PACKAGE_BUGREPORT='herbert.koelman@me.com'
@@ -1216,7 +1216,7 @@ Fine tuning of the installation directories:
   --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
   --mandir=DIR            man documentation [DATAROOTDIR/man]
   --docdir=DIR            documentation root
-                          [DATAROOTDIR/doc/ihttps://github.com/HerbertKoelman/atmiplusplus]
+                          [DATAROOTDIR/doc/https://github.com/HerbertKoelman/atmiplusplus]
   --htmldir=DIR           html documentation [DOCDIR]
   --dvidir=DIR            dvi documentation [DOCDIR]
   --pdfdir=DIR            pdf documentation [DOCDIR]
