@@ -1,17 +1,15 @@
 Author: Herbert Koelman  
-Date: 29/11/2012  
-Current stable version: v2.1 (see branch v2.1)
+Date: 30/12/2012  
+Current stable version: v3.0
  
 Tuxedo ATMI C++ wrapper
 ============
 
-The ATMI library comes as set of C libraries, ATMI++ offers a C++ wrapping of these libraries making it easier to write shorter and more robust Tuxedo code.
-
-ATMI++ cames as open source code, so you can do with it whatever you feel like doing 8-)
-
 Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
 
 ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
+
+ATMI++ is a C++ wrapping of this API, adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
 
 Project content
 ============
