@@ -44,7 +44,7 @@ AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src/tuxedo)
 AC_CONFIG_SUBDIRS(src/utl)
 AC_CONFIG_SUBDIRS(samples/atmi++)
-AC_CONFIG_SUBDIRS(samples/utl)
+# not ready to be released - AC_CONFIG_SUBDIRS(samples/utl)
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

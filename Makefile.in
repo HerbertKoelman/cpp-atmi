@@ -21,8 +21,9 @@ demos:
 atmi++:
 	cd src/tuxedo ; $(MAKE) globber all clean
 
-utl:
-	cd src/utl ; $(MAKE) globber all clean
+# These samples are not yet ready to be deleivered
+# utl:
+# 	cd src/utl ; $(MAKE) globber all clean
 
 pkg:
 	tar cf - include lib man www samples | gzip > ${PACKAGE}
