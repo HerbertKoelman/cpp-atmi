@@ -876,8 +876,6 @@ namespace atmi {
  * 
  * @return the current build version
  */
-extern "C" const char *atmicpp_is_present(void) {
-  return "fake function that can be used with AC_CHECK_LIB macros of autotools";
-}
+extern "C" const char *atmicpp_is_present(void) ;
 
 #endif
