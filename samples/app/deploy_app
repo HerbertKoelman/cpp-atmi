@@ -3,6 +3,9 @@
 basedir=`pwd`
 sampledir=$basedir/../atmi++
 
+# setup env viraibles
+. $basedir/conf/envfile
+
 echo
 echo "---`date`----------------"
 tmshutdown -S -w 10
@@ -12,10 +15,11 @@ do
   cp -i $sampledir/$srv $basedir/app/ && echo "server $srv ready to be run." || echo "could not deploy server $srv. make sur you've run make demos."
 done
 
+
 FIELDTBLS32=
 for udata in sample_fml_table
 do
-  cp -i $sampledir/$udata $basedir/udataobj/ && echo "user datar $udata ready to be used." || echo "could not deploy user data $udata. make sur you've run make demos."
+  cp -i $sampledir/$udata $basedir/udataobj/ && echo "user data $udata ready to be used." || echo "could not deploy user data $udata. make sur you've run make demos."
   if [ "$FIELDTBLS32" == "" ]
   then
     FIELDTBLS32=$udata
@@ -26,6 +30,21 @@ done
 export FIELDTBLS32
 echo "exported FIELDTBLS32=$FIELDTBLS32"
 
+VIEWFILES32=
+for udata in employee.V
+do
+  cp -i $sampledir/$udata $basedir/udataobj/ && echo "user data $udata ready to be used." || echo "could not deploy user data $udata. make sur you've run make demos."
+  if [ "$VIEWFILES32" == "" ]
+  then
+    VIEWFILES32=$udata
+  else
+    VIEWFILES32=$VIEWFILES32:$udata
+  fi
+done
+export VIEWFILES32
+echo "exported VIEWFILES32=$VIEWFILES32"
+
 echo
 echo "---`date`----------------"
+rm log/ULOG*
 tmboot -S

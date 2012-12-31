@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[TRUNK],[herbert.koelman@me.com],[http://redmine.urbix-software.fr/projects/atmiplusplus])
+AC_INIT([atmi++],[3.0],[herbert.koelman@me.com],[https://github.com/HerbertKoelman/atmiplusplus])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/atmi++.h])
@@ -44,7 +44,7 @@ AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src/tuxedo)
 AC_CONFIG_SUBDIRS(src/utl)
 AC_CONFIG_SUBDIRS(samples/atmi++)
-AC_CONFIG_SUBDIRS(samples/utl)
+# not ready to be released - AC_CONFIG_SUBDIRS(samples/utl)
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

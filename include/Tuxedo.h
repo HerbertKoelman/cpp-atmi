@@ -871,4 +871,13 @@ namespace atmi {
  */
   extern istream& operator>>(istream& in, QueueStream& qs);
 }
+
+/** fake C function that can be used with autotool AC_CHECK_LIB macro
+ * 
+ * @return the current build version
+ */
+extern "C" const char *atmicpp_is_present(void) {
+  return "fake function that can be used with AC_CHECK_LIB macros of autotools";
+}
+
 #endif
