@@ -16,7 +16,7 @@ all: atmi++ utl
 
 demos:
 	cd samples/atmi++ ; $(MAKE) globber all clean
-	cd samples/utl ; $(MAKE) globber all clean
+#	cd samples/utl ; $(MAKE) globber all clean
 
 atmi++:
 	cd src/tuxedo ; $(MAKE) globber all clean
