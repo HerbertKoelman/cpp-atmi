@@ -39,40 +39,30 @@ ATMI, for Application-to-Transaction Monitor Interface, is the main API for the 
 <p>
 ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
 <p>
-You can download a binary version v2.1 for linux <a href="https://github.com/downloads/HerbertKoelman/atmiplusplus/atmi++-v2.1-linux-gnu.tar.gz">here</a>. The API documentation is available <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>.
+You can latest stable release is v3.0. The API's documentation is available <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>.
 	
 <h3>Project's content</h4>
 
 <P>
-	The library is divided into a very simple set of classes: 
-<ul>
-	<li><strong>Tuxedo</strong>, 
-	<li><strong>Tp</strong>,
-	<li><strong>Event</strong> 
-	<li><strong>Queue</strong>.
-</ul>
-	Each one is handling one category of ATMI calls.
+The library is divided into a very simple set of classes documented <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>. Each one is handling one category of ATMI calls. The project comes with a set of basic sample programs that illustrate how ATMI++ can be used. I'll find as wel a basic Tuxedo DOMAIN configuration in samples/app.
 </P>
 
-<P>Base class <B>Tuxedo</B> implements all the common calls of ATMI (like tpinit). Specialized class <B>Tp</B> extends the base class <B>Tuxedo</B> with everything needed to call services. <B>Queue</B> class extends base class <B>Tuxedo</B> to offer functions to queue and dequeue messages. The <B>Event</B> class extends <B>Tuxedo</B> class with operations to send, post and broadcast events.</P>
-
-<P>ATMI errors handling is based upon C++ exception classes. This way, it makes it much easier to handle errors conditions.</P>
-
 <H3>Getting started</A></H4>
-
+	Dowload latest release, unzip or untar file. Then run :
 <pre><code>
-$ git clone https://github.com/HerbertKoelman/atmiplusplus.git atmi++
-$ cd atmi++
 $ configure
 $ make
 $ make install
 </code></pre>
 
-The project's sample code can be compiled with make demos.
+The project's sample code can be compiled with 
+<pre><code>
+$ make demos
+</code></pre>
 
 <h3>Code sample</h3>
 
-C++ sample code
+This code scrap joins a Tuxedo DOMAIN, initializes an FML buffer and calls a service called TOUPPER using an XA transaction (see source code samples/atmi++/tptest.bcl). The abstract class <code>AbstractClient</code> handles the joining and ending of the interaction with the DOMAIN. Errors are reported through exception that are all derived from <code>Exception</code>. 
 <PRE><code>
 #include &lt;string.h&gt;
 #include &lt;iostream&gt;
@@ -93,25 +83,21 @@ public:
       cout << "Starting client program tptest." << endl;
 
       try {
-
         Tp tp ( "TOUPPER" );
         int urcode = 0;
-
         Buffer buffer;
 
         TField<string> name ( "EMPNAME" );
         name = "Herbert";
-
         buffer.add ( &name );
 
         cout << "  Calling service TOUPPER (" << name  << "), context: " << get_context() << "." << endl;
-
         try {
 
           tp.begin();
-
           ret = tp.call ( &buffer );
-          switch (ret) {
+          
+		  switch (ret) {
             case 0:
               break;
             case -1:
@@ -144,7 +130,6 @@ public:
       cerr << "  Exception catched. tpcall failed." << endl;
       cerr << "  What: " << err.what () << "." << endl;
     }
-
     cout << "Ending program." << endl;
   };
 };
@@ -152,22 +137,17 @@ public:
 int main ( int argc, char **argv ) {
 
   int ret = 0;
-
   try {
-
-                cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
     TPtest tp;
     ret = tp.run ( argc, argv );
-
   } catch ( Exception& err ) {
     cerr << err.what () << endl;
   } catch (exception uerr ) {
     cerr << uerr.what() << endl;
   };
-
   return ret;
 }
-
 </PRE>
 </code>
 
@@ -188,12 +168,12 @@ You should have received a copy of the GNU General Public License along with ATM
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/zipball/master" class="button">
-            <small>Download</small>
+          <a href="https://github.com/HerbertKoelman/atmiplusplus/zipball/v3.0" class="button">
+            <small>Download v3.0</small>
             .zip file
           </a>
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/tarball/master" class="button">
-            <small>Download</small>
+          <a href="https://github.com/HerbertKoelman/atmiplusplus/tarball/v3.0" class="button">
+            <small>Download v3.0</small>
             .tar.gz file
           </a>
 
