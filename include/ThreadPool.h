@@ -15,9 +15,9 @@
 #include "Concurrency.h"
 
 /**
- * Class barrier.
- * This class allow to create a barrier on a value wich can be increased or decreased.
- * We can wait the desactivation of the barrier. This desactivation is signal when the value has reached zero.
+ * A barrier ( a rendez-vous point).
+ *
+ * Some parallel computations need to "meet up" at certain points before continuing. This can be accomplished with with this classs.
  */
 class Barrier {
   private:
@@ -27,6 +27,7 @@ class Barrier {
     unsigned int n;
     Condition term_cond;
   public:
+
     /**
      * constructor and destructor.
      */
@@ -37,6 +38,7 @@ class Barrier {
      * increase the value.
      */
     void up();
+
     /**
      * decrease the value
      */
@@ -60,10 +62,12 @@ class Barrier {
 class Worker;
 
 /**
- * This class define a threadpool owning several permanent worker and can create temporary workers when it is saturated.
- * It keeps track of the permanent worker in a waiting list. Getting one of them if a job arrives.
- * If no permanent worker is found, the threadpool createss one temporary worker to do it if the maximum
- * allowed wqorker has not been reached.
+ * A ThreadPool runs jobs using pre-allocated threads. A job is submitted using ThreadPool.do_job method which selects an availbale thread and uses it to run the job.
+ *
+ * When constructed the ThreadPool creates a minimum number of availbale threads. The ThreadPool will serve at most the max number of Threads (see ThreaPool constructor).
+ *
+ * @author eric belloni
+ * @since 2.0
  */
 class ThreadPool {
 
@@ -99,12 +103,17 @@ class ThreadPool {
   public:
     /**
      * constructor
+     *
+     * @param min number of threads that will be pre-allocated.
+     * @param max maximum number of threads this instance will allow to run at one time.
      */
-    ThreadPool(unsigned int, unsigned int);
+    ThreadPool(unsigned int min, unsigned int max);
+
     /**
      * destructor
      */
     ~ThreadPool();
+
     /**
      * accessors
      *
@@ -122,8 +131,6 @@ class ThreadPool {
       return this->number_of_permanent_workers;
     }
     /**
-     * accessors
-     *
      * @return number of working workers.
      */
     unsigned int get_current_workers() const {
@@ -136,9 +143,11 @@ class ThreadPool {
     void add_worker_to_waiting_list(Worker *);
 
     /**
-     * do job
+     * Runs the given Runnable instance into an available Thread
+     *
+     * @param job a job to run
      */
-    int do_job(Runnable *);
+    int do_job(Runnable *job);
 
     /**
      * barrier management

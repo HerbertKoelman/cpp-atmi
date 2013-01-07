@@ -45,35 +45,20 @@ install:
 	${INSTALL} lib/libatmiutl++.a ${prefix}/lib/libatmiutl++.a
 	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a
 	${INSTALL} lib/libfml++.a ${prefix}/lib/libfml++.a
-	${INSTALL} include/Buffers.h ${prefix}/include/Buffers.h
-	${INSTALL} include/Concurrency.h ${prefix}/include/Concurrency.h
-	${INSTALL} include/Exceptions.h ${prefix}/include/Exceptions.h
-	${INSTALL} include/Network.h ${prefix}/include/Network.h
-	${INSTALL} include/Thread.h ${prefix}/include/Thread.h
-	${INSTALL} include/ThreadPool.h ${prefix}/include/ThreadPool.h
-	${INSTALL} include/Tuxedo.h ${prefix}/include/Tuxedo.h
-	${INSTALL} include/UnixException.h ${prefix}/include/UnixException.h
-	${INSTALL} include/atmi++.h ${prefix}/include/atmi++.h
 	${INSTALL} locale/en_US/atmi++.cat ${LOCALEDIR}/en_US/atmi++.cat
 	${INSTALL} locale/fr_FR/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
+	for header in include/*.h ; do \
+		${INSTALL} $$header ${prefix}/$$header ;\
+	done
 
 uninstall:
-	${RM} ${prefix}/include/atmi++.h
-	${RM} ${prefix}/include/Buffers.h
-	${RM} ${prefix}/include/Concurrency.h
-	${RM} ${prefix}/include/config.h
-	${RM} ${prefix}/include/config.h.in
-	${RM} ${prefix}/include/Exceptions.h
-	${RM} ${prefix}/include/Network.h
-	${RM} ${prefix}/include/sample_fml_table.h
-	${RM} ${prefix}/include/Thread.h
-	${RM} ${prefix}/include/ThreadPool.h
-	${RM} ${prefix}/include/Tuxedo.h
-	${RM} ${prefix}/include/UnixException.h
 	${RM} ${prefix}/lib/libatmi++.a
 	${RM} ${prefix}/lib/libatmiutl++.a
 	${RM} ${prefix}/lib/libcltatmi++.a
 	${RM} ${prefix}/lib/libfml++.a
 	${RM} ${LOCALEDIR}/en_US/atmi++.cat
 	${RM} ${LOCALEDIR}/fr_FR/atmi++.cat
+	for header in include/*.h ; do \
+		${RM} ${prefix}/$$header ;\
+	done
 

@@ -178,7 +178,7 @@ class ScopedMutex {
 };
 
 /**
- * The pipe class is a one-way communication channel between 2 processes. It consists of a fifo queue wich stocks the messages sent.
+ * The pipe class is a one-way communication channel between Threads. It consists of a fifo queue wich stocks the messages sent.
  * And allow to retrieve the oldest message stocked one message at a time. The condtion objet c_pipe allow us to synchronized the read/write of a message.
  * One operation can not be done if another is not completely terminated.
  */

@@ -33,14 +33,32 @@ using namespace std;
 
 /**
  * Interface of a runnable class.
+ *
+ * Yiou can write code to be run through a Thread by implementing this interface.
  */
 class Runnable {
   private:
 
   public:
+    /**
+     * This method must be overriden
+     */
     virtual void run () = 0;
 };
 
+/**
+ * Handles POSIX (Portable Operating System Interface) threads. 
+ *
+ * <code>
+ *     class ReaderThread: public Thread {
+ *     public:
+ *       void run() {...}
+ *     };
+ *
+ *     ReaderThread rt;
+ *     rt.start();
+ * </code>
+ */
 class Thread : public Runnable {
   public:
     // construct/copy/destruct
@@ -77,13 +95,11 @@ class Thread : public Runnable {
 
        The thread terminates in the following cases:
 
-       o The thread returned from its starting routine (the main routine for the
-          initial thread)
+       o The thread returned from its starting routine (the main routine for the initial thread)
        o The thread called the pthread_exit subroutine
        o The thread was canceled
        o The thread received a signal that terminated it
-       o The entire process is terminated due to a call to either the exec or exit
-        subroutines.
+       o The entire process is terminated due to a call to either the exec or exit subroutines.
 
        Note: The pthread.h header file must be the first included file of each
        source file using the threads library. Otherwise, the -D_THREAD_SAFE
@@ -117,10 +133,8 @@ class Thread : public Runnable {
        action depends on the cancelability of the target thread:
 
        o If its cancelability is disabled, the cancellation request is set pending.
-       o If its cancelability is deferred, the cancellation request is set pending
-       till the thread reaches a cancellation point.
-       o If its cancelability is asynchronous, the cancellation request is acted upon
-       immediately; in some cases, it may result in unexpected behaviour.
+       o If its cancelability is deferred, the cancellation request is set pending till the thread reaches a cancellation point.
+       o If its cancelability is asynchronous, the cancellation request is acted upon immediately; in some cases, it may result in unexpected behaviour.
 
        The cancellation of a thread terminates it safely, using the same termination
        procedure as the pthread_exit subroutine.
