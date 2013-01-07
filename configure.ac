@@ -9,6 +9,11 @@ AC_CONFIG_HEADERS([include/atmi++.h])
 AC_DEFINE_UNQUOTED(ATMI_VERSION, ["v$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 AC_CHECK_PROG([RM],[rm],[rm -f])
 
+# Checks for libraries.
+AC_CHECK_LIB([pthread], [pthread_create],[],[echo "missing dependency." ; exit -9])
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." ; exit -1])
+
+
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
 AC_CHECK_PROG([BEAUTIFIER], [uncrustify], [uncrustify])

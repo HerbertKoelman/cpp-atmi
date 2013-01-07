@@ -16,8 +16,8 @@ AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify])
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create])
-AC_CHECK_LIB([yaml], [yaml_parser_initialize])
+AC_CHECK_LIB([pthread], [pthread_create],[],[echo "missing dependency." ; exit -9])
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." ; exit -1])
 
 # Setting things up for ATMI builds
 CFLAGS=-I../../include
