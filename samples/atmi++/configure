@@ -662,6 +662,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+enable_localdir
 enable_tuxdir
 '
       ac_precious_vars='build_alias
@@ -1288,6 +1289,8 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-localdir       adds -I and -L to /usr/local include and lib
+                          respectively.
   --enable-tuxdir=PATH    set TUXDIR to point to this path
 
 Some influential environment variables:
@@ -2180,6 +2183,11 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 #AC_CONFIG_HEADERS([../../include/atmi++.h])
+
+# Check whether --enable-localdir was given.
+if test "${enable_localdir+set}" = set; then :
+  enableval=$enable_localdir; CFLAGS="-I /usr/local/include -L /usr/local/lib"
+fi
 
 
 # Check whether --enable-tuxdir was given.

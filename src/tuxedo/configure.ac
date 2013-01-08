@@ -5,6 +5,7 @@ AC_PREREQ(2.63)
 AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
 AC_CONFIG_SRCDIR([Tuxedo.cpp])
 
+AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
 

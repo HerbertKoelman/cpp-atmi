@@ -6,6 +6,7 @@ AC_INIT([atmi++],[2.1],[herbert.koelman@me.com])
 AC_CONFIG_SRCDIR([tptest.bcl])
 #AC_CONFIG_HEADERS([../../include/atmi++.h])
 
+AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
 

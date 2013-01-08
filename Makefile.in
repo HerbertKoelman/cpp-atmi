@@ -16,7 +16,7 @@ all: atmi++ utl
 
 demos:
 	cd samples/atmi++ ; $(MAKE) globber all clean
-	cd samples/utl ; $(MAKE) globber all clean
+#	cd samples/utl ; $(MAKE) globber all clean
 
 atmi++:
 	cd src/tuxedo ; $(MAKE) globber all clean
@@ -25,7 +25,7 @@ utl:
 	cd src/utl ; $(MAKE) globber all clean
 
 pkg:
-	tar cf - include lib man www samples | gzip > ${PACKAGE}
+	tar cf - include lib man html samples | gzip > ${PACKAGE}
 
 globber:
 	${RM} -R html man autom4te.cache
