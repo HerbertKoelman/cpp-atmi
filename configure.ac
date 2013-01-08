@@ -4,6 +4,8 @@
 AC_PREREQ(2.63)
 AC_INIT([atmi++],[3.0],[herbert.koelman@me.com],[https://github.com/HerbertKoelman/atmiplusplus])
 
+AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
+
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/atmi++.h])
 AC_DEFINE_UNQUOTED(ATMI_VERSION, ["v$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])

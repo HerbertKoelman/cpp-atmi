@@ -6,6 +6,7 @@ AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
 AC_CONFIG_SRCDIR([Thread.cpp])
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
+AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
 
 # Checks for programs.
@@ -20,7 +21,7 @@ AC_CHECK_LIB([pthread], [pthread_create],[],[echo "missing dependency." ; exit -
 AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." ; exit -1])
 
 # Setting things up for ATMI builds
-CFLAGS=-I../../include
+CFLAGS="-I../../include $CFLAGS"
 CXXFLAGS=$CFLAGS
 
 # Checks for header files.

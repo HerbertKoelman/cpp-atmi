@@ -626,6 +626,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+enable_localdir
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1248,6 +1249,13 @@ if test -n "$ac_init_help"; then
    esac
   cat <<\_ACEOF
 
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-localdir       adds -I and -L to /usr/local include and lib
+                          respectively.
+
 Some influential environment variables:
   CC          C compiler command
   CFLAGS      C compiler flags
@@ -1771,6 +1779,12 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
+
+
+# Check whether --enable-localdir was given.
+if test "${enable_localdir+set}" = set; then :
+  enableval=$enable_localdir; CFLAGS="-I /usr/local/include -L /usr/local/lib"
+fi
 
 
 ac_aux_dir=
