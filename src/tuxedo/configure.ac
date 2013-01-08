@@ -25,7 +25,12 @@ AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
   echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
   exit -1])
 
-AC_MSG_CHECKING([for tuxedo home directory])
+# Checks for libraries.
+AC_CHECK_LIB([pthread], [pthread_create])
+
+# Setting things up for ATMI builds
+CFLAGS="$CFLAGS -I../../include"
+
 if test -n "$TUXDIR"
 then
 

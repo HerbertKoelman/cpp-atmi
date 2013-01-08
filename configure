@@ -2697,7 +2697,9 @@ _ACEOF
   LIBS="-lpthread $LIBS"
 
 else
-  echo "missing dependency." ; exit -9
+
+	 echo "missing dependency."
+   exit -1
 fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for yaml_parser_initialize in -lyaml" >&5
@@ -2744,7 +2746,9 @@ _ACEOF
   LIBS="-lyaml $LIBS"
 
 else
-  echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." ; exit -1
+
+	 echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)."
+   exit -1
 fi
 
 

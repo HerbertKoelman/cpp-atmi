@@ -12,8 +12,12 @@ AC_DEFINE_UNQUOTED(ATMI_VERSION, ["v$PACKAGE_VERSION compiled on `uname -sv`.`un
 AC_CHECK_PROG([RM],[rm],[rm -f])
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create],[],[echo "missing dependency." ; exit -9])
-AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." ; exit -1])
+AC_CHECK_LIB([pthread], [pthread_create],[],[
+	 echo "missing dependency." 
+   exit -1])
+AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
+	 echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." 
+   exit -1])
 
 
 # Check for optional use of doxygen
