@@ -45,6 +45,7 @@ install:
 	${INSTALL} lib/libatmiutl++.a ${prefix}/lib/libatmiutl++.a
 	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a
 	${INSTALL} lib/libfml++.a ${prefix}/lib/libfml++.a
+	${INSTALL} -d ${LOCALEDIR}/en_US ${LOCALEDIR}/fr_FR
 	${INSTALL} locale/en_US/atmi++.cat ${LOCALEDIR}/en_US/atmi++.cat
 	${INSTALL} locale/fr_FR/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
 	for header in include/*.h ; do \
