@@ -8,14 +8,17 @@
 using namespace std;
 
 YamlParser::YamlParser( const char *file ) throw (YamlException) {
-  f = fopen ( file, "r" );
+  if ( f = fopen ( file, "r" )){
 
-  /* Initialize parser */
-  if(!yaml_parser_initialize(&parser)){
-    throw YamlException ("Failed to initialize parser!");
+    /* Initialize parser */
+    if(!yaml_parser_initialize(&parser)){
+      throw YamlException ("Failed to initialize parser!");
+    } else {
+      /* Set input file */
+      yaml_parser_set_input_file(&parser, f);
+    }
   } else {
-    /* Set input file */
-    yaml_parser_set_input_file(&parser, f);
+    throw YamlException ("Failed to open yaml file." );
   }
 }
 
