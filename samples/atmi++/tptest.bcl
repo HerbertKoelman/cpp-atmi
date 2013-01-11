@@ -100,7 +100,7 @@ int main ( int argc, char **argv ) {
 
   try {
     cout << "using lib ATMI++ " << Tuxedo::version() << endl;
-    YamlParser yp ("tttuxedo.yml");
+    YamlParser yp ("tuxedo.yml");
     yp.parse("tptest");
     map<string,string> p = yp.get_properties();
     cout << "tptest.tuxconfig: " << p["tptest.tuxconfig"] << endl;
