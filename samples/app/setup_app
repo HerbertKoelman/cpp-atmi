@@ -1,5 +1,11 @@
 #!/bin/sh
 
+basekey=33000
+uid=`id -u`
+prefix=`expr 5 - length $uid`
+ipckey=`expr substr $basekey 1 $prefix`$uid
+
+echo `get_ipckey`
 # This scripts helps to setup the sample Tuxedo domain (application)
 basedir=`pwd`
 hostname=`hostname`
@@ -14,7 +20,12 @@ echo
 echo "setting up $basedir/conf/ubbconfig:"
 echo " basedir: $basedir"
 echo " hostanme: $hostname"
-sed -e "s:<basedir>:$basedir:g" -e "s:<hostname>:$hostname:g" -e "s:<tuxdir>:$TUXDIR:g" $basedir/template/ubbconfig.template $basedir/conf/ubbconfig > $basedir/conf/ubbconfig & echo "ubbconfig was generated here $basedir/conf/ubbconfig"
+read ipc?" IPC key (default is $ipckey): "
+if [ "$ipc" != "" ]
+then
+  ipckey=$ipc
+fi
+sed -e "s:<ipckey>:$ipckey:g" -e "s:<basedir>:$basedir:g" -e "s:<hostname>:$hostname:g" -e "s:<tuxdir>:$TUXDIR:g" $basedir/template/ubbconfig.template $basedir/conf/ubbconfig > $basedir/conf/ubbconfig && echo "ubbconfig was generated here $basedir/conf/ubbconfig" || exit -1
 
 echo
 echo "# generated on `date`" > $basedir/conf/envfile

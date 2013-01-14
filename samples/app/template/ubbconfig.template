@@ -10,7 +10,7 @@
 
 #---------------------------------------------------------------------
 *RESOURCES
-IPCKEY		    32769
+IPCKEY		    <ipckey>
 
 DOMAINID	    ATMICPP
 MASTER		    LOCALHOST
