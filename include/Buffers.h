@@ -66,6 +66,9 @@ namespace atmi {
 
       /** Create a new buffer reference.
        *
+       * Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that 
+       * the given buffer was allocated elsewhere. And it will be deallocated later.
+       *
        * @param b set FML32 buffer reference
        */
       Buffer ( FBFR32 *b );
@@ -75,13 +78,10 @@ namespace atmi {
        */
       Buffer ( FLDLEN32 len );
 
-      /** Allocates a buffer to fit the number of occurencies of bytes size.
-       * @param occ number of fields
-       * @param bytes space of field value in bytres
+      /** default destructor
+       *
+       * If memory was allocated by this instance then it will be freed. Otherwise the buffer is not deallocated.
        */
-      Buffer ( FLDOCC32 occ, FLDLEN32 bytes );
-
-      /** default destructor */
       ~Buffer ();
 
       /** @return tru if it's a FML32 buffer type
@@ -196,6 +196,10 @@ namespace atmi {
 
       /** FML buffer reference */
       FBFR32 *buffer;
+
+      /** if true then buffer was allocated by the Buffer instance (thus it can be freed when needed).
+       */
+      bool allocated ;
 
       /** value by which the buffer size will be extended */
       long extent;

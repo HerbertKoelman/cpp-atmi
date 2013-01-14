@@ -82,6 +82,19 @@ class BTest : public AbstractClient {
 
         cout << "Buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
 
+        cout << "wrapping buffer." << endl ;
+        Buffer wrapper ( b.get_buffer());
+        nom = "this was added into a wrapper instance of buffer.";
+        wrapper.set (&nom );
+        wrapper.print ();
+
+        cout << "transforming a buffer into a wrapped buffer." << endl;
+        Buffer wrapper1;
+        wrapper1.set_buffer ( wrapper.get_buffer());
+        prenom = "this was set by a wrapper";
+        wrapper1.set ( &prenom );
+        wrapper1.print();
+
       }catch ( BufferException buffErr ) {
         cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
       } catch ( Exception err ) {

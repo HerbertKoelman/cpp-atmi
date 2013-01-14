@@ -28,57 +28,47 @@
 using namespace std;
 using namespace atmi;
 
-class SimpServ : public AbstractServer {
-  public:
-    SimpServ () : sleepy (0){
-    };
+/*
+ * This function performs the actual service requested by the client. Its
+ * argument is a structure containing among other things a pointer to the
+ * data buffer, and the length of the data buffer.
+ */
+extern "C" void TOUPPER(TPSVCINFO * rqst)
+{
+  int ret = TPFAIL;
 
-    inline void handle_sighup () {
-      sleepy = ( sleepy == 0 ? 40 : 0 );
-      userlog ((sleepy == 0 ? (char *) "No sleep" : (char *) "Sleeping a few secs." ));
-    };
+  try {
+    Buffer buffer ((FBFR32 *)rqst->data );
+    //buffer.set_buffer ( (FBFR32 *)rqst->data );
 
-    inline int TOUPPER ( TPSVCINFO *rqst ) {
+    TField<string> name ( EMPNAME );
+    buffer.get ( &name );
 
-      int ret = TPFAIL;
+    userlog ( (char *)"converting %s to uppercase.", name.c_str() );
 
-      try {
-        Buffer buffer;
-        buffer.set_buffer ( (FBFR32 *)rqst->data );
+    string upper = name;
+    transform(upper.begin(), upper.end(),upper.begin(), ::toupper);
 
-        TField<string> name ( EMPNAME );
-        buffer.get ( &name );
+    name = upper ;
+    userlog ( (char *)"name is now %s (%s).", name.c_str(), upper.c_str() );
 
-        userlog ( "converting %s to uppercase.", name.c_str() );
+    buffer.set ( &name );
 
-        string upper = name;
-        transform(upper.begin(), upper.end(),upper.begin(), ::toupper);
+    ret = TPSUCCESS;
 
-        // name = "should be uppercase.";
-        name = upper ;
-        userlog ( "name is now %s (%s).", name.c_str(), upper.c_str() );
+  } catch ( TuxedoException &terr ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
+  } catch ( BufferException &berr ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
+  } catch ( Exception &err ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
+  } catch ( ... ) {
+    userlog ((char *)"unexpected exception was thrown, TOUPPER faild.");
+  }
 
-        buffer.set ( &name );
-
-        ret = TPSUCCESS;
-
-      } catch ( TuxedoException &terr ) {
-        userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
-      } catch ( BufferException &berr ) {
-        userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
-      } catch ( Exception &err ) {
-        userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
-      };
-
-
-      return(ret);
-    };
-
-  private:
-    int sleepy;
-};
-
-SimpServ *server = NULL;
+  /* Return the transformed buffer to the requestor. */
+  tpreturn(ret, 0, rqst->data, rqst->len, 0);
+}
 
 // ATMI / C++ Interface section --------------------------------------------
 
@@ -88,10 +78,8 @@ SimpServ *server = NULL;
 void sig_handler(int sig) {
   switch (sig) {
     case SIGHUP:
-      server->handle_sighup();
       break;
     case SIGTERM:
-      server->handle_sigterm ();
       break;
     default:
       userlog((char *) "Handling an unknown signal (%d).", sig);
@@ -99,56 +87,13 @@ void sig_handler(int sig) {
 }
 
 
-/*
- * tpsvrinit is executed when a server is booted, before it begins processing
- * requests.  It is not necessary to have this function. Also available is
- * tpsvrdone (not used in this example), which is called at server->shutdown
- * time.
- */
 int tpsvrinit(int argc, char *argv[]) {
-  /* userlog writes to the central TUXEDO message log */
-  userlog((char *)"Welcome to the simple server version $Revision: 79 $");
-
-  Usignal(SIGHUP, sig_handler);
-  Usignal(SIGTERM, sig_handler);
-
-  try {
-    server = new SimpServ ();
-  } catch ( ... ) {
-    userlog ( (char *)"Server init failed. Check ULOG for more." );
-  };
 
   return (0);
 }
 
-/**
- * The BEA Tuxedo ATMI system server abstraction calls tpsvrdone() after it has finished processing service requests but before it exits. When this routine is invoked, the server is still part of the system but its own services have been unadvertised. Thus, BEA Tuxedo ATMI system communication can be performed and transactions can be defined in this routine. However, if tpsvrdone() returns with open connections, asynchronous replies pending or while still in transaction mode, the BEA Tuxedo ATMI system will close its connections, ignore any pending replies, and abort the transaction before the server exits.
- *
- * If a server is shut down by the invocation of tmshutdown -y, services are suspended and the ability to perform communication or to begin transactions in tpsvrdone() is limited.
- */
 void tpsvrdone() {
-
-  delete server;
 
   userlog((char *)"server done");
 }
 
-/*
- * This function performs the actual service requested by the client. Its
- * argument is a structure containing among other things a pointer to the
- * data buffer, and the length of the data buffer.
- */
-extern "C" void TOUPPER(TPSVCINFO * rqst)
-{
-  int ret = TPFAIL;
-  try {
-
-    ret = server->TOUPPER ( rqst );
-
-  } catch ( ... ) {
-    ret = TPFAIL;
-  }
-
-  /* Return the transformed buffer to the requestor. */
-  tpreturn(ret, 0, rqst->data, rqst->len, 0);
-}

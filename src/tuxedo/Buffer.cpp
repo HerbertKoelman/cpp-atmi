@@ -18,38 +18,29 @@ namespace atmi {
 
 /* Buffer --------------------------------------------------------------------*/
 
-  Buffer::Buffer () : buffer (NULL), extent (0)  {
+  Buffer::Buffer () : allocated(false), buffer (NULL), extent (0)  {
 
     extent = 1024;
     buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
+    allocated = true ;
   }
 
   Buffer::Buffer ( FBFR32 *b ){
-    // check that we got an FML buffer
-    char type[9];
-    if ( tptypes ( (char *) b, type, NULL) > 0 ) {
-      if ( strcmp ( FMLTYPE32, type ) == 0 ) {
-
-        buffer = b;
-
-      } else {
-
-        throw Exception ( "This buffer reference is not of type FMLTYPE32." );
-      }
-    }else {
-
-      throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
-    }
+      allocated = false ;
+      set_buffer ( b );
   }
 
   Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
 
     this->extent = len;
     buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
+    allocated = true ;
   }
 
   Buffer::~Buffer () {
-    free ( (char *) buffer );
+    if ( allocated ) {
+      free ( (char *) buffer );
+    }
   }
 
   bool Buffer::is_fml32_buffer( FBFR32 *buffer){
@@ -150,20 +141,10 @@ namespace atmi {
     return f;
   };
 
-/*
-   AField Buffer::get ( FLDID32 fid ){
-
-        AField f = Buffer::field_factory ( fid );
-        get ( f.get () );
-
-        return f ;
-   };
- */
-
-/** returns the number of occurence of the given field into the buffer
- *
- * @param f a field for which to search for occurences
- */
+  /** returns the number of occurence of the given field into the buffer
+   *
+   * @param f a field for which to search for occurences
+   */
   FLDOCC32 Buffer::occurences ( const Field *f ){
 
     int rc = Foccur32 ( buffer, f->fid );
@@ -181,16 +162,19 @@ namespace atmi {
     return ( buffer == NULL ? 0 : Fsizeof32 ( buffer ));
   };
 
-/** @return number of bytes stored into the buffer */
+  /** @return number of bytes stored into the buffer */
   long Buffer::used () {
     return ( buffer == NULL ? 0 : Fused32 ( buffer ));
   };
 
-/** @return number of bytes not yet used into the buffer */
+  /** @return number of bytes not yet used into the buffer */
   long Buffer::unused () {
     return ( buffer == NULL ? 0 : Funused32 ( buffer ));
   };
 
+  /**
+   * @return the checksum value of the current buffer content
+   */
   long Buffer::chksum() {
 
     long sum = Fchksum32 ( buffer );
@@ -201,24 +185,52 @@ namespace atmi {
     return sum;
   };
 
+  /**
+   * @return  return count of all occurrences in buffer
+   */
   FLDOCC32 Buffer::num() {
 
     return Fnum32 ( buffer );
   };
 
+  /** print's on stdout the content of the buffer (debugging purpose mainly)
+   */
   void Buffer::print () {
 
     Fprint32 ( buffer );
   };
 
+  /**
+   * @return the reference the current internal buffer.
+   */
   FBFR32 *Buffer::get_buffer () {
 
     return buffer;
   };
 
+  /** replaces the current buffer reference by the given one.
+   *
+   * If preveous reference was allocated by this instance, then set_buffer frees the buffer and then set's the 
+   * buffer refrence. The buffer instance is then flagged as not allocated.
+   *
+   * @param b a preveously allocated buffer
+   */
   void Buffer::set_buffer ( FBFR32 *b ) {
 
-    // check that we got an FML buffer
+    if ( is_fml32_buffer (b)){
+
+      if ( allocated ) { /* check if we are in charge of handling memory allocation */
+        free ( (char *) buffer );
+      }
+
+      allocated = false;
+      buffer = b;
+
+    } else {
+      throw Exception ( "This buffer reference is not of type FMLTYPE32." );
+    }
+
+    /* moved into static method is_fml32_buffer
     char type[9];
     if ( tptypes ( (char *) b, type, NULL) > 0 ) {
       if ( strcmp ( FMLTYPE32, type ) == 0 ) {
@@ -227,20 +239,27 @@ namespace atmi {
         buffer = b;
 
       } else {
-
         throw Exception ( "This buffer reference is not of type FMLTYPE32." );
       }
     }else {
 
       throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
     }
+    */
   };
 
+  /** @return true if both buffer's checksums were equal
+   */
   bool Buffer::operator== ( Buffer &b) {
 
     return ( this->chksum () == b.chksum() );
   };
 
+  /** Copy's the content of one buffer into the other.
+   *
+   * @param b source buffer
+   * @return target buffer
+   */
   Buffer & Buffer::operator= ( Buffer &b) {
 
     int rc = -1;
@@ -251,45 +270,4 @@ namespace atmi {
     }
     return *this;
   };
-
-/* we'll see this later
-   AField Buffer::field_factory ( FLDID32 fid ){
-
-        AField pf ;
-
-        int ftype =  Fldtype32 ( fid );
-   switch ( ftype ){
-
-        case FLD_SHORT:
-                pf.reset ( new TField<short>(fid) );
-                break;
-
-        case FLD_LONG:
-                pf.reset ( new TField<long>(fid) );
-                break;
-
-        case FLD_CHAR:
-                pf.reset ( new TField<char>(fid) );
-                break;
-
-        case FLD_FLOAT:
-                pf.reset ( new TField<float>(fid) );
-                break;
-
-        case FLD_DOUBLE:
-                pf.reset ( new TField<double>(fid) );
-                break;
-
-        case FLD_STRING:
-                pf.reset ( new TField<string>(fid) );
-                break;
-
-        default:
-                throw Exception ( "Unsupported field type %d." , ftype );
-   };
-
-        return pf ;
-   };
- */
-
 }
