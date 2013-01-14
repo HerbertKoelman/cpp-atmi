@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.63)
-AC_INIT([atmi++],[master],[herbert.koelman@me.com],[https://github.com/HerbertKoelman/atmiplusplus])
+AC_INIT([atmi++],[v3.1],[herbert.koelman@me.com],[https://github.com/HerbertKoelman/atmiplusplus])
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 

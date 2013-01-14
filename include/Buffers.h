@@ -42,9 +42,11 @@ namespace atmi {
 
 //----------------------------------------------------------------------------------------------
   class Field;
+  class Buffer;
 
   typedef char * Carray;
   typedef auto_ptr<Carray> ACarray;
+  typedef auto_ptr<Buffer> ABuffer;
 
   /**
    * FML Buffer
@@ -61,6 +63,12 @@ namespace atmi {
 
       /** Allocates a buffer of 1024bytes */
       Buffer ();
+
+      /** Create a new buffer reference.
+       *
+       * @param b set FML32 buffer reference
+       */
+      Buffer ( FBFR32 *b );
 
       /** Allocates a buffer of byte size.
        * @param len bytes space of field value in bytres

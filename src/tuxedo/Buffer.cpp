@@ -24,6 +24,24 @@ namespace atmi {
     buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
+  Buffer::Buffer ( FBFR32 *b ){
+    // check that we got an FML buffer
+    char type[9];
+    if ( tptypes ( (char *) b, type, NULL) > 0 ) {
+      if ( strcmp ( FMLTYPE32, type ) == 0 ) {
+
+        buffer = b;
+
+      } else {
+
+        throw Exception ( "This buffer reference is not of type FMLTYPE32." );
+      }
+    }else {
+
+      throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
+    }
+  }
+
   Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
 
     this->extent = len;
