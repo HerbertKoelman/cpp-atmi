@@ -19,6 +19,7 @@
  * Boston, MA  02110-1301  USA
  */
 
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <atmi++.h>
@@ -46,9 +47,7 @@ namespace atmi {
 
     int rc = -1;
 
-
     if ( cltname != NULL || usr != NULL || passwd != NULL || tuxconfig != NULL ) {
-
 
       tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (0)  );
 
@@ -64,7 +63,16 @@ namespace atmi {
       } else {
           strncpy ( tpinfo->usrname, (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")), MAXTIDENT );
       }
-      if ( passwd != NULL ) strncpy ( tpinfo->passwd,  passwd, MAXTIDENT );
+
+      if ( passwd != NULL ) {
+        strncpy ( tpinfo->passwd,  passwd, MAXTIDENT );
+      }else {
+        if (tpchkauth() == TPSYSAUTH ){
+          char *p = getpass ("enter system password: ");
+          strncpy ( tpinfo->passwd,  p, MAXTIDENT );
+        }
+      }
+
       if ( group != NULL ) strncpy ( tpinfo->grpname,  group, MAXTIDENT );
       if ( cltname != NULL ) strncpy ( tpinfo->cltname, cltname, MAXTIDENT );
     }
@@ -73,7 +81,11 @@ namespace atmi {
 
     if ( rc < 0 ) {
       //  handleTperrno ( tperrno, "TPINIT failed. Is application started ? Check ULOG for more." );
-      throw TuxedoException  ( tperrno, catgets ( catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );
+      if (  tperrno == TPEPERM ){
+        throw TuxedoException  ( tperrno, "TPINIT access to DOMAIN denied." );
+      }else{
+        throw TuxedoException  ( tperrno, catgets ( catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );
+      }
     } else {
 
       if ( tpgetctxt ( &context, 0 ) < 0 ) {
