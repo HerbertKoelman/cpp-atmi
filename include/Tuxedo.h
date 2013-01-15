@@ -271,7 +271,7 @@ namespace atmi {
 /**
  * Helper class to implement Tuxedo application.
  *
- * Extending this class ensures that tpterm  and tpinit is called when client program are run.
+ * Extending this class ensures that tpterm  and tpinit is called when client programs are run.
  *
  * AbstractClient has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
  * need to pass a valid TUXCONFIG file when constructing an AbstractClient instance. The multiconext mode is available
@@ -298,6 +298,8 @@ namespace atmi {
        * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
        * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
        *
+       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
+       *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
        * should use factory methods  to build AQueue and ATp objects.
        *
@@ -315,6 +317,8 @@ namespace atmi {
        * first join a BEA Tuxedo ATMI system application by explicitly using tpinit or implicitly by
        * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
        * called by the BEA Tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       *
+       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
        * should use factory methods  to build AQueue and ATp objects.
