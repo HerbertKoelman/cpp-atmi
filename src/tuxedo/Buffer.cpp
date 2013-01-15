@@ -223,7 +223,7 @@ namespace atmi {
         free ( (char *) buffer );
       }
 
-      allocated = false;
+      // allocated = false;
       buffer = b;
 
     } else {
