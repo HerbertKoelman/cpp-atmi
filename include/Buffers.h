@@ -181,6 +181,15 @@ namespace atmi {
        */
       void set_buffer ( FBFR32 *b );
 
+      /**
+       * @return true if this instance willfree allocated memory buffer.
+       */
+      bool is_handling_memory();
+
+      /** @param b If true then destructor will free referenced buffer.
+       */
+      void set_handling_memory ( bool b);
+
       // operators -------------------------------------------------------------------------------
 
       /** Checks equality of two buffers (based upon chksum)

@@ -18,11 +18,11 @@ namespace atmi {
 
 /* Buffer --------------------------------------------------------------------*/
 
-  Buffer::Buffer () : allocated(false), buffer (NULL), extent (0)  {
+  Buffer::Buffer () : buffer (NULL) {
 
     extent = 1024;
-    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
     allocated = true ;
+    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
   Buffer::Buffer ( FBFR32 *b ){
@@ -33,12 +33,15 @@ namespace atmi {
   Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
 
     this->extent = len;
-    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
     allocated = true ;
+    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
   Buffer::~Buffer () {
+// cout << "Buffer destructor ... allocated is " << allocated << endl;
     if ( allocated ) {
+// cout << "is freeing a buffer..." << endl;
+// print();
       free ( (char *) buffer );
     }
   }
@@ -200,6 +203,14 @@ namespace atmi {
     Fprint32 ( buffer );
   };
 
+  bool Buffer::is_handling_memory(){
+    return allocated;
+  }
+
+  void Buffer::set_handling_memory ( bool b) {
+    allocated = b ;
+  }
+
   /**
    * @return the reference the current internal buffer.
    */
@@ -210,20 +221,21 @@ namespace atmi {
 
   /** replaces the current buffer reference by the given one.
    *
-   * If preveous reference was allocated by this instance, then set_buffer frees the buffer and then set's the 
-   * buffer refrence. The buffer instance is then flagged as not allocated.
+   * If preveous reference was allocated by this instance, then the buffer is freed before setting the new buffer reference. 
+   * The buffer instance is then flagged as not allocated. Meaning that it's up to you to free the memory that was allocated.
    *
-   * @param b a preveously allocated buffer
+   * @param b reference of an FML buffer.
+   * @throws Exception if the buffer is not an FML buffer.
    */
   void Buffer::set_buffer ( FBFR32 *b ) {
 
     if ( is_fml32_buffer (b)){
 
-      if ( allocated ) { /* check if we are in charge of handling memory allocation */
-        free ( (char *) buffer );
-      }
+      // if ( allocated ) { /* check if we are in charge of handling memory allocation */
+      //   free ( (char *) buffer );
+      // }
 
-      allocated = false;
+      //allocated = false;
       buffer = b;
 
     } else {

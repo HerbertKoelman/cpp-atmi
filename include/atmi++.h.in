@@ -91,6 +91,8 @@
 /* autoconf section ----------------------------------------------------------------------*/
 #undef ATMI_VERSION
 
+#undef _DEBUG_
+
 /* Define to 1 if you have the `gettimeofday' function. */
 #undef HAVE_GETTIMEOFDAY
 
