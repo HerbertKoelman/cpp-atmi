@@ -46,6 +46,7 @@
  *     - atmi::Tp class: extends Tuxedo class with calls dedicated to transaction processing
  *     - atmi::Queue class : extends Tuxedo class with calls dedicated to queuing operations.
  *     - atmi::Event class : extends Tuxedo class with calls dedicated to notifying and broadcasting operations.
+ *     - atmi::AbstractClient class : utility class that helps writting Tuxedo client programs.
  *     - atmi::TuxedoException class : extends Tuxedo class with calls dedicated to notifying and broadcasting operations.
  *
  *  - fml++.a : set of classes to handle Fielded Buffers (FML) calls in C++ programs
