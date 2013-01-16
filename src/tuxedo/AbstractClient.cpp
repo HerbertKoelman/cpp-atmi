@@ -68,7 +68,7 @@ namespace atmi {
         strncpy ( tpinfo->passwd,  passwd, MAXTIDENT );
       }else {
         if (tpchkauth() == TPSYSAUTH ){
-          char *p = getpass ("enter system password: ");
+          char *p = getpass ("enter application password: ");
           strncpy ( tpinfo->passwd,  p, MAXTIDENT );
         }
       }
