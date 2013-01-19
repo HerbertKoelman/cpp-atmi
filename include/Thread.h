@@ -31,130 +31,132 @@
 
 using namespace std;
 
-/**
- * Interface of a runnable class.
- *
- * Yiou can write code to be run through a Thread by implementing this interface.
- */
-class Runnable {
-  private:
+namespace atmi {
 
-  public:
-    /**
-     * This method must be overriden
-     */
-    virtual void run () = 0;
-};
+  /**
+   * Interface of a runnable class.
+   *
+   * Yiou can write code to be run through a Thread by implementing this interface.
+   */
+  class Runnable {
+    private:
 
-/**
- * Handles POSIX (Portable Operating System Interface) threads. 
- *
- * <code>
- *     class ReaderThread: public Thread {
- *     public:
- *       void run() {...}
- *     };
- *
- *     ReaderThread rt;
- *     rt.start();
- * </code>
- */
-class Thread : public Runnable {
-  public:
-    // construct/copy/destruct
+    public:
+      /**
+       * This method must be overriden
+       */
+      virtual void run () = 0;
+  };
 
-    /**
-     * create a new thread
-     *
-     * @param destroy indicates that the thread should delete itself when ended.
-     */
-    Thread( int destroy  = 0 );
+  /**
+   * Handles POSIX (Portable Operating System Interface) threads. 
+   *
+   * <code>
+   *     class ReaderThread: public Thread {
+   *     public:
+   *       void run() {...}
+   *     };
+   *
+   *     ReaderThread rt;
+   *     rt.start();
+   * </code>
+   */
+  class Thread : public Runnable {
+    public:
+      // construct/copy/destruct
 
-    /**
-     * cleanup thread ressources.
-     */
-    ~Thread();
+      /**
+       * create a new thread
+       *
+       * @param destroy indicates that the thread should delete itself when ended.
+       */
+      Thread( int destroy  = 0 );
 
-    /**
-       Override this operation with the code that the POSIX thread should run. It is
-       actually called by the extern "C" function ThreadStartup which then calls the
-       thread's run operation.
-     */
-    virtual void run ();
+      /**
+       * cleanup thread ressources.
+       */
+      ~Thread();
 
-    /**
-       The start subroutine creates a new thread and initializes its attributes
-       using the thread attributes object specified by the attr parameter. The new
-       thread inherits its creating thread's signal mask; but any pending signal of the
-       creating thread will be cleared for the new thread.
+      /**
+         Override this operation with the code that the POSIX thread should run. It is
+         actually called by the extern "C" function ThreadStartup which then calls the
+         thread's run operation.
+       */
+      virtual void run ();
 
-       The new thread is made runnable, and will start executing the run routine, with.
+      /**
+         The start subroutine creates a new thread and initializes its attributes
+         using the thread attributes object specified by the attr parameter. The new
+         thread inherits its creating thread's signal mask; but any pending signal of the
+         creating thread will be cleared for the new thread.
 
-       After thread creation, the thread attributes object can be reused to create
-       another thread, or deleted.
+         The new thread is made runnable, and will start executing the run routine, with.
 
-       The thread terminates in the following cases:
+         After thread creation, the thread attributes object can be reused to create
+         another thread, or deleted.
 
-       o The thread returned from its starting routine (the main routine for the initial thread)
-       o The thread called the pthread_exit subroutine
-       o The thread was canceled
-       o The thread received a signal that terminated it
-       o The entire process is terminated due to a call to either the exec or exit subroutines.
+         The thread terminates in the following cases:
 
-       Note: The pthread.h header file must be the first included file of each
-       source file using the threads library. Otherwise, the -D_THREAD_SAFE
-       compilation flag should be used, or the cc_r compiler used. In this case,
-       the flag is automatically set.
+         o The thread returned from its starting routine (the main routine for the initial thread)
+         o The thread called the pthread_exit subroutine
+         o The thread was canceled
+         o The thread received a signal that terminated it
+         o The entire process is terminated due to a call to either the exec or exit subroutines.
 
-       When multiple threads are created in a process, the FULL_CORE flag is set for all
-       signals. This means that if a core file is produced, it will be much bigger than
-       a single_threaded application. This is necessary to debug multiple-threaded
-       processes.
-     */
-    int start ();
+         Note: The pthread.h header file must be the first included file of each
+         source file using the threads library. Otherwise, the -D_THREAD_SAFE
+         compilation flag should be used, or the cc_r compiler used. In this case,
+         the flag is automatically set.
 
-    /**
-       The join subroutine blocks the calling thread until the thread thread
-       terminates. The target thread's termination status is returned in the status
-       parameter.
+         When multiple threads are created in a process, the FULL_CORE flag is set for all
+         signals. This means that if a core file is produced, it will be much bigger than
+         a single_threaded application. This is necessary to debug multiple-threaded
+         processes.
+       */
+      int start ();
 
-       If the target thread is already terminated, but not yet detached, the subroutine
-       returns immediately. It is impossible to join a detached thread, even if it is
-       not yet terminated. The target thread is automatically detached after all joined
-       threads have been woken up.
+      /**
+         The join subroutine blocks the calling thread until the thread thread
+         terminates. The target thread's termination status is returned in the status
+         parameter.
 
-       This subroutine does not itself cause a thread to be terminated. It acts like the
-       pthread_cond_wait subroutine to wait for a special condition.
-     */
-    int join();
+         If the target thread is already terminated, but not yet detached, the subroutine
+         returns immediately. It is impossible to join a detached thread, even if it is
+         not yet terminated. The target thread is automatically detached after all joined
+         threads have been woken up.
 
-    /**
-       The cancel subroutine requests the cancellation of the thread thread. The
-       action depends on the cancelability of the target thread:
+         This subroutine does not itself cause a thread to be terminated. It acts like the
+         pthread_cond_wait subroutine to wait for a special condition.
+       */
+      int join();
 
-       o If its cancelability is disabled, the cancellation request is set pending.
-       o If its cancelability is deferred, the cancellation request is set pending till the thread reaches a cancellation point.
-       o If its cancelability is asynchronous, the cancellation request is acted upon immediately; in some cases, it may result in unexpected behaviour.
+      /**
+         The cancel subroutine requests the cancellation of the thread thread. The
+         action depends on the cancelability of the target thread:
 
-       The cancellation of a thread terminates it safely, using the same termination
-       procedure as the pthread_exit subroutine.
-     */
-    int cancel();
+         o If its cancelability is disabled, the cancellation request is set pending.
+         o If its cancelability is deferred, the cancellation request is set pending till the thread reaches a cancellation point.
+         o If its cancelability is asynchronous, the cancellation request is acted upon immediately; in some cases, it may result in unexpected behaviour.
 
-    inline int getStatus () {
-      return status;
-    };
+         The cancellation of a thread terminates it safely, using the same termination
+         procedure as the pthread_exit subroutine.
+       */
+      int cancel();
 
-    inline int destroy_when_ended () {
-      return destroy;
-    };
+      inline int getStatus () {
+        return status;
+      };
 
-  private:
-    pthread_t thread;
-    pthread_attr_t attr;
+      inline int destroy_when_ended () {
+        return destroy;
+      };
 
-    int status;
-    int destroy;
-};
+    private:
+      pthread_t thread;
+      pthread_attr_t attr;
 
+      int status;
+      int destroy;
+  };
+}
 #endif

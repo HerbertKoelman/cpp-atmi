@@ -7,27 +7,30 @@
 
 using namespace std;
 
-Mutex::Mutex () {
-  if ( pthread_mutex_init (&mutex, NULL) != 0 ) {
-    throw ConcurrencyException ( "In constructor of Mutex pthread_mutex_init(&mutex, NULL) failed." );
+namespace atmi {
+
+  Mutex::Mutex () {
+    if ( pthread_mutex_init (&mutex, NULL) != 0 ) {
+      throw ConcurrencyException ( "In constructor of Mutex pthread_mutex_init(&mutex, NULL) failed." );
+    }
   }
-}
 
-Mutex::~Mutex () {
-  pthread_mutex_destroy (&mutex);
-}
+  Mutex::~Mutex () {
+    pthread_mutex_destroy (&mutex);
+  }
 
-int Mutex::lock () {
+  int Mutex::lock () {
 
-  return pthread_mutex_lock ( &mutex );
-}
+    return pthread_mutex_lock ( &mutex );
+  }
 
-int Mutex::tryLock () {
+  int Mutex::tryLock () {
 
-  return pthread_mutex_trylock ( &mutex );
-}
+    return pthread_mutex_trylock ( &mutex );
+  }
 
-int Mutex::unlock () {
+  int Mutex::unlock () {
 
-  return pthread_mutex_unlock ( &mutex );
+    return pthread_mutex_unlock ( &mutex );
+  }
 }

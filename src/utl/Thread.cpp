@@ -3,9 +3,11 @@
 #include "Thread.h"
 #include <pthread.h>
 
+namespace atmi {
+
 extern "C" void * ThreadStartup (void *);
 
-/*
+/**
    This function is a helper function. It has normal C linkage, and is
    the base for newly created Thread objects. It runs the
    run method on the thread object passed to it (as a void *).
@@ -17,42 +19,44 @@ void *ThreadStartup(void *args) {
   return (NULL);
 }
 
-Thread::Thread ( int destroy ) {
-  this->destroy = destroy;
 
-  /* Initialize and set thread detached attribute */
-  pthread_attr_init(&attr);
-  pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-}
+  Thread::Thread ( int destroy ) {
+    this->destroy = destroy;
 
-Thread::~Thread () {
-  pthread_attr_destroy(&attr);
-}
+    /* Initialize and set thread detached attribute */
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+  }
 
-void Thread::run () {
-}
+  Thread::~Thread () {
+    pthread_attr_destroy(&attr);
+  }
 
-int Thread::start () {
+  void Thread::run () {
+  }
 
-  int rc = 0;
+  int Thread::start () {
 
-  rc = pthread_create(&thread, &attr, ThreadStartup, (void *) this);
+    int rc = 0;
 
-  return rc;
-}
+    rc = pthread_create(&thread, &attr, ThreadStartup, (void *) this);
 
-int Thread::join () {
-  int rc = 0;
+    return rc;
+  }
 
-  rc = pthread_join(thread, (void **)&status);
+  int Thread::join () {
+    int rc = 0;
 
-  return rc;
-}
+    rc = pthread_join(thread, (void **)&status);
 
-int Thread::cancel () {
-  int rc = 0;
+    return rc;
+  }
 
-  rc = pthread_cancel ( thread );
+  int Thread::cancel () {
+    int rc = 0;
 
-  return rc;
+    rc = pthread_cancel ( thread );
+
+    return rc;
+  }
 }

@@ -8,77 +8,80 @@
 
 #include <Concurrency.h>
 
-Condition::Condition () {
-  pthread_cond_init ( &cond, NULL );
-}
+namespace atmi {
 
-Condition::~Condition () {
-}
-
-int Condition::simple_wait() {
-  int rc = 0;
-
-  rc  = pthread_cond_wait (&cond, &mutex);
-
-  return rc;
-}
-
-/*
-   int Condition::wait () {
-   int rc = 0 ;
-
-   lock () ;
-   rc  = pthread_cond_wait ( &cond, &mutex );
-
-   return rc ;
-   }
- */
-
-/* Default millis is 0 */
-int Condition::wait ( int millis ) {
-  int rc = 0;
-
-  rc = waitAndLock ( millis );
-
-  if ( rc == 0 || rc == ETIMEDOUT ) rc = unlock ();
-
-  return rc;
-}
-
-/* Default millis is 0 */
-int Condition::waitAndLock ( int millis ) {
-  int rc = 0;
-  timeval current;
-  timespec timeout;
-
-  gettimeofday ( &current, NULL );
-  timeout.tv_sec = current.tv_sec + (millis * 0.001);
-
-  rc = lock ();
-  if ( rc == 0 ) {
-    if ( millis == 0 ) {
-      rc  = pthread_cond_wait ( &cond, &mutex );
-    } else {
-      rc  = pthread_cond_timedwait ( &cond, &mutex, &timeout );
-    }
+  Condition::Condition () {
+    pthread_cond_init ( &cond, NULL );
   }
 
-  return rc;
-}
+  Condition::~Condition () {
+  }
 
-int Condition::signal() {
-  int rc = 0;
+  int Condition::simple_wait() {
+    int rc = 0;
 
-  rc = pthread_cond_signal ( &cond );
+    rc  = pthread_cond_wait (&cond, &mutex);
 
-  return rc;
-}
+    return rc;
+  }
 
-int Condition::broadcast () {
+  /*
+     int Condition::wait () {
+     int rc = 0 ;
 
-  int rc = 0;
+     lock () ;
+     rc  = pthread_cond_wait ( &cond, &mutex );
 
-  rc = pthread_cond_broadcast ( &cond );
+     return rc ;
+     }
+   */
 
-  return rc;
+  /* Default millis is 0 */
+  int Condition::wait ( int millis ) {
+    int rc = 0;
+
+    rc = waitAndLock ( millis );
+
+    if ( rc == 0 || rc == ETIMEDOUT ) rc = unlock ();
+
+    return rc;
+  }
+
+  /* Default millis is 0 */
+  int Condition::waitAndLock ( int millis ) {
+    int rc = 0;
+    timeval current;
+    timespec timeout;
+
+    gettimeofday ( &current, NULL );
+    timeout.tv_sec = current.tv_sec + (millis * 0.001);
+
+    rc = lock ();
+    if ( rc == 0 ) {
+      if ( millis == 0 ) {
+        rc  = pthread_cond_wait ( &cond, &mutex );
+      } else {
+        rc  = pthread_cond_timedwait ( &cond, &mutex, &timeout );
+      }
+    }
+
+    return rc;
+  }
+
+  int Condition::signal() {
+    int rc = 0;
+
+    rc = pthread_cond_signal ( &cond );
+
+    return rc;
+  }
+
+  int Condition::broadcast () {
+
+    int rc = 0;
+
+    rc = pthread_cond_broadcast ( &cond );
+
+    return rc;
+  }
 }

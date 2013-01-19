@@ -7,68 +7,69 @@ using namespace std;
 #include <cerrno>
 #include <string.h>
 
+namespace atmi {
 
-int UnixException::get_errno () {
+  int UnixException::get_errno () {
 
-  return error;
-}
-
-const char *UnixException::what() throw () {
-
-  message = message + ": " + strerror ( error );
-
-  return message.c_str();
-}
-
-UnixException::UnixException ( int err, const char *msg, ... ) throw () {
-
-  if ( msg != NULL ) {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
+    return error;
   }
 
-  this->error = ( err == 0 ? errno : err );;
-}
+  const char *UnixException::what() throw () {
 
-UnixException::UnixException ( const char *msg, ... ) throw () {
+    message = message + ": " + strerror ( error );
 
-  if ( msg != NULL ) {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
+    return message.c_str();
   }
 
-  this->error = errno;
-}
+  UnixException::UnixException ( int err, const char *msg, ... ) throw () {
 
-void UnixException::setup_message ( const char *msg, va_list args ) {
+    if ( msg != NULL ) {
+      va_list ap;
 
-  if ( msg == NULL )
-    message = "Unix error occured.";
-  else {
-    int len = 100;
-    char *buff = new char[len];
-
-    // try to fit message into default buffer size
-    len = vsnprintf ( buff, len, msg, args );
-
-    if ( len > 100 ) {
-
-      // didn't fit into default buffer size.
-      delete[] buff;
-
-      len += 1;
-      buff = new char[len];
-
-      vsnprintf ( buff, len, msg, args );
+      va_start ( ap, msg );
+      setup_message ( msg, ap );
+      va_end (ap);
     }
 
-    message = buff;
+    this->error = ( err == 0 ? errno : err );;
+  }
+
+  UnixException::UnixException ( const char *msg, ... ) throw () {
+
+    if ( msg != NULL ) {
+      va_list ap;
+
+      va_start ( ap, msg );
+      setup_message ( msg, ap );
+      va_end (ap);
+    }
+
+    this->error = errno;
+  }
+
+  void UnixException::setup_message ( const char *msg, va_list args ) {
+
+    if ( msg == NULL )
+      message = "Unix error occured.";
+    else {
+      int len = 100;
+      char *buff = new char[len];
+
+      // try to fit message into default buffer size
+      len = vsnprintf ( buff, len, msg, args );
+
+      if ( len > 100 ) {
+
+        // didn't fit into default buffer size.
+        delete[] buff;
+
+        len += 1;
+        buff = new char[len];
+
+        vsnprintf ( buff, len, msg, args );
+      }
+
+      message = buff;
+    }
   }
 }
-
