@@ -46,7 +46,7 @@ namespace atmi {
     }
   }
 
-  bool Buffer::is_fml32_buffer( FBFR32 *buffer){
+  bool Buffer::is_fml32_buffer( char *buffer){
 
     char type[MAXTIDENT+1] ;
     if ( tptypes ((char *) buffer, type, NULL ) == -1 ){
@@ -229,13 +229,8 @@ namespace atmi {
    */
   void Buffer::set_buffer ( FBFR32 *b ) {
 
-    if ( is_fml32_buffer (b)){
+    if ( is_fml32_buffer ( (char *)b)){ // this a lazy way to go and will need some update
 
-      // if ( allocated ) { /* check if we are in charge of handling memory allocation */
-      //   free ( (char *) buffer );
-      // }
-
-      //allocated = false;
       buffer = b;
 
     } else {

@@ -84,9 +84,11 @@ namespace atmi {
        */
       ~Buffer ();
 
-      /** @return tru if it's a FML32 buffer type
+      /**
+       * @return true if it's a FMLTYPE32 buffer type
+       * @throw Exception if we failed to get buffer type (tptypes)
        */
-      static inline bool is_fml32_buffer( FBFR32 *buffer );
+      static inline bool is_fml32_buffer( char *buffer );
 
       /** @return the size of the buffer (in bytes) */
       long size ();
