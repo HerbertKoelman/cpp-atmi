@@ -9,6 +9,7 @@
 #include <iostream>
 #include <Thread.h>
 #include <YamlParser.h>
+#include <Logger.h>
 #include <atmi++.h>
 
 using namespace std;
@@ -22,8 +23,12 @@ class TPtest : public AbstractClient, Thread {
 
     void run () {
 
+      // StandardLogger logger ;
+      ULOGLogger logger (INFO) ;
+      logger.info ("\n\n");
       int ret = -1;
-      cout << "Starting client program tptest." << endl;
+      logger.info ("Starting client program tptest.");
+      logger.info ( "version: %s." , "Hello world");
 
       try {
 
@@ -40,7 +45,7 @@ class TPtest : public AbstractClient, Thread {
 
           buffer.add ( &name );
 
-          cout << "  Calling service TOUPPER (" << name  << "), context: " << get_context() << "." << endl;
+          logger.warning ("Calling service TOUPPER (%s), context: %d", name.c_str() , get_context());
 
           try {
 
@@ -57,38 +62,37 @@ class TPtest : public AbstractClient, Thread {
               case 0:
                 break;
               case -1:
-                cerr << "  TOUPPER returned TPFAIL." << endl;
+                logger.error ("TOUPPER returned TPFAIL." );
                 break;
               default:
-                cerr << "  TOUPPER returned URCODE: " << ret << endl;
-                cout << "  Call returned: " << endl;
+                logger.info ( "TOUPPER returned URCODE: %d", ret);
                 buffer.print();
             }
 
             buffer.get ( &name );
-            cout << "  Call returned: " << name << "." << endl;
+            logger.info ( "Call returned: %s.", name.c_str() );
 
             tp.commit();
-            cout << "  Transcation was committed." << endl ;
+            logger.warning ("Transcation was committed.");
           } catch ( ... ){
             tp.abort();
-            cout << "  Transcation was aborted." << endl ;
+            logger.error("Transcation was aborted."); 
             throw;
           }
 
         } catch ( ServiceException& serr ) {
-          cerr << "  Service Exception catched. tpcall failed." << endl;
-          cerr << "  What: " << serr.what () << endl;
+          logger.error ( "Service Exception catched. tpcall failed." );
+          logger.error ( "What: %s", serr.what () );
         } catch ( TuxedoException& terr ) {
-          cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
-          cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+          logger.error ( "Tuxedo Exception catched. tpcall failed." );
+          logger.error ( "What: %s %s", terr.what () , terr.getTperrdetail() );
         };
 
-        cout << "Ending program." << endl;
+        logger.info ( "Ending program." );
       } catch ( TuxedoException& terr ) {
-        cerr << terr.what () << endl;
+        logger.error ( terr.what () );
       } catch (BufferException berr ) {
-        cerr << berr.what() << endl;
+        logger.error ( berr.what() );
       }
 
     };

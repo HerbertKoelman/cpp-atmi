@@ -1,6 +1,6 @@
 #!/bin/sh
 
-basekey=33000
+basekey=40000
 uid=`id -u`
 prefix=`expr 5 - length $uid`
 ipckey=`expr substr $basekey 1 $prefix`$uid
@@ -20,11 +20,7 @@ echo
 echo "setting up $basedir/conf/ubbconfig:"
 echo " basedir: $basedir"
 echo " hostanme: $hostname"
-read ipc?" IPC key (default is $ipckey): "
-if [ "$ipc" != "" ]
-then
-  ipckey=$ipc
-fi
+echo " IPC: $ipckey"
 sed -e "s:<ipckey>:$ipckey:g" -e "s:<basedir>:$basedir:g" -e "s:<hostname>:$hostname:g" -e "s:<tuxdir>:$TUXDIR:g" $basedir/template/ubbconfig.template $basedir/conf/ubbconfig > $basedir/conf/ubbconfig && echo "ubbconfig was generated here $basedir/conf/ubbconfig" || exit -1
 
 echo

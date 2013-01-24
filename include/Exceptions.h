@@ -62,6 +62,8 @@ namespace atmi {
 
       /**
        * helper to build string message using va_list.
+       *
+       * Message length is limited to 1024 characters long.
        */
       void setup_message ( const char *, va_list );
 

@@ -66,7 +66,7 @@ namespace atmi {
 
       /** Create a new buffer reference.
        *
-       * Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that 
+       * Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that
        * the given buffer was allocated elsewhere. And it will be deallocated later.
        *
        * @param b set FML32 buffer reference
@@ -210,7 +210,7 @@ namespace atmi {
 
       /** if true then buffer was allocated by the Buffer instance (thus it can be freed when needed).
        */
-      bool allocated ;
+      bool allocated;
 
       /** value by which the buffer size will be extended */
       long extent;
@@ -534,8 +534,8 @@ namespace atmi {
 
       /** @return a C string (with \0) of current string's content.
        */
-      const char* c_str ( ) const{
-         return value.c_str();
+      const char* c_str ( ) const {
+        return value.c_str();
       }
 
       /** Appends a copy of the argument to the string.
@@ -546,11 +546,11 @@ namespace atmi {
        * The append member function provides a similar functionality with additional options.
        *
        * @param str a copy of the content of this object is appended to the object's content.
-       * @return *this 
+       * @return *this
        */
       string& operator+= ( const string& str ){
 
-        return value += str ;
+        return value += str;
       }
 
       /** Appends a copy of the argument to the string.
@@ -561,11 +561,11 @@ namespace atmi {
        * The append member function provides a similar functionality with additional options.
        *
        * @param  s  a pointer to an array containing a null-terminated character sequence (C string), which is appended to the object's content.
-       * @return *this 
+       * @return *this
        */
       string& operator+= ( const char* s ){
 
-        return value += s ;
+        return value += s;
       }
 
       /** Appends a copy of the argument to the string.
@@ -576,10 +576,10 @@ namespace atmi {
        * The append member function provides a similar functionality with additional options.
        *
        * @param c   character. This single character is appended to the string object's content.
-       * @return *this 
+       * @return *this
        */
       string& operator+= ( char c ){
-        return value += c ;
+        return value += c;
       }
 
       /**
@@ -593,7 +593,7 @@ namespace atmi {
        * @param pos position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size_t is an unsigned integral type.
        * @return The character at the specified position in the string.
        */
-      const char& operator[] ( size_t pos ) const{
+      const char& operator[] ( size_t pos ) const {
 
         return value[pos];
       }
@@ -659,7 +659,7 @@ namespace atmi {
        *
        * The assign member function provides a similar functionality with additional options.
        *
-       * @param  c  the content is set to a single character. 
+       * @param  c  the content is set to a single character.
        */
       virtual TField<string> &operator= ( char &c ) {
 
@@ -675,10 +675,10 @@ namespace atmi {
       };
 
       /** @return a null terminated const char *
-      operator const char*() {
+         operator const char*() {
 
-        return value.c_str();
-      };
+         return value.c_str();
+         };
        */
 
     protected:

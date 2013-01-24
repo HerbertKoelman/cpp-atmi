@@ -53,21 +53,21 @@ namespace atmi {
 
       if ( tuxconfig != NULL ) {
         tpinfo->flags = TPMULTICONTEXTS;
-        if ( tuxputenv(const_cast<char *>(tuxconfig)) != 0 ){
+        if ( tuxputenv(const_cast<char *>(tuxconfig)) != 0 ) {
           throw Exception ("failed to put env varaible %s", tuxconfig );
         }
       }
 
       if ( usr != NULL ) {
-          strncpy ( tpinfo->usrname, usr, MAXTIDENT );
+        strncpy ( tpinfo->usrname, usr, MAXTIDENT );
       } else {
-          strncpy ( tpinfo->usrname, (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")), MAXTIDENT );
+        strncpy ( tpinfo->usrname, (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")), MAXTIDENT );
       }
 
       if ( passwd != NULL ) {
         strncpy ( tpinfo->passwd,  passwd, MAXTIDENT );
       }else {
-        if (tpchkauth() == TPSYSAUTH ){
+        if (tpchkauth() == TPSYSAUTH ) {
           char *p = getpass ("enter application password: ");
           strncpy ( tpinfo->passwd,  p, MAXTIDENT );
         }
@@ -81,7 +81,7 @@ namespace atmi {
 
     if ( rc < 0 ) {
       //  handleTperrno ( tperrno, "TPINIT failed. Is application started ? Check ULOG for more." );
-      if (  tperrno == TPEPERM ){
+      if (  tperrno == TPEPERM ) {
         throw TuxedoException  ( tperrno, "TPINIT access to DOMAIN denied." );
       }else{
         throw TuxedoException  ( tperrno, catgets ( catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );

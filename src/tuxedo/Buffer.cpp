@@ -21,19 +21,19 @@ namespace atmi {
   Buffer::Buffer () : buffer (NULL) {
 
     extent = 1024;
-    allocated = true ;
+    allocated = true;
     buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
   Buffer::Buffer ( FBFR32 *b ){
-      allocated = false ;
-      set_buffer ( b );
+    allocated = false;
+    set_buffer ( b );
   }
 
   Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
 
     this->extent = len;
-    allocated = true ;
+    allocated = true;
     buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
   }
 
@@ -48,8 +48,8 @@ namespace atmi {
 
   bool Buffer::is_fml32_buffer( char *buffer){
 
-    char type[MAXTIDENT+1] ;
-    if ( tptypes ((char *) buffer, type, NULL ) == -1 ){
+    char type[MAXTIDENT+1];
+    if ( tptypes ((char *) buffer, type, NULL ) == -1 ) {
       throw Exception ( tpstrerror(tperrno));
     }
 
@@ -158,7 +158,7 @@ namespace atmi {
     return rc;
   };
 
-  /** 
+  /**
    * @return the size of the buffer (in bytes)
    */
   long Buffer::size () {
@@ -208,7 +208,7 @@ namespace atmi {
   }
 
   void Buffer::set_handling_memory ( bool b) {
-    allocated = b ;
+    allocated = b;
   }
 
   /**
@@ -221,7 +221,7 @@ namespace atmi {
 
   /** replaces the current buffer reference by the given one.
    *
-   * If preveous reference was allocated by this instance, then the buffer is freed before setting the new buffer reference. 
+   * If preveous reference was allocated by this instance, then the buffer is freed before setting the new buffer reference.
    * The buffer instance is then flagged as not allocated. Meaning that it's up to you to free the memory that was allocated.
    *
    * @param b reference of an FML buffer.
@@ -229,7 +229,7 @@ namespace atmi {
    */
   void Buffer::set_buffer ( FBFR32 *b ) {
 
-    if ( is_fml32_buffer ( (char *)b)){ // this a lazy way to go and will need some update
+    if ( is_fml32_buffer ( (char *)b)) { // this a lazy way to go and will need some update
 
       buffer = b;
 
@@ -238,21 +238,21 @@ namespace atmi {
     }
 
     /* moved into static method is_fml32_buffer
-    char type[9];
-    if ( tptypes ( (char *) b, type, NULL) > 0 ) {
-      if ( strcmp ( FMLTYPE32, type ) == 0 ) {
+       char type[9];
+       if ( tptypes ( (char *) b, type, NULL) > 0 ) {
+       if ( strcmp ( FMLTYPE32, type ) == 0 ) {
 
         free ( (char *) buffer );
         buffer = b;
 
-      } else {
+       } else {
         throw Exception ( "This buffer reference is not of type FMLTYPE32." );
-      }
-    }else {
+       }
+       }else {
 
-      throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
-    }
-    */
+       throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
+       }
+     */
   };
 
   /** @return true if both buffer's checksums were equal
