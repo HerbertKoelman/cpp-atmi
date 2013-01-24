@@ -102,4 +102,4 @@ namespace atmi {
   int ServerSocket::get_max_socket_descriptor() {
     return max_socket_descriptor;
   }
-  }
+}

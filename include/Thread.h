@@ -49,7 +49,7 @@ namespace atmi {
   };
 
   /**
-   * Handles POSIX (Portable Operating System Interface) threads. 
+   * Handles POSIX (Portable Operating System Interface) threads.
    *
    * <code>
    *     class ReaderThread: public Thread {

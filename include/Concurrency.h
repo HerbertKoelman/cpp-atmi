@@ -126,7 +126,7 @@ namespace atmi {
          condition variable becomes bound to a unique mutex when a thread waits on the condition variable,
          and this (dynamic) binding ends when the wait returns.
        */
-  //  int wait () ;
+      //  int wait () ;
       int simple_wait();
       int wait ( int millis = 0);
       int waitAndLock ( int millis  = 0 );
@@ -154,18 +154,18 @@ namespace atmi {
   };
 
   class ScopedMutex {
-  /*
-     This class was designed to encapsulate a mutex and automatically control the lock attribute.
-     The ScopedMutex lock the associated mutex once we instanciate the class and the lock is automatically unlocked
-     once the object is destroyed. This allow us to correlate the lock with the scope of the object.
-   */
+    /*
+       This class was designed to encapsulate a mutex and automatically control the lock attribute.
+       The ScopedMutex lock the associated mutex once we instanciate the class and the lock is automatically unlocked
+       once the object is destroyed. This allow us to correlate the lock with the scope of the object.
+     */
     private:
       Mutex *mutex;
 
     public:
-  /*
-     constructors and destructors. The constructor is forced to only accept a mutex object or any object of a subclass.
-   */
+      /*
+         constructors and destructors. The constructor is forced to only accept a mutex object or any object of a subclass.
+       */
       explicit ScopedMutex(Mutex &m) : mutex(&m) {
         mutex->lock();
       }
@@ -173,9 +173,9 @@ namespace atmi {
         mutex->unlock();
       }
 
-  /*
-     Desabling the = operator.
-   */
+      /*
+         Desabling the = operator.
+       */
       void operator= (ScopedMutex &);
   };
 
@@ -190,24 +190,24 @@ namespace atmi {
       std::queue<T *> msg_list;
 
     public:
-  /**
-   * Cosntructors and destructors
-   */
+      /**
+       * Cosntructors and destructors
+       */
       Pipe();
       ~Pipe();
 
-  /**
-   * We can send a message by using the push function. this will stock it at the end of the queue.
-   *
-   * @param msg message to queue.
-   */
+      /**
+       * We can send a message by using the push function. this will stock it at the end of the queue.
+       *
+       * @param msg message to queue.
+       */
       void push(T*);
-  /**
-   * We then can retrieve the oldest message using the pop function. This function will remove the oldest message from the queue and
-   * send it to the receiver.
-   *
-   *  @return message queued.
-   */
+      /**
+       * We then can retrieve the oldest message using the pop function. This function will remove the oldest message from the queue and
+       * send it to the receiver.
+       *
+       *  @return message queued.
+       */
       T* pop();
 
       /**
@@ -217,10 +217,10 @@ namespace atmi {
        */
       int size();
 
-  /**
-   * Desabling the = operator.
-   *
-   */
+      /**
+       * Desabling the = operator.
+       *
+       */
       void operator= (Pipe &);
   };
 }

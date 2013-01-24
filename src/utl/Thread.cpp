@@ -5,19 +5,19 @@
 
 namespace atmi {
 
-extern "C" void * ThreadStartup (void *);
+  extern "C" void * ThreadStartup (void *);
 
 /**
    This function is a helper function. It has normal C linkage, and is
    the base for newly created Thread objects. It runs the
    run method on the thread object passed to it (as a void *).
  */
-void *ThreadStartup(void *args) {
-  Thread *thread = (Thread *)args;
-  thread->run();
-  if ( thread->destroy_when_ended () ) delete thread;
-  return (NULL);
-}
+  void *ThreadStartup(void *args) {
+    Thread *thread = (Thread *)args;
+    thread->run();
+    if ( thread->destroy_when_ended () ) delete thread;
+    return (NULL);
+  }
 
 
   Thread::Thread ( int destroy ) {

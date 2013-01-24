@@ -30,10 +30,10 @@ using namespace std;
 namespace atmi {
 
   /**
-  *
-  * Unix related exceptions
-  *
-  */
+   *
+   * Unix related exceptions
+   *
+   */
   class UnixException : public exception {
     public:
       /** Add a system message after the error message. The system message is returned by

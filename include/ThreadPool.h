@@ -208,9 +208,9 @@ namespace atmi {
        * @param destroy 1 if temporary worker 0 if permanent worker.
        */
       Worker(ThreadPool *tp, std::string surname = "", int destroy = 0);
-  /**
-   * destructor
-   */
+      /**
+       * destructor
+       */
       ~Worker();
 
       /**
