@@ -21,7 +21,7 @@
     <header>
       <div class="inner">
         <h1>Atmi++</h1>
-        <h2>Tuxedo ATMI C++ wrapper</h2>
+        <h2>Tuxedo ATMI C++ wrapper v3.1</h2>
         <a href="https://github.com/HerbertKoelman/atmiplusplus" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -39,7 +39,7 @@ ATMI, for Application-to-Transaction Monitor Interface, is the main API for the 
 <p>
 ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
 <p>
-You can latest stable release is v3.0. The API's documentation is available <a href="http://vps.urbix-software.fr/~herbert/atmi++/v3.0/index.html">here</a>.
+You can latest stable release is v3.1. The API's documentation is available <a href="http://vps.urbix-software.fr/~herbert/atmi++/v3.1/index.html">here</a>.
 	
 <h3>Project's content</h4>
 
@@ -47,7 +47,7 @@ You can latest stable release is v3.0. The API's documentation is available <a h
 The library is divided into a very simple set of classes documented <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>. Each one is handling one category of ATMI calls. The project comes with a set of basic sample programs that illustrate how ATMI++ can be used. I'll find as wel a basic Tuxedo DOMAIN configuration in samples/app.
 </P>
 
-<H3>Getting started</A></H4>
+<H4>Getting started</H4>
 	Dowload latest release, unzip or untar file. Then run :
 <pre><code>
 $ configure
@@ -62,7 +62,7 @@ $ make demos
 
 <h3>Code sample</h3>
 
-This code scrap joins a Tuxedo DOMAIN, initializes an FML buffer and calls a service called TOUPPER using an XA transaction (see source code samples/atmi++/tptest.bcl). The abstract class <code>AbstractClient</code> handles the joining and ending of the interaction with the DOMAIN. Errors are reported through exception that are all derived from <code>Exception</code>. 
+tptest joins a Tuxedo DOMAIN, initializes an FML buffer and calls a service called TOUPPER using an XA transaction (see source code samples/atmi++/tptest.bcl). The abstract class <code>AbstractClient</code> handles the joining and ending of the interaction with the DOMAIN. Errors are reported through exception that are all derived from <code>Exception</code>. 
 <PRE><code>
 #include &lt;string.h&gt;
 #include &lt;iostream&gt;
@@ -97,7 +97,7 @@ public:
           tp.begin();
           ret = tp.call ( &buffer );
           
-		  switch (ret) {
+          switch (ret) {
             case 0:
               break;
             case -1:
@@ -121,14 +121,11 @@ public:
         }
 
     } catch ( ServiceException& serr ) {
-      cerr << "  Service Exception catched. tpcall failed." << endl;
-      cerr << "  What: " << serr.what () << endl;
+      cerr << "  Service Exception catched. tpcall failed." << serr.what () << endl;
     } catch ( TuxedoException& terr ) {
-      cerr << "  Tuxedo Exception catched. tpcall failed." << endl;
-      cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+      cerr << "  Tuxedo Exception catched. tpcall failed." << terr.what () << ". " << terr.getTperrdetail() << endl;
     } catch ( Exception &err ){
-      cerr << "  Exception catched. tpcall failed." << endl;
-      cerr << "  What: " << err.what () << "." << endl;
+      cerr << "  Exception catched. tpcall failed." << err.what () << "." << endl;
     }
     cout << "Ending program." << endl;
   };
@@ -151,6 +148,38 @@ int main ( int argc, char **argv ) {
 </PRE>
 </code>
 
+Server function that implements TOUPPER code snippet:
+<pre><code>
+...
+extern "C" void TOUPPER(TPSVCINFO * rqst) {
+  int ret = TPFAIL;
+  try {
+    Buffer buffer ((FBFR32 *)rqst->data );
+    TField<string> name ( EMPNAME );
+    buffer.get ( &name );
+
+    string upper = name;
+    transform(upper.begin(), upper.end(),upper.begin(), ::toupper);
+    name = upper ;
+    buffer.set ( &name );
+
+    ret = TPSUCCESS;
+
+  } catch ( TuxedoException &terr ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
+  } catch ( BufferException &berr ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
+  } catch ( Exception &err ) {
+    userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
+  } catch ( ... ) {
+    userlog ((char *)"unexpected exception was thrown, TOUPPER faild.");
+  }
+
+  /* Return the transformed buffer to the requestor. */
+  tpreturn(ret, 0, rqst->data, rqst->len, 0);
+}
+...
+</code></pre>
 
 <h3>Authors and Contributors</h3>
 
@@ -168,18 +197,18 @@ You should have received a copy of the GNU General Public License along with ATM
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/zipball/v3.0" class="button">
-            <small>Download v3.0</small>
+          <a href="https://github.com/HerbertKoelman/atmiplusplus/zipball/v3.1" class="button">
+            <small>Download v3.1</small>
             .zip file
           </a>
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/tarball/v3.0" class="button">
-            <small>Download v3.0</small>
+          <a href="https://github.com/HerbertKoelman/atmiplusplus/tarball/v3.1" class="button">
+            <small>Download v3.1</small>
             .tar.gz file
           </a>
 
           <p class="repo-owner"><a href="https://github.com/HerbertKoelman/atmiplusplus"></a> is maintained by <a href="https://github.com/HerbertKoelman">Herbert Koelman</a>.</p>
 
-          <p></p>Having trouble with ATMI++ ? Send your suggestions or issues <a href="https://github.com/HerbertKoelman/atmiplusplus">here</a> or contact <a href="mailto:woodman.9167@me.com">woodman.9167@me.com</a> and I’ll help you sort it out.</p>
+          <p>Having trouble with ATMI++ ? Send your suggestions or issues <a href="https://github.com/HerbertKoelman/atmiplusplus">here</a> or contact <a href="mailto:woodman.9167@me.com">woodman.9167@me.com</a> and I’ll help you sort it out.</p>
 
           <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
