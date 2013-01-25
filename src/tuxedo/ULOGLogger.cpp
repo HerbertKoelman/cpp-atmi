@@ -3,10 +3,13 @@
 #include <unistd.h>
 
 #include <ctime>
+#include <iostream>
 #include <cstdio>
 #include <stdarg.h>
 #include <userlog.h>
 #include <Logger.h>
+
+using namespace std ;
 
 namespace atmi {
 
@@ -22,12 +25,22 @@ namespace atmi {
     if ( get_log_level() <= at) {
 
       string m;
-      char buff[1024];
+      int len = 50;
+      char *buff = new char[len];
 
-      vsnprintf ( buff, 1024, msg, args );
+      // vsnprintf returns the number of characters that are needed if the initial buffer size 
+      // was not big enough.
+      if ( (len = vsnprintf ( buff, len, msg, args )) > 100 ){
+        delete buff;
+        buff = new char[( len > BUFSIZ ? BUFSIZ : len )];
+
+        vsnprintf ( buff, len, msg, args );
+      }
 
       m = LEVELS[at]+ ": " + string (msg);
       userlog ( (char *)m.c_str());
+
+      delete buff ;
     }
   }
 }
