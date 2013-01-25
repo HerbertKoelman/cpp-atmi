@@ -1,6 +1,6 @@
 Author: Herbert Koelman  
-Date: 30/12/2012  
-Current version: v3.0
+Date: 25/1/2013  
+Current version: v3.1
  
 Tuxedo ATMI C++ wrapper
 ============
@@ -15,7 +15,7 @@ Project content
 ============
 
 ATMI++ comes as :
-* ```src``` directory which contains the source code. It is diveided into two subdirectories. One (```src/tuxedo```) whith the actual ATMI wrapper C++ code and a second with the usual utility classes.
+* ```src``` directory which contains the source code. It is divided into two subdirectories. One (```src/tuxedo```) whith the actual ATMI wrapper C++ code and a second with the usual utility classes.
 * ```samples``` directory which contains a directory ```samples/atmi++``` with sample client and server code. A directory ```samples/utl``` with sample code to illustrate how the utility classes can be used. Finally an ```samples/app``` directory that contains a sample Tuxedo DOMAIN setup.
 * ```include``` directory that contains everything you need to compile your code.
 * Makefile, autoconf and automake files are included (and soon an RPM build file)
