@@ -70,7 +70,7 @@ namespace atmi {
      * @param msg message to log
      * @param args substitution arguments of the message.
      */
-    virtual void print ( LoggingLevel at, const char *msg, va_list args){};
+    virtual void print ( LoggingLevel at, const char *msg, va_list args) = 0;
 
 
     string LEVELS[5];

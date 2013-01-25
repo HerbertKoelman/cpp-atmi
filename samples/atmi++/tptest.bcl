@@ -24,11 +24,11 @@ class TPtest : public AbstractClient, Thread {
     void run () {
 
       // StandardLogger logger ;
-      ULOGLogger logger (INFO) ;
-      logger.info ("\n\n");
+      ULOGLogger logger ;
       int ret = -1;
-      logger.info ("Starting client program tptest.");
-      logger.info ( "version: %s." , "Hello world");
+
+      logger.info ("%s is starting client program tptest.", "herbert");
+      logger.info ( "version: %s.", Tuxedo::version());
 
       try {
 
@@ -90,9 +90,9 @@ class TPtest : public AbstractClient, Thread {
 
         logger.info ( "Ending program." );
       } catch ( TuxedoException& terr ) {
-        logger.error ( terr.what () );
+        logger.error ( "Tuxedo err: %s " , terr.what () );
       } catch (BufferException berr ) {
-        logger.error ( berr.what() );
+        logger.error ( "Buffer error: %s",berr.what() );
       }
 
     };

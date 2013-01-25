@@ -30,21 +30,26 @@ namespace atmi {
     if ( msg == NULL )
       message = " error occured. Check ULOG.";
     else {
-      int len = 100;
-      char *buff = new char[len];
+      int len = 512;
+      char *buff = new char[len+1];
+      memset ( buff, 0, sizeof (buff) );
+      vsnprintf ( buff, len, msg, args );
 
       // vsnprintf returns the number of characters that are needed if the initial buffer size 
       // was not big enough.
-      if ( (len = vsnprintf ( buff, len, msg, args )) > 100 ){
-        delete buff;
-        buff = new char[(len > BUFSIZ ? BUFSIZ : len )];
+/* needs debugging
+      if ( (len = vsnprintf ( buff, len, msg, args )) > 50 ){
+        delete[] buff;
+        buff = new char[(len > BUFSIZ ? BUFSIZ : len +1 )];
+        memset ( buff, 0, ( len > BUFSIZ ? BUFSIZ : len  +1) );
 
         vsnprintf ( buff, len, msg, args );
       }
+*/
 
       message = buff;
 
-      delete buff;
+      delete[] buff;
     }
   }
 }

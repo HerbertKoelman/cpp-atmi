@@ -87,7 +87,7 @@ namespace atmi {
       this->fid = fid;
       this->focc = 0;
     } else {
-      throw BufferException ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32 and make sure you have read permission on the FML tables files.", fid );
+      throw BufferException ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", fid );
     }
   };
 

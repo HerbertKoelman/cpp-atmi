@@ -2,10 +2,10 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#include <ctime>
 #include <iostream>
 #include <cstdio>
-#include <stdarg.h>
+#include <cstring>
+#include <cstdarg>
 #include <userlog.h>
 #include <Logger.h>
 
@@ -24,23 +24,24 @@ namespace atmi {
 
     if ( get_log_level() <= at) {
 
-      string m;
-      int len = 50;
-      char *buff = new char[len];
+      int len = 512;
+      char *buff = NULL;
+      buff = new char[len];
+      if ( buff != NULL ){
+        memset ( buff, 0, sizeof (buff) );
 
-      // vsnprintf returns the number of characters that are needed if the initial buffer size 
-      // was not big enough.
-      if ( (len = vsnprintf ( buff, len, msg, args )) > 100 ){
-        delete buff;
-        buff = new char[( len > BUFSIZ ? BUFSIZ : len )];
+        // try to fit message into default buffer size
+        len = vsnprintf ( buff, len-1, msg, args );
+cout << "vsnprintf returned: " << msg << ". len : " << len << endl;
 
-        vsnprintf ( buff, len, msg, args );
+        string m = LEVELS[at]+ ": " + string (msg);
+cout << "print message : " << m << endl;
+        userlog ( (char *)m.c_str());
+cout << "done" << endl;
+
+        delete[] buff ;
+cout << "freed allocated memory..." << endl;
       }
-
-      m = LEVELS[at]+ ": " + string (msg);
-      userlog ( (char *)m.c_str());
-
-      delete buff ;
     }
   }
 }
