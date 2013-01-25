@@ -1,6 +1,6 @@
 Author: Herbert Koelman  
-Date: 30/12/2012  
-Current version: v3.0
+Date: 25/1/2013  
+Current version: v3.1
  
 Tuxedo ATMI C++ wrapper
 ============
@@ -67,5 +67,5 @@ Should be running :-)
  Boston, MA  02110-1301  USA
 
 -------------------------------------------------------------------
-Copyright (C) 2006 - herbert koelman
+Copyright (C) 2013 - herbert koelman
 
