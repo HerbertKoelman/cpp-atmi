@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <cstring>
 #include <stdarg.h>
 #include <cstdio>
 #include <Logger.h>
@@ -24,16 +25,21 @@ namespace atmi {
     pid = getpid();
   }
 
-  void StandardLogger::print ( LoggingLevel at, const char *msg, va_list args){
+  void StandardLogger::log ( LoggingLevel at, const char *msg, va_list args){
 
     char now [80]; // current date and time string
+    memset ( now, 0, sizeof (now));
 
     if ( get_log_level() <= at) {
       time_t tim;  //create variable of time_t
       time(&tim); //pass variable tim to time function
-
       strftime ( now, 80, "%Y-%m-%dT%H:%M:%S", localtime (&tim));
 
+      if ( at >= WARNING ){
+        cerr << now << "-" << ( id == NULL ? "ANONYMOUS" : id )  << "." << pid << "." << (unsigned int)pthread_self() << "-" << LEVELS[at] << ": ";
+        vfprintf (stderr, msg, args);
+        cerr << endl;
+      }
       cout << now << "-" << ( id == NULL ? "ANONYMOUS" : id )  << "." << pid << "." << (unsigned int)pthread_self() << "-" << LEVELS[at] << ": ";
       vfprintf (stdout, msg, args);
       cout << endl;

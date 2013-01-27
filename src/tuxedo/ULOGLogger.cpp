@@ -17,7 +17,7 @@ namespace atmi {
     set_log_level ( level );
   }
 
-  void ULOGLogger::print ( LoggingLevel at, const char *msg, va_list args){
+  void ULOGLogger::log ( LoggingLevel at, const char *msg, va_list args){
 
     if ( get_log_level() <= at) {
 

@@ -45,7 +45,7 @@ namespace atmi {
 
     va_list args;
     va_start (args, msg);
-    print ( ERROR, msg, args);
+    log ( ERROR, msg, args);
     va_end (args);
   }
 
@@ -57,7 +57,7 @@ namespace atmi {
   void Logger::warning ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
-    print (WARNING,  msg, args);
+    log (WARNING,  msg, args);
     va_end (args);
   }
 
@@ -69,7 +69,7 @@ namespace atmi {
   void Logger::info ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
-    print ( INFO, msg, args);
+    log ( INFO, msg, args);
     va_end (args);
   }
 
@@ -81,7 +81,7 @@ namespace atmi {
   void Logger::finer ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
-    print ( FINER, msg, args);
+    log ( FINER, msg, args);
     va_end (args);
   }
 
@@ -94,7 +94,7 @@ namespace atmi {
   void Logger::debug ( int indent, const char *msg, ...){
     va_list args;
     va_start (args, msg);
-    print ( DEBUG, msg, args);
+    log ( DEBUG, msg, args);
     va_end (args);
   }
 

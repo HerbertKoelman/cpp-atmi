@@ -82,17 +82,15 @@ namespace atmi {
     if ( rc < 0 ) {
       //  handleTperrno ( tperrno, "TPINIT failed. Is application started ? Check ULOG for more." );
       if (  tperrno == TPEPERM ) {
-        throw TuxedoException  ( tperrno, "TPINIT access to DOMAIN denied." );
+        throw TuxedoException  ( tperrno, "TPINIT access permission to DOMAIN denied. Check user and password." );
       }else{
         throw TuxedoException  ( tperrno, catgets ( catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );
       }
     } else {
-
       if ( tpgetctxt ( &context, 0 ) < 0 ) {
         context = 0;
         throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 34, "Context switch failed while calling tpgetctxt ( target context was %d )."), context );
       }
-
     }
 
   }

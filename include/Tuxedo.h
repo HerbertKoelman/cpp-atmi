@@ -23,6 +23,7 @@
 #ifndef __TUXEDO__
 #define __TUXEDO__
 
+#include <Logger.h>
 #include <typeinfo>
 #include <atmi.h>
 #include <fml32.h>
@@ -354,7 +355,6 @@ namespace atmi {
         return context;
       };
 
-    protected:
     private:
 
       /** Utility method that set's up a client instance.
@@ -363,6 +363,7 @@ namespace atmi {
 
       TPINIT *tpinfo;
       TPCONTEXT_T context;
+
 
   };
 
