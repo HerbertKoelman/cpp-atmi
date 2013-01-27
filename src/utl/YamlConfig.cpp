@@ -1,15 +1,16 @@
 #include <string>
+#include <cstdlib>
 #include <map>
 #include <iostream>
 #include <exception>
 #include <stdio.h>
-#include <YamlParser.h>
+#include <YamlConfig.h>
 
 using namespace std;
 
 namespace atmi {
 
-  YamlParser::YamlParser( const char *file ) throw (YamlException) {
+  YamlConfig::YamlConfig( const char *file ) throw (YamlException) {
     if ( f = fopen ( file, "r" )) {
 
       /* Initialize parser */
@@ -19,12 +20,15 @@ namespace atmi {
         /* Set input file */
         yaml_parser_set_input_file(&parser, f);
       }
+
+      parse();
+
     } else {
       throw YamlException ("Failed to open yaml file." );
     }
   }
 
-  YamlParser::~YamlParser(){
+  YamlConfig::~YamlConfig(){
 
     /* Cleanup */
     yaml_token_delete(&token);
@@ -32,7 +36,11 @@ namespace atmi {
     fclose (f);
   }
 
-  void YamlParser::parse ( string root ) {
+  void YamlConfig::parse () {
+    parse (".");
+  }
+
+  void YamlConfig::parse ( string root ) {
 
     string key;
     string value;
@@ -104,7 +112,7 @@ namespace atmi {
           break;
 
         default:
-          throw YamlParser ("Unexpected token value ?!" );
+          throw YamlConfig ("Unexpected token value ?!" );
       }
 
       last_token = token.type;
@@ -114,7 +122,47 @@ namespace atmi {
     } while( !done );
   }
 
-  const map<string,string> YamlParser::get_properties (){
+  void YamlConfig::print(){
+      for (map<string,string>::const_iterator iter = properties.begin(); iter != properties.end(); iter++)
+      {   
+          cout << "Key: " << iter->first << endl << "Values:" << iter->second << endl;
+      } 
+  }
+
+  string YamlConfig::get_string_property ( const string key ) {
+
+    string value ;
+    value = properties.at ( key );
+    return value ;
+  }
+
+  string YamlConfig::get_string_property ( const string key, string dvalue ) {
+
+    string value = dvalue ;
+    try {
+      value = properties.at ( key );
+    } catch ( ... ) {
+    }
+
+    return value ;
+  }
+
+  int YamlConfig::get_int_property ( const string key ) {
+
+    return atoi (properties.at ( key ).c_str());
+  }
+
+  int YamlConfig::get_int_property ( const string key, int dvalue ){
+    int value = dvalue ;;
+    try {
+      value = atoi (properties.at ( key ).c_str());
+    } catch ( ... ) {
+    }
+
+    return value ;
+  }
+
+  const map<string,string> YamlConfig::get_properties (){
     return properties;
   }
 }

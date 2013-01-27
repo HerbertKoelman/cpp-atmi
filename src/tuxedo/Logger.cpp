@@ -12,8 +12,16 @@ namespace atmi {
   }
 
   /** Set a new logging level
+   *  @param level level from which the logger starts to write messages
    */
   void Logger::set_log_level ( LoggingLevel level ){
+    this->level = level;
+  }
+
+  /** Set a new logging level
+   *  @param level level from which the logger starts to write messages
+   */
+  void Logger::set_log_level ( int level ){
     this->level = level;
   }
 

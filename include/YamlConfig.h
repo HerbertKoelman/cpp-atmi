@@ -53,15 +53,15 @@ namespace atmi {
    * @author herbert
    * @since v3.0
    */
-  class YamlParser {
+  class YamlConfig {
     public:
       /**
        * Create an instance ready to read the given YAML formatted file.
        *
        * @param file yaml formatted configuration file
        */
-      YamlParser ( const char *file ) throw (YamlException);
-      ~YamlParser();
+      YamlConfig ( const char *file ) throw (YamlException);
+      ~YamlConfig();
 
       /**
        * Build a map made of string key and values.
@@ -73,11 +73,62 @@ namespace atmi {
       void parse ( string root );
 
       /**
+       * Build a map made of string key and values.
+       *
+       * The key entries are forming a unique path to a value. Enumerated values for a key are seperated by a white spaces. When the parsing is done you can get the result through the get_properties method.
+       *
+       */
+      void parse ();
+
+      /**
+       * search the value for the given key. If not found the default value is returned instead.
+       *
+       * @param key map entry key
+       * @param dvalue value returned if key doesn't exist
+       * @return the string value of the key (or default if not found)
+       */
+      string get_string_property ( const string key, string dvalue ) ;
+
+      /**
+       * search the value for the given key. If not found an exception is returned
+       *
+       * @param key map entry key
+       * @return the string value of the key
+       * @trows out_of_range if the searched key was not found
+       */
+      string get_string_property ( const string key ) ;
+
+      /** 
+       * search the value for the given key. If not found the default value integer is retruned.
+       *
+       * if a value was found it is converted into an integer using atoi().
+       *
+       * @param key searched map entry key
+       * @param dvalue value returned if key doesn't exist
+       * @return the integer value of the key.
+       */
+      int get_int_property ( const string key, int dvalue );
+
+      /**
+       * search the value for the given key. If not found an exception is returned
+       *
+       * @param key map entry key
+       * @return the integer value of the key
+       * @trows out_of_range if the searched key was not found
+       */
+      int get_int_property ( const string key ) ;
+
+      /**
        * This map will contain the result of the parsing
        *
        * @return a map of key/value pairs
        */
       const map<string,string> get_properties ();
+
+      /**
+       * Print content on stdout
+       */
+      void print () ;
 
     private:
 

@@ -62,7 +62,7 @@
  *     - atmi::Barrier class: handles a point of synchronization (rendez-vous) among Threads
  *     - atmi::Mutex class: wrapper to POSIX Mutex handling functions.
  *     - atmi::Condition class: wrapper to POSIX Condition handling functions.
- *     - atmi::YamlParser: helps to parse YAML formatted conf file.
+ *     - atmi::YamlConfig: helps to parse YAML formatted conf file.
  *
  * @section setting_things_up Setting things up
  *

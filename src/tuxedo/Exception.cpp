@@ -1,11 +1,12 @@
-/* $Id: Exception.C 79 2007-08-18 17:30:26Z hkoelman $ */
 #include <iostream>
-using namespace std;
 
+#include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <atmi.h>
 #include <atmi++.h>
+
+using namespace std;
 
 namespace atmi {
 

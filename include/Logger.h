@@ -17,7 +17,8 @@ namespace atmi {
   };
 
   /** Interface og the logging facility 
-   *
+   * 
+   * Verbose is the DEBUG log level (level value 0) and least verbose is ERROR (level value 4).
    * Write messages that matches the current level value and above.
    */
   class Logger {
@@ -60,6 +61,8 @@ namespace atmi {
 
     void set_log_level ( LoggingLevel level );
 
+    void set_log_level ( int level );
+
     int get_log_level () ;
 
     protected:
@@ -70,7 +73,7 @@ namespace atmi {
      * @param msg message to log
      * @param args substitution arguments of the message.
      */
-    virtual void print ( LoggingLevel at, const char *msg, va_list args) = 0;
+    virtual void print ( LoggingLevel at, const char *msg, va_list args) {};
 
 
     string LEVELS[5];
@@ -118,8 +121,12 @@ namespace atmi {
       ULOGLogger ( LoggingLevel level = INFO );
 
     protected:
-      
+
       virtual void print ( LoggingLevel at, const char *msg, va_list args);
+
+    private:
+      
+      char buffer[1024];
   };
 
 }

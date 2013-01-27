@@ -1,11 +1,8 @@
 #include <sys/types.h>
-#include <pthread.h>
-#include <unistd.h>
-
 #include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <cstdarg>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include <userlog.h>
 #include <Logger.h>
 
@@ -24,24 +21,15 @@ namespace atmi {
 
     if ( get_log_level() <= at) {
 
-      int len = 512;
-      char *buff = NULL;
-      buff = new char[len];
-      if ( buff != NULL ){
-        memset ( buff, 0, sizeof (buff) );
+        memset ( buffer, 0, sizeof (buffer) );
 
-        // try to fit message into default buffer size
-        len = vsnprintf ( buff, len-1, msg, args );
-cout << "vsnprintf returned: " << msg << ". len : " << len << endl;
+        vsnprintf ( buffer, sizeof(buffer), msg, args );
+cout << "vsnprintf returned: " << msg << endl;
 
         string m = LEVELS[at]+ ": " + string (msg);
 cout << "print message : " << m << endl;
         userlog ( (char *)m.c_str());
 cout << "done" << endl;
-
-        delete[] buff ;
-cout << "freed allocated memory..." << endl;
-      }
     }
   }
 }
