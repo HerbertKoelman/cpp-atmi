@@ -37,7 +37,7 @@ namespace atmi {
   }
 
   void YamlConfig::parse () {
-    parse (".");
+    parse ("");
   }
 
   void YamlConfig::parse ( string root ) {
@@ -123,9 +123,10 @@ namespace atmi {
   }
 
   void YamlConfig::print(){
+      cout << "YamlConfig contains:" << endl;
       for (map<string,string>::const_iterator iter = properties.begin(); iter != properties.end(); iter++)
       {   
-          cout << "Key: " << iter->first << endl << "Values:" << iter->second << endl;
+          cout << "Key: <" << iter->first << ">:<" << iter->second << ">." << endl;
       } 
   }
 

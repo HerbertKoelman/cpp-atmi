@@ -19,6 +19,7 @@
 
 #include <string>
 #include <map>
+#include <memory>
 #include <exception>
 #include <yaml.h>
 
@@ -28,6 +29,9 @@ using namespace std;
 #define __CONFIG_PARSER__
 
 namespace atmi {
+
+  class YamlConfig;
+  typedef auto_ptr<YamlConfig> AYamlConfig;
 
   typedef enum yaml_node_types_e {
     YAML_NODE,
