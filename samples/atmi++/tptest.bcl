@@ -7,15 +7,14 @@
 #include <string>
 #include <cstring>
 #include <iostream>
-#include <Thread.h>
-#include <YamlParser.h>
+#include <YamlConfig.h>
 #include <Logger.h>
 #include <atmi++.h>
 
 using namespace std;
 using namespace atmi;
 
-class TPtest : public AbstractClient, Thread {
+class TPtest : public AbstractClient {
   public:
 
     TPtest () : AbstractClient ("tptest"){
@@ -104,10 +103,8 @@ int main ( int argc, char **argv ) {
 
   try {
     cout << "using lib ATMI++ " << Tuxedo::version() << endl;
-    YamlParser yp ("tuxedo.yml");
-    yp.parse("tptest");
-    map<string,string> p = yp.get_properties();
-    cout << "tptest.tuxconfig: " << p["tptest.tuxconfig"] << endl;
+    YamlConfig yc ("tuxedo.yml");
+    yc.print();
 
     TPtest tp;
     tp.run ();
