@@ -558,11 +558,11 @@ MAKEFLAGS=
 
 # Identity of this package.
 PACKAGE_NAME='atmi++'
-PACKAGE_TARNAME='https://github.com/HerbertKoelman/atmiplusplus'
+PACKAGE_TARNAME='atmi++-src-v3.2.tar.gz'
 PACKAGE_VERSION='v3.2'
 PACKAGE_STRING='atmi++ v3.2'
 PACKAGE_BUGREPORT='herbert.koelman@me.com'
-PACKAGE_URL=''
+PACKAGE_URL='https://github.com/HerbertKoelman/atmiplusplus'
 
 enable_option_checking=no
 ac_subst_vars='LTLIBOBJS
@@ -1230,7 +1230,7 @@ Fine tuning of the installation directories:
   --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
   --mandir=DIR            man documentation [DATAROOTDIR/man]
   --docdir=DIR            documentation root
-                          [DATAROOTDIR/doc/https://github.com/HerbertKoelman/atmiplusplus]
+                          [DATAROOTDIR/doc/atmi++-src-v3.2.tar.gz]
   --htmldir=DIR           html documentation [DOCDIR]
   --dvidir=DIR            dvi documentation [DOCDIR]
   --pdfdir=DIR            pdf documentation [DOCDIR]
@@ -1271,6 +1271,7 @@ Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
 
 Report bugs to <herbert.koelman@me.com>.
+atmi++ home page: <https://github.com/HerbertKoelman/atmiplusplus>.
 _ACEOF
 ac_status=$?
 fi
@@ -3691,7 +3692,8 @@ $config_files
 Configuration headers:
 $config_headers
 
-Report bugs to <herbert.koelman@me.com>."
+Report bugs to <herbert.koelman@me.com>.
+atmi++ home page: <https://github.com/HerbertKoelman/atmiplusplus>."
 
 _ACEOF
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
