@@ -82,7 +82,11 @@ namespace atmi {
   };
 
   void Field::setup ( FLDID32 fid){
-    fname = Fname32( fid );
+    if ( fid < 8191 ) {
+      fname = Fname( fid );
+    } else {
+      fname = Fname32( fid );
+    }
     if ( fname != NULL ) {
       this->fid = fid;
       this->focc = 0;
