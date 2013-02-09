@@ -6,10 +6,12 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <atmi.h>
 #include <fml32.h>
+#include <sys/timeb.h>
 
 #include <Concurrency.h>
 #include <atmi++.h>
@@ -223,7 +225,7 @@ namespace atmi {
   void Queue::set_reply_queue( const char *reply ) {
     if ( reply != NULL ) {
       qctl.flags = set ( qctl.flags, TPQREPLYQ );
-      strncpy(qctl.replyqueue, reply, TMQNAMELEN+1);
+      strncpy(qctl.replyqueue, reply, TMQNAMELEN);
     } else {
       qctl.flags = unset ( qctl.flags,  TPQREPLYQ );
     }
@@ -273,7 +275,22 @@ namespace atmi {
     }
   }
 
+  void Queue::set_new_corrid() {
+    // set correlation ID
+    ostringstream corrid;
+    timeb tb;
+    ftime(&tb);
+    corrid << getpid() << pthread_self() << (tb.millitm + (tb.time & 0xfffff) * 1000);
 
-/* operators -------------------------------------------------*/
+    memset ( qctl.corrid, 0, TMCORRIDLEN);
+    strncpy ( qctl.corrid, corrid.str().c_str(), (corrid.str().length() > TMCORRIDLEN ? TMCORRIDLEN : corrid.str().length()));
+    set ( qctl.flags, TPQCORRID | TPQGETBYCORRID);
+  }
+
+  void Queue::unset_corrid() {
+    unset ( qctl.flags, TPQCORRID | TPQGETBYCORRID);
+    memset ( qctl.corrid, 0, TMCORRIDLEN);
+  }
+
 
 } // namespace-end

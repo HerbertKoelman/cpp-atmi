@@ -614,7 +614,8 @@ namespace atmi {
 
       /** dequeue a reply message
        *
-       * Reply must have been set when Queue instance was created.
+       * Reply must have been set when Queue instance was created. If the flag TP TPQCORRID is set, then the correlation id value is used to
+       * retreive the message from the reply queue.
        *
        * @param data Tuxedo buffer (allocated with Tuxedo::allocate)
        * @param len length of the Tuxedo buffer
@@ -651,6 +652,8 @@ namespace atmi {
       /**
        * indicate in wich queue the replies should be posted.
        *
+       * When called, QCTL flag TPQREPLYQ is set and the queue name passed os copied into replyqueue. If passed a NULL pointer, then the TPQREPLYQ flags is unset.
+       *
        * @param q queue name
        */
       void set_reply_queue ( const char *q );
@@ -668,6 +671,7 @@ namespace atmi {
       inline void set_queue_space ( const char *qs) {
         this->qspace = const_cast<char *>(qs);
       };
+
       inline const char *get_queue_space () {
         return qspace;
       };
@@ -675,6 +679,7 @@ namespace atmi {
       inline void set_queue ( char *q) {
         this->queue = q;
       };
+
       inline const char *get_queue () {
         return queue;
       };
@@ -726,6 +731,18 @@ namespace atmi {
       inline int get_diagno () {
         return diagno;
       };
+
+      /** Calculate and set qctl corid
+       *
+       * Correlation ID is made of pid+threadid+<current time in milliseconds>. When the correlation is set the flags TPQGETBYCORRID and TPQCORRID are also set.
+       * This means that subsequent calls to dequeue methods will get only message with the correleation id that was last set.
+       */
+      void set_new_corrid();
+
+      /** Reset flags and value related to correlation id to off.
+       *
+       */
+      void unset_corrid();
 
     protected:
       int handleDiagnostics ( int _tperrno, int _diagno, const char *msg, ... );
