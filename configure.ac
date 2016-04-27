@@ -1,8 +1,10 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
-AC_INIT([atmi++],[v3.2],[herbert.koelman@me.com],[atmi++-src-v3.2.tar.gz],[https://github.com/HerbertKoelman/atmiplusplus])
+AC_PREREQ(2.69)
+#AC_INIT([atmi++],[v3.2],[herbert.koelman@me.com],[atmi++-src-v3.2.tar.gz],[https://github.com/HerbertKoelman/atmiplusplus])
+AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
+AC_LANG(C++)
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug],[sets #define _DEBUG_]),[AC_DEFINE_UNQUOTED(_DEBUG_,[1],[activate debug traces.])])
@@ -62,10 +64,9 @@ else
 fi
 
 AC_PROG_INSTALL
-AC_CONFIG_SUBDIRS(src/tuxedo)
-AC_CONFIG_SUBDIRS(src/utl)
-AC_CONFIG_SUBDIRS(samples/atmi++)
-# not ready to be released - AC_CONFIG_SUBDIRS(samples/utl)
+AC_CONFIG_SUBDIRS(src)
+#AC_CONFIG_SUBDIRS(src/utl)
+#AC_CONFIG_SUBDIRS(samples/atmi++)
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
