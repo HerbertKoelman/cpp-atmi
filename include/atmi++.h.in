@@ -91,7 +91,7 @@
 
 
 /* autoconf section ----------------------------------------------------------------------*/
-#undef ATMI_VERSION
+#undef CPP_ATMI_VERSION
 
 #undef _DEBUG_
 

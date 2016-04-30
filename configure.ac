@@ -1,25 +1,18 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
-AC_INIT([atmi++],[v3.2],[herbert.koelman@me.com],[atmi++-src-v3.2.tar.gz],[https://github.com/HerbertKoelman/atmiplusplus])
+AC_PREREQ(2.69)
+AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
+AC_LANG(C++)
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug],[sets #define _DEBUG_]),[AC_DEFINE_UNQUOTED(_DEBUG_,[1],[activate debug traces.])])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 AC_CONFIG_HEADERS([include/atmi++.h])
-AC_DEFINE_UNQUOTED(ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 AC_CHECK_PROG([RM],[rm],[rm -f])
 
-# Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create],[],[
-	 echo "missing dependency." 
-   exit -1])
-AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
-	 echo "missing dependency (check http://pyyaml.org/wiki/LibYAML)." 
-   exit -1])
-
+AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
@@ -62,10 +55,9 @@ else
 fi
 
 AC_PROG_INSTALL
-AC_CONFIG_SUBDIRS(src/tuxedo)
-AC_CONFIG_SUBDIRS(src/utl)
-AC_CONFIG_SUBDIRS(samples/atmi++)
-# not ready to be released - AC_CONFIG_SUBDIRS(samples/utl)
+AC_CONFIG_SUBDIRS(src)
+#AC_CONFIG_SUBDIRS(src/utl)
+#AC_CONFIG_SUBDIRS(samples/atmi++)
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

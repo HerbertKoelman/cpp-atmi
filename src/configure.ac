@@ -1,11 +1,16 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.63)
-AC_INIT([atmi++],[3.0],[herbert.koelman@labanquepostale.fr])
+AC_PREREQ(2.69)
+AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
+AC_CONFIG_HEADERS([../include/atmi++.h])
+
+AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
+
 AC_CONFIG_SRCDIR([Tuxedo.cpp])
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
+
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
 
@@ -15,23 +20,14 @@ AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AC_PROG_CXX
 AC_CHECK_PROG([AR],[ar],[ar -rv])
-AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../../crust.cfg])
+AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../crust.cfg])
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create],[],[
-  echo "you need libpthread, please check your distrib"
-  exit -1])
-
-AC_CHECK_LIB([yaml], [yaml_parser_initialize],[],[
-  echo "you need libyaml, please check your distrib or you may try yum install libyaml-devel"
-  exit -1])
-
-# Checks for libraries.
-AC_CHECK_LIB([pthread], [pthread_create])
+AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
 
 # Setting things up for ATMI builds
-CFLAGS="$CFLAGS -I../../include"
+CFLAGS="$CFLAGS -I../include"
 
 if test -n "$TUXDIR"
 then
@@ -74,24 +70,6 @@ fi
 
 # Checks for typedefs, structures, and compiler characteristics.
 #AC_HEADER_STDBOOL
-
-AC_MSG_CHECKING([whether target directory ../../lib exists])
-if test -e ../../lib
-then
-	AC_MSG_RESULT([already there.])
-else
-  mkdir -p ../../lib
-	AC_MSG_RESULT([../../lib created.])
-fi
-
-AC_MSG_CHECKING([whether wording directory ../../locale exists])
-if test -e ../../locale 
-then
-	AC_MSG_RESULT([already there.])
-else
-  mkdir -p ../../locale/en_US ../../locale/fr_FR
-	AC_MSG_RESULT([../../locale created.])
-fi
 
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
