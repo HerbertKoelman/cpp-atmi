@@ -12,37 +12,33 @@ DOXYGEN=@DOXYGEN@
 BEAUTIFIER=@BEAUTIFIER@ --no-backup -l CPP --replace -c ./crust.cfg {} \;
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
-all: atmi++ utl
+all: atmi++ 
 
 demos:
 	cd samples/atmi++ ; $(MAKE) globber all clean
 #	cd samples/utl ; $(MAKE) globber all clean
 
 atmi++:
-	cd src/tuxedo ; $(MAKE) globber all clean
-
-utl:
-	cd src/utl ; $(MAKE) globber all clean
+	cd src ; $(MAKE) globber all clean
 
 pkg:
 	tar cf - include lib man html samples | gzip > ${PACKAGE}
 
+clean: globber
+
 globber:
 	${RM} -R html man autom4te.cache
 	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
-	cd src/tuxedo ;$(MAKE) globber
-	cd src/utl ;$(MAKE) globber
+	cd src ;$(MAKE) globber
 
 doxygen:
 	${DOXYGEN} doxyconf
 
 beautifull:
 	cd src/tuxedo ;$(MAKE) beautifull
-	cd src/utl ;$(MAKE) beautifull
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
-	${INSTALL} lib/libatmiutl++.a ${prefix}/lib/libatmiutl++.a
 	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a
 	${INSTALL} lib/libfml++.a ${prefix}/lib/libfml++.a
 	${INSTALL} -d ${LOCALEDIR}/en_US ${LOCALEDIR}/fr_FR
@@ -54,7 +50,6 @@ install:
 
 uninstall:
 	${RM} ${prefix}/lib/libatmi++.a
-	${RM} ${prefix}/lib/libatmiutl++.a
 	${RM} ${prefix}/lib/libcltatmi++.a
 	${RM} ${prefix}/lib/libfml++.a
 	${RM} ${LOCALEDIR}/en_US/atmi++.cat

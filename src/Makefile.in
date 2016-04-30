@@ -1,6 +1,6 @@
 # @PACKAGE_NAME@ @PACKAGE_VERSION@
 # 
-# First created by: hkoelman (herbert.koelman@urbix.fr)
+# First created by: herbert koelman (herbert.koelman@me.com)
 #
 # Template Makefile.in used to generate Makfile. This is done by running the command 
 # configure.
@@ -9,7 +9,7 @@
 .SUFFIXES: .V .v .cpp
 prefix=@builddir@
 
-BASEDIR=../../
+BASEDIR=../
 UDATAOBJ=$(BASEDIR)/udataobj/
 BINDIR=$(BASEDIR)/bin/
 APPDIR=$(BASEDIR)/app/

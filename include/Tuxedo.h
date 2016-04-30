@@ -223,7 +223,7 @@ namespace atmi {
 
       /** @return ATMI++ version number */
       static inline const char *version () {
-        return ATMI_VERSION;
+        return CPP_ATMI_VERSION;
       };
 
       static const long FAILED = -1;
