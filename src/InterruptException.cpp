@@ -3,7 +3,7 @@
  */
 
 #include <stdarg.h>
-#include <atmi++.h>
+#include <atmi/atmi++.h>
 
 namespace atmi {
 

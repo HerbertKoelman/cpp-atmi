@@ -6,7 +6,7 @@
 
 #include <unistd.h>
 #include <iostream>
-#include <atmi++.h>
+#include <atmi/atmi++.h>
 
 #include <string.h>
 

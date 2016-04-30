@@ -8,7 +8,7 @@
 #include <atmi.h>
 #include <string>
 #include <nl_types.h>
-#include <atmi++.h>
+#include <atmi/atmi++.h>
 
 #define CATD_ATMI_SET 100
 
