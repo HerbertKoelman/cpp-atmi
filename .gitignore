@@ -27,6 +27,10 @@ autom4te.cache
 *ULOG*
 
 # misc and project created files
+doc
+doxyfile
+atmi++.cpp
+config.h
 locale
 html
 man

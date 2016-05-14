@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.69)
 AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
-AC_CONFIG_HEADERS([../include/atmi++.h])
+AC_CONFIG_HEADERS([../include/atmi/config.h])
 
 AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
 
@@ -82,6 +82,6 @@ case "$CXX" in
   AC_MSG_RESULT(none found.)
 esac
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([atmi++.cpp Makefile])
 AC_OUTPUT
 

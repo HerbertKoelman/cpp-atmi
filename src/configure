@@ -2079,7 +2079,7 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
-ac_config_headers="$ac_config_headers ../include/atmi++.h"
+ac_config_headers="$ac_config_headers ../include/atmi/config.h"
 
 
 
@@ -4429,7 +4429,7 @@ $as_echo "-O5 -qmaxmem=-1 -qsmp." >&6; }
 $as_echo "none found." >&6; }
 esac
 
-ac_config_files="$ac_config_files Makefile"
+ac_config_files="$ac_config_files atmi++.cpp Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5121,7 +5121,8 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
-    "../include/atmi++.h") CONFIG_HEADERS="$CONFIG_HEADERS ../include/atmi++.h" ;;
+    "../include/atmi/config.h") CONFIG_HEADERS="$CONFIG_HEADERS ../include/atmi/config.h" ;;
+    "atmi++.cpp") CONFIG_FILES="$CONFIG_FILES atmi++.cpp" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

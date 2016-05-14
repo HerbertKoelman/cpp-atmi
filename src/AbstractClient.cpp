@@ -22,7 +22,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <atmi++.h>
+#include <atmi/atmi++.hpp>
 
 using namespace std;
 

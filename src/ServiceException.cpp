@@ -10,7 +10,7 @@ using namespace std;
 #include <stdio.h>
 #include <atmi.h>
 
-#include <atmi++.h>
+#include <atmi/atmi++.hpp>
 
 namespace atmi {
 

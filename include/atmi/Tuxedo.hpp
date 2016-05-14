@@ -23,7 +23,9 @@
 #ifndef __TUXEDO__
 #define __TUXEDO__
 
-#include <Logger.h>
+#include <atmi/config.h>
+#include <atmi/Logger.hpp>
+
 #include <typeinfo>
 #include <atmi.h>
 #include <fml32.h>
@@ -43,10 +45,9 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
-        #ifndef __BUFFERS__
+#ifndef __BUFFERS__
   class Buffer;
-        #endif
-
+#endif
 
   class Tp;
   class Queue;
@@ -54,11 +55,11 @@ namespace atmi {
   typedef auto_ptr<Tp> ATp;
   typedef auto_ptr<Queue> AQueue;
 
-/**
- * All common used ATMI method are group in this class.
- *
- * @author Herbert Koelman
- */
+  /**
+   * All common used ATMI method are group in this class.
+   *
+   * @author Herbert Koelman
+   */
   class Tuxedo {
     public:
       Tuxedo ();

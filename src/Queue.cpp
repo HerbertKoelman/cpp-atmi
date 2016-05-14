@@ -13,8 +13,8 @@
 #include <fml32.h>
 #include <sys/timeb.h>
 
-#include <Concurrency.h>
-#include <atmi++.h>
+// #include <atmi/Concurrency.h>
+#include <atmi/atmi++.hpp>
 
 using namespace std;
 

@@ -28,7 +28,7 @@ using namespace std;
 
 #include <string>
 
-#include <atmi++.h>
+#include <atmi/atmi++.hpp>
 
 namespace atmi {
 

@@ -1,53 +1,61 @@
-Author: Herbert Koelman  
-Date: 25/1/2013  
-Current version: v3.1
- 
-Tuxedo ATMI C++ wrapper
-============
+@section what_it_does What it does
 
-Tuxedo (Transactions for Unix, Extended for Distributed Operations) is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
+ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction 
+management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling
+functions; service interface functions; and buffer management functions for distributed application communication.
 
-ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
+ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. 
+This should help making it easier to write fast and rock solid Tuxedo software.
 
-ATMI++ is a C++ wrapping of this API, adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
+This project is currently hosted <a href="http://herbertkoelman.github.com/atmiplusplus">here</a>.
 
-Project content
-============
+@section what_it_implements What it implements
 
-ATMI++ comes as :
-* ```src``` directory which contains the source code. It is divided into two subdirectories. One (```src/tuxedo```) whith the actual ATMI wrapper C++ code and a second with the usual utility classes.
-* ```samples``` directory which contains a directory ```samples/atmi++``` with sample client and server code. A directory ```samples/utl``` with sample code to illustrate how the utility classes can be used. Finally an ```samples/app``` directory that contains a sample Tuxedo DOMAIN setup.
-* ```include``` directory that contains everything you need to compile your code.
-* Makefile, autoconf and automake files are included (and soon an RPM build file)
+The ATMI++ comes as the following list of libraries:
+ - atmi++.a : set of classes to handle ATMI calls in C++ programs
+    - atmi::Tuxedo class : base class offers access to common function (like memory allocation).
+    - atmi::Tp class: extends Tuxedo class with calls dedicated to transaction processing
+    - atmi::Queue class : extends Tuxedo class with calls dedicated to queuing operations.
+    - atmi::Event class : extends Tuxedo class with calls dedicated to notifying and broadcasting operations.
+    - atmi::AbstractClient class : utility class that helps writting Tuxedo client programs.
+    - atmi::TuxedoException class : extends Tuxedo class with calls dedicated to notifying and broadcasting operations.
+    - atmi::Logger class : implements a simple mechanism to write messages at a given logging level (see also atmi::StandardLogger and atmi::ULOGLogger).
 
-The building of the libraries is based upon automake and autoconf functionalities. So to setup ATMI++ you can follow the next steps:
-```
-$ configure
-$ make
-$ make demos
-```
+ - fml++.a : set of classes to handle Fielded Buffers (FML) calls in C++ programs
+    - atmi::Buffer class : Handle field buffer memory.
+    - atmi::Field class: base class to manipulate Fields. This is an virtual pure class.
+    - atmi::TField < > class templates : 
 
-This should get you started. At least on ```Fedora FC17``` and AIX 5.3 or later. When build was successfully you should end up with a ```locale``` directory which contains the message catalogues (currently French and English). If needed you can build the usage documentation this way:
-```
-$ make doxygen
-```
+ - atmiutl++.a : set of helper classes to handle concurrency and multithreading
+    - atmi::Thread class: wrapper of the POSIX Threading library
+    - atmi::ThreadPool class: pre-allocated Threads
+    - atmi::Pipe class: coordonated way to pass messages among Threads
+    - atmi::Barrier class: handles a point of synchronization (rendez-vous) among Threads
+    - atmi::Mutex class: wrapper to POSIX Mutex handling functions.
+    - atmi::Condition class: wrapper to POSIX Condition handling functions.
+    - atmi::YamlConfig: helps to parse YAML formatted conf file.
 
-This creates an ```html``` and ```man``` directory.
+@section setting_things_up Setting things up
 
-It is also possible to deploy the library onto your system using de install/uninstall make targets.
+    $ configure
+    $ make
 
-Samples
-===========
+The library comes with sample code that are gathered into the samples directory. You can build them using 
 
-The samples directory contains a set of sample programs to illustrate how this is meant to be used. The directory samples/apphelps you setup a Tuxedo server (DOMAIN) to run the sample server implementations. To get things setup and running:
-```
-$ make demos
-$ cd samples/app
-$ . ./setup_app
-$ . ./deploy_app
-```
+    $ make demos
 
-Should be running :-)
+This documentation is obtained :
+
+    $ make doxygen
+
+Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com">here</a>
+
+@section depends_on Dependencies
+
+The project depends on :
+- libyaml available <a href="http://pyyaml.org/wiki/LibYAML">here</a> 
+
+
 
 -------------------------------------------------------------------
 

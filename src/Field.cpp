@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-#include <atmi++.h>
+#include <atmi/atmi++.hpp>
 
 using namespace std;
 
