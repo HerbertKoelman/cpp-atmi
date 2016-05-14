@@ -10,7 +10,7 @@
 #include <string>
 #include <atmi.h>
 #include <fml32.h>
-#include <atmi/atmi++.h>
+#include <atmi/atmi++.hpp>
 
 using namespace std;
 

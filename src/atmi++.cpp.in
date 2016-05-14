@@ -9,8 +9,8 @@
 #ifndef atmi_atmi_hpp
 #define atmi_atmi_hpp
 
-#include "atmi++/atmi++.hpp"
-#include "atmi++/config.h"
+#include "atmi/atmi++.hpp"
+#include "atmi/config.h"
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT

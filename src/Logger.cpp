@@ -1,6 +1,6 @@
 #include <stdarg.h>
 #include <string>
-#include <atmi/Logger.h>
+#include <atmi/Logger.hpp>
 
 namespace atmi {
 

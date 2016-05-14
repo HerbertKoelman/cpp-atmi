@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <atmi.h>
-#include <atmi/atmi++.h>
+#include <atmi/atmi++.hpp>
 
 using namespace std;
 
