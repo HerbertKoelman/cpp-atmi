@@ -54,7 +54,7 @@ namespace atmi {
       if ( tuxconfig != NULL ) {
         tpinfo->flags = TPMULTICONTEXTS;
         if ( tuxputenv(const_cast<char *>(tuxconfig)) != 0 ) {
-          throw Exception ("failed to put env varaible %s", tuxconfig );
+          throw atmi_exception ("failed to put env varaible %s", tuxconfig );
         }
       }
 

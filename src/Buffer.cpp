@@ -50,7 +50,7 @@ namespace atmi {
 
     char type[MAXTIDENT+1];
     if ( tptypes ((char *) buffer, type, NULL ) == -1 ) {
-      throw Exception ( tpstrerror(tperrno));
+      throw atmi_exception ( tpstrerror(tperrno));
     }
 
     return (strncmp ( FMLTYPE32, type, 8) == 0 );
@@ -59,7 +59,7 @@ namespace atmi {
   Field *Buffer::set ( Field *f ){
 
     if ( f == NULL ) {
-      throw Exception ("Setting a NULL field !!??");
+      throw atmi_exception ("Setting a NULL field !!??");
     } else {
       f->set ( this );
     }
@@ -73,7 +73,7 @@ namespace atmi {
   Field *Buffer::add ( Field *f ){
 
     if ( f == NULL ) {
-      throw Exception ("Adding a NULL field !!??");
+      throw atmi_exception ("Adding a NULL field !!??");
     } else {
       f->add ( this );
     }
@@ -99,7 +99,7 @@ namespace atmi {
 
   Field *Buffer::append ( Field *f ){
 
-    throw Exception ( "Method append is not implemented yat !!??;" );
+    throw atmi_exception ( "Method append is not implemented yat !!??;" );
     return NULL;
   }
 
@@ -112,7 +112,7 @@ namespace atmi {
     if ( f != NULL ) {
       f->remove ( this );
     }else {
-      throw Exception ( "Remove failed. You passed a NULL pointer as field !!" );
+      throw atmi_exception ( "Remove failed. You passed a NULL pointer as field !!" );
     }
   }
 
@@ -125,7 +125,7 @@ namespace atmi {
     if ( f != NULL ) {
       f->get( this, occ );
     } else {
-      throw Exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
+      throw atmi_exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
     }
     return f;
   };
@@ -139,7 +139,7 @@ namespace atmi {
     if ( f != NULL ) {
       f->get( this );
     } else {
-      throw Exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
+      throw atmi_exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
     }
     return f;
   };
@@ -225,7 +225,7 @@ namespace atmi {
    * The buffer instance is then flagged as not allocated. Meaning that it's up to you to free the memory that was allocated.
    *
    * @param b reference of an FML buffer.
-   * @throws Exception if the buffer is not an FML buffer.
+   * @throws atmi_exception if the buffer is not an FML buffer.
    */
   void Buffer::set_buffer ( FBFR32 *b ) {
 
@@ -234,7 +234,7 @@ namespace atmi {
       buffer = b;
 
     } else {
-      throw Exception ( "This buffer reference is not of type FMLTYPE32." );
+      throw atmi_exception ( "This buffer reference is not of type FMLTYPE32." );
     }
 
     /* moved into static method is_fml32_buffer
@@ -246,7 +246,7 @@ namespace atmi {
         buffer = b;
 
        } else {
-        throw Exception ( "This buffer reference is not of type FMLTYPE32." );
+        throw atmi_exception ( "This buffer reference is not of type FMLTYPE32." );
        }
        }else {
 

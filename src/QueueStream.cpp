@@ -25,7 +25,7 @@ namespace atmi {
     buff_size = bs;
     encodeBase64( false );
     if ( queue == NULL ) {
-      throw Exception ( "QueueStream needs a queue to by initialized. Passed queue was NULL." );
+      throw atmi_exception ( "QueueStream needs a queue to by initialized. Passed queue was NULL." );
     }
 
     this->queue = queue;

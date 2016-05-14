@@ -1,24 +1,24 @@
 /*
-   $Id: Exceptions.h 79 2007-08-18 17:30:26Z hkoelman $
+   $Id: atmi_exceptions.h 79 2007-08-18 17:30:26Z hkoelman $
  */
 
 /*
- * Exceptions
+ * atmi_exceptions
  *
  * Copyright (C) 2006 - herbert koelman
  *
- * Exceptions is free software; you can redistribute it and/or modify
+ * atmi_exceptions is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Exceptions is distributed in the hope that it will be useful,
+ * atmi_exceptions is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Exceptions; if not, write to the Free Software
+ * along with atmi_exceptions; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301  USA
  */
@@ -45,15 +45,14 @@ namespace atmi {
  *
  * Can be used to throw any kind of error message in a consitent way.
  */
-  class Exception : public exception {
+  class atmi_exception : public exception {
     public:
       /** create a new instance
        *
        * @param msg error message
        */
-      Exception ( const char *msg = NULL, ... ) throw ();
-      virtual ~Exception () throw () {
-      };
+      atmi_exception ( const char *msg = NULL, ... ) throw ();
+      virtual ~atmi_exception () throw () { };
 
       /**
        * @return user friendly text message
@@ -71,14 +70,14 @@ namespace atmi {
       string message;
   };
 
-/****************************************************************************
-*
-* Unix related exceptions
-*
-****************************************************************************/
-  class UnixException : public Exception {
+  /** Unix related exceptions.
+   *
+   * This exception can be used to return a system error.
+   */
+  class unix_exception : public atmi_exception {
     public:
-      UnixException ( int err, const char *msg = NULL, ... ) throw ();
+      unix_exception ( int err, const char *msg = NULL, ... ) throw ();
+      unix_exception ( const char *msg, ... ) throw () ;
 
       /**
        * @return user friendly text message
@@ -95,7 +94,7 @@ namespace atmi {
 * Tuxedo FML related exceptions
 *
 ****************************************************************************/
-  class BufferException : public Exception {
+  class BufferException : public atmi_exception {
     public:
       BufferException ( int err, const char *msg = NULL, ... ) throw ();
 
@@ -129,7 +128,7 @@ namespace atmi {
 *
 ****************************************************************************/
 
-  class TuxedoException : public Exception {
+  class TuxedoException : public atmi_exception {
     public:
       /**
        * Base class of Tuxedo exceptions.

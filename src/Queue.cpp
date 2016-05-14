@@ -24,7 +24,7 @@ namespace atmi {
 
     /* Too restrictive
        if ( qspace == NULL || queue == NULL ) {
-            throw Exception ( "Invalid values for qspace or queue parameter" );
+            throw atmi_exception ( "Invalid values for qspace or queue parameter" );
        }
      */
 
@@ -67,7 +67,7 @@ namespace atmi {
 
     if ( qspace == NULL || queue == NULL ) {
 
-      throw Exception ( catgets ( catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
     }
 
     // check if we need to switch context
@@ -107,7 +107,7 @@ namespace atmi {
     int rc = -1;
 
     if ( qctl.replyqueue == NULL ) {
-      throw Exception ( catgets ( catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
     }
 
     rc = dequeue ( qctl.replyqueue, data, len );
@@ -125,7 +125,7 @@ namespace atmi {
     int rc = -1;
 
     if ( qctl.replyqueue == NULL ) {
-      throw Exception ( catgets ( catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
     }
 
     rc = enqueue ( qctl.replyqueue, data, len );
@@ -139,7 +139,7 @@ namespace atmi {
 
     if ( qspace == NULL || queue == NULL ) {
 
-      throw Exception ( catgets ( catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
     }
 
     // check if we need to switch context
@@ -271,7 +271,7 @@ namespace atmi {
         break;
 
       default:
-        throw Exception (catgets ( catd, CATD_ATMI_SET, 23, "Unsupported QoS (%d) for /Q operations."), qos);
+        throw atmi_exception (catgets ( catd, CATD_ATMI_SET, 23, "Unsupported QoS (%d) for /Q operations."), qos);
     }
   }
 

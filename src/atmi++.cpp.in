@@ -27,7 +27,7 @@ namespace atmi {
 
   extern "C" const char *cpp_atmi_version(){
 #ifndef CPP_ATMI_VERSION
-    return "missing CPP_PTHREAD_VERSION define. Re-run configure" ;
+    return "missing CPP_ATMI_VERSION define. Re-run configure" ;
 #else
     return CPP_ATMI_VERSION ;
 #endif

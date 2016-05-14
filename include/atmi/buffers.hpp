@@ -86,7 +86,7 @@ namespace atmi {
 
       /**
        * @return true if it's a FMLTYPE32 buffer type
-       * @throw Exception if we failed to get buffer type (tptypes)
+       * @throw atmi_exception if we failed to get buffer type (tptypes)
        */
       static inline bool is_fml32_buffer( char *buffer );
 
@@ -360,9 +360,9 @@ namespace atmi {
         setup ( fid );
         // check type matching
         if ( type() > 5 ) {
-          throw Exception ( "This template doesn't support the given type TField<%s>.", tname ());
+          throw atmi_exception ( "This template doesn't support the given type TField<%s>.", tname ());
         } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
-          throw Exception ( "TField %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
+          throw atmi_exception ( "TField %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
         }
       }
 
@@ -378,7 +378,7 @@ namespace atmi {
 
         // check type matching
         if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
-          throw Exception ( "TField value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), name());
+          throw atmi_exception ( "TField value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), name());
         }
       }
 
@@ -439,7 +439,7 @@ namespace atmi {
             b->extend ();
           }
         } catch ( BufferException buffErr ) {
-          throw  Exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
+          throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
         };
 
         rc = Fadd32 ( b->get_buffer(), id(), (char *) &value, length() );
@@ -495,7 +495,7 @@ namespace atmi {
 
         // check taht we have a string declaration in the FML table
         if ( type () != 5 ) {
-          throw Exception ( "TField %s's value is of type string and the FML table decalares a type %s.", name (), tname());
+          throw atmi_exception ( "TField %s's value is of type string and the FML table decalares a type %s.", name (), tname());
         }
       }
 
@@ -511,7 +511,7 @@ namespace atmi {
 
         // check type matching
         if ( type() !=5 ) {
-          throw Exception ( "TField value is of type string and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "TField value is of type string and the FML table decalares a type %s for %s.", tname(), name());
         }
       }
 
@@ -704,7 +704,7 @@ namespace atmi {
               b->extend ();
             }
           } catch ( BufferException buffErr ) {
-            throw  Exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
+            throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
           rc = Fadd32 ( b->get_buffer(), id(), (char *) value.c_str(), length() );
@@ -714,7 +714,7 @@ namespace atmi {
             setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
         } else {
-          throw Exception ("Field %s's value is empty !!?? Cannot add an empty field value.", name ());
+          throw atmi_exception ("Field %s's value is empty !!?? Cannot add an empty field value.", name ());
         }
 
         return rc;
@@ -768,7 +768,7 @@ namespace atmi {
 
         // check taht we have a string declaration in the FML table
         if ( type () != 6 ) {
-          throw Exception ( "TField %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
+          throw atmi_exception ( "TField %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
         }
       }
 
@@ -784,7 +784,7 @@ namespace atmi {
 
         // check type matching
         if ( type() != 6 ) {
-          throw Exception ( "TField value is of type carray and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "TField value is of type carray and the FML table decalares a type %s for %s.", tname(), name());
         }
       }
 
@@ -866,7 +866,7 @@ namespace atmi {
               b->extend ();
             }
           } catch ( BufferException buffErr ) {
-            throw  Exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
+            throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
           rc  = Fadd32 ( b->get_buffer(), id(), value, length() );
@@ -877,7 +877,7 @@ namespace atmi {
           }
 
         } else {
-          throw Exception ( "Field %s's value is empty !!?? Cannot add an empty field value.", name () );
+          throw atmi_exception ( "Field %s's value is empty !!?? Cannot add an empty field value.", name () );
         }
 
         return rc;

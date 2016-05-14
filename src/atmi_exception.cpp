@@ -10,12 +10,12 @@ using namespace std;
 
 namespace atmi {
 
-  const char *Exception::what() throw () {
+  const char *atmi_exception::what() throw () {
 
     return message.c_str();
   }
 
-  Exception::Exception ( const char *msg, ... ) throw () {
+  atmi_exception::atmi_exception ( const char *msg, ... ) throw () {
 
     if ( msg != NULL ) {
       va_list ap;
@@ -26,7 +26,7 @@ namespace atmi {
     }
   }
 
-  void Exception::setup_message ( const char *msg, va_list args ) {
+  void atmi_exception::setup_message ( const char *msg, va_list args ) {
 
     if ( msg == NULL )
       message = " error occured. Check ULOG.";
