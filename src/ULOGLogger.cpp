@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <userlog.h>
-#include <atmi/Logger.hpp>
+#include <atmi/logger.hpp>
 
 using namespace std ;
 

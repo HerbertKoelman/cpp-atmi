@@ -24,7 +24,7 @@
 #define __TUXEDO__
 
 #include <atmi/config.h>
-#include <atmi/Logger.hpp>
+#include <atmi/logger.hpp>
 
 #include <typeinfo>
 #include <atmi.h>

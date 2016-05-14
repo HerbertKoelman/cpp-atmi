@@ -28,9 +28,10 @@
 #include <signal.h>
 #include <Usignal.h>
 
-#include <atmi/Exceptions.hpp>
-#include <atmi/Tuxedo.hpp>
-#include <atmi/Buffers.hpp>
+#include <atmi/exceptions.hpp>
+#include <atmi/logger.hpp>
+#include <atmi/tuxedo.hpp>
+#include <atmi/buffers.hpp>
 #include <atmi/config.h>
 
 #endif

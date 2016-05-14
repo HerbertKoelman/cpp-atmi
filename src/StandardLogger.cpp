@@ -7,7 +7,7 @@
 #include <cstring>
 #include <stdarg.h>
 #include <cstdio>
-#include <atmi/Logger.hpp>
+#include <atmi/logger.hpp>
 
 using namespace std;
 
