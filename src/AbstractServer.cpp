@@ -33,19 +33,19 @@ using namespace std;
 namespace atmi {
 
   AbstractServer::AbstractServer () {
-    if ( tpopen () == -1 ) throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 1, "Call to tpopen() failed.") );
+    if ( tpopen () == -1 ) throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 1, "Call to tpopen() failed.") );
   };
 
   AbstractServer::~AbstractServer () {
-    if ( tpclose () == -1 ) throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 2, "Call to tpclose() failed.a") );
+    if ( tpclose () == -1 ) throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 2, "Call to tpclose() failed.a") );
   };
 
   void AbstractServer::tpsvrthrdone( void ) {
-    if ( tpclose () == -1 ) throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 3, "Thread done call to tpclose() failed.") );
+    if ( tpclose () == -1 ) throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 3, "Thread done call to tpclose() failed.") );
   }
 
   int AbstractServer::tpsvrthrinit( int argc, char **argv ) {
-    if ( tpopen () == -1 ) throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 4, "Thread init call to tpopen() failed.") );
+    if ( tpopen () == -1 ) throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 4, "Thread init call to tpopen() failed.") );
 
     return -1;
   }

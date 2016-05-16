@@ -39,17 +39,15 @@ CCFLAGS=@CXXFLAGS@
 LDFLAGS=@LDFLAGS@ @LIBS@
 
 # Header files
-HEADERS=$(INCDIR)/Tuxedo.h $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+HEADERS=$(INCDIR)/tuxedo.hpp $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=Event.o Tp.o Queue.o QueueStream.o Tuxedo.o Exception.o AbstractServer.o TuxedoException.o InterruptException.o \
-		 BlockingException.o TimeoutException.o ServiceException.o DiagnosticException.o NomsgException.o \
-		 AbortedException.o Logger.o StandardLogger.o ULOGLogger.o atmi++.o
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o AbstractServer.o logger.o standard_logger.o ulog_logger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
-ATMI_CLT_OBJS=AbstractClient.o ${ATMI_SRV_OBJS}
+ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
 
-BUFF_OBJS=Buffer.o Field.o BufferException.o
+BUFF_OBJS=buffer.o field.o exceptions.o
 
 all: libatmi++.a libfml++.a libcltatmi++.a gencat
 
@@ -69,19 +67,19 @@ globber:
 	$(RM) $(ATMI_CLT_OBJS) $(BUFF_OBJS) core $(LIBDIR)/libfml++.a $(LIBDIR)/libatmi++.a  $(LIBDIR)/libcltatmi++.a ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
-libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/Tuxedo.h $(INCDIR)/Exceptions.h
+libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(ATMI_CLT_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/Tuxedo.h $(INCDIR)/Exceptions.h
+libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libfml++.a: $(BUFF_OBJS) $(INCDIR)/Buffers.h $(INCDIR)/Exceptions.h
+libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/Tuxedo.h $(INCDIR)/Exceptions.h
+libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${CXX} -G -bnoentry -bexpall -bM:SRE -o $@ $(ATMI_CLT_OBJS)
 	${AR} libatmi++.a $@
 

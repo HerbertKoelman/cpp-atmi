@@ -1,33 +1,33 @@
 #include <stdarg.h>
 #include <string>
-#include <atmi/Logger.hpp>
+#include <atmi/logger.hpp>
 
 namespace atmi {
 
 
   /** @return current logging level
    */
-  int Logger::get_log_level () {
+  int logger::get_log_level () {
     return level;
   }
 
   /** Set a new logging level
    *  @param level level from which the logger starts to write messages
    */
-  void Logger::set_log_level ( LoggingLevel level ){
+  void logger::set_log_level ( LoggingLevel level ){
     this->level = level;
   }
 
   /** Set a new logging level
    *  @param level level from which the logger starts to write messages
    */
-  void Logger::set_log_level ( int level ){
+  void logger::set_log_level ( int level ){
     this->level = level;
   }
 
   /** Setup the logging level name array
    * */
-  void Logger::setup_level_names (){
+  void logger::setup_level_names (){
 
     LEVELS[0]="DEBUG";
     LEVELS[1]="FINER";
@@ -41,7 +41,7 @@ namespace atmi {
    * @param msg message string
    * @param ... insertion values
    */
-  void Logger::error ( const char *msg, ...){
+  void logger::error ( const char *msg, ...){
 
     va_list args;
     va_start (args, msg);
@@ -54,7 +54,7 @@ namespace atmi {
    * @param msg message string
    * @param ... insertion values
    */
-  void Logger::warning ( const char *msg, ...){
+  void logger::warning ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
     log (WARNING,  msg, args);
@@ -66,7 +66,7 @@ namespace atmi {
    * @param msg message string
    * @param ... insertion values
    */
-  void Logger::info ( const char *msg, ...){
+  void logger::info ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
     log ( INFO, msg, args);
@@ -78,7 +78,7 @@ namespace atmi {
    * @param msg message string
    * @param ... insertion values
    */
-  void Logger::finer ( const char *msg, ...){
+  void logger::finer ( const char *msg, ...){
     va_list args;
     va_start (args, msg);
     log ( FINER, msg, args);
@@ -91,7 +91,7 @@ namespace atmi {
    * @param msg message string
    * @param ... insertion values
    */
-  void Logger::debug ( int indent, const char *msg, ...){
+  void logger::debug ( int indent, const char *msg, ...){
     va_list args;
     va_start (args, msg);
     log ( DEBUG, msg, args);

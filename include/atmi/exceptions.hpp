@@ -1,24 +1,24 @@
 /*
-   $Id: Exceptions.h 79 2007-08-18 17:30:26Z hkoelman $
+   $Id: atmi_exceptions.h 79 2007-08-18 17:30:26Z hkoelman $
  */
 
 /*
- * Exceptions
+ * atmi_exceptions
  *
  * Copyright (C) 2006 - herbert koelman
  *
- * Exceptions is free software; you can redistribute it and/or modify
+ * atmi_exceptions is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Exceptions is distributed in the hope that it will be useful,
+ * atmi_exceptions is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Exceptions; if not, write to the Free Software
+ * along with atmi_exceptions; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301  USA
  */
@@ -45,15 +45,14 @@ namespace atmi {
  *
  * Can be used to throw any kind of error message in a consitent way.
  */
-  class Exception : public exception {
+  class atmi_exception : public exception {
     public:
       /** create a new instance
        *
        * @param msg error message
        */
-      Exception ( const char *msg = NULL, ... ) throw ();
-      virtual ~Exception () throw () {
-      };
+      atmi_exception ( const char *msg = NULL, ... ) throw ();
+      virtual ~atmi_exception () throw () { };
 
       /**
        * @return user friendly text message
@@ -71,33 +70,46 @@ namespace atmi {
       string message;
   };
 
-/****************************************************************************
-*
-* Unix related exceptions
-*
-****************************************************************************/
-  class UnixException : public Exception {
+  /** Unix related exceptions.
+   *
+   * This exception can be used to return a system error.
+   */
+  class unix_exception : public atmi_exception {
     public:
-      UnixException ( int err, const char *msg = NULL, ... ) throw ();
+      /** new unix exception.
+       *
+       * @param err errno value
+       * @param error message
+       * @param ... error message parameters (variadic).
+       */
+      unix_exception ( int err, const char *msg = NULL, ... ) throw ();
+
+      /** new unix exception.
+       *
+       * @param error message
+       * @param ... error message parameters (variadic).
+       */
+      unix_exception ( const char *msg, ... ) throw () ;
+      virtual ~unix_exception () throw() {};
 
       /**
        * @return user friendly text message
        */
       virtual const char *what () throw ();
 
+      /** @return unix errno
+       */
       int get_errno ();
     protected:
       int error;
   };
 
-/****************************************************************************
-*
-* Tuxedo FML related exceptions
-*
-****************************************************************************/
-  class BufferException : public Exception {
+  /** FML buffer related exceptions.
+   *
+   */
+  class buffer_exception : public atmi_exception {
     public:
-      BufferException ( int err, const char *msg = NULL, ... ) throw ();
+      buffer_exception ( int err, const char *msg = NULL, ... ) throw ();
 
       /**
        * @return tuxedo FML error number
@@ -123,22 +135,21 @@ namespace atmi {
       int ferror;
   };
 
-/****************************************************************************
-*
-* Tuxedo TP related exceptions
-*
-****************************************************************************/
-
-  class TuxedoException : public Exception {
+  /**
+   *
+   * Tuxedo TP related exceptions
+   *
+   */
+  class tuxedo_exception : public atmi_exception {
     public:
       /**
-       * Base class of Tuxedo exceptions.
+       * Tuxedo exceptions.
        *
        * @param err value of tperr
        * @param msg error message.
        */
-      TuxedoException ( int err = 0, const char *msg = NULL, ... ) throw ();
-      virtual ~TuxedoException () throw () {
+      tuxedo_exception ( int err = 0, const char *msg = NULL, ... ) throw ();
+      virtual ~tuxedo_exception () throw () {
       };
 
       /**
@@ -185,20 +196,20 @@ namespace atmi {
 /**
  * Thrown when a TPESVRERR is returned after a TP call.
  */
-  class ServiceException : public TuxedoException {
+  class service_exception : public tuxedo_exception {
     public:
-      ServiceException ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~ServiceException () throw () {
+      service_exception ( int err, const char *msg = NULL, ... ) throw ();
+      virtual ~service_exception () throw () {
       };
   };
 
 /**
  * Thrown when TPETIME is returned after a TP call.
  */
-  class TimeoutException : public TuxedoException {
+  class timeout_exception : public tuxedo_exception {
     public:
-      TimeoutException ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~TimeoutException () throw (){
+      timeout_exception ( int err, const char *msg = NULL, ... ) throw ();
+      virtual ~timeout_exception () throw (){
       };
   };
 
@@ -206,20 +217,20 @@ namespace atmi {
  * Thrown when TPEBLOCK is returned after a TP call and a blocking condition
  * exists.
  */
-  class BlockingException : public TuxedoException {
+  class blocking_exception : public tuxedo_exception {
     public:
-      BlockingException ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~BlockingException () throw () {
+      blocking_exception ( int err, const char *msg = NULL, ... ) throw ();
+      virtual ~blocking_exception () throw () {
       };
   };
 
 /**
  * Thrown when TPEGOSIG is returned after a signal was received.
  */
-  class InterruptException : public TuxedoException {
+  class interrupt_exception : public tuxedo_exception {
     public:
-      InterruptException ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~InterruptException () throw () {
+      interrupt_exception ( int err, const char *msg = NULL, ... ) throw ();
+      virtual ~interrupt_exception () throw () {
       };
   };
 
@@ -229,7 +240,7 @@ namespace atmi {
  *
  ***************************************************************************/
 
-  class DiagnosticException : public TuxedoException {
+  class diagnostic_exception : public tuxedo_exception {
     public:
       /**
        * Constructs a Queue exeption
@@ -238,8 +249,8 @@ namespace atmi {
        * @param diagno value of ctl.diagnostic
        * @param msg error message.
        */
-      DiagnosticException ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
-      virtual ~DiagnosticException ()  throw () {
+      diagnostic_exception ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
+      virtual ~diagnostic_exception ()  throw () {
       };
 
       /**
@@ -266,22 +277,22 @@ namespace atmi {
 /**
  * Thrown when QMENOMSG is returned
  */
-  class NomsgException : public DiagnosticException {
+  class nomsg_exception : public diagnostic_exception {
     public:
-      NomsgException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-      virtual ~NomsgException () throw () {
+      nomsg_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      virtual ~nomsg_exception () throw () {
       };
   };
 
 /**
  * Thrown when QMEABORTED is returned
  */
-  class AbortedException : public DiagnosticException {
+  class aborted_exception : public diagnostic_exception {
     public:
-      AbortedException ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-      virtual ~AbortedException () throw () {
+      aborted_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      virtual ~aborted_exception () throw () {
       };
   };
 
-}
+} // atmi namespace
 #endif
