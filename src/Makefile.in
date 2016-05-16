@@ -45,7 +45,7 @@ HEADERS=$(INCDIR)/tuxedo.hpp $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
 ATMI_SRV_OBJS=Event.o Tp.o queue.o queue_stream.o tuxedo.o exceptions.o AbstractServer.o Logger.o StandardLogger.o ULOGLogger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
-ATMI_CLT_OBJS=AbstractClient.o ${ATMI_SRV_OBJS}
+ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
 
 BUFF_OBJS=Buffer.o Field.o exceptions.o
 

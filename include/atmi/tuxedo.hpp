@@ -48,7 +48,7 @@ namespace atmi {
   class Tp;
   class queue;
 
-  typedef auto_ptr<Tp> ATp;
+  typedef auto_ptr<Tp>          tp_auto_ptr;
   typedef auto_ptr<atmi::queue> queue_auto_ptr;
 
   /**
@@ -61,7 +61,7 @@ namespace atmi {
       tuxedo ();
       virtual ~tuxedo();
 
-      /* Method moved into the constructor of AbstractClient
+      /* Method moved into the constructor of abstract_client
        * init() allows a client to join a BEA tuxedo ATMI system application. Before a client can
        * use any of the BEA tuxedo ATMI system communication or transaction routines, it can
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit or implicitly by
@@ -74,7 +74,7 @@ namespace atmi {
        *  int init ( char *cltname = NULL, char *usr = NULL, char *passwd = NULL) ;
        */
 
-      /* Method moved into the destructor of AbstractClient
+      /* Method moved into the destructor of abstract_client
        * End any pending operation and free any alloated ressource. After this call any attempt at
        * using ATMI will fail.
        * int term () ;
@@ -266,23 +266,23 @@ namespace atmi {
  *
  * Extending this class ensures that tpterm  and tpinit is called when client programs are run.
  *
- * AbstractClient has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
- * need to pass a valid TUXCONFIG file when constructing an AbstractClient instance. The multiconext mode is available
+ * abstract_client has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
+ * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
  * only for native clients.
  *
- * Two factory methods are available to construct Tp and queue class instances (new_tp_instance and new_queue_instance). These methods return ATp and queue_auto_ptr
+ * Two factory methods are available to construct Tp and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
  * which are auto pointers. which is probaly the best way to avoid memory leaks.
  *
  */
-  class AbstractClient : public tuxedo {
+  class abstract_client : public tuxedo {
     public:
 
-      /** Method moved into the destructor of AbstractClient
+      /** Method moved into the destructor of abstract_client
        * End any pending operation and free any alloated ressource. After this call any attempt at
        * using ATMI will fail.
        * int term () ;
        */
-      virtual ~AbstractClient ();
+      virtual ~abstract_client ();
 
       /**
        * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
@@ -294,7 +294,7 @@ namespace atmi {
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and ATp objects.
+       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
@@ -302,7 +302,7 @@ namespace atmi {
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param tuxconf path to tuxedo config file (same as TUXCONFIG en variable default NULL)
        */
-      AbstractClient ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
+      abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
 
       /**
        * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
@@ -314,7 +314,7 @@ namespace atmi {
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and ATp objects.
+       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
@@ -322,7 +322,7 @@ namespace atmi {
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param multicontext if true start a multicontext client using the env TUXCONFIG
        */
-      AbstractClient ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
+      abstract_client ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
 
       /** This method must overriden  to run the client application.
        *
@@ -338,7 +338,7 @@ namespace atmi {
        *
        * @return  an auto_ptr to a new Tp instance
        */
-      ATp new_tp_instance ( const char *svc );
+      tp_auto_ptr new_tp_instance ( const char *svc );
 
       /** Creates an instance of queue and set the client context to be used.
        *

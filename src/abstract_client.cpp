@@ -1,20 +1,20 @@
 /*
- * AbstractClient
+ * abstract_client
  *
  * Copyright (C) 2006 - herbert koelman
  *
- * AbstractClient is free software; you can redistribute it and/or modify
+ * abstract_client is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * AbstractClient is distributed in the hope that it will be useful,
+ * abstract_client is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with AbstractClient; if not, write to the Free Software
+ * along with abstract_client; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301  USA
  */
@@ -28,22 +28,22 @@ using namespace std;
 
 namespace atmi {
 
-  AbstractClient::~AbstractClient () {
+  abstract_client::~abstract_client () {
     if ( context > 0 ) tpsetctxt ( context, 0 );
     tpterm ();
   };
 
-  AbstractClient::AbstractClient ( bool tuxconfig, const char *cltname, const char *usr, const char *passwd, const char *group) {
+  abstract_client::abstract_client ( bool tuxconfig, const char *cltname, const char *usr, const char *passwd, const char *group) {
 
     string tc = string ("TUXCONFIG=") + getenv ("TUXCONFIG");
     setup_client ( cltname, usr, passwd, group, tc.c_str() );
   }
 
-  AbstractClient::AbstractClient ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig) {
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig) {
     setup_client ( cltname, usr, passwd, group, tuxconfig );
   }
 
-  void AbstractClient::setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
+  void abstract_client::setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
 
@@ -95,7 +95,7 @@ namespace atmi {
 
   }
 
-  ATp AbstractClient::new_tp_instance ( const char *svc ){
+  tp_auto_ptr abstract_client::new_tp_instance ( const char *svc ){
 
     auto_ptr<Tp> ptr;
     ptr.reset ( new Tp ( svc ));
@@ -103,7 +103,7 @@ namespace atmi {
     return ptr;
   }
 
-  queue_auto_ptr AbstractClient::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
+  queue_auto_ptr abstract_client::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
     auto_ptr<atmi::queue> ptr;
     ptr.reset ( new atmi::queue ( qspace, queue, reply ));
