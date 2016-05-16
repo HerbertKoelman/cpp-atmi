@@ -45,10 +45,10 @@ namespace atmi {
 
   class buffer;
 
-  class Tp;
+  class transaction;
   class queue;
 
-  typedef auto_ptr<Tp>          tp_auto_ptr;
+  typedef auto_ptr<transaction>          tp_auto_ptr;
   typedef auto_ptr<atmi::queue> queue_auto_ptr;
 
   /**
@@ -245,9 +245,9 @@ namespace atmi {
        * @param tpe tperrno to handle
        * @param msg message to setup in thrown exception.
        * @param ... substitution parameters
-       * @return legacy will be removed when prototype will be changed to void handleTperrno()
+       * @return legacy will be removed when prototype will be changed to void handletransactionerrno()
        */
-      virtual int handleTperrno ( int tpe, const char *msg = NULL, ... );
+      virtual int handletransactionerrno ( int tpe, const char *msg = NULL, ... );
 
       long flags;
       nl_catd catd;
@@ -270,7 +270,7 @@ namespace atmi {
  * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
  * only for native clients.
  *
- * Two factory methods are available to construct Tp and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
+ * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
  * which are auto pointers. which is probaly the best way to avoid memory leaks.
  *
  */
@@ -334,9 +334,9 @@ namespace atmi {
         return -1;
       };
 
-      /** Creates an instance of Tp and set the client context to be used.
+      /** Creates an instance of transaction and set the client context to be used.
        *
-       * @return  an auto_ptr to a new Tp instance
+       * @return  an auto_ptr to a new transaction instance
        */
       tp_auto_ptr new_tp_instance ( const char *svc );
 
@@ -423,7 +423,7 @@ namespace atmi {
 /**
  * Implement TP calls
  */
-  class Tp : public tuxedo {
+  class transaction : public tuxedo {
     public:
       /**
        * Call service. 
@@ -487,7 +487,7 @@ namespace atmi {
        * @throw timeout_exception Upon TPETIME.
        * @throw tuxedo_exception thrown for the other error conditions.
        *
-       * @see Tp
+       * @see transaction
        */
       int call( char **idata = NULL, long *ilen = 0, int *urcode = NULL, int retries = 0, int delay = 0 );
 
@@ -542,12 +542,12 @@ namespace atmi {
        */
       int cancel ( int cd = 0 );
 
-      inline int getCallDesc () {
-        return calldesc;
+      inline int call_descriptor () {
+        return _call_descriptor;
       };
 
-      inline string getService () {
-        return service;
+      inline string service () {
+        return _service;
       };
 
       // contrucors/destructors -------------------------------------------------------
@@ -555,14 +555,14 @@ namespace atmi {
       /**
        * @param service service name (< 32 characters long)
        */
-      Tp ( const char *service );
+      transaction ( const char *service );
 
     protected:
 
     private:
 
-      int calldesc;
-      string service;
+      int    _call_descriptor;
+      string _service;
 
   };
 
