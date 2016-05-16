@@ -16,7 +16,7 @@ namespace atmi {
   /** Create a standard output logger.
    *
    */
-  StandardLogger::StandardLogger ( const char *id, LoggingLevel level ){
+  standard_logger::standard_logger ( const char *id, LoggingLevel level ){
 
     setup_level_names();
 
@@ -25,7 +25,7 @@ namespace atmi {
     pid = getpid();
   }
 
-  void StandardLogger::log ( LoggingLevel at, const char *msg, va_list args){
+  void standard_logger::log ( LoggingLevel at, const char *msg, va_list args){
 
     char now [80]; // current date and time string
     memset ( now, 0, sizeof (now));

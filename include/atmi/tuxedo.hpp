@@ -766,7 +766,7 @@ namespace atmi {
 
   /**
    * Use this class to post an event and any accompanying data. The event is named by eventname and data, if
-   * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI EventBroker
+   * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI eventBroker
    * to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules
    * successfully evaluate against data.
    *
@@ -779,17 +779,17 @@ namespace atmi {
    * that does not require a length to be specified (for example, an FML fielded buffer), then len is ignored. If data
    * is NULL, len is ignored and the event is posted with no data.
    *
-   * When Event is used within a transaction, the transaction boundary can be extended to include those servers
-   * and/or stable-storage message queues notified by the EventBroker. When a transactional posting is made, some of
+   * When event is used within a transaction, the transaction boundary can be extended to include those servers
+   * and/or stable-storage message queues notified by the eventBroker. When a transactional posting is made, some of
    * the recipients of the event posting are notified on behalf of the poster’s transaction (for example, servers and
    * queues), while some are not (for example, clients).
    *
-   * If the poster is within a transaction and the TPNOTRAN flag is not set, the posted event goes to the EventBroker
+   * If the poster is within a transaction and the TPNOTRAN flag is not set, the posted event goes to the eventBroker
    * in transaction mode such that it dispatches the event as part of the poster’s transaction. The broker dispatches
    * transactional event notifications only to those service routine and stable-storage queue subscriptions that used
    * the TPEVTRAN bit setting in the ctlflags parameter passed to subscribe(). Client notifications, and those
    * service routine and stable-storage queue subscriptions that did not use the TPEVTRAN bit setting in the ctlflags
-   * parameter passed to subscribe(), are also dispatched by the EventBroker but not as part of the posting
+   * parameter passed to subscribe(), are also dispatched by the eventBroker but not as part of the posting
    * process’s transaction.
    *
    * If the poster is outside a transaction, post() is a one-way post with no acknowledgement when the service
@@ -797,28 +797,28 @@ namespace atmi {
    * parameter passed to subscribe()). If the poster is in a transaction, then post() returns TPESVCFAIL when the
    * associated service fails in the event.
    */
-  class Event : public tuxedo {
+  class event : public tuxedo {
     public:
       /**
        * Use this class to post an event and any accompanying data. The event is named by eventname and data, if
-       * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI EventBroker
+       * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI eventBroker
        * to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules
        * successfully evaluate against data.
        *
        * @param evtname is a NULL-terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.”) as this character is reserved by the Oracle tuxedo ATMI system itself.
        */
-      Event( const char *evtname = NULL);
+      event( const char *evtname = NULL);
 
       /**
        * The caller uses post() to post an event and any accompanying data. The event is named by eventname and data, if
-       * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI EventBroker
+       * not NULL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo ATMI eventBroker
        * to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules
        * successfully evaluate against data.
        *
        * @param data it must point to a buffer previously allocated by allocate()
        * @param len len should specify the amount of data in the buffer that should be posted with the event.
        *
-       * @return number of notifications number of event notifications dispatched by the EventBroker on behalf of eventname.
+       * @return number of notifications number of event notifications dispatched by the eventBroker on behalf of eventname.
        */
       long post ( const char *data = NULL, long len = 0 ) throw ( tuxedo_exception );
 

@@ -35,7 +35,7 @@ using namespace std;
 namespace atmi {
 
 //----------------------------------------------------------------------------------------------
-  class Field;
+  class field;
   class buffer;
 
   typedef char * Carray;
@@ -50,7 +50,7 @@ namespace atmi {
 
     public:
 
-      friend class Field;
+      friend class field;
 
       /** Allocates a buffer of 1024bytes */
       buffer ();
@@ -112,34 +112,34 @@ namespace atmi {
        * @param f a pointer to the field for which to change the value
        * @throw buffer_exception upon failure
        */
-      Field *set    ( Field *f );
+      field *set    ( field *f );
 
       /** Adds a field into the buffer
        *
        * @param f a pointer to the field to add into the buffer
        * @throw buffer_exception upon failure
        */
-      Field *add    ( Field *f );         // FLDID fieldid, char *value, FLDLEN len );
+      field *add    ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
 
       /** Appends a field to the buffer
        *
        * @param f a pointer to the field to add into the buffer
        */
-      Field *append ( Field *f );         // FLDID fieldid, char *value, FLDLEN len );
+      field *append ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
 
       /** Removes the field from the buffer
        *
        * @param f a pointer to the field to remove
        * @throw buffer_exception upon failure
        */
-      void remove ( Field *f );         // FLDID fieldid );
+      void remove ( field *f );         // FLDID fieldid );
 
       /** Get the field value set in the buffer
        * @param f the field to set
        * @return the field when set
        * @throw buffer_exception upon failure
        */
-      Field *get ( Field *f );
+      field *get ( field *f );
 
       /** Get the field value set in the buffer
        * @param f the field to set
@@ -147,7 +147,7 @@ namespace atmi {
        * @return the field when set
        * @throw buffer_exception upon failure
        */
-      Field *get ( Field *f, FLDOCC32 occ);
+      field *get ( field *f, FLDOCC32 occ);
 
       /** @return the current check sum of the buffer
        *
@@ -156,7 +156,7 @@ namespace atmi {
       long chksum();
 
       /** @return the number of occurences of the field into the buffer */
-      FLDOCC32 occurences ( const Field *f );
+      FLDOCC32 occurences ( const field *f );
 
       /** @return the number of fields into the buffer */
       FLDOCC32 num ();
@@ -210,10 +210,10 @@ namespace atmi {
 // ---------------------------------------------------------------------------------
 
 
-/** Abstract class to manipulate a Field
+/** Abstract class to manipulate a field
  *
  */
-  class Field {
+  class field {
 
     public:
 
@@ -221,7 +221,7 @@ namespace atmi {
 
       /** Default destructor
        */
-      virtual ~Field () {
+      virtual ~field () {
       };
 
       /**
@@ -246,7 +246,7 @@ namespace atmi {
        */
       const char * tname ();
 
-      /** @return the Field ID of the field
+      /** @return the field ID of the field
        */
       FLDID32 id ();
 
@@ -275,7 +275,7 @@ namespace atmi {
        */
       const char * what ();
 
-      virtual Field &operator= ( const string & ) {
+      virtual field &operator= ( const string & ) {
         return *this;
       };
 
@@ -325,8 +325,8 @@ namespace atmi {
       virtual int remove ( buffer *b );
 
     private:
-      FLDID32 fid;  // Field ID
-      FLDOCC32 focc;                    // Field occurence
+      FLDID32 fid;  // field ID
+      FLDOCC32 focc;                    // field occurence
       char *fname;
       int last_err;
   };
@@ -334,46 +334,46 @@ namespace atmi {
 /** Template that handles non pointer data types (short, long, char, double, ...)
  *
  */
-  template <class T> class TField : public Field {
+  template <class T> class Tfield : public field {
     public:
 
-      /** Constructs a TField for the passed field id
+      /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      TField ( FLDID32 fid ) {
+      Tfield ( FLDID32 fid ) {
 
-        /** This array is used to check that FML type matches template TField's type */
+        /** This array is used to check that FML type matches template Tfield's type */
         const char *TYPEID_NAMES[5] = { typeid(short).name(), typeid(long).name(), typeid(char).name(), typeid(float).name(), typeid(double).name() };
 
         setup ( fid );
         // check type matching
         if ( type() > 5 ) {
-          throw atmi_exception ( "This template doesn't support the given type TField<%s>.", tname ());
+          throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
         } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
-          throw atmi_exception ( "TField %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
+          throw atmi_exception ( "Tfield %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
         }
       }
 
-      /** Constructs a TField for the passed name
+      /** Constructs a Tfield for the passed name
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      TField ( const char *n ) {
+      Tfield ( const char *n ) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
         // check type matching
         if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
-          throw atmi_exception ( "TField value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), name());
+          throw atmi_exception ( "Tfield value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), name());
         }
       }
 
-      virtual ~TField() {
+      virtual ~Tfield() {
       };
 
       /** @return de length (or size) of the field's data
@@ -385,7 +385,7 @@ namespace atmi {
 
       /** Assigns a value to the field
        * ...
-       * TField<int> f (fid);
+       * Tfield<int> f (fid);
        * f = 156 ; // Set value to 156
        * ...
        */
@@ -398,7 +398,7 @@ namespace atmi {
 
       /** casts the field value
        * ...
-       * TField<int> f (fid);
+       * Tfield<int> f (fid);
        * f = 156 ;
        * int x = f ; // returns 156
        * ...
@@ -416,7 +416,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) &value, length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -435,7 +435,7 @@ namespace atmi {
 
         rc = Fadd32 ( b->get_buffer(), id(), (char *) &value, length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         } else {
           setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
         }
@@ -467,46 +467,46 @@ namespace atmi {
   };
 
 
-/** Specialization of template TField which handles string typed fields.
+/** Specialization of template Tfield which handles string typed fields.
  *
  * This class is using a string object to hold and handle string data
  */
-  template <> class TField<string>: public Field {
+  template <> class Tfield<string>: public field {
     public:
 
-      /** Constructs a TField for the passed field id
+      /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      TField ( FLDID32 fid ) {
+      Tfield ( FLDID32 fid ) {
 
         setup ( fid );
 
         // check taht we have a string declaration in the FML table
         if ( type () != 5 ) {
-          throw atmi_exception ( "TField %s's value is of type string and the FML table decalares a type %s.", name (), tname());
+          throw atmi_exception ( "Tfield %s's value is of type string and the FML table decalares a type %s.", name (), tname());
         }
       }
 
-      /** Constructs a TField for the passed name
+      /** Constructs a Tfield for the passed name
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      TField ( const char *n ) {
+      Tfield ( const char *n ) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
         // check type matching
         if ( type() !=5 ) {
-          throw atmi_exception ( "TField value is of type string and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "Tfield value is of type string and the FML table decalares a type %s for %s.", tname(), name());
         }
       }
 
-      virtual ~TField() {
+      virtual ~Tfield() {
       };
 
       /** @return the string's length
@@ -617,7 +617,7 @@ namespace atmi {
        *
        * @param s   a pointer to an array containing a null-terminated character sequence (C string), which is copied as the new content for the object.
        */
-      virtual TField<string> &operator= ( const char* s ) {
+      virtual Tfield<string> &operator= ( const char* s ) {
 
         value = s;
         return *this;
@@ -635,7 +635,7 @@ namespace atmi {
        *
        * @param str a copy of the content of this object is used as the new content for the object.
        */
-      virtual TField<string> &operator= ( const string &str ) {
+      virtual Tfield<string> &operator= ( const string &str ) {
 
         value = str;
 
@@ -652,7 +652,7 @@ namespace atmi {
        *
        * @param  c  the content is set to a single character.
        */
-      virtual TField<string> &operator= ( char &c ) {
+      virtual Tfield<string> &operator= ( char &c ) {
 
         value = c;
 
@@ -680,7 +680,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) value.c_str(), length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -700,12 +700,12 @@ namespace atmi {
 
           rc = Fadd32 ( b->get_buffer(), id(), (char *) value.c_str(), length() );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
         } else {
-          throw atmi_exception ("Field %s's value is empty !!?? Cannot add an empty field value.", name ());
+          throw atmi_exception ("field %s's value is empty !!?? Cannot add an empty field value.", name ());
         }
 
         return rc;
@@ -731,7 +731,7 @@ namespace atmi {
           delete v;
 
         } else {
-          throw buffer_exception (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
@@ -740,46 +740,46 @@ namespace atmi {
       string value;
   };
 
-/** Specialization of template TField which handles CARRAY typed fields.
+/** Specialization of template Tfield which handles CARRAY typed fields.
  *
  * This class is using a string object to hold and handle char * data
  */
-  template <> class TField<char *>: public Field {
+  template <> class Tfield<char *>: public field {
     public:
 
-      /** Constructs a TField for the passed field id
+      /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      TField ( FLDID32 fid ) : len (0), value (NULL) {
+      Tfield ( FLDID32 fid ) : len (0), value (NULL) {
 
         setup ( fid );
 
         // check taht we have a string declaration in the FML table
         if ( type () != 6 ) {
-          throw atmi_exception ( "TField %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
+          throw atmi_exception ( "Tfield %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
         }
       }
 
-      /** Constructs a TField for the passed name
+      /** Constructs a Tfield for the passed name
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      TField ( const char *n ) : len (0), value (NULL) {
+      Tfield ( const char *n ) : len (0), value (NULL) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
         // check type matching
         if ( type() != 6 ) {
-          throw atmi_exception ( "TField value is of type carray and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "Tfield value is of type carray and the FML table decalares a type %s for %s.", tname(), name());
         }
       }
 
-      virtual ~TField() {
+      virtual ~Tfield() {
 
         if ( value != NULL) delete[] value;
       };
@@ -827,7 +827,7 @@ namespace atmi {
 
       /** copy the field's value
        */
-      TField<char *> &operator= ( TField<char*> &carray ){
+      Tfield<char *> &operator= ( Tfield<char*> &carray ){
 
         setCarray ( carray.value, carray.len );
 
@@ -842,7 +842,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), value, length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -862,13 +862,13 @@ namespace atmi {
 
           rc  = Fadd32 ( b->get_buffer(), id(), value, length() );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
 
         } else {
-          throw atmi_exception ( "Field %s's value is empty !!?? Cannot add an empty field value.", name () );
+          throw atmi_exception ( "field %s's value is empty !!?? Cannot add an empty field value.", name () );
         }
 
         return rc;
@@ -899,7 +899,7 @@ namespace atmi {
           delete[] v;
 
         } else {
-          throw buffer_exception (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
@@ -910,7 +910,7 @@ namespace atmi {
   };
 
 /** Helper that handles the operator << between output streams and field value */
-  ostream &operator<< ( ostream &o, TField<string> &f );
+  ostream &operator<< ( ostream &o, Tfield<string> &f );
 
 
 }

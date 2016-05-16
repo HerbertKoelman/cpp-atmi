@@ -9,9 +9,9 @@ using namespace std;
 
 namespace atmi {
 
-  class Logger;
+  class logger;
 
-  typedef auto_ptr<Logger> ALogger ;
+  typedef auto_ptr<logger> Alogger ;
 
   enum LoggingLevel {
     ERROR=4,
@@ -26,7 +26,7 @@ namespace atmi {
    * Verbose is the DEBUG log level (level value 0) and least verbose is ERROR (level value 4).
    * Write messages that matches the current level value and above.
    */
-  class Logger {
+  class logger {
     public:
     /** Write an error message
      *
@@ -91,16 +91,16 @@ namespace atmi {
   /**
    * This class uses stdout to log messages.
    *
-   * @see Logger
+   * @see logger
    */
-  class StandardLogger : public Logger {
+  class standard_logger : public logger {
     public:
 
       /** Create a logger that pprint's message form level up to highest level defined.
        * @param level lowest level 
        * @param id an identification char array (i.e. your program name)
        */
-      StandardLogger ( const char *id = NULL, LoggingLevel level = INFO );
+      standard_logger ( const char *id = NULL, LoggingLevel level = INFO );
 
     protected:
       
@@ -114,16 +114,16 @@ namespace atmi {
       pid_t pid;
   };
 
-  /** This logger writes messages in the user log (ULOG).
+  /** This logger writes messages in the user log (ulog_).
    *
-   * @see Logger
+   * @see logger
    */
-  class ULOGLogger : public Logger {
+  class ulog_logger : public logger {
     public:
       /** Create a logger that print's message form level up to highest level defined.
        * @param level lowest level 
        */
-      ULOGLogger ( LoggingLevel level = INFO );
+      ulog_logger ( LoggingLevel level = INFO );
 
     protected:
 

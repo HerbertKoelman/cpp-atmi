@@ -53,7 +53,7 @@ namespace atmi {
     return (strncmp ( FMLTYPE32, type, 8) == 0 );
   }
 
-  Field *buffer::set ( Field *f ){
+  field *buffer::set ( field *f ){
 
     if ( f == NULL ) {
       throw atmi_exception ("Setting a NULL field !!??");
@@ -67,7 +67,7 @@ namespace atmi {
    *
    * @param f the field to add
    */
-  Field *buffer::add ( Field *f ){
+  field *buffer::add ( field *f ){
 
     if ( f == NULL ) {
       throw atmi_exception ("Adding a NULL field !!??");
@@ -94,7 +94,7 @@ namespace atmi {
     resize ( size() + _extent );
   };
 
-  Field *buffer::append ( Field *f ){
+  field *buffer::append ( field *f ){
 
     throw atmi_exception ( "Method append is not implemented yet !!??;" );
     return NULL;
@@ -104,7 +104,7 @@ namespace atmi {
    *
    * @param f field to remove
    */
-  void buffer::remove ( Field *f ){
+  void buffer::remove ( field *f ){
 
     if ( f != NULL ) {
       f->remove ( this );
@@ -117,7 +117,7 @@ namespace atmi {
    *
    * @param f field for which we want to get the value
    */
-  Field *buffer::get ( Field *f, FLDOCC32 occ ) {
+  field *buffer::get ( field *f, FLDOCC32 occ ) {
 
     if ( f != NULL ) {
       f->get( this, occ );
@@ -131,7 +131,7 @@ namespace atmi {
    *
    * @param f field for which we want to get the value
    */
-  Field *buffer::get ( Field *f ) {
+  field *buffer::get ( field *f ) {
 
     if ( f != NULL ) {
       f->get( this );
@@ -141,7 +141,7 @@ namespace atmi {
     return f;
   };
 
-  FLDOCC32 buffer::occurences ( const Field *f ){
+  FLDOCC32 buffer::occurences ( const field *f ){
 
     int rc = Foccur32 ( _buffer, f->fid );
     if ( rc < 0 ) {

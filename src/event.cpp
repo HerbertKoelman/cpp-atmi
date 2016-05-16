@@ -14,19 +14,19 @@ using namespace std;
 
 namespace atmi {
 
-  Event::Event( const char *eventname ) {
+  event::event( const char *eventname ) {
     this->eventname = eventname;
     set_flags ( TPNOTRAN );
   }
 
-  long Event::post ( const char *data, long len ) throw (tuxedo_exception ){
+  long event::post ( const char *data, long len ) throw (tuxedo_exception ){
     int ret = -1;
 
     if ( tppost ( const_cast<char *> (eventname), const_cast<char *>(data), len, flags ) != -1 ) {
       // get number of events that were dispatched see tpurcode
       ret = tpurcode;
     }else{
-      // Throw an EventException
+      // Throw an eventException
       handleTperrno ( tperrno, "Post event %s failed.", eventname );
     }
 
