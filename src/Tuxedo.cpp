@@ -1,5 +1,5 @@
 /*
-   $Id: Tuxedo.C 79 2007-08-18 17:30:26Z hkoelman $
+   $Id: tuxedo.C 79 2007-08-18 17:30:26Z hkoelman $
  */
 
 #include <limits.h>
@@ -16,7 +16,7 @@ using namespace std;
 
 namespace atmi {
 
-  Tuxedo::Tuxedo () {
+  tuxedo::tuxedo () {
     errorno =  0;
     errornodetail = 0;
     flags = TPNOFLAGS;
@@ -24,17 +24,16 @@ namespace atmi {
     catd  = catopen (const_cast<char *> ("atmi++"), 0 );
   }
 
-  Tuxedo::~Tuxedo() {
-
+  tuxedo::~tuxedo() {
     catclose ( catd );
   }
 
-  void Tuxedo::updateErrno () {
+  void tuxedo::updateErrno () {
     errorno = tperrno;
     errornodetail = tperrordetail ( 0 );
   };
 
-  char * Tuxedo::allocate ( const char *type, const char *subtype, long size ) {
+  char * tuxedo::allocate ( const char *type, const char *subtype, long size ) {
 
     char *buffer = NULL;
 
@@ -49,7 +48,7 @@ namespace atmi {
     return buffer;
   }
 
-  char *Tuxedo::extend ( char *buff, long extent ) {
+  char *tuxedo::extend ( char *buff, long extent ) {
 
     char *b = tprealloc ( buff, extent );
 
@@ -63,12 +62,12 @@ namespace atmi {
   };
 
 
-  void Tuxedo::free ( char *buffer ) {
+  void tuxedo::free ( char *buffer ) {
     if ( buffer != NULL) tpfree ( buffer );
   };
 
 
-  int Tuxedo::begin ( int timeout ) {
+  int tuxedo::begin ( int timeout ) {
 
     int rc  = -1;
 
@@ -83,7 +82,7 @@ namespace atmi {
     return rc;
   }
 
-  int Tuxedo::commit () {
+  int tuxedo::commit () {
 
     int rc  = -1;
 
@@ -98,7 +97,7 @@ namespace atmi {
     return rc;
   }
 
-  int Tuxedo::abort () {
+  int tuxedo::abort () {
 
     int rc  = -1;
 
@@ -113,7 +112,7 @@ namespace atmi {
     return rc;
   }
 
-  void Tuxedo::switch_context () {
+  void tuxedo::switch_context () {
 
     TPCONTEXT_T ctxt = 0;
     int rc = -1;
@@ -133,21 +132,21 @@ namespace atmi {
     }
   }
 
-  long Tuxedo::set ( long f, long sf ){
+  long tuxedo::set ( long f, long sf ){
 
     f |= sf;
 
     return f;
   }
 
-  long Tuxedo::unset ( long f, long uf ){
+  long tuxedo::unset ( long f, long uf ){
 
     f &= ( LONG_MAX ^ uf );
 
     return f;
   }
 
-  int Tuxedo::handleTperrno ( int _tperrno, const char *msg, ... ) {
+  int tuxedo::handleTperrno ( int _tperrno, const char *msg, ... ) {
 
     va_list ap;
     va_start ( ap, msg );

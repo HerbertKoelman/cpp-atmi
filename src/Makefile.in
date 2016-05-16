@@ -42,14 +42,12 @@ LDFLAGS=@LDFLAGS@ @LIBS@
 HEADERS=$(INCDIR)/tuxedo.hpp $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=Event.o Tp.o Queue.o QueueStream.o Tuxedo.o atmi_exception.o AbstractServer.o unix_exception.o TuxedoException.o InterruptException.o \
-		 BlockingException.o TimeoutException.o ServiceException.o DiagnosticException.o NomsgException.o \
-		 AbortedException.o Logger.o StandardLogger.o ULOGLogger.o atmi++.o
+ATMI_SRV_OBJS=Event.o Tp.o queue.o queue_stream.o Tuxedo.o exceptions.o AbstractServer.o Logger.o StandardLogger.o ULOGLogger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=AbstractClient.o ${ATMI_SRV_OBJS}
 
-BUFF_OBJS=Buffer.o Field.o buffer_exception.o
+BUFF_OBJS=Buffer.o Field.o exceptions.o
 
 all: libatmi++.a libfml++.a libcltatmi++.a gencat
 

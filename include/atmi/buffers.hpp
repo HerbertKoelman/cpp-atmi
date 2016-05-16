@@ -1,10 +1,4 @@
 /*
-   $Id$
-
-   Helper class for dealing with FML buffer and fields.
- */
-
-/*
  * Buffers
  *
  * Copyright (C) 2006 - herbert koelman
@@ -51,11 +45,8 @@ namespace atmi {
   /**
    * FML Buffer
    *
-   * A fielded buffer is composed of Fields of fixed length (for example, TField<long>, TField<short>), and field for varying length fields (for example TField<string>).
-   *
    */
-  class Buffer : public Tuxedo {
-
+  class Buffer : public tuxedo {
 
     public:
 

@@ -1,5 +1,5 @@
 /*
-   $Id: Queue.C 79 2007-08-18 17:30:26Z hkoelman $
+   $Id: queue.C 79 2007-08-18 17:30:26Z hkoelman $
 
    Tuxedo queue manipulation helper class.
  */
@@ -20,7 +20,7 @@ using namespace std;
 
 namespace atmi {
 
-  Queue::Queue ( const char *qspace, const char *queue, const char *reply ) {
+  queue::queue ( const char *qspace, const char *queue, const char *reply ) {
 
     /* Too restrictive
        if ( qspace == NULL || queue == NULL ) {
@@ -28,11 +28,11 @@ namespace atmi {
        }
      */
 
-    this->qspace = const_cast<char *>(qspace);
-    this->queue = const_cast<char *>(queue);
+    _qspace = const_cast<char *>(qspace);
+    _queue = const_cast<char *>(queue);
 
     this->flags = TPNOFLAGS;
-    qctl.flags = TPNOFLAGS;
+    _qctl.flags = TPNOFLAGS;
 
     set_message_wait ( true );
     set_quality_of_service( TPQQOSDEFAULTPERSIST );
@@ -42,12 +42,12 @@ namespace atmi {
 
 /* operations ------------------------------------------------*/
 
-  int Queue::enqueue ( Buffer *data ) {
+  int queue::enqueue ( Buffer *data ) {
 
     return enqueue ( (char *)data->get_buffer(), 0 );
   }
 
-  int Queue::dequeue ( Buffer *data ) {
+  int queue::dequeue ( Buffer *data ) {
 
     int rc = -1;
     long len = 0;
@@ -61,11 +61,11 @@ namespace atmi {
     return rc;
   }
 
-  int Queue::enqueue ( char *queue,  char *data, long len ){
+  int queue::enqueue ( char *queue,  char *data, long len ){
 
     int rc = -1;
 
-    if ( qspace == NULL || queue == NULL ) {
+    if ( _qspace == NULL || queue == NULL ) {
 
       throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
     }
@@ -73,71 +73,71 @@ namespace atmi {
     // check if we need to switch context
     switch_context ();
 
-    rc = tpenqueue ( qspace, queue, (TPQCTL *) &qctl, data, len, flags );
+    rc = tpenqueue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, flags );
 
     updateErrno ();
 
     if ( rc < 0 ) {
       if ( tperrno == TPEDIAGNOSTIC ) {
-        handleDiagnostics ( tperrno, qctl.diagnostic, "Enqueue in %s:%s failed.", qspace, queue );
+        handle_diagnostics ( tperrno, _qctl.diagnostic, "Enqueue in %s:%s failed.", _qspace, queue );
       } else {
-        handleTperrno ( tperrno, "Enqueue on %s:%s failed.", qspace, queue );
+        handleTperrno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
       }
     }
 
     return rc;
   }
 
-  int Queue::enqueue ( char *data, long len ){
+  int queue::enqueue ( char *data, long len ){
 
     int rc = -1;
 
-    rc = enqueue ( queue, data, len );
+    rc = enqueue ( _queue, data, len );
 
     return rc;
   }
 
-  int Queue::dequeueReply ( Buffer *data ) {
+  int queue::dequeueReply ( Buffer *data ) {
 
     return dequeueReply ( (char **) data->get_buffer(), 0 );
   }
 
-  int Queue::dequeueReply ( char **data, long *len ) {
+  int queue::dequeueReply ( char **data, long *len ) {
 
     int rc = -1;
 
-    if ( qctl.replyqueue == NULL ) {
+    if ( _qctl.replyqueue == NULL ) {
       throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
     }
 
-    rc = dequeue ( qctl.replyqueue, data, len );
+    rc = dequeue ( _qctl.replyqueue, data, len );
 
     return rc;
   }
 
-  int Queue::enqueueReply ( Buffer *data ) {
+  int queue::enqueueReply ( Buffer *data ) {
 
     return enqueueReply ( (char *)data->get_buffer(), 0 );
   }
 
-  int Queue::enqueueReply ( char *data, long len ) {
+  int queue::enqueueReply ( char *data, long len ) {
 
     int rc = -1;
 
-    if ( qctl.replyqueue == NULL ) {
+    if ( _qctl.replyqueue == NULL ) {
       throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
     }
 
-    rc = enqueue ( qctl.replyqueue, data, len );
+    rc = enqueue ( _qctl.replyqueue, data, len );
 
     return rc;
   }
 
-  int Queue::dequeue ( char *queue, char **data, long *len ) {
+  int queue::dequeue ( char *queue, char **data, long *len ) {
 
     int rc = -1;
 
-    if ( qspace == NULL || queue == NULL ) {
+    if ( _qspace == NULL || queue == NULL ) {
 
       throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
     }
@@ -145,37 +145,37 @@ namespace atmi {
     // check if we need to switch context
     switch_context ();
 
-    rc = tpdequeue ( qspace, queue, (TPQCTL *) &qctl, data, len, flags );
+    rc = tpdequeue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, flags );
 
     updateErrno ();
 
     if ( rc < 0 ) {
       if ( tperrno == TPEDIAGNOSTIC ) {
-        if ( qctl.diagnostic == QMENOMSG ) {
+        if ( _qctl.diagnostic == QMENOMSG ) {
           rc = QMENOMSG;
         } else {
-          handleDiagnostics ( tperrno, qctl.diagnostic, "Dequeue from %s:%s failed.", qspace, queue );
+          handle_diagnostics ( tperrno, _qctl.diagnostic, "Dequeue from %s:%s failed.", _qspace, queue );
         }
       } else {
-        handleTperrno ( tperrno, "Dequeue from %s:%s failed.", qspace, queue );
+        handleTperrno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
       }
     }
 
     return rc;
   }
 
-  int Queue::dequeue ( char **data, long *len ) {
+  int queue::dequeue ( char **data, long *len ) {
 
     int rc = -1;
 
-    rc = dequeue ( queue, data, len );
+    rc = dequeue ( _queue, data, len );
 
     return rc;
   }
 
-  int Queue::handleDiagnostics ( int _tperrno, int _diagno, const char *msg, ... ) {
+  int queue::handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, ... ) {
 
-    this->diagno = diagno;
+    _diagno = tux_diagno;
 
     va_list ap;
     va_start ( ap, msg );
@@ -194,14 +194,14 @@ namespace atmi {
       case QMERELEASE:
       case QMESHARE:
       {
-        diagnostic_exception err ( _tperrno, _diagno );
+        diagnostic_exception err ( tux_tperrno, _diagno );
         err.setup_message ( msg, ap );
         throw err;
       }
       break;
       case QMEABORTED:
       {
-        aborted_exception err ( _tperrno, _diagno );
+        aborted_exception err ( tux_tperrno, _diagno );
         err.setup_message (msg, ap );
         throw err;
       }
@@ -211,7 +211,7 @@ namespace atmi {
         // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
         break;
       default:
-        throw diagnostic_exception ( _tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, _tperrno);
+        throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
     }
 
     va_end ( ap );
@@ -222,52 +222,52 @@ namespace atmi {
 /* properties ------------------------------------------------*/
 
 
-  void Queue::set_reply_queue( const char *reply ) {
+  void queue::set_reply_queue( const char *reply ) {
     if ( reply != NULL ) {
-      qctl.flags = set ( qctl.flags, TPQREPLYQ );
-      strncpy(qctl.replyqueue, reply, TMQNAMELEN);
+      _qctl.flags = set ( _qctl.flags, TPQREPLYQ );
+      strncpy(_qctl.replyqueue, reply, TMQNAMELEN);
     } else {
-      qctl.flags = unset ( qctl.flags,  TPQREPLYQ );
+      _qctl.flags = unset ( _qctl.flags,  TPQREPLYQ );
     }
   }
 
-  const char *Queue::get_reply_queue() {
+  const char *queue::reply_queue() {
 
-    return qctl.replyqueue;
+    return _qctl.replyqueue;
   }
 
-  void Queue::set_message_wait ( bool qwait ) {
+  void queue::set_message_wait ( bool qwait ) {
 
     if ( qwait ) {
-      qctl.flags = set ( qctl.flags, TPQWAIT);                    // Set QWait bits
+      _qctl.flags = set ( _qctl.flags, TPQWAIT);                    // Set QWait bits
     } else {
-      qctl.flags = unset ( qctl.flags, TPQWAIT );                    // Unset QWait bits
+      _qctl.flags = unset ( _qctl.flags, TPQWAIT );                    // Unset QWait bits
     }
   }
 
-  void Queue::set_quality_of_service ( long qos ) {
+  void queue::set_quality_of_service ( long qos ) {
 
-    qctl.flags = unset( qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS );
+    _qctl.flags = unset( _qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS );
 
 
     switch ( qos ) {
 
       case TPQQOSDEFAULTPERSIST:
-        qctl.flags = set ( qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS);
-        qctl.delivery_qos = TPQQOSDEFAULTPERSIST;
-        qctl.reply_qos  = TPQQOSDEFAULTPERSIST;
+        _qctl.flags        = set ( _qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS);
+        _qctl.delivery_qos = TPQQOSDEFAULTPERSIST;
+        _qctl.reply_qos    = TPQQOSDEFAULTPERSIST;
         break;
 
       case TPQQOSPERSISTENT:
-        qctl.flags = set ( qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS);
-        qctl.delivery_qos = TPQQOSPERSISTENT;
-        qctl.reply_qos  = TPQQOSPERSISTENT;
+        _qctl.flags        = set ( _qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS);
+        _qctl.delivery_qos = TPQQOSPERSISTENT;
+        _qctl.reply_qos    = TPQQOSPERSISTENT;
         break;
 
       case TPQQOSNONPERSISTENT:
-        qctl.flags = set ( qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS );
-        qctl.delivery_qos = TPQQOSNONPERSISTENT;
-        qctl.reply_qos  = TPQQOSNONPERSISTENT;
+        _qctl.flags        = set ( _qctl.flags, TPQDELIVERYQOS | TPQREPLYQOS );
+        _qctl.delivery_qos = TPQQOSNONPERSISTENT;
+        _qctl.reply_qos    = TPQQOSNONPERSISTENT;
         break;
 
       default:
@@ -275,21 +275,21 @@ namespace atmi {
     }
   }
 
-  void Queue::set_new_corrid() {
+  void queue::set_new_corrid() {
     // set correlation ID
     ostringstream corrid;
     timeb tb;
     ftime(&tb);
     corrid << getpid() << pthread_self() << (tb.millitm + (tb.time & 0xfffff) * 1000);
 
-    memset ( qctl.corrid, 0, TMCORRIDLEN);
-    strncpy ( qctl.corrid, corrid.str().c_str(), (corrid.str().length() > TMCORRIDLEN ? TMCORRIDLEN : corrid.str().length()));
-    set ( qctl.flags, TPQCORRID | TPQGETBYCORRID);
+    memset ( _qctl.corrid, 0, TMCORRIDLEN);
+    strncpy ( _qctl.corrid, corrid.str().c_str(), (corrid.str().length() > TMCORRIDLEN ? TMCORRIDLEN : corrid.str().length()));
+    set ( _qctl.flags, TPQCORRID | TPQGETBYCORRID);
   }
 
-  void Queue::unset_corrid() {
-    unset ( qctl.flags, TPQCORRID | TPQGETBYCORRID);
-    memset ( qctl.corrid, 0, TMCORRIDLEN);
+  void queue::unset_corrid() {
+    unset  ( _qctl.flags, TPQCORRID | TPQGETBYCORRID);
+    memset ( _qctl.corrid, 0, TMCORRIDLEN);
   }
 
 
