@@ -1,5 +1,5 @@
 /*
- * Buffers
+ * buffers
  *
  * Copyright (C) 2006 - herbert koelman
  *
@@ -20,8 +20,8 @@
  */
 
 
-#ifndef __BUFFERS__
-#define __BUFFERS__
+#ifndef __ATMI_BUFFERS__
+#define __ATMI_BUFFERS__
 
 #include <typeinfo>
 #include <fml.h>
@@ -36,24 +36,24 @@ namespace atmi {
 
 //----------------------------------------------------------------------------------------------
   class Field;
-  class Buffer;
+  class buffer;
 
   typedef char * Carray;
   typedef auto_ptr<Carray> ACarray;
-  typedef auto_ptr<Buffer> ABuffer;
+  typedef auto_ptr<buffer> Abuffer;
 
   /**
-   * FML Buffer
+   * FML buffer
    *
    */
-  class Buffer : public tuxedo {
+  class buffer : public tuxedo {
 
     public:
 
       friend class Field;
 
       /** Allocates a buffer of 1024bytes */
-      Buffer ();
+      buffer ();
 
       /** Create a new buffer reference.
        *
@@ -62,18 +62,18 @@ namespace atmi {
        *
        * @param b set FML32 buffer reference
        */
-      Buffer ( FBFR32 *b );
+      buffer ( FBFR32 *b );
 
       /** Allocates a buffer of byte size.
        * @param len bytes space of field value in bytres
        */
-      Buffer ( FLDLEN32 len );
+      buffer ( FLDLEN32 len );
 
       /** default destructor
        *
        * If memory was allocated by this instance then it will be freed. Otherwise the buffer is not deallocated.
        */
-      ~Buffer ();
+      ~buffer ();
 
       /**
        * @return true if it's a FMLTYPE32 buffer type
@@ -188,23 +188,23 @@ namespace atmi {
       /** Checks equality of two buffers (based upon chksum)
        * @return true if both checksums are equal.
        */
-      bool operator== ( Buffer &);
+      bool operator== ( buffer &);
 
       /** Copies the content of a fielded buffer into another
        */
-      Buffer &operator= (Buffer &);
+      buffer &operator= (buffer &);
 
     private:
 
       /** FML buffer reference */
-      FBFR32 *buffer;
+      FBFR32 *_buffer;
 
-      /** if true then buffer was allocated by the Buffer instance (thus it can be freed when needed).
+      /** if true then buffer was allocated by the buffer instance (thus it can be freed when needed).
        */
-      bool allocated;
+      bool _allocated;
 
       /** value by which the buffer size will be extended */
-      long extent;
+      long _extent;
   };
 
 // ---------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ namespace atmi {
 
     public:
 
-      friend class Buffer;
+      friend class buffer;
 
       /** Default destructor
        */
@@ -293,7 +293,7 @@ namespace atmi {
        *
        * @param b buffer from which to retrieve the field's value
        */
-      virtual int get ( Buffer *b ) = 0;
+      virtual int get ( buffer *b ) = 0;
 
       /** Retrieves the value of the field's occurence found into the buffer
        *
@@ -302,7 +302,7 @@ namespace atmi {
        * @param b buffer from which to retrieve the field's value
        * @param occ occurence to retreive
        */
-      virtual int get ( Buffer *b, FLDOCC32 occ ) = 0;
+      virtual int get ( buffer *b, FLDOCC32 occ ) = 0;
 
       /** add the fiels into the buffer
        *
@@ -310,19 +310,19 @@ namespace atmi {
        *
        * @param b buffer in which to add the field.
        */
-      virtual int add ( Buffer *b ) = 0;
+      virtual int add ( buffer *b ) = 0;
 
       /** set the value of the field's value
        *
        * @param b the buffer in which the value must be changed
        */
-      virtual int set ( Buffer *b ) = 0;
+      virtual int set ( buffer *b ) = 0;
 
       /** removes the field from the buffer
        *
        * @param b the buffer from which to remove the field
        */
-      virtual int remove ( Buffer *b );
+      virtual int remove ( buffer *b );
 
     private:
       FLDID32 fid;  // Field ID
@@ -410,7 +410,7 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( Buffer *b) {
+      virtual int set ( buffer *b) {
 
         int rc = -1;
 
@@ -422,7 +422,7 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( Buffer *b) {
+      virtual int add ( buffer *b) {
 
         int rc = -1;
         try {
@@ -443,12 +443,12 @@ namespace atmi {
         return rc;
       };
 
-      virtual int get ( Buffer *b ){
+      virtual int get ( buffer *b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( Buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer *b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = length();
@@ -674,7 +674,7 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( Buffer *b) {
+      virtual int set ( buffer *b) {
 
         int rc = -1;
 
@@ -686,7 +686,7 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( Buffer *b) {
+      virtual int add ( buffer *b) {
 
         int rc = -1;
         if ( length () > 0 ) {
@@ -711,12 +711,12 @@ namespace atmi {
         return rc;
       };
 
-      virtual int get ( Buffer *b ){
+      virtual int get ( buffer *b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( Buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer *b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = 0;
@@ -836,7 +836,7 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( Buffer *b) {
+      virtual int set ( buffer *b) {
 
         int rc = -1;
 
@@ -848,7 +848,7 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( Buffer *b) {
+      virtual int add ( buffer *b) {
 
         int rc = -1;
         if ( length () > 0 ) {
@@ -874,12 +874,12 @@ namespace atmi {
         return rc;
       };
 
-      virtual int get ( Buffer *b ){
+      virtual int get ( buffer *b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( Buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer *b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = 0;

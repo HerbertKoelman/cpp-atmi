@@ -42,12 +42,12 @@ namespace atmi {
 
 /* operations ------------------------------------------------*/
 
-  int queue::enqueue ( Buffer *data ) {
+  int queue::enqueue (buffer *data ) {
 
     return enqueue ( (char *)data->get_buffer(), 0 );
   }
 
-  int queue::dequeue ( Buffer *data ) {
+  int queue::dequeue (buffer *data ) {
 
     int rc = -1;
     long len = 0;
@@ -97,7 +97,7 @@ namespace atmi {
     return rc;
   }
 
-  int queue::dequeueReply ( Buffer *data ) {
+  int queue::dequeueReply (buffer *data ) {
 
     return dequeueReply ( (char **) data->get_buffer(), 0 );
   }
@@ -115,7 +115,7 @@ namespace atmi {
     return rc;
   }
 
-  int queue::enqueueReply ( Buffer *data ) {
+  int queue::enqueueReply (buffer *data ) {
 
     return enqueueReply ( (char *)data->get_buffer(), 0 );
   }

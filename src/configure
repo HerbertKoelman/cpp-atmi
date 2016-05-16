@@ -585,7 +585,7 @@ PACKAGE_STRING='cpp-atmi beta.v2.1-04122012'
 PACKAGE_BUGREPORT='herbert.koelman@me.com'
 PACKAGE_URL='http://herbertkoelman.github.io/atmiplusplus/'
 
-ac_unique_file="Tuxedo.cpp"
+ac_unique_file="tuxedo.cpp"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>

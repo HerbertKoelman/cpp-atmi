@@ -7,7 +7,7 @@ AC_CONFIG_HEADERS([../include/atmi/config.h])
 
 AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
 
-AC_CONFIG_SRCDIR([Tuxedo.cpp])
+AC_CONFIG_SRCDIR([tuxedo.cpp])
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 

@@ -16,37 +16,34 @@ using namespace std;
 
 namespace atmi {
 
-/* Buffer --------------------------------------------------------------------*/
+/* buffer --------------------------------------------------------------------*/
 
-  Buffer::Buffer () : buffer (NULL) {
+  buffer::buffer () : _buffer (NULL) {
 
-    extent = 1024;
-    allocated = true;
-    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
+    _extent    = 1024;
+    _allocated = true;
+    _buffer    = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, _extent );
   }
 
-  Buffer::Buffer ( FBFR32 *b ){
-    allocated = false;
+  buffer::buffer ( FBFR32 *b ){
+    _allocated = false;
     set_buffer ( b );
   }
 
-  Buffer::Buffer ( FLDLEN32 len ) : buffer (NULL) {
+  buffer::buffer ( FLDLEN32 len ) : _buffer (NULL) {
 
-    this->extent = len;
-    allocated = true;
-    buffer = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, extent );
+    _extent    = len;
+    _allocated = true;
+    _buffer    = (FBFR32 *)allocate ( const_cast<char *>(FMLTYPE32), NULL, _extent );
   }
 
-  Buffer::~Buffer () {
-// cout << "Buffer destructor ... allocated is " << allocated << endl;
-    if ( allocated ) {
-// cout << "is freeing a buffer..." << endl;
-// print();
-      free ( (char *) buffer );
+  buffer::~buffer () {
+    if ( _allocated ) {
+      free ( (char *) _buffer );
     }
   }
 
-  bool Buffer::is_fml32_buffer( char *buffer){
+  bool buffer::is_fml32_buffer( char *buffer){
 
     char type[MAXTIDENT+1];
     if ( tptypes ((char *) buffer, type, NULL ) == -1 ) {
@@ -56,7 +53,7 @@ namespace atmi {
     return (strncmp ( FMLTYPE32, type, 8) == 0 );
   }
 
-  Field *Buffer::set ( Field *f ){
+  Field *buffer::set ( Field *f ){
 
     if ( f == NULL ) {
       throw atmi_exception ("Setting a NULL field !!??");
@@ -66,11 +63,11 @@ namespace atmi {
     return f;
   }
 
-/** add the field into the buffer.
- *
- * @param f the field to add
- */
-  Field *Buffer::add ( Field *f ){
+  /** add the field into the buffer.
+   *
+   * @param f the field to add
+   */
+  Field *buffer::add ( Field *f ){
 
     if ( f == NULL ) {
       throw atmi_exception ("Adding a NULL field !!??");
@@ -81,33 +78,33 @@ namespace atmi {
     return f;
   }
 
-  void Buffer::pack () {
+  void buffer::pack () {
 
     resize ( used() );
   };
 
-  void Buffer::resize ( long extent ){
+  void buffer::resize ( long extent ){
 
-    this->extent = extent;
-    buffer = (FBFR32 *) Tuxedo::extend ( (char *) buffer, this->extent );
+    _extent = extent;
+    _buffer = (FBFR32 *) tuxedo::extend ( (char *) _buffer, _extent );
   };
 
-  void Buffer::extend() {
+  void buffer::extend() {
 
-    resize ( size() + extent );
+    resize ( size() + _extent );
   };
 
-  Field *Buffer::append ( Field *f ){
+  Field *buffer::append ( Field *f ){
 
-    throw atmi_exception ( "Method append is not implemented yat !!??;" );
+    throw atmi_exception ( "Method append is not implemented yet !!??;" );
     return NULL;
   }
 
-/** remove a field from the buffer
- *
- * @param f field to remove
- */
-  void Buffer::remove ( Field *f ){
+  /** remove a field from the buffer
+   *
+   * @param f field to remove
+   */
+  void buffer::remove ( Field *f ){
 
     if ( f != NULL ) {
       f->remove ( this );
@@ -116,41 +113,37 @@ namespace atmi {
     }
   }
 
-/** gets the value (if exsists) of passed field
- *
- * @param f field for which we want to get the value
- */
-  Field *Buffer::get ( Field *f, FLDOCC32 occ ) {
+  /** gets the value (if exsists) of passed field.
+   *
+   * @param f field for which we want to get the value
+   */
+  Field *buffer::get ( Field *f, FLDOCC32 occ ) {
 
     if ( f != NULL ) {
       f->get( this, occ );
     } else {
-      throw atmi_exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
+      throw atmi_exception ( "buffer get failed. You passed a NULL pointer as field !!" );
     }
     return f;
   };
 
-/** gets the value (if exsists) of passed field
- *
- * @param f field for which we want to get the value
- */
-  Field *Buffer::get ( Field *f ) {
+  /** gets the value (if exsists) of passed field
+   *
+   * @param f field for which we want to get the value
+   */
+  Field *buffer::get ( Field *f ) {
 
     if ( f != NULL ) {
       f->get( this );
     } else {
-      throw atmi_exception ( "Buffer get failed. You passed a NULL pointer as field !!" );
+      throw atmi_exception ( "buffer get failed. You passed a NULL pointer as field !!" );
     }
     return f;
   };
 
-  /** returns the number of occurence of the given field into the buffer
-   *
-   * @param f a field for which to search for occurences
-   */
-  FLDOCC32 Buffer::occurences ( const Field *f ){
+  FLDOCC32 buffer::occurences ( const Field *f ){
 
-    int rc = Foccur32 ( buffer, f->fid );
+    int rc = Foccur32 ( _buffer, f->fid );
     if ( rc < 0 ) {
       throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f->fname, f->fid );
     }
@@ -158,29 +151,21 @@ namespace atmi {
     return rc;
   };
 
-  /**
-   * @return the size of the buffer (in bytes)
-   */
-  long Buffer::size () {
-    return ( buffer == NULL ? 0 : Fsizeof32 ( buffer ));
+  long buffer::size () {
+    return ( _buffer == NULL ? 0 : Fsizeof32 ( _buffer ));
   };
 
-  /** @return number of bytes stored into the buffer */
-  long Buffer::used () {
-    return ( buffer == NULL ? 0 : Fused32 ( buffer ));
+  long buffer::used () {
+    return ( _buffer == NULL ? 0 : Fused32 ( _buffer ));
   };
 
-  /** @return number of bytes not yet used into the buffer */
-  long Buffer::unused () {
-    return ( buffer == NULL ? 0 : Funused32 ( buffer ));
+  long buffer::unused () {
+    return ( _buffer == NULL ? 0 : Funused32 ( _buffer ));
   };
 
-  /**
-   * @return the checksum value of the current buffer content
-   */
-  long Buffer::chksum() {
+  long buffer::chksum() {
 
-    long sum = Fchksum32 ( buffer );
+    long sum = Fchksum32 ( _buffer );
     if ( sum < 0 ) {
       throw buffer_exception (Ferror32, "Fchksum call on buffer failed." );
     }
@@ -188,76 +173,45 @@ namespace atmi {
     return sum;
   };
 
-  /**
-   * @return  return count of all occurrences in buffer
-   */
-  FLDOCC32 Buffer::num() {
+  FLDOCC32 buffer::num() {
 
-    return Fnum32 ( buffer );
+    return Fnum32 ( _buffer );
   };
 
-  /** print's on stdout the content of the buffer (debugging purpose mainly)
-   */
-  void Buffer::print () {
+  void buffer::print () {
 
-    Fprint32 ( buffer );
+    Fprint32 ( _buffer );
   };
 
-  bool Buffer::is_handling_memory(){
-    return allocated;
+  bool buffer::is_handling_memory(){
+    return _allocated;
   }
 
-  void Buffer::set_handling_memory ( bool b) {
-    allocated = b;
+  void buffer::set_handling_memory ( bool b) {
+    _allocated = b;
   }
 
   /**
    * @return the reference the current internal buffer.
    */
-  FBFR32 *Buffer::get_buffer () {
+  FBFR32 *buffer::get_buffer () {
 
-    return buffer;
+    return _buffer;
   };
 
-  /** replaces the current buffer reference by the given one.
-   *
-   * If preveous reference was allocated by this instance, then the buffer is freed before setting the new buffer reference.
-   * The buffer instance is then flagged as not allocated. Meaning that it's up to you to free the memory that was allocated.
-   *
-   * @param b reference of an FML buffer.
-   * @throws atmi_exception if the buffer is not an FML buffer.
-   */
-  void Buffer::set_buffer ( FBFR32 *b ) {
+  void buffer::set_buffer ( FBFR32 *b ) {
 
     if ( is_fml32_buffer ( (char *)b)) { // this a lazy way to go and will need some update
 
-      buffer = b;
+      _buffer = b;
 
     } else {
       throw atmi_exception ( "This buffer reference is not of type FMLTYPE32." );
     }
 
-    /* moved into static method is_fml32_buffer
-       char type[9];
-       if ( tptypes ( (char *) b, type, NULL) > 0 ) {
-       if ( strcmp ( FMLTYPE32, type ) == 0 ) {
-
-        free ( (char *) buffer );
-        buffer = b;
-
-       } else {
-        throw atmi_exception ( "This buffer reference is not of type FMLTYPE32." );
-       }
-       }else {
-
-       throw tuxedo_exception ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
-       }
-     */
   };
 
-  /** @return true if both buffer's checksums were equal
-   */
-  bool Buffer::operator== ( Buffer &b) {
+  bool buffer::operator== ( buffer &b) {
 
     return ( this->chksum () == b.chksum() );
   };
@@ -267,11 +221,11 @@ namespace atmi {
    * @param b source buffer
    * @return target buffer
    */
-  Buffer & Buffer::operator= ( Buffer &b) {
+  buffer & buffer::operator= ( buffer &b) {
 
     int rc = -1;
 
-    rc = Fcpy32 ( this->buffer, b.buffer );
+    rc = Fcpy32 ( _buffer, b._buffer );
     if ( rc == -1 ) {
       throw buffer_exception ( Ferror32, "FCOPY32 failed.");
     }

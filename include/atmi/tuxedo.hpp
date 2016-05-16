@@ -43,13 +43,13 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
-  class Buffer;
+  class buffer;
 
   class Tp;
   class queue;
 
   typedef auto_ptr<Tp> ATp;
-  typedef auto_ptr<queue> Aqueue;
+  typedef auto_ptr<atmi::queue> queue_auto_ptr;
 
   /**
    * All common used ATMI method are group in this class.
@@ -83,7 +83,7 @@ namespace atmi {
       /**
        * Allocate a new buffer. 
        *
-       * Buffer types provided by tuxedo
+       * buffer types provided by tuxedo
        * CARRAY	   Character array (possibly containing NULL characters) that is neither encoded nor decoded during transmission
        * STRING	   NULL-terminated character array
        * FML		   FML fielded buffer
@@ -93,7 +93,7 @@ namespace atmi {
        * X_ COMMON Equivalent to VIEW; provided for XATMI compatibility
        * FML32     FML32 fielded buffer, using 32-bit identifiers and offsets
        * VIEW32    C structure or FML32 view, using 32-bit identifiers, counter variables, and size variables
-       * XML       Buffer for XML documents
+       * XML       buffer for XML documents
        * MBSTRING  Character array for multibyte characters
        *
        * Note that only the first eight bytes of type and the first 16 bytes
@@ -270,7 +270,7 @@ namespace atmi {
  * need to pass a valid TUXCONFIG file when constructing an AbstractClient instance. The multiconext mode is available
  * only for native clients.
  *
- * Two factory methods are available to construct Tp and queue class instances (new_tp_instance and new_queue_instance). These methods return ATp and Aqueue
+ * Two factory methods are available to construct Tp and queue class instances (new_tp_instance and new_queue_instance). These methods return ATp and queue_auto_ptr
  * which are auto pointers. which is probaly the best way to avoid memory leaks.
  *
  */
@@ -294,7 +294,7 @@ namespace atmi {
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build Aqueue and ATp objects.
+       * should use factory methods  to build queue_auto_ptr and ATp objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
@@ -314,7 +314,7 @@ namespace atmi {
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
        * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build Aqueue and ATp objects.
+       * should use factory methods  to build queue_auto_ptr and ATp objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
@@ -344,7 +344,7 @@ namespace atmi {
        *
        * @return  an auto_ptr to a new queue instance
        */
-      Aqueue new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
+      queue_auto_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
 
       TPCONTEXT_T get_context () {
         return context;
@@ -466,7 +466,7 @@ namespace atmi {
        *
        * @see atmi::Tuxedo
        */
-      int call( Buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
+      int call( buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
 
       /**
        * Call service.
@@ -514,7 +514,7 @@ namespace atmi {
        *
        * @throw An exception is raised upon failure
        */
-      int acall( Buffer *buffer );
+      int acall( buffer *buffer );
 
       /**
        * get reply from previous asynchronious service call.
@@ -533,7 +533,7 @@ namespace atmi {
        * @param urcode - user return code
        * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
        */
-      int reply ( Buffer *buffer,int *urcode = NULL, int *cd = NULL );
+      int reply ( buffer *buffer,int *urcode = NULL, int *cd = NULL );
 
       /**
        * Cancel asynchronious service call.
@@ -600,13 +600,13 @@ namespace atmi {
        *
        * @param data tuxedo FML32 buffer (allocated with tuxedo::allocate)
        */
-      int enqueue ( Buffer *data );
+      int enqueue ( buffer *data );
 
       /** dequeue a message
        *
        * @param data tuxedo FML32 buffer (allocated with tuxedo::allocate)
        */
-      int dequeue ( Buffer *data );
+      int dequeue ( buffer *data );
 
       /** dequeue a reply message
        *
@@ -624,7 +624,7 @@ namespace atmi {
        *
        * @param data tuxedo buffer (allocated with tuxedo::allocate)
        */
-      int dequeueReply ( Buffer *data );
+      int dequeueReply ( buffer *data );
 
       /** enqueue a reply message
        *
@@ -643,7 +643,7 @@ namespace atmi {
        *
        * @param data tuxedo buffer (allocated with tuxedo::allocate)
        */
-      int enqueueReply ( Buffer *data );
+      int enqueueReply ( buffer *data );
 
       /**
        * indicate in wich queue the replies should be posted in.

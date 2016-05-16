@@ -103,10 +103,10 @@ namespace atmi {
     return ptr;
   }
 
-  AQueue AbstractClient::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
+  queue_auto_ptr AbstractClient::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
-    auto_ptr<Queue> ptr;
-    ptr.reset ( new Queue ( qspace, queue, reply ));
+    auto_ptr<atmi::queue> ptr;
+    ptr.reset ( new atmi::queue ( qspace, queue, reply ));
     ptr->set_context ( context );
     return ptr;
   }

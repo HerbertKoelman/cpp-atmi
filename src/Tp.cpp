@@ -59,7 +59,7 @@ namespace atmi {
     return rc;
   }
 
-  int Tp::call( Buffer *buffer, int *urcode,int retries, int delay ){
+  int Tp::call(atmi::buffer *buffer, int *urcode,int retries, int delay ){
 
     int rc = -1;
     long osize = buffer->size();
@@ -80,7 +80,7 @@ namespace atmi {
     return rc;
   }
 
-  int Tp::acall ( Buffer *buffer ) {
+  int Tp::acall (buffer *buffer ) {
 
     int ret = -1;
     calldesc = -1;
@@ -99,7 +99,7 @@ namespace atmi {
   }
 
 
-  int Tp::reply (Buffer *buffer, int *urcode, int *cd ) {
+  int Tp::reply (atmi::buffer *buffer, int *urcode, int *cd ) {
 
     int rc = -1;
     FBFR32 *b = buffer->get_buffer ();

@@ -71,9 +71,9 @@ namespace atmi {
     return rc;              // this the size in bytes needed
   };
 
-  int Field::remove ( Buffer *b) {
+  int Field::remove ( buffer *b) {
 
-    int rc = Fdel32 ( b->buffer, fid, focc );
+    int rc = Fdel32 ( b->_buffer, fid, focc );
     if ( rc < 0 ) {
       throw buffer_exception ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", fname, fid, focc );
     }
