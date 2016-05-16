@@ -194,24 +194,24 @@ namespace atmi {
       case QMERELEASE:
       case QMESHARE:
       {
-        DiagnosticException err ( _tperrno, _diagno );
+        diagnostic_exception err ( _tperrno, _diagno );
         err.setup_message ( msg, ap );
         throw err;
       }
       break;
       case QMEABORTED:
       {
-        AbortedException err ( _tperrno, _diagno );
+        aborted_exception err ( _tperrno, _diagno );
         err.setup_message (msg, ap );
         throw err;
       }
       break;
       /* these are not errors */
       case QMENOMSG:
-        // not an error - throw NomsgException ( _tperrno, _diagno, msg, ap );
+        // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
         break;
       default:
-        throw DiagnosticException ( _tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, _tperrno);
+        throw diagnostic_exception ( _tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, _tperrno);
     }
 
     va_end ( ap );

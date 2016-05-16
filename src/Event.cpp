@@ -19,7 +19,7 @@ namespace atmi {
     set_flags ( TPNOTRAN );
   }
 
-  long Event::post ( const char *data, long len ) throw (TuxedoException ){
+  long Event::post ( const char *data, long len ) throw (tuxedo_exception ){
     int ret = -1;
 
     if ( tppost ( const_cast<char *> (eventname), const_cast<char *>(data), len, flags ) != -1 ) {

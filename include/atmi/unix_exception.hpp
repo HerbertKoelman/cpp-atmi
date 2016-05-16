@@ -34,23 +34,22 @@ namespace atmi {
    * Unix related exceptions
    *
    */
-  class UnixException : public exception {
+  class unix_exception : public exception {
     public:
       /** Add a system message after the error message. The system message is returned by
        * strerror. The last errno value is used to set the system message.
        * @param msg user message.
        */
-      UnixException ( const char *msg = NULL, ... ) throw ();
+      unix_exception ( const char *msg = NULL, ... ) throw ();
 
       /** Add a system message after the error message. The system message is returned by
        * strerror.
        * @param err error number (like errno).
        * @param msg user message.
        */
-      UnixException ( int err=0, const char *msg = NULL, ... ) throw ();
+      unix_exception ( int err=0, const char *msg = NULL, ... ) throw ();
 
-      virtual ~UnixException () throw () {
-      };
+      virtual ~unix_exception () throw () { };
 
       /**
        * @return user friendly text message

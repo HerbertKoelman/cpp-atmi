@@ -49,7 +49,7 @@ ATMI_SRV_OBJS=Event.o Tp.o Queue.o QueueStream.o Tuxedo.o atmi_exception.o Abstr
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=AbstractClient.o ${ATMI_SRV_OBJS}
 
-BUFF_OBJS=Buffer.o Field.o BufferException.o
+BUFF_OBJS=Buffer.o Field.o buffer_exception.o
 
 all: libatmi++.a libfml++.a libcltatmi++.a gencat
 

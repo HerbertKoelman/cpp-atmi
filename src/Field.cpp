@@ -65,7 +65,7 @@ namespace atmi {
 
     int rc = Fneeded32 ( 1, (length() > 0 ? length() : 1 ));
     if ( rc < 0 ) {
-      throw BufferException ( Ferror32, "FNEEDED32i: failed to estimate needed space for field %s (id: %d, occ: %d). Make sure field contains data (length() > 0).", fname, fid, focc );
+      throw buffer_exception ( Ferror32, "FNEEDED32i: failed to estimate needed space for field %s (id: %d, occ: %d). Make sure field contains data (length() > 0).", fname, fid, focc );
     }
 
     return rc;              // this the size in bytes needed
@@ -75,7 +75,7 @@ namespace atmi {
 
     int rc = Fdel32 ( b->buffer, fid, focc );
     if ( rc < 0 ) {
-      throw BufferException ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", fname, fid, focc );
+      throw buffer_exception ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", fname, fid, focc );
     }
 
     return rc;
@@ -91,7 +91,7 @@ namespace atmi {
       this->fid = fid;
       this->focc = 0;
     } else {
-      throw BufferException ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", fid );
+      throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", fid );
     }
   };
 
@@ -103,7 +103,7 @@ namespace atmi {
     va_start ( ap, msg );
 
     if ( last_err != FNOTPRES ) {
-      throw BufferException ( last_err, msg, ap );
+      throw buffer_exception ( last_err, msg, ap );
     }
 
     va_end ( ap );

@@ -43,7 +43,7 @@ namespace atmi {
     updateErrno ();
 
     if ( buffer == NULL ) {
-      throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 28, "TPALLOCATE failed. Check ULOG for more information.") );
+      throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 28, "TPALLOCATE failed. Check ULOG for more information.") );
     }
 
     return buffer;
@@ -56,7 +56,7 @@ namespace atmi {
     updateErrno ();
 
     if ( b == NULL ) {
-      throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 29, "TPREALLOC failed. Check ULOG for more information.") );
+      throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 29, "TPREALLOC failed. Check ULOG for more information.") );
     }
 
     return b;
@@ -77,7 +77,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 30, "TPBEGIN failed. Check ULOG for more information.") );
+      throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 30, "TPBEGIN failed. Check ULOG for more information.") );
     }
 
     return rc;
@@ -92,7 +92,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 31, "TPCOMMIT failed. Check ULOG for more information.") );
+      throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 31, "TPCOMMIT failed. Check ULOG for more information.") );
     }
 
     return rc;
@@ -107,7 +107,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 32, "TPABORT failed. Check ULOG for more information.") );
+      throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 32, "TPABORT failed. Check ULOG for more information.") );
     }
 
     return rc;
@@ -121,12 +121,12 @@ namespace atmi {
     if ( context > 0 ) {
       rc = tpgetctxt ( &ctxt, 0 );
       if ( rc < 0 ) {
-        throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 34, "Context switch failed while calling tpgetctxt ( target context was %d )."), context );
+        throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 34, "Context switch failed while calling tpgetctxt ( target context was %d )."), context );
       } else {
         if ( context != ctxt ) {                         // check if we have to switch at all
           rc = tpsetctxt ( context, 0 );
           if ( rc < 0 ) {
-            throw TuxedoException ( tperrno, catgets ( catd, CATD_ATMI_SET, 35, "Context switch failed ( target context was %d )."), context );
+            throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 35, "Context switch failed ( target context was %d )."), context );
           }
         }
       }
@@ -164,35 +164,35 @@ namespace atmi {
       case TPEOS:
       case TPELIMIT:
       {                           // required because we are declaring variables
-        TuxedoException err ( _tperrno );
+        tuxedo_exception err ( _tperrno );
         err.setup_message ( msg,  ap );
         throw err;
       }
       break;
       case TPEBLOCK:
       {
-        BlockingException err ( _tperrno );
+        blocking_exception err ( _tperrno );
         err.setup_message ( msg,  ap );
         throw err;
       }
       break;
       case TPGOTSIG:
       {
-        InterruptException err ( _tperrno );
+        interrupt_exception err ( _tperrno );
         err.setup_message ( msg,  ap );
         throw err;
       }
       break;
       case TPESVCERR:
       {
-        ServiceException err ( _tperrno );
+        service_exception err ( _tperrno );
         err.setup_message ( msg,  ap );
         throw err;
       }
       break;
       case TPETIME:
       {
-        TimeoutException err ( _tperrno );
+        timeout_exception err ( _tperrno );
         err.setup_message ( msg,  ap );
         throw err;
       }
@@ -204,7 +204,7 @@ namespace atmi {
         break;
 
       default:
-        throw TuxedoException (_tperrno,catgets ( catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
+        throw tuxedo_exception (_tperrno,catgets ( catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
     };
 
     va_end (ap);

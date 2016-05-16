@@ -17,7 +17,7 @@ namespace atmi {
   Tp::Tp ( const char *service ) {
 
     // length 32 chars (see definition in atmi.h
-    if ( strlen ( service ) > 32 ) throw TuxedoException ( 0, "Given service name '%s' is too long.", service );
+    if ( strlen ( service ) > 32 ) throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
 
     this->service.clear();
     this->service = service;

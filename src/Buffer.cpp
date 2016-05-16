@@ -152,7 +152,7 @@ namespace atmi {
 
     int rc = Foccur32 ( buffer, f->fid );
     if ( rc < 0 ) {
-      throw BufferException ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f->fname, f->fid );
+      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f->fname, f->fid );
     }
 
     return rc;
@@ -182,7 +182,7 @@ namespace atmi {
 
     long sum = Fchksum32 ( buffer );
     if ( sum < 0 ) {
-      throw BufferException (Ferror32, "Fchksum call on buffer failed." );
+      throw buffer_exception (Ferror32, "Fchksum call on buffer failed." );
     }
 
     return sum;
@@ -250,7 +250,7 @@ namespace atmi {
        }
        }else {
 
-       throw TuxedoException ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
+       throw tuxedo_exception ( tperrno, "Method set_buffer failed to get buffer type (tptypes)." );
        }
      */
   };
@@ -273,7 +273,7 @@ namespace atmi {
 
     rc = Fcpy32 ( this->buffer, b.buffer );
     if ( rc == -1 ) {
-      throw BufferException ( Ferror32, "FCOPY32 failed.");
+      throw buffer_exception ( Ferror32, "FCOPY32 failed.");
     }
     return *this;
   };

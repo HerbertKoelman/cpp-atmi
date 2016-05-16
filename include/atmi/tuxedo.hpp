@@ -85,9 +85,9 @@ namespace atmi {
        */
 
       /**
-       * Allocate a new buffer of type. Depending on the type both subtype and
-       * len are optional.
+       * Allocate a new buffer of type. 
        *
+       * Depending on the type both subtype and len are optional.
        *
        * Buffer types provided by Tuxedo
        * CARRAY	   Character array (possibly containing NULL characters) that is neither encoded nor decoded during transmission
@@ -111,7 +111,7 @@ namespace atmi {
        *
        * @return allocated buffer or NULL if failed
        *
-       * @throw TuxedotException if something goes wrong.
+       * @throw tuxedo_exception if something goes wrong.
        */
       char *allocate ( const char *type, const char *subtype, long size );
 
@@ -134,14 +134,14 @@ namespace atmi {
        *
        * @param timeout max duration in seconds for a transaction to complete.
        *
-       * @throw TransactionException is raised upon failure.
+       * @throw transaction_exception is raised upon failure.
        */
       int begin ( int timeout = 0 );
 
       /**
        * Commit XA transaction
        *
-       * @throw TransactionException on failure.
+       * @throw transaction_exception on failure.
        */
       int commit ();
 
@@ -149,7 +149,7 @@ namespace atmi {
        * Abort XA transaction.
        *
        * Return:
-       * Upon failure an TransactionException is raised.
+       * Upon failure an transaction_exception is raised.
        */
       int abort ();
 
@@ -380,7 +380,7 @@ namespace atmi {
       /**
        * Setup minimal requirements (mainly tpopen)
        *
-       * @throw TuxedoException if tpopen failed.
+       * @throw tuxedo_exception if tpopen failed.
        */
       AbstractServer ();
 
@@ -432,9 +432,7 @@ namespace atmi {
   class Tp : public Tuxedo {
     public:
       /**
-       * call() sends a request and synchronously awaits its reply. A call to call () returns
-       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-       * should be > 0. All other error conditions are handled through Exceptions.
+       * Call service. 
        *
        * @param idata a data buffer preveously allocated with tpalloc() and hols input data
        * @param ilen  idata buffer lenght.
@@ -448,16 +446,16 @@ namespace atmi {
        * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
        * @return  0 TPSUCCESS is returned
        *
-       * @throw  ServiceException Upon TPESVCERR.
-       * @throw  TimeoutException Upon TPETIME.
-       * @throw  TuxedoException thrown for the other error conditions.
+       * @throw  service_exception Upon TPESVCERR.
+       * @throw  timeout_exception Upon TPETIME.
+       * @throw  tuxedo_exception thrown for the other error conditions.
+       *
+       * @see atmi::Tuxedo
        */
       int call( char *idata, long ilen, char **odata, long *olen, int *urcode = NULL,int retries = 0, int delay = 0 );
 
       /**
-       * call() sends a request and synchronously awaits its reply. A call to call () returns
-       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-       * should be > 0. All other error conditions are handled through Exceptions.
+       * Call service.
        *
        * @param buffer a data buffer preveously allocated
        * @param urcode user return code (see tpreturn)
@@ -468,18 +466,18 @@ namespace atmi {
        * @return  -1 is retuened upon service failure TPFAIL and tpurcode == 0
        * @return  0 TPSUCCESS is returned
        *
-       * @throw  ServiceException Upon TPESVCERR.
-       * @throw  TimeoutException Upon TPETIME.
-       * @throw  TuxedoException thrown for the other error conditions.
+       * @throw  service_exception Upon TPESVCERR.
+       * @throw  timeout_exception Upon TPETIME.
+       * @throw  tuxedo_exception thrown for the other error conditions.
+       *
+       * @see atmi::Tuxedo
        */
       int call( Buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
 
       /**
-       * call() sends a request and synchronously awaits its reply. A call to call () returns
-       * 0 if call succeed, -1 when no urcode was found else urcode is returned and
-       * should be > 0. All other error conditions are handled through Exceptions.
+       * Call service.
        *
-       * Input data buffer is used to as output data buffer.
+       * Input data buffer is used as output data buffer.
        *
        * @param idata a data buffer preveously allocated with tpalloc() and holds input data
        * @param ilen  idata buffer lenght.
@@ -491,46 +489,48 @@ namespace atmi {
        * @return -1 is retuened upon service failure TPFAIL and tpurcode == 0
        * @return 0 TPSUCCESS is returned
        *
-       * @throw ServiceException Upon TPESVCERR.
-       * @throw TimeoutException Upon TPETIME.
-       * @throw TuxedoException thrown for the other error conditions.
+       * @throw service_exception Upon TPESVCERR.
+       * @throw timeout_exception Upon TPETIME.
+       * @throw tuxedo_exception thrown for the other error conditions.
+       *
+       * @see Tp
        */
       int call( char **idata = NULL, long *ilen = 0, int *urcode = NULL, int retries = 0, int delay = 0 );
 
       /**
-       * acall() sends a request message to the service named by svc.
+       * Asynchronious service call.
        *
-       * Parameters:
-       * idata - a data buffer preveously allocated with tpalloc() and hols input data
-       * ilen  - idata buffer lenght.
+       * @param idata - a data buffer preveously allocated with tpalloc() and hols input data
+       * @param ilen  - idata buffer lenght.
        *
        * @return call descriptor if call succeeded else -1
        *
        * @throw An exception is raised upon failure
+       *
+       * @see reply
        */
       int acall( char *idata = NULL, long ilen = 0 );
 
       /**
-       * get reply from preveous acall().
+       * Asynchronious service call.
        *
-       * @param data - a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
-       * @param urcode - user return code
-       * @param len  - reponse buffer length.
-       * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
-       */
-      int reply ( char **data, long *len,int *urcode = NULL, int *cd = NULL );
-
-      /**
-       * acall() sends a request message to the service named by svc.
-       *
-       * Parameters:
-       * buffer - a fielded buffer preveously allocated with tpalloc() and hols input data
+       * @param buffer a fielded buffer preveously allocated with tpalloc() and hols input data
        *
        * @return call descriptor if call succeeded else -1
        *
        * @throw An exception is raised upon failure
        */
       int acall( Buffer *buffer );
+
+      /**
+       * get reply from preveous asynchronious service call.
+       *
+       * @param data    a data buffer preveously allocated with tpalloc() and that will hold returned data by the called service.
+       * @param urcode  user return code
+       * @param len     reponse buffer length.
+       * @param cd      a call descriptor. if 0 then last acall descriptor is used.
+       */
+      int reply ( char **data, long *len,int *urcode = NULL, int *cd = NULL );
 
       /**
        * get reply from preveous acall().
@@ -542,15 +542,16 @@ namespace atmi {
       int reply ( Buffer *buffer,int *urcode = NULL, int *cd = NULL );
 
       /**
-       * Cancel acall.
+       * Cancel asynchronious service call.
        *
-       * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
+       * @param cd call descriptor. if 0 then last acall descriptor is used.
        */
       int cancel ( int cd = 0 );
 
       inline int getCallDesc () {
         return calldesc;
       };
+
       inline string getService () {
         return service;
       };
@@ -826,7 +827,7 @@ namespace atmi {
        *
        * @return number of notifications number of event notifications dispatched by the EventBroker on behalf of eventname.
        */
-      long post ( const char *data = NULL, long len = 0 ) throw ( TuxedoException );
+      long post ( const char *data = NULL, long len = 0 ) throw ( tuxedo_exception );
 
     private:
       const char *eventname;

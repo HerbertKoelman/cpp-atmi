@@ -88,7 +88,7 @@ namespace atmi {
 
               // If we still don't succeed to export buffer we throw an exception and exit the program.
               if ( rc < 0 ) {
-                throw TuxedoException ( tperrno, "TPEXPORT failed. Check buffer size (last buffer size was %d bytes).", s );
+                throw tuxedo_exception ( tperrno, "TPEXPORT failed. Check buffer size (last buffer size was %d bytes).", s );
               }
             }
 
@@ -98,7 +98,7 @@ namespace atmi {
           }
           qs.queue->commit ();
 
-        } catch ( TimeoutException &timeout) {
+        } catch ( timeout_exception &timeout) {
           qs.queue->abort();
         }
       }
@@ -107,12 +107,12 @@ namespace atmi {
       delete  buffer;
 
       /* REMOVE - Handled in one and unique exception handler
-         }catch ( DiagnosticException &diagErr ) {
+         }catch ( diagnostic_exception &diagErr ) {
          qs.queue->abort();
          qs.free ( message );
          delete  buffer;
          throw;
-         }catch ( TuxedoException &tuxErr ) {
+         }catch ( tuxedo_exception &tuxErr ) {
          qs.queue->abort();
          qs.free ( message );
          delete buffer;
@@ -146,7 +146,7 @@ namespace atmi {
         rc = tpimport ( (char *)line.c_str(), line.size(), (char **) &message, &len, qs.flags );
 
         if ( rc < 0 ) {
-          throw TuxedoException ( tperrno, "TPIMPORT failed. Was this message exported using tpexport ?" );
+          throw tuxedo_exception ( tperrno, "TPIMPORT failed. Was this message exported using tpexport ?" );
         }
 
         try{ // to en dequeue message.
@@ -157,10 +157,10 @@ namespace atmi {
 
           qs.count++;
 
-        } catch ( DiagnosticException &diagErr ) {
+        } catch ( diagnostic_exception &diagErr ) {
           qs.queue->abort ();
           throw;
-        } catch (TuxedoException &tuxErr ) {
+        } catch (tuxedo_exception &tuxErr ) {
           qs.queue->abort ();
           throw;
         }
@@ -169,7 +169,7 @@ namespace atmi {
 
       qs.free ( message );
 
-    } catch (TuxedoException &terr ) {
+    } catch (tuxedo_exception &terr ) {
       qs.free ( message );
       throw;
     }             // try-end

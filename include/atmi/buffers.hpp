@@ -112,21 +112,21 @@ namespace atmi {
       /** Extends the buffer size with the given bytes
        *
        * @param extent size in bytes of the extent
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       void resize ( long extent );
 
       /** Set a field's value into the buffer
        *
        * @param f a pointer to the field for which to change the value
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       Field *set    ( Field *f );
 
       /** Adds a field into the buffer
        *
        * @param f a pointer to the field to add into the buffer
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       Field *add    ( Field *f );         // FLDID fieldid, char *value, FLDLEN len );
 
@@ -139,14 +139,14 @@ namespace atmi {
       /** Removes the field from the buffer
        *
        * @param f a pointer to the field to remove
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       void remove ( Field *f );         // FLDID fieldid );
 
       /** Get the field value set in the buffer
        * @param f the field to set
        * @return the field when set
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       Field *get ( Field *f );
 
@@ -154,13 +154,13 @@ namespace atmi {
        * @param f the field to set
        * @param occ the field occurence to set
        * @return the field when set
-       * @throw BufferException upon failure
+       * @throw buffer_exception upon failure
        */
       Field *get ( Field *f, FLDOCC32 occ);
 
       /** @return the current check sum of the buffer
        *
-       * @throw BufferException when calcutaion fails.
+       * @throw buffer_exception when calcutaion fails.
        */
       long chksum();
 
@@ -425,7 +425,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) &value, length() );
         if ( rc < 0 ) {
-          throw BufferException ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -438,13 +438,13 @@ namespace atmi {
           if ( (needed () + b->used()) >= b->size()) {
             b->extend ();
           }
-        } catch ( BufferException buffErr ) {
+        } catch ( buffer_exception buffErr ) {
           throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
         };
 
         rc = Fadd32 ( b->get_buffer(), id(), (char *) &value, length() );
         if ( rc < 0 ) {
-          throw BufferException ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         } else {
           setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
         }
@@ -465,7 +465,7 @@ namespace atmi {
 
         rc = Fget32 ( b->get_buffer(), id(), occurence(), (char *) &value, &l );
         if ( rc == -1 ) {
-          throw BufferException (Ferror32, "FGET32 failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGET32 failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
@@ -689,7 +689,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) value.c_str(), length() );
         if ( rc < 0 ) {
-          throw BufferException ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -703,13 +703,13 @@ namespace atmi {
             if ( (needed () + b->used()) >= b->size()) {
               b->extend ();
             }
-          } catch ( BufferException buffErr ) {
+          } catch ( buffer_exception buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
           rc = Fadd32 ( b->get_buffer(), id(), (char *) value.c_str(), length() );
           if ( rc < 0 ) {
-            throw BufferException ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
@@ -740,7 +740,7 @@ namespace atmi {
           delete v;
 
         } else {
-          throw BufferException (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
@@ -851,7 +851,7 @@ namespace atmi {
 
         rc = Fchg32 ( b->get_buffer(), id(), occurence(), value, length() );
         if ( rc < 0 ) {
-          throw BufferException ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 TField::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
 
         return rc;
@@ -865,13 +865,13 @@ namespace atmi {
             if ( (needed () + b->used()) >= b->size()) {
               b->extend ();
             }
-          } catch ( BufferException buffErr ) {
+          } catch ( buffer_exception buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
           rc  = Fadd32 ( b->get_buffer(), id(), value, length() );
           if ( rc < 0 ) {
-            throw BufferException ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 TField::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
@@ -908,7 +908,7 @@ namespace atmi {
           delete[] v;
 
         } else {
-          throw BufferException (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETSA32 TField::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
