@@ -51,7 +51,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handletransactionerrno ( tperrno, "TPCALL to %s failed.", _service.c_str() );
+      rc = handle_transaction_errno ( tperrno, "TPCALL to %s failed.", _service.c_str() );
     }
 
     return rc;
@@ -88,7 +88,7 @@ namespace atmi {
     updateErrno ();
 
     if ( ret < 0 ) {
-      ret = handletransactionerrno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
+      ret = handle_transaction_errno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
     } else {
       _call_descriptor = ret;
     }
@@ -124,7 +124,7 @@ namespace atmi {
     updateErrno ();
 
     if ( ret < 0 ) {
-      ret = handletransactionerrno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
+      ret = handle_transaction_errno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
     } else {
       _call_descriptor = ret;
     }
@@ -149,7 +149,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handletransactionerrno ( tperrno, "TPGETREPLY from %s failed.", _service.c_str() );
+      rc = handle_transaction_errno ( tperrno, "TPGETREPLY from %s failed.", _service.c_str() );
     }
 
     return rc;
@@ -166,7 +166,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handletransactionerrno ( tperrno, "TPCANCEL of a call to %s failed." );
+      rc = handle_transaction_errno ( tperrno, "TPCANCEL of a call to %s failed." );
     }
 
     return rc;

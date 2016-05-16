@@ -81,7 +81,7 @@ namespace atmi {
       if ( tperrno == TPEDIAGNOSTIC ) {
         handle_diagnostics ( tperrno, _qctl.diagnostic, "Enqueue in %s:%s failed.", _qspace, queue );
       } else {
-        handleTperrno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
+        handle_transaction_errno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
       }
     }
 
@@ -157,7 +157,7 @@ namespace atmi {
           handle_diagnostics ( tperrno, _qctl.diagnostic, "Dequeue from %s:%s failed.", _qspace, queue );
         }
       } else {
-        handleTperrno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
+        handle_transaction_errno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
       }
     }
 

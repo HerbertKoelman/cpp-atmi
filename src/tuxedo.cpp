@@ -146,7 +146,7 @@ namespace atmi {
     return f;
   }
 
-  int tuxedo::handleTperrno ( int _tperrno, const char *msg, ... ) {
+  int tuxedo::handle_transaction_errno ( int _tperrno, const char *msg, ... ) {
 
     va_list ap;
     va_start ( ap, msg );

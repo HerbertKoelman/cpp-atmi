@@ -80,7 +80,7 @@ namespace atmi {
     rc = tpinit ( tpinfo );
 
     if ( rc < 0 ) {
-      //  handleTperrno ( tperrno, "TPINIT failed. Is application started ? Check ULOG for more." );
+      //  handletransactionerrno ( tperrno, "TPINIT failed. Is application started ? Check ULOG for more." );
       if (  tperrno == TPEPERM ) {
         throw tuxedo_exception  ( tperrno, "TPINIT access permission to DOMAIN denied. Check user and password." );
       }else{
@@ -97,8 +97,8 @@ namespace atmi {
 
   tp_auto_ptr abstract_client::new_tp_instance ( const char *svc ){
 
-    auto_ptr<Tp> ptr;
-    ptr.reset ( new Tp ( svc ));
+    auto_ptr<transaction> ptr;
+    ptr.reset ( new transaction ( svc ));
     ptr->set_context ( context );
     return ptr;
   }

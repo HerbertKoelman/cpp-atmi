@@ -27,7 +27,7 @@ namespace atmi {
       ret = tpurcode;
     }else{
       // Throw an eventException
-      handleTperrno ( tperrno, "Post event %s failed.", eventname );
+      handle_transaction_errno ( tperrno, "Post event %s failed.", eventname );
     }
 
     return ret;

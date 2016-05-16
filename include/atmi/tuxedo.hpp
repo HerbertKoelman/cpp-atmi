@@ -245,9 +245,9 @@ namespace atmi {
        * @param tpe tperrno to handle
        * @param msg message to setup in thrown exception.
        * @param ... substitution parameters
-       * @return legacy will be removed when prototype will be changed to void handletransactionerrno()
+       * @return legacy will be removed when prototype will be changed to void handle_transaction_errno()
        */
-      virtual int handletransactionerrno ( int tpe, const char *msg = NULL, ... );
+      virtual int handle_transaction_errno ( int tpe, const char *msg = NULL, ... );
 
       long flags;
       nl_catd catd;
