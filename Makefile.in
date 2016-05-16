@@ -32,7 +32,7 @@ globber:
 	cd src ;$(MAKE) globber
 
 doxygen:
-	${DOXYGEN} doxyconf
+	${DOXYGEN}
 
 beautifull:
 	cd src/tuxedo ;$(MAKE) beautifull
