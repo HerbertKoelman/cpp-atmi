@@ -188,8 +188,8 @@ namespace atmi {
 
     protected:
 
-      int tuxerror;
-      int errdetail;
+      int tuxerror; //!< A Tuxedo error number (tperrno)
+      int errdetail;//!< Tuxedo detail error number
 
   };
 
@@ -198,9 +198,14 @@ namespace atmi {
  */
   class service_exception : public tuxedo_exception {
     public:
+      /** new instance.
+       *
+       * @param err error number
+       * @param msg error message format
+       * @param ... error message parameters.
+       */
       service_exception ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~service_exception () throw () {
-      };
+      virtual ~service_exception () throw () { };
   };
 
 /**
@@ -208,9 +213,14 @@ namespace atmi {
  */
   class timeout_exception : public tuxedo_exception {
     public:
+      /** new instance.
+       *
+       * @param err error number
+       * @param msg error message format
+       * @param ... error message parameters.
+       */
       timeout_exception ( int err, const char *msg = NULL, ... ) throw ();
-      virtual ~timeout_exception () throw (){
-      };
+      virtual ~timeout_exception () throw (){ };
   };
 
 /**
@@ -219,6 +229,12 @@ namespace atmi {
  */
   class blocking_exception : public tuxedo_exception {
     public:
+      /** new instance.
+       *
+       * @param err error number
+       * @param msg error message format
+       * @param ... error message parameters.
+       */
       blocking_exception ( int err, const char *msg = NULL, ... ) throw ();
       virtual ~blocking_exception () throw () {
       };
@@ -229,17 +245,22 @@ namespace atmi {
  */
   class interrupt_exception : public tuxedo_exception {
     public:
+      /** new instance.
+       *
+       * @param err error number
+       * @param msg error message format
+       * @param ... error message parameters.
+       */
       interrupt_exception ( int err, const char *msg = NULL, ... ) throw ();
       virtual ~interrupt_exception () throw () {
       };
   };
 
-/****************************************************************************
- *
- * /Q related exceptions
- *
- ***************************************************************************/
-
+  /**
+   *
+   * /Q related exceptions
+   *
+   */
   class diagnostic_exception : public tuxedo_exception {
     public:
       /**
@@ -247,7 +268,8 @@ namespace atmi {
        *
        * @param err value of tperr
        * @param diagno value of ctl.diagnostic
-       * @param msg error message.
+       * @param msg error message format.
+       * @param ... error message parameters
        */
       diagnostic_exception ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
       virtual ~diagnostic_exception ()  throw () {
@@ -279,6 +301,14 @@ namespace atmi {
  */
   class nomsg_exception : public diagnostic_exception {
     public:
+      /**
+       * Constructs a Queue exeption
+       *
+       * @param err value of tperr
+       * @param diagno value of ctl.diagnostic
+       * @param msg error message format.
+       * @param ... error message parameters
+       */
       nomsg_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
       virtual ~nomsg_exception () throw () {
       };
@@ -289,6 +319,7 @@ namespace atmi {
  */
   class aborted_exception : public diagnostic_exception {
     public:
+
       aborted_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
       virtual ~aborted_exception () throw () {
       };
