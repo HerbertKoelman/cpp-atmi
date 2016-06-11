@@ -67,7 +67,7 @@ namespace atmi {
       void setup_message ( const char *, va_list );
 
     protected:
-      string message;
+      string message; //!< error message
   };
 
   /** Unix related exceptions.
@@ -79,17 +79,19 @@ namespace atmi {
       /** new unix exception.
        *
        * @param err errno value
-       * @param error message
+       * @param msg error message
        * @param ... error message parameters (variadic).
        */
       unix_exception ( int err, const char *msg = NULL, ... ) throw ();
 
       /** new unix exception.
        *
-       * @param error message
+       * @param msg error message
        * @param ... error message parameters (variadic).
        */
       unix_exception ( const char *msg, ... ) throw () ;
+
+      /** default constructor */
       virtual ~unix_exception () throw() {};
 
       /**
@@ -101,7 +103,7 @@ namespace atmi {
        */
       int get_errno ();
     protected:
-      int error;
+      int error; //!< unix errno
   };
 
   /** FML buffer related exceptions.
@@ -109,6 +111,12 @@ namespace atmi {
    */
   class buffer_exception : public atmi_exception {
     public:
+      /** new buffer error instance.
+       *
+       * @param err Ferror32 value
+       * @param msg explanation message
+       * @param ... message parameters
+       */
       buffer_exception ( int err, const char *msg = NULL, ... ) throw ();
 
       /**
@@ -132,7 +140,7 @@ namespace atmi {
       virtual const char *what() throw ();
 
     protected:
-      int ferror;
+      int ferror; //!< related Ferror32 error number.
   };
 
   /**
@@ -320,6 +328,14 @@ namespace atmi {
   class aborted_exception : public diagnostic_exception {
     public:
 
+      /**
+       * Constructs an aborted  exeption
+       *
+       * @param err value of tperr
+       * @param diagno value of ctl.diagnostic
+       * @param msg error message format.
+       * @param ... error message parameters
+       */
       aborted_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
       virtual ~aborted_exception () throw () {
       };

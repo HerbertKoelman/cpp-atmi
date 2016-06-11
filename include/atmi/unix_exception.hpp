@@ -22,8 +22,8 @@
 #include <exception>
 #include <string>
 
-#ifndef __UNIX_EXCEPTION__
-#define __UNIX_EXCEPTION__
+#ifndef __ATMI_UNIX_EXCEPTION__
+#define __ATMI_UNIX_EXCEPTION__
 
 using namespace std;
 
@@ -56,12 +56,19 @@ namespace atmi {
        */
       virtual const char *what () throw ();
 
+      /** @return exception's errno */
       int get_errno ();
     protected:
+
+      /** helper method that set's up an explanation message.
+       * 
+       * @param msg explanantion message
+       * @param args variadic
+       */
       void setup_message ( const char *msg, va_list args );
 
-      int error;
-      string message;
+      int error; //!< related errno value
+      string message; //!< explanation message
   };
 }
 #endif

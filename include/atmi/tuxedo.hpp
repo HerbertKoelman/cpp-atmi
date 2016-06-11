@@ -147,7 +147,7 @@ namespace atmi {
       /**
        * Abort XA transaction.
        *
-       * @trhow transaction_exception if abort failed.
+       * @throw transaction_exception if abort failed.
        */
       int abort ();
 
@@ -157,6 +157,7 @@ namespace atmi {
       inline long  get_errno () {
         return errorno;
       };
+
       /**
        * @return an error description string of the last errno
        */
@@ -177,9 +178,9 @@ namespace atmi {
         return tpstrerrordetail ( errornodetail, 0 );
       };
 
-      /** set the tuxedo context to use when calling tuxedo functions.
+      /** set the tuxedo context to use when calling tuxedo functions(tpsetctxt()).
        *
-       * When set, ATMI++ switches to this context (@tpsetctxt()@ ) before executing a tuxedo call.
+       * When set, ATMI++ switches to this context before executing a tuxedo call.
        *
        * @param c context to be used by this instance
        */
@@ -217,6 +218,9 @@ namespace atmi {
         tuxedo::set (this->flags, flags);
       };
 
+      /** unset flags
+       * @param flags flags to unset
+       */
       inline void unsetFlags ( long flags ) {
         tuxedo::unset (this->flags, flags);
       };
@@ -226,7 +230,7 @@ namespace atmi {
         return CPP_ATMI_VERSION;
       };
 
-      static const long FAILED = -1;
+      static const long FAILED = -1; //!< Tuxedo error value
 
     protected:
 
@@ -242,6 +246,7 @@ namespace atmi {
        */
       static long set ( long, long );
 
+      /** update current errno and sets what must be set. */
       void updateErrno ();
 
       /**
@@ -254,8 +259,8 @@ namespace atmi {
        */
       virtual int handle_transaction_errno ( int tpe, const char *msg = NULL, ... );
 
-      long flags;
-      nl_catd catd;
+      long flags; //!< Tuxedo flags
+      nl_catd catd; //!< message catalog refenence
 
     private:
       long errorno;
@@ -372,8 +377,9 @@ namespace atmi {
 /**
  * Helper class to implement tuxedo AsbtractServers.
  *
+ * @deprecated clutters server code.
  */
-  class AbstractServer : public tuxedo {
+  class abstract_server : public tuxedo {
     public:
 
       /**
@@ -381,12 +387,12 @@ namespace atmi {
        *
        * @throw tuxedo_exception if tpopen failed.
        */
-      AbstractServer ();
+      abstract_server ();
 
       /**
        * minimal cleanup
        */
-      ~AbstractServer ();
+      ~abstract_server ();
 
       /**
        * Terminates a BEA tuxedo ATMI server thread
@@ -547,10 +553,12 @@ namespace atmi {
        */
       int cancel ( int cd = 0 );
 
+      /** @return last asynchronous call descriptor. */
       inline int call_descriptor () {
         return _call_descriptor;
       };
 
+      /** @return transaction/service name */
       inline string service () {
         return _service;
       };
@@ -672,22 +680,29 @@ namespace atmi {
         _qspace = const_cast<char *>(qs);
       };
 
-      inline const char *get_queue_space () {
+      /** @return queue's queque space name */
+      inline const char *queue_space () {
         return _qspace;
       };
 
+      /** set the queue the instance is wrapping.
+       *
+       * @param q queue name 
+       * @see set_queue_space make sure the queue name exists in the current queue space.
+       */
       inline void set_queue ( char *q) {
         _queue = q;
       };
 
-      inline const char *get_queue () {
+      /** @return the currently wrapped queue name */
+      inline const char *queue () {
         return _queue;
       };
 
       /**
        * @return the current value of QCTL flags
        */
-      inline long get_qctl_flags () {
+      inline long qctl_flags () {
         return _qctl.flags;
       };
 
@@ -712,6 +727,7 @@ namespace atmi {
         return is_message_waiting ();
       };
 
+      /** @return ture if TPQWAIT flag is set. */.
       inline bool is_message_waiting () {
         return ((_qctl.flags & TPQWAIT) == TPQWAIT);
       };
@@ -728,13 +744,14 @@ namespace atmi {
 
       /** @return the diagnostic code returned by last call.
        */
-      inline int get_diagno () {
+      inline int diagno () {
         return _diagno;
       };
 
       /** Calculate and set qctl corid
        *
-       * Correlation ID is made of pid+threadid+<current time in milliseconds>. When the correlation is set the flags TPQGETBYCORRID and TPQCORRID are also set.
+       * Correlation ID is made of pid+threadid+current_time (in milliseconds).
+       * When the correlation is set the flags TPQGETBYCORRID and TPQCORRID are also set.
        * This means that subsequent calls to dequeue methods will get only message with the correleation id that was last set.
        */
       void set_new_corrid();
@@ -745,6 +762,12 @@ namespace atmi {
       void unset_corrid();
 
     protected:
+      /** handle queue diagnostic errors
+       *
+       * @param tux_tperrno tperrno to handle
+       * @param _tux_diagno diagnostic number
+       * @param msg related explanatory message.
+       */
       int handle_diagnostics ( int tux_tperrno, int _tux_diagno, const char *msg, ... );
 
     private:
@@ -834,17 +857,26 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
-/** Handles in/out operation on a queue
- *
- *
- */
+  /** Handles in/out operation on a queue
+   *
+   */
   class queue_stream : public tuxedo {
     public:
 
       friend ostream& operator<<(ostream& out, queue_stream& qs);
       friend istream& operator>>(istream& in, queue_stream& qs);
 
+      /** setup a queue stream.
+       *
+       * @param q a queue
+       */
       queue_stream ( queue *q );
+
+      /** setup a queue stream.
+       *
+       * @param q a queue
+       * @param bs stream buffer size.
+       */
       queue_stream ( queue *q, long bs );
 
       /** @return the number of messages handle by last IO operation
@@ -853,14 +885,21 @@ namespace atmi {
         return _count;
       };
 
+      /** set the stream buffer size.
+       * @param s buffer size (bytes)
+       */
       inline void set_buffer_size ( long s ) {
         _buffer_size = s;
       };
 
+      /** @return current buffer size */
       inline long buffer_size () {
         return _buffer_size;
       };
 
+      /** use base64 encoding 
+       * @param b if true, the encode using base64
+       */
       void encode_base64(bool b);
 
     protected:

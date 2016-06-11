@@ -38,13 +38,13 @@ namespace atmi {
   class field;
   class buffer;
 
-  typedef char * Carray;
+  typedef char * carray; //!< character array
 #if __cplusplus < 201103L
-  typedef auto_ptr<Carray> ACarray;
-  typedef auto_ptr<buffer> Abuffer;
+  typedef auto_ptr<carray> Acarray; //!< auto_ptr to a carray.
+  typedef auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
 #else
-  typedef unique_ptr<Carray> ACarray;
-  typedef unique_ptr<buffer> Abuffer;
+  typedef unique_ptr<Carray> ACarray; //!< unique_ptr to a carray.
+  typedef unique_ptr<buffer> Abuffer; //!< uniqueauto_ptr to a FML buffer. 
 #endif
 
   /**
@@ -281,6 +281,7 @@ namespace atmi {
        */
       virtual FLDLEN32  length () = 0;
 
+      /** @return number bytes needed to store the fields value */
       virtual long needed ();
 
       /** @return a string describing the field
@@ -299,7 +300,7 @@ namespace atmi {
        *
        * @param ferror Ferror32 value
        * @param format error message formatting string.
-       * @param        error message viariadic
+       * @param ...    error message viariadic
        * @return the handled ferror value.
        */
       int ferror_handler(int ferror, const char *format, ...);
@@ -502,7 +503,7 @@ namespace atmi {
         return rc;
       };
 
-      T value;
+      T value; //!< field's current value
 
   };
 
@@ -747,7 +748,7 @@ namespace atmi {
         return rc;
       };
 
-      string value;
+      string value; //!< string field's value
   };
 
   /** Specialization of template Tfield which handles CARRAY typed fields.
@@ -908,8 +909,8 @@ namespace atmi {
         return rc;
       };
 
-      FLDLEN32 len;
-      char    *value;
+      FLDLEN32 len;   //!< field length (bytes)
+      char    *value; //!< chacater buffer
   };
 
 /** Helper that handles the operator << between output streams and field value */

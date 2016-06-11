@@ -85,11 +85,12 @@ namespace atmi {
     virtual void log ( LoggingLevel at, const char *msg, va_list args) {};
 
 
-    string LEVELS[5];
+    string LEVELS[5]; //!< logging level names
 
+    /** initialize level name array */
     void setup_level_names ();
 
-    int level;
+    int level; //!< current logging level
   };
 
   /**
