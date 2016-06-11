@@ -690,12 +690,12 @@ namespace atmi {
        * @param q queue name 
        * @see set_queue_space make sure the queue name exists in the current queue space.
        */
-      inline void set_queue ( char *q) {
+      inline void set_queue_name ( char *q) {
         _queue = q;
       };
 
       /** @return the currently wrapped queue name */
-      inline const char *queue () {
+      inline const char *queue_name () {
         return _queue;
       };
 
@@ -727,7 +727,7 @@ namespace atmi {
         return is_message_waiting ();
       };
 
-      /** @return ture if TPQWAIT flag is set. */.
+      /** @return ture if TPQWAIT flag is set. */
       inline bool is_message_waiting () {
         return ((_qctl.flags & TPQWAIT) == TPQWAIT);
       };

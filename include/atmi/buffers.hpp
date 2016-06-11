@@ -43,7 +43,7 @@ namespace atmi {
   typedef auto_ptr<carray> Acarray; //!< auto_ptr to a carray.
   typedef auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
 #else
-  typedef unique_ptr<Carray> ACarray; //!< unique_ptr to a carray.
+  typedef unique_ptr<carray> ACarray; //!< unique_ptr to a carray.
   typedef unique_ptr<buffer> Abuffer; //!< uniqueauto_ptr to a FML buffer. 
 #endif
 
