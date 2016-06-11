@@ -107,41 +107,53 @@ namespace atmi {
        */
       void resize ( long extent );
 
-      /** Set a field's value into the buffer
+      /** Set/change a field's value into the buffer (Fchg32)
        *
        * @param f a pointer to the field for which to change the value
        * @throw buffer_exception upon failure
+       *
+       * @see add
        */
       field *set    ( field *f );
 
-      /** Adds a field into the buffer
+      /** Adds a field into the buffer (Fadd32).
+       *
+       * Adds an occurence of a field to the buffer. The first call becomes occurence 0. When successfully added the 
+       * occurence property of the field is set.
        *
        * @param f a pointer to the field to add into the buffer
        * @throw buffer_exception upon failure
+       *
+       * @see set to update the value of a field in a buffer
        */
       field *add    ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
 
       /** Appends a field to the buffer
        *
        * @param f a pointer to the field to add into the buffer
+       * @deprecated not implemented.
        */
       field *append ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
 
-      /** Removes the field from the buffer
+      /** Removes the field from the buffer (Fdel32).
        *
        * @param f a pointer to the field to remove
        * @throw buffer_exception upon failure
        */
       void remove ( field *f );         // FLDID fieldid );
 
-      /** Get the field value set in the buffer
+      /** Get the field value set in the buffer (Fget32).
+       *
+       * The field's occurence property is used to find the fields value.
+       *
        * @param f the field to set
        * @return the field when set
        * @throw buffer_exception upon failure
        */
       field *get ( field *f );
 
-      /** Get the field value set in the buffer
+      /** Get the field value set in the buffer (Fget32).
+       *
        * @param f the field to set
        * @param occ the field occurence to set
        * @return the field when set
@@ -155,7 +167,7 @@ namespace atmi {
        */
       long chksum();
 
-      /** @return the number of occurences of the field into the buffer */
+      /** @return the number of occurences of the field into the buffer (Foccur32)*/
       FLDOCC32 occurences ( const field *f );
 
       /** @return the number of fields into the buffer */
@@ -196,22 +208,18 @@ namespace atmi {
 
     private:
 
-      /** FML buffer reference */
-      FBFR32 *_buffer;
-
-      /** if true then buffer was allocated by the buffer instance (thus it can be freed when needed).
-       */
-      bool _allocated;
-
-      /** value by which the buffer size will be extended */
-      long _extent;
+      
+      FBFR32 *_buffer;     //!< FML buffer reference 
+      bool    _allocated;  //!< if true then buffer was allocated by the buffer instance (thus it can be freed when needed).
+      long    _extent;     //!< value by which the buffer size will be extended 
   };
 
 // ---------------------------------------------------------------------------------
 
 
-/** Abstract class to manipulate a field
+/** Abstract field class.
  *
+ * This is the base class of all implemented fields.
  */
   class field {
 
@@ -221,8 +229,7 @@ namespace atmi {
 
       /** Default destructor
        */
-      virtual ~field () {
-      };
+      virtual ~field () { };
 
       /**
        *  Possible values are:
@@ -262,7 +269,7 @@ namespace atmi {
       /** @return the fields occurence (as last found in a buffer)*/
       FLDOCC32 occurence ();
 
-      /** @return the last Ferror32 value */
+      /** @return the last Ferror32 value that was returned by the FML library */
       int error ();
 
       /** @return the length of the field's value
@@ -275,21 +282,40 @@ namespace atmi {
        */
       const char * what ();
 
-      virtual field &operator= ( const string & ) {
+      /** @param value value to assign to the field.
+       */
+      virtual field &operator= ( const string &value ) {
         return *this;
       };
 
     protected:
 
-      int handleFerror(int, const char *, ...);
-
-      virtual void setFocc ( FLDOCC32 occ );
-
-      /** utility method to setup field's data
+      /** Field manipulation error handler.
+       *
+       * @param ferror Ferror32 value
+       * @param format error message formatting string.
+       * @param        error message viariadic
+       * @return the handled ferror value.
        */
-      virtual void setup ( FLDID32 fid );
+      int ferror_handler(int ferror, const char *format, ...);
 
-      /** Retrieves the value of the field found into the buffer
+      /** set the field occurence.
+       *
+       * Occurences start counting from 0.
+       *
+       * @param occ occurence.
+       */
+      virtual void set_field_occurence ( FLDOCC32 occ );
+
+      /** utility method to setup field's data.
+       *
+       * checks if field exists, if so it fetch all available metadata (name, type, ...)
+       *
+       * @param field_id field identifier.
+       */
+      virtual void setup ( FLDID32 field_id );
+
+      /** Retrieves the value of the field found into the buffer. 
        *
        * @param b buffer from which to retrieve the field's value
        */
@@ -297,18 +323,20 @@ namespace atmi {
 
       /** Retrieves the value of the field's occurence found into the buffer
        *
-       * Upon success the value of focc is set to the retrieved occurence.
+       * Upon success the value of occurence is set to the retrieved occurence.
        *
        * @param b buffer from which to retrieve the field's value
        * @param occ occurence to retreive
+       * @see occurence
        */
       virtual int get ( buffer *b, FLDOCC32 occ ) = 0;
 
       /** add the fiels into the buffer
        *
-       * When successfull the value of focc is set
+       * When successfull the value of occurence is set
        *
        * @param b buffer in which to add the field.
+       * @see occurence
        */
       virtual int add ( buffer *b ) = 0;
 
@@ -325,10 +353,10 @@ namespace atmi {
       virtual int remove ( buffer *b );
 
     private:
-      FLDID32 fid;  // field ID
-      FLDOCC32 focc;                    // field occurence
-      char *fname;
-      int last_err;
+      FLDID32   _field_id;
+      FLDOCC32  _field_occurence;
+      char     *_field_name;
+      int       _ferror;
   };
 
 /** Template that handles non pointer data types (short, long, char, double, ...)
@@ -346,10 +374,17 @@ namespace atmi {
       Tfield ( FLDID32 fid ) {
 
         /** This array is used to check that FML type matches template Tfield's type */
-        const char *TYPEID_NAMES[5] = { typeid(short).name(), typeid(long).name(), typeid(char).name(), typeid(float).name(), typeid(double).name() };
+        const char *TYPEID_NAMES[5] = { 
+          typeid(short).name(), 
+          typeid(long).name(),
+          typeid(char).name(),
+          typeid(float).name(),
+          typeid(double).name()
+        };
 
-        setup ( fid );
-        // check type matching
+        setup ( fid ); 
+        
+        // check if type is matching
         if ( type() > 5 ) {
           throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
         } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
@@ -361,15 +396,15 @@ namespace atmi {
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
-       * @param n the fml field name to setup (as defined in the FML tables)
+       * @param name the fml field name to setup (as defined in the FML tables)
        */
-      Tfield ( const char *n ) {
+      Tfield ( const char *name ) {
 
-        setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
+        setup ( (FLDID32) Fldid32 ( const_cast<char *>(name) ) );
 
         // check type matching
         if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
-          throw atmi_exception ( "Tfield value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), name());
+          throw atmi_exception ( "Tfield value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), this->name());
         }
       }
 
@@ -437,7 +472,7 @@ namespace atmi {
         if ( rc < 0 ) {
           throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         } else {
-          setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+          set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
         }
 
         return rc;
@@ -452,7 +487,7 @@ namespace atmi {
 
         int rc = -1;
         FLDLEN32 l = length();
-        setFocc (occ);
+        set_field_occurence (occ);
 
         rc = Fget32 ( b->get_buffer(), id(), occurence(), (char *) &value, &l );
         if ( rc == -1 ) {
@@ -559,12 +594,7 @@ namespace atmi {
         return value += s;
       }
 
-      /** Appends a copy of the argument to the string.
-       *
-       * The new string content is the content existing in the string object before the call followed by the content of
-       * the argument.
-       *
-       * The append member function provides a similar functionality with additional options.
+      /** Appends character to the string field.
        *
        * @param c   character. This single character is appended to the string object's content.
        * @return *this
@@ -606,34 +636,20 @@ namespace atmi {
       }
 
       /**
-       * string& operator= ( char c );
+       * assigns values to the string field.
        *
-       * String assignment
-       * Sets a copy of the argument as the new content for the string object.
-       *
-       * The previous content is dropped.
-       *
-       * The assign member function provides a similar functionality with additional options.
-       *
-       * @param s   a pointer to an array containing a null-terminated character sequence (C string), which is copied as the new content for the object.
+       * @param str   null terminated character array.
        */
-      virtual Tfield<string> &operator= ( const char* s ) {
+      virtual Tfield<string> &operator= ( const char* str ) {
 
-        value = s;
+        value = str;
         return *this;
       };
 
       /**
-       * string& operator= ( char c );
+       * assigns values to the string field.
        *
-       * String assignment
-       * Sets a copy of the argument as the new content for the string object.
-       *
-       * The previous content is dropped.
-       *
-       * The assign member function provides a similar functionality with additional options.
-       *
-       * @param str a copy of the content of this object is used as the new content for the object.
+       * @param str string to assign
        */
       virtual Tfield<string> &operator= ( const string &str ) {
 
@@ -643,12 +659,7 @@ namespace atmi {
       };
 
       /**
-       * String assignment
-       * Sets a copy of the argument as the new content for the string object.
-       *
-       * The previous content is dropped.
-       *
-       * The assign member function provides a similar functionality with additional options.
+       * assigns values to the string field.
        *
        * @param  c  the content is set to a single character.
        */
@@ -658,19 +669,13 @@ namespace atmi {
 
         return *this;
       };
+
       /** casts the field value
        */
       operator string(){
 
         return value;
       };
-
-      /** @return a null terminated const char *
-         operator const char*() {
-
-         return value.c_str();
-         };
-       */
 
     protected:
 
@@ -702,7 +707,7 @@ namespace atmi {
           if ( rc < 0 ) {
             throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
-            setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+            set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
         } else {
           throw atmi_exception ("field %s's value is empty !!?? Cannot add an empty field value.", name ());
@@ -721,7 +726,7 @@ namespace atmi {
         int rc = -1;
         FLDLEN32 l = 0;
         char *v = NULL;
-        setFocc(occ);
+        set_field_occurence(occ);
 
         v = Fgetsa32 ( b->get_buffer(), id(), occurence(), &l );
         if ( v != NULL ) {
@@ -740,10 +745,10 @@ namespace atmi {
       string value;
   };
 
-/** Specialization of template Tfield which handles CARRAY typed fields.
- *
- * This class is using a string object to hold and handle char * data
- */
+  /** Specialization of template Tfield which handles CARRAY typed fields.
+   *
+   * This class is using a string object to hold and handle char * data
+   */
   template <> class Tfield<char *>: public field {
     public:
 
@@ -792,8 +797,11 @@ namespace atmi {
       };
 
       /** Assigns a value to the field
+       *
+       * @param c character buffer
+       * @param s character buffer size
        */
-      void setCarray ( const char * c, long s ) {
+      void set_char_array ( const char * c, long s ) {
 
         if ( value == NULL ) delete value;
 
@@ -802,25 +810,15 @@ namespace atmi {
         memcpy ( value, c, len );
       };
 
-      /**
-       * @return new allocated  pointer to the value of the carray
-         virtual ACarray getCarrayAlloc () {
-
-              Carray carray = new char[length()];
-              memcpy ( carray, value, length () );
-
-         return new ACarray ( &carray );
-         };
-       */
-
-      /** copy (memcpy) the field's value into carray. If size is smaller than the length of the field,
-       * then only size characters are copied. If size is bigger then the field's length, then length characters
-       * are copied.
+      /** copy (memcpy) the field's value into carray.
        *
-       * @param carray pointer to a character buffer
-       * @param size size of the buffer
+       * if the given size is smaller than the actual field size, then size characters are copied into your buffer. If size is bigger than 
+       * the actual field size then field length characters are copied.
+       *
+       * @param carray pointer to a previously allocted character buffer
+       * @param size   character buffer size
        */
-      virtual void getCarray ( char *carray, long size ) {
+      virtual void get_char_array ( char *carray, long size ) {
 
         memcpy ( carray, value, ( size < length () ? size : length() ) );
       };
@@ -829,7 +827,7 @@ namespace atmi {
        */
       Tfield<char *> &operator= ( Tfield<char*> &carray ){
 
-        setCarray ( carray.value, carray.len );
+        set_char_array ( carray.value, carray.len );
 
         return *this;
       };
@@ -864,7 +862,7 @@ namespace atmi {
           if ( rc < 0 ) {
             throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
-            setFocc ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+            set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
           }
 
         } else {
@@ -883,7 +881,7 @@ namespace atmi {
 
         int rc = -1;
         FLDLEN32 l = 0;
-        setFocc(occ);
+        set_field_occurence(occ);
         char *v = NULL;
 
         v = Fgetalloc32 ( b->get_buffer(), id(), occurence(), &l );

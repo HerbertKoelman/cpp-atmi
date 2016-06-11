@@ -9,7 +9,6 @@ INSTALL=@INSTALL@
 LOCALEDIR=@localedir@
 RM=@RM@
 DOXYGEN=@DOXYGEN@
-BEAUTIFIER=@BEAUTIFIER@ --no-backup -l CPP --replace -c ./crust.cfg {} \;
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
 all: atmi++ 
@@ -22,20 +21,19 @@ atmi++:
 	cd src ; $(MAKE) globber all clean
 
 pkg:
-	tar cf - include lib man html samples | gzip > ${PACKAGE}
+	$(MKDIR) distrib
+	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE)
 
-clean: globber
+clean:
+	( cd src && make clean )
 
-globber:
+globber:clean
 	${RM} -R html man autom4te.cache
 	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
-	cd src ;$(MAKE) globber
+	(cd src && $(MAKE) globber)
 
 doxygen:
 	${DOXYGEN}
-
-beautifull:
-	cd src/tuxedo ;$(MAKE) beautifull
 
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
@@ -44,7 +42,7 @@ install:
 	${INSTALL} -d ${LOCALEDIR}/en_US ${LOCALEDIR}/fr_FR
 	${INSTALL} locale/en_US/atmi++.cat ${LOCALEDIR}/en_US/atmi++.cat
 	${INSTALL} locale/fr_FR/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
-	for header in include/*.h ; do \
+	for header in include/atmi/*.h include/atmi/*.hpp ; do \
 		${INSTALL} $$header ${prefix}/$$header ;\
 	done
 
@@ -52,9 +50,7 @@ uninstall:
 	${RM} ${prefix}/lib/libatmi++.a
 	${RM} ${prefix}/lib/libcltatmi++.a
 	${RM} ${prefix}/lib/libfml++.a
+	${RM} ${prefix}/include/atmi
 	${RM} ${LOCALEDIR}/en_US/atmi++.cat
 	${RM} ${LOCALEDIR}/fr_FR/atmi++.cat
-	for header in include/*.h ; do \
-		${RM} ${prefix}/$$header ;\
-	done
 
