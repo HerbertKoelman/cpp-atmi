@@ -35,8 +35,10 @@ DEBUG=-g -bnoquiet
 
 CFLAGS=@CFLAGS@
 CXXFLAGS=@CXXFLAGS@
-CCFLAGS=@CXXFLAGS@
-LDFLAGS=@LDFLAGS@ @LIBS@
+CPPFLAGS=@CPPFLAGS@
+
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
 
 # Header files
 HEADERS=$(INCDIR)/tuxedo.hpp $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
@@ -85,11 +87,12 @@ libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 
 # Implicit rules ------------------------------------------
 
-.cpp:
-	$(CCC) $(CCFLAGS) $(LDFLAGS) $< -o $@
-
+# cpp build rule
 .cpp.o:
-	$(CCC) $(CCFLAGS) -c $<
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) -c $<
+
+.cpp:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
 
 .v.V: 
 	viewc $(VFLAGS) -d $(UDATAOBJ) $@

@@ -18,7 +18,7 @@ demos:
 #	cd samples/utl ; $(MAKE) globber all clean
 
 atmi++:
-	cd src ; $(MAKE) globber all clean
+	(cd src && $(MAKE) clean all )
 
 pkg:
 	$(MKDIR) distrib
@@ -28,8 +28,8 @@ clean:
 	( cd src && make clean )
 
 globber:clean
-	${RM} -R html man autom4te.cache
-	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
+	${RM} -R doc html man autom4te.cache
+	${RM} confdefs.h config.status include/atmi++.h autom4te.cache
 	(cd src && $(MAKE) globber)
 
 doxygen:

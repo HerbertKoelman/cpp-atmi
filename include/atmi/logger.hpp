@@ -11,7 +11,11 @@ namespace atmi {
 
   class logger;
 
+#if __cplusplus < 201103L
   typedef auto_ptr<logger> Alogger ;
+#else
+  typedef unique_ptr<logger> Alogger ;
+#endif
 
   enum LoggingLevel {
     ERROR=4,

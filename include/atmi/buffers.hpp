@@ -39,8 +39,13 @@ namespace atmi {
   class buffer;
 
   typedef char * Carray;
+#if __cplusplus < 201103L
   typedef auto_ptr<Carray> ACarray;
   typedef auto_ptr<buffer> Abuffer;
+#else
+  typedef unique_ptr<Carray> ACarray;
+  typedef unique_ptr<buffer> Abuffer;
+#endif
 
   /**
    * FML buffer

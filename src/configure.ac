@@ -23,15 +23,15 @@ AC_CHECK_PROG([AR],[ar],[ar -rv])
 AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../crust.cfg])
 AC_PROG_RANLIB
 
+CXXFLAGS=""
+CFLAGS="-I../include"
+
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
 
 # Setting things up for ATMI builds
-CFLAGS="$CFLAGS -I../include"
-
 if test -n "$TUXDIR"
 then
-
   AC_MSG_RESULT([$TUXDIR])
 
   TUXLIB="$TUXDIR/lib"
@@ -44,11 +44,10 @@ then
   test -e $TUXINC && AC_MSG_RESULT(found $TUXINC.) || AC_MSG_ERROR(failed to find $TUXINC directory.)
 
   CFLAGS="$CFLAGS -I$TUXINC "
-  CXXFLAGS="$CFLAGS"
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
   # This cannot be checked here. The library doesn't exist until configure and make is run
-  # AC_CHECK_LIB([tux], [tpcall])
+  #AC_CHECK_LIB([tux], [tpcall])
 
 else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
@@ -73,13 +72,17 @@ fi
 
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
-  xlC_r)
-	CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
-	CXXFLAGS="-O5 -qmaxmem=-1 -qsmp $CXXFLAGS "
-  AC_MSG_RESULT(-O5 -qmaxmem=-1 -qsmp.)
-  ;;
+  xlC_r | xlC)
+    CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
+    AC_MSG_RESULT([-O5 -qmaxmem=-1 -qsmp])
+    ;;
+  g++ | gcc)
+    CFLAGS="$CFLAGS -O2"
+    CPPFLAGS="-std=c++11 $CPPFLAGS "
+    AC_MSG_RESULT([-std=c++11])
+    ;;
   *)
-  AC_MSG_RESULT(none found.)
+    AC_MSG_RESULT([none found.])
 esac
 
 AC_CONFIG_FILES([atmi++.cpp Makefile])

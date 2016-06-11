@@ -48,8 +48,13 @@ namespace atmi {
   class transaction;
   class queue;
 
-  typedef auto_ptr<transaction>          tp_auto_ptr;
+#if __cplusplus < 201103L
+  typedef auto_ptr<transaction> tp_auto_ptr;
   typedef auto_ptr<atmi::queue> queue_auto_ptr;
+#else
+  typedef unique_ptr<transaction> tp_auto_ptr;    //!< @deprecated use unique_ptr instead
+  typedef unique_ptr<atmi::queue> queue_auto_ptr; //!< @deprecated use unique_ptr instead
+#endif
 
   /**
    * All common used ATMI method are group in this class.

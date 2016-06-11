@@ -4316,6 +4316,9 @@ else
 fi
 
 
+CXXFLAGS=""
+CFLAGS="-I../include"
+
 # Checks for libraries.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in -lpthread" >&5
 $as_echo_n "checking for pthread_create in -lpthread... " >&6; }
@@ -4366,8 +4369,6 @@ fi
 
 
 # Setting things up for ATMI builds
-CFLAGS="$CFLAGS -I../include"
-
 if test -n "$TUXDIR"
 then
 
@@ -4388,11 +4389,10 @@ $as_echo_n "checking for tuxedo includes... " >&6; }
 $as_echo "found $TUXINC." >&6; } || as_fn_error $? "failed to find $TUXINC directory." "$LINENO" 5
 
   CFLAGS="$CFLAGS -I$TUXINC "
-  CXXFLAGS="$CFLAGS"
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
   # This cannot be checked here. The library doesn't exist until configure and make is run
-  # AC_CHECK_LIB([tux], [tpcall])
+  #AC_CHECK_LIB([tux], [tpcall])
 
 else
   as_fn_error $? "set env variable TUXDIR or use --enable-tuxdir=PATH." "$LINENO" 5
@@ -4418,14 +4418,19 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether we have specific compiler optimization options for $CXX " >&5
 $as_echo_n "checking whether we have specific compiler optimization options for $CXX ... " >&6; }
 case "$CXX" in
-  xlC_r)
-	CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
-	CXXFLAGS="-O5 -qmaxmem=-1 -qsmp $CXXFLAGS "
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: -O5 -qmaxmem=-1 -qsmp." >&5
-$as_echo "-O5 -qmaxmem=-1 -qsmp." >&6; }
-  ;;
+  xlC_r | xlC)
+    CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: -O5 -qmaxmem=-1 -qsmp" >&5
+$as_echo "-O5 -qmaxmem=-1 -qsmp" >&6; }
+    ;;
+  g++ | gcc)
+    CFLAGS="$CFLAGS -O2"
+    CPPFLAGS="-std=c++11 $CPPFLAGS "
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: -std=c++11" >&5
+$as_echo "-std=c++11" >&6; }
+    ;;
   *)
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: none found." >&5
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: none found." >&5
 $as_echo "none found." >&6; }
 esac
 
