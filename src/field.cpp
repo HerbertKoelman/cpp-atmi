@@ -1,5 +1,4 @@
-/*
-   $Id$
+/* author: herbert koelman (herbert.koelman@me.com)
  */
 
 #include <iostream>
@@ -20,44 +19,44 @@ namespace atmi {
 /* fields --------------------------------------------------------------------*/
 
   const char *field::tname () {
-    return Ftype32 ( fid );
+    return Ftype32 ( _field_id );
   };
 
   FLDID32 field::id () {
-    return fid;
+    return _field_id;
   };
 
   const char *field::name () {
-    return fname;
+    return _field_name;
   };
 
   int field::number () {
-    return Fldno32 ( fid );
+    return Fldno32 ( _field_id );
   };
 
   FLDOCC32 field::occurence() {
 
-    return focc;
+    return _field_occurence;
   };
 
   int field::error( ){
 
-    return last_err;
+    return _ferror;
   };
 
-  void field::setFocc( FLDOCC32 occ) {
+  void field::set_field_occurence( FLDOCC32 occ) {
 
-    focc = occ < 0 ? 0 : occ;              // check that we don't have a negative occurence
+    _field_occurence = occ < 0 ? 0 : occ;              // check that we don't have a negative occurence
   };
 
   int field::type () {
-    return Fldtype32 ( fid );
+    return Fldtype32 ( _field_id );
   };
 
   const char*field::what() {
 
     stringstream buff;
-    buff << "Fid: " << fid << ", occurence: " << focc << ", name: " << fname << ", len: " << length() << ", type: " << tname () << ".";
+    buff << "Fid: " << _field_id << ", occurence: " << _field_occurence << ", name: " << _field_name << ", len: " << length() << ", type: " << tname () << ".";
     return buff.str().c_str ();
   }
 
@@ -65,7 +64,7 @@ namespace atmi {
 
     int rc = Fneeded32 ( 1, (length() > 0 ? length() : 1 ));
     if ( rc < 0 ) {
-      throw buffer_exception ( Ferror32, "FNEEDED32i: failed to estimate needed space for field %s (id: %d, occ: %d). Make sure field contains data (length() > 0).", fname, fid, focc );
+      throw buffer_exception ( Ferror32, "FNEEDED32: failed to estimate needed space for field %s (id: %d, occ: %d). Make sure field contains data (length() > 0).", _field_name, _field_id, _field_occurence );
     }
 
     return rc;              // this the size in bytes needed
@@ -73,42 +72,42 @@ namespace atmi {
 
   int field::remove ( buffer *b) {
 
-    int rc = Fdel32 ( b->_buffer, fid, focc );
+    int rc = Fdel32 ( b->_buffer, _field_id, _field_occurence );
     if ( rc < 0 ) {
-      throw buffer_exception ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", fname, fid, focc );
+      throw buffer_exception ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", _field_name, _field_id, _field_occurence );
     }
 
     return rc;
   };
 
-  void field::setup ( FLDID32 fid){
-    if ( fid < 8191 ) {
-      fname = Fname( fid );
+  void field::setup ( FLDID32 field_id){
+    if ( field_id < 8191 ) {
+      _field_name = Fname( field_id );
     } else {
-      fname = Fname32( fid );
+      _field_name = Fname32( field_id );
     }
-    if ( fname != NULL ) {
-      this->fid = fid;
-      this->focc = 0;
+    if ( _field_name != NULL ) {
+      this->_field_id = field_id;
+      this->_field_occurence = 0;
     } else {
-      throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", fid );
+      throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", field_id );
     }
   };
 
-  int field::handleFerror ( int err, const char *msg, ... ) {
+  int field::ferror_handler ( int ferror, const char *format, ... ) {
 
-    this->last_err = err;
+    _ferror = ferror;
 
     va_list ap;
-    va_start ( ap, msg );
+    va_start ( ap, format );
 
-    if ( last_err != FNOTPRES ) {
-      throw buffer_exception ( last_err, msg, ap );
+    if ( _ferror != FNOTPRES ) {
+      throw buffer_exception ( _ferror, format, ap );
     }
 
     va_end ( ap );
 
-    return last_err;
+    return _ferror;
   }
 
 // operators --------------------------------------------------------------------------------

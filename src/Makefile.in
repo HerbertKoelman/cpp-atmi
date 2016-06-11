@@ -35,14 +35,16 @@ DEBUG=-g -bnoquiet
 
 CFLAGS=@CFLAGS@
 CXXFLAGS=@CXXFLAGS@
-CCFLAGS=@CXXFLAGS@
-LDFLAGS=@LDFLAGS@ @LIBS@
+CPPFLAGS=@CPPFLAGS@
+
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
 
 # Header files
 HEADERS=$(INCDIR)/tuxedo.hpp $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o AbstractServer.o logger.o standard_logger.o ulog_logger.o atmi++.o
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o abstract_server.o logger.o standard_logger.o ulog_logger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
@@ -85,11 +87,12 @@ libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 
 # Implicit rules ------------------------------------------
 
-.cpp:
-	$(CCC) $(CCFLAGS) $(LDFLAGS) $< -o $@
-
+# cpp build rule
 .cpp.o:
-	$(CCC) $(CCFLAGS) -c $<
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) -c $<
+
+.cpp:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
 
 .v.V: 
 	viewc $(VFLAGS) -d $(UDATAOBJ) $@

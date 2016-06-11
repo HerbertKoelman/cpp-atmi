@@ -97,7 +97,13 @@ namespace atmi {
 
   tp_auto_ptr abstract_client::new_tp_instance ( const char *svc ){
 
+
+#if __cplusplus < 201103L
     auto_ptr<transaction> ptr;
+#else
+    unique_ptr<transaction> ptr;
+#endif
+
     ptr.reset ( new transaction ( svc ));
     ptr->set_context ( context );
     return ptr;
@@ -105,7 +111,11 @@ namespace atmi {
 
   queue_auto_ptr abstract_client::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
+#if __cplusplus < 201103L
     auto_ptr<atmi::queue> ptr;
+#else
+    unique_ptr<atmi::queue> ptr;
+#endif
     ptr.reset ( new atmi::queue ( qspace, queue, reply ));
     ptr->set_context ( context );
     return ptr;
