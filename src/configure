@@ -4371,7 +4371,6 @@ fi
 # Setting things up for ATMI builds
 if test -n "$TUXDIR"
 then
-
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $TUXDIR" >&5
 $as_echo "$TUXDIR" >&6; }
 
@@ -4424,7 +4423,7 @@ case "$CXX" in
 $as_echo "-O5 -qmaxmem=-1 -qsmp" >&6; }
     ;;
   g++ | gcc)
-    CFLAGS="$CFLAGS -O2"
+    CXXFLAGS="-O2"
     CPPFLAGS="-std=c++11 $CPPFLAGS "
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: -std=c++11" >&5
 $as_echo "-std=c++11" >&6; }

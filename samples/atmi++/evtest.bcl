@@ -4,15 +4,15 @@
 
  */
 #include <iostream>
-#include <atmi++.h>
+#include "atmi/atmi++.hpp"
 
 using namespace std;
 using namespace atmi;
 
-class EventPoster : public AbstractClient {
+class EventPoster : public abstract_client {
   public:
 
-    EventPoster () : AbstractClient ("event_poster"){
+    EventPoster () : abstract_client ("event_poster"){
     };
 
     int run () {
@@ -23,22 +23,22 @@ class EventPoster : public AbstractClient {
       try {
         //Buffer b ;
 
-        Event e ("sample/event" );
+        atmi::event e ("sample/event" );
         cout << " Posting a message." << endl;
         e.post ();
         cout << " Message posted." << endl;
 
-      } catch ( ServiceException& serr ) {
+      } catch ( atmi::service_exception& serr ) {
         cerr << "  Event Exception catched. qwcall failed." << endl;
         cerr << "  What: " << serr.what () << endl;
-      } catch ( TuxedoException& terr ) {
+      } catch ( atmi::tuxedo_exception& terr ) {
         cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
-        cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
-      } catch (BufferException berr ) {
+        cerr << "  What: " << terr.what () << endl;
+      } catch ( atmi::buffer_exception berr ) {
         cerr << berr.what() << endl;
       };
 
-      cout << "Ending client qwritze." << endl;
+      cout << "Ending client." << endl;
       return ret;
     };
 };
@@ -49,13 +49,11 @@ int main ( int argc, char **argv ) {
 
   try {
 
-    cout << "using lib ATMI++ " << Tuxedo::version() << endl;
+    cout << "using lib ATMI++ " << atmi::cpp_atmi_version() << endl;
     EventPoster qw;
     ret = qw.run ();
 
-  } catch ( Exception& err ) {
-    cerr << err.what () << endl;
-  } catch (exception uerr ) {
+  } catch (std::exception uerr ) {
     cerr << uerr.what() << endl;
   };
 

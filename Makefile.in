@@ -35,6 +35,10 @@ globber:clean
 doxygen:
 	${DOXYGEN}
 
+version:
+	autoconf && ( cd src && autoconf )
+	-echo "don't forget to run configure."
+
 install:
 	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
 	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a

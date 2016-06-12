@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "atmi++.h"
+#include "atmi/atmi++.hpp"
 #include <Thread.h>
 #include <nl_types.h>
 
@@ -18,10 +18,10 @@
 using namespace std;
 using namespace atmi;
 
-class MultiContextClient : public AbstractClient, Thread {
+class MultiContextClient : public abstract_client, Thread {
   public:
 
-    MultiContextClient () : AbstractClient ( true, "mctest" ) {
+    MultiContextClient () : abstract_client ( true, "mctest" ) {
     };
 
     void run (){
@@ -37,16 +37,10 @@ class MultiContextClient : public AbstractClient, Thread {
         TOUPPER->call ( message, 10, &message, &olen );
         cout << "TOUPPER returned "  << message << endl;
 
-      }catch ( BufferException buffErr ) {
-        cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
-      } catch ( DiagnosticException qerr ) {
-        cerr << qerr.what() << endl;
-      } catch ( TuxedoException terr ) {
-        cerr << terr.what() << endl;
-      } catch ( Exception err ) {
+      }catch ( atmi_exception &err ) {
         cerr << err.what() << endl;
-      } catch ( exception uerr ) {
-        cerr << uerr.what() << endl;
+      } catch ( std::exception &err ) {
+        cerr << err.what() << endl;
       }
     }
 
@@ -77,11 +71,11 @@ int main ( int argc, char **argv ) {
 
     cout << "press any key to end program " << endl ;
     getline(cin, line);
-  } catch ( Exception err ) {
+  } catch ( atmi_exception &err ) {
     cerr << err.what() << endl;
-  } catch ( exception uerr ) {
-    cerr << uerr.what() << endl;
+  } catch ( std::exception &err ) {
+    cerr << err.what() << endl;
   }
 
-  return 9999;
+  return EXIT_SUCCESS;
 }

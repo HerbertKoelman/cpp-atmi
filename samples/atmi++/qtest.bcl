@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <atmi++.h>
+#include <atmi/atmi++.hpp>
 #include <Thread.h>
 
 using namespace std;

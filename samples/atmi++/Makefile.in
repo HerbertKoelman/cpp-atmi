@@ -35,10 +35,13 @@ DEBUG=-g -bnoquiet
 
 CFLAGS=@CFLAGS@
 CXXFLAGS=@CXXFLAGS@
-CCFLAGS=@CXXFLAGS@
-LDFLAGS=@LDFLAGS@ @LIBS@
+CPPFLAGS=@CPPFLAGS@
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
 
-TARGETS=fml_tables views evtest btest tptest qwriter qtest mctest SIMPSERV SIMPSERV++
+BCL=@BCL@
+BSR=@BSR@
+TARGETS=fml_tables views $(BCL) $(BSR)
 
 all:${TARGETS}
 
@@ -53,23 +56,17 @@ sample_fml_table.h:sample_fml_table
 
 clean:
 	${RM} *.o core *.a
+	${RM} ${BCL} $(BSR)
 
-globber:
+globber:clean
 	${RM} *.o core *.a
-	${RM} ${TARGETS}
 	$(RM) *unc-backup*~ *unc-backup*~
-
-cxref:
-	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
-
-beautifull:
-	${BEAUTIFIER} *.bcl *.bsr
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
 	@echo "bulding native client $@" 
 	CC=@CXX@ \
-	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
 	buildclient ${WSL} -v \
 	-o $@ \
 	-f $< \
@@ -78,7 +75,7 @@ beautifull:
 	-l -latmiutl++
 	@echo "bulding workstation client $@w" 
 	CC=@CXX@ \
-	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
 	buildclient -w -v \
 	-o $@w \
 	-f $< \
@@ -89,7 +86,7 @@ beautifull:
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:
 	CC=@CXX@ \
-	CFLAGS="${CXXFLAGS} ${LDFLAGS} " \
+	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
 	buildserver -s @$@.func \
 	-o $@ \
 	-f $< \

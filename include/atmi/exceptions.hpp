@@ -1,8 +1,4 @@
 /*
-   $Id: atmi_exceptions.h 79 2007-08-18 17:30:26Z hkoelman $
- */
-
-/*
  * atmi_exceptions
  *
  * Copyright (C) 2006 - herbert koelman
@@ -45,11 +41,12 @@ namespace atmi {
  *
  * Can be used to throw any kind of error message in a consitent way.
  */
-  class atmi_exception : public exception {
+  class atmi_exception : public std::exception {
     public:
       /** create a new instance
        *
        * @param msg error message
+       * @todo use variadic template instead.
        */
       atmi_exception ( const char *msg = NULL, ... ) throw ();
       virtual ~atmi_exception () throw () { };
@@ -57,17 +54,32 @@ namespace atmi {
       /**
        * @return user friendly text message
        */
-      virtual const char *what () throw ();
+#if __cplusplus < 201103L
+      virtual const char *what() throw () ;
+#else
+      virtual const char *what() const noexcept override;
+#endif
+
+      /** @return explanatory error message. */
+#if __cplusplus < 201103L
+      virtual const char *message() throw() ;
+#else
+      virtual const char *message() const noexcept ;
+#endif
 
       /**
        * helper to build string message using va_list.
        *
        * Message length is limited to 1024 characters long.
+       *
+       * this method is public because it is used by error handlers (queue, transaction). This can surely be re-written
+       * using variadic templates, making it possible to pass ... from one constructor to it's base one.
        */
       void setup_message ( const char *, va_list );
 
     protected:
-      string message; //!< error message
+      std::string _message; //!< error message
+      std::string _what;    //!< what message (often the concatenation of message + other infos)
   };
 
   /** Unix related exceptions.
@@ -91,19 +103,13 @@ namespace atmi {
        */
       unix_exception ( const char *msg, ... ) throw () ;
 
-      /** default constructor */
       virtual ~unix_exception () throw() {};
-
-      /**
-       * @return user friendly text message
-       */
-      virtual const char *what () throw ();
 
       /** @return unix errno
        */
-      int get_errno ();
+      int error () const;
     protected:
-      int error; //!< unix errno
+      int _error; //!< unix errno
   };
 
   /** FML buffer related exceptions.
@@ -122,25 +128,24 @@ namespace atmi {
       /**
        * @return tuxedo FML error number
        */
-      int getFerror ();
+      int error () const;
 
       /**
        * @return tuxedo FML error message string
        */
-      virtual const char *getFmlerrmsg ();
-
-      /**
-       * @return error message.
-       */
-      virtual const char *getMessage();
+       const char *error_message () const;
 
       /**
        * @return user friendly text message
        */
-      virtual const char *what() throw ();
+#if __cplusplus < 201103L
+      virtual const char *what() throw () ;
+#else
+      virtual const char *what() const noexcept override;
+#endif
 
-    protected:
-      int ferror; //!< related Ferror32 error number.
+    private:
+      int _error; //!< related Ferror32 error number.
   };
 
   /**
@@ -153,51 +158,57 @@ namespace atmi {
       /**
        * Tuxedo exceptions.
        *
-       * @param err value of tperr
+       * @param err value of tperrno
        * @param msg error message.
        */
       tuxedo_exception ( int err = 0, const char *msg = NULL, ... ) throw ();
+
+//      /** tuxedo exception
+//       *
+//       * @param err value of tperrno
+//       */
+//      tuxedo_exception ( int err ) throw ();
+
       virtual ~tuxedo_exception () throw () {
       };
 
       /**
+       * @return user friendly text message
+       */
+#if __cplusplus < 201103L
+      virtual const char *what() throw () ;
+#else
+      virtual const char *what() const noexcept override;
+#endif
+
+      /**
        * @return tperr that raise the exception
        */
-      virtual inline int getErrno () {
-        return tuxerror;
+      virtual inline int error () const {
+        return _error;
       };
 
       /**
        * @return detail error number
        */
-      virtual inline int getErrdetail () {
-        return errdetail;
+      virtual inline int detail () const {
+        return _detail;
       };
-
-      /**
-       * @return error message.
-       */
-      virtual const char *getMessage();
 
       /**
        * @return tuxedo error message string
        */
-      virtual const char *getTperrmsg ();
+      virtual const char *error_message () const ;
 
       /**
        * @return tuxedo error detail string
        */
-      virtual const char *getTperrdetail ();
+      virtual const char *error_detail () const ;
 
-      /**
-       * @return user friendly text message
-       */
-      virtual const char *what () throw ();
+    private:
 
-    protected:
-
-      int tuxerror; //!< A Tuxedo error number (tperrno)
-      int errdetail;//!< Tuxedo detail error number
+      int _error; //!< A Tuxedo error number (tperrno)
+      int _detail;//!< Tuxedo detail error number
 
   };
 
@@ -249,7 +260,7 @@ namespace atmi {
   };
 
 /**
- * Thrown when TPEGOSIG is returned after a signal was received.
+ * Thrown when TPENOSIG is returned after a signal was received.
  */
   class interrupt_exception : public tuxedo_exception {
     public:
@@ -286,22 +297,26 @@ namespace atmi {
       /**
        * @return tuxedo diagnostic error number
        */
-      inline long getDiagno () {
-        return diagno;
+      inline long diagnostic () const {
+        return _diagno;
       };
 
       /**
        * @return diagnostic error message string
        */
-      const char *getDiagmsg ();
-
-      /**
-       * @return user friendly text message
-       */
-      virtual const char *what () throw ();
+      const char *diagnostic_message () const ;
+//
+//      /**
+//       * @return user friendly text message
+//       */
+//#if __cplusplus < 201103L
+//      virtual const char *what() throw () ;
+//#else
+//      virtual const char *what() const noexcept override;
+//#endif
 
     private:
-      long diagno;
+      long _diagno;
   };
 
 /**
@@ -337,8 +352,7 @@ namespace atmi {
        * @param ... error message parameters
        */
       aborted_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
-      virtual ~aborted_exception () throw () {
-      };
+      virtual ~aborted_exception () throw () { };
   };
 
 } // atmi namespace

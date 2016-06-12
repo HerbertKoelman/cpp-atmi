@@ -23,9 +23,11 @@ AC_PROG_RANLIB
 AC_CHECK_LIB([pthread], [pthread_create])
 AC_CHECK_LIB([yaml], [yaml_parser_initialize])
 
-# Setting things up for ATMI builds
-CFLAGS="$CFLAGS -I../../include "
+CXXFLAGS="-O2"
+CFLAGS="-I../../include "
+LDFLAGS="$LDFLAGS -L../../lib"
 
+# Setting things up for ATMI builds
 AC_MSG_CHECKING([for tuxedo home directory])
 if test -n "$TUXDIR"
 then
@@ -42,14 +44,27 @@ then
   test -e $TUXINC && AC_MSG_RESULT(found $TUXINC.) || AC_MSG_ERROR(failed to find $TUXINC directory.)
 
   CFLAGS="$CFLAGS -I$TUXINC "
-  CXXFLAGS="$CFLAGS"
-  LDFLAGS="$LDFLAGS -L$TUXLIB -L../../lib"
+  LDFLAGS="$LDFLAGS -L$TUXLIB"
 
   AC_CHECK_LIB([tux], [tpcall])
 
 else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
 fi
+
+BCL=""
+for target in *.bcl
+do
+  BCL="$BCL `basename $target .bcl`"
+done
+AC_SUBST(BCL,$BCL)
+
+BSR=""
+for target in *.bsr
+do
+  BSR="$BSR `basename $target .bsr`"
+done
+AC_SUBST(BSR,$BSR)
 
 # Checks for header files.
 #AC_HEADER_STDC
@@ -75,9 +90,9 @@ case "$CXX" in
   AC_MSG_RESULT([-+ .])
   ;;
   g++)
-	CFLAGS="-+ $CFLAGS "
-	CXXFLAGS="-x c++ -frtti $CXXFLAGS "
-  AC_MSG_RESULT([-x c++ -frtti .])
+	CFLAGS="-frtti $CFLAGS"
+  CPPFLAGS="$CPPFLAGS -x c++ -std=c++11"
+  AC_MSG_RESULT([$CFLAGS $CPPFLAGS.])
   ;;
   *)
   AC_MSG_RESULT(none found.)

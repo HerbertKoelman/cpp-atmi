@@ -77,7 +77,7 @@ case "$CXX" in
     AC_MSG_RESULT([-O5 -qmaxmem=-1 -qsmp])
     ;;
   g++ | gcc)
-    CFLAGS="$CFLAGS -O2"
+    CXXFLAGS="-O2"
     CPPFLAGS="-std=c++11 $CPPFLAGS "
     AC_MSG_RESULT([-std=c++11])
     ;;
