@@ -26,16 +26,12 @@ namespace atmi {
       _message = "ATMI error occured, check ULOG.";
     else {
       int len = 1024;
+      char buff[len+1];
 
-#if __cplusplus < 201103L
-     auto_ptr<char[]>   buff(new char[len+1]);
-#else
-     unique_ptr<char[]> buff(new char[len+1]);
-#endif
-      memset ( buff.get(), 0, len+1 );
-      vsnprintf ( buff.get(), len, msg, args );
+      memset ( buff, 0, len+1 );
+      vsnprintf ( buff, len, msg, args );
 
-      _message = buff.get() ;
+      _message = buff ;
     }
   }
 

@@ -73,8 +73,9 @@ fi
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-    CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
-    AC_MSG_RESULT([-O5 -qmaxmem=-1 -qsmp])
+	  CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences -qwarn0x  -qsourcetype=c++ "
+    CFLAGS="-O -qmaxmem=-1 -qsmp $CFLAGS "
+    AC_MSG_RESULT([$CFLAGS $CPPFLAGS])
     ;;
   g++ | gcc)
     CXXFLAGS="-O2"
