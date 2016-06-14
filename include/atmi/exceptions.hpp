@@ -1,5 +1,5 @@
 /*
- * atmi_exceptions
+ * atmi exceptions
  *
  * Copyright (C) 2006 - herbert koelman
  *
@@ -22,6 +22,7 @@
 #ifndef __TUXEDO_EXCEPTION__
 #define __TUXEDO_EXCEPTION__
 
+#include <atmi.h>
 #include <stdarg.h>
 #include <exception>
 #include <string>
@@ -30,11 +31,7 @@ using namespace std;
 
 namespace atmi {
 
-/****************************************************************************
-*
-* base class
-*
-****************************************************************************/
+#define ATMI_MESSAGE_LENGTH 1024
 
 /**
  * Base class of ATMI++ exception
@@ -45,10 +42,25 @@ namespace atmi {
     public:
       /** create a new instance
        *
-       * @param msg error message
-       * @todo use variadic template instead.
+       * @param msg error message (used in snprintf)
+       * @param args message parameters
        */
-      atmi_exception ( const char *msg = NULL, ... ) throw ();
+      template<typename... Args> atmi_exception( const char *msg, const Args&... args){
+        char buff[ATMI_MESSAGE_LENGTH+1];
+
+        memset ( buff, 0, ATMI_MESSAGE_LENGTH+1 );
+        snprintf ( buff, ATMI_MESSAGE_LENGTH, msg, args... );
+
+        _message = buff ;
+        printf("Atmi message was set to [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
+      };
+
+      /** default constructor.
+       *
+       * set a default message.
+       */
+      atmi_exception();
+
       virtual ~atmi_exception () throw () { };
 
       /**
@@ -67,6 +79,7 @@ namespace atmi {
       virtual const char *message() const noexcept ;
 #endif
 
+    protected:
       /**
        * helper to build string message using va_list.
        *
@@ -77,7 +90,6 @@ namespace atmi {
        */
       void setup_message ( const char *, va_list );
 
-    protected:
       std::string _message; //!< error message
       std::string _what;    //!< what message (often the concatenation of message + other infos)
   };
@@ -94,7 +106,25 @@ namespace atmi {
        * @param msg error message
        * @param ... error message parameters (variadic).
        */
-      unix_exception ( int err, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> unix_exception( int err, const char *msg, const Args&... args): _error(err), atmi_exception(msg, args...){
+        _what = _message + " " + strerror ( _error );
+      };
+
+      /** new unix exception.
+       *
+       * error is defaulted to errno
+       *
+       * @param msg error message
+       * @param ... error message parameters (variadic).
+       */
+      template<typename... Args> unix_exception( const char *msg, const Args&... args): unix_exception(errno, msg, args...){
+      };
+
+      /** default constructor.
+       *
+       * set error message to strerror.
+       */
+      unix_exception();
 
       /** new unix exception.
        *
@@ -108,7 +138,8 @@ namespace atmi {
       /** @return unix errno
        */
       int error () const;
-    protected:
+
+    private:
       int _error; //!< unix errno
   };
 
@@ -117,13 +148,29 @@ namespace atmi {
    */
   class buffer_exception : public atmi_exception {
     public:
+      /** new buffer exception.
+       *
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
+       */
+      template<typename... Args> buffer_exception( int err, const char *msg, const Args&... args): _error(err), atmi_exception(msg, args...){
+        _what = _message + " " + error_message();
+      };
+
+      /** default constructor.
+       *
+       * set error message to strerror.
+       */
+      buffer_exception();
+
       /** new buffer error instance.
        *
        * @param err Ferror32 value
        * @param msg explanation message
        * @param ... message parameters
        */
-      buffer_exception ( int err, const char *msg = NULL, ... ) throw ();
+      // buffer_exception ( int err, const char *msg = NULL, ... ) throw ();
 
       /**
        * @return tuxedo FML error number
@@ -134,15 +181,6 @@ namespace atmi {
        * @return tuxedo FML error message string
        */
        const char *error_message () const;
-
-      /**
-       * @return user friendly text message
-       */
-#if __cplusplus < 201103L
-      virtual const char *what() throw () ;
-#else
-      virtual const char *what() const noexcept override;
-#endif
 
     private:
       int _error; //!< related Ferror32 error number.
@@ -158,28 +196,16 @@ namespace atmi {
       /**
        * Tuxedo exceptions.
        *
-       * @param err value of tperrno
-       * @param msg error message.
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
        */
-      tuxedo_exception ( int err = 0, const char *msg = NULL, ... ) throw ();
-
-//      /** tuxedo exception
-//       *
-//       * @param err value of tperrno
-//       */
-//      tuxedo_exception ( int err ) throw ();
+      template<typename... Args> tuxedo_exception( int err, const char *msg, const Args&... args): _error(err), atmi_exception(msg, args...){
+        _what = _message + " " + error_message();
+      };
 
       virtual ~tuxedo_exception () throw () {
       };
-
-      /**
-       * @return user friendly text message
-       */
-#if __cplusplus < 201103L
-      virtual const char *what() throw () ;
-#else
-      virtual const char *what() const noexcept override;
-#endif
 
       /**
        * @return tperr that raise the exception
@@ -213,17 +239,19 @@ namespace atmi {
   };
 
 /**
- * Thrown when a TPESVRERR is returned after a TP call.
+ * Thrown when a TPESVCERR s returned after a TP call.
  */
   class service_exception : public tuxedo_exception {
     public:
       /** new instance.
        *
-       * @param err error number
-       * @param msg error message format
-       * @param ... error message parameters.
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
        */
-      service_exception ( int err, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> service_exception( const char *msg, const Args&... args): tuxedo_exception(TPESVCERR, msg, args...){
+        _what = _message + " " + error_message();
+      };
       virtual ~service_exception () throw () { };
   };
 
@@ -234,11 +262,13 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err error number
-       * @param msg error message format
-       * @param ... error message parameters.
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
        */
-      timeout_exception ( int err, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> timeout_exception( const char *msg, const Args&... args): tuxedo_exception(TPETIME, msg, args...){
+        _what = _message + " " + error_message();
+      };
       virtual ~timeout_exception () throw (){ };
   };
 
@@ -250,27 +280,31 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err error number
-       * @param msg error message format
-       * @param ... error message parameters.
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
        */
-      blocking_exception ( int err, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> blocking_exception( const char *msg, const Args&... args): tuxedo_exception(TPEBLOCK, msg, args...){
+        _what = _message + " " + error_message();
+      };
       virtual ~blocking_exception () throw () {
       };
   };
 
 /**
- * Thrown when TPENOSIG is returned after a signal was received.
+ * Thrown when TPGOTSIG is returned after a signal was received.
  */
   class interrupt_exception : public tuxedo_exception {
     public:
       /** new instance.
        *
-       * @param err error number
-       * @param msg error message format
-       * @param ... error message parameters.
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
        */
-      interrupt_exception ( int err, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> interrupt_exception( const char *msg, const Args&... args): tuxedo_exception(TPGOTSIG, msg, args...){
+        _what = _message + " " + error_message();
+      };
       virtual ~interrupt_exception () throw () {
       };
   };
@@ -288,9 +322,15 @@ namespace atmi {
        * @param err value of tperr
        * @param diagno value of ctl.diagnostic
        * @param msg error message format.
-       * @param ... error message parameters
+       * @param args error message parameters (variadic).
        */
-      diagnostic_exception ( int err = 0, long diagno = 0, const char *msg  = NULL, ... ) throw ();
+      template<typename... Args> diagnostic_exception( int err, long diagno, const char *msg, const Args&... args): _diagno(diagno), tuxedo_exception(err, msg, args...){
+        if ( error() == TPEDIAGNOSTIC ) {
+          _what = _message + " " + diagnostic_message ();
+        } else {
+          _what = _message + " " + error_message ();
+        }
+      };
       virtual ~diagnostic_exception ()  throw () {
       };
 
@@ -305,34 +345,33 @@ namespace atmi {
        * @return diagnostic error message string
        */
       const char *diagnostic_message () const ;
-//
-//      /**
-//       * @return user friendly text message
-//       */
-//#if __cplusplus < 201103L
-//      virtual const char *what() throw () ;
-//#else
-//      virtual const char *what() const noexcept override;
-//#endif
 
     private:
       long _diagno;
   };
 
-/**
- * Thrown when QMENOMSG is returned
- */
+  /**
+   * Thrown when QMENOMSG is returned
+   */
   class nomsg_exception : public diagnostic_exception {
     public:
       /**
        * Constructs a Queue exeption
        *
-       * @param err value of tperr
+       * @param err    value of tperr
        * @param diagno value of ctl.diagnostic
-       * @param msg error message format.
-       * @param ... error message parameters
+       * @param msg    error message format.
+       * @param args   error message parameters
        */
-      nomsg_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> nomsg_exception( const char *msg, const Args&... args)
+        : diagnostic_exception(TPEDIAGNOSTIC, QMENOMSG, msg, args...){
+
+        if ( error() == TPEDIAGNOSTIC ) {
+          _what = _message + " " + diagnostic_message ();
+        } else {
+          _what = _message + " " + error_message ();
+        }
+      };
       virtual ~nomsg_exception () throw () {
       };
   };
@@ -349,9 +388,15 @@ namespace atmi {
        * @param err value of tperr
        * @param diagno value of ctl.diagnostic
        * @param msg error message format.
-       * @param ... error message parameters
+       * @param args error message parameters
        */
-      aborted_exception ( int err, int diagno, const char *msg = NULL, ... ) throw ();
+      template<typename... Args> aborted_exception( const char *msg, const Args&... args): diagnostic_exception(TPEDIAGNOSTIC, QMEABORTED, msg, args...){
+        if ( error() == TPEDIAGNOSTIC ) {
+          _what = _message + " " + diagnostic_message ();
+        } else {
+          _what = _message + " " + error_message ();
+        }
+      };
       virtual ~aborted_exception () throw () { };
   };
 

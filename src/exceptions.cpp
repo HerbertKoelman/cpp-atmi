@@ -8,16 +8,7 @@
 
 namespace atmi {
 
-
-  atmi_exception::atmi_exception ( const char *msg, ... ) throw () {
-
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
+  atmi_exception::atmi_exception (): _message("ATMI error occured, check ULOG for more informations"){
   }
 
   void atmi_exception::setup_message ( const char *msg, va_list args ) {
@@ -25,23 +16,23 @@ namespace atmi {
     if ( msg == NULL )
       _message = "ATMI error occured, check ULOG.";
     else {
-      int len = 1024;
-      char buff[len+1];
+      char buff[ATMI_MESSAGE_LENGTH+1];
 
-      memset ( buff, 0, len+1 );
-      vsnprintf ( buff, len, msg, args );
+      memset ( buff, 0, ATMI_MESSAGE_LENGTH+1 );
+      vsnprintf ( buff, ATMI_MESSAGE_LENGTH, msg, args );
 
       _message = buff ;
     }
   }
 
 #if __cplusplus < 201103L
-  const char *atmi_exception::what() throw () {
+  const char *atmi_exception::what() throw(){
 #else
   const char *atmi_exception::what() const noexcept {
 #endif
 
-    return message();
+//    printf("Atmi what:  [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
+    return (_what.size() > 0 ) ? _what.c_str() : _message.c_str();
   }
 
 #if __cplusplus < 201103L
@@ -57,36 +48,7 @@ namespace atmi {
   // unix_exception ----------------------------------------
   //
 
-  unix_exception::unix_exception ( int err, const char *msg, ... ) throw () {
-
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
-
-    _error = ( err == 0 ) ? errno : err ;
-
-    _message.append(" ");
-    _message.append(strerror ( _error ));
-  }
-
-  unix_exception::unix_exception ( const char *msg, ... ) throw () {
-
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
-
-    _error = errno;
-
-    _message.append(" ");
-    _message.append(strerror ( _error ));
+  unix_exception::unix_exception (): _error(errno), atmi_exception(strerror (errno)) {
   }
 
   int unix_exception::error () const {
@@ -97,17 +59,7 @@ namespace atmi {
   // buffer_exception ---------------------------------------
   //
 
-  buffer_exception::buffer_exception ( int err, const char *msg, ... ) throw () {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    _error = err;
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
+  buffer_exception::buffer_exception (): _error(0), atmi_exception("FML buffer error occured.") {
   }
 
   int buffer_exception::error () const {
@@ -120,44 +72,8 @@ namespace atmi {
     return Fstrerror32 ( _error );
   }
 
-#if __cplusplus < 201103L
-  const char *buffer_exception::what() throw () {
-#else
-  const char *buffer_exception::what() const noexcept {
-#endif
-
-    return _what.c_str();
-  }
-
   // tuxedo_exception --------------------------------------
   //
-
-//  tuxedo_exception::tuxedo_exception ( int err) throw (): _error(err) {
-//  }
-
-  tuxedo_exception::tuxedo_exception ( int err, const char *msg, ... ) throw () {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    _error = err;
-    _detail = tperrordetail ( 0 );
-    
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
-  }
-  
-#if __cplusplus < 201103L
-  const char *tuxedo_exception::what() throw () {
-#else
-  const char *tuxedo_exception::what() const noexcept {
-#endif
-
-    return (_what.size() > 0 )?_what.c_str() : message();
-  }
 
   const char *tuxedo_exception::error_detail () const {
     return tpstrerrordetail(_detail, 0);
@@ -168,78 +84,12 @@ namespace atmi {
     return tpstrerror ( _error );
   }
 
-  // derived from tuxedo_exception ------------------
-  //
-  interrupt_exception::interrupt_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err ) {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-    
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
-  }
-
-  service_exception::service_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err ) {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
-  }
-
-  timeout_exception::timeout_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err ) {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
-  }
-
-  blocking_exception::blocking_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err ) {
-
-    if ( msg != NULL){
-      va_list ap;
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
-    
-    // this call depends on the value of _error and must placed after the aboce assignement.
-    _what = _message + " " + error_message (); 
-  }
 
   // /Q related exceptions ---------------------------------------------------------
   //
   // diagnostic exception -----------------------------------
   //
   
-  diagnostic_exception::diagnostic_exception ( int err, long diagno, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    _diagno = diagno;
-
-    if ( error() == TPEDIAGNOSTIC ) {
-      _what = _message + " " + diagnostic_message ();
-    } else {
-      _what = _message + " " + error_message ();
-    }
-  }
-
   const char *diagnostic_exception::diagnostic_message () const {
     switch ( _diagno ) {
       case QMEINVAL:
@@ -285,35 +135,4 @@ namespace atmi {
         return "Never heard about this diagno !!??";
     }
   }
-
-  nomsg_exception::nomsg_exception ( int err, int diagno, const char * msg, ... ) throw () : diagnostic_exception ( err, diagno ) {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    if ( error() == TPEDIAGNOSTIC ) {
-      _what = _message + " " + diagnostic_message ();
-    } else {
-      _what = _message + " " + error_message ();
-    }
-  }
-
-  aborted_exception::aborted_exception ( int err, int diagno, const char * msg, ... ) throw () : diagnostic_exception ( err, diagno )
-  {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    if ( error() == TPEDIAGNOSTIC ) {
-      _what = _message + " " + diagnostic_message ();
-    } else {
-      _what = _message + " " + error_message ();
-    }
-  }
-
 }

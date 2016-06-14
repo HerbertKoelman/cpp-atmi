@@ -254,10 +254,69 @@ namespace atmi {
        *
        * @param tpe tperrno to handle
        * @param msg message to setup in thrown exception.
-       * @param ... substitution parameters
+       * @param Args substitution parameters
        * @return legacy will be removed when prototype will be changed to void handle_transaction_errno()
        */
-      virtual int handle_transaction_errno ( int tpe, const char *msg = NULL, ... );
+        template<typename... Args>  int handle_tperrno ( int _tperrno, const char *msg, const Args&... args) {
+
+          switch ( _tperrno ) {
+            case TPEINVAL:
+            case TPEPERM:
+            case TPENOENT:
+            case TPEITYPE:
+            case TPEOTYPE:
+            case TPETRAN:
+            case TPEPROTO:
+            case TPESYSTEM:
+            case TPEOS:
+            case TPELIMIT:
+            {                           
+              // required because we are declaring variables
+              tuxedo_exception ( _tperrno, msg, args... );
+              // err.setup_message ( msg,  ap );
+              // throw err;
+            }
+            break;
+            case TPEBLOCK:
+            {
+              throw blocking_exception ( msg, args... );
+              // err.setup_message ( msg,  ap );
+              // throw err;
+            }
+            break;
+            case TPGOTSIG:
+            {
+              interrupt_exception ( msg, args... );
+              // err.setup_message ( msg,  ap );
+              // throw err;
+            }
+            break;
+            case TPESVCERR:
+            {
+              service_exception ( msg, args... );
+              // err.setup_message ( msg,  ap );
+              // throw err;
+            }
+            break;
+            case TPETIME:
+            {
+              timeout_exception ( msg, args... );
+              // err.setup_message ( msg,  ap );
+              // throw err;
+            }
+            break;
+            case TPESVCFAIL:
+              // return application specific error number instead
+              // as the application will probably know what to do
+              _tperrno = ( tpurcode > 0 ? tpurcode : -1 );
+              break;
+
+            default:
+              throw tuxedo_exception (_tperrno, catgets ( catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
+          };
+
+          return _tperrno;
+        };
 
       long flags; //!< Tuxedo flags
       nl_catd catd; //!< message catalog refenence
@@ -765,10 +824,45 @@ namespace atmi {
       /** handle queue diagnostic errors
        *
        * @param tux_tperrno tperrno to handle
-       * @param _tux_diagno diagnostic number
+       * @param tux_diagno diagnostic number
        * @param msg related explanatory message.
        */
-      int handle_diagnostics ( int tux_tperrno, int _tux_diagno, const char *msg, ... );
+      template<typename... Args> int handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, const Args&... args) {
+
+        _diagno = tux_diagno;
+
+        switch ( _diagno ) {
+          case QMEINVAL:
+          case QMEBADRMID:
+          case QMENOTOPEN:
+          case QMETRAN:
+          case QMEBADMSGID:
+          case QMESYSTEM:
+          case QMEOS:
+          case QMEPROTO:
+          case QMEBADQUEUE:
+          case QMENOSPACE:
+          case QMERELEASE:
+          case QMESHARE:
+          {
+            throw diagnostic_exception ( tux_tperrno, _diagno, msg, args... );
+          }
+          break;
+          case QMEABORTED:
+          {
+            aborted_exception err ( msg, args... );
+          }
+          break;
+          /* these are not errors */
+          case QMENOMSG:
+            // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
+            break;
+          default:
+            throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
+        }
+
+        return _diagno;
+      }
 
     private:
 

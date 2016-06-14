@@ -1,95 +1,80 @@
-# $Revision: 44 $ $Author: hkoelman $
 #
-# builds simple application server and clients
+# builds substation related programs
 
-.SUFFIXES:.V .v
-# Build client -> bcl
-.SUFFIXES:.bcl
-# Build server -> bsr
-.SUFFIXES:.bsr
+# Compile c++ source code
+.SUFFIXES:.cpp
 
-BASEDIR=../../
+BASEDIR=../
 XREFDIR=${BASEDIR}/xref/
-UDATAOBJ=$(BASEDIR)/udataobj/
 BINDIR=$(BASEDIR)/bin/
-APPDIR=$(BASEDIR)/app/
 INCDIR=$(BASEDIR)/include/
 LIBDIR=$(BASEDIR)/lib/
-LOCALEDIR=${BASEDIR}/locale
-
-# Tuxedo
-TUXLIB=$(TUXDIR)/lib
-TUXINC=$(TUXDIR)/include
-
-INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
-LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
 
 CC=@CC@
 CCC=@CXX@
+CXX=$CCC
 RANLIB=@RANLIB@
-RM=rm -f
+RM=@RM@
 AR=@AR@
-BEAUTIFIER=@BEAUTIFIER@
+MV=@MV@
+MKFLDHDR=@MKFLDHDR@
 
-DEBUG=-g -bnoquiet
+BITS=@BITS@
+OBJECT_MODE=$(BITS)
 
-CFLAGS=@CFLAGS@
 CXXFLAGS=@CXXFLAGS@
+CFLAGS=@CFLAGS@
 CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
+CODECHECK=@CODECHECK@
 
-BCL=@BCL@
-BSR=@BSR@
-TARGETS=fml_tables views $(BCL) $(BSR)
+OBJECTS=@OBJECTS@
+BCL=exceptions-tests #btest evtest mctest qtest qwriter tptest
+BSR=SIMPSERV++ SIMPSERV
+FMLTABLES=sample_fml_table
+TARGETS=$(BCL) $(BSR)
 
-all:${TARGETS}
+TARGETS=$(BCL) $(BSR)
 
-views:
-	@echo "views build."
+all:fml-tbl ${TARGETS}
 
-fml_tables:sample_fml_table.h
-	@echo "fml tables build."
+fml-tbl: $(FMLTABLES)
+	$(MKFLDHDR) $?
 
-sample_fml_table.h:sample_fml_table
-	mkfldhdr32 $<
+exceptions-tests: exceptions-tests.o
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS) "  buildclient -f $? -f "csfi_adaptor_tests.o" -o $@ -l "$(LIBS)"
+
+#tests: all
+#	exception_tests > exception_tests.out 2>&1
+#	csfi_adaptor_tests > csfi_adaptor_tests.out 2>&1
+
+globber: clean
+	-$(RM) -R Makefile autom4te.cache config.log config.status 
+
+codecheck:
+	$(CODECHECK)
 
 clean:
 	${RM} *.o core *.a
-	${RM} ${BCL} $(BSR)
-
-globber:clean
-	${RM} *.o core *.a
+	${RM} ${TARGETS}
 	$(RM) *unc-backup*~ *unc-backup*~
+
+cxref:
+	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
+
+# cpp build rule
+.cpp.o:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) -c $<
+
+.cpp: 
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
-	@echo "bulding native client $@" 
-	CC=@CXX@ \
-	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-	buildclient ${WSL} -v \
-	-o $@ \
-	-f $< \
-	-l -lcltatmi++ \
-	-l -lfml++ \
-	-l -latmiutl++
-	@echo "bulding workstation client $@w" 
-	CC=@CXX@ \
-	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-	buildclient -w -v \
-	-o $@w \
-	-f $< \
-	-l -lcltatmi++ \
-	-l -lfml++ \
-	-l -latmiutl++
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -w -f $< -o $@ -l "$(LIBS)"
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient    -f $< -o $@ -l "$(LIBS)"
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:
-	CC=@CXX@ \
-	CFLAGS="${CFLAGS} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-	buildserver -s @$@.func \
-	-o $@ \
-	-f $< \
-	-l -lfml++ \
-	-l -lcltatmi++ \
-	-l -latmiutl++
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"   buildserver -s @$@.func -f $< -o $@ -l "$(LIBS)"

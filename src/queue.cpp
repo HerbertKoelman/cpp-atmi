@@ -83,7 +83,7 @@ namespace atmi {
       if ( tperrno == TPEDIAGNOSTIC ) {
         handle_diagnostics ( tperrno, _qctl.diagnostic, "Enqueue in %s:%s failed.", _qspace, queue );
       } else {
-        handle_transaction_errno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
+        handle_tperrno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
       }
     }
 
@@ -159,7 +159,7 @@ namespace atmi {
           handle_diagnostics ( tperrno, _qctl.diagnostic, "Dequeue from %s:%s failed.", _qspace, queue );
         }
       } else {
-        handle_transaction_errno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
+        handle_tperrno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
       }
     }
 
@@ -175,51 +175,6 @@ namespace atmi {
     return rc;
   }
 
-  int queue::handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, ... ) {
-
-    _diagno = tux_diagno;
-
-    va_list ap;
-    va_start ( ap, msg );
-
-    switch ( _diagno ) {
-      case QMEINVAL:
-      case QMEBADRMID:
-      case QMENOTOPEN:
-      case QMETRAN:
-      case QMEBADMSGID:
-      case QMESYSTEM:
-      case QMEOS:
-      case QMEPROTO:
-      case QMEBADQUEUE:
-      case QMENOSPACE:
-      case QMERELEASE:
-      case QMESHARE:
-      {
-        diagnostic_exception err ( tux_tperrno, _diagno );
-        err.setup_message ( msg, ap );
-        throw err;
-      }
-      break;
-      case QMEABORTED:
-      {
-        aborted_exception err ( tux_tperrno, _diagno );
-        err.setup_message (msg, ap );
-        throw err;
-      }
-      break;
-      /* these are not errors */
-      case QMENOMSG:
-        // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
-        break;
-      default:
-        throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
-    }
-
-    va_end ( ap );
-
-    return _diagno;
-  }
 
 /* properties ------------------------------------------------*/
 

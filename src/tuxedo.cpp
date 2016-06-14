@@ -3,7 +3,6 @@
  */
 
 #include <limits.h>
-#include <stdarg.h>
 #include <iostream>
 #include <atmi.h>
 #include <string>
@@ -146,68 +145,4 @@ namespace atmi {
     return f;
   }
 
-  int tuxedo::handle_transaction_errno ( int _tperrno, const char *msg, ... ) {
-
-    va_list ap;
-    va_start ( ap, msg );
-
-    switch ( _tperrno ) {
-      case TPEINVAL:
-      case TPEPERM:
-      case TPENOENT:
-      case TPEITYPE:
-      case TPEOTYPE:
-      case TPETRAN:
-      case TPEPROTO:
-      case TPESYSTEM:
-      case TPEOS:
-      case TPELIMIT:
-      {                           // required because we are declaring variables
-        tuxedo_exception err ( _tperrno );
-        err.setup_message ( msg,  ap );
-        throw err;
-      }
-      break;
-      case TPEBLOCK:
-      {
-        blocking_exception err ( _tperrno );
-        err.setup_message ( msg,  ap );
-        throw err;
-      }
-      break;
-      case TPGOTSIG:
-      {
-        interrupt_exception err ( _tperrno );
-        err.setup_message ( msg,  ap );
-        throw err;
-      }
-      break;
-      case TPESVCERR:
-      {
-        service_exception err ( _tperrno );
-        err.setup_message ( msg,  ap );
-        throw err;
-      }
-      break;
-      case TPETIME:
-      {
-        timeout_exception err ( _tperrno );
-        err.setup_message ( msg,  ap );
-        throw err;
-      }
-      break;
-      case TPESVCFAIL:
-        // return application specific error number instead
-        // as the application will probably know what to do
-        _tperrno = ( tpurcode > 0 ? tpurcode : -1 );
-        break;
-
-      default:
-        throw tuxedo_exception (_tperrno,catgets ( catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
-    };
-
-    va_end (ap);
-
-    return _tperrno;
-  }
 }
