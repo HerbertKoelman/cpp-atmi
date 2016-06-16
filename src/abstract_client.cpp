@@ -29,7 +29,7 @@ using namespace std;
 namespace atmi {
 
   abstract_client::~abstract_client () {
-    if ( context > 0 ) tpsetctxt ( context, 0 );
+    switch_context() ; // unused remove when possible if ( context() > 0 ) tpsetctxt ( context, 0 );
     tpterm ();
   };
 
@@ -43,6 +43,7 @@ namespace atmi {
     setup_client ( cltname, usr, passwd, group, tuxconfig );
   }
 
+  // TODO protect this code with a mutex
   void abstract_client::setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
@@ -84,15 +85,15 @@ namespace atmi {
       if (  tperrno == TPEPERM ) {
         throw tuxedo_exception  ( tperrno, "TPINIT access permission to DOMAIN denied. Check user and password." );
       }else{
-        throw tuxedo_exception  ( tperrno, catgets ( catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );
+        throw tuxedo_exception  ( tperrno, catgets ( _catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Check TUXCONFIG env var and ULOG for more.") );
       }
     } else {
-      if ( tpgetctxt ( &context, 0 ) < 0 ) {
-        context = 0;
-        throw tuxedo_exception ( tperrno, catgets ( catd, CATD_ATMI_SET, 34, "Context switch failed while calling tpgetctxt ( target context was %d )."), context );
+      TPCONTEXT_T ctxt = 0;
+      if ( tpgetctxt ( &ctxt, 0 ) < 0 ) {
+        set_context(ctxt);
+        throw tuxedo_exception ( tperrno, catgets ( _catd, CATD_ATMI_SET, 34, "Context switch failed while calling tpgetctxt ( target context was %d )."), context() );
       }
     }
-
   }
 
   tp_auto_ptr abstract_client::new_tp_instance ( const char *svc ){

@@ -1,0 +1,141 @@
+/* $Id: qwtest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <unistd.h>
+#include <libgen.h>
+#include <limits.h>
+#include <string.h>
+#include <iostream>
+#include <atmi++.h>
+#include <Concurrency.h>
+
+using namespace std;
+using namespace atmi;
+
+class Sequence : private Mutex {
+    public:
+      Sequence ( long min = 0, long max = LONG_MAX ){
+        cval = min;
+        this->min = min;
+        this->max = max;
+      };  
+
+      long next () {
+
+        lock();
+        if ( ++cval > max ) cval = min;
+        unlock();
+
+        return cval;
+      };  
+
+      long value () {
+
+        return cval;
+      };  
+
+    private:
+      long cval, min, max;
+
+  };  
+
+class QWriter : public AbstractClient {
+public:
+
+  QWriter ( const char *qs, const char *q, const char *r = NULL ) : reply(NULL), AbstractClient ("qwriter"){
+      qspace =  qs;
+      queue =  q;
+      reply =  r;
+  };
+
+  void run () {
+
+    cout << "Starting client program qwriter." << endl;
+
+    try {
+        cout << "Reply queue: " << reply << endl;
+        AQueue q = new_queue_instance ( qspace, queue, reply );
+        Buffer buffer;
+
+        TField<string> name ( "EMPNAME" );
+        name = (string) "Herbert";
+
+        buffer.add ( &name );
+
+        cout << " Posting a message." << endl;
+        q->enqueue ( &buffer );
+        cout << " Message posted." << endl ;
+
+        cout << " Getting a message." << endl;
+        q->dequeue ( &buffer );
+        buffer.get ( &name );
+        cout << " Message was : " << (string) name << endl ;
+
+        cout << " Replying to message." << endl ;
+        name = (string) "francoise koelman";
+        buffer.set ( &name );
+        q->enqueueReply ( &buffer );
+        cout << " Reply message posted." << endl ;
+        q->dequeueReply ( &buffer );
+        cout << " Reply message dequeued." << endl ;
+
+    } catch ( ServiceException& serr ) {
+      cerr << "  Queue Exception catched. program failed." << endl;
+      cerr << "  What: " << serr.what () << endl;
+    } catch ( TuxedoException& terr ) {
+      cerr << "  Tuxedo Exception catched. program failed." << endl;
+      cerr << "  What: " << terr.what () << ". " << terr.getTperrdetail() << endl;
+    } catch (BufferException berr ) {
+      cerr << berr.what() << endl;
+    };
+
+    cout << "Ending client qwrite." << endl ;
+  };
+
+private:
+  const char *qspace;
+  const char *queue;
+  const char *reply;
+};
+
+int main ( int argc, char **argv ) {
+
+  int status = EXIT_FAILURE;
+  const char *qspace = NULL, *queue = NULL, *reply = NULL;
+
+  try {
+
+    int c = 0;
+    while ( ( c = getopt ( argc, argv, "?Q:r:")) != -1 ) {
+
+        switch( c ) {
+          case 'Q':
+            qspace =  strtok ( optarg, ":");
+            queue  = strtok (NULL, ":");
+            break;
+          case 'r':
+            reply = optarg ;
+            break;
+
+          case '?':
+          default:
+            cout <<  "unkown command line option. usage:" << basename (argv[0]) << " [-r<replyqueue>]" << endl ;
+            exit (status);
+        }
+    }
+
+    cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
+    QWriter qw(qspace, queue, reply );
+    qw.run ();
+    status = EXIT_SUCCESS ;
+
+  } catch ( Exception& err ) {
+    cerr << err.what () << endl;
+  } catch (exception uerr ) {
+    cerr << uerr.what() << endl;
+  };
+
+  return status;
+}

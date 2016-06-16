@@ -20,14 +20,26 @@ AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AC_PROG_CXX
 AC_CHECK_PROG([AR],[ar],[ar -rv])
-AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../crust.cfg])
 AC_PROG_RANLIB
 
 CXXFLAGS=""
 CFLAGS="-I../include"
 
+AC_ARG_ENABLE([warn], AS_HELP_STRING([--enable-warn=PATH],[add warning options to CXXFLAGS (i.e. -qwarn0x)]), CXXFLAGS="$CXXFLAGS -qwarn0x")
+
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
+
+#HEADERS=""
+#for header in include/atmi/*.hpp include/atmi/*.h
+#do
+#  HEADERS="$HEADERS $header"
+#done
+#for header in include/atmi/*.in
+#do
+#  HEADERS="$HEADERS `basename $header .in`"
+#done
+#AC_SUBST(HEADERS,$HEADERS)
 
 # Setting things up for ATMI builds
 if test -n "$TUXDIR"
@@ -73,7 +85,7 @@ fi
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-	  CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences -qwarn0x  -qsourcetype=c++ "
+	  CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not used anymore -qsourcetype=c++ "
     CFLAGS="-O -qmaxmem=-1 -qsmp $CFLAGS "
     AC_MSG_RESULT([$CFLAGS $CPPFLAGS])
     ;;

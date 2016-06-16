@@ -35,6 +35,7 @@ man
 .*
 ULOG*
 src/atmi++.cpp
+*.tar
 
 # sample programs
 btest

@@ -32,7 +32,7 @@ namespace atmi {
 
   void queue_stream::encode_base64( bool b ){
 
-    flags = b ? TPNOFLAGS : TPEX_STRING;
+    _flags = b ? TPNOFLAGS : TPEX_STRING;
   };
 
 /* operations ------------------------------------------------*/
@@ -45,13 +45,13 @@ namespace atmi {
 
   ostream& operator<<(ostream& out, queue_stream& qs){
 
-    int rc = -1;
+    int   rc      = -1;
     char *message = NULL;
-    long len = qs._buffer_size, size = qs._buffer_size, s = 0;
-    char *buffer = new char[size];
+    long  len     = qs._buffer_size, size = qs._buffer_size, s = 0;
+    char *buffer  = new char[size];
 
     try{
-      qs._count = 0;
+      qs._count = 0; // it's a friend, I can access private class data
 
       // the use of const_cast avoids the warnings on GCC/Linux
       message = qs.allocate ( const_cast<char *>("CARRAY"), NULL, len );

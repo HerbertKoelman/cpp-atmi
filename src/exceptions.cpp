@@ -11,20 +11,6 @@ namespace atmi {
   atmi_exception::atmi_exception (): _message("ATMI error occured, check ULOG for more informations"){
   }
 
-  void atmi_exception::setup_message ( const char *msg, va_list args ) {
-
-    if ( msg == NULL )
-      _message = "ATMI error occured, check ULOG.";
-    else {
-      char buff[ATMI_MESSAGE_LENGTH+1];
-
-      memset ( buff, 0, ATMI_MESSAGE_LENGTH+1 );
-      vsnprintf ( buff, ATMI_MESSAGE_LENGTH, msg, args );
-
-      _message = buff ;
-    }
-  }
-
 #if __cplusplus < 201103L
   const char *atmi_exception::what() throw(){
 #else
@@ -59,7 +45,7 @@ namespace atmi {
   // buffer_exception ---------------------------------------
   //
 
-  buffer_exception::buffer_exception (): _error(0), atmi_exception("FML buffer error occured.") {
+  buffer_exception::buffer_exception (): _error(Ferror32), atmi_exception("FML buffer error occured.") {
   }
 
   int buffer_exception::error () const {

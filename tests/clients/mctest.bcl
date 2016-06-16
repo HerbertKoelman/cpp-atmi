@@ -1,0 +1,83 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include "atmi/atmi++.hpp"
+#include "pthread/pthread.hpp"
+#include <nl_types.h>
+
+#include "sample_fml_table.h"
+
+using namespace std;
+using namespace atmi;
+
+class MultiContextClient : public abstract_client, public pthread::abstract_thread {
+  public:
+
+    MultiContextClient () : abstract_client ( true, "mctest" ) {
+    };
+
+    void run () throw (){
+      try {
+
+        cout << "Running in multicontext mode. Context is : " << get_context () << "." << endl;
+
+        tp_auto_ptr TOUPPER = new_tp_instance ( "TOUPPER" );
+        char *message = (char *)TOUPPER->allocate ( "STRING", NULL, 10 );
+        strncpy (message, "hello",10);
+
+        long olen = 0;
+        TOUPPER->call ( message, 10, &message, &olen );
+        cout << "TOUPPER returned "  << message << endl;
+
+      }catch ( atmi_exception &err ) {
+        cerr << err.what() << endl;
+      } catch ( std::exception &err ) {
+        cerr << err.what() << endl;
+      } catch( ... ){
+        cerr << "unexpected exception was thrown..." << endl;
+      }
+    }
+
+};
+
+// program main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  try {
+
+    string line;
+    string tuxconfig;
+
+    {
+      MultiContextClient mc2 ;
+      {
+        MultiContextClient mc1 ;
+        mc1.run ();
+        cout << "press any key to end context " << mc1.context() << endl;
+        getline(cin, line);
+      }
+
+      mc2.run ();
+      cout << "press any key to end context " << mc2.context() << endl ;
+      getline(cin, line);
+    }
+
+    cout << "press any key to end program " << endl ;
+    getline(cin, line);
+  } catch ( atmi_exception &err ) {
+    cerr << err.what() << endl;
+  } catch ( std::exception &err ) {
+    cerr << err.what() << endl;
+  }
+
+  return EXIT_SUCCESS;
+}

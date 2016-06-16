@@ -52,7 +52,7 @@ namespace atmi {
         snprintf ( buff, ATMI_MESSAGE_LENGTH, msg, args... );
 
         _message = buff ;
-        printf("Atmi message was set to [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
+        // DEBUG printf("Atmi message was set to [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
       };
 
       /** default constructor.
@@ -80,18 +80,8 @@ namespace atmi {
 #endif
 
     protected:
-      /**
-       * helper to build string message using va_list.
-       *
-       * Message length is limited to 1024 characters long.
-       *
-       * this method is public because it is used by error handlers (queue, transaction). This can surely be re-written
-       * using variadic templates, making it possible to pass ... from one constructor to it's base one.
-       */
-      void setup_message ( const char *, va_list );
-
-      std::string _message; //!< error message
       std::string _what;    //!< what message (often the concatenation of message + other infos)
+      std::string _message; //!< error message
   };
 
   /** Unix related exceptions.
@@ -126,13 +116,6 @@ namespace atmi {
        */
       unix_exception();
 
-      /** new unix exception.
-       *
-       * @param msg error message
-       * @param ... error message parameters (variadic).
-       */
-      unix_exception ( const char *msg, ... ) throw () ;
-
       virtual ~unix_exception () throw() {};
 
       /** @return unix errno
@@ -164,14 +147,6 @@ namespace atmi {
        */
       buffer_exception();
 
-      /** new buffer error instance.
-       *
-       * @param err Ferror32 value
-       * @param msg explanation message
-       * @param ... message parameters
-       */
-      // buffer_exception ( int err, const char *msg = NULL, ... ) throw ();
-
       /**
        * @return tuxedo FML error number
        */
@@ -186,9 +161,7 @@ namespace atmi {
       int _error; //!< related Ferror32 error number.
   };
 
-  /**
-   *
-   * Tuxedo TP related exceptions
+  /** Tuxedo TP related exceptions
    *
    */
   class tuxedo_exception : public atmi_exception {
@@ -217,7 +190,7 @@ namespace atmi {
       /**
        * @return detail error number
        */
-      virtual inline int detail () const {
+      inline int detail () const {
         return _detail;
       };
 
@@ -229,7 +202,7 @@ namespace atmi {
       /**
        * @return tuxedo error detail string
        */
-      virtual const char *error_detail () const ;
+      const char *error_detail () const ;
 
     private:
 
@@ -238,9 +211,9 @@ namespace atmi {
 
   };
 
-/**
- * Thrown when a TPESVCERR s returned after a TP call.
- */
+  /**
+   * Thrown when a TPESVCERR s returned after a TP call.
+   */
   class service_exception : public tuxedo_exception {
     public:
       /** new instance.
@@ -250,14 +223,13 @@ namespace atmi {
        * @param args error message parameters (variadic).
        */
       template<typename... Args> service_exception( const char *msg, const Args&... args): tuxedo_exception(TPESVCERR, msg, args...){
-        _what = _message + " " + error_message();
       };
       virtual ~service_exception () throw () { };
   };
 
-/**
- * Thrown when TPETIME is returned after a TP call.
- */
+  /**
+   * Thrown when TPETIME is returned after a TP call.
+   */
   class timeout_exception : public tuxedo_exception {
     public:
       /** new instance.
@@ -267,15 +239,13 @@ namespace atmi {
        * @param args error message parameters (variadic).
        */
       template<typename... Args> timeout_exception( const char *msg, const Args&... args): tuxedo_exception(TPETIME, msg, args...){
-        _what = _message + " " + error_message();
       };
       virtual ~timeout_exception () throw (){ };
   };
 
-/**
- * Thrown when TPEBLOCK is returned after a TP call and a blocking condition
- * exists.
- */
+  /**
+   * Thrown when a blocking condition is detected (TPEBLOCK .
+   */
   class blocking_exception : public tuxedo_exception {
     public:
       /** new instance.
@@ -285,15 +255,14 @@ namespace atmi {
        * @param args error message parameters (variadic).
        */
       template<typename... Args> blocking_exception( const char *msg, const Args&... args): tuxedo_exception(TPEBLOCK, msg, args...){
-        _what = _message + " " + error_message();
       };
       virtual ~blocking_exception () throw () {
       };
   };
 
-/**
- * Thrown when TPGOTSIG is returned after a signal was received.
- */
+  /**
+   * Thrown when TPGOTSIG is returned after a signal was received.
+   */
   class interrupt_exception : public tuxedo_exception {
     public:
       /** new instance.
@@ -303,7 +272,6 @@ namespace atmi {
        * @param args error message parameters (variadic).
        */
       template<typename... Args> interrupt_exception( const char *msg, const Args&... args): tuxedo_exception(TPGOTSIG, msg, args...){
-        _what = _message + " " + error_message();
       };
       virtual ~interrupt_exception () throw () {
       };
@@ -363,14 +331,7 @@ namespace atmi {
        * @param msg    error message format.
        * @param args   error message parameters
        */
-      template<typename... Args> nomsg_exception( const char *msg, const Args&... args)
-        : diagnostic_exception(TPEDIAGNOSTIC, QMENOMSG, msg, args...){
-
-        if ( error() == TPEDIAGNOSTIC ) {
-          _what = _message + " " + diagnostic_message ();
-        } else {
-          _what = _message + " " + error_message ();
-        }
+      template<typename... Args> nomsg_exception( const char *msg, const Args&... args): diagnostic_exception(TPEDIAGNOSTIC, QMENOMSG, msg, args...){
       };
       virtual ~nomsg_exception () throw () {
       };
@@ -391,11 +352,6 @@ namespace atmi {
        * @param args error message parameters
        */
       template<typename... Args> aborted_exception( const char *msg, const Args&... args): diagnostic_exception(TPEDIAGNOSTIC, QMEABORTED, msg, args...){
-        if ( error() == TPEDIAGNOSTIC ) {
-          _what = _message + " " + diagnostic_message ();
-        } else {
-          _what = _message + " " + error_message ();
-        }
       };
       virtual ~aborted_exception () throw () { };
   };

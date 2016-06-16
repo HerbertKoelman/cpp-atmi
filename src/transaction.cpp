@@ -14,12 +14,12 @@ using namespace std;
 
 namespace atmi {
 
-  transaction::transaction ( const char *service ): _service(service) {
+  transaction::transaction ( const char *service ): _service(service), _call_descriptor(0) {
 
     // length 32 chars (see definition in atmi.h
-    if ( _service.size() > 32 ) throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
-
-    _call_descriptor = 0;
+    if ( _service.size() > 32 ) {
+      throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
+    }
   }
 
 
@@ -34,7 +34,7 @@ namespace atmi {
     do {
 
       rc = -1;
-      if ((rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen,flags )) < 0 ) {
+      if ((rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen, _flags )) < 0 ) {
 
         switch ( tperrno ) {
           case TPETIME:
@@ -119,7 +119,7 @@ namespace atmi {
     // check if need switch context
     switch_context ();
 
-    ret = tpacall ( (char *) _service.c_str(), idata, ilen, flags );
+    ret = tpacall ( (char *) _service.c_str(), idata, ilen, _flags );
 
     updateErrno ();
 
@@ -138,9 +138,9 @@ namespace atmi {
     int rc = -1;
 
     if ( cd == NULL ) {
-      rc = tpgetrply(&_call_descriptor, data, len, flags);
+      rc = tpgetrply(&_call_descriptor, data, len, _flags);
     } else {
-      rc = tpgetrply(cd, data, len, flags);
+      rc = tpgetrply(cd, data, len,  _flags);
       if ( *cd == _call_descriptor ) _call_descriptor = 0;
     }
 

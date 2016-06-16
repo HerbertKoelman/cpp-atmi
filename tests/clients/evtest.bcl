@@ -1,0 +1,61 @@
+/* $Id: qwtest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <iostream>
+#include "atmi/atmi++.hpp"
+
+using namespace std;
+using namespace atmi;
+
+class EventPoster : public abstract_client {
+  public:
+
+    EventPoster () : abstract_client ("event_poster"){
+    };
+
+    int run () {
+
+      int ret = -1;
+      cout << "Starting client program event poster." << endl;
+
+      try {
+        //Buffer b ;
+
+        atmi::event e ("sample/event" );
+        cout << " Posting a message." << endl;
+        e.post ();
+        cout << " Message posted." << endl;
+
+      } catch ( atmi::service_exception& serr ) {
+        cerr << "  Event Exception catched. qwcall failed." << endl;
+        cerr << "  What: " << serr.what () << endl;
+      } catch ( atmi::tuxedo_exception& terr ) {
+        cerr << "  Tuxedo Exception catched. qwcall failed." << endl;
+        cerr << "  What: " << terr.what () << endl;
+      } catch ( atmi::buffer_exception berr ) {
+        cerr << berr.what() << endl;
+      };
+
+      cout << "Ending client." << endl;
+      return ret;
+    };
+};
+
+int main ( int argc, char **argv ) {
+
+  int ret = 0;
+
+  try {
+
+    cout << "using lib ATMI++ " << atmi::cpp_atmi_version() << endl;
+    EventPoster qw;
+    ret = qw.run ();
+
+  } catch (std::exception uerr ) {
+    cerr << uerr.what() << endl;
+  };
+
+  return ret;
+}

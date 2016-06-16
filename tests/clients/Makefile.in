@@ -1,0 +1,76 @@
+#
+# builds substation related programs
+
+# Compile c++ source code
+.SUFFIXES:.cpp .bcl .bsr
+
+BASEDIR=../
+XREFDIR=${BASEDIR}/xref/
+BINDIR=$(BASEDIR)/bin/
+INCDIR=$(BASEDIR)/include/
+LIBDIR=$(BASEDIR)/lib/
+
+CC=@CC@
+CCC=@CXX@
+CXX=$CCC
+RANLIB=@RANLIB@
+RM=@RM@
+AR=@AR@
+MV=@MV@
+MKFLDHDR=@MKFLDHDR@
+
+BITS=@BITS@
+OBJECT_MODE=$(BITS)
+
+CXXFLAGS=@CXXFLAGS@
+CFLAGS=@CFLAGS@
+CPPFLAGS=@CPPFLAGS@
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+CODECHECK=@CODECHECK@
+
+OBJECTS=@OBJECTS@
+FMLTABLES=sample_fml_table
+TARGETS=exceptions-tests btest # evtest mctest qtest qwriter tptest
+
+all:fml-tbl ${TARGETS}
+
+fml-tbl: $(FMLTABLES)
+	$(MKFLDHDR) $?
+
+exceptions-tests: exceptions-tests.o
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS) "  buildclient -f "$?" -o $@ -l "$(LIBS)"
+
+#tests: all
+#	exception_tests > exception_tests.out 2>&1
+#	csfi_adaptor_tests > csfi_adaptor_tests.out 2>&1
+
+globber: clean
+	-$(RM) -R Makefile autom4te.cache config.log config.status 
+
+codecheck:
+	$(CODECHECK)
+
+clean:
+	${RM} *.o core *.a
+	${RM} ${TARGETS}
+	$(RM) *unc-backup*~ *unc-backup*~
+
+cxref:
+	cxref *.c -xref -index-all -latex209 -O${XREFDIR} -I${INCDIR} -I${INCTUX}
+
+# cpp build rule
+.cpp.o:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) -c $<
+
+.cpp: 
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
+
+# Build a simple Tuxedo client program (buildclient)
+.bcl:
+	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -w -f $< -o $@ -l "$(LIBS)"
+	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient    -f $< -o $@ -l "$(LIBS)"
+
+# Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
+.bsr:
+	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"   buildserver -s @$@.func -f $< -o $@ -l "$(LIBS)"

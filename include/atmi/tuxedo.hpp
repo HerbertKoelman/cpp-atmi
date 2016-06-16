@@ -154,80 +154,75 @@ namespace atmi {
       /**
        * @return the current errno value
        */
-      inline long  get_errno () {
-        return errorno;
+      inline long  error () const {
+        return _errorno;
       };
 
       /**
        * @return an error description string of the last errno
        */
-      inline const char *get_errmsg () {
-        return tpstrerror(errorno);
+      inline const char *error_message () const {
+        return tpstrerror(_errorno);
       };
 
       /**
        * @return the current error detail (if one exist).
        */
-      inline int   get_errnodetail() {
-        return errornodetail;
+      inline int errnodetail() const {
+        return _errornodetail;
       };
       /**
        * @return an error detail description string (if one exists).
        */
-      inline const char *get_errdetail () {
-        return tpstrerrordetail ( errornodetail, 0 );
+      inline const char *error_detail () const {
+        return tpstrerrordetail ( _errornodetail, 0 );
       };
 
       /** set the tuxedo context to use when calling tuxedo functions(tpsetctxt()).
        *
        * When set, ATMI++ switches to this context before executing a tuxedo call.
        *
-       * @param c context to be used by this instance
+       * @param context context to be used by this instance
        */
-      inline void set_context ( TPCONTEXT_T c ) {
+      inline void set_context ( TPCONTEXT_T context) {
 
-        context = c;
+        _context = context;
       };
 
       /** @return the current context
        */
-      inline TPCONTEXT_T get_context () {
+      inline TPCONTEXT_T context () const {
 
-        return context;
+        return _context;
       };
 
       /**
        * @return tuxedo flags used by this instance.
        */
-      inline long get_flags() {
-        return flags;
+      inline long flags() const {
+        return _flags;
       };
 
       /**
        * Set tuxedo flags
        */
       inline void set_flags ( long flags ) {
-        tuxedo::set (this->flags, flags);
+        tuxedo::set (_flags, flags);
       };
 
       /**
        * Reset flag value to TPNOFLAGS
        */
       inline void reset_flags ( long flags ) {
-        this->flags = TPNOFLAGS;
-        tuxedo::set (this->flags, flags);
+        _flags = TPNOFLAGS;
+        tuxedo::set (_flags, flags);
       };
 
       /** unset flags
        * @param flags flags to unset
        */
-      inline void unsetFlags ( long flags ) {
-        tuxedo::unset (this->flags, flags);
-      };
-
-      /** @return ATMI++ version number */
-      static inline const char *version () {
-        return CPP_ATMI_VERSION;
+      inline void unset_flags ( long flags ) {
+        tuxedo::unset (_flags, flags);
       };
 
       static const long FAILED = -1; //!< Tuxedo error value
@@ -246,7 +241,10 @@ namespace atmi {
        */
       static long set ( long, long );
 
-      /** update current errno and sets what must be set. */
+      /** update current errno and sets what must be set. 
+       *
+       * @deprecated we use exception instead
+       */
       void updateErrno ();
 
       /**
@@ -271,38 +269,27 @@ namespace atmi {
             case TPEOS:
             case TPELIMIT:
             {                           
-              // required because we are declaring variables
               tuxedo_exception ( _tperrno, msg, args... );
-              // err.setup_message ( msg,  ap );
-              // throw err;
             }
             break;
             case TPEBLOCK:
             {
               throw blocking_exception ( msg, args... );
-              // err.setup_message ( msg,  ap );
-              // throw err;
             }
             break;
             case TPGOTSIG:
             {
               interrupt_exception ( msg, args... );
-              // err.setup_message ( msg,  ap );
-              // throw err;
             }
             break;
             case TPESVCERR:
             {
               service_exception ( msg, args... );
-              // err.setup_message ( msg,  ap );
-              // throw err;
             }
             break;
             case TPETIME:
             {
               timeout_exception ( msg, args... );
-              // err.setup_message ( msg,  ap );
-              // throw err;
             }
             break;
             case TPESVCFAIL:
@@ -312,19 +299,19 @@ namespace atmi {
               break;
 
             default:
-              throw tuxedo_exception (_tperrno, catgets ( catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
+              throw tuxedo_exception (_tperrno, catgets ( _catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
           };
 
           return _tperrno;
         };
 
-      long flags; //!< Tuxedo flags
-      nl_catd catd; //!< message catalog refenence
+      long    _flags; //!< Tuxedo flags
+      nl_catd _catd;  //!< message catalog refenence
 
     private:
-      long errorno;
-      long errornodetail;
-      TPCONTEXT_T context;
+      long        _errorno;
+      long        _errornodetail;
+      TPCONTEXT_T _context;
 
   };
 
@@ -415,10 +402,6 @@ namespace atmi {
        */
       queue_auto_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
 
-      TPCONTEXT_T get_context () {
-        return context;
-      };
-
     private:
 
       /** Utility method that set's up a client instance.
@@ -426,9 +409,7 @@ namespace atmi {
       void setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig);
 
       TPINIT *tpinfo;
-      TPCONTEXT_T context;
-
-
+      //TPCONTEXT_T context;
   };
 
 // ---------------------------------------------------------------------------------
@@ -858,7 +839,7 @@ namespace atmi {
             // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
             break;
           default:
-            throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
+            throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( _catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
         }
 
         return _diagno;
