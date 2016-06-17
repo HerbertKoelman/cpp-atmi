@@ -31,7 +31,7 @@ CODECHECK=@CODECHECK@
 
 OBJECTS=@OBJECTS@
 FMLTABLES=sample_fml_table
-TARGETS=exceptions-tests btest # evtest mctest qtest qwriter tptest
+TARGETS=queue_test transaction_test exceptions-tests buffer_test multi_context_test # evtest qtest qwriter
 
 all:fml-tbl ${TARGETS}
 
@@ -68,8 +68,8 @@ cxref:
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
-	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -w -f $< -o $@ -l "$(LIBS)"
-	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient    -f $< -o $@ -l "$(LIBS)"
+	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -f $< -o $@ -l "$(LIBS)"
+#build a workstation client 	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) -w $(LDFLAGS)"  buildclient    -f $< -o $@w -l "$(LIBS)"
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:

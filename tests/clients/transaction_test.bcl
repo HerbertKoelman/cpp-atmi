@@ -16,14 +16,14 @@ using namespace atmi;
 class TPtest : public abstract_client {
   public:
 
-    TPtest () : abstract_client ("tptest"){
+    TPtest () : abstract_client ("tran_test"){
     };
 
     void run () {
 
       int ret = -1;
 
-      printf ("%s is starting client program tptest.\n", "herbert");
+      printf ("%s is starting client program.\n", "herbert");
       printf ("version: %s.\n", atmi::cpp_atmi_version());
 
       try {
@@ -32,7 +32,6 @@ class TPtest : public abstract_client {
         int urcode = 0;
 
         try {
-
 
           buffer buffer;
 
@@ -72,16 +71,16 @@ class TPtest : public abstract_client {
             printf ("Transcation was committed.\n");
           } catch ( ... ){
             tp.abort();
-            printf("Transcation was aborted.\n"); 
+            printf("Transaction was aborted.\n"); 
             throw;
           }
 
         } catch ( service_exception& serr ) {
           printf ( "Service Exception catched. tpcall failed..\n" );
           printf ( "What: %s.\n", serr.what () );
-        } catch ( tuxedo_exception& terr ) {
-          printf ( "Tuxedo Exception catched. tpcall failed..\n" );
-          printf ( "What: %s, error detail: %s.\n", terr.what () , terr.error_detail() );
+        } catch ( tuxedo_exception& err ) {
+          printf ( "Tuxedo Exception catched. tpcall failed. %s\n"i, err.what() ); 
+          printf ( "What: %s, error detail: %s.\n", err.what () , err.error_detail() );
         };
 
         printf ( "Ending program." );

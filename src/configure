@@ -640,6 +640,7 @@ LDFLAGS
 CFLAGS
 CC
 TUXDIR
+AUXDIR
 target_alias
 host_alias
 build_alias
@@ -682,12 +683,14 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 enable_localdir
+enable_auxdir
 enable_tuxdir
 enable_warn
 '
       ac_precious_vars='build_alias
 host_alias
 target_alias
+AUXDIR
 TUXDIR
 CC
 CFLAGS
@@ -1309,10 +1312,12 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-localdir       adds -I and -L to /usr/local include and lib
                           respectively.
+  --enable-auxdir=PATH    set AUXDIR to point to this path
   --enable-tuxdir=PATH    set TUXDIR to point to this path
   --enable-warn=PATH      add warning options to CXXFLAGS (i.e. -qwarn0x)
 
 Some influential environment variables:
+  AUXDIR      auxiliary include and lib directories
   TUXDIR      Tuxedo home directory
   CC          C compiler command
   CFLAGS      C compiler flags
@@ -2093,7 +2098,14 @@ _ACEOF
 
 # Check whether --enable-localdir was given.
 if test "${enable_localdir+set}" = set; then :
-  enableval=$enable_localdir; CFLAGS="-I /usr/local/include -L /usr/local/lib"
+  enableval=$enable_localdir; CFLAGS="-I /usr/local/include" LDFLAGS=" -L /usr/local/lib"
+fi
+
+
+
+# Check whether --enable-auxdir was given.
+if test "${enable_auxdir+set}" = set; then :
+  enableval=$enable_auxdir; AUXDIR=$enable_auxdir
 fi
 
 
@@ -4283,6 +4295,14 @@ fi
 CXXFLAGS=""
 CFLAGS="-I../include"
 
+if test -n "$AUXDIR"
+then
+  CFLAGS="$CFLAGS -I$AUXDIR/include"
+  LDFLAGS="$LDFLAGS -L$AUXDIR/lib"
+  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING using auxiliary directory $AUXDIR (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)" >&5
+$as_echo "$as_me: WARNING using auxiliary directory $AUXDIR (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)" >&6;}
+fi
+
 # Check whether --enable-warn was given.
 if test "${enable_warn+set}" = set; then :
   enableval=$enable_warn; CXXFLAGS="$CXXFLAGS -qwarn0x"
@@ -4337,6 +4357,62 @@ else
   as_fn_error $? "missing pthread library." "$LINENO" 5
 fi
 
+
+# C++11 checks
+ac_fn_c_check_header_mongrel "$LINENO" "mutex" "ac_cv_header_mutex" "$ac_includes_default"
+if test "x$ac_cv_header_mutex" = xyes; then :
+  $as_echo "#define HAVE_CPP11_MUTEX 1" >>confdefs.h
+
+fi
+
+
+
+if test "$ac_cv_header_mutex" = "no"
+then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for cpp_pthread_version in -lcpp-pthread" >&5
+$as_echo_n "checking for cpp_pthread_version in -lcpp-pthread... " >&6; }
+if ${ac_cv_lib_cpp_pthread_cpp_pthread_version+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcpp-pthread  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char cpp_pthread_version ();
+int
+main ()
+{
+return cpp_pthread_version ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_cpp_pthread_cpp_pthread_version=yes
+else
+  ac_cv_lib_cpp_pthread_cpp_pthread_version=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_cpp_pthread_cpp_pthread_version" >&5
+$as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
+if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
+  $as_echo "#define HAVE_CPP_PTHREAD 1" >>confdefs.h
+
+else
+  as_fn_error $? "missing cpp-thread library." "$LINENO" 5
+fi
+
+fi
 
 #HEADERS=""
 #for header in include/atmi/*.hpp include/atmi/*.h

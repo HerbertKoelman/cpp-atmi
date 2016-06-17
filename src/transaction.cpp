@@ -34,7 +34,8 @@ namespace atmi {
     do {
 
       rc = -1;
-      if ((rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen, _flags )) < 0 ) {
+      rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen, _flags );
+      if (rc < 0 ) {
 
         switch ( tperrno ) {
           case TPETIME:

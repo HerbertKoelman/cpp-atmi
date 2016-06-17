@@ -20,8 +20,8 @@
  * Boston, MA  02110-1301  USA
  */
 
-#ifndef __ATMI_TUXEDO__
-#define __ATMI_TUXEDO__
+#ifndef __CPP_ATMI_TUXEDO__
+#define __CPP_ATMI_TUXEDO__
 
 #include <atmi/config.h>
 #include <atmi/logger.hpp>
@@ -33,6 +33,12 @@
 #include <stdio.h>
 #include <memory>
 #include <nl_types.h>
+
+#ifndef HAVE_CPP11_MUTEX
+#include <pthread/pthread.hpp>
+#else
+#include <mutex>
+#endif
 
 /** catalog message set */
 #define CATD_ATMI_SET 100
@@ -49,8 +55,8 @@ namespace atmi {
   class queue;
 
 #if __cplusplus < 201103L
-  typedef auto_ptr<transaction> tp_auto_ptr;
-  typedef auto_ptr<atmi::queue> queue_auto_ptr;
+  typedef auto_ptr<transaction> transaction_ptr;
+  typedef auto_ptr<atmi::queue> queue_ptr;
 #else
   typedef unique_ptr<transaction> tp_auto_ptr;    //!< @deprecated use unique_ptr instead
   typedef unique_ptr<atmi::queue> queue_auto_ptr; //!< @deprecated use unique_ptr instead
@@ -185,13 +191,15 @@ namespace atmi {
        * @param context context to be used by this instance
        */
       inline void set_context ( TPCONTEXT_T context) {
-
         _context = context;
+        // printf("DEBUG set_context [%d]:\n", _context);
       };
 
       /** @return the current context
        */
       inline TPCONTEXT_T context () const {
+
+        // printf("DEBUG context [%d]:\n", _context);
 
         return _context;
       };
@@ -269,7 +277,7 @@ namespace atmi {
             case TPEOS:
             case TPELIMIT:
             {                           
-              tuxedo_exception ( _tperrno, msg, args... );
+              throw tuxedo_exception ( _tperrno, msg, args... );
             }
             break;
             case TPEBLOCK:
@@ -279,17 +287,17 @@ namespace atmi {
             break;
             case TPGOTSIG:
             {
-              interrupt_exception ( msg, args... );
+              throw interrupt_exception ( msg, args... );
             }
             break;
             case TPESVCERR:
             {
-              service_exception ( msg, args... );
+              throw service_exception ( msg, args... );
             }
             break;
             case TPETIME:
             {
-              timeout_exception ( msg, args... );
+              throw timeout_exception ( msg, args... );
             }
             break;
             case TPESVCFAIL:
@@ -341,42 +349,54 @@ namespace atmi {
       virtual ~abstract_client ();
 
       /**
-       * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
-       * use any of the BEA tuxedo ATMI system communication or transaction routines, it can
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit or implicitly by
-       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-       * called by the BEA tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * This constructor sets the TPINFO flag TPMULTICONTEXTS.
+       *
+       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        *
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
        * @param passwd user's password (default NULL)
        * @param group is used to associate the client with a resource manager group name (default NULL)
-       * @param tuxconf path to tuxedo config file (same as TUXCONFIG en variable default NULL)
+       * @param tuxconfig used located the DOMAIN
        */
       abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
 
       /**
-       * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
-       * use any of the BEA tuxedo ATMI system communication or transaction routines, it can
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit or implicitly by
-       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-       * called by the BEA tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        *
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
        * @param passwd user's password (default NULL)
        * @param group is used to associate the client with a resource manager group name (default NULL)
-       * @param multicontext if true start a multicontext client using the env TUXCONFIG
+       */
+      abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL);
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       *
+       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
+       *
+       * @param cltname client program name (default NULL)
+       * @param usr user name (default NULL)
+       * @param passwd user's password (default NULL)
+       * @param group is used to associate the client with a resource manager group name (default NULL)
+       *
+       * @deprecated use abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL); instead.
        */
       abstract_client ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
 
@@ -394,22 +414,40 @@ namespace atmi {
        *
        * @return  an auto_ptr to a new transaction instance
        */
-      tp_auto_ptr new_tp_instance ( const char *svc );
+      transaction_ptr new_transaction_instance ( const char *svc );
 
       /** Creates an instance of queue and set the client context to be used.
        *
        * @return  an auto_ptr to a new queue instance
        */
-      queue_auto_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
+      queue_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
+
+      /** @return tuxedo client name */
+      inline const char *name() const {
+        return _name.c_str();
+      }
+
+      /** @return associated TUXCONFIG value */
+      inline const char *tuxconfig() const {
+        return _tuxconfig.c_str();
+      }
+
+      /** @return true if multicontext is active */
+      inline bool multi_context(){
+        return context() > 0 ;
+      }
 
     private:
 
-      /** Utility method that set's up a client instance.
-       */
-      void setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig);
+      std::string  _name;
+      std::string  _tuxconfig;
+      TPINIT      *_tpinfo;
 
-      TPINIT *tpinfo;
-      //TPCONTEXT_T context;
+#ifndef HAVE_CPP11_MUTEX
+//      static pthread::mutex _mutex;
+#else
+//      static std::mutex     _mutex;
+#endif
   };
 
 // ---------------------------------------------------------------------------------
@@ -831,7 +869,7 @@ namespace atmi {
           break;
           case QMEABORTED:
           {
-            aborted_exception err ( msg, args... );
+            throw aborted_exception ( msg, args... );
           }
           break;
           /* these are not errors */
