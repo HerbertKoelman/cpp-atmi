@@ -26,6 +26,7 @@
 #include <stdarg.h>
 #include <exception>
 #include <string>
+#include <cstring>
 
 using namespace std;
 

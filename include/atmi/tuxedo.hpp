@@ -60,8 +60,8 @@ namespace atmi {
   typedef auto_ptr<transaction> transaction_ptr;
   typedef auto_ptr<atmi::queue> queue_ptr;
 #else
-  typedef unique_ptr<transaction> tp_auto_ptr;    //!< @deprecated use unique_ptr instead
-  typedef unique_ptr<atmi::queue> queue_auto_ptr; //!< @deprecated use unique_ptr instead
+  typedef unique_ptr<transaction> transaction_ptr;    //!< @deprecated use unique_ptr instead
+  typedef unique_ptr<atmi::queue> queue_ptr; //!< @deprecated use unique_ptr instead
 #endif
 
   /**
