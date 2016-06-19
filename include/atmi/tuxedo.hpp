@@ -34,18 +34,20 @@
 #include <memory>
 #include <nl_types.h>
 
-#ifndef HAVE_CPP11_MUTEX
-#include <pthread/pthread.hpp>
-#else
-#include <mutex>
-#endif
-
 /** catalog message set */
 #define CATD_ATMI_SET 100
 
 using namespace std;
 
 namespace atmi {
+
+/** \addtogroup atmi Application-to-Transaction Monitor Interface
+ *
+ * The main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response,
+ * conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer
+ * management functions for distributed application communication.
+ * @{
+ */
 
 // ---------------------------------------------------------------------------------
 
@@ -325,6 +327,11 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
+  /** \addtogroup helpers Helper classes
+   *
+   * @{
+   */
+
 /**
  * Helper class to implement tuxedo application.
  *
@@ -507,11 +514,15 @@ namespace atmi {
 
   };
 
+  /** @} */
+
 // ---------------------------------------------------------------------------------
 
-/**
- * Implement TP calls
- */
+  /**
+   * Implement transaction calls (/T)
+   *
+   * @author herbert koelman
+   */
   class transaction : public tuxedo {
     public:
       /**
@@ -1042,11 +1053,14 @@ namespace atmi {
  * @param qs queue stream that handles the writing of messages to
  */
   extern istream& operator>>(istream& in, queue_stream& qs);
+
+/** @} */
 }
 
 /** fake C function that can be used with autotool AC_CHECK_LIB macro
  *
  * @return the current build version
+ * @deprecated remove this fake function
  */
 extern "C" const char *atmicpp_is_present(void);
 
