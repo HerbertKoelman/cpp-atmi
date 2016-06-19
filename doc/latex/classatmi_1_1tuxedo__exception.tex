@@ -1,0 +1,101 @@
+\hypertarget{classatmi_1_1tuxedo__exception}{}\section{atmi\+:\+:tuxedo\+\_\+exception Class Reference}
+\label{classatmi_1_1tuxedo__exception}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+
+
+{\ttfamily \#include $<$exceptions.\+hpp$>$}
+
+Inheritance diagram for atmi\+:\+:tuxedo\+\_\+exception\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.373494cm]{classatmi_1_1tuxedo__exception}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\\hyperlink{classatmi_1_1tuxedo__exception_a6219496e27ade0d5fa67fce17ecea526}{tuxedo\+\_\+exception} (int err, const char $\ast$msg, const Args \&...args)
+\item 
+virtual int \hyperlink{classatmi_1_1tuxedo__exception_a9299a99da028fde85d8c4d52165a6b1d}{error} () const 
+\item 
+int \hyperlink{classatmi_1_1tuxedo__exception_ab0dff17c0b6e5af2ba4e9c73029fc41b}{detail} () const 
+\item 
+virtual const char $\ast$ \hyperlink{classatmi_1_1tuxedo__exception_adcf355cbe82b96ba273fabf6753e3bc7}{error\+\_\+message} () const 
+\item 
+const char $\ast$ \hyperlink{classatmi_1_1tuxedo__exception_abeb62f07cfb36d1d9d58b6a3aa9ef939}{error\+\_\+detail} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Tuxedo T\+P related exceptions 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classatmi_1_1tuxedo__exception_a6219496e27ade0d5fa67fce17ecea526}{}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}!tuxedo\+\_\+exception@{tuxedo\+\_\+exception}}
+\index{tuxedo\+\_\+exception@{tuxedo\+\_\+exception}!atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+\subsubsection[{tuxedo\+\_\+exception(int err, const char $\ast$msg, const Args \&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ atmi\+::tuxedo\+\_\+exception\+::tuxedo\+\_\+exception (
+\begin{DoxyParamCaption}
+\item[{int}]{err, }
+\item[{const char $\ast$}]{msg, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo__exception_a6219496e27ade0d5fa67fce17ecea526}
+Tuxedo exceptions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em err} & Ferror32 value \\
+\hline
+{\em msg} & error message \\
+\hline
+{\em args} & error message parameters (variadic). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classatmi_1_1tuxedo__exception_ab0dff17c0b6e5af2ba4e9c73029fc41b}{}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}!detail@{detail}}
+\index{detail@{detail}!atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+\subsubsection[{detail() const }]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::tuxedo\+\_\+exception\+::detail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo__exception_ab0dff17c0b6e5af2ba4e9c73029fc41b}
+\begin{DoxyReturn}{Returns}
+detail error number 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo__exception_a9299a99da028fde85d8c4d52165a6b1d}{}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}!error@{error}}
+\index{error@{error}!atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+\subsubsection[{error() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual int atmi\+::tuxedo\+\_\+exception\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1tuxedo__exception_a9299a99da028fde85d8c4d52165a6b1d}
+\begin{DoxyReturn}{Returns}
+tperr that raise the exception 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo__exception_abeb62f07cfb36d1d9d58b6a3aa9ef939}{}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}!error\+\_\+detail@{error\+\_\+detail}}
+\index{error\+\_\+detail@{error\+\_\+detail}!atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+\subsubsection[{error\+\_\+detail() const }]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::tuxedo\+\_\+exception\+::error\+\_\+detail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classatmi_1_1tuxedo__exception_abeb62f07cfb36d1d9d58b6a3aa9ef939}
+\begin{DoxyReturn}{Returns}
+tuxedo error detail string 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo__exception_adcf355cbe82b96ba273fabf6753e3bc7}{}\index{atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}!error\+\_\+message@{error\+\_\+message}}
+\index{error\+\_\+message@{error\+\_\+message}!atmi\+::tuxedo\+\_\+exception@{atmi\+::tuxedo\+\_\+exception}}
+\subsubsection[{error\+\_\+message() const }]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::tuxedo\+\_\+exception\+::error\+\_\+message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classatmi_1_1tuxedo__exception_adcf355cbe82b96ba273fabf6753e3bc7}
+\begin{DoxyReturn}{Returns}
+tuxedo error message string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/exceptions.\+hpp\item 
+src/exceptions.\+cpp\end{DoxyCompactItemize}

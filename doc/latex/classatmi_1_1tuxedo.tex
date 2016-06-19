@@ -1,0 +1,360 @@
+\hypertarget{classatmi_1_1tuxedo}{}\section{atmi\+:\+:tuxedo Class Reference}
+\label{classatmi_1_1tuxedo}\index{atmi\+::tuxedo@{atmi\+::tuxedo}}
+
+
+{\ttfamily \#include $<$tuxedo.\+hpp$>$}
+
+Inheritance diagram for atmi\+:\+:tuxedo\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.167883cm]{classatmi_1_1tuxedo}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{allocate} (const char $\ast$type, const char $\ast$subtype, long size)
+\item 
+char $\ast$ \hyperlink{classatmi_1_1tuxedo_a683b79440474b94c471ed78ff3775eb8}{extend} (char $\ast$\hyperlink{classatmi_1_1buffer}{buffer}, long extent)
+\item 
+void \hyperlink{classatmi_1_1tuxedo_afdcf4b7d25862c6fdaeb47d095609a01}{free} (char $\ast$\hyperlink{classatmi_1_1buffer}{buffer})
+\item 
+int \hyperlink{classatmi_1_1tuxedo_ac702cf5e571a3302978bfa76cd314c9b}{begin} (int timeout=0)
+\item 
+int \hyperlink{classatmi_1_1tuxedo_aeff1d0270d6b12de07a4478839ec8b07}{commit} ()
+\item 
+int \hyperlink{classatmi_1_1tuxedo_ac5dbf9db596b4bfa05d0067b8a38e11c}{abort} ()
+\item 
+long \hyperlink{classatmi_1_1tuxedo_a2f5b4f52ca8095d704dcb23771425690}{error} () const 
+\item 
+const char $\ast$ \hyperlink{classatmi_1_1tuxedo_ad134373ac62fd2c7e1ac5482bdb7f65e}{error\+\_\+message} () const 
+\item 
+int \hyperlink{classatmi_1_1tuxedo_a77e2902dcd0293a2127a5d106e566a3b}{errnodetail} () const 
+\item 
+const char $\ast$ \hyperlink{classatmi_1_1tuxedo_ad7bf2370e3edeb091512d0b640093e9d}{error\+\_\+detail} () const 
+\item 
+void \hyperlink{classatmi_1_1tuxedo_afa3734356109e8c3ce4d23bfcb94242b}{set\+\_\+context} (T\+P\+C\+O\+N\+T\+E\+X\+T\+\_\+\+T \hyperlink{classatmi_1_1tuxedo_a6d31779e76609264295e0065fdfc008d}{context})
+\item 
+T\+P\+C\+O\+N\+T\+E\+X\+T\+\_\+\+T \hyperlink{classatmi_1_1tuxedo_a6d31779e76609264295e0065fdfc008d}{context} () const 
+\item 
+long \hyperlink{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}{flags} () const 
+\item 
+void \hyperlink{classatmi_1_1tuxedo_a31eb2881e3b9706c515da03728ab6875}{set\+\_\+flags} (long \hyperlink{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}{flags})
+\item 
+void \hyperlink{classatmi_1_1tuxedo_a649b28c90b5f73439e5d2ceb83a43dbd}{reset\+\_\+flags} (long \hyperlink{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}{flags})
+\item 
+void \hyperlink{classatmi_1_1tuxedo_aeef30e346c61643db72b255872729633}{unset\+\_\+flags} (long \hyperlink{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}{flags})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classatmi_1_1tuxedo_a79d8805a077e30138729f44c75fcfa5d}{}static const long \hyperlink{classatmi_1_1tuxedo_a79d8805a077e30138729f44c75fcfa5d}{F\+A\+I\+L\+E\+D} = -\/1\label{classatmi_1_1tuxedo_a79d8805a077e30138729f44c75fcfa5d}
+
+\begin{DoxyCompactList}\small\item\em Tuxedo error value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classatmi_1_1tuxedo_a90d83b2141d484744a82202f3f66a939}{switch\+\_\+context} ()
+\item 
+void \hyperlink{classatmi_1_1tuxedo_a1c1d7f2df43e4357788d03977548ac2e}{update\+Errno} ()
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\int \hyperlink{classatmi_1_1tuxedo_ae8715aedf9c8f3178aec71e93ee35be4}{handle\+\_\+tperrno} (int \+\_\+tperrno, const char $\ast$msg, const Args \&...args)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static long \hyperlink{classatmi_1_1tuxedo_abe17cfd8c79b1bc47fce4cbadc87d12f}{unset} (long, long)
+\item 
+static long \hyperlink{classatmi_1_1tuxedo_a73c4c95f165a052ba5a3a29cb2834831}{set} (long, long)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classatmi_1_1tuxedo_ac0714439c1f2e889190471966c9fda2f}{}long \hyperlink{classatmi_1_1tuxedo_ac0714439c1f2e889190471966c9fda2f}{\+\_\+flags}\label{classatmi_1_1tuxedo_ac0714439c1f2e889190471966c9fda2f}
+
+\begin{DoxyCompactList}\small\item\em Tuxedo flags. \end{DoxyCompactList}\item 
+\hypertarget{classatmi_1_1tuxedo_a1193fe16ac0984776678a23da351d00a}{}nl\+\_\+catd \hyperlink{classatmi_1_1tuxedo_a1193fe16ac0984776678a23da351d00a}{\+\_\+catd}\label{classatmi_1_1tuxedo_a1193fe16ac0984776678a23da351d00a}
+
+\begin{DoxyCompactList}\small\item\em message catalog refenence \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+All common used A\+T\+M\+I method are group in this class.
+
+\begin{DoxyAuthor}{Author}
+Herbert Koelman 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classatmi_1_1tuxedo_ac5dbf9db596b4bfa05d0067b8a38e11c}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!abort@{abort}}
+\index{abort@{abort}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{abort()}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::tuxedo\+::abort (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_ac5dbf9db596b4bfa05d0067b8a38e11c}
+Abort X\+A transaction.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em transaction\+\_\+exception} & if abort failed. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!allocate@{allocate}}
+\index{allocate@{allocate}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{allocate(const char $\ast$type, const char $\ast$subtype, long size)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ atmi\+::tuxedo\+::allocate (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{type, }
+\item[{const char $\ast$}]{subtype, }
+\item[{long}]{size}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}
+Allocate a new buffer.
+
+buffer types provided by tuxedo C\+A\+R\+R\+A\+Y Character array (possibly containing N\+U\+L\+L characters) that is neither encoded nor decoded during transmission S\+T\+R\+I\+N\+G N\+U\+L\+L-\/terminated character array F\+M\+L F\+M\+L fielded buffer V\+I\+E\+W C structure or F\+M\+L view X\+\_\+\+O\+C\+T\+E\+T Equivalent to C\+A\+R\+R\+A\+Y; provided for X\+A\+T\+M\+I compatibility X\+\_\+\+C\+\_\+\+T\+Y\+P\+E Equivalent to V\+I\+E\+W; provided for X\+A\+T\+M\+I compatibility X\+\_\+ C\+O\+M\+M\+O\+N Equivalent to V\+I\+E\+W; provided for X\+A\+T\+M\+I compatibility F\+M\+L32 F\+M\+L32 fielded buffer, using 32-\/bit identifiers and offsets V\+I\+E\+W32 C structure or F\+M\+L32 view, using 32-\/bit identifiers, counter variables, and size variables X\+M\+L buffer for X\+M\+L documents M\+B\+S\+T\+R\+I\+N\+G Character array for multibyte characters
+
+Note that only the first eight bytes of type and the first 16 bytes of subtype are significant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & buffer type to allocate (S\+T\+R\+I\+N\+G, V\+I\+E\+W, F\+M\+L, ...) \\
+\hline
+{\em subtype} & buffer subtype. N\+U\+L\+L means none \\
+\hline
+{\em size} & memory size to allocate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+allocated buffer or N\+U\+L\+L if failed
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classatmi_1_1tuxedo__exception}{tuxedo\+\_\+exception}} & if something goes wrong. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classatmi_1_1tuxedo_ac702cf5e571a3302978bfa76cd314c9b}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!begin@{begin}}
+\index{begin@{begin}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{begin(int timeout=0)}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::tuxedo\+::begin (
+\begin{DoxyParamCaption}
+\item[{int}]{timeout = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_ac702cf5e571a3302978bfa76cd314c9b}
+Starts X\+A transaction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout} & max duration in seconds for a transaction to complete.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em transaction\+\_\+exception} & is raised upon failure. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classatmi_1_1tuxedo_aeff1d0270d6b12de07a4478839ec8b07}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!commit@{commit}}
+\index{commit@{commit}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{commit()}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::tuxedo\+::commit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_aeff1d0270d6b12de07a4478839ec8b07}
+Commit X\+A transaction.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em transaction\+\_\+exception} & on failure. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classatmi_1_1tuxedo_a6d31779e76609264295e0065fdfc008d}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!context@{context}}
+\index{context@{context}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{context() const }]{\setlength{\rightskip}{0pt plus 5cm}T\+P\+C\+O\+N\+T\+E\+X\+T\+\_\+\+T atmi\+::tuxedo\+::context (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_a6d31779e76609264295e0065fdfc008d}
+\begin{DoxyReturn}{Returns}
+the current context 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_a77e2902dcd0293a2127a5d106e566a3b}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!errnodetail@{errnodetail}}
+\index{errnodetail@{errnodetail}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{errnodetail() const }]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::tuxedo\+::errnodetail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_a77e2902dcd0293a2127a5d106e566a3b}
+\begin{DoxyReturn}{Returns}
+the current error detail (if one exist). 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_a2f5b4f52ca8095d704dcb23771425690}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!error@{error}}
+\index{error@{error}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{error() const }]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::tuxedo\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_a2f5b4f52ca8095d704dcb23771425690}
+\begin{DoxyReturn}{Returns}
+the current errno value 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_ad7bf2370e3edeb091512d0b640093e9d}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!error\+\_\+detail@{error\+\_\+detail}}
+\index{error\+\_\+detail@{error\+\_\+detail}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{error\+\_\+detail() const }]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::tuxedo\+::error\+\_\+detail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_ad7bf2370e3edeb091512d0b640093e9d}
+\begin{DoxyReturn}{Returns}
+an error detail description string (if one exists). 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_ad134373ac62fd2c7e1ac5482bdb7f65e}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!error\+\_\+message@{error\+\_\+message}}
+\index{error\+\_\+message@{error\+\_\+message}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{error\+\_\+message() const }]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::tuxedo\+::error\+\_\+message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_ad134373ac62fd2c7e1ac5482bdb7f65e}
+\begin{DoxyReturn}{Returns}
+an error description string of the last errno 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_a683b79440474b94c471ed78ff3775eb8}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!extend@{extend}}
+\index{extend@{extend}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{extend(char $\ast$buffer, long extent)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ atmi\+::tuxedo\+::extend (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buffer, }
+\item[{long}]{extent}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_a683b79440474b94c471ed78ff3775eb8}
+resize buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & buffer to resize (the return value maybe different buffer) \\
+\hline
+{\em extent} & number of bytes to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+reference to resized buffer 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!flags@{flags}}
+\index{flags@{flags}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{flags() const }]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::tuxedo\+::flags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_adfebbea0b6599ba8ca87743c55157b82}
+\begin{DoxyReturn}{Returns}
+tuxedo flags used by this instance. 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_afdcf4b7d25862c6fdaeb47d095609a01}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!free@{free}}
+\index{free@{free}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{free(char $\ast$buffer)}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::free (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buffer}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1tuxedo_afdcf4b7d25862c6fdaeb47d095609a01}
+Free a previously allocated tuxedo buffer. \hypertarget{classatmi_1_1tuxedo_ae8715aedf9c8f3178aec71e93ee35be4}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!handle\+\_\+tperrno@{handle\+\_\+tperrno}}
+\index{handle\+\_\+tperrno@{handle\+\_\+tperrno}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{handle\+\_\+tperrno(int \+\_\+tperrno, const char $\ast$msg, const Args \&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ int atmi\+::tuxedo\+::handle\+\_\+tperrno (
+\begin{DoxyParamCaption}
+\item[{int}]{\+\_\+tperrno, }
+\item[{const char $\ast$}]{msg, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classatmi_1_1tuxedo_ae8715aedf9c8f3178aec71e93ee35be4}
+Triggers exceptions according to the given tperrno passed. The exception will be initialized with msg.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tpe} & tperrno to handle \\
+\hline
+{\em msg} & message to setup in thrown exception. \\
+\hline
+{\em Args} & substitution parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+legacy will be removed when prototype will be changed to void handle\+\_\+transaction\+\_\+errno() 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1tuxedo_a649b28c90b5f73439e5d2ceb83a43dbd}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!reset\+\_\+flags@{reset\+\_\+flags}}
+\index{reset\+\_\+flags@{reset\+\_\+flags}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{reset\+\_\+flags(long flags)}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::reset\+\_\+flags (
+\begin{DoxyParamCaption}
+\item[{long}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_a649b28c90b5f73439e5d2ceb83a43dbd}
+Reset flag value to T\+P\+N\+O\+F\+L\+A\+G\+S \hypertarget{classatmi_1_1tuxedo_a73c4c95f165a052ba5a3a29cb2834831}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!set@{set}}
+\index{set@{set}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{set(long, long)}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::tuxedo\+::set (
+\begin{DoxyParamCaption}
+\item[{long}]{f, }
+\item[{long}]{sf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classatmi_1_1tuxedo_a73c4c95f165a052ba5a3a29cb2834831}
+set bits in second argument in first argument \hypertarget{classatmi_1_1tuxedo_afa3734356109e8c3ce4d23bfcb94242b}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!set\+\_\+context@{set\+\_\+context}}
+\index{set\+\_\+context@{set\+\_\+context}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{set\+\_\+context(\+T\+P\+C\+O\+N\+T\+E\+X\+T\+\_\+\+T context)}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::set\+\_\+context (
+\begin{DoxyParamCaption}
+\item[{T\+P\+C\+O\+N\+T\+E\+X\+T\+\_\+\+T}]{context}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_afa3734356109e8c3ce4d23bfcb94242b}
+set the tuxedo context to use when calling tuxedo functions(tpsetctxt()).
+
+When set, A\+T\+M\+I++ switches to this context before executing a tuxedo call.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context to be used by this instance \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1tuxedo_a31eb2881e3b9706c515da03728ab6875}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!set\+\_\+flags@{set\+\_\+flags}}
+\index{set\+\_\+flags@{set\+\_\+flags}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{set\+\_\+flags(long flags)}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::set\+\_\+flags (
+\begin{DoxyParamCaption}
+\item[{long}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_a31eb2881e3b9706c515da03728ab6875}
+Set tuxedo flags \hypertarget{classatmi_1_1tuxedo_a90d83b2141d484744a82202f3f66a939}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!switch\+\_\+context@{switch\+\_\+context}}
+\index{switch\+\_\+context@{switch\+\_\+context}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{switch\+\_\+context()}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::switch\+\_\+context (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classatmi_1_1tuxedo_a90d83b2141d484744a82202f3f66a939}
+If context is set (context != 0 ), then tpsetctxt is called. This method does nothing otherwise. \hypertarget{classatmi_1_1tuxedo_abe17cfd8c79b1bc47fce4cbadc87d12f}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!unset@{unset}}
+\index{unset@{unset}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{unset(long, long)}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::tuxedo\+::unset (
+\begin{DoxyParamCaption}
+\item[{long}]{f, }
+\item[{long}]{uf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classatmi_1_1tuxedo_abe17cfd8c79b1bc47fce4cbadc87d12f}
+Unset bits in second argument from first argument \hypertarget{classatmi_1_1tuxedo_aeef30e346c61643db72b255872729633}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!unset\+\_\+flags@{unset\+\_\+flags}}
+\index{unset\+\_\+flags@{unset\+\_\+flags}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{unset\+\_\+flags(long flags)}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::unset\+\_\+flags (
+\begin{DoxyParamCaption}
+\item[{long}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1tuxedo_aeef30e346c61643db72b255872729633}
+unset flags 
+\begin{DoxyParams}{Parameters}
+{\em flags} & flags to unset \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1tuxedo_a1c1d7f2df43e4357788d03977548ac2e}{}\index{atmi\+::tuxedo@{atmi\+::tuxedo}!update\+Errno@{update\+Errno}}
+\index{update\+Errno@{update\+Errno}!atmi\+::tuxedo@{atmi\+::tuxedo}}
+\subsubsection[{update\+Errno()}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::tuxedo\+::update\+Errno (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classatmi_1_1tuxedo_a1c1d7f2df43e4357788d03977548ac2e}
+update current errno and sets what must be set.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000006}{Deprecated}]we use exception instead \end{DoxyRefDesc}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/tuxedo.\+hpp\item 
+src/tuxedo.\+cpp\end{DoxyCompactItemize}

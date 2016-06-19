@@ -1,0 +1,109 @@
+\hypertarget{classatmi_1_1_abstract_server}{}\section{atmi\+:\+:Abstract\+Server Class Reference}
+\label{classatmi_1_1_abstract_server}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+
+
+{\ttfamily \#include $<$tuxedo.\+hpp$>$}
+
+Inheritance diagram for atmi\+:\+:Abstract\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classatmi_1_1_abstract_server}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classatmi_1_1_abstract_server_a94f8a6f36001407ff5d40aff7b469ed0}{Abstract\+Server} ()
+\item 
+\hyperlink{classatmi_1_1_abstract_server_a0307cd9f122a533ffcb0e3636b53a2e1}{$\sim$\+Abstract\+Server} ()
+\item 
+virtual void \hyperlink{classatmi_1_1_abstract_server_a14f2df69f05b9dbc5f6d060b89b1059c}{tpsvrthrdone} ()
+\item 
+virtual int \hyperlink{classatmi_1_1_abstract_server_ad974763532b70ec01a78b316ac5fc9a2}{tpsvrthrinit} (int argc, char $\ast$$\ast$argv)
+\item 
+virtual void \hyperlink{classatmi_1_1_abstract_server_ae6969df1f1c97fb4c4b4d07f84a28738}{handle\+\_\+sighup} ()
+\item 
+virtual void \hyperlink{classatmi_1_1_abstract_server_aa7f6c20f7df624f9a911be42bb136b71}{handle\+\_\+sigterm} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Helper class to implement tuxedo Asbtract\+Servers. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classatmi_1_1_abstract_server_a94f8a6f36001407ff5d40aff7b469ed0}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!Abstract\+Server@{Abstract\+Server}}
+\index{Abstract\+Server@{Abstract\+Server}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{Abstract\+Server()}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::\+Abstract\+Server\+::\+Abstract\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1_abstract_server_a94f8a6f36001407ff5d40aff7b469ed0}
+Setup minimal requirements (mainly tpopen)
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classatmi_1_1tuxedo__exception}{tuxedo\+\_\+exception}} & if tpopen failed. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{classatmi_1_1_abstract_server_a0307cd9f122a533ffcb0e3636b53a2e1}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!````~Abstract\+Server@{$\sim$\+Abstract\+Server}}
+\index{````~Abstract\+Server@{$\sim$\+Abstract\+Server}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{$\sim$\+Abstract\+Server()}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::\+Abstract\+Server\+::$\sim$\+Abstract\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1_abstract_server_a0307cd9f122a533ffcb0e3636b53a2e1}
+minimal cleanup 
+
+\subsection{Member Function Documentation}
+\hypertarget{classatmi_1_1_abstract_server_ae6969df1f1c97fb4c4b4d07f84a28738}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!handle\+\_\+sighup@{handle\+\_\+sighup}}
+\index{handle\+\_\+sighup@{handle\+\_\+sighup}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{handle\+\_\+sighup()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void atmi\+::\+Abstract\+Server\+::handle\+\_\+sighup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_abstract_server_ae6969df1f1c97fb4c4b4d07f84a28738}
+Handles S\+I\+G\+H\+U\+P signals. It normaly expected that the server takes actions to re-\/initialize it\textquotesingle{}s internal state.
+
+This method should be overloaded \hypertarget{classatmi_1_1_abstract_server_aa7f6c20f7df624f9a911be42bb136b71}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!handle\+\_\+sigterm@{handle\+\_\+sigterm}}
+\index{handle\+\_\+sigterm@{handle\+\_\+sigterm}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{handle\+\_\+sigterm()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void atmi\+::\+Abstract\+Server\+::handle\+\_\+sigterm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_abstract_server_aa7f6c20f7df624f9a911be42bb136b71}
+Handles S\+I\+G\+T\+E\+R\+M signals. A server should cleanup and prepare it\textquotesingle{}s self to terminated.
+
+This method should be overloaded \hypertarget{classatmi_1_1_abstract_server_a14f2df69f05b9dbc5f6d060b89b1059c}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!tpsvrthrdone@{tpsvrthrdone}}
+\index{tpsvrthrdone@{tpsvrthrdone}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{tpsvrthrdone()}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::\+Abstract\+Server\+::tpsvrthrdone (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classatmi_1_1_abstract_server_a14f2df69f05b9dbc5f6d060b89b1059c}
+Terminates a B\+E\+A tuxedo A\+T\+M\+I server thread \hypertarget{classatmi_1_1_abstract_server_ad974763532b70ec01a78b316ac5fc9a2}{}\index{atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}!tpsvrthrinit@{tpsvrthrinit}}
+\index{tpsvrthrinit@{tpsvrthrinit}!atmi\+::\+Abstract\+Server@{atmi\+::\+Abstract\+Server}}
+\subsubsection[{tpsvrthrinit(int argc, char $\ast$$\ast$argv)}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::\+Abstract\+Server\+::tpsvrthrinit (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classatmi_1_1_abstract_server_ad974763532b70ec01a78b316ac5fc9a2}
+Initializes a B\+E\+A tuxedo A\+T\+M\+I server thread.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & C\+L\+O\+P\+T argument count. \\
+\hline
+{\em argv} & C\+L\+O\+P\+T user arguments\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A negative return value will cause the server dispatch thread to exit gracefully. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/tuxedo.\+hpp\item 
+src/Abstract\+Server.\+cpp\end{DoxyCompactItemize}

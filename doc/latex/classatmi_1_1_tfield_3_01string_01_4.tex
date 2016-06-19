@@ -1,0 +1,383 @@
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4}{}\section{atmi\+:\+:Tfield$<$ string $>$ Class Template Reference}
+\label{classatmi_1_1_tfield_3_01string_01_4}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+
+
+{\ttfamily \#include $<$buffers.\+hpp$>$}
+
+Inheritance diagram for atmi\+:\+:Tfield$<$ string $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classatmi_1_1_tfield_3_01string_01_4}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classatmi_1_1_tfield_3_01string_01_4_acf3ba399e850813d9bc7029e20f3cf90}{Tfield} (F\+L\+D\+I\+D32 fid)
+\item 
+\hyperlink{classatmi_1_1_tfield_3_01string_01_4_af47d03e9d7fcabb4005118b6cf68b495}{Tfield} (const char $\ast$n)
+\item 
+virtual F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01string_01_4_aa087966002323328ac6a3eac0efb8b4b}{length} ()
+\item 
+virtual F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a4294b2eeed43b7fec264022adbb5ae8a}{size} ()
+\item 
+const char $\ast$ \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a7c5cff3adeba13f23d5240905d59806b}{c\+\_\+str} () const 
+\item 
+string \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_aa30e565a844720235f74662385bcb5a9}{operator+=} (const string \&str)
+\item 
+string \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a7a5be64f8f6f83bc9db528ab1bed797d}{operator+=} (const char $\ast$s)
+\item 
+string \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_acd9bf2d1fe96a88aa25bb1d9c1377e1c}{operator+=} (char c)
+\item 
+const char \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_ae9ae83968b205215d3a4df0e14be84f0}{operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t pos) const 
+\item 
+char \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_aecc471a2f6349775d4f148c588c97281}{operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t pos)
+\item 
+virtual \hyperlink{classatmi_1_1_tfield}{Tfield}$<$ string $>$ \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a4eb4f0262602f58c71b036b6a033c52e}{operator=} (const char $\ast$str)
+\item 
+virtual \hyperlink{classatmi_1_1_tfield}{Tfield}$<$ string $>$ \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a3fb49fd82f01f8033cc540cbe4636248}{operator=} (const string \&str)
+\item 
+virtual \hyperlink{classatmi_1_1_tfield}{Tfield}$<$ string $>$ \& \hyperlink{classatmi_1_1_tfield_3_01string_01_4_ac2c57af61ba5979c7a5f8d862fa7810c}{operator=} (char \&c)
+\item 
+\hyperlink{classatmi_1_1_tfield_3_01string_01_4_ae844a83493829d97f60348d71a50ee97}{operator string} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \hyperlink{classatmi_1_1_tfield_3_01string_01_4_aac572b9f5c296cdb4589ed409f4084ed}{set} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+\item 
+virtual int \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a20be721257ccba7903a5fe4ed3dc672d}{add} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+\item 
+virtual int \hyperlink{classatmi_1_1_tfield_3_01string_01_4_a3001b8eb567de52e2193e54373721afe}{get} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+\item 
+virtual int \hyperlink{classatmi_1_1_tfield_3_01string_01_4_ad3936cbfcb487109f6e9cd2f32fd71c5}{get} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b, F\+L\+D\+O\+C\+C32 occ)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_afba2608339682e6d6f10dd8bb9875cc6}{}string \hyperlink{classatmi_1_1_tfield_3_01string_01_4_afba2608339682e6d6f10dd8bb9875cc6}{value}\label{classatmi_1_1_tfield_3_01string_01_4_afba2608339682e6d6f10dd8bb9875cc6}
+
+\begin{DoxyCompactList}\small\item\em string field\textquotesingle{}s value \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$$>$class atmi\+::\+Tfield$<$ string $>$}
+
+Specialization of template \hyperlink{classatmi_1_1_tfield}{Tfield} which handles string typed fields.
+
+This class is using a string object to hold and handle string data 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_acf3ba399e850813d9bc7029e20f3cf90}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!Tfield@{Tfield}}
+\index{Tfield@{Tfield}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{Tfield(\+F\+L\+D\+I\+D32 fid)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf atmi\+::\+Tfield}$<$ string $>$\+::{\bf Tfield} (
+\begin{DoxyParamCaption}
+\item[{F\+L\+D\+I\+D32}]{fid}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_acf3ba399e850813d9bc7029e20f3cf90}
+Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed field id
+
+The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
+
+
+\begin{DoxyParams}{Parameters}
+{\em fid} & the fml field id to setup (as defined in the F\+M\+L tables) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_af47d03e9d7fcabb4005118b6cf68b495}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!Tfield@{Tfield}}
+\index{Tfield@{Tfield}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{Tfield(const char $\ast$n)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf atmi\+::\+Tfield}$<$ string $>$\+::{\bf Tfield} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_af47d03e9d7fcabb4005118b6cf68b495}
+Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed name
+
+The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the fml field name to setup (as defined in the F\+M\+L tables) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a20be721257ccba7903a5fe4ed3dc672d}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!add@{add}}
+\index{add@{add}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{add(buffer $\ast$b)}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ string $>$\+::add (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} $\ast$}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_a20be721257ccba7903a5fe4ed3dc672d}
+add the fiels into the buffer
+
+When successfull the value of occurence is set
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer in which to add the field. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classatmi_1_1field_a161b9b7037c49fbcf86518fcb35e779c}{occurence} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classatmi_1_1field_af8a3477256b0f22313493d9435193442}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a7c5cff3adeba13f23d5240905d59806b}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!c\+\_\+str@{c\+\_\+str}}
+\index{c\+\_\+str@{c\+\_\+str}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{c\+\_\+str() const }]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ {\bf atmi\+::\+Tfield}$<$ string $>$\+::c\+\_\+str (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_a7c5cff3adeba13f23d5240905d59806b}
+\begin{DoxyReturn}{Returns}
+a C string (with \textbackslash{}0) of current string\textquotesingle{}s content. 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a3001b8eb567de52e2193e54373721afe}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!get@{get}}
+\index{get@{get}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{get(buffer $\ast$b)}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ string $>$\+::get (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} $\ast$}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_a3001b8eb567de52e2193e54373721afe}
+Retrieves the value of the field found into the buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer from which to retrieve the field\textquotesingle{}s value \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classatmi_1_1field_af6c42d9410250936fa4e69854375a3fc}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_ad3936cbfcb487109f6e9cd2f32fd71c5}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!get@{get}}
+\index{get@{get}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{get(buffer $\ast$b, F\+L\+D\+O\+C\+C32 occ)}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ string $>$\+::get (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} $\ast$}]{b, }
+\item[{F\+L\+D\+O\+C\+C32}]{occ}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_ad3936cbfcb487109f6e9cd2f32fd71c5}
+Retrieves the value of the field\textquotesingle{}s occurence found into the buffer
+
+Upon success the value of occurence is set to the retrieved occurence.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer from which to retrieve the field\textquotesingle{}s value \\
+\hline
+{\em occ} & occurence to retreive \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classatmi_1_1field_a161b9b7037c49fbcf86518fcb35e779c}{occurence} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classatmi_1_1field_ae3fcad0a671dd56e370a992850b40454}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_aa087966002323328ac6a3eac0efb8b4b}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!length@{length}}
+\index{length@{length}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{length()}]{\setlength{\rightskip}{0pt plus 5cm}virtual F\+L\+D\+L\+E\+N32 {\bf atmi\+::\+Tfield}$<$ string $>$\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_aa087966002323328ac6a3eac0efb8b4b}
+\begin{DoxyReturn}{Returns}
+the string\textquotesingle{}s length 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classatmi_1_1field_a296771293135085d91aa9aefd108d44d}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_ae844a83493829d97f60348d71a50ee97}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator string@{operator string}}
+\index{operator string@{operator string}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator string()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf atmi\+::\+Tfield}$<$ string $>$\+::operator string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_ae844a83493829d97f60348d71a50ee97}
+casts the field value \hypertarget{classatmi_1_1_tfield_3_01string_01_4_aa30e565a844720235f74662385bcb5a9}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator+=(const string \&str)}]{\setlength{\rightskip}{0pt plus 5cm}string\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_aa30e565a844720235f74662385bcb5a9}
+Appends a copy of the argument to the string.
+
+The new string content is the content existing in the string object before the call followed by the content of the argument.
+
+The append member function provides a similar functionality with additional options.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & a copy of the content of this object is appended to the object\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$this 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a7a5be64f8f6f83bc9db528ab1bed797d}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator+=(const char $\ast$s)}]{\setlength{\rightskip}{0pt plus 5cm}string\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_a7a5be64f8f6f83bc9db528ab1bed797d}
+Appends a copy of the argument to the string.
+
+The new string content is the content existing in the string object before the call followed by the content of the argument.
+
+The append member function provides a similar functionality with additional options.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & a pointer to an array containing a null-\/terminated character sequence (C string), which is appended to the object\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$this 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_acd9bf2d1fe96a88aa25bb1d9c1377e1c}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator+=(char c)}]{\setlength{\rightskip}{0pt plus 5cm}string\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_acd9bf2d1fe96a88aa25bb1d9c1377e1c}
+Appends character to the string field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & character. This single character is appended to the string object\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$this 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a4eb4f0262602f58c71b036b6a033c52e}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator=(const char $\ast$str)}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tfield}$<$string$>$\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_a4eb4f0262602f58c71b036b6a033c52e}
+assigns values to the string field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & null terminated character array. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a3fb49fd82f01f8033cc540cbe4636248}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator=(const string \&str)}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tfield}$<$string$>$\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_a3fb49fd82f01f8033cc540cbe4636248}
+assigns values to the string field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & string to assign \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classatmi_1_1field_ac032afae0c1ebfc606f047ce1a32ac58}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_ac2c57af61ba5979c7a5f8d862fa7810c}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator=(char \&c)}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Tfield}$<$string$>$\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{char \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_ac2c57af61ba5979c7a5f8d862fa7810c}
+assigns values to the string field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & the content is set to a single character. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_ae9ae83968b205215d3a4df0e14be84f0}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator[](size\+\_\+t pos) const }]{\setlength{\rightskip}{0pt plus 5cm}const char\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{pos}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_ae9ae83968b205215d3a4df0e14be84f0}
+Returns a reference the character at position pos in the string.
+
+The function actually returns data()\mbox{[} pos \mbox{]}.
+
+The at member function has the same behavior as this operator function, except that at also performs a range check.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size\+\_\+t is an unsigned integral type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The character at the specified position in the string. 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_aecc471a2f6349775d4f148c588c97281}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{operator[](size\+\_\+t pos)}]{\setlength{\rightskip}{0pt plus 5cm}char\& {\bf atmi\+::\+Tfield}$<$ string $>$\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1_tfield_3_01string_01_4_aecc471a2f6349775d4f148c588c97281}
+Returns a reference the character at position pos in the string.
+
+The function actually returns data()\mbox{[} pos \mbox{]}.
+
+The at member function has the same behavior as this operator function, except that at also performs a range check.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size\+\_\+t is an unsigned integral type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The character at the specified position in the string. 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_aac572b9f5c296cdb4589ed409f4084ed}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!set@{set}}
+\index{set@{set}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{set(buffer $\ast$b)}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ string $>$\+::set (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} $\ast$}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_aac572b9f5c296cdb4589ed409f4084ed}
+set the value of the field\textquotesingle{}s value
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & the buffer in which the value must be changed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classatmi_1_1field_a0153530cc98a94cbb5c6e85d1ced52fb}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_3_01string_01_4_a4294b2eeed43b7fec264022adbb5ae8a}{}\index{atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}!size@{size}}
+\index{size@{size}!atmi\+::\+Tfield$<$ string $>$@{atmi\+::\+Tfield$<$ string $>$}}
+\subsubsection[{size()}]{\setlength{\rightskip}{0pt plus 5cm}virtual F\+L\+D\+L\+E\+N32 {\bf atmi\+::\+Tfield}$<$ string $>$\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1_tfield_3_01string_01_4_a4294b2eeed43b7fec264022adbb5ae8a}
+\begin{DoxyReturn}{Returns}
+the string\textquotesingle{}s size 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/buffers.\+hpp\end{DoxyCompactItemize}

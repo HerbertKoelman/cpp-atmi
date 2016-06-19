@@ -1,0 +1,88 @@
+\hypertarget{classatmi_1_1buffer__exception}{}\section{atmi\+:\+:buffer\+\_\+exception Class Reference}
+\label{classatmi_1_1buffer__exception}\index{atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}}
+
+
+{\ttfamily \#include $<$exceptions.\+hpp$>$}
+
+Inheritance diagram for atmi\+:\+:buffer\+\_\+exception\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classatmi_1_1buffer__exception}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\\hyperlink{classatmi_1_1buffer__exception_aff48a3528d8a2d575a194233f454bd40}{buffer\+\_\+exception} (int err, const char $\ast$msg, const Args \&...args)
+\item 
+\hyperlink{classatmi_1_1buffer__exception_a25ef1cb87d75bfca1577f298466e77a0}{buffer\+\_\+exception} ()
+\item 
+int \hyperlink{classatmi_1_1buffer__exception_a8d9475dbaa7d9864b906dc6ea9818351}{error} () const 
+\item 
+const char $\ast$ \hyperlink{classatmi_1_1buffer__exception_a6881332c2a607fb71b987eaf811723b7}{error\+\_\+message} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+F\+M\+L buffer related exceptions. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classatmi_1_1buffer__exception_aff48a3528d8a2d575a194233f454bd40}{}\index{atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}!buffer\+\_\+exception@{buffer\+\_\+exception}}
+\index{buffer\+\_\+exception@{buffer\+\_\+exception}!atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}}
+\subsubsection[{buffer\+\_\+exception(int err, const char $\ast$msg, const Args \&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ atmi\+::buffer\+\_\+exception\+::buffer\+\_\+exception (
+\begin{DoxyParamCaption}
+\item[{int}]{err, }
+\item[{const char $\ast$}]{msg, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1buffer__exception_aff48a3528d8a2d575a194233f454bd40}
+new buffer exception.
+
+
+\begin{DoxyParams}{Parameters}
+{\em err} & Ferror32 value \\
+\hline
+{\em msg} & error message \\
+\hline
+{\em args} & error message parameters (variadic). \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1buffer__exception_a25ef1cb87d75bfca1577f298466e77a0}{}\index{atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}!buffer\+\_\+exception@{buffer\+\_\+exception}}
+\index{buffer\+\_\+exception@{buffer\+\_\+exception}!atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}}
+\subsubsection[{buffer\+\_\+exception()}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+\_\+exception\+::buffer\+\_\+exception (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classatmi_1_1buffer__exception_a25ef1cb87d75bfca1577f298466e77a0}
+default constructor.
+
+set error message to strerror. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classatmi_1_1buffer__exception_a8d9475dbaa7d9864b906dc6ea9818351}{}\index{atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}!error@{error}}
+\index{error@{error}!atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}}
+\subsubsection[{error() const }]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::buffer\+\_\+exception\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classatmi_1_1buffer__exception_a8d9475dbaa7d9864b906dc6ea9818351}
+\begin{DoxyReturn}{Returns}
+tuxedo F\+M\+L error number 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1buffer__exception_a6881332c2a607fb71b987eaf811723b7}{}\index{atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}!error\+\_\+message@{error\+\_\+message}}
+\index{error\+\_\+message@{error\+\_\+message}!atmi\+::buffer\+\_\+exception@{atmi\+::buffer\+\_\+exception}}
+\subsubsection[{error\+\_\+message() const }]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::buffer\+\_\+exception\+::error\+\_\+message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classatmi_1_1buffer__exception_a6881332c2a607fb71b987eaf811723b7}
+\begin{DoxyReturn}{Returns}
+tuxedo F\+M\+L error message string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/exceptions.\+hpp\item 
+src/exceptions.\+cpp\end{DoxyCompactItemize}
