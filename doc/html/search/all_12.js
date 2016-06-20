@@ -7,7 +7,7 @@ var searchData=
   ['timeout_5fexception',['timeout_exception',['../classatmi_1_1timeout__exception.html',1,'atmi']]],
   ['timeout_5fexception',['timeout_exception',['../classatmi_1_1timeout__exception.html#a8fe65e08189bb4d6cbcd63bbfdb53a2b',1,'atmi::timeout_exception']]],
   ['tname',['tname',['../classatmi_1_1field.html#a7d6260dd6f7c3c44de29190c2dfd546e',1,'atmi::field']]],
-  ['tp_5fauto_5fptr',['tp_auto_ptr',['../namespaceatmi.html#a4a71d76e59908eb5ec5e53269c2742b5',1,'atmi']]],
+  ['tp_5fauto_5fptr',['tp_auto_ptr',['../group__atmi.html#ga4a71d76e59908eb5ec5e53269c2742b5',1,'atmi']]],
   ['tpsvrthrdone',['tpsvrthrdone',['../classatmi_1_1abstract__server.html#ad839be63bae91afe4b5f4e090cd8e8c5',1,'atmi::abstract_server']]],
   ['tpsvrthrinit',['tpsvrthrinit',['../classatmi_1_1abstract__server.html#a08dec6ac0346262a7364e3f6a9657016',1,'atmi::abstract_server']]],
   ['transaction',['transaction',['../classatmi_1_1transaction.html',1,'atmi']]],

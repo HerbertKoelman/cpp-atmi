@@ -14,7 +14,8 @@ var indexSectionsWithContent =
   4: "_flv",
   5: "acqt",
   6: "o",
-  7: "d"
+  7: "af",
+  8: "d"
 };
 
 var indexSectionNames =
@@ -26,7 +27,8 @@ var indexSectionNames =
   4: "variables",
   5: "typedefs",
   6: "related",
-  7: "pages"
+  7: "groups",
+  8: "pages"
 };
 
 function convertToId(search)
