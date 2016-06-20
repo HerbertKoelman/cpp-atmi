@@ -1,6 +1,5 @@
-\hypertarget{group__fml}{\section{Formatted Message Language}
-\label{group__fml}\index{Formatted Message Language@{Formatted Message Language}}
-}
+\hypertarget{group__fml}{}\section{Field Manipulation Language}
+\label{group__fml}\index{Field Manipulation Language@{Field Manipulation Language}}
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,15 +16,15 @@ class \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4}{atmi\+::\+Tfield$<$ ch
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{typedef char $\ast$ \hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{atmi\+::carray}}\label{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}
+\hypertarget{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{}typedef char $\ast$ \hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{atmi\+::carray}\label{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}
 
 \begin{DoxyCompactList}\small\item\em character array \end{DoxyCompactList}\item 
-\hypertarget{group__fml_ga374230d2a2355a879f42c829eb2d70ff}{typedef unique\+\_\+ptr$<$ carray $>$ \hyperlink{group__fml_ga374230d2a2355a879f42c829eb2d70ff}{atmi\+::\+A\+Carray}}\label{group__fml_ga374230d2a2355a879f42c829eb2d70ff}
+\hypertarget{group__fml_ga374230d2a2355a879f42c829eb2d70ff}{}typedef unique\+\_\+ptr$<$ carray $>$ \hyperlink{group__fml_ga374230d2a2355a879f42c829eb2d70ff}{atmi\+::\+A\+Carray}\label{group__fml_ga374230d2a2355a879f42c829eb2d70ff}
 
 \begin{DoxyCompactList}\small\item\em unique\+\_\+ptr to a carray. \end{DoxyCompactList}\item 
-\hypertarget{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}{typedef unique\+\_\+ptr$<$ buffer $>$ \hyperlink{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}{atmi\+::\+Abuffer}}\label{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}
+\hypertarget{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}{}typedef unique\+\_\+ptr$<$ buffer $>$ \hyperlink{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}{atmi\+::\+Abuffer}\label{group__fml_ga268bae34ffaa2c2e72fabbcb54841934}
 
-\begin{DoxyCompactList}\small\item\em uniqueauto\+\_\+ptr to a F\+M\+L buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em unique\+\_\+ptr to a F\+M\+L buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,15 +33,17 @@ ostream \& \hyperlink{group__fml_gaaf1bf620dc4ebad71a8f2b98e45107e3}{atmi\+::ope
 
 
 \subsection{Detailed Description}
+A set of C++ classes for defining and manipulating storage structures called fielded buffers, that contain attribute-\/value pairs called fields. The attribute is the field’s identifier, and the associated value represents the field’s data content.
 
+Fielded buffers provide an excellent structure for communicating parameterized data between cooperating processes, by providing named access to a set of related fields. Programs that need to communicate with other processes can use the F\+M\+L software to provide access to fields without concerning themselves with the structures containing them. 
 
 \subsection{Function Documentation}
-\hypertarget{group__fml_gaaf1bf620dc4ebad71a8f2b98e45107e3}{\index{Formatted Message Language@{Formatted Message Language}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!Formatted Message Language@{Formatted Message Language}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream \& atmi\+::operator$<$$<$ (
+\hypertarget{group__fml_gaaf1bf620dc4ebad71a8f2b98e45107e3}{}\index{Field Manipulation Language@{Field Manipulation Language}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Field Manipulation Language@{Field Manipulation Language}}
+\subsubsection[{operator$<$$<$(ostream \&o, Tfield$<$ string $>$ \&f)}]{\setlength{\rightskip}{0pt plus 5cm}ostream \& atmi\+::operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{ostream \&}]{o, }
-\item[{Tfield$<$ string $>$ \&}]{f}
+\item[{{\bf Tfield}$<$ string $>$ \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{group__fml_gaaf1bf620dc4ebad71a8f2b98e45107e3}
+)}\label{group__fml_gaaf1bf620dc4ebad71a8f2b98e45107e3}
 Helper that handles the operator $<$$<$ between output streams and field value 
