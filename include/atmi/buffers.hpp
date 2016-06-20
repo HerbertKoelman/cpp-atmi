@@ -34,6 +34,9 @@ using namespace std;
 
 namespace atmi {
 
+  /** \addtogroup fml Formatted Message Language
+   * @{
+   */
 //----------------------------------------------------------------------------------------------
   class field;
   class buffer;
@@ -916,6 +919,8 @@ namespace atmi {
 /** Helper that handles the operator << between output streams and field value */
   ostream &operator<< ( ostream &o, Tfield<string> &f );
 
-
+/**
+ * @}
+ */
 }
 #endif

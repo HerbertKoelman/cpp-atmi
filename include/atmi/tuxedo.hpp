@@ -47,6 +47,9 @@ using namespace std;
 
 namespace atmi {
 
+  /** \addtogroup atmi Application-to-Transaction Monitor Interface
+   * @{
+   */
 // ---------------------------------------------------------------------------------
 
   class buffer;
@@ -1018,6 +1021,10 @@ namespace atmi {
  * @param qs queue stream that handles the writing of messages to
  */
   extern istream& operator>>(istream& in, queue_stream& qs);
+
+  /**
+   * @}
+   */
 }
 
 /** fake C function that can be used with autotool AC_CHECK_LIB macro
