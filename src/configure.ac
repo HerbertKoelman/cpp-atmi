@@ -9,7 +9,10 @@ AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git lo
 
 AC_CONFIG_SRCDIR([tuxedo.cpp])
 
-AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
+AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include" LDFLAGS=" -L /usr/local/lib" )
+
+AC_ARG_VAR([AUXDIR], [auxiliary include and lib directories])
+AC_ARG_ENABLE([auxdir], AS_HELP_STRING([--enable-auxdir=PATH],[set AUXDIR to point to this path]), AUXDIR=$enable_auxdir)
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
@@ -20,14 +23,42 @@ AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AC_PROG_CXX
 AC_CHECK_PROG([AR],[ar],[ar -rv])
-AC_CHECK_PROG([BEAUTIFIER],[uncrustify],[uncrustify -l CPP --replace -c ../crust.cfg])
 AC_PROG_RANLIB
 
 CXXFLAGS=""
 CFLAGS="-I../include"
 
+if test -n "$AUXDIR"
+then
+  CFLAGS="$CFLAGS -I$AUXDIR/include"
+  LDFLAGS="$LDFLAGS -L$AUXDIR/lib"
+  AC_MSG_NOTICE([WARNING using auxiliary directory $AUXDIR (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)])
+fi
+
+AC_ARG_ENABLE([warn], AS_HELP_STRING([--enable-warn=PATH],[add warning options to CXXFLAGS (i.e. -qwarn0x)]), CXXFLAGS="$CXXFLAGS -qwarn0x")
+
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
+
+# C++11 checks
+AC_CHECK_HEADER([mutex], [AC_DEFINE([HAVE_CPP11_MUTEX])])
+
+if test "$ac_cv_header_mutex" = "no" 
+then
+#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-thread library.])])
+   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[])
+fi
+
+#HEADERS=""
+#for header in include/atmi/*.hpp include/atmi/*.h
+#do
+#  HEADERS="$HEADERS $header"
+#done
+#for header in include/atmi/*.in
+#do
+#  HEADERS="$HEADERS `basename $header .in`"
+#done
+#AC_SUBST(HEADERS,$HEADERS)
 
 # Setting things up for ATMI builds
 if test -n "$TUXDIR"
@@ -73,11 +104,12 @@ fi
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-    CFLAGS="-O5 -qmaxmem=-1 -qsmp $CFLAGS "
-    AC_MSG_RESULT([-O5 -qmaxmem=-1 -qsmp])
+	  CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not used anymore -qsourcetype=c++ "
+    CFLAGS="-O -qmaxmem=-1 -qsmp $CFLAGS "
+    AC_MSG_RESULT([$CFLAGS $CPPFLAGS])
     ;;
   g++ | gcc)
-    CFLAGS="$CFLAGS -O2"
+    CXXFLAGS="-O2"
     CPPFLAGS="-std=c++11 $CPPFLAGS "
     AC_MSG_RESULT([-std=c++11])
     ;;

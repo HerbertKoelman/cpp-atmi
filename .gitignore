@@ -20,7 +20,6 @@ Makefile
 *.log
 confdefs.h
 config.status
-include/atmi++.h
 autom4te.cache
 
 # Tuxedo specific files
@@ -29,9 +28,22 @@ autom4te.cache
 # misc and project created files
 doc
 doxyfile
-atmi++.cpp
 config.h
 locale
 html
 man
 .*
+ULOG*
+access*
+src/atmi++.cpp
+*.tar
+*orig
+
+# sample programs
+exceptions_tests
+buffer_test        
+multi_context_test 
+queue_test          
+transaction_test
+sample_fml_table.h
+

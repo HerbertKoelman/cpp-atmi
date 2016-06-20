@@ -9,15 +9,26 @@ AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to 
 AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug],[sets #define _DEBUG_]),[AC_DEFINE_UNQUOTED(_DEBUG_,[1],[activate debug traces.])])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
-AC_CHECK_PROG([RM],[rm],[rm -f])
 
 AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
-AC_CHECK_PROG([BEAUTIFIER], [uncrustify], [uncrustify])
+AC_CHECK_PROG([RM],[rm],[rm -f])
+AC_PROG_MKDIR_P
 
 AC_CANONICAL_BUILD
+
+#HEADERS=""
+#for header in include/atmi/*.hpp include/atmi/*.h
+#do
+#  HEADERS="$HEADERS $header"
+#done
+#for header in include/atmi/*.in
+#do
+#  HEADERS="$HEADERS `basename $header .in`"
+#done
+#AC_SUBST(HEADERS,$HEADERS)
 
 AC_MSG_CHECKING([whether target directory ./lib exists])
 if test -e ./lib
@@ -39,8 +50,6 @@ fi
 
 AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src)
-#AC_CONFIG_SUBDIRS(src/utl)
-#AC_CONFIG_SUBDIRS(samples/atmi++)
 AC_CONFIG_FILES([Makefile doxyfile])
 AC_OUTPUT
 

@@ -1,135 +1,83 @@
-/* $Id: aborted_exception.C 79 2007-08-18 17:30:26Z hkoelman $
-
- */
-
 #include <iostream>
 #include <cerrno>
 #include <stdarg.h>
 #include <stdio.h>
 #include <atmi.h>
+#include <memory>
 #include <atmi/atmi++.hpp>
 
 namespace atmi {
 
-  aborted_exception::aborted_exception ( int err, int diagno, const char * msg, ... ) throw () : diagnostic_exception ( err, diagno )
-  {
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
+  atmi_exception::atmi_exception (): _message("ATMI error occured, check ULOG for more informations"){
   }
 
-  const char *atmi_exception::what() throw () {
+#if __cplusplus < 201103L
+  const char *atmi_exception::what() throw(){
+#else
+  const char *atmi_exception::what() const noexcept {
+#endif
 
-    return message.c_str();
+//    printf("Atmi what:  [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
+    return (_what.size() > 0 ) ? _what.c_str() : _message.c_str();
   }
 
-  atmi_exception::atmi_exception ( const char *msg, ... ) throw () {
+#if __cplusplus < 201103L
+  const char *atmi_exception::message() throw () {
+#else
+  const char *atmi_exception::message() const noexcept {
+#endif
 
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
+    return _message.c_str();
   }
 
-  void atmi_exception::setup_message ( const char *msg, va_list args ) {
 
-    if ( msg == NULL )
-      message = " error occured. Check ULOG.";
-    else {
-      int len = 512;
-      char *buff = new char[len+1];
-      memset ( buff, 0, sizeof (buff) );
-      vsnprintf ( buff, len, msg, args );
+  // unix_exception ----------------------------------------
+  //
 
-      // vsnprintf returns the number of characters that are needed if the initial buffer size 
-      // was not big enough.
-/* needs debugging
-      if ( (len = vsnprintf ( buff, len, msg, args )) > 50 ){
-        delete[] buff;
-        buff = new char[(len > BUFSIZ ? BUFSIZ : len +1 )];
-        memset ( buff, 0, ( len > BUFSIZ ? BUFSIZ : len  +1) );
-
-        vsnprintf ( buff, len, msg, args );
-      }
-*/
-
-      message = buff;
-
-      delete[] buff;
-    }
+  unix_exception::unix_exception (): _error(errno), atmi_exception(strerror (errno)) {
   }
 
-  blocking_exception::blocking_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
+  int unix_exception::error () const {
 
-    va_list ap;
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
+    return _error;
   }
 
-  int buffer_exception::getFerror () {
+  // buffer_exception ---------------------------------------
+  //
 
-    return ferror;
+  buffer_exception::buffer_exception (): _error(Ferror32), atmi_exception("FML buffer error occured.") {
   }
 
-  const char *buffer_exception::getFmlerrmsg () {
+  int buffer_exception::error () const {
 
-    return Fstrerror32 ( ferror );
+    return _error;
   }
 
-  const char *buffer_exception::getMessage() {
+  const char *buffer_exception::error_message () const {
 
-    return message.c_str();
+    return Fstrerror32 ( _error );
   }
 
-  const char *buffer_exception::what() throw () {
+  // tuxedo_exception --------------------------------------
+  //
 
-    message = message + " " + getFmlerrmsg ();
-
-    return message.c_str();
+  const char *tuxedo_exception::error_detail () const {
+    return tpstrerrordetail(_detail, 0);
   }
 
-  buffer_exception::buffer_exception ( int err, const char *msg, ... ) throw () {
+  const char *tuxedo_exception::error_message () const {
 
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    this->ferror = err;
+    return tpstrerror ( _error );
   }
 
-  diagnostic_exception::diagnostic_exception ( int err, long diagno, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
-    va_list ap;
 
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-    this->diagno = diagno;
-  }
-
-  const char *diagnostic_exception::what () throw () {
-
-    string buffer;
-    if ( tuxerror == TPEDIAGNOSTIC ) {
-      buffer += message + getDiagmsg ();
-    } else {
-      buffer += message + getTperrmsg ();
-    }
-
-    return buffer.c_str();
-  }
-
-  const char *diagnostic_exception::getDiagmsg () {
-    switch ( diagno ) {
+  // /Q related exceptions ---------------------------------------------------------
+  //
+  // diagnostic exception -----------------------------------
+  //
+  
+  const char *diagnostic_exception::diagnostic_message () const {
+    switch ( _diagno ) {
       case QMEINVAL:
         return "QMEINVAL: An invalid flag value was specified.";
 
@@ -173,120 +121,4 @@ namespace atmi {
         return "Never heard about this diagno !!??";
     }
   }
-
-  interrupt_exception::interrupt_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-  }
-
-  nomsg_exception::nomsg_exception ( int err, int diagno, const char * msg, ... ) throw () : diagnostic_exception ( err, diagno )
-  {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-  }
-
-  service_exception::service_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-  }
-
-  timeout_exception::timeout_exception ( int err, const char * msg, ... ) throw () : tuxedo_exception ( err )
-  {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-  }
-
-  const char *tuxedo_exception::getTperrdetail () {
-    return tpstrerrordetail(errdetail, 0);
-  }
-
-  const char *tuxedo_exception::getTperrmsg () {
-
-    return tpstrerror ( tuxerror );
-  }
-
-  const char *tuxedo_exception::getMessage() {
-
-    return message.c_str();
-  }
-
-  const char *tuxedo_exception::what() throw () {
-
-    message = message + " " + getTperrmsg ();
-
-    return message.c_str();
-  }
-
-  tuxedo_exception::tuxedo_exception ( int err, const char *msg, ... ) throw () {
-
-    va_list ap;
-
-    va_start ( ap, msg );
-    setup_message ( msg, ap );
-    va_end (ap);
-
-    this->tuxerror = err;
-    errdetail = tperrordetail ( 0 );
-  }
-
-  int unix_exception::get_errno () {
-
-    return error;
-  }
-
-  const char *unix_exception::what() throw () {
-
-    message = message + ": " + strerror ( error );
-
-    return message.c_str();
-  }
-
-  unix_exception::unix_exception ( int err, const char *msg, ... ) throw () {
-
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
-
-    this->error = ( err == 0 ? errno : err );;
-  }
-
-  unix_exception::unix_exception ( const char *msg, ... ) throw () {
-
-    if ( msg != NULL ) {
-      va_list ap;
-
-      va_start ( ap, msg );
-      setup_message ( msg, ap );
-      va_end (ap);
-    }
-
-    this->error = errno;
-  }
-
 }
-

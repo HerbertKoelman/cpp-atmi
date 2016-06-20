@@ -3,6 +3,8 @@
 
    Tuxedo queue manipulation helper class.
  */
+#include <unistd.h>
+#include <pthread.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -31,7 +33,7 @@ namespace atmi {
     _qspace = const_cast<char *>(qspace);
     _queue = const_cast<char *>(queue);
 
-    this->flags = TPNOFLAGS;
+    _flags      = TPNOFLAGS;
     _qctl.flags = TPNOFLAGS;
 
     set_message_wait ( true );
@@ -67,13 +69,13 @@ namespace atmi {
 
     if ( _qspace == NULL || queue == NULL ) {
 
-      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
     }
 
     // check if we need to switch context
     switch_context ();
 
-    rc = tpenqueue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, flags );
+    rc = tpenqueue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, _flags );
 
     updateErrno ();
 
@@ -81,7 +83,7 @@ namespace atmi {
       if ( tperrno == TPEDIAGNOSTIC ) {
         handle_diagnostics ( tperrno, _qctl.diagnostic, "Enqueue in %s:%s failed.", _qspace, queue );
       } else {
-        handle_transaction_errno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
+        handle_tperrno ( tperrno, "Enqueue on %s:%s failed.", _qspace, queue );
       }
     }
 
@@ -107,7 +109,7 @@ namespace atmi {
     int rc = -1;
 
     if ( _qctl.replyqueue == NULL ) {
-      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 40, "Denqueue reply failed, reply queue properties have not been set !!??") );
     }
 
     rc = dequeue ( _qctl.replyqueue, data, len );
@@ -125,7 +127,7 @@ namespace atmi {
     int rc = -1;
 
     if ( _qctl.replyqueue == NULL ) {
-      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 40, "Enqueue reply failed, reply queue properties have not been set !!??") );
     }
 
     rc = enqueue ( _qctl.replyqueue, data, len );
@@ -139,13 +141,13 @@ namespace atmi {
 
     if ( _qspace == NULL || queue == NULL ) {
 
-      throw atmi_exception ( catgets ( catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
+      throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
     }
 
     // check if we need to switch context
     switch_context ();
 
-    rc = tpdequeue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, flags );
+    rc = tpdequeue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, _flags );
 
     updateErrno ();
 
@@ -157,7 +159,7 @@ namespace atmi {
           handle_diagnostics ( tperrno, _qctl.diagnostic, "Dequeue from %s:%s failed.", _qspace, queue );
         }
       } else {
-        handle_transaction_errno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
+        handle_tperrno ( tperrno, "Dequeue from %s:%s failed.", _qspace, queue );
       }
     }
 
@@ -173,51 +175,6 @@ namespace atmi {
     return rc;
   }
 
-  int queue::handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, ... ) {
-
-    _diagno = tux_diagno;
-
-    va_list ap;
-    va_start ( ap, msg );
-
-    switch ( _diagno ) {
-      case QMEINVAL:
-      case QMEBADRMID:
-      case QMENOTOPEN:
-      case QMETRAN:
-      case QMEBADMSGID:
-      case QMESYSTEM:
-      case QMEOS:
-      case QMEPROTO:
-      case QMEBADQUEUE:
-      case QMENOSPACE:
-      case QMERELEASE:
-      case QMESHARE:
-      {
-        diagnostic_exception err ( tux_tperrno, _diagno );
-        err.setup_message ( msg, ap );
-        throw err;
-      }
-      break;
-      case QMEABORTED:
-      {
-        aborted_exception err ( tux_tperrno, _diagno );
-        err.setup_message (msg, ap );
-        throw err;
-      }
-      break;
-      /* these are not errors */
-      case QMENOMSG:
-        // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
-        break;
-      default:
-        throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
-    }
-
-    va_end ( ap );
-
-    return _diagno;
-  }
 
 /* properties ------------------------------------------------*/
 
@@ -271,7 +228,7 @@ namespace atmi {
         break;
 
       default:
-        throw atmi_exception (catgets ( catd, CATD_ATMI_SET, 23, "Unsupported QoS (%d) for /Q operations."), qos);
+        throw atmi_exception (catgets ( _catd, CATD_ATMI_SET, 23, "Unsupported QoS (%d) for /Q operations."), qos);
     }
   }
 

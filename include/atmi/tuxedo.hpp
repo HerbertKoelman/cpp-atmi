@@ -20,8 +20,8 @@
  * Boston, MA  02110-1301  USA
  */
 
-#ifndef __ATMI_TUXEDO__
-#define __ATMI_TUXEDO__
+#ifndef __CPP_ATMI_TUXEDO__
+#define __CPP_ATMI_TUXEDO__
 
 #include <atmi/config.h>
 #include <atmi/logger.hpp>
@@ -33,6 +33,12 @@
 #include <stdio.h>
 #include <memory>
 #include <nl_types.h>
+
+//#ifndef HAVE_CPP11_MUTEX
+//#include <pthread/pthread.hpp>
+//#else
+//#include <mutex>
+//#endif
 
 /** catalog message set */
 #define CATD_ATMI_SET 100
@@ -49,8 +55,8 @@ namespace atmi {
   class queue;
 
 #if __cplusplus < 201103L
-  typedef auto_ptr<transaction> tp_auto_ptr;
-  typedef auto_ptr<atmi::queue> queue_auto_ptr;
+  typedef auto_ptr<transaction> transaction_ptr;
+  typedef auto_ptr<atmi::queue> queue_ptr;
 #else
   typedef unique_ptr<transaction> tp_auto_ptr;    //!< @deprecated use unique_ptr instead
   typedef unique_ptr<atmi::queue> queue_auto_ptr; //!< @deprecated use unique_ptr instead
@@ -154,80 +160,77 @@ namespace atmi {
       /**
        * @return the current errno value
        */
-      inline long  get_errno () {
-        return errorno;
+      inline long  error () const {
+        return _errorno;
       };
 
       /**
        * @return an error description string of the last errno
        */
-      inline const char *get_errmsg () {
-        return tpstrerror(errorno);
+      inline const char *error_message () const {
+        return tpstrerror(_errorno);
       };
 
       /**
        * @return the current error detail (if one exist).
        */
-      inline int   get_errnodetail() {
-        return errornodetail;
+      inline int errnodetail() const {
+        return _errornodetail;
       };
       /**
        * @return an error detail description string (if one exists).
        */
-      inline const char *get_errdetail () {
-        return tpstrerrordetail ( errornodetail, 0 );
+      inline const char *error_detail () const {
+        return tpstrerrordetail ( _errornodetail, 0 );
       };
 
       /** set the tuxedo context to use when calling tuxedo functions(tpsetctxt()).
        *
        * When set, ATMI++ switches to this context before executing a tuxedo call.
        *
-       * @param c context to be used by this instance
+       * @param context context to be used by this instance
        */
-      inline void set_context ( TPCONTEXT_T c ) {
-
-        context = c;
+      inline void set_context ( TPCONTEXT_T context) {
+        _context = context;
+        // printf("DEBUG set_context [%d]:\n", _context);
       };
 
       /** @return the current context
        */
-      inline TPCONTEXT_T get_context () {
+      inline TPCONTEXT_T context () const {
 
-        return context;
+        // printf("DEBUG context [%d]:\n", _context);
+
+        return _context;
       };
 
       /**
        * @return tuxedo flags used by this instance.
        */
-      inline long get_flags() {
-        return flags;
+      inline long flags() const {
+        return _flags;
       };
 
       /**
        * Set tuxedo flags
        */
       inline void set_flags ( long flags ) {
-        tuxedo::set (this->flags, flags);
+        tuxedo::set (_flags, flags);
       };
 
       /**
        * Reset flag value to TPNOFLAGS
        */
       inline void reset_flags ( long flags ) {
-        this->flags = TPNOFLAGS;
-        tuxedo::set (this->flags, flags);
+        _flags = TPNOFLAGS;
+        tuxedo::set (_flags, flags);
       };
 
       /** unset flags
        * @param flags flags to unset
        */
-      inline void unsetFlags ( long flags ) {
-        tuxedo::unset (this->flags, flags);
-      };
-
-      /** @return ATMI++ version number */
-      static inline const char *version () {
-        return CPP_ATMI_VERSION;
+      inline void unset_flags ( long flags ) {
+        tuxedo::unset (_flags, flags);
       };
 
       static const long FAILED = -1; //!< Tuxedo error value
@@ -246,7 +249,10 @@ namespace atmi {
        */
       static long set ( long, long );
 
-      /** update current errno and sets what must be set. */
+      /** update current errno and sets what must be set. 
+       *
+       * @deprecated we use exception instead
+       */
       void updateErrno ();
 
       /**
@@ -254,18 +260,66 @@ namespace atmi {
        *
        * @param tpe tperrno to handle
        * @param msg message to setup in thrown exception.
-       * @param ... substitution parameters
+       * @param Args substitution parameters
        * @return legacy will be removed when prototype will be changed to void handle_transaction_errno()
        */
-      virtual int handle_transaction_errno ( int tpe, const char *msg = NULL, ... );
+        template<typename... Args>  int handle_tperrno ( int _tperrno, const char *msg, const Args&... args) {
 
-      long flags; //!< Tuxedo flags
-      nl_catd catd; //!< message catalog refenence
+          switch ( _tperrno ) {
+            case TPEINVAL:
+            case TPEPERM:
+            case TPENOENT:
+            case TPEITYPE:
+            case TPEOTYPE:
+            case TPETRAN:
+            case TPEPROTO:
+            case TPESYSTEM:
+            case TPEOS:
+            case TPELIMIT:
+            {                           
+              throw tuxedo_exception ( _tperrno, msg, args... );
+            }
+            break;
+            case TPEBLOCK:
+            {
+              throw blocking_exception ( msg, args... );
+            }
+            break;
+            case TPGOTSIG:
+            {
+              throw interrupt_exception ( msg, args... );
+            }
+            break;
+            case TPESVCERR:
+            {
+              throw service_exception ( msg, args... );
+            }
+            break;
+            case TPETIME:
+            {
+              throw timeout_exception ( msg, args... );
+            }
+            break;
+            case TPESVCFAIL:
+              // return application specific error number instead
+              // as the application will probably know what to do
+              _tperrno = ( tpurcode > 0 ? tpurcode : -1 );
+              break;
+
+            default:
+              throw tuxedo_exception (_tperrno, catgets ( _catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
+          };
+
+          return _tperrno;
+        };
+
+      long    _flags; //!< Tuxedo flags
+      nl_catd _catd;  //!< message catalog refenence
 
     private:
-      long errorno;
-      long errornodetail;
-      TPCONTEXT_T context;
+      long        _errorno;
+      long        _errornodetail;
+      TPCONTEXT_T _context;
 
   };
 
@@ -295,44 +349,32 @@ namespace atmi {
       virtual ~abstract_client ();
 
       /**
-       * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
-       * use any of the BEA tuxedo ATMI system communication or transaction routines, it can
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit or implicitly by
-       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-       * called by the BEA tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
        *
-       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
-       *
-       * @param cltname client program name (default NULL)
-       * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
-       * @param group is used to associate the client with a resource manager group name (default NULL)
-       * @param tuxconf path to tuxedo config file (same as TUXCONFIG en variable default NULL)
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        */
-      abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
+       abstract_client ();
 
       /**
-       * The constructor allows a client to join a BEA tuxedo ATMI system application by calling tpinit. Before a client can
-       * use any of the BEA tuxedo ATMI system communication or transaction routines, it can
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit or implicitly by
-       * issuing a service request (or any ATMI function). In the later case, the tpinit() function is
-       * called by the BEA tuxedo system on behalf of the client with the tpinfo argument set to NULL.
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * This constructor sets the TPINFO flag TPMULTICONTEXTS.
+       *
+       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        *
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * If tuxconfig is passed then the MULTICONTEXT flag is set and the newly created context is saved. Multi context applications
-       * should use factory methods  to build queue_auto_ptr and tp_auto_ptr objects.
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
        * @param passwd user's password (default NULL)
        * @param group is used to associate the client with a resource manager group name (default NULL)
-       * @param multicontext if true start a multicontext client using the env TUXCONFIG
+       * @param tuxconfig used located the DOMAIN
        */
-      abstract_client ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
+      abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
 
       /** This method must overriden  to run the client application.
        *
@@ -348,28 +390,40 @@ namespace atmi {
        *
        * @return  an auto_ptr to a new transaction instance
        */
-      tp_auto_ptr new_tp_instance ( const char *svc );
+      transaction_ptr new_transaction_instance ( const char *svc );
 
       /** Creates an instance of queue and set the client context to be used.
        *
        * @return  an auto_ptr to a new queue instance
        */
-      queue_auto_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
+      queue_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
 
-      TPCONTEXT_T get_context () {
-        return context;
-      };
+      /** @return tuxedo client name */
+      inline const char *name() const {
+        return _name.c_str();
+      }
+
+      /** @return associated TUXCONFIG value */
+      inline const char *tuxconfig() const {
+        return _tuxconfig.c_str();
+      }
+
+      /** @return true if multicontext is active */
+      inline bool multi_context(){
+        return context() > 0 ;
+      }
 
     private:
 
-      /** Utility method that set's up a client instance.
-       */
-      void setup_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig);
+      std::string  _name;
+      std::string  _tuxconfig;
+      TPINIT      *_tpinfo;
 
-      TPINIT *tpinfo;
-      TPCONTEXT_T context;
-
-
+#ifndef HAVE_CPP11_MUTEX
+//      static pthread::mutex _mutex;
+#else
+//      static std::mutex     _mutex;
+#endif
   };
 
 // ---------------------------------------------------------------------------------
@@ -765,10 +819,45 @@ namespace atmi {
       /** handle queue diagnostic errors
        *
        * @param tux_tperrno tperrno to handle
-       * @param _tux_diagno diagnostic number
+       * @param tux_diagno diagnostic number
        * @param msg related explanatory message.
        */
-      int handle_diagnostics ( int tux_tperrno, int _tux_diagno, const char *msg, ... );
+      template<typename... Args> int handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, const Args&... args) {
+
+        _diagno = tux_diagno;
+
+        switch ( _diagno ) {
+          case QMEINVAL:
+          case QMEBADRMID:
+          case QMENOTOPEN:
+          case QMETRAN:
+          case QMEBADMSGID:
+          case QMESYSTEM:
+          case QMEOS:
+          case QMEPROTO:
+          case QMEBADQUEUE:
+          case QMENOSPACE:
+          case QMERELEASE:
+          case QMESHARE:
+          {
+            throw diagnostic_exception ( tux_tperrno, _diagno, msg, args... );
+          }
+          break;
+          case QMEABORTED:
+          {
+            throw aborted_exception ( msg, args... );
+          }
+          break;
+          /* these are not errors */
+          case QMENOMSG:
+            // not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );
+            break;
+          default:
+            throw diagnostic_exception ( tux_tperrno, _diagno, catgets ( _catd, CATD_ATMI_SET, 33, "Never heard about this diagno %d (tperrno: %d) !!??"), _diagno, tux_tperrno);
+        }
+
+        return _diagno;
+      }
 
     private:
 

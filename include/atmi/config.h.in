@@ -1,10 +1,4 @@
 /*
-  $Id$
-
-  Helper class for dealing with tuxedo.
-*/
-
-/*
  * ATMI++
  *
  * Copyright (C) 2006 - herbert koelman
@@ -31,7 +25,13 @@
 /* autoconf section ----------------------------------------------------------------------*/
 #undef CPP_ATMI_VERSION
 
-#undef _DEBUG_
+/* Defined if compiler support C++11 */
+#undef HAVE_CPP11_MUTEX
+#undef HAVE_CPP11_CHRONO
+#undef HAVE_CPP11_THREAD
+
+/* substitution lib */
+#undef HAVE_CPP_PTHREAD
 
 /* Define to 1 if you have the `gettimeofday' function. */
 #undef HAVE_GETTIMEOFDAY

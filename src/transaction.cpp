@@ -14,12 +14,12 @@ using namespace std;
 
 namespace atmi {
 
-  transaction::transaction ( const char *service ): _service(service) {
+  transaction::transaction ( const char *service ): _service(service), _call_descriptor(0) {
 
     // length 32 chars (see definition in atmi.h
-    if ( _service.size() > 32 ) throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
-
-    _call_descriptor = 0;
+    if ( _service.size() > 32 ) {
+      throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
+    }
   }
 
 
@@ -34,7 +34,8 @@ namespace atmi {
     do {
 
       rc = -1;
-      if ((rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen,flags )) < 0 ) {
+      rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen, _flags );
+      if (rc < 0 ) {
 
         switch ( tperrno ) {
           case TPETIME:
@@ -51,7 +52,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handle_transaction_errno ( tperrno, "TPCALL to %s failed.", _service.c_str() );
+      rc = handle_tperrno ( tperrno, "TPCALL to %s failed.", _service.c_str() );
     }
 
     return rc;
@@ -88,7 +89,7 @@ namespace atmi {
     updateErrno ();
 
     if ( ret < 0 ) {
-      ret = handle_transaction_errno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
+      ret = handle_tperrno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
     } else {
       _call_descriptor = ret;
     }
@@ -119,12 +120,12 @@ namespace atmi {
     // check if need switch context
     switch_context ();
 
-    ret = tpacall ( (char *) _service.c_str(), idata, ilen, flags );
+    ret = tpacall ( (char *) _service.c_str(), idata, ilen, _flags );
 
     updateErrno ();
 
     if ( ret < 0 ) {
-      ret = handle_transaction_errno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
+      ret = handle_tperrno ( tperrno, "TPACALL to %s failed.", _service.c_str() );
     } else {
       _call_descriptor = ret;
     }
@@ -138,9 +139,9 @@ namespace atmi {
     int rc = -1;
 
     if ( cd == NULL ) {
-      rc = tpgetrply(&_call_descriptor, data, len, flags);
+      rc = tpgetrply(&_call_descriptor, data, len, _flags);
     } else {
-      rc = tpgetrply(cd, data, len, flags);
+      rc = tpgetrply(cd, data, len,  _flags);
       if ( *cd == _call_descriptor ) _call_descriptor = 0;
     }
 
@@ -149,7 +150,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handle_transaction_errno ( tperrno, "TPGETREPLY from %s failed.", _service.c_str() );
+      rc = handle_tperrno ( tperrno, "TPGETREPLY from %s failed.", _service.c_str() );
     }
 
     return rc;
@@ -166,7 +167,7 @@ namespace atmi {
     updateErrno ();
 
     if ( rc < 0 ) {
-      rc = handle_transaction_errno ( tperrno, "TPCANCEL of a call to %s failed." );
+      rc = handle_tperrno ( tperrno, "TPCANCEL of a call to %s failed." );
     }
 
     return rc;

@@ -5,20 +5,29 @@
 # C++ encapsulation of ATMI and a set of tools to help write Tuxedo applications.
 
 prefix=@prefix@
+exec_prefix=@exec_prefix@
+LIBDIR=@libdir@
+INCLUDEDIR=@includedir@/atmi
+
 INSTALL=@INSTALL@ 
 LOCALEDIR=@localedir@
+LIBDIR=@libdir@
+
 RM=@RM@
 DOXYGEN=@DOXYGEN@
+MKDIR=@MKDIR_P@
+
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
-all: atmi++ 
+HEADERS=@HEADERS@
+CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
-demos:
-	cd samples/atmi++ ; $(MAKE) globber all clean
+all:
+	(cd src && $(MAKE) all )
+
+#demos:
+#	cd samples/atmi++ ; $(MAKE) globber all clean
 #	cd samples/utl ; $(MAKE) globber all clean
-
-atmi++:
-	(cd src && $(MAKE) clean all )
 
 pkg:
 	$(MKDIR) distrib
@@ -35,22 +44,14 @@ globber:clean
 doxygen:
 	${DOXYGEN}
 
-install:
-	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
-	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a
-	${INSTALL} lib/libfml++.a ${prefix}/lib/libfml++.a
-	${INSTALL} -d ${LOCALEDIR}/en_US ${LOCALEDIR}/fr_FR
-	${INSTALL} locale/en_US/atmi++.cat ${LOCALEDIR}/en_US/atmi++.cat
-	${INSTALL} locale/fr_FR/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
-	for header in include/atmi/*.h include/atmi/*.hpp ; do \
-		${INSTALL} $$header ${prefix}/$$header ;\
-	done
+version:
+	autoconf && ( cd src && autoconf )
+	-echo "don't forget to run configure."
+
+install: lib/libatmi++.a lib/libcltatmi++.a lib/libfml++.a
+	cd include/atmi && $(MKDIR) $(INCLUDEDIR) $(INSTALL) *.hpp *.h $(INCLUDEDIR)
+	cd lib && $(INSTALL) $(CPPATMILIBS) @libdir@
 
 uninstall:
-	${RM} ${prefix}/lib/libatmi++.a
-	${RM} ${prefix}/lib/libcltatmi++.a
-	${RM} ${prefix}/lib/libfml++.a
-	${RM} ${prefix}/include/atmi
-	${RM} ${LOCALEDIR}/en_US/atmi++.cat
-	${RM} ${LOCALEDIR}/fr_FR/atmi++.cat
-
+	$(RM) -R  $(INCLUDEDIR)
+	(cd @libdir@ && $(RM) ${CPPATMILIBS})
