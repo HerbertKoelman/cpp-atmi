@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['error_20handling',['Error handling',['../group__atmi-exceptions.html',1,'']]],
   ['encode_5fbase64',['encode_base64',['../classatmi_1_1queue__stream.html#a4a47e7caf329e46c31f44425e3ceb6e3',1,'atmi::queue_stream']]],
   ['enqueue',['enqueue',['../classatmi_1_1queue.html#a6b27337fd68ca97236e4905d09b7eb15',1,'atmi::queue::enqueue(char *data, long len)'],['../classatmi_1_1queue.html#a47254fc660abe655dfabb330f30e3148',1,'atmi::queue::enqueue(buffer *data)']]],
   ['enqueuereply',['enqueueReply',['../classatmi_1_1queue.html#a2ea608bb1f59fdccb2b7592381bcf267',1,'atmi::queue::enqueueReply(char *data, long len)'],['../classatmi_1_1queue.html#abffed5f4f91dedd7e62a445444f8f94e',1,'atmi::queue::enqueueReply(buffer *data)']]],

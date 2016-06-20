@@ -1,5 +1,6 @@
-\hypertarget{classatmi_1_1abstract__client}{}\section{atmi\+:\+:abstract\+\_\+client Class Reference}
+\hypertarget{classatmi_1_1abstract__client}{\section{atmi\+:\+:abstract\+\_\+client Class Reference}
 \label{classatmi_1_1abstract__client}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
+}
 
 
 {\ttfamily \#include $<$tuxedo.\+hpp$>$}
@@ -15,17 +16,15 @@ Inheritance diagram for atmi\+:\+:abstract\+\_\+client\+:\begin{figure}[H]
 \item 
 virtual \hyperlink{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}{$\sim$abstract\+\_\+client} ()
 \item 
-\hyperlink{classatmi_1_1abstract__client_aa6f01ecf6dabf6ea21efb78c9b217129}{abstract\+\_\+client} (const char $\ast$cltname=N\+U\+L\+L, const char $\ast$usr=N\+U\+L\+L, const char $\ast$passwd=N\+U\+L\+L, const char $\ast$group=N\+U\+L\+L, const char $\ast$\hyperlink{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{tuxconfig}=N\+U\+L\+L)
+\hyperlink{classatmi_1_1abstract__client_a10a6aa2b44cb98ceab7d4e637757437e}{abstract\+\_\+client} ()
 \item 
-\hyperlink{classatmi_1_1abstract__client_ac9c90f0042456520751dbfdb4e66655d}{abstract\+\_\+client} (const char $\ast$cltname=N\+U\+L\+L, const char $\ast$usr=N\+U\+L\+L, const char $\ast$passwd=N\+U\+L\+L, const char $\ast$group=N\+U\+L\+L)
-\item 
-\hyperlink{classatmi_1_1abstract__client_ad6ca32ce6f7b63fc610b5bcbaf6e81ff}{abstract\+\_\+client} (bool multicontext, const char $\ast$cltname=N\+U\+L\+L, const char $\ast$usr=N\+U\+L\+L, const char $\ast$passwd=N\+U\+L\+L, const char $\ast$group=N\+U\+L\+L)
+\hyperlink{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}{abstract\+\_\+client} (const char $\ast$cltname, const char $\ast$usr=N\+U\+L\+L, const char $\ast$passwd=N\+U\+L\+L, const char $\ast$group=N\+U\+L\+L, const char $\ast$\hyperlink{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{tuxconfig}=N\+U\+L\+L)
 \item 
 virtual int \hyperlink{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}{run} (int argc, char $\ast$$\ast$argv)
 \item 
-\hyperlink{group__atmi_gafc1ae4cdb2829f98c37f27b472fcb867}{transaction\+\_\+ptr} \hyperlink{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}{new\+\_\+transaction\+\_\+instance} (const char $\ast$svc)
+transaction\+\_\+ptr \hyperlink{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}{new\+\_\+transaction\+\_\+instance} (const char $\ast$svc)
 \item 
-\hyperlink{group__atmi_gaf8c3e342d908ddc295b73c376b7515ca}{queue\+\_\+ptr} \hyperlink{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}{new\+\_\+queue\+\_\+instance} (const char $\ast$qspace, const char $\ast$\hyperlink{classatmi_1_1queue}{queue}, const char $\ast$reply=N\+U\+L\+L)
+queue\+\_\+ptr \hyperlink{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}{new\+\_\+queue\+\_\+instance} (const char $\ast$qspace, const char $\ast$\hyperlink{classatmi_1_1queue}{queue}, const char $\ast$reply=N\+U\+L\+L)
 \item 
 const char $\ast$ \hyperlink{classatmi_1_1abstract__client_a2f50ed746c5bab5e01ef0677296e10e3}{name} () const 
 \item 
@@ -41,29 +40,38 @@ Helper class to implement tuxedo application.
 
 Extending this class ensures that tpterm and tpinit is called when client programs are run.
 
-\hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} has two modes of operation\+: single-\/context mode and multicontext mode. To run in multicontext mode you\textquotesingle{}ll need to pass a valid T\+U\+X\+C\+O\+N\+F\+I\+G file when constructing an \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} instance. The multiconext mode is available only for native clients.
+\hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} has two modes of operation\+: single-\/context mode and multicontext mode. To run in multicontext mode you'll need to pass a valid T\+U\+X\+C\+O\+N\+F\+I\+G file when constructing an \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} instance. The multiconext mode is available only for native clients.
 
 Two factory methods are available to construct transaction and queue class instances (new\+\_\+tp\+\_\+instance and new\+\_\+queue\+\_\+instance). These methods return tp\+\_\+auto\+\_\+ptr and queue\+\_\+auto\+\_\+ptr which are auto pointers. which is probaly the best way to avoid memory leaks. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!````~abstract\+\_\+client@{$\sim$abstract\+\_\+client}}
+\hypertarget{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!````~abstract\+\_\+client@{$\sim$abstract\+\_\+client}}
 \index{````~abstract\+\_\+client@{$\sim$abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{$\sim$abstract\+\_\+client()}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::$\sim$abstract\+\_\+client (
+\subsubsection[{$\sim$abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::$\sim$abstract\+\_\+client (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}
-Method moved into the destructor of \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} End any pending operation and free any alloated ressource. After this call any attempt at using A\+T\+M\+I will fail. int term () ; \hypertarget{classatmi_1_1abstract__client_aa6f01ecf6dabf6ea21efb78c9b217129}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}
+Method moved into the destructor of \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} End any pending operation and free any alloated ressource. After this call any attempt at using A\+T\+M\+I will fail. int term () ; \hypertarget{classatmi_1_1abstract__client_a10a6aa2b44cb98ceab7d4e637757437e}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
 \index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{abstract\+\_\+client(const char $\ast$cltname=\+N\+U\+L\+L, const char $\ast$usr=\+N\+U\+L\+L, const char $\ast$passwd=\+N\+U\+L\+L, const char $\ast$group=\+N\+U\+L\+L, const char $\ast$tuxconfig=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
+\subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
 \begin{DoxyParamCaption}
-\item[{const char $\ast$}]{cltname = {\ttfamily NULL}, }
+{}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1abstract__client_a10a6aa2b44cb98ceab7d4e637757437e}
+Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
+
+Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it must first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit. \hypertarget{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
+\subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{cltname, }
 \item[{const char $\ast$}]{usr = {\ttfamily NULL}, }
 \item[{const char $\ast$}]{passwd = {\ttfamily NULL}, }
 \item[{const char $\ast$}]{group = {\ttfamily NULL}, }
 \item[{const char $\ast$}]{tuxconfig = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)}\label{classatmi_1_1abstract__client_aa6f01ecf6dabf6ea21efb78c9b217129}
+)}}\label{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}
 Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
 
 This constructor sets the T\+P\+I\+N\+F\+O flag T\+P\+M\+U\+L\+T\+I\+C\+O\+N\+T\+E\+X\+T\+S.
@@ -80,127 +88,70 @@ If passwd is N\+U\+L\+L then the constructor checks if authentication is needed.
 \hline
 {\em usr} & user name (default N\+U\+L\+L) \\
 \hline
-{\em passwd} & user\textquotesingle{}s password (default N\+U\+L\+L) \\
+{\em passwd} & user's password (default N\+U\+L\+L) \\
 \hline
 {\em group} & is used to associate the client with a resource manager group name (default N\+U\+L\+L) \\
 \hline
 {\em tuxconfig} & used located the D\+O\+M\+A\+I\+N \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1abstract__client_ac9c90f0042456520751dbfdb4e66655d}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
-\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{abstract\+\_\+client(const char $\ast$cltname=\+N\+U\+L\+L, const char $\ast$usr=\+N\+U\+L\+L, const char $\ast$passwd=\+N\+U\+L\+L, const char $\ast$group=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
-\begin{DoxyParamCaption}
-\item[{const char $\ast$}]{cltname = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{usr = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{passwd = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{group = {\ttfamily NULL}}
-\end{DoxyParamCaption}
-)}\label{classatmi_1_1abstract__client_ac9c90f0042456520751dbfdb4e66655d}
-Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
-
-Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it must first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit.
-
-If passwd is N\+U\+L\+L then the constructor checks if authentication is needed. If so it promps the user for a password.
-
-
-\begin{DoxyParams}{Parameters}
-{\em cltname} & client program name (default N\+U\+L\+L) \\
-\hline
-{\em usr} & user name (default N\+U\+L\+L) \\
-\hline
-{\em passwd} & user\textquotesingle{}s password (default N\+U\+L\+L) \\
-\hline
-{\em group} & is used to associate the client with a resource manager group name (default N\+U\+L\+L) \\
-\hline
-\end{DoxyParams}
-\hypertarget{classatmi_1_1abstract__client_ad6ca32ce6f7b63fc610b5bcbaf6e81ff}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
-\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{abstract\+\_\+client(bool multicontext, const char $\ast$cltname=\+N\+U\+L\+L, const char $\ast$usr=\+N\+U\+L\+L, const char $\ast$passwd=\+N\+U\+L\+L, const char $\ast$group=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
-\begin{DoxyParamCaption}
-\item[{bool}]{multicontext, }
-\item[{const char $\ast$}]{cltname = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{usr = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{passwd = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{group = {\ttfamily NULL}}
-\end{DoxyParamCaption}
-)}\label{classatmi_1_1abstract__client_ad6ca32ce6f7b63fc610b5bcbaf6e81ff}
-Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
-
-Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it must first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit.
-
-If passwd is N\+U\+L\+L then the constructor checks if authentication is needed. If so it promps the user for a password.
-
-
-\begin{DoxyParams}{Parameters}
-{\em cltname} & client program name (default N\+U\+L\+L) \\
-\hline
-{\em usr} & user name (default N\+U\+L\+L) \\
-\hline
-{\em passwd} & user\textquotesingle{}s password (default N\+U\+L\+L) \\
-\hline
-{\em group} & is used to associate the client with a resource manager group name (default N\+U\+L\+L)\\
-\hline
-\end{DoxyParams}
-\begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000007}{Deprecated}]use \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} ( const char $\ast$cltname = N\+U\+L\+L, const char $\ast$usr = N\+U\+L\+L, const char $\ast$passwd = N\+U\+L\+L, const char $\ast$group = N\+U\+L\+L, const char $\ast$tuxconfig = N\+U\+L\+L); instead. \end{DoxyRefDesc}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1abstract__client_a026c8cff81a66afdcfa3bf977417738a}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!multi\+\_\+context@{multi\+\_\+context}}
+\hypertarget{classatmi_1_1abstract__client_a026c8cff81a66afdcfa3bf977417738a}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!multi\+\_\+context@{multi\+\_\+context}}
 \index{multi\+\_\+context@{multi\+\_\+context}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{multi\+\_\+context()}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::abstract\+\_\+client\+::multi\+\_\+context (
+\subsubsection[{multi\+\_\+context}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::abstract\+\_\+client\+::multi\+\_\+context (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1abstract__client_a026c8cff81a66afdcfa3bf977417738a}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1abstract__client_a026c8cff81a66afdcfa3bf977417738a}
 \begin{DoxyReturn}{Returns}
 true if multicontext is active 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1abstract__client_a2f50ed746c5bab5e01ef0677296e10e3}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!name@{name}}
+\hypertarget{classatmi_1_1abstract__client_a2f50ed746c5bab5e01ef0677296e10e3}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!name@{name}}
 \index{name@{name}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{name() const }]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::abstract\+\_\+client\+::name (
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::abstract\+\_\+client\+::name (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1abstract__client_a2f50ed746c5bab5e01ef0677296e10e3}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1abstract__client_a2f50ed746c5bab5e01ef0677296e10e3}
 \begin{DoxyReturn}{Returns}
 tuxedo client name 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!new\+\_\+queue\+\_\+instance@{new\+\_\+queue\+\_\+instance}}
+\hypertarget{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!new\+\_\+queue\+\_\+instance@{new\+\_\+queue\+\_\+instance}}
 \index{new\+\_\+queue\+\_\+instance@{new\+\_\+queue\+\_\+instance}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{new\+\_\+queue\+\_\+instance(const char $\ast$qspace, const char $\ast$queue, const char $\ast$reply=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf queue\+\_\+ptr} atmi\+::abstract\+\_\+client\+::new\+\_\+queue\+\_\+instance (
+\subsubsection[{new\+\_\+queue\+\_\+instance}]{\setlength{\rightskip}{0pt plus 5cm}queue\+\_\+ptr atmi\+::abstract\+\_\+client\+::new\+\_\+queue\+\_\+instance (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{qspace, }
 \item[{const char $\ast$}]{queue, }
 \item[{const char $\ast$}]{reply = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)}\label{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}
+)}}\label{classatmi_1_1abstract__client_a7337c966369376497d9c1f94ec12c5ae}
 Creates an instance of queue and set the client context to be used.
 
 \begin{DoxyReturn}{Returns}
 an auto\+\_\+ptr to a new queue instance 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!new\+\_\+transaction\+\_\+instance@{new\+\_\+transaction\+\_\+instance}}
+\hypertarget{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!new\+\_\+transaction\+\_\+instance@{new\+\_\+transaction\+\_\+instance}}
 \index{new\+\_\+transaction\+\_\+instance@{new\+\_\+transaction\+\_\+instance}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{new\+\_\+transaction\+\_\+instance(const char $\ast$svc)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf transaction\+\_\+ptr} atmi\+::abstract\+\_\+client\+::new\+\_\+transaction\+\_\+instance (
+\subsubsection[{new\+\_\+transaction\+\_\+instance}]{\setlength{\rightskip}{0pt plus 5cm}transaction\+\_\+ptr atmi\+::abstract\+\_\+client\+::new\+\_\+transaction\+\_\+instance (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{svc}
 \end{DoxyParamCaption}
-)}\label{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}
+)}}\label{classatmi_1_1abstract__client_a9449f2df2136afd5b253389418265c87}
 Creates an instance of transaction and set the client context to be used.
 
 \begin{DoxyReturn}{Returns}
 an auto\+\_\+ptr to a new transaction instance 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!run@{run}}
+\hypertarget{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!run@{run}}
 \index{run@{run}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{run(int argc, char $\ast$$\ast$argv)}]{\setlength{\rightskip}{0pt plus 5cm}virtual int atmi\+::abstract\+\_\+client\+::run (
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}virtual int atmi\+::abstract\+\_\+client\+::run (
 \begin{DoxyParamCaption}
 \item[{int}]{argc, }
 \item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}
 This method must overriden to run the client application.
 
 
@@ -211,14 +162,14 @@ This method must overriden to run the client application.
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000008}{Deprecated}]\end{DoxyRefDesc}
-\hypertarget{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{}\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!tuxconfig@{tuxconfig}}
+\item[\hyperlink{deprecated__deprecated000006}{Deprecated}]\end{DoxyRefDesc}
+\hypertarget{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!tuxconfig@{tuxconfig}}
 \index{tuxconfig@{tuxconfig}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
-\subsubsection[{tuxconfig() const }]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::abstract\+\_\+client\+::tuxconfig (
+\subsubsection[{tuxconfig}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::abstract\+\_\+client\+::tuxconfig (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}
 \begin{DoxyReturn}{Returns}
 associated T\+U\+X\+C\+O\+N\+F\+I\+G value 
 \end{DoxyReturn}

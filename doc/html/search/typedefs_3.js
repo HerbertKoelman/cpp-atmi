@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transaction_5fptr',['transaction_ptr',['../group__atmi.html#gafc1ae4cdb2829f98c37f27b472fcb867',1,'atmi']]]
+  ['tp_5fauto_5fptr',['tp_auto_ptr',['../namespaceatmi.html#a4a71d76e59908eb5ec5e53269c2742b5',1,'atmi']]]
 ];
