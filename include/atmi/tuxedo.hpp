@@ -34,11 +34,11 @@
 #include <memory>
 #include <nl_types.h>
 
-#ifndef HAVE_CPP11_MUTEX
-#include <pthread/pthread.hpp>
-#else
-#include <mutex>
-#endif
+//#ifndef HAVE_CPP11_MUTEX
+//#include <pthread/pthread.hpp>
+//#else
+//#include <mutex>
+//#endif
 
 /** catalog message set */
 #define CATD_ATMI_SET 100
@@ -351,6 +351,14 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit. 
        *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       */
+       abstract_client ();
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
        * This constructor sets the TPINFO flag TPMULTICONTEXTS.
        *
        * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
@@ -366,39 +374,7 @@ namespace atmi {
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param tuxconfig used located the DOMAIN
        */
-      abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL);
-
-      /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
-       *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
-       *
-       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * @param cltname client program name (default NULL)
-       * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
-       * @param group is used to associate the client with a resource manager group name (default NULL)
-       */
-      abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL);
-
-      /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
-       *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
-       *
-       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * @param cltname client program name (default NULL)
-       * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
-       * @param group is used to associate the client with a resource manager group name (default NULL)
-       *
-       * @deprecated use abstract_client ( const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL); instead.
-       */
-      abstract_client ( bool multicontext, const char *cltname = NULL, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL );
+      abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
 
       /** This method must overriden  to run the client application.
        *

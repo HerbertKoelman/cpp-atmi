@@ -37,13 +37,13 @@ ULOG*
 access*
 src/atmi++.cpp
 *.tar
+*orig
 
 # sample programs
-btest
-btestw
-evtest
-evtestw
-exceptions-tests
-exceptions-testsw
+exceptions_tests
+buffer_test        
+multi_context_test 
+queue_test          
+transaction_test
 sample_fml_table.h
 

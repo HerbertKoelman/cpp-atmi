@@ -4369,6 +4369,7 @@ fi
 
 if test "$ac_cv_header_mutex" = "no"
 then
+#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-thread library.])])
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for cpp_pthread_version in -lcpp-pthread" >&5
 $as_echo_n "checking for cpp_pthread_version in -lcpp-pthread... " >&6; }
 if ${ac_cv_lib_cpp_pthread_cpp_pthread_version+:} false; then :
@@ -4408,8 +4409,6 @@ $as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
 if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
   $as_echo "#define HAVE_CPP_PTHREAD 1" >>confdefs.h
 
-else
-  as_fn_error $? "missing cpp-thread library." "$LINENO" 5
 fi
 
 fi

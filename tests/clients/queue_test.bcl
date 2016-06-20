@@ -17,16 +17,17 @@ using namespace atmi;
 
 // Runner classes declarations -----------------------------------------
 
-class Runner : public atmi::abstract_thread {
+class Runner : public pthread::abstract_thread {
   public:
     inline int isRunning () {
       return running;
     };
+
     inline void setRunning ( int running ) {
       this->running = running;
     };
-    Runner ();
 
+    Runner();
   protected:
     int running;
 };
@@ -37,7 +38,7 @@ class Queuer : public Runner {
       quantity = qty;
     }
 
-    void run ();
+    void run () throw ();
 
   private:
     int quantity;
@@ -46,17 +47,16 @@ class Queuer : public Runner {
 
 class Dequeuer : public Runner {
   public:
-    void run ();
+    void run () throw();
 };
 
 // Runner classes implementations --------------------------------------
 
-Runner::Runner () {
-
+Runner::Runner (){
   this->running = 1;
 }
 
-void Dequeuer::run () {
+void Dequeuer::run () throw(){
 
   cout << "Running Dequeuer thread." << endl;
   try {
@@ -110,7 +110,7 @@ void Dequeuer::run () {
   cout << "Ended Dequeuer thread." << endl;
 }
 
-void Queuer::run () {
+void Queuer::run () throw(){
 
   cout << "Running Queuer thread." << endl;
   try {

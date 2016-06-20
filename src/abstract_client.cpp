@@ -34,14 +34,8 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group):
-    abstract_client(cltname, usr, passwd, group, NULL) {
-  }
-
-  abstract_client::abstract_client ( bool tuxconfig, const char *cltname, const char *usr, const char *passwd, const char *group):
-    abstract_client ( cltname, usr, passwd, group, getenv ("TUXCONFIG") ){
-
-    
+  abstract_client::abstract_client ():
+    abstract_client(NULL) {
   }
 
   abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig):

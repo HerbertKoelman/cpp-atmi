@@ -31,7 +31,7 @@ CODECHECK=@CODECHECK@
 
 OBJECTS=@OBJECTS@
 FMLTABLES=sample_fml_table
-TARGETS=queue_test transaction_test exceptions-tests buffer_test multi_context_test # evtest qtest qwriter
+TARGETS=queue_test transaction_test exceptions_tests buffer_test multi_context_test # evtest qtest qwriter
 
 all:fml-tbl ${TARGETS}
 

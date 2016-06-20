@@ -20,7 +20,7 @@ AC_ARG_ENABLE([auxdir], \
   AS_HELP_STRING([--enable-auxdir=PATH], [set AUXDIR to extend include and lib search]), \
   AUXDIR=$enable_auxdir )
 
-AC_CONFIG_SRCDIR([exceptions-tests.cpp])
+AC_CONFIG_SRCDIR([exceptions_tests.bcl])
 AC_CONFIG_AUX_DIR([/usr/bin ../../ ../bin])
 
 # Checks for programs.

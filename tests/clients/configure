@@ -585,7 +585,7 @@ PACKAGE_STRING='cpp-atmi Unit tests'
 PACKAGE_BUGREPORT='herbert.koelman@pmu.fr'
 PACKAGE_URL=''
 
-ac_unique_file="exceptions-tests.cpp"
+ac_unique_file="exceptions_tests.bcl"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>

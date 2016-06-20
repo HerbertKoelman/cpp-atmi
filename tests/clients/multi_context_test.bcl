@@ -21,8 +21,13 @@ using namespace atmi;
 class MultiContextClient : public abstract_client, public pthread::abstract_thread {
   public:
 
-    MultiContextClient () : abstract_client ( true, "mctest" ) {
+    MultiContextClient () : abstract_client ( "mctest", NULL, NULL, NULL, getenv("TUXCONFIG") ) {
+      std::cout << "connect client " << name() << std::endl ;
     };
+
+    ~MultiContextClient(){
+      std::cout << "disconnecting client " << name() << std::endl ;
+    }
 
     void run () throw (){
       try {
@@ -57,15 +62,17 @@ int main ( int argc, char **argv ) {
     string line;
     {
       MultiContextClient mc2 ;
+
       {
         MultiContextClient mc1 ;
+
         mc1.run ();
-        cout << "press any key to end " << mc1.name() << endl;
+        cout << "press any key to continue" << endl;
         getline(cin, line);
       }
 
       mc2.run ();
-      cout << "press any key to end " << mc2.name() << endl ;
+      cout << "press any key to continue" << endl;
       getline(cin, line);
     }
 
