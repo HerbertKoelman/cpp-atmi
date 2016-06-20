@@ -34,7 +34,7 @@
 #include <atmi/buffers.hpp>
 #include <atmi/config.h>
 
-//! \namespace atmi set of ATMI wrappers
+//! \namespace atmi 
 namespace atmi {
 
   /** @return the library's current version */

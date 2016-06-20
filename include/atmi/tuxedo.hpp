@@ -47,9 +47,14 @@ using namespace std;
 
 namespace atmi {
 
-  /** \addtogroup atmi Application-to-Transaction Monitor Interface
-   * @{
-   */
+/** \addtogroup atmi Application-to-Transaction Monitor Interface
+ *
+ * The main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response,
+ * conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer
+ * management functions for distributed application communication.
+ * @{
+ */
+
 // ---------------------------------------------------------------------------------
 
   class buffer;
@@ -61,8 +66,8 @@ namespace atmi {
   typedef auto_ptr<transaction> transaction_ptr;
   typedef auto_ptr<atmi::queue> queue_ptr;
 #else
-  typedef unique_ptr<transaction> tp_auto_ptr;    //!< @deprecated use unique_ptr instead
-  typedef unique_ptr<atmi::queue> queue_auto_ptr; //!< @deprecated use unique_ptr instead
+  typedef unique_ptr<transaction> transaction_ptr;    //!< @deprecated use unique_ptr instead
+  typedef unique_ptr<atmi::queue> queue_ptr; //!< @deprecated use unique_ptr instead
 #endif
 
   /**
@@ -328,6 +333,11 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
+  /** \addtogroup helpers Helper classes
+   *
+   * @{
+   */
+
 /**
  * Helper class to implement tuxedo application.
  *
@@ -486,11 +496,15 @@ namespace atmi {
 
   };
 
+  /** @} */
+
 // ---------------------------------------------------------------------------------
 
-/**
- * Implement TP calls
- */
+  /**
+   * Implement transaction calls (/T)
+   *
+   * @author herbert koelman
+   */
   class transaction : public tuxedo {
     public:
       /**
@@ -1022,14 +1036,13 @@ namespace atmi {
  */
   extern istream& operator>>(istream& in, queue_stream& qs);
 
-  /**
-   * @}
-   */
+/** @} */
 }
 
 /** fake C function that can be used with autotool AC_CHECK_LIB macro
  *
  * @return the current build version
+ * @deprecated remove this fake function
  */
 extern "C" const char *atmicpp_is_present(void);
 

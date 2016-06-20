@@ -34,9 +34,16 @@ using namespace std;
 
 namespace atmi {
 
-  /** \addtogroup fml Formatted Message Language
-   * @{
-   */
+/** \addtogroup fml Field Manipulation Language
+ * A set of C++ classes for defining and manipulating storage structures called fielded buffers, that contain attribute-value
+ * pairs called fields. The attribute is the field’s identifier, and the associated value represents the field’s data content.
+ *
+ * Fielded buffers provide an excellent structure for communicating parameterized data between cooperating processes, by providing
+ * named access to a set of related fields. Programs that need to communicate with other processes can use the FML software to
+ * provide access to fields without concerning themselves with the structures containing them.
+ * @{
+ */
+
 //----------------------------------------------------------------------------------------------
   class field;
   class buffer;
@@ -47,7 +54,7 @@ namespace atmi {
   typedef auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
 #else
   typedef unique_ptr<carray> ACarray; //!< unique_ptr to a carray.
-  typedef unique_ptr<buffer> Abuffer; //!< uniqueauto_ptr to a FML buffer. 
+  typedef unique_ptr<buffer> Abuffer; //!< unique_ptr to a FML buffer. 
 #endif
 
   /**
@@ -919,8 +926,6 @@ namespace atmi {
 /** Helper that handles the operator << between output streams and field value */
   ostream &operator<< ( ostream &o, Tfield<string> &f );
 
-/**
- * @}
- */
+/** @} */
 }
 #endif

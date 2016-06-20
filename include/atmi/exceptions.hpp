@@ -26,12 +26,18 @@
 #include <stdarg.h>
 #include <exception>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
 namespace atmi {
 
 #define ATMI_MESSAGE_LENGTH 1024
+
+/** \addtogroup atmi-exceptions Error handling
+ * Errors are handle through these exceptions.
+ * @{
+ */
 
 /**
  * Base class of ATMI++ exception
@@ -355,6 +361,8 @@ namespace atmi {
       };
       virtual ~aborted_exception () throw () { };
   };
+
+/** @} */
 
 } // atmi namespace
 #endif
