@@ -7,6 +7,7 @@ management functions (routines, verbs); request/response, conversational, queuin
 functions; service interface functions; and buffer management functions for distributed application communication.
 
 ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. 
+
 This should help making it easier to write fast and rock solid Tuxedo software.
 
 This project is currently hosted <a href="http://herbertkoelman.github.com/cpp-atmi">here</a>.
@@ -16,15 +17,61 @@ This project is currently hosted <a href="http://herbertkoelman.github.com/cpp-a
     $ configure
     $ make
 
-This documentation is obtained :
+Documentation is obtained with this command:
 
     $ make doxygen
 
-Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com">here</a>
+The library is documented [here](http://herbertkoelman.github.io/cpp-atmi/doc/html/).
 
-###  Dependencies
+###  How it's used
 
-none
+This code creates a FML field and passes it to a service called `XATOUPPER`. If anything goes wrong, we roll back the transaction and pass the exception (`throw`) so that the diagnostic messages can be displayed.
+        ...
+        transaction tp ( "XATOUPPER" );
+        int urcode = 0;
+
+        try {
+
+          buffer buffer;
+
+          Tfield<string> name ( "EMPNAME" );
+          name = (string) "Herbert.Koelman@me.com";
+
+          buffer.add ( &name );
+
+          printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name());
+
+          try {
+
+            tp.begin();
+
+            int ret = tp.call ( &buffer );
+            switch (ret) {
+              case 0:
+                break;
+              case -1:
+                printf ("TOUPPER returned TPFAIL.\n" );
+                break;
+              default:
+                printf ( "TOUPPER returned: %d (error: %d/%d).\n", ret, tp.error());
+                buffer.print();
+            }
+
+            buffer.get ( &name );
+            printf ( "Call returned: %s.\n", name.c_str() );
+
+            tp.commit();
+          } catch ( ... ){
+            tp.abort();
+            throw;
+          }
+
+        } catch ( tuxedo_exception& err ) {
+          printf ( "Tuxedo Exception catched. tpcall failed. %s\n", err.what() ); 
+        };
+        ...
+
+### License
 
 -------------------------------------------------------------------
 
