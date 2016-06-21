@@ -1,0 +1,37 @@
+//
+//  cpp_atmi.hpp
+//  cpp_atmi
+//
+//  Created by herbert koelman on 18/03/2016.
+//
+//
+
+#ifndef atmi_atmi_hpp
+#define atmi_atmi_hpp
+
+#include "atmi/atmi++.hpp"
+#include "atmi/config.h"
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+namespace atmi {
+
+  extern "C" const char *cpp_atmi_version(){
+#ifndef CPP_ATMI_VERSION
+    return "missing CPP_ATMI_VERSION define. Re-run configure" ;
+#else
+    return CPP_ATMI_VERSION ;
+#endif
+  }
+
+}
+#endif /* atmi_atmi_hpp */

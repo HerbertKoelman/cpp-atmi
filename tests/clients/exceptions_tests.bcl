@@ -1,0 +1,91 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <string>
+#include <iostream>
+#include "atmi/atmi++.hpp"
+
+// main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  try {
+
+    std::cout << "exceptions sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
+    std::cerr << std::endl ;
+
+    try {
+      Ferror32 = 5 ;
+      throw atmi::buffer_exception ();
+
+    } catch ( atmi::buffer_exception &err ) {
+      printf("TEST buffer_exception(): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
+    }
+
+    try {
+      throw atmi::buffer_exception ( 4, "Buffer error number %d blabla: %s.", 4, "car");
+
+    } catch ( atmi::buffer_exception &err ) {
+      printf("TEST buffer_exception(...): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
+    }
+
+
+    try {
+      throw atmi::unix_exception ( EISCONN, "Unix error number %d blabla: %s.", 4, "car");
+
+    } catch ( atmi::unix_exception &err ) {
+      printf("TEST unix_exception(...): what [%s], error: %d\n\n", err.what(), err.error());
+    }
+
+    try {
+      throw atmi::atmi_exception ( "Error number %d.", 4);
+
+    } catch ( atmi::atmi_exception &err ) {
+      printf("TEST atmi_exception(...): what [%s]\n\n", err.what());
+    }
+
+    try {
+      throw atmi::blocking_exception ( "blocking exception %d.", 4);
+
+    } catch ( atmi::tuxedo_exception &err ) {
+      printf("TEST blocking_exception(...): what [%s], message: [%s], error: %d\n\n", err.what());
+    }
+
+    try {
+      throw atmi::service_exception ( "service exception %d.", 4);
+
+    } catch ( atmi::tuxedo_exception &err ) {
+      printf("TEST service_exception(...): what [%s], message: [%s], error: %d\n\n", err.what());
+    }
+
+    try {
+      throw atmi::timeout_exception ( "timeout exception %d.", 4);
+
+    } catch ( atmi::tuxedo_exception &err ) {
+      printf("TEST timeout_exception(...): what [%s], message: [%s], error: %d\n\n", err.what());
+    }
+
+    try {
+      throw atmi::diagnostic_exception (TPEDIAGNOSTIC,  QMEINVAL, "diagnostic error %d was thrown.", QMEINVAL);
+
+    } catch ( atmi::diagnostic_exception &err ) {
+      printf("TEST diagnostic_exception(...): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
+    }
+
+    try {
+      throw atmi::nomsg_exception ("no message in %s.", "queue");
+
+    } catch ( atmi::nomsg_exception &err ) {
+      printf("TEST nomsg_exception(...): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
+    }
+
+  } catch ( std::exception &err ) {
+    std::cerr << "catched an exception: " << err.what() << std::endl;
+  } catch (... ) {
+    std::cerr << "unexpected error occured." << std::endl;
+  }
+
+  return EXIT_SUCCESS;
+}

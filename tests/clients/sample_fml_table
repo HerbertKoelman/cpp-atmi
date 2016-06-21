@@ -1,0 +1,15 @@
+# following are fields for EMPLOYEE service
+# employee ID fields are based at 500
+*base 10500
+#name           rel-number      type           flags   comment
+#----           ----------      ----           ------  -------
+EMPNAME         1               string         -       emp name
+EMPID           2               long           -       emp id
+EMPJOB          3               char           -       job type
+SRVCDAY         4               carray         -       service date
+*base 10700
+# all address fields are now relative to 700
+EMPADDR         1               string         -       street address
+EMPCITY         2               string         -       city
+EMPSTATE        3               string         -       state
+EMPZIP          4               long           -       zip code

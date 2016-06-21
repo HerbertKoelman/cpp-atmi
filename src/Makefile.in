@@ -1,0 +1,107 @@
+# @PACKAGE_NAME@ @PACKAGE_VERSION@
+# 
+# First created by: herbert koelman (herbert.koelman@me.com)
+#
+# Template Makefile.in used to generate Makfile. This is done by running the command 
+# configure.
+#
+# @configure_input@
+#
+# Builds library libatmi++.a
+.SUFFIXES: .V .v .cpp
+prefix=@prefix@
+
+BASEDIR=../
+UDATAOBJ=$(BASEDIR)/udataobj/
+BINDIR=$(BASEDIR)/bin/
+APPDIR=$(BASEDIR)/app/
+INCDIR=$(BASEDIR)/include/atmi/
+LIBDIR=$(BASEDIR)/lib/
+LOCALEDIR=${BASEDIR}/locale
+BEAUTIFIER=@BEAUTIFIER@
+
+# Tuxedo 
+TUXLIB=$(TUXDIR)/lib
+TUXINC=$(TUXDIR)/include
+
+INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
+LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
+
+INSTALL=@INSTALL@
+CC=@CC@
+CCC=@CXX@
+RANLIB=@RANLIB@
+RM=rm -f
+AR=@AR@
+
+CFLAGS=@CFLAGS@
+CXXFLAGS=@CXXFLAGS@
+CPPFLAGS=@CPPFLAGS@
+
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+
+# These object file are used to build the library to implement Tuxedo server programs (buildserver)
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o abstract_server.o logger.o standard_logger.o ulog_logger.o atmi++.o
+
+# These object file are used to build the library to implement Tuxedo client programs (buildclient)
+ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
+
+# FML buffer objects
+BUFF_OBJS=buffer.o field.o exceptions.o
+
+CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
+
+all: $(CPPATMILIBS) gencat
+
+gencat:
+	# US english translation
+	gencat ${LOCALEDIR}/en_US/atmi++.cat atmi++en_US.msg
+	# French translation
+	gencat ${LOCALEDIR}/fr_FR/atmi++.cat atmi++fr_FR.msg
+
+clean:
+	${RM} *.o core
+
+globber:
+	$(RM) $(ATMI_CLT_OBJS) $(BUFF_OBJS) core 
+	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
+	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
+
+libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+	${AR} ${LIBDIR}/$@ $(ATMI_CLT_OBJS)
+	$(RANLIB) ${LIBDIR}/$@
+
+libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
+	$(RANLIB) ${LIBDIR}/$@
+
+libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
+	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
+	$(RANLIB) ${LIBDIR}/$@
+
+libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+	${CXX} -G -bnoentry -bexpall -bM:SRE -o $@ $(ATMI_CLT_OBJS)
+	${AR} libatmi++.a $@
+
+install:
+	$(MKDIR) ${prefix}/include/atmi
+	$(MKDIR) ${prefix}/lib
+	cd $(INCDIR) && $(INSTALL) *.hpp *.h ${prefix}/include/atmi
+	cd $(LIBDIR) && $(INSTALL) $(CPPATMILIBS)        ${prefix}/lib/
+
+uninstall:
+	$(RM) -R  ${prefix}/include/
+	(cd ${prefix}/lib/ && $(RM) ${CPPATMILIBS})
+
+# Implicit rules ------------------------------------------
+
+# cpp build rule
+.cpp.o:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) -c $<
+
+.cpp:
+	$(CCC) $(CPPFLAGS) $(CXXFLAGS) $(CFLAGS) $< -o $@ $(LDFLAGS) $(LIBS)
+
+.v.V: 
+	viewc $(VFLAGS) -d $(UDATAOBJ) $@

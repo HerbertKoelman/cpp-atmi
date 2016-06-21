@@ -39,8 +39,8 @@ class BTest : public abstract_client {
         cout << "buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
 
         Tfield<string> prenom ( EMPNAME );
-        Tfield<long> empid ( EMPID );
-        Tfield<long> empzip ( EMPZIP );
+        Tfield<long>   empid ( EMPID );
+        Tfield<long>   empzip ( EMPZIP );
         Tfield<string> nom ( EMPNAME );
         Tfield<char *> carray ( SRVCDAY );
         Tfield<char *> copy ( SRVCDAY );
@@ -96,7 +96,7 @@ class BTest : public abstract_client {
         wrapper1.print();
 
       }catch ( atmi::buffer_exception &err ) {
-        cerr << err.what() << "Ferror : " << err.error() <<endl;
+        cerr << err.what() << ". Ferror : " << err.error() <<endl;
       } catch ( atmi::atmi_exception &err ) {
         cerr << err.what() << endl;
       } catch ( exception &err ) {

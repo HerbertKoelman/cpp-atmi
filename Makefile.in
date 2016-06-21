@@ -5,61 +5,58 @@
 # C++ encapsulation of ATMI and a set of tools to help write Tuxedo applications.
 
 prefix=@prefix@
+exec_prefix=@exec_prefix@
+LIBDIR=@libdir@
+INCLUDEDIR=@includedir@/atmi
+
 INSTALL=@INSTALL@ 
 LOCALEDIR=@localedir@
+LIBDIR=@libdir@
+
 RM=@RM@
 DOXYGEN=@DOXYGEN@
-BEAUTIFIER=@BEAUTIFIER@ --no-backup -l CPP --replace -c ./crust.cfg {} \;
+CODECHECK=@CODECHECK@
+MKDIR=@MKDIR_P@
+
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
 
-all: atmi++ utl
+HEADERS=@HEADERS@
+CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
-demos:
-	cd samples/atmi++ ; $(MAKE) globber all clean
+all:
+	(cd src && $(MAKE) all )
+
+#demos:
+#	cd samples/atmi++ ; $(MAKE) globber all clean
 #	cd samples/utl ; $(MAKE) globber all clean
 
-atmi++:
-	cd src/tuxedo ; $(MAKE) globber all clean
-
-utl:
-	cd src/utl ; $(MAKE) globber all clean
-
 pkg:
-	tar cf - include lib man html samples | gzip > ${PACKAGE}
+	$(MKDIR) distrib
+	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE)
 
-globber:
-	${RM} -R html man autom4te.cache
-	${RM} html man confdefs.h config.status include/atmi++.h autom4te.cache
-	cd src/tuxedo ;$(MAKE) globber
-	cd src/utl ;$(MAKE) globber
+clean:
+	( cd src && make clean )
+
+globber:clean
+	${RM} -R doc html man autom4te.cache
+	${RM} confdefs.h config.status include/atmi++.h autom4te.cache
+	(cd src && $(MAKE) globber)
 
 doxygen:
-	${DOXYGEN} doxyconf
+	${DOXYGEN}
 
-beautifull:
-	cd src/tuxedo ;$(MAKE) beautifull
-	cd src/utl ;$(MAKE) beautifull
+codecheck:
+	$(CODECHECK)
 
-install:
-	${INSTALL} lib/libatmi++.a ${prefix}/lib/libatmi++.a
-	${INSTALL} lib/libatmiutl++.a ${prefix}/lib/libatmiutl++.a
-	${INSTALL} lib/libcltatmi++.a ${prefix}/lib/libcltatmi++.a
-	${INSTALL} lib/libfml++.a ${prefix}/lib/libfml++.a
-	${INSTALL} -d ${LOCALEDIR}/en_US ${LOCALEDIR}/fr_FR
-	${INSTALL} locale/en_US/atmi++.cat ${LOCALEDIR}/en_US/atmi++.cat
-	${INSTALL} locale/fr_FR/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat
-	for header in include/*.h ; do \
-		${INSTALL} $$header ${prefix}/$$header ;\
-	done
+version:
+	touch configure.ac && ( cd src/ && touch configure.ac )
+	autoconf && ( cd src && autoconf )
+	-echo "don't forget to run configure."
+
+install: lib/libatmi++.a lib/libcltatmi++.a lib/libfml++.a
+	cd include/atmi && $(MKDIR) $(INCLUDEDIR) $(INSTALL) *.hpp *.h $(INCLUDEDIR)
+	cd lib && $(INSTALL) $(CPPATMILIBS) @libdir@
 
 uninstall:
-	${RM} ${prefix}/lib/libatmi++.a
-	${RM} ${prefix}/lib/libatmiutl++.a
-	${RM} ${prefix}/lib/libcltatmi++.a
-	${RM} ${prefix}/lib/libfml++.a
-	${RM} ${LOCALEDIR}/en_US/atmi++.cat
-	${RM} ${LOCALEDIR}/fr_FR/atmi++.cat
-	for header in include/*.h ; do \
-		${RM} ${prefix}/$$header ;\
-	done
-
+	$(RM) -R  $(INCLUDEDIR)
+	(cd @libdir@ && $(RM) ${CPPATMILIBS})
