@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="description" content="ATMI++ offers a c++ wrapping of Oracle Tuxedo ATMI C libraries." />
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,196 +20,83 @@
     <header>
       <div class="inner">
         <h1>Atmi++</h1>
-        <h2>Tuxedo ATMI C++ wrapper v3.1</h2>
-        <a href="https://github.com/HerbertKoelman/atmiplusplus" class="button"><small>View project on</small>GitHub</a>
+        <h2>Tuxedo ATMI C++ wrapper</h2>
+        <a href="https://github.com/HerbertKoelman/cpp-atmi" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
 
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          
-<h3>Welcome to Tuxedo ATMI++ C++ library.</h3>
+          <h2>
+<a id="c-atmi-wrapper" class="anchor" href="#c-atmi-wrapper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>C++ ATMI wrapper</h2>
 
-<p>
-<a href="http://en.wikipedia.org/wiki/Tuxedo_(software)">Tuxedo (Transactions for Unix, Extended for Distributed Operations)</a> is a middleware platform used to manage distributed transaction processing in distributed computing environments. Tuxedo is a transaction processing system or transaction-oriented middleware, or enterprise application server for a variety of systems and programming languages. Developed by AT&T in the 1980s, it became a software product of Oracle Corporation in 2008.
-<p>
-ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling functions; service interface functions; and buffer management functions for distributed application communication.
-<p>
-ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
-<p>
-You can latest stable release is v3.1. The API's documentation is available <a href="http://vps.urbix-software.fr/~herbert/atmi++/v3.1/index.html">here</a>.
-	
-<h3>Project's content</h3>
+<h3>
+<a id="what-it-does" class="anchor" href="#what-it-does" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What it does</h3>
 
-<P>
-The library is divided into a very simple set of classes documented <a href="http://herbertkoelman.github.com/atmiplusplus/api">here</a>. Each one is handling one category of ATMI calls. The project comes with a set of basic sample programs that illustrate how ATMI++ can be used. I'll find as wel a basic Tuxedo DOMAIN configuration in samples/app.
-</P>
+<p>ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system. It includes transaction 
+management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling
+functions; service interface functions; and buffer management functions for distributed application communication.</p>
 
-<H3>Getting started</H3>
-	Dowload latest release, unzip or untar file. Then run :
-<pre><code>
-$ configure
+<p>ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. 
+This should help making it easier to write fast and rock solid Tuxedo software.</p>
+
+<p>This project is currently hosted <a href="http://herbertkoelman.github.com/cpp-atmi">here</a>.</p>
+
+<h3>
+<a id="setting-things-up" class="anchor" href="#setting-things-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting things up</h3>
+
+<pre><code>$ configure
 $ make
-$ make install
 </code></pre>
 
-The project's sample code can be compiled with 
-<pre><code>
-$ make demos
+<p>This documentation is obtained :</p>
+
+<pre><code>$ make doxygen
 </code></pre>
 
-<h3>Code sample</h3>
+<p>Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com">here</a></p>
 
-tptest joins a Tuxedo DOMAIN, initializes an FML buffer and calls a service called TOUPPER using an XA transaction (see source code samples/atmi++/tptest.bcl). The abstract class <code>AbstractClient</code> handles the joining and ending of the interaction with the DOMAIN. Errors are reported through exception that are all derived from <code>Exception</code>. 
-<PRE><code>
-#include &lt;string.h&gt;
-#include &lt;iostream&gt;
-#include &quot;atmi++.h&quot;
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h3>
 
-using namespace std;
-using namespace atmi;
+<p>none</p>
 
-class TPtest : public AbstractClient {
-public:
+<hr>
 
-  TPtest () : AbstractClient ("tptest"){
-  };
+<p>ATMI++ is free software, you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.</p>
 
-    void run () {
+<p>ATMI++ is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.</p>
 
-      int ret = -1;
-      cout << "Starting client program tptest." << endl;
+<p>You should have received a copy of the GNU General Public License
+ along with ATMI++; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301  USA</p>
 
-      try {
-        Tp tp ( "TOUPPER" );
-        int urcode = 0;
-        Buffer buffer;
+<hr>
 
-        TField<string> name ( "EMPNAME" );
-        name = "Herbert";
-        buffer.add ( &name );
-
-        cout << "  Calling service TOUPPER (" << name  << "), context: " << get_context() << "." << endl;
-        try {
-
-          tp.begin();
-          ret = tp.call ( &buffer );
-          
-          switch (ret) {
-            case 0:
-              break;
-            case -1:
-              cerr << "  TOUPPER returned TPFAIL." << endl;
-              break;
-            default:
-              cerr << "  TOUPPER returned URCODE: " << ret << endl;
-              cout << "  Call returned: " << endl;
-              buffer.print();
-          }
-
-          buffer.get ( &name );
-          cout << "  Call returned: " << name << "." << endl;
-
-          tp.commit();
-          cout << "  Transcation was committed." << endl ;
-        } catch ( ... ){
-          tp.abort();
-          cout << "  Transcation was aborted." << endl ;
-          throw;
-        }
-
-    } catch ( ServiceException& serr ) {
-      cerr << "  Service Exception catched. tpcall failed." << serr.what () << endl;
-    } catch ( TuxedoException& terr ) {
-      cerr << "  Tuxedo Exception catched. tpcall failed." << terr.what () << ". " << terr.getTperrdetail() << endl;
-    } catch ( Exception &err ){
-      cerr << "  Exception catched. tpcall failed." << err.what () << "." << endl;
-    }
-    cout << "Ending program." << endl;
-  };
-};
-
-int main ( int argc, char **argv ) {
-
-  int ret = 0;
-  try {
-    cout << "using lib ATMI++ " << Tuxedo::version() << endl ;
-    TPtest tp;
-    ret = tp.run ( argc, argv );
-  } catch ( Exception& err ) {
-    cerr << err.what () << endl;
-  } catch (exception uerr ) {
-    cerr << uerr.what() << endl;
-  };
-  return ret;
-}
-</PRE>
-</code>
-
-Server function that implements TOUPPER code snippet:
-<pre><code>
-...
-extern "C" void TOUPPER(TPSVCINFO * rqst) {
-  int ret = TPFAIL;
-  try {
-    Buffer buffer ((FBFR32 *)rqst->data );
-    TField<string> name ( EMPNAME );
-    buffer.get ( &name );
-
-    string upper = name;
-    transform(upper.begin(), upper.end(),upper.begin(), ::toupper);
-    name = upper ;
-    buffer.set ( &name );
-
-    ret = TPSUCCESS;
-
-  } catch ( TuxedoException &terr ) {
-    userlog ( (char *)"Service call TOUPPER failed. %s", terr.what() );
-  } catch ( BufferException &berr ) {
-    userlog ( (char *)"Service call TOUPPER failed. %s", berr.what() );
-  } catch ( Exception &err ) {
-    userlog ( (char *)"Service call TOUPPER failed. %s", err.what() );
-  } catch ( ... ) {
-    userlog ((char *)"unexpected exception was thrown, TOUPPER faild.");
-  }
-
-  /* Return the transformed buffer to the requestor. */
-  tpreturn(ret, 0, rqst->data, rqst->len, 0);
-}
-...
-</code></pre>
-
-<h3>Authors and Contributors</h3>
-
-<p>Herbert Koelman is chief software architect at La Banque Postale and is in charge of supervising some of the Tuxedo developments. He started ATMI++ in order to enhance the robustness of the Tuxedo code that was produced by IT Service providers.</p>
-
-<h3>License</h3>
-
-<p></p>ATMI++ is free software, you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
-ATMI++ is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with ATMI++; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-</p>
-
+<p>Copyright (C) 2016 - herbert koelman</p>
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/zipball/v3.1" class="button">
-            <small>Download v3.1</small>
+          <a href="https://github.com/HerbertKoelman/cpp-atmi/zipball/master" class="button">
+            <small>Download</small>
             .zip file
           </a>
-          <a href="https://github.com/HerbertKoelman/atmiplusplus/tarball/v3.1" class="button">
-            <small>Download v3.1</small>
+          <a href="https://github.com/HerbertKoelman/cpp-atmi/tarball/master" class="button">
+            <small>Download</small>
             .tar.gz file
           </a>
 
-          <p class="repo-owner"><a href="https://github.com/HerbertKoelman/atmiplusplus"></a> is maintained by <a href="https://github.com/HerbertKoelman">Herbert Koelman</a>.</p>
+          <p class="repo-owner"><a href="https://github.com/HerbertKoelman/cpp-atmi"></a> is maintained by <a href="https://github.com/HerbertKoelman">HerbertKoelman</a>.</p>
 
-          <p>Having trouble with ATMI++ ? Send your suggestions or issues <a href="https://github.com/HerbertKoelman/atmiplusplus">here</a> or contact <a href="mailto:woodman.9167@me.com">woodman.9167@me.com</a> and I’ll help you sort it out.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
         </aside>
       </div>
     </div>
