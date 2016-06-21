@@ -591,6 +591,7 @@ subdirs
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
+CODECHECK
 build_os
 build_vendor
 build_cpu
@@ -1938,6 +1939,86 @@ else
   mkdir -p ./locale/en_US ./locale/fr_FR
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: ./locale created." >&5
 $as_echo "./locale created." >&6; }
+fi
+
+# Okay, no cppcheck found, maybe we have sonar
+if test -z "$CODECHECK"
+then
+  # Extract the first word of "sonar-runner", so it can be a program name with args.
+set dummy sonar-runner; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_CODECHECK+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$CODECHECK"; then
+  ac_cv_prog_CODECHECK="$CODECHECK" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_CODECHECK="sonar-runner -Dsonar.sources=src/,include/atmi/ -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+CODECHECK=$ac_cv_prog_CODECHECK
+if test -n "$CODECHECK"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CODECHECK" >&5
+$as_echo "$CODECHECK" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+else
+  # Extract the first word of "cppcheck", so it can be a program name with args.
+set dummy cppcheck; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_CODECHECK+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$CODECHECK"; then
+  ac_cv_prog_CODECHECK="$CODECHECK" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_CODECHECK="cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+fi
+fi
+CODECHECK=$ac_cv_prog_CODECHECK
+if test -n "$CODECHECK"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CODECHECK" >&5
+$as_echo "$CODECHECK" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
 fi
 
 # Find a good install program.  We prefer a C program (faster),

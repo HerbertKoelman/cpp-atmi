@@ -3,11 +3,11 @@
 
    Tuxedo queue manipulation helper class.
  */
-#include <unistd.h>
 #include <pthread.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <stdio.h>
+#include <unistd.h>
+#include <climits>
+#include <cstdarg>
+#include <cstdio>
 #include <sstream>
 #include <iostream>
 #include <string>

@@ -15,6 +15,7 @@ LIBDIR=@libdir@
 
 RM=@RM@
 DOXYGEN=@DOXYGEN@
+CODECHECK=@CODECHECK@
 MKDIR=@MKDIR_P@
 
 PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
@@ -43,6 +44,9 @@ globber:clean
 
 doxygen:
 	${DOXYGEN}
+
+codecheck:
+	$(CODECHECK)
 
 version:
 	autoconf && ( cd src && autoconf )

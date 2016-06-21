@@ -96,7 +96,7 @@ namespace atmi {
 
   field *buffer::append ( field *f ){
 
-    throw atmi_exception ( "Method append is not implemented yet !!??;" );
+    throw atmi_exception ( "Method append is not implemented yet !!??;" ); //NOSONAR this desired implementation.
     return NULL;
   }
 
@@ -104,7 +104,7 @@ namespace atmi {
    *
    * @param f field to remove
    */
-  void buffer::remove ( field *f ){
+  void buffer::remove ( field *f ){ //NOSONAR this is a ATMI name it certainly will not change
 
     if ( f != NULL ) {
       f->remove ( this );

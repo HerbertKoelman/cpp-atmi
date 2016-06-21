@@ -48,6 +48,14 @@ else
   AC_MSG_RESULT([./locale created.])
 fi
 
+# Okay, no cppcheck found, maybe we have sonar
+if test -z "$CODECHECK" 
+then
+  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.sources=src/,include/atmi/ -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
+else
+  AC_CHECK_PROG([CODECHECK],[cppcheck],[cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src],[])
+fi
+
 AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src)
 AC_CONFIG_FILES([Makefile doxyfile])

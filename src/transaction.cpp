@@ -42,6 +42,7 @@ namespace atmi {
           case TPESVCERR:
             if ( delay > 0 ) sleep (delay);
         };
+
       } else {
         if ( urcode != NULL ) *urcode = tpurcode;
       }

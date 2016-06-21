@@ -5,7 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstring>
-#include <stdarg.h>
+#include <cstdarg>
 #include <cstdio>
 #include <atmi/logger.hpp>
 
@@ -25,7 +25,7 @@ namespace atmi {
     pid = getpid();
   }
 
-  void standard_logger::log ( LoggingLevel at, const char *msg, va_list args){
+  void standard_logger::log ( LoggingLevel at, const char *msg, va_list args){ //NOSONAR this is a ATMI name it certainly will not change
 
     char now [80]; // current date and time string
     memset ( now, 0, sizeof (now));

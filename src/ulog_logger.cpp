@@ -1,8 +1,8 @@
 #include <sys/types.h>
 #include <iostream>
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
 #include <userlog.h>
 #include <atmi/logger.hpp>
 
@@ -17,7 +17,7 @@ namespace atmi {
     set_log_level ( level );
   }
 
-  void ulog_logger::log ( LoggingLevel at, const char *msg, va_list args){
+  void ulog_logger::log ( LoggingLevel at, const char *msg, va_list args){ // NOSONAR this is a ATMI name it certainly will not change
 
     if ( get_log_level() <= at) {
 
