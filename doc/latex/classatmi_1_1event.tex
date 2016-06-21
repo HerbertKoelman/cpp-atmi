@@ -1,5 +1,6 @@
-\hypertarget{classatmi_1_1event}{}\section{atmi\+:\+:event Class Reference}
+\hypertarget{classatmi_1_1event}{\section{atmi\+:\+:event Class Reference}
 \label{classatmi_1_1event}\index{atmi\+::event@{atmi\+::event}}
+}
 
 
 {\ttfamily \#include $<$tuxedo.\+hpp$>$}
@@ -34,13 +35,13 @@ If the poster is within a transaction and the T\+P\+N\+O\+T\+R\+A\+N flag is not
 If the poster is outside a transaction, \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} is a one-\/way post with no acknowledgement when the service associated with the event fails. This occurs even when T\+P\+E\+V\+T\+R\+A\+N is set for that event (using the ctlflags parameter passed to subscribe()). If the poster is in a transaction, then \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} returns T\+P\+E\+S\+V\+C\+F\+A\+I\+L when the associated service fails in the event. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{}\index{atmi\+::event@{atmi\+::event}!event@{event}}
+\hypertarget{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{\index{atmi\+::event@{atmi\+::event}!event@{event}}
 \index{event@{event}!atmi\+::event@{atmi\+::event}}
-\subsubsection[{event(const char $\ast$evtname=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::event\+::event (
+\subsubsection[{event}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::event\+::event (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{evtname = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)}\label{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}
+)}}\label{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}
 Use this class to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+L\+L, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+M\+I event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
 
 
@@ -51,14 +52,14 @@ Use this class to post an event and any accompanying data. The event is named by
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{}\index{atmi\+::event@{atmi\+::event}!post@{post}}
+\hypertarget{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{\index{atmi\+::event@{atmi\+::event}!post@{post}}
 \index{post@{post}!atmi\+::event@{atmi\+::event}}
-\subsubsection[{post(const char $\ast$data=\+N\+U\+L\+L, long len=0)}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::event\+::post (
+\subsubsection[{post}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::event\+::post (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{data = {\ttfamily NULL}, }
 \item[{long}]{len = {\ttfamily 0}}
 \end{DoxyParamCaption}
-) throw  {\bf tuxedo\+\_\+exception}) }\label{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}
+) throw  {\bf tuxedo\+\_\+exception}) }}\label{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}
 The caller uses \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+L\+L, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+M\+I event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
 
 
