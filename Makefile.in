@@ -54,7 +54,7 @@ version:
 	-echo "don't forget to run configure."
 
 install: lib/libatmi++.a lib/libcltatmi++.a lib/libfml++.a
-	cd include/atmi && $(MKDIR) $(INCLUDEDIR) $(INSTALL) *.hpp *.h $(INCLUDEDIR)
+	cd include/atmi && $(MKDIR) $(INCLUDEDIR) && $(INSTALL) *.hpp *.h $(INCLUDEDIR)
 	cd lib && $(INSTALL) $(CPPATMILIBS) @libdir@
 
 uninstall:
