@@ -9,7 +9,7 @@ functions; service interface functions; and buffer management functions for dist
 ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. 
 This should help making it easier to write fast and rock solid Tuxedo software.
 
-This project is currently hosted <a href="http://herbertkoelman.github.com/atmiplusplus">here</a>.
+This project is currently hosted <a href="http://herbertkoelman.github.com/cpp-atmi">here</a>.
 
 ### Setting things up
 
@@ -24,10 +24,7 @@ Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com"
 
 ###  Dependencies
 
-The project depends on :
-- libyaml available <a href="http://pyyaml.org/wiki/LibYAML">here</a> 
-
-
+none
 
 -------------------------------------------------------------------
 
@@ -47,5 +44,5 @@ The project depends on :
  Boston, MA  02110-1301  USA
 
 -------------------------------------------------------------------
-Copyright (C) 2006 - herbert koelman
+Copyright (C) 2016 - herbert koelman
 
