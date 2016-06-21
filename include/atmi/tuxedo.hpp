@@ -250,8 +250,11 @@ namespace atmi {
       void switch_context ();
 
       /** Unset bits in second argument from first argument
+       *
+       * @param bits bits that should be unset
+       * @param flags flags to unset 
        */
-      static long unset ( long, long );
+      static long unset ( long bits, long flags);
 
       /** set bits in second argument in first argument
        */
@@ -997,7 +1000,7 @@ namespace atmi {
       /**
        * minimal cleanup
        */
-      ~abstract_server ();
+      virtual ~abstract_server ();
 
       /**
        * Terminates a BEA tuxedo ATMI server thread

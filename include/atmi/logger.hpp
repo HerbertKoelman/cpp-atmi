@@ -32,65 +32,68 @@ namespace atmi {
    */
   class logger {
     public:
-    /** Write an error message
-     *
-     * @param msg message string
-     * @param ... insertion values
-     */
-    virtual void error ( const char *msg, ...);
 
-    /** Write a warning message
-     *
-     * @param msg message string
-     * @param ... insertion values
-     */
-    virtual void warning ( const char *msg, ...);
+      ~virtual ~log() {};
 
-    /** Write an info message
-     *
-     * @param msg message string
-     * @param ... insertion values
-     */
-    virtual void info ( const char *msg, ...);
+      /** Write an error message
+       *
+       * @param msg message string
+       * @param ... insertion values
+       */
+      virtual void error ( const char *msg, ...);
 
-    /** Write a finer message
-     *
-     * @param msg message string
-     * @param ... insertion values
-     */
-    virtual void finer ( const char *msg, ...);
+      /** Write a warning message
+       *
+       * @param msg message string
+       * @param ... insertion values
+       */
+      virtual void warning ( const char *msg, ...);
 
-    /** Write a debug message
-     *
-     * @param indent indentation level
-     * @param msg message string
-     * @param ... insertion values
-     */
-    virtual void debug ( int indent, const char *msg, ...);
+      /** Write an info message
+       *
+       * @param msg message string
+       * @param ... insertion values
+       */
+      virtual void info ( const char *msg, ...);
 
-    void set_log_level ( LoggingLevel level );
+      /** Write a finer message
+       *
+       * @param msg message string
+       * @param ... insertion values
+       */
+      virtual void finer ( const char *msg, ...);
 
-    void set_log_level ( int level );
+      /** Write a debug message
+       *
+       * @param indent indentation level
+       * @param msg message string
+       * @param ... insertion values
+       */
+      virtual void debug ( int indent, const char *msg, ...);
 
-    int get_log_level () ;
+      void set_log_level ( LoggingLevel level );
+
+      void set_log_level ( int level );
+
+      int get_log_level () ;
 
     protected:
 
-    /** Overide this method to implement output handling.
-     *
-     * @param at the level to which this message correspond's
-     * @param msg message to log
-     * @param args substitution arguments of the message.
-     */
-    virtual void log ( LoggingLevel at, const char *msg, va_list args) {};
+      /** Overide this method to implement output handling.
+       *
+       * @param at the level to which this message correspond's
+       * @param msg message to log
+       * @param args substitution arguments of the message.
+       */
+      virtual void log ( LoggingLevel at, const char *msg, va_list args) {};
 
 
-    string LEVELS[5]; //!< logging level names
+      string LEVELS[5]; //!< logging level names
 
-    /** initialize level name array */
-    void setup_level_names ();
+      /** initialize level name array */
+      void setup_level_names ();
 
-    int level; //!< current logging level
+      int level; //!< current logging level
   };
 
   /**
@@ -106,6 +109,8 @@ namespace atmi {
        * @param id an identification char array (i.e. your program name)
        */
       standard_logger ( const char *id = NULL, LoggingLevel level = INFO );
+
+      virtual ~standard_logger() {};
 
     protected:
       
@@ -129,6 +134,8 @@ namespace atmi {
        * @param level lowest level 
        */
       ulog_logger ( LoggingLevel level = INFO );
+
+      virtual ~ulog_logger() {};
 
     protected:
 

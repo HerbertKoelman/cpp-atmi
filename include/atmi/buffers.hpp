@@ -480,7 +480,7 @@ namespace atmi {
           if ( (needed () + b->used()) >= b->size()) {
             b->extend ();
           }
-        } catch ( buffer_exception buffErr ) {
+        } catch ( buffer_exception &buffErr ) {
           throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
         };
 
@@ -715,7 +715,7 @@ namespace atmi {
             if ( (needed () + b->used()) >= b->size()) {
               b->extend ();
             }
-          } catch ( buffer_exception buffErr ) {
+          } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
@@ -870,7 +870,7 @@ namespace atmi {
             if ( (needed () + b->used()) >= b->size()) {
               b->extend ();
             }
-          } catch ( buffer_exception buffErr ) {
+          } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 

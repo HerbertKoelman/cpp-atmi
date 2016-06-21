@@ -70,7 +70,7 @@ namespace atmi {
     return rc;              // this the size in bytes needed
   };
 
-  int field::remove ( buffer *b) {
+  int field::remove ( buffer *b) {//NOSONAR this FML grammar and cannot be renamed.
 
     int rc = Fdel32 ( b->_buffer, _field_id, _field_occurence );
     if ( rc < 0 ) {

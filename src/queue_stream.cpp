@@ -3,9 +3,9 @@
 
    Tuxedo queue manipulation helper class.
  */
-#include <limits.h>
-#include <stdarg.h>
-#include <stdio.h>
+#include <climits>
+#include <cstdarg>
+#include <cstdio>
 #include <iostream>
 #include <string>
 #include <atmi.h>
@@ -14,9 +14,12 @@
 
 using namespace std;
 
+/** default buffer size of a queue stream */
+#define QS_BUFFER_SIZE 1024
+
 namespace atmi {
 
-  queue_stream::queue_stream ( atmi::queue *q ) : queue_stream ( q, 1024 ){
+  queue_stream::queue_stream ( atmi::queue *q ) : queue_stream ( q, QS_BUFFER_SIZE ){
   }
 
   queue_stream::queue_stream ( atmi::queue *queue, long bs ): _count(0) {
@@ -102,7 +105,7 @@ namespace atmi {
       qs.free ( message );
       delete  buffer;
 
-    } catch (... ) {
+    } catch ( ... ) { //NOSONAR if something goes wrong we want to abort on going transaction
       qs._queue->abort();
       qs.free ( message );
       delete buffer;
@@ -155,7 +158,7 @@ namespace atmi {
     } catch (tuxedo_exception &terr ) {
       qs.free ( message );
       throw;
-    } 
+    }
 
     return in;
   }

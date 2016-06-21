@@ -2,7 +2,7 @@
    $Id: tuxedo.C 79 2007-08-18 17:30:26Z hkoelman $
  */
 
-#include <limits.h>
+#include <climits>
 #include <iostream>
 #include <atmi.h>
 #include <string>
@@ -61,8 +61,10 @@ namespace atmi {
   };
 
 
-  void tuxedo::free ( char *buffer ) {
-    if ( buffer != NULL) tpfree ( buffer );
+  void tuxedo::free ( char *buffer ) { //NOSONAR this is a ATMI name it certainly will not change
+    if ( buffer != NULL){
+      tpfree ( buffer );
+    }
   };
 
 
@@ -96,7 +98,7 @@ namespace atmi {
     return rc;
   }
 
-  int tuxedo::abort () {
+  int tuxedo::abort () { //NOSONAR this is a ATMI name it certainly will not change
 
     int rc  = -1;
 

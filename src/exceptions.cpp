@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cerrno>
-#include <stdarg.h>
-#include <stdio.h>
+// #include <stdio.h>
 #include <atmi.h>
 #include <memory>
 #include <atmi/atmi++.hpp>
