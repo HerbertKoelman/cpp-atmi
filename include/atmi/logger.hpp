@@ -33,7 +33,7 @@ namespace atmi {
   class logger {
     public:
 
-      ~virtual ~log() {};
+      virtual ~logger() {};
 
       /** Write an error message
        *
