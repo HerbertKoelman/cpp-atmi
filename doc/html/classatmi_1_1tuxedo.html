@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v3.2.0-beta)</span>
+   &#160;<span id="projectnumber">(v3.2.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -172,8 +172,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:abe17cfd8c79b1bc47fce4cbadc87d12f"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#abe17cfd8c79b1bc47fce4cbadc87d12f">unset</a> (long, long)</td></tr>
-<tr class="separator:abe17cfd8c79b1bc47fce4cbadc87d12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af962caf2ded45e192ba6a37740b133d0"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0">unset</a> (long bits, long <a class="el" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a>)</td></tr>
+<tr class="separator:af962caf2ded45e192ba6a37740b133d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73c4c95f165a052ba5a3a29cb2834831"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#a73c4c95f165a052ba5a3a29cb2834831">set</a> (long, long)</td></tr>
 <tr class="separator:a73c4c95f165a052ba5a3a29cb2834831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -704,7 +704,7 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="abe17cfd8c79b1bc47fce4cbadc87d12f"></a>
+<a class="anchor" id="af962caf2ded45e192ba6a37740b133d0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -715,13 +715,13 @@ template&lt;typename... Args&gt; </div>
           <td class="memname">long atmi::tuxedo::unset </td>
           <td>(</td>
           <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>f</em>, </td>
+          <td class="paramname"><em>bits</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>uf</em>&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -735,7 +735,14 @@ template&lt;typename... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Unset bits in second argument from first argument </p>
+<p>Unset bits in second argument from first argument</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bits</td><td>bits that should be unset </td></tr>
+    <tr><td class="paramname">flags</td><td>flags to unset </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v3.2.0-beta)</span>
+   &#160;<span id="projectnumber">(v3.2.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -112,7 +112,7 @@ Inheritance diagram for atmi::abstract_server:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8379cb3f00991fa5459f02d106f45de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__server.html#ae8379cb3f00991fa5459f02d106f45de">abstract_server</a> ()</td></tr>
 <tr class="separator:ae8379cb3f00991fa5459f02d106f45de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a69000edc58c8111234060ea0bc330e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__server.html#a2a69000edc58c8111234060ea0bc330e">~abstract_server</a> ()</td></tr>
+<tr class="memitem:a2a69000edc58c8111234060ea0bc330e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__server.html#a2a69000edc58c8111234060ea0bc330e">~abstract_server</a> ()</td></tr>
 <tr class="separator:a2a69000edc58c8111234060ea0bc330e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad839be63bae91afe4b5f4e090cd8e8c5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__server.html#ad839be63bae91afe4b5f4e090cd8e8c5">tpsvrthrdone</a> ()</td></tr>
 <tr class="separator:ad839be63bae91afe4b5f4e090cd8e8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,8 +172,8 @@ static const long&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 <tr class="memitem:ae8715aedf9c8f3178aec71e93ee35be4 inherit pro_methods_classatmi_1_1tuxedo"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">handle_tperrno</a> (int _tperrno, const char *msg, const Args &amp;...args)</td></tr>
 <tr class="separator:ae8715aedf9c8f3178aec71e93ee35be4 inherit pro_methods_classatmi_1_1tuxedo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classatmi_1_1tuxedo"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classatmi_1_1tuxedo')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></td></tr>
-<tr class="memitem:abe17cfd8c79b1bc47fce4cbadc87d12f inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#abe17cfd8c79b1bc47fce4cbadc87d12f">unset</a> (long, long)</td></tr>
-<tr class="separator:abe17cfd8c79b1bc47fce4cbadc87d12f inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af962caf2ded45e192ba6a37740b133d0 inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0">unset</a> (long bits, long <a class="el" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a>)</td></tr>
+<tr class="separator:af962caf2ded45e192ba6a37740b133d0 inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73c4c95f165a052ba5a3a29cb2834831 inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1tuxedo.html#a73c4c95f165a052ba5a3a29cb2834831">set</a> (long, long)</td></tr>
 <tr class="separator:a73c4c95f165a052ba5a3a29cb2834831 inherit pro_static_methods_classatmi_1_1tuxedo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classatmi_1_1tuxedo"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classatmi_1_1tuxedo')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></td></tr>
@@ -215,6 +215,9 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <a class="anchor" id="a2a69000edc58c8111234060ea0bc330e"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">atmi::abstract_server::~abstract_server </td>
@@ -223,6 +226,11 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>minimal cleanup </p>
 
