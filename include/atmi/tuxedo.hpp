@@ -333,65 +333,6 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
-/**
- * Helper class to implement tuxedo AsbtractServers.
- *
- * @deprecated clutters server code.
- */
-  class abstract_server : public tuxedo {
-    public:
-
-      /**
-       * Setup minimal requirements (mainly tpopen)
-       *
-       * @throw tuxedo_exception if tpopen failed.
-       */
-      abstract_server ();
-
-      /**
-       * minimal cleanup
-       */
-      ~abstract_server ();
-
-      /**
-       * Terminates a BEA tuxedo ATMI server thread
-       */
-      virtual void tpsvrthrdone();
-
-      /**
-       * Initializes a BEA tuxedo ATMI server thread.
-       *
-       * @param argc CLOPT argument count.
-       * @param argv CLOPT user arguments
-       *
-       * @return A negative return value will cause the server dispatch thread to exit gracefully.
-       */
-      virtual int tpsvrthrinit( int argc, char **argv );
-
-      /**
-       * Handles SIGHUP signals. It normaly expected that the server takes actions
-       * to re-initialize it's internal state.
-       *
-       * This method should be overloaded
-       */
-      virtual inline void handle_sighup ()  {                   /* not implemented */
-      };
-
-      /**
-       * Handles SIGTERM signals. A server should cleanup and prepare it's self to
-       * terminated.
-       *
-       * This method should be overloaded
-       */
-      virtual inline void handle_sigterm () {                   /* not implemented */
-      };
-
-  };
-
-  /** @} */
-
-// ---------------------------------------------------------------------------------
-
   /**
    * Implement transaction calls (/T)
    *
@@ -1038,13 +979,62 @@ namespace atmi {
 #endif
   };
 
-}
+  /**
+   * Helper class to implement tuxedo AsbtractServers.
+   *
+   * @deprecated clutters server code.
+   */
+  class abstract_server : public tuxedo {
+    public:
 
-/** fake C function that can be used with autotool AC_CHECK_LIB macro
- *
- * @return the current build version
- * @deprecated remove this fake function
- */
-extern "C" const char *atmicpp_is_present(void);
+      /**
+       * Setup minimal requirements (mainly tpopen)
+       *
+       * @throw tuxedo_exception if tpopen failed.
+       */
+      abstract_server ();
+
+      /**
+       * minimal cleanup
+       */
+      ~abstract_server ();
+
+      /**
+       * Terminates a BEA tuxedo ATMI server thread
+       */
+      virtual void tpsvrthrdone();
+
+      /**
+       * Initializes a BEA tuxedo ATMI server thread.
+       *
+       * @param argc CLOPT argument count.
+       * @param argv CLOPT user arguments
+       *
+       * @return A negative return value will cause the server dispatch thread to exit gracefully.
+       */
+      virtual int tpsvrthrinit( int argc, char **argv );
+
+      /**
+       * Handles SIGHUP signals. It normaly expected that the server takes actions
+       * to re-initialize it's internal state.
+       *
+       * This method should be overloaded
+       */
+      virtual inline void handle_sighup ()  {                   /* not implemented */
+      };
+
+      /**
+       * Handles SIGTERM signals. A server should cleanup and prepare it's self to
+       * terminated.
+       *
+       * This method should be overloaded
+       */
+      virtual inline void handle_sigterm () {                   /* not implemented */
+      };
+
+  };
+
+  /** @} */
+}
 
 #endif
