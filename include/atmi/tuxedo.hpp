@@ -333,114 +333,6 @@ namespace atmi {
 
 // ---------------------------------------------------------------------------------
 
-  /** \addtogroup helpers Helper classes
-   *
-   * @{
-   */
-
-/**
- * Helper class to implement tuxedo application.
- *
- * Extending this class ensures that tpterm  and tpinit is called when client programs are run.
- *
- * abstract_client has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
- * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
- * only for native clients.
- *
- * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
- * which are auto pointers. which is probaly the best way to avoid memory leaks.
- *
- */
-  class abstract_client : public tuxedo {
-    public:
-
-      /** Method moved into the destructor of abstract_client
-       * End any pending operation and free any alloated ressource. After this call any attempt at
-       * using ATMI will fail.
-       * int term () ;
-       */
-      virtual ~abstract_client ();
-
-      /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
-       *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
-       */
-       abstract_client ();
-
-      /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
-       *
-       * This constructor sets the TPINFO flag TPMULTICONTEXTS.
-       *
-       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
-       *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
-       *
-       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
-       * @param cltname client program name (default NULL)
-       * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
-       * @param group is used to associate the client with a resource manager group name (default NULL)
-       * @param tuxconfig used located the DOMAIN
-       */
-      abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
-
-      /** This method must overriden  to run the client application.
-       *
-       * @param argc number of command line option received when the program was started
-       * @param argv actual value of command line arguments
-       * @deprecated
-       */
-      virtual int run ( int argc, char **argv ) {
-        return -1;
-      };
-
-      /** Creates an instance of transaction and set the client context to be used.
-       *
-       * @return  an auto_ptr to a new transaction instance
-       */
-      transaction_ptr new_transaction_instance ( const char *svc );
-
-      /** Creates an instance of queue and set the client context to be used.
-       *
-       * @return  an auto_ptr to a new queue instance
-       */
-      queue_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
-
-      /** @return tuxedo client name */
-      inline const char *name() const {
-        return _name.c_str();
-      }
-
-      /** @return associated TUXCONFIG value */
-      inline const char *tuxconfig() const {
-        return _tuxconfig.c_str();
-      }
-
-      /** @return true if multicontext is active */
-      inline bool multi_context(){
-        return context() > 0 ;
-      }
-
-    private:
-
-      std::string  _name;
-      std::string  _tuxconfig;
-      TPINIT      *_tpinfo;
-
-#ifndef HAVE_CPP11_MUTEX
-//      static pthread::mutex _mutex;
-#else
-//      static std::mutex     _mutex;
-#endif
-  };
-
-// ---------------------------------------------------------------------------------
-
 /**
  * Helper class to implement tuxedo AsbtractServers.
  *
@@ -1022,21 +914,130 @@ namespace atmi {
       queue *_queue;
   };
 
-/** Global utility to stream out the content of a queue
- *
- * @param out output stream
- * @param qs queue stream that will handle the reading of messages
- */
+  /** Global utility to stream out the content of a queue
+   *
+   * @param out output stream
+   * @param qs queue stream that will handle the reading of messages
+   */
   extern ostream& operator<<(ostream& out, queue_stream& qs);
 
-/** Global utility to stream in a queue
- *
- * @param in input stream
- * @param qs queue stream that handles the writing of messages to
- */
+  /** Global utility to stream in a queue
+   *
+   * @param in input stream
+   * @param qs queue stream that handles the writing of messages to
+   */
   extern istream& operator>>(istream& in, queue_stream& qs);
 
-/** @} */
+  /** @} */
+  
+  // ---------------------------------------------------------------------------------
+
+  /** \addtogroup helpers Helper classes
+   *
+   * @{
+   */
+
+  /**
+   * Helper class to implement tuxedo application.
+   *
+   * Extending this class ensures that tpterm  and tpinit is called when client programs are run.
+   *
+   * abstract_client has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll
+   * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
+   * only for native clients.
+   *
+   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
+   * which are auto pointers. which is probaly the best way to avoid memory leaks.
+   *
+   */
+  class abstract_client : public tuxedo {
+    public:
+
+      /** Method moved into the destructor of abstract_client
+       * End any pending operation and free any alloated ressource. After this call any attempt at
+       * using ATMI will fail.
+       * int term () ;
+       */
+      virtual ~abstract_client ();
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       */
+       abstract_client ();
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       *
+       * This constructor sets the TPINFO flag TPMULTICONTEXTS.
+       *
+       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
+       *
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       *
+       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
+       *
+       * @param cltname client program name (default NULL)
+       * @param usr user name (default NULL)
+       * @param passwd user's password (default NULL)
+       * @param group is used to associate the client with a resource manager group name (default NULL)
+       * @param tuxconfig used located the DOMAIN
+       */
+      abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
+
+      /** This method must overriden  to run the client application.
+       *
+       * @param argc number of command line option received when the program was started
+       * @param argv actual value of command line arguments
+       * @deprecated
+       */
+      virtual int run ( int argc, char **argv ) {
+        return -1;
+      };
+
+      /** Creates an instance of transaction and set the client context to be used.
+       *
+       * @return  an auto_ptr to a new transaction instance
+       */
+      transaction_ptr new_transaction_instance ( const char *svc );
+
+      /** Creates an instance of queue and set the client context to be used.
+       *
+       * @return  an auto_ptr to a new queue instance
+       */
+      queue_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
+
+      /** @return tuxedo client name */
+      inline const char *name() const {
+        return _name.c_str();
+      }
+
+      /** @return associated TUXCONFIG value */
+      inline const char *tuxconfig() const {
+        return _tuxconfig.c_str();
+      }
+
+      /** @return true if multicontext is active */
+      inline bool multi_context(){
+        return context() > 0 ;
+      }
+
+    private:
+
+      std::string  _name;
+      std::string  _tuxconfig;
+      TPINIT      *_tpinfo;
+
+#ifndef HAVE_CPP11_MUTEX
+//      static pthread::mutex _mutex;
+#else
+//      static std::mutex     _mutex;
+#endif
+  };
+
 }
 
 /** fake C function that can be used with autotool AC_CHECK_LIB macro

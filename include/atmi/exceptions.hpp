@@ -34,7 +34,7 @@ namespace atmi {
 
 #define ATMI_MESSAGE_LENGTH 1024
 
-/** \addtogroup atmi-exceptions Error handling
+/* \addtogroup atmi-exceptions Error handling
  * Errors are handle through these exceptions.
  * @{
  */
@@ -362,7 +362,7 @@ namespace atmi {
       virtual ~aborted_exception () throw () { };
   };
 
-/** @} */
+/* @} */
 
 } // atmi namespace
 #endif
