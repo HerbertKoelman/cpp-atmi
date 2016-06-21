@@ -1981,7 +1981,10 @@ $as_echo "no" >&6; }
 fi
 
 
-else
+fi
+
+if test -z "$CODECHECK"
+then
   # Extract the first word of "cppcheck", so it can be a program name with args.
 set dummy cppcheck; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5

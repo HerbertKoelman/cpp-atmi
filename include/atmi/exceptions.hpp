@@ -179,7 +179,7 @@ namespace atmi {
        * @param msg  error message
        * @param args error message parameters (variadic).
        */
-      template<typename... Args> tuxedo_exception( int err, const char *msg, const Args&... args): _error(err), atmi_exception(msg, args...){
+      template<typename... Args> tuxedo_exception( int err, const char *msg, const Args&... args): _error(err), _detail(0), atmi_exception(msg, args...){
         _what = _message + " " + error_message();
       };
 

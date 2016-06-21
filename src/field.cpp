@@ -53,7 +53,7 @@ namespace atmi {
     return Fldtype32 ( _field_id );
   };
 
-  const char*field::what() {
+  const char *field::what() {
 
     stringstream buff;
     buff << "Fid: " << _field_id << ", occurence: " << _field_occurence << ", name: " << _field_name << ", len: " << length() << ", type: " << tname () << ".";

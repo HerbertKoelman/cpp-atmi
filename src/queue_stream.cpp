@@ -50,7 +50,9 @@ namespace atmi {
 
     int   rc      = -1;
     char *message = NULL;
-    long  len     = qs._buffer_size, size = qs._buffer_size, s = 0;
+    long  len     = qs._buffer_size;
+    long  size    = qs._buffer_size;
+    long  s       = 0;
     char *buffer  = new char[size];
 
     try{

@@ -77,12 +77,12 @@ namespace atmi {
        *
        * @param b set FML32 buffer reference
        */
-      buffer ( FBFR32 *b );
+      explicit buffer ( FBFR32 *b );
 
       /** Allocates a buffer of byte size.
        * @param len bytes space of field value in bytres
        */
-      buffer ( FLDLEN32 len );
+      explicit buffer ( FLDLEN32 len );
 
       /** default destructor
        *
@@ -296,7 +296,7 @@ namespace atmi {
 
       /** @return a string describing the field
        */
-      const char * what ();
+      const char *what ();
 
       /** @param value value to assign to the field.
        */

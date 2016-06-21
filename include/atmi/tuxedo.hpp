@@ -475,7 +475,7 @@ namespace atmi {
       /**
        * @param service service name (< 32 characters long)
        */
-      transaction ( const char *service );
+      explicit transaction ( const char *service ) ;
 
     protected:
 

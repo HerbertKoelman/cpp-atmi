@@ -37,7 +37,7 @@ namespace atmi {
   };
 
   abstract_server::~abstract_server () {
-    if ( tpclose () == -1 ) throw tuxedo_exception ( tperrno, catgets ( _catd, CATD_ATMI_SET, 2, "Call to tpclose() failed.a") );
+    if ( tpclose () == -1 ) ; // throw tuxedo_exception ( tperrno, catgets ( _catd, CATD_ATMI_SET, 2, "Call to tpclose() failed.a") );
   };
 
   void abstract_server::tpsvrthrdone( void ) {
