@@ -26,6 +26,7 @@ The library is documented [here](http://herbertkoelman.github.io/cpp-atmi/doc/ht
 ###  How it's used
 
 This code creates a FML field and passes it to a service called `XATOUPPER`. If anything goes wrong, we roll back the transaction and pass the exception (`throw`) so that the diagnostic messages can be displayed.
+
         ...
         transaction tp ( "XATOUPPER" );
         int urcode = 0;
