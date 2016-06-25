@@ -22,15 +22,12 @@ namespace atmi {
   queue_stream::queue_stream ( atmi::queue *q ) : queue_stream ( q, QS_BUFFER_SIZE ){
   }
 
-  queue_stream::queue_stream ( atmi::queue *queue, long bs ): _count(0) {
+  queue_stream::queue_stream ( atmi::queue *queue, long bs ): _count(0), _buffer_size(bs), _queue(queue) {
 
-    _buffer_size = bs;
     encode_base64( false );
     if ( queue == NULL ) {
       throw atmi_exception ( "queue_stream needs a queue to by initialized. Passed queue was NULL." );
     }
-
-    this->_queue = queue;
   }
 
   void queue_stream::encode_base64( bool b ){
@@ -53,8 +50,9 @@ namespace atmi {
     long  len     = qs._buffer_size;
     long  size    = qs._buffer_size;
     long  s       = 0;
-    char *buffer  = new char[size];
+    char *buffer  = new char[size]; 
 
+    memset ( buffer, 0, size); // initialize buffer with 0
     try{
       qs._count = 0; // it's a friend, I can access private class data
 
@@ -77,7 +75,7 @@ namespace atmi {
 
             if ( rc < 0 ) {
 
-              // Give it chance to be corrected
+              // Buffer is signaled too small, give it chance to be corrected
               if ( tperrno == TPELIMIT ) {
                 s += s;
 

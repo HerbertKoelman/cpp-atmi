@@ -777,7 +777,7 @@ namespace atmi {
        *
        * @param evtname is a NULL-terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.”) as this character is reserved by the Oracle tuxedo ATMI system itself.
        */
-      event( const char *evtname = NULL);
+      explicit event( const char *evtname = NULL);
 
       /**
        * The caller uses post() to post an event and any accompanying data. The event is named by eventname and data, if
@@ -812,7 +812,7 @@ namespace atmi {
        *
        * @param q a queue
        */
-      queue_stream ( queue *q );
+      explicit queue_stream ( queue *q ) ;
 
       /** setup a queue stream.
        *
@@ -853,7 +853,8 @@ namespace atmi {
       long   _count;
       long   _buffer_size;
 
-      long   _flags;
+      // TODO this was hidding the base class protected declaration.
+      // long   _flags;
 
       queue *_queue;
   };
