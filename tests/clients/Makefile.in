@@ -25,6 +25,10 @@ OBJECT_MODE=$(BITS)
 CXXFLAGS=@CXXFLAGS@
 CFLAGS=@CFLAGS@
 CPPFLAGS=@CPPFLAGS@
+
+# Tuxedo build flags
+TXFLAGS=@TXFLAGS@
+
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
 CODECHECK=@CODECHECK@
@@ -68,9 +72,9 @@ cxref:
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
-	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -f $< -o $@ -l "$(LIBS)"
+	CC=$(CCC) CFLAGS="$(TXFALGS)  $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"  buildclient -f $< -o $@ -l "$(LIBS)"
 #build a workstation client 	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) -w $(LDFLAGS)"  buildclient    -f $< -o $@w -l "$(LIBS)"
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:
-	CC=$(CCC) CFLAGS="$(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"   buildserver -s @$@.func -f $< -o $@ -l "$(LIBS)"
+	CC=$(CCC) CFLAGS="$(TXFLAGS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)"   buildserver -s @$@.func -f $< -o $@ -l "$(LIBS)"
