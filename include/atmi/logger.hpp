@@ -133,7 +133,7 @@ namespace atmi {
       /** Create a logger that print's message form level up to highest level defined.
        * @param level lowest level 
        */
-      ulog_logger ( LoggingLevel level = INFO );
+      explicit ulog_logger ( LoggingLevel level = INFO );
 
       virtual ~ulog_logger() {};
 

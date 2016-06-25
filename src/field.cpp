@@ -57,7 +57,8 @@ namespace atmi {
 
     stringstream buff;
     buff << "Fid: " << _field_id << ", occurence: " << _field_occurence << ", name: " << _field_name << ", len: " << length() << ", type: " << tname () << ".";
-    return buff.str().c_str ();
+    _what = buff.str();
+    return _what.c_str ();
   }
 
   long field::needed (){
@@ -94,21 +95,21 @@ namespace atmi {
     }
   };
 
-  int field::ferror_handler ( int ferror, const char *format, ... ) {
-
-    _ferror = ferror;
-
-    va_list ap;
-    va_start ( ap, format );
-
-    if ( _ferror != FNOTPRES ) {
-      throw buffer_exception ( _ferror, format, ap );
-    }
-
-    va_end ( ap );
-
-    return _ferror;
-  }
+//  int field::ferror_handler ( int ferror, const char *format, ... ) {
+//
+//    _ferror = ferror;
+//
+//    va_list ap;
+//    va_start ( ap, format );
+//
+//    if ( _ferror != FNOTPRES ) {
+//      throw buffer_exception ( _ferror, format, ap );
+//    }
+//
+//    va_end ( ap );
+//
+//    return _ferror;
+//  }
 
 // operators --------------------------------------------------------------------------------
 

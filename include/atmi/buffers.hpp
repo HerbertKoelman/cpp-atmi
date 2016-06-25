@@ -313,7 +313,7 @@ namespace atmi {
        * @param ...    error message viariadic
        * @return the handled ferror value.
        */
-      int ferror_handler(int ferror, const char *format, ...);
+      // int ferror_handler(int ferror, const char *format, ...);
 
       /** set the field occurence.
        *
@@ -373,6 +373,7 @@ namespace atmi {
       FLDOCC32  _field_occurence;
       char     *_field_name;
       int       _ferror;
+      std::string _what; // used to return a desciption
   };
 
 /** Template that handles non pointer data types (short, long, char, double, ...)
@@ -387,7 +388,7 @@ namespace atmi {
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      Tfield ( FLDID32 fid ) {
+      explicit Tfield ( FLDID32 fid ) {
 
         /** This array is used to check that FML type matches template Tfield's type */
         const char *TYPEID_NAMES[5] = { 
@@ -531,7 +532,7 @@ namespace atmi {
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      Tfield ( FLDID32 fid ) {
+      explicit Tfield ( FLDID32 fid ) {
 
         setup ( fid );
 
