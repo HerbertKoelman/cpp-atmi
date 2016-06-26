@@ -26,7 +26,7 @@
 #include <atmi/exceptions.hpp>
 #include <atmi/abstract_client.hpp>
 
-using namespace std;
+// using namespace std;
 
 namespace atmi {
 
@@ -35,12 +35,11 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client ():
-    abstract_client(NULL) {
+  abstract_client::abstract_client (): abstract_client((const char *)NULL) {// cltname is passed as NULL
+
   }
 
-  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig):
-    _tuxconfig(tuxconfig){
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
 
@@ -50,12 +49,13 @@ namespace atmi {
 
       // when we receive this parameter we setup things so they can run in a multi context mode.
       if ( tuxconfig != NULL ) {
+        _tuxconfig = tuxconfig;
         _tpinfo->flags = TPMULTICONTEXTS;
 
         // tuxconfig parameter is a path to an UBB file, to make sure that the env var TUXCONFIG is
         // indeed referencing this path, we set this variable through an explicit call to tuxputenv.
         // The function tuxputenv expect a string in form of "key=value".
-        std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; 
+        std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; // create env variable entry (key=value)
 
         if ( tuxputenv(const_cast<char *>(tuxconfig_kv.c_str()) ) != 0 ) {
           throw atmi_exception ("failed to put env varaible %s.", tuxconfig );

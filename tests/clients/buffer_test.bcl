@@ -17,9 +17,10 @@
 using namespace std;
 using namespace atmi;
 
-class BTest : public abstract_client {
+class buffer_test : public abstract_client {
   public:
-    BTest () : abstract_client ("btest"){
+    buffer_test (): abstract_client ("btest"){
+      cout << "instance ready" << endl;
     };
 
     int run ( int argc, char **argv ){
@@ -116,7 +117,7 @@ int main ( int argc, char **argv ) {
 
     cout << "buffer sample program (" << atmi::cpp_atmi_version() <<")." << endl;
     cout << "setting up";
-    BTest btest;
+    buffer_test btest;
 
     cout << ", starting up" ;
     btest.run ( argc, argv );

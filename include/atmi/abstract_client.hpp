@@ -62,10 +62,9 @@ namespace atmi {
   class abstract_client : public tuxedo {
     public:
 
-      /** Method moved into the destructor of abstract_client
-       * End any pending operation and free any alloated ressource. After this call any attempt at
-       * using ATMI will fail.
-       * int term () ;
+      /** End any pending operation and free any alloated ressource (tpterm()). 
+       *
+       * After this call any attempt at using ATMI will fail.
        */
       virtual ~abstract_client ();
 
@@ -80,12 +79,12 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit. 
        *
-       * This constructor sets the TPINFO flag TPMULTICONTEXTS.
-       *
-       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads or to use a factory.
-       *
        * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       *
+       * This constructor sets the TPINFO flag TPMULTICONTEXTS if the parameter tuxconfig is passed.
+       *
+       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads.
        *
        * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
        *
@@ -95,7 +94,7 @@ namespace atmi {
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param tuxconfig used located the DOMAIN
        */
-      abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
+      explicit abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
 
       /** This method must overriden  to run the client application.
        *
@@ -120,17 +119,17 @@ namespace atmi {
       queue_ptr new_queue_instance ( const char *qspace, const char *queue, const char *reply = NULL );
 
       /** @return tuxedo client name */
-      inline const char *name() const {
+      const char *name() const {
         return _name.c_str();
       }
 
       /** @return associated TUXCONFIG value */
-      inline const char *tuxconfig() const {
+      const char *tuxconfig() const {
         return _tuxconfig.c_str();
       }
 
       /** @return true if multicontext is active */
-      inline bool multi_context(){
+      bool multi_context(){
         return context() > 0 ;
       }
 
