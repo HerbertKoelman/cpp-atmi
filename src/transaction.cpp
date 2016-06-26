@@ -55,14 +55,14 @@ namespace atmi {
     return rc;
   }
 
-  int transaction::call(atmi::buffer *buffer, int *urcode,int retries, int delay ){
+  int transaction::call(atmi::buffer &buffer, int *urcode,int retries, int delay ){
 
     int rc = -1;
-    long osize = buffer->size();
-    FBFR32 *b = buffer->get_buffer();
+    long osize = buffer.size();       // output buffer size 
+    FBFR32 *b  = buffer.get_buffer(); // FML buffer reference
 
-    rc = call ( (char *)buffer->get_buffer(), buffer->size(), (char **) &b, &osize, urcode, retries, delay );
-    buffer->set_buffer ( b );
+    rc = call ( (char *)b, osize, (char **) &b, &osize, urcode, retries, delay );
+    buffer.set_buffer ( b );
 
     return rc;
   };
@@ -76,12 +76,12 @@ namespace atmi {
     return rc;
   }
 
-  int transaction::acall (buffer *buffer ) {
+  int transaction::acall (buffer &buffer ) {
 
     int ret = -1;
     _call_descriptor = -1;
 
-    ret = acall ( (char *) buffer->get_buffer(), buffer->size() );
+    ret = acall ( (char *) buffer.get_buffer(), buffer.size() );
 
     updateErrno ();
 
@@ -95,15 +95,15 @@ namespace atmi {
   }
 
 
-  int transaction::reply (atmi::buffer *buffer, int *urcode, int *cd ) {
+  int transaction::reply (atmi::buffer &buffer, int *urcode, int *cd ) {
 
     int rc = -1;
-    FBFR32 *b = buffer->get_buffer ();
-    long osize = buffer->size();
+    FBFR32 *b = buffer.get_buffer ();
+    long osize = buffer.size();
 
     rc = reply( (char **) &b, &osize, urcode, cd);
     if ( rc != -1 ) {
-      buffer->set_buffer ( b );
+      buffer.set_buffer ( b );
     }
 
     return rc;

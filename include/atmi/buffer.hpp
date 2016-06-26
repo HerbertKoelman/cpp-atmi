@@ -117,7 +117,7 @@ namespace atmi {
        *
        * @see add
        */
-      field *set    ( field *f );
+      field &set    ( field &f );
 
       /** Adds a field into the buffer (Fadd32).
        *
@@ -129,21 +129,21 @@ namespace atmi {
        *
        * @see set to update the value of a field in a buffer
        */
-      field *add    ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
+      field &add    ( field &f );         // FLDID fieldid, char *value, FLDLEN len );
 
       /** Appends a field to the buffer
        *
        * @param f a pointer to the field to add into the buffer
        * @deprecated not implemented.
        */
-      field *append ( field *f );         // FLDID fieldid, char *value, FLDLEN len );
+      field &append ( field &f );         // FLDID fieldid, char *value, FLDLEN len );
 
       /** Removes the field from the buffer (Fdel32).
        *
        * @param f a pointer to the field to remove
        * @throw buffer_exception upon failure
        */
-      void remove ( field *f );         // FLDID fieldid );
+      void remove ( field &f );         // FLDID fieldid );
 
       /** Get the field value set in the buffer (Fget32).
        *
@@ -153,7 +153,7 @@ namespace atmi {
        * @return the field when set
        * @throw buffer_exception upon failure
        */
-      field *get ( field *f );
+      field &get ( field &f );
 
       /** Get the field value set in the buffer (Fget32).
        *
@@ -162,7 +162,7 @@ namespace atmi {
        * @return the field when set
        * @throw buffer_exception upon failure
        */
-      field *get ( field *f, FLDOCC32 occ);
+      field &get ( field &f, FLDOCC32 occ);
 
       /** @return the current check sum of the buffer
        *
@@ -171,7 +171,7 @@ namespace atmi {
       long chksum();
 
       /** @return the number of occurences of the field into the buffer (Foccur32)*/
-      FLDOCC32 occurences ( const field *f );
+      FLDOCC32 occurences ( const field &f );
 
       /** @return the number of fields into the buffer */
       FLDOCC32 num ();
