@@ -38,8 +38,9 @@
 management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling
 functions; service interface functions; and buffer management functions for distributed application communication.</p>
 
-<p>ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. 
-This should help making it easier to write fast and rock solid Tuxedo software.</p>
+<p>ATMI++ is a C++ wrapping of this API,  adding strong typing of FML buffers and adding the use of exceptions to detect and handle error conditions. </p>
+
+<p>This should help making it easier to write fast and rock solid Tuxedo software.</p>
 
 <p>This project is currently hosted <a href="http://herbertkoelman.github.com/cpp-atmi">here</a>.</p>
 
@@ -50,17 +51,66 @@ This should help making it easier to write fast and rock solid Tuxedo software.<
 $ make
 </code></pre>
 
-<p>This documentation is obtained :</p>
+<p>Documentation is obtained with this command:</p>
 
 <pre><code>$ make doxygen
 </code></pre>
 
-<p>Suggestions or bug reporting can be done <a href="mailto:herbert.koelman@me.com">here</a></p>
+<p>The library is documented <a href="http://herbertkoelman.github.io/cpp-atmi/doc/html/">here</a>.</p>
 
 <h3>
-<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h3>
+<a id="how-its-used" class="anchor" href="#how-its-used" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it's used</h3>
 
-<p>none</p>
+<p>This code creates a FML field and passes it to a service called <code>XATOUPPER</code>. If anything goes wrong, we roll back the transaction and pass the exception (<code>throw</code>) so that the diagnostic messages can be displayed.</p>
+
+<pre><code>    ...
+    transaction tp ( "XATOUPPER" );
+    int urcode = 0;
+
+    try {
+
+      buffer buffer;
+
+      Tfield&lt;string&gt; name ( "EMPNAME" );
+      name = (string) "Herbert.Koelman@me.com";
+
+      buffer.add ( &amp;name );
+
+      printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name());
+
+      try {
+
+        tp.begin();
+
+        int ret = tp.call ( &amp;buffer );
+        switch (ret) {
+          case 0:
+            break;
+          case -1:
+            printf ("TOUPPER returned TPFAIL.\n" );
+            break;
+          default:
+            printf ( "TOUPPER returned: %d (error: %d/%d).\n", ret, tp.error());
+            buffer.print();
+        }
+
+        buffer.get ( &amp;name );
+        printf ( "Call returned: %s.\n", name.c_str() );
+
+        tp.commit();
+      } catch ( ... ){
+        tp.abort();
+        throw;
+      }
+
+    } catch ( tuxedo_exception&amp; err ) {
+      printf ( "Tuxedo Exception catched. tpcall failed. %s\n", err.what() ); 
+    };
+    ...
+</code></pre>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
 
 <hr>
 
