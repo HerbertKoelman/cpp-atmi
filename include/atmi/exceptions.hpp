@@ -100,7 +100,7 @@ namespace atmi {
        *
        * @param err errno value
        * @param msg error message
-       * @param ... error message parameters (variadic).
+       * @param args error message parameters (variadic).
        */
       template<typename... Args> unix_exception( int err, const char *msg, const Args&... args): _error(err), atmi_exception(msg, args...){
         _what = _message + " " + strerror ( _error );
@@ -111,7 +111,7 @@ namespace atmi {
        * error is defaulted to errno
        *
        * @param msg error message
-       * @param ... error message parameters (variadic).
+       * @param args error message parameters (variadic).
        */
       template<typename... Args> unix_exception( const char *msg, const Args&... args): unix_exception(errno, msg, args...){
       };
@@ -224,7 +224,6 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err  Ferror32 value
        * @param msg  error message
        * @param args error message parameters (variadic).
        */
@@ -240,7 +239,6 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err  Ferror32 value
        * @param msg  error message
        * @param args error message parameters (variadic).
        */
@@ -256,7 +254,6 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err  Ferror32 value
        * @param msg  error message
        * @param args error message parameters (variadic).
        */
@@ -273,7 +270,6 @@ namespace atmi {
     public:
       /** new instance.
        *
-       * @param err  Ferror32 value
        * @param msg  error message
        * @param args error message parameters (variadic).
        */
@@ -332,8 +328,6 @@ namespace atmi {
       /**
        * Constructs a Queue exeption
        *
-       * @param err    value of tperr
-       * @param diagno value of ctl.diagnostic
        * @param msg    error message format.
        * @param args   error message parameters
        */
@@ -352,8 +346,6 @@ namespace atmi {
       /**
        * Constructs an aborted  exeption
        *
-       * @param err value of tperr
-       * @param diagno value of ctl.diagnostic
        * @param msg error message format.
        * @param args error message parameters
        */

@@ -105,12 +105,13 @@ namespace atmi {
 
     protected:
 
-      /** Field manipulation error handler.
+      /* Field manipulation error handler.
        *
        * @param ferror Ferror32 value
        * @param format error message formatting string.
        * @param ...    error message viariadic
        * @return the handled ferror value.
+       * @deprecated TIDO remove this
        */
       // int ferror_handler(int ferror, const char *format, ...);
 
@@ -167,7 +168,10 @@ namespace atmi {
        */
       virtual int remove ( buffer &b );
 
+      field(){};
     private:
+
+
       FLDID32   _field_id;
       FLDOCC32  _field_occurence;
       char     *_field_name;
@@ -214,7 +218,7 @@ namespace atmi {
        *
        * @param name the fml field name to setup (as defined in the FML tables)
        */
-      Tfield ( const char *name ) {
+      explicit Tfield ( const char *name ) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(name) ) );
 

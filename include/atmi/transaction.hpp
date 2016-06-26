@@ -35,9 +35,9 @@ namespace atmi {
   class transaction;
 
 #if __cplusplus < 201103L
-  typedef auto_ptr<transaction>   transaction_ptr;//!< @deprecated use unique_ptr instead
+  typedef std::auto_ptr<transaction>   transaction_ptr;//!< @deprecated use unique_ptr instead
 #else
-  typedef unique_ptr<transaction> transaction_ptr; 
+  typedef std::unique_ptr<transaction> transaction_ptr; //!< allocation handling type
 #endif
 
   /**

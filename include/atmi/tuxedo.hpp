@@ -225,9 +225,9 @@ namespace atmi {
       /**
        * Triggers exceptions according to the given tperrno passed. The exception will be initialized with msg.
        *
-       * @param tpe tperrno to handle
+       * @param _tperrno tperrno to handle
        * @param msg message to setup in thrown exception.
-       * @param Args substitution parameters
+       * @param args message argument (see printf)
        * @return legacy will be removed when prototype will be changed to void handle_transaction_errno()
        */
         template<typename... Args>  int handle_tperrno ( int _tperrno, const char *msg, const Args&... args) {
