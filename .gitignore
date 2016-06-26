@@ -40,6 +40,7 @@ src/atmi++.cpp
 *orig
 
 # sample programs
+ulog_test
 exceptions_tests
 buffer_test        
 multi_context_test 
