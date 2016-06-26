@@ -45,7 +45,13 @@ namespace atmi {
   class ulog {
     public:
 
-      ulog( log_level level = log_level::info);
+      /** create a ULOG instance.
+       *
+       * Default is log_atmi::levels::info
+       * 
+       * @param level wanted log level
+       */
+      explicit ulog( log_level level = log_level::info);
 
       virtual ~ulog() {};
 

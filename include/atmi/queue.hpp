@@ -29,9 +29,9 @@ namespace atmi {
   class queue;
 
 #if __cplusplus < 201103L
-  typedef auto_ptr<atmi::queue> queue_ptr;//!< @deprecated use unique_ptr instead
+  typedef std::auto_ptr<atmi::queue>   queue_ptr; //!< @deprecated use unique_ptr instead
 #else
-  typedef unique_ptr<atmi::queue> queue_ptr; //<! helper type
+  typedef std::unique_ptr<atmi::queue> queue_ptr; //<! helper type
 #endif
 
   /**
@@ -220,6 +220,7 @@ namespace atmi {
        * @param tux_tperrno tperrno to handle
        * @param tux_diagno diagnostic number
        * @param msg related explanatory message.
+       * @param args message arguments
        */
       template<typename... Args> int handle_diagnostics ( int tux_tperrno, int tux_diagno, const char *msg, const Args&... args) {
 
