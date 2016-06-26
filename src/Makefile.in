@@ -36,7 +36,7 @@ LIBS=@LIBS@
 OBJECTS=@OBJECTS@
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o logger.o standard_logger.o ulog_logger.o atmi++.o
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o ulog.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}

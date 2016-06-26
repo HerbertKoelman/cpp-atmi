@@ -26,7 +26,7 @@
 
 #include <atmi/config.h> // configuration file (config.h.in)
 
-#include <atmi/logger.hpp>
+#include <atmi/ulog.hpp>
 #include <atmi/exceptions.hpp>
 
 #include <atmi/buffer.hpp>

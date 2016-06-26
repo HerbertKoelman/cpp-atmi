@@ -10,14 +10,10 @@ using namespace std ;
 
 namespace atmi {
 
-  ulog_logger::ulog_logger ( LoggingLevel level ){
-
-    setup_level_names();
-
-    set_log_level ( level );
+  ulog_logger::ulog_logger ( log_levels level ): logger(level){
   }
 
-  void ulog_logger::log ( LoggingLevel at, const char *msg, va_list args){ // NOSONAR this is a ATMI name it certainly will not change
+  void ulog_logger::log ( log_levels at, const char *msg, va_list args){ // NOSONAR this is a ATMI name it certainly will not change
 
     if ( get_log_level() <= at) {
 
