@@ -20,14 +20,6 @@ LIBDIR=$(BASEDIR)/lib/
 LOCALEDIR=${BASEDIR}/locale
 BEAUTIFIER=@BEAUTIFIER@
 
-# Tuxedo 
-TUXLIB=$(TUXDIR)/lib
-TUXINC=$(TUXDIR)/include
-
-INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
-LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
-
-INSTALL=@INSTALL@
 CC=@CC@
 CCC=@CXX@
 RANLIB=@RANLIB@
@@ -68,7 +60,8 @@ clean:
 	${RM} *.o core
 
 globber: clean
-	$(RM) $(OBJECTS) core *.log ULO* access*
+	$(RM) *.log ULO* access* atmi++.cpp
+	${RM} -R autom4te.cache
 	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
@@ -83,16 +76,6 @@ libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
-
-install:
-	$(MKDIR) ${prefix}/include/atmi
-	$(MKDIR) ${prefix}/lib
-	cd $(INCDIR) && $(INSTALL) *.hpp *.h     ${prefix}/include/atmi
-	cd $(LIBDIR) && $(INSTALL) $(CPPATMILIBS) ${prefix}/lib/
-
-uninstall:
-	$(RM) -R  ${prefix}/include/
-	(cd ${prefix}/lib/ && $(RM) ${CPPATMILIBS})
 
 # Implicit rules ------------------------------------------
 

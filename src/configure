@@ -4463,7 +4463,7 @@ fi
 $as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
 if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
   $as_echo "#define HAVE_CPP_PTHREAD 1" >>confdefs.h
-
+ LIBS="$LIBS -lcpp-pthread"
 else
    as_fn_error $? "missing cpp-pthread library." "$LINENO" 5
 fi
