@@ -39,7 +39,7 @@ clean:
 
 globber:clean
 	${RM} -R doc html man autom4te.cache
-	${RM} confdefs.h config.status include/atmi++.h autom4te.cache
+	${RM} confdefs.h config.status 
 	(cd src && $(MAKE) globber)
 
 doxygen:

@@ -10,9 +10,8 @@
 #include <string>
 #include <atmi.h>
 #include <fml32.h>
-#include <atmi/atmi++.hpp>
 
-using namespace std;
+#include <atmi/queue.hpp>
 
 /** default buffer size of a queue stream */
 #define QS_BUFFER_SIZE 1024

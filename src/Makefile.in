@@ -20,14 +20,6 @@ LIBDIR=$(BASEDIR)/lib/
 LOCALEDIR=${BASEDIR}/locale
 BEAUTIFIER=@BEAUTIFIER@
 
-# Tuxedo 
-TUXLIB=$(TUXDIR)/lib
-TUXINC=$(TUXDIR)/include
-
-INCDIRS=-I $(TUXDIR)/include -I $(INCDIR)
-LIBDIRS=-L $(LIBDIR) -L$(TUXLIB)
-
-INSTALL=@INSTALL@
 CC=@CC@
 CCC=@CXX@
 RANLIB=@RANLIB@
@@ -41,8 +33,10 @@ CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
 
+OBJECTS=@OBJECTS@
+
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o abstract_server.o logger.o standard_logger.o ulog_logger.o atmi++.o
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o logger.o standard_logger.o ulog_logger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
@@ -54,6 +48,8 @@ CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
 all: $(CPPATMILIBS) gencat
 
+objects: $(OBJECTS)
+
 gencat:
 	# US english translation
 	gencat ${LOCALEDIR}/en_US/atmi++.cat atmi++en_US.msg
@@ -63,8 +59,9 @@ gencat:
 clean:
 	${RM} *.o core
 
-globber:
-	$(RM) $(ATMI_CLT_OBJS) $(BUFF_OBJS) core 
+globber: clean
+	$(RM) *.log ULO* access* atmi++.cpp
+	${RM} -R autom4te.cache
 	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
@@ -76,23 +73,9 @@ libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
+libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
-
-libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
-	${CXX} -G -bnoentry -bexpall -bM:SRE -o $@ $(ATMI_CLT_OBJS)
-	${AR} libatmi++.a $@
-
-install:
-	$(MKDIR) ${prefix}/include/atmi
-	$(MKDIR) ${prefix}/lib
-	cd $(INCDIR) && $(INSTALL) *.hpp *.h ${prefix}/include/atmi
-	cd $(LIBDIR) && $(INSTALL) $(CPPATMILIBS)        ${prefix}/lib/
-
-uninstall:
-	$(RM) -R  ${prefix}/include/
-	(cd ${prefix}/lib/ && $(RM) ${CPPATMILIBS})
 
 # Implicit rules ------------------------------------------
 
