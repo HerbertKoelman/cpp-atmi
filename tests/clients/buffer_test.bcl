@@ -19,7 +19,7 @@ using namespace atmi;
 
 class BTest : public abstract_client {
   public:
-    BTest () : abstract_client (const_cast<char *>("btest")){
+    BTest () : abstract_client ("btest"){
     };
 
     int run ( int argc, char **argv ){
@@ -115,14 +115,18 @@ int main ( int argc, char **argv ) {
   try {
 
     cout << "buffer sample program (" << atmi::cpp_atmi_version() <<")." << endl;
+    cout << "setting up";
     BTest btest;
 
+    cout << ", starting up" ;
     btest.run ( argc, argv );
 
+    cout << ", done." << endl;
+
   } catch ( atmi::atmi_exception &err){
-    cerr << err.what() << endl;
-  } catch ( exception &err ) {
-    cerr << err.what() << endl;
+    cerr << endl << err.what() << endl;
+  } catch ( std::exception &err ) {
+    cerr << endl << err.what() << endl;
   }
 
   return 9999;

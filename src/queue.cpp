@@ -16,7 +16,7 @@
 #include <sys/timeb.h>
 
 // #include <atmi/Concurrency.h>
-#include <atmi/atmi++.hpp>
+#include <atmi/queue.hpp>
 
 using namespace std;
 

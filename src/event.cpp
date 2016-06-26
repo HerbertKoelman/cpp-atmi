@@ -6,9 +6,7 @@
 
 #include <unistd.h>
 #include <iostream>
-#include <atmi/atmi++.hpp>
-
-#include <string.h>
+#include <atmi/event.hpp>
 
 using namespace std;
 

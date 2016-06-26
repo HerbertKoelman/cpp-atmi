@@ -7,9 +7,7 @@
 #include <atmi.h>
 #include <string>
 #include <nl_types.h>
-#include <atmi/atmi++.hpp>
-
-#define _catd_ATMI_SET 100
+#include <atmi/tuxedo.hpp>
 
 using namespace std;
 

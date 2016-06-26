@@ -3,16 +3,15 @@
 
 #include <iostream>
 
-#include <stdarg.h>
 #include <atmi.h>
 #include <fml.h>
 #include <memory>
 #include <string>
 #include <sstream>
 
-#include <atmi/atmi++.hpp>
+#include <atmi/fields.hpp>
 
-using namespace std;
+// using namespace std;
 
 namespace atmi {
 

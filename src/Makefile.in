@@ -42,7 +42,7 @@ LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
 
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
-ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o abstract_server.o logger.o standard_logger.o ulog_logger.o atmi++.o
+ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o logger.o standard_logger.o ulog_logger.o atmi++.o
 
 # These object file are used to build the library to implement Tuxedo client programs (buildclient)
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
@@ -76,19 +76,15 @@ libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffers.hpp $(INCDIR)/exceptions.hpp
+libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
-
-libatmi++.so: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
-	${CXX} -G -bnoentry -bexpall -bM:SRE -o $@ $(ATMI_CLT_OBJS)
-	${AR} libatmi++.a $@
 
 install:
 	$(MKDIR) ${prefix}/include/atmi
 	$(MKDIR) ${prefix}/lib
-	cd $(INCDIR) && $(INSTALL) *.hpp *.h ${prefix}/include/atmi
-	cd $(LIBDIR) && $(INSTALL) $(CPPATMILIBS)        ${prefix}/lib/
+	cd $(INCDIR) && $(INSTALL) *.hpp *.h     ${prefix}/include/atmi
+	cd $(LIBDIR) && $(INSTALL) $(CPPATMILIBS) ${prefix}/lib/
 
 uninstall:
 	$(RM) -R  ${prefix}/include/

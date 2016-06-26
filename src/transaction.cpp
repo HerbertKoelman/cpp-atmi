@@ -4,11 +4,7 @@
    Helper for handling tuxedo TP calls
  */
 
-#include <unistd.h>
-#include <iostream>
-#include <atmi/atmi++.hpp>
-
-#include <string.h>
+#include <atmi/transaction.hpp>
 
 using namespace std;
 

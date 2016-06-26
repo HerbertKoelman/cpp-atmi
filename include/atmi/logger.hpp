@@ -2,8 +2,8 @@
 #include <memory>
 #include <string>
 
-#ifndef _LOGGER_
-#define _LOGGER_
+#ifndef CPP_ATMI_LOGGER_HPP
+#define CPP_ATMI_LOGGER_HPP
 
 using namespace std;
 

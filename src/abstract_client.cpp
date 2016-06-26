@@ -23,7 +23,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <atmi/atmi++.hpp>
+#include <atmi/exceptions.hpp>
+#include <atmi/abstract_client.hpp>
 
 using namespace std;
 

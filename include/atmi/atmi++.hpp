@@ -21,18 +21,22 @@
 
 
 
-#ifndef _ATMI_PLUS_PLUS_H_
-#define _ATMI_PLUS_PLUS_H_
+#ifndef CPP_ATMI_PLUS_PLUS_HPP
+#define CPP_ATMI_PLUS_PLUS_HPP
 
-#include <userlog.h>
-#include <signal.h>
-#include <Usignal.h>
+#include <atmi/config.h> // configuration file (config.h.in)
 
-#include <atmi/exceptions.hpp>
 #include <atmi/logger.hpp>
+#include <atmi/exceptions.hpp>
+
+#include <atmi/buffer.hpp>
+#include <atmi/fields.hpp>
+
 #include <atmi/tuxedo.hpp>
-#include <atmi/buffers.hpp>
-#include <atmi/config.h>
+#include <atmi/transaction.hpp>
+#include <atmi/queue.hpp>
+#include <atmi/event.hpp>
+#include <atmi/abstract_client.hpp>
 
 //! \namespace atmi 
 namespace atmi {
