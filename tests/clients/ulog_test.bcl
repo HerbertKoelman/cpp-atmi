@@ -1,0 +1,33 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <string>
+#include <iostream>
+#include "atmi/atmi++.hpp"
+
+// main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  try {
+
+    std::cout << "exceptions sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
+    std::cerr << std::endl ;
+
+    atmi::ulog log;
+
+    log.info("Hello, world %s...", "herbert");
+    log.debug("DEBUG Hello, world %s...", "herbert");
+    log.error("DEBUG Hello, world %s...", "herbert");
+
+
+  } catch ( std::exception &err ) {
+    std::cerr << "catched an exception: " << err.what() << std::endl;
+  } catch (... ) {
+    std::cerr << "unexpected error occured." << std::endl;
+  }
+
+  return EXIT_SUCCESS;
+}

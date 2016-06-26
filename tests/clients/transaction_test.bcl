@@ -1,0 +1,111 @@
+/* $Id: tptest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <iostream>
+#include <atmi/atmi++.hpp>
+
+using namespace std;
+
+class TPtest : public atmi::abstract_client {
+  public:
+
+    TPtest () : atmi::abstract_client ("tran_test"){
+    };
+
+    void run () {
+
+      int ret = -1;
+
+      printf ("%s is starting client program.\n", "herbert");
+      printf ("version: %s.\n", atmi::cpp_atmi_version());
+
+      try {
+
+        atmi::transaction tp ( "XATOUPPER" );
+        int urcode = 0;
+
+        try {
+
+          atmi::buffer buffer;
+
+          atmi::Tfield<string> name ( "EMPNAME" );
+          name = (string) "Herbert";
+
+          buffer.add ( name );
+
+          printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , context());
+
+          try {
+
+            tp.begin();
+
+            //switch ((ret = tp.call ( message, len, (char **)&message, (long *)&len, (int *)&urcode, 1, 1 ))) {
+            //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
+            //switch ((ret = tp.call ( message, len, &message, &len ))) {
+            //ret = tp.acall ( &buffer );
+            //switch ((ret =tp.reply ( buffer, NULL, &ret))) {
+
+            ret = tp.call ( buffer );
+            switch (ret) {
+              case 0:
+                break;
+              case -1:
+                printf ("TOUPPER returned TPFAIL..\n" );
+                break;
+              default:
+                printf ( "TOUPPER returned URCODE: %d (error: %d/%d).\n", ret, tp.error(), tperrno);
+                buffer.print();
+            }
+
+            buffer.get ( name );
+            printf ( "Call returned: %s.\n", name.c_str() );
+
+            tp.commit();
+            printf ("Transcation was committed.\n");
+          } catch ( ... ){
+            tp.abort();
+            printf("Transaction was aborted.\n"); 
+            throw;
+          }
+
+        } catch ( atmi::service_exception& serr ) {
+          printf ( "Service Exception catched. tpcall failed..\n" );
+          printf ( "What: %s.\n", serr.what () );
+        } catch ( atmi::tuxedo_exception& err ) {
+          printf ( "Tuxedo Exception catched. tpcall failed. %s\n", err.what() ); 
+          printf ( "What: %s, error detail: %s.\n", err.what () , err.error_detail() );
+        };
+
+        printf ( "Ending program." );
+      } catch ( atmi::tuxedo_exception &err ) {
+        printf ( "Tuxedo err: %s.\n" , err.what () );
+      } catch (atmi::buffer_exception &err ) {
+        printf ( "Buffer error: %s.\n",err.what() );
+      }
+
+    };
+};
+
+int main ( int argc, char **argv ) {
+
+  int ret = 0;
+
+  try {
+
+    TPtest tp;
+    tp.run ();
+
+  } catch ( atmi::atmi_exception &err ) {
+    std::cerr << err.what () << std::endl;
+  } catch ( std::exception &err ) {
+    std::cerr << err.what() << std::endl;
+  };
+
+  return ret;
+}

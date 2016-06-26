@@ -585,7 +585,7 @@ PACKAGE_STRING='cpp-atmi Unit tests'
 PACKAGE_BUGREPORT='herbert.koelman@pmu.fr'
 PACKAGE_URL=''
 
-ac_unique_file="exceptions-tests.cpp"
+ac_unique_file="exceptions_tests.bcl"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -624,6 +624,7 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+TXFLAGS
 OBJECTS
 BITS
 EGREP
@@ -1832,60 +1833,6 @@ fi
   as_fn_set_status $ac_retval
 
 } # ac_fn_cxx_try_link
-
-# ac_fn_cxx_check_type LINENO TYPE VAR INCLUDES
-# ---------------------------------------------
-# Tests whether TYPE exists after having included INCLUDES, setting cache
-# variable VAR accordingly.
-ac_fn_cxx_check_type ()
-{
-  as_lineno=${as_lineno-"$1"} as_lineno_stack=as_lineno_stack=$as_lineno_stack
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $2" >&5
-$as_echo_n "checking for $2... " >&6; }
-if eval \${$3+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  eval "$3=no"
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-$4
-int
-main ()
-{
-if (sizeof ($2))
-	 return 0;
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_cxx_try_compile "$LINENO"; then :
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-$4
-int
-main ()
-{
-if (sizeof (($2)))
-	    return 0;
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_cxx_try_compile "$LINENO"; then :
-
-else
-  eval "$3=yes"
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-eval ac_res=\$$3
-	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
-$as_echo "$ac_res" >&6; }
-  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
-
-} # ac_fn_cxx_check_type
 
 # ac_fn_cxx_check_func LINENO FUNC VAR
 # ------------------------------------
@@ -3971,12 +3918,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_tux_tpcall" >&5
 $as_echo "$ac_cv_lib_tux_tpcall" >&6; }
 if test "x$ac_cv_lib_tux_tpcall" = xyes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBTUX 1
-_ACEOF
-
-  LIBS="-ltux $LIBS"
-
+  _void="found tux lib."
 fi
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Falloc32 in -lfml32" >&5
@@ -4016,12 +3958,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_fml32_Falloc32" >&5
 $as_echo "$ac_cv_lib_fml32_Falloc32" >&6; }
 if test "x$ac_cv_lib_fml32_Falloc32" = xyes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBFML32 1
-_ACEOF
-
-  LIBS="-lfml32 $LIBS"
-
+  _void="found fml32 lib."
 fi
 
 else
@@ -4059,14 +3996,18 @@ OBJECTS=$OBJECTS
 $as_echo_n "checking for specific $CXX compiler options... " >&6; }
 case "$CXX" in
   xlC_r | xlC)
-	CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences -qwarn0x  -qsourcetype=c++ "
+	CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not needed anymore -qsourcetype=c++ "
   CFLAGS="-q$bits -O -qmaxmem=-1 $CFLAGS"
+  TXFLAGS="-+"
+
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
   ;;
   g++ | gcc)
 	#permissive is not required anymore - CXXFLAGS="-x c++ -std=c++11 -frtti -fpermissive $CXXFLAGS "
-	CXXFLAGS="-x c++ -std=c++11 -frtti $CXXFLAGS "
+	CPPFLAGS="-x c++ -std=c++11 -frtti $CPPFLAGS "
+  TXFLAGS=""
+
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
   ;;
@@ -4171,13 +4112,13 @@ else
   as_fn_error $? "missing cltatmi++ library." "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for log_get_header in -lpmulog" >&5
-$as_echo_n "checking for log_get_header in -lpmulog... " >&6; }
-if ${ac_cv_lib_pmulog_log_get_header+:} false; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in -lpthread" >&5
+$as_echo_n "checking for pthread_create in -lpthread... " >&6; }
+if ${ac_cv_lib_pthread_pthread_create+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lpmulog  $LIBS"
+LIBS="-lpthread  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -4187,45 +4128,88 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char log_get_header ();
+char pthread_create ();
 int
 main ()
 {
-return log_get_header ();
+return pthread_create ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_cxx_try_link "$LINENO"; then :
-  ac_cv_lib_pmulog_log_get_header=yes
+  ac_cv_lib_pthread_pthread_create=yes
 else
-  ac_cv_lib_pmulog_log_get_header=no
+  ac_cv_lib_pthread_pthread_create=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_pmulog_log_get_header" >&5
-$as_echo "$ac_cv_lib_pmulog_log_get_header" >&6; }
-if test "x$ac_cv_lib_pmulog_log_get_header" = xyes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_pthread_pthread_create" >&5
+$as_echo "$ac_cv_lib_pthread_pthread_create" >&6; }
+if test "x$ac_cv_lib_pthread_pthread_create" = xyes; then :
   cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBPMULOG 1
+#define HAVE_LIBPTHREAD 1
 _ACEOF
 
-  LIBS="-lpmulog $LIBS"
+  LIBS="-lpthread $LIBS"
 
 else
-  as_fn_error $? "missing pmulog.h header." "$LINENO" 5
+  as_fn_error $? "missing pthread library." "$LINENO" 5
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for cpp_pthread_version in -lcpp-pthread" >&5
+$as_echo_n "checking for cpp_pthread_version in -lcpp-pthread... " >&6; }
+if ${ac_cv_lib_cpp_pthread_cpp_pthread_version+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcpp-pthread  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char cpp_pthread_version ();
+int
+main ()
+{
+return cpp_pthread_version ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_link "$LINENO"; then :
+  ac_cv_lib_cpp_pthread_cpp_pthread_version=yes
+else
+  ac_cv_lib_cpp_pthread_cpp_pthread_version=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_cpp_pthread_cpp_pthread_version" >&5
+$as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
+if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBCPP_PTHREAD 1
+_ACEOF
+
+  LIBS="-lcpp-pthread $LIBS"
+
+else
+  as_fn_error $? "missing cpp-thread library." "$LINENO" 5
 fi
 
 
 # Checks for header files.
-# Changed for a AC_CHECK_LIB call - AC_CHECK_HEADERS([pmulog.h],[],[AC_ERROR([missing pmulog.h header.])])
 
 # Checks for typedefs, structures, and compiler characteristics.
-#AC_C_CONST
-#AC_C_INLINE
-#AC_HEADER_TIME
 
 # Checks for library functions.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking return type of signal handlers" >&5
@@ -4261,103 +4245,6 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-
-# Checks for typedefs, structures, and compiler characteristics.
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for stdbool.h that conforms to C99" >&5
-$as_echo_n "checking for stdbool.h that conforms to C99... " >&6; }
-if ${ac_cv_header_stdbool_h+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-             #include <stdbool.h>
-             #ifndef bool
-              "error: bool is not defined"
-             #endif
-             #ifndef false
-              "error: false is not defined"
-             #endif
-             #if false
-              "error: false is not 0"
-             #endif
-             #ifndef true
-              "error: true is not defined"
-             #endif
-             #if true != 1
-              "error: true is not 1"
-             #endif
-             #ifndef __bool_true_false_are_defined
-              "error: __bool_true_false_are_defined is not defined"
-             #endif
-
-             struct s { _Bool s: 1; _Bool t; } s;
-
-             char a[true == 1 ? 1 : -1];
-             char b[false == 0 ? 1 : -1];
-             char c[__bool_true_false_are_defined == 1 ? 1 : -1];
-             char d[(bool) 0.5 == true ? 1 : -1];
-             /* See body of main program for 'e'.  */
-             char f[(_Bool) 0.0 == false ? 1 : -1];
-             char g[true];
-             char h[sizeof (_Bool)];
-             char i[sizeof s.t];
-             enum { j = false, k = true, l = false * true, m = true * 256 };
-             /* The following fails for
-                HP aC++/ANSI C B3910B A.05.55 [Dec 04 2003]. */
-             _Bool n[m];
-             char o[sizeof n == m * sizeof n[0] ? 1 : -1];
-             char p[-1 - (_Bool) 0 < 0 && -1 - (bool) 0 < 0 ? 1 : -1];
-             /* Catch a bug in an HP-UX C compiler.  See
-                http://gcc.gnu.org/ml/gcc-patches/2003-12/msg02303.html
-                http://lists.gnu.org/archive/html/bug-coreutils/2005-11/msg00161.html
-              */
-             _Bool q = true;
-             _Bool *pq = &q;
-
-int
-main ()
-{
-
-             bool e = &s;
-             *pq |= q;
-             *pq |= ! q;
-             /* Refer to every declared value, to avoid compiler optimizations.  */
-             return (!a + !b + !c + !d + !e + !f + !g + !h + !i + !!j + !k + !!l
-                     + !m + !n + !o + !p + !q + !pq);
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_cxx_try_compile "$LINENO"; then :
-  ac_cv_header_stdbool_h=yes
-else
-  ac_cv_header_stdbool_h=no
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_header_stdbool_h" >&5
-$as_echo "$ac_cv_header_stdbool_h" >&6; }
-   ac_fn_cxx_check_type "$LINENO" "_Bool" "ac_cv_type__Bool" "$ac_includes_default"
-if test "x$ac_cv_type__Bool" = xyes; then :
-
-cat >>confdefs.h <<_ACEOF
-#define HAVE__BOOL 1
-_ACEOF
-
-
-fi
-
-
-if test $ac_cv_header_stdbool_h = yes; then
-
-$as_echo "#define HAVE_STDBOOL_H 1" >>confdefs.h
-
-fi
-
-
-# Checks for library functions.
 for ac_func in gettimeofday
 do :
   ac_fn_cxx_check_func "$LINENO" "gettimeofday" "ac_cv_func_gettimeofday"

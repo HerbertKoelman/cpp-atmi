@@ -9,23 +9,23 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "atmi++.h"
 #include <typeinfo>
+#include "atmi/atmi++.hpp"
 
 #include "sample_fml_table.h"
 
 using namespace std;
 using namespace atmi;
 
-class BTest : public AbstractClient {
+class BTest : public abstract_client {
   public:
-    BTest () : AbstractClient (const_cast<char *>("btest")){
+    BTest () : abstract_client (const_cast<char *>("btest")){
     };
 
     int run ( int argc, char **argv ){
       try {
 
-        Buffer b (100), a;
+        buffer b (100), a;
         /*
            const char *types[5] = { typeid(short).name(), typeid(int).name() };
            cout << "Stored: " << types[0] << endl;
@@ -36,19 +36,19 @@ class BTest : public AbstractClient {
            cout << "Type id " << typeid(long).name() << endl;
          */
 
-        cout << "Buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+        cout << "buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
 
-        TField<string> prenom ( EMPNAME );
-        TField<long> empid ( EMPID );
-        TField<long> empzip ( EMPZIP );
-        TField<string> nom ( EMPNAME );
-        TField<char *> carray ( SRVCDAY );
-        TField<char *> copy ( SRVCDAY );
+        Tfield<string> prenom ( EMPNAME );
+        Tfield<long> empid ( EMPID );
+        Tfield<long> empzip ( EMPZIP );
+        Tfield<string> nom ( EMPNAME );
+        Tfield<char *> carray ( SRVCDAY );
+        Tfield<char *> copy ( SRVCDAY );
 
         prenom = "herbert";
         nom = "this is a char *";
         empid = 2;
-        carray.setCarray("helloworld\0rray", sizeof ("helloworld\0rray"));
+        carray.set_char_array("helloworld\0rray", sizeof ("helloworld\0rray"));
         copy = carray;
 
         cout << "Added fields: " << endl;
@@ -65,7 +65,7 @@ class BTest : public AbstractClient {
         cout << copy.what() << endl;
         long len = 5;                  //copy.length();
         char *cav = new char[len];
-        copy.getCarray ( cav, len );
+        copy.get_char_array ( cav, len );
         for ( int x = 0; x < len; x++ ) {
           cout << "'"<< cav[x]<<"',";
         }
@@ -80,27 +80,27 @@ class BTest : public AbstractClient {
         b.pack ();
         cout << ", after pack: " << b.size() << endl;
 
-        cout << "Buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+        cout << "buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
 
         cout << "wrapping buffer." << endl ;
-        Buffer wrapper ( b.get_buffer());
+        buffer wrapper ( b.get_buffer());
         nom = "this was added into a wrapper instance of buffer.";
         wrapper.set (&nom );
         wrapper.print ();
 
         cout << "transforming a buffer into a wrapped buffer." << endl;
-        Buffer wrapper1;
+        buffer wrapper1;
         wrapper1.set_buffer ( wrapper.get_buffer());
         prenom = "this was set by a wrapper";
         wrapper1.set ( &prenom );
         wrapper1.print();
 
-      }catch ( BufferException buffErr ) {
-        cerr << buffErr.what() << "Ferror : " << buffErr.getFerror() <<endl;
-      } catch ( Exception err ) {
+      }catch ( atmi::buffer_exception &err ) {
+        cerr << err.what() << "Ferror : " << err.error() <<endl;
+      } catch ( atmi::atmi_exception &err ) {
         cerr << err.what() << endl;
-      } catch ( exception uerr ) {
-        cerr << uerr.what() << endl;
+      } catch ( exception &err ) {
+        cerr << err.what() << endl;
       }
 
       return 9999;
@@ -114,15 +114,15 @@ int main ( int argc, char **argv ) {
 
   try {
 
-    cout << "Buffer sample program (" << Tuxedo::version() <<")." << endl;
+    cout << "buffer sample program (" << atmi::cpp_atmi_version() <<")." << endl;
     BTest btest;
 
     btest.run ( argc, argv );
 
-  } catch ( Exception err ) {
+  } catch ( atmi::atmi_exception &err){
     cerr << err.what() << endl;
-  } catch ( exception uerr ) {
-    cerr << uerr.what() << endl;
+  } catch ( exception &err ) {
+    cerr << err.what() << endl;
   }
 
   return 9999;

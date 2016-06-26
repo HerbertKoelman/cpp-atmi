@@ -1,0 +1,129 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <typeinfo>
+#include "atmi/atmi++.hpp"
+
+#include "sample_fml_table.h"
+
+class buffer_test : public atmi::abstract_client {
+  public:
+    buffer_test (): atmi::abstract_client ("btest"){
+    };
+
+    int run ( int argc, char **argv ){
+      try {
+
+        atmi::buffer b (100), a;
+        /*
+           const char *types[5] = { typeid(short).name(), typeid(int).name() };
+           std::cout << "Stored: " << types[0] << std::endl;
+           std::cout << "Stored: " << types[1] << " is a " << std::endl;
+           if(strcmp ( typeid(int).name(), types[1]) == 0 ){
+           std::cout << "same type int." << std::endl;
+           }
+           std::cout << "Type id " << typeid(long).name() << std::endl;
+         */
+
+        std::cout << "atmi::buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
+
+        atmi::Tfield<string> prenom ( EMPNAME );
+        atmi::Tfield<long>   empid ( EMPID );
+        atmi::Tfield<long>   empzip ( EMPZIP );
+        atmi::Tfield<string> nom ( EMPNAME );
+        atmi::Tfield<char *> carray ( SRVCDAY );
+        atmi::Tfield<char *> copy ( SRVCDAY );
+
+        prenom = "herbert";
+        nom = "this is a char *";
+        empid = 2;
+        carray.set_char_array("helloworld\0rray", sizeof ("helloworld\0rray"));
+        copy = carray;
+
+        std::cout << "Added fields: " << std::endl;
+        b.add ( empid );
+        b.add ( nom );
+        b.add ( prenom );
+        b.add ( carray );
+        b.add ( copy );
+        b.print ();
+
+        std::cout << "get copy" << std::endl;
+        b.get ( copy );
+
+        std::cout << copy.what() << std::endl;
+        long len = 5;                  //copy.length();
+        char *cav = new char[len];
+        copy.get_char_array ( cav, len );
+        for ( int x = 0; x < len; x++ ) {
+          std::cout << "'"<< cav[x]<<"',";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Setting (update) empid value: " << std::endl;
+        empid = 22;
+        b.set ( empid );
+        b.print ();
+
+        std::cout << "size : " << b.size();
+        b.pack ();
+        std::cout << ", after pack: " << b.size() << std::endl;
+
+        std::cout << "atmi::buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
+
+        std::cout << "wrapping atmi::buffer." << std::endl ;
+        atmi::buffer wrapper ( b.get_buffer());
+        nom = "this was added into a wrapper instance of atmi::buffer.";
+        wrapper.set (nom );
+        wrapper.print ();
+
+        std::cout << "transforming a atmi::buffer into a wrapped buffer." << std::endl;
+        atmi::buffer wrapper1;
+        wrapper1.set_buffer ( wrapper.get_buffer());
+        prenom = "this was set by a wrapper";
+        wrapper1.set ( prenom );
+        wrapper1.print();
+
+      }catch ( atmi::buffer_exception &err ) {
+        cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
+      } catch ( atmi::atmi_exception &err ) {
+        cerr << err.what() << std::endl;
+      } catch ( std::exception &err ) {
+        cerr << err.what() << std::endl;
+      }
+
+      return 9999;
+    }
+
+};
+
+// program main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  try {
+
+    std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
+    std::cout << "setting up";
+    buffer_test btest;
+
+    std::cout << ", starting up" ;
+    btest.run ( argc, argv );
+
+  } catch ( atmi::atmi_exception &err){
+    cerr << std::endl << err.what() << std::endl;
+  } catch ( std::exception &err ) {
+    cerr << std::endl << err.what() << std::endl;
+  }
+  std::cout << ", done." << std::endl;
+
+  return 9999;
+}
