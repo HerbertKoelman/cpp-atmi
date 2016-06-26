@@ -49,9 +49,9 @@ class TPtest : public atmi::abstract_client {
             //switch ((ret = tp.call ( message, len, &message, &len, (int *) NULL, 1, 1 ))) {
             //switch ((ret = tp.call ( message, len, &message, &len ))) {
             //ret = tp.acall ( &buffer );
-            //switch ((ret =tp.reply ( &buffer, NULL, &ret))) {
+            //switch ((ret =tp.reply ( buffer, NULL, &ret))) {
 
-            ret = tp.call ( &buffer );
+            ret = tp.call ( buffer );
             switch (ret) {
               case 0:
                 break;

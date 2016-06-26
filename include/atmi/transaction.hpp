@@ -88,7 +88,7 @@ namespace atmi {
        *
        * @see atmi::Tuxedo
        */
-      int call( buffer *buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
+      int call( buffer &buffer, int *urcode = NULL,int retries = 0, int delay = 0 );
 
       /**
        * Call service.
@@ -136,7 +136,7 @@ namespace atmi {
        *
        * @throw An exception is raised upon failure
        */
-      int acall( buffer *buffer );
+      int acall( buffer &buffer );
 
       /**
        * get reply from previous asynchronious service call.
@@ -155,7 +155,7 @@ namespace atmi {
        * @param urcode - user return code
        * @param cd    - a call descriptor. if 0 then last acall descriptor is used.
        */
-      int reply ( buffer *buffer,int *urcode = NULL, int *cd = NULL );
+      int reply ( buffer &buffer,int *urcode = NULL, int *cd = NULL );
 
       /**
        * Cancel asynchronious service call.
