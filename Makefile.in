@@ -18,7 +18,7 @@ DOXYGEN=@DOXYGEN@
 CODECHECK=@CODECHECK@
 MKDIR=@MKDIR_P@
 
-PACKAGE=@PACKAGE_NAME@-v@PACKAGE_VERSION@-@build_os@.tar.gz
+PACKAGE=@PACKAGE_NAME@-@PACKAGE_VERSION@-@build_os@.tar.gz
 
 HEADERS=@HEADERS@
 CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
@@ -38,7 +38,7 @@ clean:
 	( cd src && make clean )
 
 globber:clean
-	${RM} -R doc html man autom4te.cache
+	${RM} -R doc html man autom4te.cache distrib
 	${RM} confdefs.h config.status 
 	(cd src && $(MAKE) globber)
 

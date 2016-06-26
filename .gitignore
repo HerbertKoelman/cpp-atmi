@@ -32,6 +32,7 @@ config.h
 locale
 html
 man
+distrib
 .*
 ULOG*
 access*
