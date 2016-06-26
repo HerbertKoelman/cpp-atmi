@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ulog_5flogger',['ulog_logger',['../classatmi_1_1ulog__logger.html#ab8c093b492bff137bf6cec6a9e9daa71',1,'atmi::ulog_logger']]],
+  ['ulog',['ulog',['../classatmi_1_1ulog.html#a52394015e2bcd098c9b6de0e173637e9',1,'atmi::ulog']]],
   ['unix_5fexception',['unix_exception',['../classatmi_1_1unix__exception.html#a0e296d42c4d9e4008e0f3b920fe453ae',1,'atmi::unix_exception::unix_exception(int err, const char *msg, const Args &amp;...args)'],['../classatmi_1_1unix__exception.html#aec5e09afab40d70b2b4d9aa314a5b71b',1,'atmi::unix_exception::unix_exception(const char *msg, const Args &amp;...args)'],['../classatmi_1_1unix__exception.html#aeba0ddfd609e50f3bdf03b7208fdcc3d',1,'atmi::unix_exception::unix_exception()']]],
   ['unset',['unset',['../classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0',1,'atmi::tuxedo']]],
   ['unset_5fcorrid',['unset_corrid',['../classatmi_1_1queue.html#aa74de8091c32580972e7871e7ddf786c',1,'atmi::queue']]],

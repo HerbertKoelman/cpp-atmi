@@ -1,0 +1,187 @@
+\hypertarget{classatmi_1_1ulog}{}\section{atmi\+:\+:ulog Class Reference}
+\label{classatmi_1_1ulog}\index{atmi\+::ulog@{atmi\+::ulog}}
+
+
+{\ttfamily \#include $<$ulog.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classatmi_1_1ulog_a52394015e2bcd098c9b6de0e173637e9}{ulog} (log\+\_\+level \hyperlink{classatmi_1_1ulog_a75c3bf9fdf68677f5e2b096acdac737e}{level}=log\+\_\+level\+::info)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_a29e7f8215085533c0b4fb788545e9329}{error} (const std\+::string \&fmt, const Args \&...args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_a48f44bc3d0265fdb3b8d464b78894ccc}{warning} (const std\+::string \&fmt, const Args \&...args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_a21019f39119ed09e7d71672441456787}{info} (const std\+::string \&fmt, const Args \&...args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_a23b79b2222930f4363d3150c39b49992}{finer} (const std\+::string \&fmt, const Args \&...args)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_a96d76b04d41c2a77a4c88e5d422ea5e5}{debug} (const std\+::string \&fmt, const Args \&...args)
+\item 
+void \hyperlink{classatmi_1_1ulog_a190ffba6f15d00c21578051ac5c7b035}{set\+\_\+log\+\_\+level} (log\+\_\+levels \hyperlink{classatmi_1_1ulog_a75c3bf9fdf68677f5e2b096acdac737e}{level})
+\item 
+int \hyperlink{classatmi_1_1ulog_a75c3bf9fdf68677f5e2b096acdac737e}{level} () const 
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{classatmi_1_1ulog_ad352992adc121dbdaf0428fd6f53125a}{log} (log\+\_\+levels at, const std\+::string \&fmt, const Args \&...args)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface og the logging facility
+
+Verbose is the D\+E\+B\+UG log level (level value 0) and least verbose is E\+R\+R\+OR (level value 4). Write messages that matches the current level value and above. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{atmi\+::ulog@{atmi\+::ulog}!ulog@{ulog}}
+\index{ulog@{ulog}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{ulog(log\+\_\+level level=log\+\_\+level\+::info)}{ulog(log\_level level=log\_level::info)}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::ulog\+::ulog (
+\begin{DoxyParamCaption}
+\item[{log\+\_\+level}]{level = {\ttfamily log\+\_\+level\+:\+:info}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classatmi_1_1ulog_a52394015e2bcd098c9b6de0e173637e9}{}\label{classatmi_1_1ulog_a52394015e2bcd098c9b6de0e173637e9}
+create a U\+L\+OG instance.
+
+Default is log\+\_\+atmi\+::levels\+::info
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & wanted log level \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{atmi\+::ulog@{atmi\+::ulog}!debug@{debug}}
+\index{debug@{debug}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{debug(const std\+::string \&fmt, const Args \&...\+args)}{debug(const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::debug (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a96d76b04d41c2a77a4c88e5d422ea5e5}{}\label{classatmi_1_1ulog_a96d76b04d41c2a77a4c88e5d422ea5e5}
+debug message
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & message format( see stdd\+:pritnf()) \\
+\hline
+{\em args} & format arguments \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!error@{error}}
+\index{error@{error}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{error(const std\+::string \&fmt, const Args \&...\+args)}{error(const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::error (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a29e7f8215085533c0b4fb788545e9329}{}\label{classatmi_1_1ulog_a29e7f8215085533c0b4fb788545e9329}
+error message
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & message format( see stdd\+:pritnf()) \\
+\hline
+{\em args} & format arguments \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!finer@{finer}}
+\index{finer@{finer}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{finer(const std\+::string \&fmt, const Args \&...\+args)}{finer(const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::finer (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a23b79b2222930f4363d3150c39b49992}{}\label{classatmi_1_1ulog_a23b79b2222930f4363d3150c39b49992}
+finer message
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & message format( see stdd\+:pritnf()) \\
+\hline
+{\em args} & format arguments \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!info@{info}}
+\index{info@{info}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{info(const std\+::string \&fmt, const Args \&...\+args)}{info(const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::info (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a21019f39119ed09e7d71672441456787}{}\label{classatmi_1_1ulog_a21019f39119ed09e7d71672441456787}
+info message
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & message format( see stdd\+:pritnf()) \\
+\hline
+{\em args} & format arguments \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!level@{level}}
+\index{level@{level}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{level() const }{level() const }}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::ulog\+::level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a75c3bf9fdf68677f5e2b096acdac737e}{}\label{classatmi_1_1ulog_a75c3bf9fdf68677f5e2b096acdac737e}
+\begin{DoxyReturn}{Returns}
+current log level 
+\end{DoxyReturn}
+\index{atmi\+::ulog@{atmi\+::ulog}!log@{log}}
+\index{log@{log}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{log(log\+\_\+levels at, const std\+::string \&fmt, const Args \&...\+args)}{log(log\_levels at, const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::log (
+\begin{DoxyParamCaption}
+\item[{log\+\_\+levels}]{at, }
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_ad352992adc121dbdaf0428fd6f53125a}{}\label{classatmi_1_1ulog_ad352992adc121dbdaf0428fd6f53125a}
+Actual log writer
+
+
+\begin{DoxyParams}{Parameters}
+{\em at} & the level to which this message correspond\textquotesingle{}s \\
+\hline
+{\em fmt} & message to log \\
+\hline
+{\em args} & substitution arguments of the message. \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!set\+\_\+log\+\_\+level@{set\+\_\+log\+\_\+level}}
+\index{set\+\_\+log\+\_\+level@{set\+\_\+log\+\_\+level}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{set\+\_\+log\+\_\+level(log\+\_\+levels level)}{set\_log\_level(log\_levels level)}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::ulog\+::set\+\_\+log\+\_\+level (
+\begin{DoxyParamCaption}
+\item[{log\+\_\+levels}]{level}
+\end{DoxyParamCaption}
+)}\hypertarget{classatmi_1_1ulog_a190ffba6f15d00c21578051ac5c7b035}{}\label{classatmi_1_1ulog_a190ffba6f15d00c21578051ac5c7b035}
+Set a new logging level 
+\begin{DoxyParams}{Parameters}
+{\em level} & level from which the ulog starts to write messages \\
+\hline
+\end{DoxyParams}
+\index{atmi\+::ulog@{atmi\+::ulog}!warning@{warning}}
+\index{warning@{warning}!atmi\+::ulog@{atmi\+::ulog}}
+\subsubsection[{\texorpdfstring{warning(const std\+::string \&fmt, const Args \&...\+args)}{warning(const std::string \&fmt, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void atmi\+::ulog\+::warning (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fmt, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1ulog_a48f44bc3d0265fdb3b8d464b78894ccc}{}\label{classatmi_1_1ulog_a48f44bc3d0265fdb3b8d464b78894ccc}
+warning message
+
+
+\begin{DoxyParams}{Parameters}
+{\em fmt} & message format( see stdd\+:pritnf()) \\
+\hline
+{\em args} & format arguments \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/atmi/ulog.\+hpp\item 
+src/ulog.\+cpp\end{DoxyCompactItemize}

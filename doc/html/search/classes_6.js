@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger',['logger',['../classatmi_1_1logger.html',1,'atmi']]]
+  ['nomsg_5fexception',['nomsg_exception',['../classatmi_1_1nomsg__exception.html',1,'atmi']]]
 ];

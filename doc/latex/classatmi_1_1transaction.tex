@@ -1,9 +1,8 @@
-\hypertarget{classatmi_1_1transaction}{\section{atmi\+:\+:transaction Class Reference}
+\hypertarget{classatmi_1_1transaction}{}\section{atmi\+:\+:transaction Class Reference}
 \label{classatmi_1_1transaction}\index{atmi\+::transaction@{atmi\+::transaction}}
-}
 
 
-{\ttfamily \#include $<$tuxedo.\+hpp$>$}
+{\ttfamily \#include $<$transaction.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:transaction\+:\begin{figure}[H]
 \begin{center}
@@ -14,19 +13,19 @@ Inheritance diagram for atmi\+:\+:transaction\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}{call} (char $\ast$idata, long ilen, char $\ast$$\ast$odata, long $\ast$olen, int $\ast$urcode=N\+U\+L\+L, int retries=0, int delay=0)
+int \hyperlink{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}{call} (char $\ast$idata, long ilen, char $\ast$$\ast$odata, long $\ast$olen, int $\ast$urcode=N\+U\+LL, int retries=0, int delay=0)
 \item 
-int \hyperlink{classatmi_1_1transaction_a5cf6cc1130cdf5ab70f8d3a469400921}{call} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$\hyperlink{classatmi_1_1buffer}{buffer}, int $\ast$urcode=N\+U\+L\+L, int retries=0, int delay=0)
+int \hyperlink{classatmi_1_1transaction_afc2bebb88fb56466d0a41d45e6060377}{call} (\hyperlink{classatmi_1_1buffer}{buffer} \&\hyperlink{classatmi_1_1buffer}{buffer}, int $\ast$urcode=N\+U\+LL, int retries=0, int delay=0)
 \item 
-int \hyperlink{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}{call} (char $\ast$$\ast$idata=N\+U\+L\+L, long $\ast$ilen=0, int $\ast$urcode=N\+U\+L\+L, int retries=0, int delay=0)
+int \hyperlink{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}{call} (char $\ast$$\ast$idata=N\+U\+LL, long $\ast$ilen=0, int $\ast$urcode=N\+U\+LL, int retries=0, int delay=0)
 \item 
-int \hyperlink{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}{acall} (char $\ast$idata=N\+U\+L\+L, long ilen=0)
+int \hyperlink{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}{acall} (char $\ast$idata=N\+U\+LL, long ilen=0)
 \item 
-int \hyperlink{classatmi_1_1transaction_afd2f657d069ff22055720f27cd320934}{acall} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$\hyperlink{classatmi_1_1buffer}{buffer})
+int \hyperlink{classatmi_1_1transaction_a3abfbaad23aafaccd6b96af66d36e329}{acall} (\hyperlink{classatmi_1_1buffer}{buffer} \&\hyperlink{classatmi_1_1buffer}{buffer})
 \item 
-int \hyperlink{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}{reply} (char $\ast$$\ast$data, long $\ast$len, int $\ast$urcode=N\+U\+L\+L, int $\ast$cd=N\+U\+L\+L)
+int \hyperlink{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}{reply} (char $\ast$$\ast$data, long $\ast$len, int $\ast$urcode=N\+U\+LL, int $\ast$cd=N\+U\+LL)
 \item 
-int \hyperlink{classatmi_1_1transaction_a7818572d56203baa700cd80d616b3447}{reply} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$\hyperlink{classatmi_1_1buffer}{buffer}, int $\ast$urcode=N\+U\+L\+L, int $\ast$cd=N\+U\+L\+L)
+int \hyperlink{classatmi_1_1transaction_a3bcbf7ec6d3b9909e10368ffb6e3d39d}{reply} (\hyperlink{classatmi_1_1buffer}{buffer} \&\hyperlink{classatmi_1_1buffer}{buffer}, int $\ast$urcode=N\+U\+LL, int $\ast$cd=N\+U\+LL)
 \item 
 int \hyperlink{classatmi_1_1transaction_a380d536258d33a801973100d6e2ae622}{cancel} (int cd=0)
 \item 
@@ -40,7 +39,7 @@ string \hyperlink{classatmi_1_1transaction_a16d4442ea8f6582ec4820a064fc9a825}{se
 
 
 \subsection{Detailed Description}
-Implement transaction calls (/\+T)
+Implement transaction calls (/T)
 
 \begin{DoxyAuthor}{Author}
 herbert koelman 
@@ -48,13 +47,13 @@ herbert koelman
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1transaction_a0cb59a4954d3fc4b903c0f2876dd00b3}{\index{atmi\+::transaction@{atmi\+::transaction}!transaction@{transaction}}
+\index{atmi\+::transaction@{atmi\+::transaction}!transaction@{transaction}}
 \index{transaction@{transaction}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{transaction}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::transaction\+::transaction (
+\subsubsection[{\texorpdfstring{transaction(const char $\ast$service)}{transaction(const char *service)}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::transaction\+::transaction (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{service}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a0cb59a4954d3fc4b903c0f2876dd00b3}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classatmi_1_1transaction_a0cb59a4954d3fc4b903c0f2876dd00b3}{}\label{classatmi_1_1transaction_a0cb59a4954d3fc4b903c0f2876dd00b3}
 
 \begin{DoxyParams}{Parameters}
 {\em service} & service name ($<$ 32 characters long) \\
@@ -63,14 +62,14 @@ herbert koelman
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}{\index{atmi\+::transaction@{atmi\+::transaction}!acall@{acall}}
+\index{atmi\+::transaction@{atmi\+::transaction}!acall@{acall}}
 \index{acall@{acall}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{acall}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::acall (
+\subsubsection[{\texorpdfstring{acall(char $\ast$idata=\+N\+U\+L\+L, long ilen=0)}{acall(char *idata=NULL, long ilen=0)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::acall (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{idata = {\ttfamily NULL}, }
 \item[{long}]{ilen = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}
+)}\hypertarget{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}{}\label{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}
 Asynchronious service call.
 
 
@@ -91,13 +90,13 @@ call descriptor if call succeeded else -\/1
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}{reply} 
 \end{DoxySeeAlso}
-\hypertarget{classatmi_1_1transaction_afd2f657d069ff22055720f27cd320934}{\index{atmi\+::transaction@{atmi\+::transaction}!acall@{acall}}
+\index{atmi\+::transaction@{atmi\+::transaction}!acall@{acall}}
 \index{acall@{acall}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{acall}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::acall (
+\subsubsection[{\texorpdfstring{acall(buffer \&buffer)}{acall(buffer \&buffer)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::acall (
 \begin{DoxyParamCaption}
-\item[{{\bf buffer} $\ast$}]{buffer}
+\item[{{\bf buffer} \&}]{buffer}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_afd2f657d069ff22055720f27cd320934}
+)}\hypertarget{classatmi_1_1transaction_a3abfbaad23aafaccd6b96af66d36e329}{}\label{classatmi_1_1transaction_a3abfbaad23aafaccd6b96af66d36e329}
 Asynchronious service call.
 
 
@@ -113,9 +112,9 @@ call descriptor if call succeeded else -\/1
 {\em An} & exception is raised upon failure \\
 \hline
 \end{DoxyExceptions}
-\hypertarget{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}{\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
+\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
 \index{call@{call}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{call}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
+\subsubsection[{\texorpdfstring{call(char $\ast$idata, long ilen, char $\ast$$\ast$odata, long $\ast$olen, int $\ast$urcode=\+N\+U\+L\+L, int retries=0, int delay=0)}{call(char *idata, long ilen, char **odata, long *olen, int *urcode=NULL, int retries=0, int delay=0)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{idata, }
 \item[{long}]{ilen, }
@@ -125,7 +124,7 @@ call descriptor if call succeeded else -\/1
 \item[{int}]{retries = {\ttfamily 0}, }
 \item[{int}]{delay = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}
+)}\hypertarget{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}{}\label{classatmi_1_1transaction_a1251381692ec4e235ca9179a84273484}
 Call service.
 
 
@@ -146,17 +145,17 @@ Call service.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0 
+tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+IL a user returned code (tpurcode) $>$ 0 
 
--\/1 is retuened upon service failure T\+P\+F\+A\+I\+L and tpurcode == 0 
+-\/1 is retuened upon service failure T\+P\+F\+A\+IL and tpurcode == 0 
 
-0 T\+P\+S\+U\+C\+C\+E\+S\+S is returned
+0 T\+P\+S\+U\+C\+C\+E\+SS is returned
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+R\+R. \\
+{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+RR. \\
 \hline
-{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+M\+E. \\
+{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+ME. \\
 \hline
 {\em \hyperlink{classatmi_1_1tuxedo__exception}{tuxedo\+\_\+exception}} & thrown for the other error conditions.\\
 \hline
@@ -164,16 +163,16 @@ tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0
 \begin{DoxySeeAlso}{See also}
 atmi\+::\+Tuxedo 
 \end{DoxySeeAlso}
-\hypertarget{classatmi_1_1transaction_a5cf6cc1130cdf5ab70f8d3a469400921}{\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
+\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
 \index{call@{call}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{call}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
+\subsubsection[{\texorpdfstring{call(buffer \&buffer, int $\ast$urcode=\+N\+U\+L\+L, int retries=0, int delay=0)}{call(buffer \&buffer, int *urcode=NULL, int retries=0, int delay=0)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
 \begin{DoxyParamCaption}
-\item[{{\bf atmi\+::buffer} $\ast$}]{buffer, }
+\item[{{\bf atmi\+::buffer} \&}]{buffer, }
 \item[{int $\ast$}]{urcode = {\ttfamily NULL}, }
 \item[{int}]{retries = {\ttfamily 0}, }
 \item[{int}]{delay = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a5cf6cc1130cdf5ab70f8d3a469400921}
+)}\hypertarget{classatmi_1_1transaction_afc2bebb88fb56466d0a41d45e6060377}{}\label{classatmi_1_1transaction_afc2bebb88fb56466d0a41d45e6060377}
 Call service.
 
 
@@ -188,17 +187,17 @@ Call service.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0 
+tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+IL a user returned code (tpurcode) $>$ 0 
 
--\/1 is retuened upon service failure T\+P\+F\+A\+I\+L and tpurcode == 0 
+-\/1 is retuened upon service failure T\+P\+F\+A\+IL and tpurcode == 0 
 
-0 T\+P\+S\+U\+C\+C\+E\+S\+S is returned
+0 T\+P\+S\+U\+C\+C\+E\+SS is returned
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+R\+R. \\
+{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+RR. \\
 \hline
-{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+M\+E. \\
+{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+ME. \\
 \hline
 {\em \hyperlink{classatmi_1_1tuxedo__exception}{tuxedo\+\_\+exception}} & thrown for the other error conditions.\\
 \hline
@@ -206,9 +205,9 @@ tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0
 \begin{DoxySeeAlso}{See also}
 atmi\+::\+Tuxedo 
 \end{DoxySeeAlso}
-\hypertarget{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}{\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
+\index{atmi\+::transaction@{atmi\+::transaction}!call@{call}}
 \index{call@{call}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{call}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
+\subsubsection[{\texorpdfstring{call(char $\ast$$\ast$idata=\+N\+U\+L\+L, long $\ast$ilen=0, int $\ast$urcode=\+N\+U\+L\+L, int retries=0, int delay=0)}{call(char **idata=NULL, long *ilen=0, int *urcode=NULL, int retries=0, int delay=0)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call (
 \begin{DoxyParamCaption}
 \item[{char $\ast$$\ast$}]{idata = {\ttfamily NULL}, }
 \item[{long $\ast$}]{ilen = {\ttfamily 0}, }
@@ -216,7 +215,7 @@ atmi\+::\+Tuxedo
 \item[{int}]{retries = {\ttfamily 0}, }
 \item[{int}]{delay = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}
+)}\hypertarget{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}{}\label{classatmi_1_1transaction_aa5fb9edab0ee78c39b73936ca59a0b02}
 Call service.
 
 Input data buffer is used as output data buffer.
@@ -235,17 +234,17 @@ Input data buffer is used as output data buffer.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0 
+tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+IL a user returned code (tpurcode) $>$ 0 
 
--\/1 is retuened upon service failure T\+P\+F\+A\+I\+L and tpurcode == 0 
+-\/1 is retuened upon service failure T\+P\+F\+A\+IL and tpurcode == 0 
 
-0 T\+P\+S\+U\+C\+C\+E\+S\+S is returned
+0 T\+P\+S\+U\+C\+C\+E\+SS is returned
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+R\+R. \\
+{\em \hyperlink{classatmi_1_1service__exception}{service\+\_\+exception}} & Upon T\+P\+E\+S\+V\+C\+E\+RR. \\
 \hline
-{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+M\+E. \\
+{\em \hyperlink{classatmi_1_1timeout__exception}{timeout\+\_\+exception}} & Upon T\+P\+E\+T\+I\+ME. \\
 \hline
 {\em \hyperlink{classatmi_1_1tuxedo__exception}{tuxedo\+\_\+exception}} & thrown for the other error conditions.\\
 \hline
@@ -253,23 +252,23 @@ tpurcode if T\+P\+E\+S\+V\+C\+F\+A\+I\+L a user returned code (tpurcode) $>$ 0
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classatmi_1_1transaction}{transaction} 
 \end{DoxySeeAlso}
-\hypertarget{classatmi_1_1transaction_a11018dd9689a5a66d0510ae78bb048da}{\index{atmi\+::transaction@{atmi\+::transaction}!call\+\_\+descriptor@{call\+\_\+descriptor}}
+\index{atmi\+::transaction@{atmi\+::transaction}!call\+\_\+descriptor@{call\+\_\+descriptor}}
 \index{call\+\_\+descriptor@{call\+\_\+descriptor}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{call\+\_\+descriptor}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call\+\_\+descriptor (
+\subsubsection[{\texorpdfstring{call\+\_\+descriptor()}{call\_descriptor()}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::call\+\_\+descriptor (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1transaction_a11018dd9689a5a66d0510ae78bb048da}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1transaction_a11018dd9689a5a66d0510ae78bb048da}{}\label{classatmi_1_1transaction_a11018dd9689a5a66d0510ae78bb048da}
 \begin{DoxyReturn}{Returns}
 last asynchronous call descriptor. 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1transaction_a380d536258d33a801973100d6e2ae622}{\index{atmi\+::transaction@{atmi\+::transaction}!cancel@{cancel}}
+\index{atmi\+::transaction@{atmi\+::transaction}!cancel@{cancel}}
 \index{cancel@{cancel}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{cancel}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::cancel (
+\subsubsection[{\texorpdfstring{cancel(int cd=0)}{cancel(int cd=0)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::cancel (
 \begin{DoxyParamCaption}
 \item[{int}]{cd = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a380d536258d33a801973100d6e2ae622}
+)}\hypertarget{classatmi_1_1transaction_a380d536258d33a801973100d6e2ae622}{}\label{classatmi_1_1transaction_a380d536258d33a801973100d6e2ae622}
 Cancel asynchronious service call.
 
 
@@ -277,16 +276,16 @@ Cancel asynchronious service call.
 {\em cd} & call descriptor. if 0 then last acall descriptor is used. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}{\index{atmi\+::transaction@{atmi\+::transaction}!reply@{reply}}
+\index{atmi\+::transaction@{atmi\+::transaction}!reply@{reply}}
 \index{reply@{reply}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::reply (
+\subsubsection[{\texorpdfstring{reply(char $\ast$$\ast$data, long $\ast$len, int $\ast$urcode=\+N\+U\+L\+L, int $\ast$cd=\+N\+U\+L\+L)}{reply(char **data, long *len, int *urcode=NULL, int *cd=NULL)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::reply (
 \begin{DoxyParamCaption}
 \item[{char $\ast$$\ast$}]{data, }
 \item[{long $\ast$}]{len, }
 \item[{int $\ast$}]{urcode = {\ttfamily NULL}, }
 \item[{int $\ast$}]{cd = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}
+)}\hypertarget{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}{}\label{classatmi_1_1transaction_a810c7fdad2bc26722027d4d0565f4c9a}
 get reply from previous asynchronious service call.
 
 
@@ -300,15 +299,15 @@ get reply from previous asynchronious service call.
 {\em cd} & a call descriptor. if 0 then last acall descriptor is used. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1transaction_a7818572d56203baa700cd80d616b3447}{\index{atmi\+::transaction@{atmi\+::transaction}!reply@{reply}}
+\index{atmi\+::transaction@{atmi\+::transaction}!reply@{reply}}
 \index{reply@{reply}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::reply (
+\subsubsection[{\texorpdfstring{reply(buffer \&buffer, int $\ast$urcode=\+N\+U\+L\+L, int $\ast$cd=\+N\+U\+L\+L)}{reply(buffer \&buffer, int *urcode=NULL, int *cd=NULL)}}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::transaction\+::reply (
 \begin{DoxyParamCaption}
-\item[{{\bf atmi\+::buffer} $\ast$}]{buffer, }
+\item[{{\bf atmi\+::buffer} \&}]{buffer, }
 \item[{int $\ast$}]{urcode = {\ttfamily NULL}, }
 \item[{int $\ast$}]{cd = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1transaction_a7818572d56203baa700cd80d616b3447}
+)}\hypertarget{classatmi_1_1transaction_a3bcbf7ec6d3b9909e10368ffb6e3d39d}{}\label{classatmi_1_1transaction_a3bcbf7ec6d3b9909e10368ffb6e3d39d}
 get reply from previous \hyperlink{classatmi_1_1transaction_abf3ecf74af155274d4b500df2e6ec69b}{acall()}.
 
 
@@ -320,13 +319,13 @@ get reply from previous \hyperlink{classatmi_1_1transaction_abf3ecf74af155274d4b
 {\em cd} & -\/ a call descriptor. if 0 then last acall descriptor is used. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1transaction_a16d4442ea8f6582ec4820a064fc9a825}{\index{atmi\+::transaction@{atmi\+::transaction}!service@{service}}
+\index{atmi\+::transaction@{atmi\+::transaction}!service@{service}}
 \index{service@{service}!atmi\+::transaction@{atmi\+::transaction}}
-\subsubsection[{service}]{\setlength{\rightskip}{0pt plus 5cm}string atmi\+::transaction\+::service (
+\subsubsection[{\texorpdfstring{service()}{service()}}]{\setlength{\rightskip}{0pt plus 5cm}string atmi\+::transaction\+::service (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1transaction_a16d4442ea8f6582ec4820a064fc9a825}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1transaction_a16d4442ea8f6582ec4820a064fc9a825}{}\label{classatmi_1_1transaction_a16d4442ea8f6582ec4820a064fc9a825}
 \begin{DoxyReturn}{Returns}
 transaction/service name 
 \end{DoxyReturn}
@@ -334,5 +333,5 @@ transaction/service name
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/tuxedo.\+hpp\item 
+include/atmi/transaction.\+hpp\item 
 src/transaction.\+cpp\end{DoxyCompactItemize}

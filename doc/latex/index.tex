@@ -1,8 +1,10 @@
 \subsubsection*{What it does}
 
-A\+T\+M\+I, for Application-\/to-\/\+Transaction Monitor Interface, is the main A\+P\+I for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-\/and-\/subscribe message-\/handling functions; service interface functions; and buffer management functions for distributed application communication.
+A\+T\+MI, for Application-\/to-\/\+Transaction Monitor Interface, is the main A\+PI for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-\/and-\/subscribe message-\/handling functions; service interface functions; and buffer management functions for distributed application communication.
 
-A\+T\+M\+I++ is a C++ wrapping of this A\+P\+I, adding strong typing of F\+M\+L buffers and adding the use of exceptions to detect and handle error conditions. This should help making it easier to write fast and rock solid Tuxedo software.
+A\+T\+M\+I++ is a C++ wrapping of this A\+PI, adding strong typing of F\+ML buffers and adding the use of exceptions to detect and handle error conditions.
+
+This should help making it easier to write fast and rock solid Tuxedo software.
 
 This project is currently hosted \href{http://herbertkoelman.github.com/cpp-atmi}{\tt here}.
 
@@ -13,22 +15,71 @@ $ make
 \end{DoxyVerb}
 
 
-This documentation is obtained \+: \begin{DoxyVerb}$ make doxygen
+Documentation is obtained with this command\+: \begin{DoxyVerb}$ make doxygen
 \end{DoxyVerb}
 
 
-Suggestions or bug reporting can be done \href{mailto:herbert.koelman@me.com}{\tt here}
+The library is documented \href{http://herbertkoelman.github.io/cpp-atmi/doc/html/}{\tt here}.
 
-\subsubsection*{Dependencies}
+\subsubsection*{How it\textquotesingle{}s used}
 
-none 
+This code creates a F\+ML field and passes it to a service called {\ttfamily X\+A\+T\+O\+U\+P\+P\+ER}. If anything goes wrong, we roll back the transaction and pass the exception ({\ttfamily throw}) so that the diagnostic messages can be displayed. \begin{DoxyVerb}    ...
+    transaction tp ( "XATOUPPER" );
+    int urcode = 0;
+
+    try {
+
+      buffer buffer;
+
+      Tfield<string> name ( "EMPNAME" );
+      name = (string) "Herbert.Koelman@me.com";
+
+      buffer.add ( &name );
+
+      printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name());
+
+      try {
+
+        tp.begin();
+
+        int ret = tp.call ( &buffer );
+        switch (ret) {
+          case 0:
+            break;
+          case -1:
+            printf ("TOUPPER returned TPFAIL.\n" );
+            break;
+          default:
+            printf ( "TOUPPER returned: %d (error: %d/%d).\n", ret, tp.error());
+            buffer.print();
+        }
+
+        buffer.get ( &name );
+        printf ( "Call returned: %s.\n", name.c_str() );
+
+        tp.commit();
+      } catch ( ... ){
+        tp.abort();
+        throw;
+      }
+
+    } catch ( tuxedo_exception& err ) {
+      printf ( "Tuxedo Exception catched. tpcall failed. %s\n", err.what() ); 
+    };
+    ...
+\end{DoxyVerb}
+
+
+\subsubsection*{License}
 
 
 
-A\+T\+M\+I++ is free software, you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
-A\+T\+M\+I++ is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
 
-You should have received a copy of the G\+N\+U General Public License along with A\+T\+M\+I++; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, M\+A 02110-\/1301 U\+S\+A 
+A\+T\+M\+I++ is free software, you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+A\+T\+M\+I++ is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with A\+T\+M\+I++; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-\/1301 U\+SA 
 
  Copyright (C) 2016 -\/ herbert koelman 

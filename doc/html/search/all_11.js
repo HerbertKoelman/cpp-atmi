@@ -1,9 +1,9 @@
 var searchData=
 [
   ['service',['service',['../classatmi_1_1transaction.html#a16d4442ea8f6582ec4820a064fc9a825',1,'atmi::transaction']]],
-  ['service_5fexception',['service_exception',['../classatmi_1_1service__exception.html#aaaf22082b56169c161573ec3dfd4a6fd',1,'atmi::service_exception']]],
   ['service_5fexception',['service_exception',['../classatmi_1_1service__exception.html',1,'atmi']]],
-  ['set',['set',['../classatmi_1_1buffer.html#a97374f4ebf72c61e761cf875059c592b',1,'atmi::buffer::set()'],['../classatmi_1_1field.html#a0153530cc98a94cbb5c6e85d1ced52fb',1,'atmi::field::set()'],['../classatmi_1_1_tfield.html#ae1da3af2b09c0259de11e5f334f75ce0',1,'atmi::Tfield::set()'],['../classatmi_1_1_tfield_3_01string_01_4.html#aac572b9f5c296cdb4589ed409f4084ed',1,'atmi::Tfield&lt; string &gt;::set()'],['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#adf1bb05dd57c8ffe65cf03b59d5c3555',1,'atmi::Tfield&lt; char * &gt;::set()'],['../classatmi_1_1tuxedo.html#a73c4c95f165a052ba5a3a29cb2834831',1,'atmi::tuxedo::set()']]],
+  ['service_5fexception',['service_exception',['../classatmi_1_1service__exception.html#aaaf22082b56169c161573ec3dfd4a6fd',1,'atmi::service_exception']]],
+  ['set',['set',['../classatmi_1_1buffer.html#a1fe98844cb17328390b3d4e658bd6903',1,'atmi::buffer::set()'],['../classatmi_1_1field.html#a41bb209965d627d2e67c839bece5372c',1,'atmi::field::set()'],['../classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77',1,'atmi::Tfield::set()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9',1,'atmi::Tfield&lt; std::string &gt;::set()'],['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7',1,'atmi::Tfield&lt; char * &gt;::set()'],['../classatmi_1_1tuxedo.html#a73c4c95f165a052ba5a3a29cb2834831',1,'atmi::tuxedo::set()']]],
   ['set_5fbuffer',['set_buffer',['../classatmi_1_1buffer.html#ade8853e7c2ae10dcd024b34049e99af3',1,'atmi::buffer']]],
   ['set_5fbuffer_5fsize',['set_buffer_size',['../classatmi_1_1queue__stream.html#a500b658e3f3f1a353982a1304ea27801',1,'atmi::queue_stream']]],
   ['set_5fchar_5farray',['set_char_array',['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#a57def5d907b0f5671a5dae41bccd64f1',1,'atmi::Tfield&lt; char * &gt;']]],
@@ -11,7 +11,7 @@ var searchData=
   ['set_5ffield_5foccurence',['set_field_occurence',['../classatmi_1_1field.html#a83412cd9df383c342b5feb195090c9d9',1,'atmi::field']]],
   ['set_5fflags',['set_flags',['../classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875',1,'atmi::tuxedo']]],
   ['set_5fhandling_5fmemory',['set_handling_memory',['../classatmi_1_1buffer.html#a68f05d1dbd040062850feeba5aa188fc',1,'atmi::buffer']]],
-  ['set_5flog_5flevel',['set_log_level',['../classatmi_1_1logger.html#aa8c3743cb153dd802e8e556d020b65cb',1,'atmi::logger::set_log_level(LoggingLevel level)'],['../classatmi_1_1logger.html#a2da95e739145fb4aebeb4bb453c377ba',1,'atmi::logger::set_log_level(int level)']]],
+  ['set_5flog_5flevel',['set_log_level',['../classatmi_1_1ulog.html#a190ffba6f15d00c21578051ac5c7b035',1,'atmi::ulog']]],
   ['set_5fmessage_5fwait',['set_message_wait',['../classatmi_1_1queue.html#a9669776889226a450093d2ddfd921d4b',1,'atmi::queue']]],
   ['set_5fnew_5fcorrid',['set_new_corrid',['../classatmi_1_1queue.html#a2c0511c9f17e939789c5290fe83d1f1f',1,'atmi::queue']]],
   ['set_5fquality_5fof_5fservice',['set_quality_of_service',['../classatmi_1_1queue.html#a0fbca137aadc2946b8f3889b76352af9',1,'atmi::queue']]],
@@ -20,9 +20,6 @@ var searchData=
   ['set_5freply_5fqueue',['set_reply_queue',['../classatmi_1_1queue.html#a216acfef7e80352c8ce8476825f1146e',1,'atmi::queue']]],
   ['setqwait',['setQWait',['../classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a',1,'atmi::queue']]],
   ['setup',['setup',['../classatmi_1_1field.html#a9ca5e61e3e1068770098d20ad1332f24',1,'atmi::field']]],
-  ['setup_5flevel_5fnames',['setup_level_names',['../classatmi_1_1logger.html#a775b09e9c2cdae0ff2b69216c8fb520a',1,'atmi::logger']]],
-  ['size',['size',['../classatmi_1_1buffer.html#a5ee67d265b7919363d71cf00af79e598',1,'atmi::buffer::size()'],['../classatmi_1_1_tfield_3_01string_01_4.html#a4294b2eeed43b7fec264022adbb5ae8a',1,'atmi::Tfield&lt; string &gt;::size()']]],
-  ['standard_5flogger',['standard_logger',['../classatmi_1_1standard__logger.html',1,'atmi']]],
-  ['standard_5flogger',['standard_logger',['../classatmi_1_1standard__logger.html#a1f1d082ae9c3aa8eb63ea0911b31af81',1,'atmi::standard_logger']]],
+  ['size',['size',['../classatmi_1_1buffer.html#a5ee67d265b7919363d71cf00af79e598',1,'atmi::buffer::size()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#aea88f61cd27f8f258ee473e0e938790b',1,'atmi::Tfield&lt; std::string &gt;::size()']]],
   ['switch_5fcontext',['switch_context',['../classatmi_1_1tuxedo.html#a90d83b2141d484744a82202f3f66a939',1,'atmi::tuxedo']]]
 ];

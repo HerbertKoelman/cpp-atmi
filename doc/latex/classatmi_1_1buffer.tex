@@ -1,9 +1,8 @@
-\hypertarget{classatmi_1_1buffer}{\section{atmi\+:\+:buffer Class Reference}
+\hypertarget{classatmi_1_1buffer}{}\section{atmi\+:\+:buffer Class Reference}
 \label{classatmi_1_1buffer}\index{atmi\+::buffer@{atmi\+::buffer}}
-}
 
 
-{\ttfamily \#include $<$buffers.\+hpp$>$}
+{\ttfamily \#include $<$buffer.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:buffer\+:\begin{figure}[H]
 \begin{center}
@@ -34,21 +33,21 @@ void \hyperlink{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}{extend} (
 \item 
 void \hyperlink{classatmi_1_1buffer_a669b48d7cbabc7bc45608ab9343c0c51}{resize} (long extent)
 \item 
-\hyperlink{classatmi_1_1field}{field} $\ast$ \hyperlink{classatmi_1_1buffer_a97374f4ebf72c61e761cf875059c592b}{set} (\hyperlink{classatmi_1_1field}{field} $\ast$f)
+\hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_a1fe98844cb17328390b3d4e658bd6903}{set} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
-\hyperlink{classatmi_1_1field}{field} $\ast$ \hyperlink{classatmi_1_1buffer_a0a9ec0818505c5898f2f9fc019155d0e}{add} (\hyperlink{classatmi_1_1field}{field} $\ast$f)
+\hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_a5f30826d8273b619380e8b4f039af094}{add} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
-\hyperlink{classatmi_1_1field}{field} $\ast$ \hyperlink{classatmi_1_1buffer_a1122406dbbcb04c7ddd5bafbcb6c6f5c}{append} (\hyperlink{classatmi_1_1field}{field} $\ast$f)
+\hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_a4a9abeb69354fa575c8b27c9af170e79}{append} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
-void \hyperlink{classatmi_1_1buffer_a387dd9a90170e72720064169c161f1fe}{remove} (\hyperlink{classatmi_1_1field}{field} $\ast$f)
+void \hyperlink{classatmi_1_1buffer_a4a1ef484befbf22aca919fc1a312ab61}{remove} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
-\hyperlink{classatmi_1_1field}{field} $\ast$ \hyperlink{classatmi_1_1buffer_a5922bd744eae562797426ff08f6f8d53}{get} (\hyperlink{classatmi_1_1field}{field} $\ast$f)
+\hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_affb14c05bc21e29c3a2f6dc03c30c0fa}{get} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
-\hyperlink{classatmi_1_1field}{field} $\ast$ \hyperlink{classatmi_1_1buffer_a54d377f4ebed18539b4f14f9dbf3f215}{get} (\hyperlink{classatmi_1_1field}{field} $\ast$f, F\+L\+D\+O\+C\+C32 occ)
+\hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_a864adb4d0153e6be38a7905c994915e1}{get} (\hyperlink{classatmi_1_1field}{field} \&f, F\+L\+D\+O\+C\+C32 occ)
 \item 
 long \hyperlink{classatmi_1_1buffer_a4ae9fa419098eb136ae3681ad90ccafb}{chksum} ()
 \item 
-F\+L\+D\+O\+C\+C32 \hyperlink{classatmi_1_1buffer_abce3f6694ba1a8a9ea2b51cf52ec26e6}{occurences} (const \hyperlink{classatmi_1_1field}{field} $\ast$f)
+F\+L\+D\+O\+C\+C32 \hyperlink{classatmi_1_1buffer_a57ff1b2ed449d59d4ec936e9e79a5d1a}{occurences} (const \hyperlink{classatmi_1_1field}{field} \&f)
 \item 
 F\+L\+D\+O\+C\+C32 \hyperlink{classatmi_1_1buffer_a3ec1c691a444915993628b2774503d18}{num} ()
 \item 
@@ -74,30 +73,30 @@ static bool \hyperlink{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}{is
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classatmi_1_1buffer_acd53905ae10cba58b4337aefe648aec6}{class {\bfseries field}}\label{classatmi_1_1buffer_acd53905ae10cba58b4337aefe648aec6}
+class {\bfseries field}\hypertarget{classatmi_1_1buffer_acd53905ae10cba58b4337aefe648aec6}{}\label{classatmi_1_1buffer_acd53905ae10cba58b4337aefe648aec6}
 
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
-F\+M\+L buffer 
+F\+ML buffer 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1buffer_ab5a434d367c856f9b1b7c831b98ff0d3}{\index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
 \index{buffer@{buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{buffer}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
+\subsubsection[{\texorpdfstring{buffer()}{buffer()}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_ab5a434d367c856f9b1b7c831b98ff0d3}
-Allocates a buffer of 1024bytes \hypertarget{classatmi_1_1buffer_a5a2836413da6d30d25afa2ea242cd90d}{\index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
+)}\hypertarget{classatmi_1_1buffer_ab5a434d367c856f9b1b7c831b98ff0d3}{}\label{classatmi_1_1buffer_ab5a434d367c856f9b1b7c831b98ff0d3}
+Allocates a buffer of 1024bytes \index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
 \index{buffer@{buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{buffer}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
+\subsubsection[{\texorpdfstring{buffer(\+F\+B\+F\+R32 $\ast$b)}{buffer(FBFR32 *b)}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
 \begin{DoxyParamCaption}
 \item[{F\+B\+F\+R32 $\ast$}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a5a2836413da6d30d25afa2ea242cd90d}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classatmi_1_1buffer_a5a2836413da6d30d25afa2ea242cd90d}{}\label{classatmi_1_1buffer_a5a2836413da6d30d25afa2ea242cd90d}
 Create a new buffer reference.
 
 Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that the given buffer was allocated elsewhere. And it will be deallocated later.
@@ -107,37 +106,37 @@ Memory allocation (alloc/free) are not handled by the instance create by this co
 {\em b} & set F\+M\+L32 buffer reference \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_ae2bc183e6b0909b8155dcfa17686a574}{\index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!buffer@{buffer}}
 \index{buffer@{buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{buffer}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
+\subsubsection[{\texorpdfstring{buffer(\+F\+L\+D\+L\+E\+N32 len)}{buffer(FLDLEN32 len)}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::buffer (
 \begin{DoxyParamCaption}
 \item[{F\+L\+D\+L\+E\+N32}]{len}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_ae2bc183e6b0909b8155dcfa17686a574}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classatmi_1_1buffer_ae2bc183e6b0909b8155dcfa17686a574}{}\label{classatmi_1_1buffer_ae2bc183e6b0909b8155dcfa17686a574}
 Allocates a buffer of byte size. 
 \begin{DoxyParams}{Parameters}
 {\em len} & bytes space of field value in bytres \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_aa58097eacc94f1f5cc5e99b434ec7135}{\index{atmi\+::buffer@{atmi\+::buffer}!````~buffer@{$\sim$buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!````~buffer@{$\sim$buffer}}
 \index{````~buffer@{$\sim$buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{$\sim$buffer}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::$\sim$buffer (
+\subsubsection[{\texorpdfstring{$\sim$buffer()}{~buffer()}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::$\sim$buffer (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_aa58097eacc94f1f5cc5e99b434ec7135}
+)}\hypertarget{classatmi_1_1buffer_aa58097eacc94f1f5cc5e99b434ec7135}{}\label{classatmi_1_1buffer_aa58097eacc94f1f5cc5e99b434ec7135}
 default destructor
 
 If memory was allocated by this instance then it will be freed. Otherwise the buffer is not deallocated. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1buffer_a0a9ec0818505c5898f2f9fc019155d0e}{\index{atmi\+::buffer@{atmi\+::buffer}!add@{add}}
+\index{atmi\+::buffer@{atmi\+::buffer}!add@{add}}
 \index{add@{add}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} $\ast$ atmi\+::buffer\+::add (
+\subsubsection[{\texorpdfstring{add(field \&f)}{add(field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} \& atmi\+::buffer\+::add (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f}
+\item[{{\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a0a9ec0818505c5898f2f9fc019155d0e}
+)}\hypertarget{classatmi_1_1buffer_a5f30826d8273b619380e8b4f039af094}{}\label{classatmi_1_1buffer_a5f30826d8273b619380e8b4f039af094}
 Adds a field into the buffer (Fadd32).
 
 Adds an occurence of a field to the buffer. The first call becomes occurence 0. When successfully added the occurence property of the field is set.
@@ -153,7 +152,7 @@ Adds an occurence of a field to the buffer. The first call becomes occurence 0. 
 \hline
 \end{DoxyExceptions}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{classatmi_1_1buffer_a97374f4ebf72c61e761cf875059c592b}{set} to update the value of a \hyperlink{classatmi_1_1field}{field} in a \hyperlink{classatmi_1_1buffer}{buffer}
+\hyperlink{classatmi_1_1buffer_a1fe98844cb17328390b3d4e658bd6903}{set} to update the value of a \hyperlink{classatmi_1_1field}{field} in a \hyperlink{classatmi_1_1buffer}{buffer}
 \end{DoxySeeAlso}
 add the field into the buffer.
 
@@ -162,13 +161,13 @@ add the field into the buffer.
 {\em f} & the field to add \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_a1122406dbbcb04c7ddd5bafbcb6c6f5c}{\index{atmi\+::buffer@{atmi\+::buffer}!append@{append}}
+\index{atmi\+::buffer@{atmi\+::buffer}!append@{append}}
 \index{append@{append}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{append}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} $\ast$ atmi\+::buffer\+::append (
+\subsubsection[{\texorpdfstring{append(field \&f)}{append(field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} \& atmi\+::buffer\+::append (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f}
+\item[{{\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a1122406dbbcb04c7ddd5bafbcb6c6f5c}
+)}\hypertarget{classatmi_1_1buffer_a4a9abeb69354fa575c8b27c9af170e79}{}\label{classatmi_1_1buffer_a4a9abeb69354fa575c8b27c9af170e79}
 Appends a field to the buffer
 
 
@@ -177,14 +176,14 @@ Appends a field to the buffer
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]not implemented. \end{DoxyRefDesc}
-\hypertarget{classatmi_1_1buffer_a4ae9fa419098eb136ae3681ad90ccafb}{\index{atmi\+::buffer@{atmi\+::buffer}!chksum@{chksum}}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]not implemented. \end{DoxyRefDesc}
+\index{atmi\+::buffer@{atmi\+::buffer}!chksum@{chksum}}
 \index{chksum@{chksum}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{chksum}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::chksum (
+\subsubsection[{\texorpdfstring{chksum()}{chksum()}}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::chksum (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a4ae9fa419098eb136ae3681ad90ccafb}
+)}\hypertarget{classatmi_1_1buffer_a4ae9fa419098eb136ae3681ad90ccafb}{}\label{classatmi_1_1buffer_a4ae9fa419098eb136ae3681ad90ccafb}
 \begin{DoxyReturn}{Returns}
 the current check sum of the buffer
 \end{DoxyReturn}
@@ -193,23 +192,23 @@ the current check sum of the buffer
 {\em \hyperlink{classatmi_1_1buffer__exception}{buffer\+\_\+exception}} & when calcutaion fails. \\
 \hline
 \end{DoxyExceptions}
-\hypertarget{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}{\index{atmi\+::buffer@{atmi\+::buffer}!extend@{extend}}
+\index{atmi\+::buffer@{atmi\+::buffer}!extend@{extend}}
 \index{extend@{extend}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{extend}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::extend (
+\subsubsection[{\texorpdfstring{extend()}{extend()}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::extend (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}
-Extends the buffer size with the given bytes \hypertarget{classatmi_1_1buffer_a5922bd744eae562797426ff08f6f8d53}{\index{atmi\+::buffer@{atmi\+::buffer}!get@{get}}
+)}\hypertarget{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}{}\label{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}
+Extends the buffer size with the given bytes \index{atmi\+::buffer@{atmi\+::buffer}!get@{get}}
 \index{get@{get}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} $\ast$ atmi\+::buffer\+::get (
+\subsubsection[{\texorpdfstring{get(field \&f)}{get(field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} \& atmi\+::buffer\+::get (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f}
+\item[{{\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a5922bd744eae562797426ff08f6f8d53}
+)}\hypertarget{classatmi_1_1buffer_affb14c05bc21e29c3a2f6dc03c30c0fa}{}\label{classatmi_1_1buffer_affb14c05bc21e29c3a2f6dc03c30c0fa}
 Get the field value set in the buffer (Fget32).
 
-The field's occurence property is used to find the fields value.
+The field\textquotesingle{}s occurence property is used to find the fields value.
 
 
 \begin{DoxyParams}{Parameters}
@@ -231,14 +230,14 @@ gets the value (if exsists) of passed field
 {\em f} & field for which we want to get the value \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_a54d377f4ebed18539b4f14f9dbf3f215}{\index{atmi\+::buffer@{atmi\+::buffer}!get@{get}}
+\index{atmi\+::buffer@{atmi\+::buffer}!get@{get}}
 \index{get@{get}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} $\ast$ atmi\+::buffer\+::get (
+\subsubsection[{\texorpdfstring{get(field \&f, F\+L\+D\+O\+C\+C32 occ)}{get(field \&f, FLDOCC32 occ)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} \& atmi\+::buffer\+::get (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f, }
+\item[{{\bf field} \&}]{f, }
 \item[{F\+L\+D\+O\+C\+C32}]{occ}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a54d377f4ebed18539b4f14f9dbf3f215}
+)}\hypertarget{classatmi_1_1buffer_a864adb4d0153e6be38a7905c994915e1}{}\label{classatmi_1_1buffer_a864adb4d0153e6be38a7905c994915e1}
 Get the field value set in the buffer (Fget32).
 
 
@@ -263,73 +262,73 @@ gets the value (if exsists) of passed field.
 {\em f} & field for which we want to get the value \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_aa9aa5382717ed17a2047db2779f8f0ec}{\index{atmi\+::buffer@{atmi\+::buffer}!get\+\_\+buffer@{get\+\_\+buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!get\+\_\+buffer@{get\+\_\+buffer}}
 \index{get\+\_\+buffer@{get\+\_\+buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{get\+\_\+buffer}]{\setlength{\rightskip}{0pt plus 5cm}F\+B\+F\+R32 $\ast$ atmi\+::buffer\+::get\+\_\+buffer (
+\subsubsection[{\texorpdfstring{get\+\_\+buffer()}{get\_buffer()}}]{\setlength{\rightskip}{0pt plus 5cm}F\+B\+F\+R32 $\ast$ atmi\+::buffer\+::get\+\_\+buffer (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_aa9aa5382717ed17a2047db2779f8f0ec}
+)}\hypertarget{classatmi_1_1buffer_aa9aa5382717ed17a2047db2779f8f0ec}{}\label{classatmi_1_1buffer_aa9aa5382717ed17a2047db2779f8f0ec}
 \begin{DoxyReturn}{Returns}
 return F\+M\+L32 buffer reference
 
 the reference the current internal buffer. 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}{\index{atmi\+::buffer@{atmi\+::buffer}!is\+\_\+fml32\+\_\+buffer@{is\+\_\+fml32\+\_\+buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!is\+\_\+fml32\+\_\+buffer@{is\+\_\+fml32\+\_\+buffer}}
 \index{is\+\_\+fml32\+\_\+buffer@{is\+\_\+fml32\+\_\+buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{is\+\_\+fml32\+\_\+buffer}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::is\+\_\+fml32\+\_\+buffer (
+\subsubsection[{\texorpdfstring{is\+\_\+fml32\+\_\+buffer(char $\ast$buffer)}{is\_fml32\_buffer(char *buffer)}}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::is\+\_\+fml32\+\_\+buffer (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{buffer}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}{}\label{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}
 \begin{DoxyReturn}{Returns}
-true if it's a F\+M\+L\+T\+Y\+P\+E32 buffer type 
+true if it\textquotesingle{}s a F\+M\+L\+T\+Y\+P\+E32 buffer type 
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
 {\em \hyperlink{classatmi_1_1atmi__exception}{atmi\+\_\+exception}} & if we failed to get buffer type (tptypes) \\
 \hline
 \end{DoxyExceptions}
-\hypertarget{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}{\index{atmi\+::buffer@{atmi\+::buffer}!is\+\_\+handling\+\_\+memory@{is\+\_\+handling\+\_\+memory}}
+\index{atmi\+::buffer@{atmi\+::buffer}!is\+\_\+handling\+\_\+memory@{is\+\_\+handling\+\_\+memory}}
 \index{is\+\_\+handling\+\_\+memory@{is\+\_\+handling\+\_\+memory}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{is\+\_\+handling\+\_\+memory}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::is\+\_\+handling\+\_\+memory (
+\subsubsection[{\texorpdfstring{is\+\_\+handling\+\_\+memory()}{is\_handling\_memory()}}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::is\+\_\+handling\+\_\+memory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}
+)}\hypertarget{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}{}\label{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}
 \begin{DoxyReturn}{Returns}
 true if this instance willfree allocated memory buffer. 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a3ec1c691a444915993628b2774503d18}{\index{atmi\+::buffer@{atmi\+::buffer}!num@{num}}
+\index{atmi\+::buffer@{atmi\+::buffer}!num@{num}}
 \index{num@{num}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{num}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+O\+C\+C32 atmi\+::buffer\+::num (
+\subsubsection[{\texorpdfstring{num()}{num()}}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+O\+C\+C32 atmi\+::buffer\+::num (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a3ec1c691a444915993628b2774503d18}
+)}\hypertarget{classatmi_1_1buffer_a3ec1c691a444915993628b2774503d18}{}\label{classatmi_1_1buffer_a3ec1c691a444915993628b2774503d18}
 \begin{DoxyReturn}{Returns}
 the number of fields into the buffer 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_abce3f6694ba1a8a9ea2b51cf52ec26e6}{\index{atmi\+::buffer@{atmi\+::buffer}!occurences@{occurences}}
+\index{atmi\+::buffer@{atmi\+::buffer}!occurences@{occurences}}
 \index{occurences@{occurences}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{occurences}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+O\+C\+C32 atmi\+::buffer\+::occurences (
+\subsubsection[{\texorpdfstring{occurences(const field \&f)}{occurences(const field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+O\+C\+C32 atmi\+::buffer\+::occurences (
 \begin{DoxyParamCaption}
-\item[{const {\bf field} $\ast$}]{f}
+\item[{const {\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_abce3f6694ba1a8a9ea2b51cf52ec26e6}
+)}\hypertarget{classatmi_1_1buffer_a57ff1b2ed449d59d4ec936e9e79a5d1a}{}\label{classatmi_1_1buffer_a57ff1b2ed449d59d4ec936e9e79a5d1a}
 \begin{DoxyReturn}{Returns}
 the number of occurences of the field into the buffer (Foccur32) 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
+\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
 \index{operator=@{operator=}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(buffer \&)}{operator=(buffer \&)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}
+)}\hypertarget{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}{}\label{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}
 Copies the content of a fielded buffer into another
 
-Copy's the content of one buffer into the other.
+Copy\textquotesingle{}s the content of one buffer into the other.
 
 
 \begin{DoxyParams}{Parameters}
@@ -339,37 +338,37 @@ Copy's the content of one buffer into the other.
 \begin{DoxyReturn}{Returns}
 target buffer 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}{\index{atmi\+::buffer@{atmi\+::buffer}!operator==@{operator==}}
+\index{atmi\+::buffer@{atmi\+::buffer}!operator==@{operator==}}
 \index{operator==@{operator==}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::operator== (
+\subsubsection[{\texorpdfstring{operator==(buffer \&)}{operator==(buffer \&)}}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::operator== (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}
+)}\hypertarget{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}{}\label{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}
 Checks equality of two buffers (based upon chksum) \begin{DoxyReturn}{Returns}
 true if both checksums are equal. 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}{\index{atmi\+::buffer@{atmi\+::buffer}!pack@{pack}}
+\index{atmi\+::buffer@{atmi\+::buffer}!pack@{pack}}
 \index{pack@{pack}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{pack}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::pack (
+\subsubsection[{\texorpdfstring{pack()}{pack()}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::pack (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}
-Removes unused space allocation \hypertarget{classatmi_1_1buffer_a04d31b2fb8d27274ad81e8064eec3765}{\index{atmi\+::buffer@{atmi\+::buffer}!print@{print}}
+)}\hypertarget{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}{}\label{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}
+Removes unused space allocation \index{atmi\+::buffer@{atmi\+::buffer}!print@{print}}
 \index{print@{print}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::print (
+\subsubsection[{\texorpdfstring{print()}{print()}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::print (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a04d31b2fb8d27274ad81e8064eec3765}
-print on stdout the content of the buffer. Mainly used for debugging \hypertarget{classatmi_1_1buffer_a387dd9a90170e72720064169c161f1fe}{\index{atmi\+::buffer@{atmi\+::buffer}!remove@{remove}}
+)}\hypertarget{classatmi_1_1buffer_a04d31b2fb8d27274ad81e8064eec3765}{}\label{classatmi_1_1buffer_a04d31b2fb8d27274ad81e8064eec3765}
+print on stdout the content of the buffer. Mainly used for debugging \index{atmi\+::buffer@{atmi\+::buffer}!remove@{remove}}
 \index{remove@{remove}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::remove (
+\subsubsection[{\texorpdfstring{remove(field \&f)}{remove(field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::remove (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f}
+\item[{{\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a387dd9a90170e72720064169c161f1fe}
+)}\hypertarget{classatmi_1_1buffer_a4a1ef484befbf22aca919fc1a312ab61}{}\label{classatmi_1_1buffer_a4a1ef484befbf22aca919fc1a312ab61}
 Removes the field from the buffer (Fdel32).
 
 
@@ -389,13 +388,13 @@ remove a field from the buffer
 {\em f} & field to remove \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_a669b48d7cbabc7bc45608ab9343c0c51}{\index{atmi\+::buffer@{atmi\+::buffer}!resize@{resize}}
+\index{atmi\+::buffer@{atmi\+::buffer}!resize@{resize}}
 \index{resize@{resize}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::resize (
+\subsubsection[{\texorpdfstring{resize(long extent)}{resize(long extent)}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::resize (
 \begin{DoxyParamCaption}
 \item[{long}]{extent}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a669b48d7cbabc7bc45608ab9343c0c51}
+)}\hypertarget{classatmi_1_1buffer_a669b48d7cbabc7bc45608ab9343c0c51}{}\label{classatmi_1_1buffer_a669b48d7cbabc7bc45608ab9343c0c51}
 Extends the buffer size with the given bytes
 
 
@@ -408,14 +407,14 @@ Extends the buffer size with the given bytes
 {\em \hyperlink{classatmi_1_1buffer__exception}{buffer\+\_\+exception}} & upon failure \\
 \hline
 \end{DoxyExceptions}
-\hypertarget{classatmi_1_1buffer_a97374f4ebf72c61e761cf875059c592b}{\index{atmi\+::buffer@{atmi\+::buffer}!set@{set}}
+\index{atmi\+::buffer@{atmi\+::buffer}!set@{set}}
 \index{set@{set}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} $\ast$ atmi\+::buffer\+::set (
+\subsubsection[{\texorpdfstring{set(field \&f)}{set(field \&f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field} \& atmi\+::buffer\+::set (
 \begin{DoxyParamCaption}
-\item[{{\bf field} $\ast$}]{f}
+\item[{{\bf field} \&}]{f}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a97374f4ebf72c61e761cf875059c592b}
-Set/change a field's value into the buffer (Fchg32)
+)}\hypertarget{classatmi_1_1buffer_a1fe98844cb17328390b3d4e658bd6903}{}\label{classatmi_1_1buffer_a1fe98844cb17328390b3d4e658bd6903}
+Set/change a field\textquotesingle{}s value into the buffer (Fchg32)
 
 
 \begin{DoxyParams}{Parameters}
@@ -428,59 +427,59 @@ Set/change a field's value into the buffer (Fchg32)
 \hline
 \end{DoxyExceptions}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{classatmi_1_1buffer_a0a9ec0818505c5898f2f9fc019155d0e}{add} 
+\hyperlink{classatmi_1_1buffer_a5f30826d8273b619380e8b4f039af094}{add} 
 \end{DoxySeeAlso}
-\hypertarget{classatmi_1_1buffer_ade8853e7c2ae10dcd024b34049e99af3}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+buffer@{set\+\_\+buffer}}
+\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+buffer@{set\+\_\+buffer}}
 \index{set\+\_\+buffer@{set\+\_\+buffer}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{set\+\_\+buffer}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+buffer (
+\subsubsection[{\texorpdfstring{set\+\_\+buffer(\+F\+B\+F\+R32 $\ast$b)}{set\_buffer(FBFR32 *b)}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+buffer (
 \begin{DoxyParamCaption}
 \item[{F\+B\+F\+R32 $\ast$}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_ade8853e7c2ae10dcd024b34049e99af3}
+)}\hypertarget{classatmi_1_1buffer_ade8853e7c2ae10dcd024b34049e99af3}{}\label{classatmi_1_1buffer_ade8853e7c2ae10dcd024b34049e99af3}
 Set a new buffer reference. Previous buffer is deallocated before assign the passed value. 
 \begin{DoxyParams}{Parameters}
 {\em b} & set F\+M\+L32 buffer reference \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+handling\+\_\+memory@{set\+\_\+handling\+\_\+memory}}
+\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+handling\+\_\+memory@{set\+\_\+handling\+\_\+memory}}
 \index{set\+\_\+handling\+\_\+memory@{set\+\_\+handling\+\_\+memory}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{set\+\_\+handling\+\_\+memory}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+handling\+\_\+memory (
+\subsubsection[{\texorpdfstring{set\+\_\+handling\+\_\+memory(bool b)}{set\_handling\_memory(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+handling\+\_\+memory (
 \begin{DoxyParamCaption}
 \item[{bool}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}
+)}\hypertarget{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{}\label{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}
 
 \begin{DoxyParams}{Parameters}
 {\em b} & If true then destructor will free referenced buffer. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1buffer_a5ee67d265b7919363d71cf00af79e598}{\index{atmi\+::buffer@{atmi\+::buffer}!size@{size}}
+\index{atmi\+::buffer@{atmi\+::buffer}!size@{size}}
 \index{size@{size}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::size (
+\subsubsection[{\texorpdfstring{size()}{size()}}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::size (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a5ee67d265b7919363d71cf00af79e598}
+)}\hypertarget{classatmi_1_1buffer_a5ee67d265b7919363d71cf00af79e598}{}\label{classatmi_1_1buffer_a5ee67d265b7919363d71cf00af79e598}
 \begin{DoxyReturn}{Returns}
 the size of the buffer (in bytes) 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a7f6deadb4060641ad16aa242f787758e}{\index{atmi\+::buffer@{atmi\+::buffer}!unused@{unused}}
+\index{atmi\+::buffer@{atmi\+::buffer}!unused@{unused}}
 \index{unused@{unused}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{unused}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::unused (
+\subsubsection[{\texorpdfstring{unused()}{unused()}}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::unused (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a7f6deadb4060641ad16aa242f787758e}
+)}\hypertarget{classatmi_1_1buffer_a7f6deadb4060641ad16aa242f787758e}{}\label{classatmi_1_1buffer_a7f6deadb4060641ad16aa242f787758e}
 \begin{DoxyReturn}{Returns}
 number of bytes not yet used into the buffer 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a2bac749e70e7ce6967be7abadfe85ffe}{\index{atmi\+::buffer@{atmi\+::buffer}!used@{used}}
+\index{atmi\+::buffer@{atmi\+::buffer}!used@{used}}
 \index{used@{used}!atmi\+::buffer@{atmi\+::buffer}}
-\subsubsection[{used}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::used (
+\subsubsection[{\texorpdfstring{used()}{used()}}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::buffer\+::used (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a2bac749e70e7ce6967be7abadfe85ffe}
+)}\hypertarget{classatmi_1_1buffer_a2bac749e70e7ce6967be7abadfe85ffe}{}\label{classatmi_1_1buffer_a2bac749e70e7ce6967be7abadfe85ffe}
 \begin{DoxyReturn}{Returns}
 number of bytes stored into the buffer 
 \end{DoxyReturn}
@@ -488,5 +487,5 @@ number of bytes stored into the buffer
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/buffers.\+hpp\item 
+include/atmi/buffer.\+hpp\item 
 src/buffer.\+cpp\end{DoxyCompactItemize}

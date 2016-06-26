@@ -1,9 +1,8 @@
-\hypertarget{classatmi_1_1_tfield}{\section{atmi\+:\+:Tfield$<$ T $>$ Class Template Reference}
+\hypertarget{classatmi_1_1_tfield}{}\section{atmi\+:\+:Tfield$<$ T $>$ Class Template Reference}
 \label{classatmi_1_1_tfield}\index{atmi\+::\+Tfield$<$ T $>$@{atmi\+::\+Tfield$<$ T $>$}}
-}
 
 
-{\ttfamily \#include $<$buffers.\+hpp$>$}
+{\ttfamily \#include $<$fields.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:Tfield$<$ T $>$\+:\begin{figure}[H]
 \begin{center}
@@ -27,70 +26,71 @@ T \hyperlink{classatmi_1_1_tfield_a7903e881d35805b1477b1ef8f2928f4e}{operator=} 
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \hyperlink{classatmi_1_1_tfield_ae1da3af2b09c0259de11e5f334f75ce0}{set} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+virtual int \hyperlink{classatmi_1_1_tfield_a7bd1997e976116990ad0e2072320db77}{set} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
-virtual int \hyperlink{classatmi_1_1_tfield_a46dfca85173035aad4c6adb48ba46959}{add} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+virtual int \hyperlink{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}{add} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
-virtual int \hyperlink{classatmi_1_1_tfield_a4c541818b9e62e2a9f872eb3c2724a04}{get} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b)
+virtual int \hyperlink{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
-virtual int \hyperlink{classatmi_1_1_tfield_acf705d624909bfb959e8229b91819701}{get} (\hyperlink{classatmi_1_1buffer}{buffer} $\ast$b, F\+L\+D\+O\+C\+C32 occ)
+virtual int \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b, F\+L\+D\+O\+C\+C32 occ)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{T \hyperlink{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{value}}\label{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}
+T \hyperlink{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{value}\hypertarget{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{}\label{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}
 
-\begin{DoxyCompactList}\small\item\em field's current value \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em field\textquotesingle{}s current value \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class atmi\+::\+Tfield$<$ T $>$}
+\subsubsection*{template$<$class T$>$\\*
+class atmi\+::\+Tfield$<$ T $>$}
 
 Template that handles non pointer data types (short, long, char, double, ...) 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
 \index{Tfield@{Tfield}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{Tfield}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
+\subsubsection[{\texorpdfstring{Tfield(\+F\+L\+D\+I\+D32 fid)}{Tfield(FLDID32 fid)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
 \begin{DoxyParamCaption}
 \item[{F\+L\+D\+I\+D32}]{fid}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}{}\label{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}
 Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed field id
 
 The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
 
 
 \begin{DoxyParams}{Parameters}
-{\em fid} & the fml field id to setup (as defined in the F\+M\+L tables) \\
+{\em fid} & the fml field id to setup (as defined in the F\+ML tables) \\
 \hline
 \end{DoxyParams}
-This array is used to check that F\+M\+L type matches template \hyperlink{classatmi_1_1_tfield}{Tfield}'s type \hypertarget{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
+This array is used to check that F\+ML type matches template \hyperlink{classatmi_1_1_tfield}{Tfield}\textquotesingle{}s type \index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
 \index{Tfield@{Tfield}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{Tfield}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
+\subsubsection[{\texorpdfstring{Tfield(const char $\ast$name)}{Tfield(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{name}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{}\label{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}
 Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed name
 
 The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
 
 
 \begin{DoxyParams}{Parameters}
-{\em name} & the fml field name to setup (as defined in the F\+M\+L tables) \\
+{\em name} & the fml field name to setup (as defined in the F\+ML tables) \\
 \hline
 \end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1_tfield_a46dfca85173035aad4c6adb48ba46959}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!add@{add}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!add@{add}}
 \index{add@{add}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::add (
+\subsubsection[{\texorpdfstring{add(buffer \&b)}{add(buffer \&b)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::add (
 \begin{DoxyParamCaption}
-\item[{{\bf buffer} $\ast$}]{b}
+\item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_a46dfca85173035aad4c6adb48ba46959}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}{}\label{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}
 add the fiels into the buffer
 
 When successfull the value of occurence is set
@@ -105,41 +105,41 @@ When successfull the value of occurence is set
 \end{DoxySeeAlso}
 
 
-Implements \hyperlink{classatmi_1_1field_af8a3477256b0f22313493d9435193442}{atmi\+::field}.
+Implements \hyperlink{classatmi_1_1field_a5441bc87ba4bc3e9eb37c6db6a29688f}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_a4c541818b9e62e2a9f872eb3c2724a04}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
 \index{get@{get}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::get (
+\subsubsection[{\texorpdfstring{get(buffer \&b)}{get(buffer \&b)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::get (
 \begin{DoxyParamCaption}
-\item[{{\bf buffer} $\ast$}]{b}
+\item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_a4c541818b9e62e2a9f872eb3c2724a04}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{}\label{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}
 Retrieves the value of the field found into the buffer.
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & buffer from which to retrieve the field's value \\
+{\em b} & buffer from which to retrieve the field\textquotesingle{}s value \\
 \hline
 \end{DoxyParams}
 
 
-Implements \hyperlink{classatmi_1_1field_af6c42d9410250936fa4e69854375a3fc}{atmi\+::field}.
+Implements \hyperlink{classatmi_1_1field_aae2d3df756e816b5db8f729039a59a51}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_acf705d624909bfb959e8229b91819701}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
 \index{get@{get}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::get (
+\subsubsection[{\texorpdfstring{get(buffer \&b, F\+L\+D\+O\+C\+C32 occ)}{get(buffer \&b, FLDOCC32 occ)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::get (
 \begin{DoxyParamCaption}
-\item[{{\bf buffer} $\ast$}]{b, }
+\item[{{\bf buffer} \&}]{b, }
 \item[{F\+L\+D\+O\+C\+C32}]{occ}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_acf705d624909bfb959e8229b91819701}
-Retrieves the value of the field's occurence found into the buffer
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{}\label{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}
+Retrieves the value of the field\textquotesingle{}s occurence found into the buffer
 
 Upon success the value of occurence is set to the retrieved occurence.
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & buffer from which to retrieve the field's value \\
+{\em b} & buffer from which to retrieve the field\textquotesingle{}s value \\
 \hline
 {\em occ} & occurence to retreive \\
 \hline
@@ -149,44 +149,44 @@ Upon success the value of occurence is set to the retrieved occurence.
 \end{DoxySeeAlso}
 
 
-Implements \hyperlink{classatmi_1_1field_ae3fcad0a671dd56e370a992850b40454}{atmi\+::field}.
+Implements \hyperlink{classatmi_1_1field_a56ce53fabe290b94463f87936515ec46}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!length@{length}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!length@{length}}
 \index{length@{length}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual F\+L\+D\+L\+E\+N32 {\bf atmi\+::\+Tfield}$<$ T $>$\+::length (
+\subsubsection[{\texorpdfstring{length()}{length()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual F\+L\+D\+L\+E\+N32 {\bf atmi\+::\+Tfield}$<$ T $>$\+::length (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{}\label{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}
 \begin{DoxyReturn}{Returns}
-de length (or size) of the field's data 
+de length (or size) of the field\textquotesingle{}s data 
 \end{DoxyReturn}
 
 
 Implements \hyperlink{classatmi_1_1field_a296771293135085d91aa9aefd108d44d}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_ad8b13cf9dc43ad4a896ab96a1aefb31f}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!operator T@{operator T}}
+\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!operator T@{operator T}}
 \index{operator T@{operator T}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{operator T}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::operator T (
+\subsubsection[{\texorpdfstring{operator T()}{operator T()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::operator T (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_ad8b13cf9dc43ad4a896ab96a1aefb31f}
-casts the field value ... Tfield$<$int$>$ f (fid); f = 156 ; int x = f ; // returns 156 ... \hypertarget{classatmi_1_1_tfield_a7903e881d35805b1477b1ef8f2928f4e}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!operator=@{operator=}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1_tfield_ad8b13cf9dc43ad4a896ab96a1aefb31f}{}\label{classatmi_1_1_tfield_ad8b13cf9dc43ad4a896ab96a1aefb31f}
+casts the field value ... Tfield$<$int$>$ f (fid); f = 156 ; int x = f ; // returns 156 ... \index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!operator=@{operator=}}
 \index{operator=@{operator=}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T {\bf atmi\+::\+Tfield}$<$ T $>$\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(\+T v)}{operator=(T v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T {\bf atmi\+::\+Tfield}$<$ T $>$\+::operator= (
 \begin{DoxyParamCaption}
 \item[{T}]{v}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_a7903e881d35805b1477b1ef8f2928f4e}
-Assigns a value to the field ... Tfield$<$int$>$ f (fid); f = 156 ; // Set value to 156 ... \hypertarget{classatmi_1_1_tfield_ae1da3af2b09c0259de11e5f334f75ce0}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!set@{set}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1_tfield_a7903e881d35805b1477b1ef8f2928f4e}{}\label{classatmi_1_1_tfield_a7903e881d35805b1477b1ef8f2928f4e}
+Assigns a value to the field ... Tfield$<$int$>$ f (fid); f = 156 ; // Set value to 156 ... \index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!set@{set}}
 \index{set@{set}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::set (
+\subsubsection[{\texorpdfstring{set(buffer \&b)}{set(buffer \&b)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::set (
 \begin{DoxyParamCaption}
-\item[{{\bf buffer} $\ast$}]{b}
+\item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_ae1da3af2b09c0259de11e5f334f75ce0}
-set the value of the field's value
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classatmi_1_1_tfield_a7bd1997e976116990ad0e2072320db77}{}\label{classatmi_1_1_tfield_a7bd1997e976116990ad0e2072320db77}
+set the value of the field\textquotesingle{}s value
 
 
 \begin{DoxyParams}{Parameters}
@@ -195,10 +195,10 @@ set the value of the field's value
 \end{DoxyParams}
 
 
-Implements \hyperlink{classatmi_1_1field_a0153530cc98a94cbb5c6e85d1ced52fb}{atmi\+::field}.
+Implements \hyperlink{classatmi_1_1field_a41bb209965d627d2e67c839bece5372c}{atmi\+::field}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/buffers.\+hpp\end{DoxyCompactItemize}
+include/atmi/fields.\+hpp\end{DoxyCompactItemize}
