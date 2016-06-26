@@ -70,9 +70,9 @@ namespace atmi {
     return rc;              // this the size in bytes needed
   };
 
-  int field::remove ( buffer *b) {//NOSONAR this FML grammar and cannot be renamed.
+  int field::remove ( buffer &b) {//NOSONAR this FML grammar and cannot be renamed.
 
-    int rc = Fdel32 ( b->_buffer, _field_id, _field_occurence );
+    int rc = Fdel32 ( b._buffer, _field_id, _field_occurence );
     if ( rc < 0 ) {
       throw buffer_exception ( Ferror32, "FDEL32 failed for field %s (id: %d, occ: %d) failed", _field_name, _field_id, _field_occurence );
     }

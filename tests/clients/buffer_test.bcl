@@ -14,37 +14,33 @@
 
 #include "sample_fml_table.h"
 
-using namespace std;
-using namespace atmi;
-
-class buffer_test : public abstract_client {
+class buffer_test : public atmi::abstract_client {
   public:
-    buffer_test (): abstract_client ("btest"){
-      cout << "instance ready" << endl;
+    buffer_test (): atmi::abstract_client ("btest"){
     };
 
     int run ( int argc, char **argv ){
       try {
 
-        buffer b (100), a;
+        atmi::buffer b (100), a;
         /*
            const char *types[5] = { typeid(short).name(), typeid(int).name() };
-           cout << "Stored: " << types[0] << endl;
-           cout << "Stored: " << types[1] << " is a " << endl;
+           std::cout << "Stored: " << types[0] << std::endl;
+           std::cout << "Stored: " << types[1] << " is a " << std::endl;
            if(strcmp ( typeid(int).name(), types[1]) == 0 ){
-           cout << "same type int." << endl;
+           std::cout << "same type int." << std::endl;
            }
-           cout << "Type id " << typeid(long).name() << endl;
+           std::cout << "Type id " << typeid(long).name() << std::endl;
          */
 
-        cout << "buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+        std::cout << "atmi::buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
 
-        Tfield<string> prenom ( EMPNAME );
-        Tfield<long>   empid ( EMPID );
-        Tfield<long>   empzip ( EMPZIP );
-        Tfield<string> nom ( EMPNAME );
-        Tfield<char *> carray ( SRVCDAY );
-        Tfield<char *> copy ( SRVCDAY );
+        atmi::Tfield<string> prenom ( EMPNAME );
+        atmi::Tfield<long>   empid ( EMPID );
+        atmi::Tfield<long>   empzip ( EMPZIP );
+        atmi::Tfield<string> nom ( EMPNAME );
+        atmi::Tfield<char *> carray ( SRVCDAY );
+        atmi::Tfield<char *> copy ( SRVCDAY );
 
         prenom = "herbert";
         nom = "this is a char *";
@@ -52,56 +48,56 @@ class buffer_test : public abstract_client {
         carray.set_char_array("helloworld\0rray", sizeof ("helloworld\0rray"));
         copy = carray;
 
-        cout << "Added fields: " << endl;
-        b.add ( &empid );
-        b.add ( &nom );
-        b.add ( &prenom );
-        b.add ( &carray );
-        b.add ( &copy );
+        std::cout << "Added fields: " << std::endl;
+        b.add ( empid );
+        b.add ( nom );
+        b.add ( prenom );
+        b.add ( carray );
+        b.add ( copy );
         b.print ();
 
-        cout << "get copy" << endl;
-        b.get ( &copy );
+        std::cout << "get copy" << std::endl;
+        b.get ( copy );
 
-        cout << copy.what() << endl;
+        std::cout << copy.what() << std::endl;
         long len = 5;                  //copy.length();
         char *cav = new char[len];
         copy.get_char_array ( cav, len );
         for ( int x = 0; x < len; x++ ) {
-          cout << "'"<< cav[x]<<"',";
+          std::cout << "'"<< cav[x]<<"',";
         }
-        cout << endl;
+        std::cout << std::endl;
 
-        cout << "Setting empid value: " << endl;
+        std::cout << "Setting (update) empid value: " << std::endl;
         empid = 22;
-        b.set ( &empid );
+        b.set ( empid );
         b.print ();
 
-        cout << "size : " << b.size();
+        std::cout << "size : " << b.size();
         b.pack ();
-        cout << ", after pack: " << b.size() << endl;
+        std::cout << ", after pack: " << b.size() << std::endl;
 
-        cout << "buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  endl;
+        std::cout << "atmi::buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
 
-        cout << "wrapping buffer." << endl ;
-        buffer wrapper ( b.get_buffer());
-        nom = "this was added into a wrapper instance of buffer.";
-        wrapper.set (&nom );
+        std::cout << "wrapping atmi::buffer." << std::endl ;
+        atmi::buffer wrapper ( b.get_buffer());
+        nom = "this was added into a wrapper instance of atmi::buffer.";
+        wrapper.set (nom );
         wrapper.print ();
 
-        cout << "transforming a buffer into a wrapped buffer." << endl;
-        buffer wrapper1;
+        std::cout << "transforming a atmi::buffer into a wrapped buffer." << std::endl;
+        atmi::buffer wrapper1;
         wrapper1.set_buffer ( wrapper.get_buffer());
         prenom = "this was set by a wrapper";
-        wrapper1.set ( &prenom );
+        wrapper1.set ( prenom );
         wrapper1.print();
 
       }catch ( atmi::buffer_exception &err ) {
-        cerr << err.what() << ". Ferror : " << err.error() <<endl;
+        cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
       } catch ( atmi::atmi_exception &err ) {
-        cerr << err.what() << endl;
-      } catch ( exception &err ) {
-        cerr << err.what() << endl;
+        cerr << err.what() << std::endl;
+      } catch ( std::exception &err ) {
+        cerr << err.what() << std::endl;
       }
 
       return 9999;
@@ -115,20 +111,19 @@ int main ( int argc, char **argv ) {
 
   try {
 
-    cout << "buffer sample program (" << atmi::cpp_atmi_version() <<")." << endl;
-    cout << "setting up";
+    std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
+    std::cout << "setting up";
     buffer_test btest;
 
-    cout << ", starting up" ;
+    std::cout << ", starting up" ;
     btest.run ( argc, argv );
 
-    cout << ", done." << endl;
-
   } catch ( atmi::atmi_exception &err){
-    cerr << endl << err.what() << endl;
+    cerr << std::endl << err.what() << std::endl;
   } catch ( std::exception &err ) {
-    cerr << endl << err.what() << endl;
+    cerr << std::endl << err.what() << std::endl;
   }
+  std::cout << ", done." << std::endl;
 
   return 9999;
 }

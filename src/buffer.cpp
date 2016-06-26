@@ -53,13 +53,9 @@ namespace atmi {
     return (strncmp ( FMLTYPE32, type, 8) == 0 );
   }
 
-  field *buffer::set ( field *f ){
+  field &buffer::set ( field &f ){
 
-    if ( f == NULL ) {
-      throw atmi_exception ("Setting a NULL field !!??");
-    } else {
-      f->set ( this );
-    }
+    f.set ( *this );
     return f;
   }
 
@@ -67,13 +63,9 @@ namespace atmi {
    *
    * @param f the field to add
    */
-  field *buffer::add ( field *f ){
+  field &buffer::add ( field &f ){
 
-    if ( f == NULL ) {
-      throw atmi_exception ("Adding a NULL field !!??");
-    } else {
-      f->add ( this );
-    }
+    f.add ( *this );
 
     return f;
   }
@@ -94,36 +86,28 @@ namespace atmi {
     resize ( size() + _extent );
   };
 
-  field *buffer::append ( field *f ){
+  field &buffer::append ( field &f ){
 
     throw atmi_exception ( "Method append is not implemented yet !!??;" ); //NOSONAR this desired implementation.
-    return NULL;
+    return f;
   }
 
   /** remove a field from the buffer
    *
    * @param f field to remove
    */
-  void buffer::remove ( field *f ){ //NOSONAR this is a ATMI name it certainly will not change
+  void buffer::remove ( field &f ){ //NOSONAR this is a ATMI name it certainly will not change
 
-    if ( f != NULL ) {
-      f->remove ( this );
-    }else {
-      throw atmi_exception ( "Remove failed. You passed a NULL pointer as field !!" );
-    }
+    f.remove ( *this );
   }
 
   /** gets the value (if exsists) of passed field.
    *
    * @param f field for which we want to get the value
    */
-  field *buffer::get ( field *f, FLDOCC32 occ ) {
+  field &buffer::get ( field &f, FLDOCC32 occ ) {
 
-    if ( f != NULL ) {
-      f->get( this, occ );
-    } else {
-      throw atmi_exception ( "buffer get failed. You passed a NULL pointer as field !!" );
-    }
+    f.get( *this, occ );
     return f;
   };
 
@@ -131,21 +115,17 @@ namespace atmi {
    *
    * @param f field for which we want to get the value
    */
-  field *buffer::get ( field *f ) {
+  field &buffer::get ( field &f ) {
 
-    if ( f != NULL ) {
-      f->get( this );
-    } else {
-      throw atmi_exception ( "buffer get failed. You passed a NULL pointer as field !!" );
-    }
+    f.get( *this );
     return f;
   };
 
-  FLDOCC32 buffer::occurences ( const field *f ){
+  FLDOCC32 buffer::occurences ( const field &f ){
 
-    int rc = Foccur32 ( _buffer, f->_field_id );
+    int rc = Foccur32 ( _buffer, f._field_id );
     if ( rc < 0 ) {
-      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f->_field_name, f->_field_id );
+      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f._field_name, f._field_id );
     }
 
     return rc;

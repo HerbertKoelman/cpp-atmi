@@ -134,7 +134,7 @@ namespace atmi {
        *
        * @param b buffer from which to retrieve the field's value
        */
-      virtual int get ( buffer *b ) = 0;
+      virtual int get ( buffer &b ) = 0;
 
       /** Retrieves the value of the field's occurence found into the buffer
        *
@@ -144,7 +144,7 @@ namespace atmi {
        * @param occ occurence to retreive
        * @see occurence
        */
-      virtual int get ( buffer *b, FLDOCC32 occ ) = 0;
+      virtual int get ( buffer &b, FLDOCC32 occ ) = 0;
 
       /** add the fiels into the buffer
        *
@@ -153,19 +153,19 @@ namespace atmi {
        * @param b buffer in which to add the field.
        * @see occurence
        */
-      virtual int add ( buffer *b ) = 0;
+      virtual int add ( buffer &b ) = 0;
 
       /** set the value of the field's value
        *
        * @param b the buffer in which the value must be changed
        */
-      virtual int set ( buffer *b ) = 0;
+      virtual int set ( buffer &b ) = 0;
 
       /** removes the field from the buffer
        *
        * @param b the buffer from which to remove the field
        */
-      virtual int remove ( buffer *b );
+      virtual int remove ( buffer &b );
 
     private:
       FLDID32   _field_id;
@@ -261,11 +261,11 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( buffer *b) {
+      virtual int set ( buffer &b) {
 
         int rc = -1;
 
-        rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) &value, length() );
+        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) &value, length() );
         if ( rc < 0 ) {
           throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
@@ -273,39 +273,39 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( buffer *b) {
+      virtual int add ( buffer &b) {
 
         int rc = -1;
         try {
-          if ( (needed () + b->used()) >= b->size()) {
-            b->extend ();
+          if ( (needed () + b.used()) >= b.size()) {
+            b.extend ();
           }
         } catch ( buffer_exception &buffErr ) {
           throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
         };
 
-        rc = Fadd32 ( b->get_buffer(), id(), (char *) &value, length() );
+        rc = Fadd32 ( b.get_buffer(), id(), (char *) &value, length() );
         if ( rc < 0 ) {
           throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         } else {
-          set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+          set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
         }
 
         return rc;
       };
 
-      virtual int get ( buffer *b ){
+      virtual int get ( buffer &b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = length();
         set_field_occurence (occ);
 
-        rc = Fget32 ( b->get_buffer(), id(), occurence(), (char *) &value, &l );
+        rc = Fget32 ( b.get_buffer(), id(), occurence(), (char *) &value, &l );
         if ( rc == -1 ) {
           throw buffer_exception (Ferror32, "FGET32 failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
@@ -322,7 +322,7 @@ namespace atmi {
  *
  * This class is using a string object to hold and handle string data
  */
-  template <> class Tfield<string>: public field {
+  template <> class Tfield<std::string>: public field {
     public:
 
       /** Constructs a Tfield for the passed field id
@@ -495,11 +495,11 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( buffer *b) {
+      virtual int set ( buffer &b) {
 
         int rc = -1;
 
-        rc = Fchg32 ( b->get_buffer(), id(), occurence(), (char *) value.c_str(), length() );
+        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) value.c_str(), length() );
         if ( rc < 0 ) {
           throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
@@ -507,23 +507,23 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( buffer *b) {
+      virtual int add ( buffer &b) {
 
         int rc = -1;
         if ( length () > 0 ) {
           try {
-            if ( (needed () + b->used()) >= b->size()) {
-              b->extend ();
+            if ( (needed () + b.used()) >= b.size()) {
+              b.extend ();
             }
           } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
-          rc = Fadd32 ( b->get_buffer(), id(), (char *) value.c_str(), length() );
+          rc = Fadd32 ( b.get_buffer(), id(), (char *) value.c_str(), length() );
           if ( rc < 0 ) {
             throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
-            set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+            set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
         } else {
           throw atmi_exception ("field %s's value is empty !!?? Cannot add an empty field value.", name ());
@@ -532,19 +532,19 @@ namespace atmi {
         return rc;
       };
 
-      virtual int get ( buffer *b ){
+      virtual int get ( buffer &b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = 0;
         char *v = NULL;
         set_field_occurence(occ);
 
-        v = Fgetsa32 ( b->get_buffer(), id(), occurence(), &l );
+        v = Fgetsa32 ( b.get_buffer(), id(), occurence(), &l );
         if ( v != NULL ) {
 
           rc=0;
@@ -650,11 +650,11 @@ namespace atmi {
 
     protected:
 
-      virtual int set ( buffer *b) {
+      virtual int set ( buffer &b) {
 
         int rc = -1;
 
-        rc = Fchg32 ( b->get_buffer(), id(), occurence(), value, length() );
+        rc = Fchg32 ( b.get_buffer(), id(), occurence(), value, length() );
         if ( rc < 0 ) {
           throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
         }
@@ -662,23 +662,23 @@ namespace atmi {
         return rc;
       };
 
-      virtual int add ( buffer *b) {
+      virtual int add ( buffer &b) {
 
         int rc = -1;
         if ( length () > 0 ) {
           try {
-            if ( (needed () + b->used()) >= b->size()) {
-              b->extend ();
+            if ( (needed () + b.used()) >= b.size()) {
+              b.extend ();
             }
           } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           };
 
-          rc  = Fadd32 ( b->get_buffer(), id(), value, length() );
+          rc  = Fadd32 ( b.get_buffer(), id(), value, length() );
           if ( rc < 0 ) {
             throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
-            set_field_occurence ( (b->occurences ( this ) == 0 ? 0 : b->occurences ( this )-1));
+            set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
 
         } else {
@@ -688,19 +688,19 @@ namespace atmi {
         return rc;
       };
 
-      virtual int get ( buffer *b ){
+      virtual int get ( buffer &b ){
 
         return get ( b, occurence() );
       };
 
-      virtual int get ( buffer *b, FLDOCC32 occ ){
+      virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
         FLDLEN32 l = 0;
         set_field_occurence(occ);
         char *v = NULL;
 
-        v = Fgetalloc32 ( b->get_buffer(), id(), occurence(), &l );
+        v = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &l );
         if ( v != NULL ) {
 
           len = l;
