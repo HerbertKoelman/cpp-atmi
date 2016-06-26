@@ -66,13 +66,13 @@ namespace atmi {
        *
        * @param data tuxedo FML32 buffer (allocated with tuxedo::allocate)
        */
-      int enqueue ( buffer *data );
+      int enqueue ( buffer &data );
 
       /** dequeue a message
        *
        * @param data tuxedo FML32 buffer (allocated with tuxedo::allocate)
        */
-      int dequeue ( buffer *data );
+      int dequeue ( buffer &data );
 
       /** dequeue a reply message
        *
@@ -90,7 +90,7 @@ namespace atmi {
        *
        * @param data tuxedo buffer (allocated with tuxedo::allocate)
        */
-      int dequeueReply ( buffer *data );
+      int dequeueReply ( buffer &data );
 
       /** enqueue a reply message
        *
@@ -109,7 +109,7 @@ namespace atmi {
        *
        * @param data tuxedo buffer (allocated with tuxedo::allocate)
        */
-      int enqueueReply ( buffer *data );
+      int enqueueReply ( buffer &data );
 
       /**
        * indicate in wich queue the replies should be posted in.

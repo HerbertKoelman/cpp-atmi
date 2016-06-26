@@ -44,20 +44,20 @@ namespace atmi {
 
 /* operations ------------------------------------------------*/
 
-  int queue::enqueue (buffer *data ) {
+  int queue::enqueue (buffer &data ) {
 
-    return enqueue ( (char *)data->get_buffer(), 0 );
+    return enqueue ( (char *)data.get_buffer(), 0 );
   }
 
-  int queue::dequeue (buffer *data ) {
+  int queue::dequeue (buffer &data ) {
 
     int rc = -1;
     long len = 0;
-    FBFR32 *b = data->get_buffer();
+    FBFR32 *b = data.get_buffer();
 
     if ( (rc = dequeue ( (char **) &b, &len )) != -1 ) {
 
-      data->set_buffer ( b );
+      data.set_buffer ( b );
     }
 
     return rc;
@@ -99,9 +99,9 @@ namespace atmi {
     return rc;
   }
 
-  int queue::dequeueReply (buffer *data ) {
+  int queue::dequeueReply (buffer &data ) {
 
-    return dequeueReply ( (char **) data->get_buffer(), 0 );
+    return dequeueReply ( (char **) data.get_buffer(), 0 );
   }
 
   int queue::dequeueReply ( char **data, long *len ) {
@@ -117,9 +117,9 @@ namespace atmi {
     return rc;
   }
 
-  int queue::enqueueReply (buffer *data ) {
+  int queue::enqueueReply (buffer &data ) {
 
-    return enqueueReply ( (char *)data->get_buffer(), 0 );
+    return enqueueReply ( (char *)data.get_buffer(), 0 );
   }
 
   int queue::enqueueReply ( char *data, long len ) {
