@@ -41,6 +41,8 @@ CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
 
+OBJECTS=@OBJECTS@
+
 # These object file are used to build the library to implement Tuxedo server programs (buildserver)
 ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o logger.o standard_logger.o ulog_logger.o atmi++.o
 
@@ -54,6 +56,8 @@ CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
 all: $(CPPATMILIBS) gencat
 
+objects: $(OBJECTS)
+
 gencat:
 	# US english translation
 	gencat ${LOCALEDIR}/en_US/atmi++.cat atmi++en_US.msg
@@ -63,8 +67,8 @@ gencat:
 clean:
 	${RM} *.o core
 
-globber:
-	$(RM) $(ATMI_CLT_OBJS) $(BUFF_OBJS) core 
+globber: clean
+	$(RM) $(OBJECTS) core *.log ULO* access*
 	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 

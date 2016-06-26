@@ -624,6 +624,7 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+OBJECTS
 RANLIB
 AR
 ac_ct_CXX
@@ -682,10 +683,8 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
-enable_localdir
 enable_auxdir
 enable_tuxdir
-enable_warn
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1310,11 +1309,8 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
-  --enable-localdir       adds -I and -L to /usr/local include and lib
-                          respectively.
   --enable-auxdir=PATH    set AUXDIR to point to this path
   --enable-tuxdir=PATH    set TUXDIR to point to this path
-  --enable-warn=PATH      add warning options to CXXFLAGS (i.e. -qwarn0x)
 
 Some influential environment variables:
   AUXDIR      auxiliary include and lib directories
@@ -1733,6 +1729,73 @@ fi
   as_fn_set_status $ac_retval
 
 } # ac_fn_c_try_link
+
+# ac_fn_c_check_func LINENO FUNC VAR
+# ----------------------------------
+# Tests whether FUNC exists, setting the cache variable VAR accordingly
+ac_fn_c_check_func ()
+{
+  as_lineno=${as_lineno-"$1"} as_lineno_stack=as_lineno_stack=$as_lineno_stack
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $2" >&5
+$as_echo_n "checking for $2... " >&6; }
+if eval \${$3+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+/* Define $2 to an innocuous variant, in case <limits.h> declares $2.
+   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
+#define $2 innocuous_$2
+
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char $2 (); below.
+    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+    <limits.h> exists even on freestanding compilers.  */
+
+#ifdef __STDC__
+# include <limits.h>
+#else
+# include <assert.h>
+#endif
+
+#undef $2
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char $2 ();
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined __stub_$2 || defined __stub___$2
+choke me
+#endif
+
+int
+main ()
+{
+return $2 ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  eval "$3=yes"
+else
+  eval "$3=no"
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+fi
+eval ac_res=\$$3
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
+
+} # ac_fn_c_check_func
 cat >config.log <<_ACEOF
 This file contains any messages produced by compilers while
 running configure, to aid debugging if configure makes a mistake.
@@ -2089,18 +2152,8 @@ ac_config_headers="$ac_config_headers ../include/atmi/config.h"
 
 
 
-cat >>confdefs.h <<_ACEOF
-#define CPP_ATMI_VERSION "$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."
-_ACEOF
 
-
-
-
-# Check whether --enable-localdir was given.
-if test "${enable_localdir+set}" = set; then :
-  enableval=$enable_localdir; CFLAGS="-I /usr/local/include" LDFLAGS=" -L /usr/local/lib"
-fi
-
+# AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]))
 
 
 # Check whether --enable-auxdir was given.
@@ -4303,11 +4356,13 @@ then
 $as_echo "$as_me: WARNING using auxiliary directory $AUXDIR (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)" >&6;}
 fi
 
-# Check whether --enable-warn was given.
-if test "${enable_warn+set}" = set; then :
-  enableval=$enable_warn; CXXFLAGS="$CXXFLAGS -qwarn0x"
+if test -n "$enable_localdir"
+then
+  CFLAGS="$CFLAGS -I$enable_localdir/include"
+  LDFLAGS="$LDFLAGS -L$wenable_localdir/lib"
+  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING using local directory $enable_localdir (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)" >&5
+$as_echo "$as_me: WARNING using local directory $enable_localdir (CFLAGS=$CFLAGS, LDFLAGS=$LDFLAGS)" >&6;}
 fi
-
 
 # Checks for libraries.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in -lpthread" >&5
@@ -4369,7 +4424,7 @@ fi
 
 if test "$ac_cv_header_mutex" = "no"
 then
-#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-thread library.])])
+#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for cpp_pthread_version in -lcpp-pthread" >&5
 $as_echo_n "checking for cpp_pthread_version in -lcpp-pthread... " >&6; }
 if ${ac_cv_lib_cpp_pthread_cpp_pthread_version+:} false; then :
@@ -4409,20 +4464,19 @@ $as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
 if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
   $as_echo "#define HAVE_CPP_PTHREAD 1" >>confdefs.h
 
+else
+   as_fn_error $? "missing cpp-pthread library." "$LINENO" 5
 fi
 
 fi
 
-#HEADERS=""
-#for header in include/atmi/*.hpp include/atmi/*.h
-#do
-#  HEADERS="$HEADERS $header"
-#done
-#for header in include/atmi/*.in
-#do
-#  HEADERS="$HEADERS `basename $header .in`"
-#done
-#AC_SUBST(HEADERS,$HEADERS)
+OBJECTS="atmi++.o"
+for src in *.cpp
+do
+  OBJECTS="$OBJECTS `basename $src .cpp`.o"
+done
+OBJECTS=$OBJECTS
+
 
 # Setting things up for ATMI builds
 if test -n "$TUXDIR"
@@ -4446,44 +4500,50 @@ $as_echo "found $TUXINC." >&6; } || as_fn_error $? "failed to find $TUXINC direc
   CFLAGS="$CFLAGS -I$TUXINC "
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
-  # This cannot be checked here. The library doesn't exist until configure and make is run
-  #AC_CHECK_LIB([tux], [tpcall])
-
 else
   as_fn_error $? "set env variable TUXDIR or use --enable-tuxdir=PATH." "$LINENO" 5
 fi
 
+
+cat >>confdefs.h <<_ACEOF
+#define CPP_ATMI_VERSION "$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."
+_ACEOF
+
+
 # Checks for header files.
-#AC_HEADER_STDC
-#AC_CHECK_HEADERS([limits.h nl_types.h stdlib.h string.h sys/time.h unistd.h])
+#AC_CHECK_HEADERS([limits.h nl_types.h cstdlib cstring sys/time.h cunistd])
 
 # Checks for typedefs, structures, and compiler characteristics.
-#AC_C_CONST
-#AC_C_INLINE
-#AC_HEADER_TIME
 
 # Checks for library functions.
-#AC_TYPE_SIGNAL
-#AC_FUNC_MALLOC
-#AC_CHECK_FUNCS([memset])
+for ac_func in memset
+do :
+  ac_fn_c_check_func "$LINENO" "memset" "ac_cv_func_memset"
+if test "x$ac_cv_func_memset" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_MEMSET 1
+_ACEOF
 
-# Checks for typedefs, structures, and compiler characteristics.
-#AC_HEADER_STDBOOL
+fi
+done
+
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether we have specific compiler optimization options for $CXX " >&5
 $as_echo_n "checking whether we have specific compiler optimization options for $CXX ... " >&6; }
 case "$CXX" in
   xlC_r | xlC)
-	  CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not used anymore -qsourcetype=c++ "
-    CFLAGS="-O -qmaxmem=-1 -qsmp $CFLAGS "
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CFLAGS $CPPFLAGS" >&5
-$as_echo "$CFLAGS $CPPFLAGS" >&6; }
+	  CPPFLAGS="-qlanglvl=extended0x:decltype:static_assert:rvaluereferences"
+    CFLAGS="-qmaxmem=-1 -qsmp $CFLAGS"
+    CXXFLAGS="-O"
+    LDFLAGS="-brtl -bh:5 $LDFLAGS"
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CFLAGS $CPPFLAGS $CXXFLAGS" >&5
+$as_echo "$CFLAGS $CPPFLAGS $CXXFLAGS" >&6; }
     ;;
   g++ | gcc)
     CXXFLAGS="-O2"
     CPPFLAGS="-std=c++11 $CPPFLAGS "
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: -std=c++11" >&5
-$as_echo "-std=c++11" >&6; }
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $CFLAGS $CPPFLAGS $CXXFLAGS" >&5
+$as_echo "$CFLAGS $CPPFLAGS $CXXFLAGS" >&6; }
     ;;
   *)
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: none found." >&5
