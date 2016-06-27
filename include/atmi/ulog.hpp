@@ -13,7 +13,7 @@
 
 namespace atmi {
 
-  /** \adtogroup logging ULOG writer
+  /** \addtogroup logging ULOG writer
    *
    * ULOG helpers
    *
