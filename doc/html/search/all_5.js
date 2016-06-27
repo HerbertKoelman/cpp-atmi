@@ -7,7 +7,8 @@ var searchData=
   ['error',['error',['../classatmi_1_1unix__exception.html#a4aab55cca505c04ea9e1c65b8cc0c254',1,'atmi::unix_exception::error()'],['../classatmi_1_1buffer__exception.html#a8d9475dbaa7d9864b906dc6ea9818351',1,'atmi::buffer_exception::error()'],['../classatmi_1_1tuxedo__exception.html#a9299a99da028fde85d8c4d52165a6b1d',1,'atmi::tuxedo_exception::error()'],['../classatmi_1_1field.html#a6d8db988f58f3779b0ef528a11b3466f',1,'atmi::field::error()'],['../classatmi_1_1tuxedo.html#a2f5b4f52ca8095d704dcb23771425690',1,'atmi::tuxedo::error()'],['../classatmi_1_1ulog.html#a29e7f8215085533c0b4fb788545e9329',1,'atmi::ulog::error()']]],
   ['error_5fdetail',['error_detail',['../classatmi_1_1tuxedo__exception.html#abeb62f07cfb36d1d9d58b6a3aa9ef939',1,'atmi::tuxedo_exception::error_detail()'],['../classatmi_1_1tuxedo.html#ad7bf2370e3edeb091512d0b640093e9d',1,'atmi::tuxedo::error_detail()']]],
   ['error_5fmessage',['error_message',['../classatmi_1_1buffer__exception.html#a6881332c2a607fb71b987eaf811723b7',1,'atmi::buffer_exception::error_message()'],['../classatmi_1_1tuxedo__exception.html#adcf355cbe82b96ba273fabf6753e3bc7',1,'atmi::tuxedo_exception::error_message()'],['../classatmi_1_1tuxedo.html#ad134373ac62fd2c7e1ac5482bdb7f65e',1,'atmi::tuxedo::error_message()']]],
-  ['event',['event',['../classatmi_1_1event.html',1,'atmi']]],
+  ['eceptions',['Eceptions',['../group__errors.html',1,'']]],
   ['event',['event',['../classatmi_1_1event.html#a64e8905f6b027d052074cb801567b1b3',1,'atmi::event']]],
+  ['event',['event',['../classatmi_1_1event.html',1,'atmi']]],
   ['extend',['extend',['../classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb',1,'atmi::buffer::extend()'],['../classatmi_1_1tuxedo.html#a683b79440474b94c471ed78ff3775eb8',1,'atmi::tuxedo::extend()']]]
 ];
