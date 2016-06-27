@@ -5,6 +5,7 @@
  */
 
 #include <atmi/transaction.hpp>
+#include <unistd.h>
 
 using namespace std;
 
