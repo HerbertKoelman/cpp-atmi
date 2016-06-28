@@ -85,13 +85,13 @@ namespace atmi {
       static inline bool is_fml32_buffer( char *buffer );
 
       /** @return the size of the buffer (in bytes) */
-      long size ();
+      size_t size ();
 
       /** @return number of bytes stored into the buffer */
-      long used ();
+      size_t used ();
 
       /** @return number of bytes not yet used into the buffer */
-      long unused ();
+      size_t unused ();
 
 
       /** Removes unused space allocation
@@ -108,7 +108,7 @@ namespace atmi {
        * @param extent size in bytes of the extent
        * @throw buffer_exception upon failure
        */
-      void resize ( long extent );
+      void resize ( size_t extent );
 
       /** Set/change a field's value into the buffer (Fchg32)
        *
@@ -174,7 +174,21 @@ namespace atmi {
       FLDOCC32 occurences ( const field &f );
 
       /** @return the number of fields into the buffer */
-      FLDOCC32 num ();
+      FLDOCC32 field_count ();
+
+      /** call this to get an idea of what char * buffer you should allocate to store the
+       * result of Fsprint32
+       *
+       * @return an estimatation of what a buffer size should to call Fsprint32
+       */
+      size_t print_buffer_size();
+
+      /** fill the given buffer with the a string representation of the buffer's content.
+       *
+       * @param buffer char buffer to fill
+       * @see print_buffer_size()
+       */
+      void print(char *buffer);
 
       /** print on stdout the content of the buffer. Mainly used for debugging
        */

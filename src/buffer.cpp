@@ -75,7 +75,7 @@ namespace atmi {
     resize ( used() );
   };
 
-  void buffer::resize ( long extent ){
+  void buffer::resize ( size_t extent ){
 
     _extent = extent;
     _buffer = (FBFR32 *) tuxedo::extend ( (char *) _buffer, _extent );
@@ -131,15 +131,15 @@ namespace atmi {
     return rc;
   };
 
-  long buffer::size () {
+  size_t buffer::size () {
     return ( _buffer == NULL ? 0 : Fsizeof32 ( _buffer ));
   };
 
-  long buffer::used () {
+  size_t buffer::used () {
     return ( _buffer == NULL ? 0 : Fused32 ( _buffer ));
   };
 
-  long buffer::unused () {
+  size_t buffer::unused () {
     return ( _buffer == NULL ? 0 : Funused32 ( _buffer ));
   };
 
@@ -153,10 +153,19 @@ namespace atmi {
     return sum;
   };
 
-  FLDOCC32 buffer::num() {
+  FLDOCC32 buffer::field_count() {
 
     return Fnum32 ( _buffer );
   };
+
+  size_t buffer::print_buffer_size(){
+
+    return (field_count() * MAXTIDENT) + used();
+  }
+
+  void buffer::print (char *buffer) {
+    Fsprint32(_buffer, buffer);
+  }
 
   void buffer::print () {
 
