@@ -38,9 +38,9 @@ This code creates a FML field and passes it to a service called `XATOUPPER`. If 
           Tfield<string> name ( "EMPNAME" );
           name = (string) "Herbert.Koelman@me.com";
 
-          buffer.add ( &name );
+          buffer.add ( name );
 
-          printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name());
+          printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name().c_str());
 
           try {
 
