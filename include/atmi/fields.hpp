@@ -168,7 +168,7 @@ namespace atmi {
        */
       virtual int remove ( buffer &b );
 
-      field(){};
+      field(): _field_id(0), _field_occurence(0), _field_name(NULL), _ferror(0){};
     private:
 
 
