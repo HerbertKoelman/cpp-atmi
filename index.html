@@ -74,9 +74,9 @@ $ make
       Tfield&lt;string&gt; name ( "EMPNAME" );
       name = (string) "Herbert.Koelman@me.com";
 
-      buffer.add ( &amp;name );
+      buffer.add ( name );
 
-      printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name());
+      printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , name().c_str());
 
       try {
 
