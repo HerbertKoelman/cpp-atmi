@@ -6,6 +6,5 @@ var searchData=
   ['new_5ftransaction_5finstance',['new_transaction_instance',['../classatmi_1_1abstract__client.html#a9449f2df2136afd5b253389418265c87',1,'atmi::abstract_client']]],
   ['nomsg_5fexception',['nomsg_exception',['../classatmi_1_1nomsg__exception.html',1,'atmi']]],
   ['nomsg_5fexception',['nomsg_exception',['../classatmi_1_1nomsg__exception.html#adf4039103c33fa16b63242cb7e129664',1,'atmi::nomsg_exception']]],
-  ['num',['num',['../classatmi_1_1buffer.html#a3ec1c691a444915993628b2774503d18',1,'atmi::buffer']]],
   ['number',['number',['../classatmi_1_1field.html#aa71d28f3df8490e9ed016607f857fae1',1,'atmi::field']]]
 ];

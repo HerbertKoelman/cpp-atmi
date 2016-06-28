@@ -8,5 +8,6 @@ var searchData=
   ['chksum',['chksum',['../classatmi_1_1buffer.html#a4ae9fa419098eb136ae3681ad90ccafb',1,'atmi::buffer']]],
   ['commit',['commit',['../classatmi_1_1tuxedo.html#aeff1d0270d6b12de07a4478839ec8b07',1,'atmi::tuxedo']]],
   ['context',['context',['../classatmi_1_1tuxedo.html#a6d31779e76609264295e0065fdfc008d',1,'atmi::tuxedo']]],
-  ['count',['count',['../classatmi_1_1queue__stream.html#ac4f1e88530a4d9fda0bc4b271301866b',1,'atmi::queue_stream']]]
+  ['count',['count',['../classatmi_1_1queue__stream.html#ac4f1e88530a4d9fda0bc4b271301866b',1,'atmi::queue_stream']]],
+  ['c_2b_2b_20atmi_20wrapper',['C++ ATMI wrapper',['../index.html',1,'']]]
 ];

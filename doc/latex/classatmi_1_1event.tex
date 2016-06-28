@@ -1,6 +1,5 @@
-\hypertarget{classatmi_1_1event}{\section{atmi\+:\+:event Class Reference}
+\hypertarget{classatmi_1_1event}{}\section{atmi\+:\+:event Class Reference}
 \label{classatmi_1_1event}\index{atmi\+::event@{atmi\+::event}}
-}
 
 
 {\ttfamily \#include $<$event.\+hpp$>$}
@@ -14,53 +13,53 @@ Inheritance diagram for atmi\+:\+:event\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{event} (const char $\ast$evtname=N\+U\+L\+L)
+\hyperlink{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{event} (const char $\ast$evtname=N\+U\+LL)
 \item 
-long \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post} (const char $\ast$data=N\+U\+L\+L, long len=0)  throw ( tuxedo\+\_\+exception )
+long \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post} (const char $\ast$data=N\+U\+LL, long len=0)  throw ( tuxedo\+\_\+exception )
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
-Use this class to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+L\+L, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+M\+I event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
+Use this class to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+LL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+MI event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
 
-eventname is a N\+U\+L\+L-\/terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.\+”) as this character is reserved as the starting character for all events defined by the Oracle tuxedo A\+T\+M\+I system itself.
+eventname is a N\+U\+L\+L-\/terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.\+”) as this character is reserved as the starting character for all events defined by the Oracle tuxedo A\+T\+MI system itself.
 
-If data is non-\/\+N\+U\+L\+L, it must point to a buffer previously allocated by tpalloc() and len should specify the amount of data in the buffer that should be posted with the event. Note that if data points to a buffer of a type that does not require a length to be specified (for example, an F\+M\+L fielded buffer), then len is ignored. If data is N\+U\+L\+L, len is ignored and the event is posted with no data.
+If data is non-\/\+N\+U\+LL, it must point to a buffer previously allocated by tpalloc() and len should specify the amount of data in the buffer that should be posted with the event. Note that if data points to a buffer of a type that does not require a length to be specified (for example, an F\+ML fielded buffer), then len is ignored. If data is N\+U\+LL, len is ignored and the event is posted with no data.
 
 When event is used within a transaction, the transaction boundary can be extended to include those servers and/or stable-\/storage message queues notified by the event\+Broker. When a transactional posting is made, some of the recipients of the event posting are notified on behalf of the poster’s transaction (for example, servers and queues), while some are not (for example, clients).
 
-If the poster is within a transaction and the T\+P\+N\+O\+T\+R\+A\+N flag is not set, the posted event goes to the event\+Broker in transaction mode such that it dispatches the event as part of the poster’s transaction. The broker dispatches transactional event notifications only to those service routine and stable-\/storage queue subscriptions that used the T\+P\+E\+V\+T\+R\+A\+N bit setting in the ctlflags parameter passed to subscribe(). Client notifications, and those service routine and stable-\/storage queue subscriptions that did not use the T\+P\+E\+V\+T\+R\+A\+N bit setting in the ctlflags parameter passed to subscribe(), are also dispatched by the event\+Broker but not as part of the posting process’s transaction.
+If the poster is within a transaction and the T\+P\+N\+O\+T\+R\+AN flag is not set, the posted event goes to the event\+Broker in transaction mode such that it dispatches the event as part of the poster’s transaction. The broker dispatches transactional event notifications only to those service routine and stable-\/storage queue subscriptions that used the T\+P\+E\+V\+T\+R\+AN bit setting in the ctlflags parameter passed to subscribe(). Client notifications, and those service routine and stable-\/storage queue subscriptions that did not use the T\+P\+E\+V\+T\+R\+AN bit setting in the ctlflags parameter passed to subscribe(), are also dispatched by the event\+Broker but not as part of the posting process’s transaction.
 
-If the poster is outside a transaction, \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} is a one-\/way post with no acknowledgement when the service associated with the event fails. This occurs even when T\+P\+E\+V\+T\+R\+A\+N is set for that event (using the ctlflags parameter passed to subscribe()). If the poster is in a transaction, then \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} returns T\+P\+E\+S\+V\+C\+F\+A\+I\+L when the associated service fails in the event. 
+If the poster is outside a transaction, \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} is a one-\/way post with no acknowledgement when the service associated with the event fails. This occurs even when T\+P\+E\+V\+T\+R\+AN is set for that event (using the ctlflags parameter passed to subscribe()). If the poster is in a transaction, then \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} returns T\+P\+E\+S\+V\+C\+F\+A\+IL when the associated service fails in the event. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{\index{atmi\+::event@{atmi\+::event}!event@{event}}
+\index{atmi\+::event@{atmi\+::event}!event@{event}}
 \index{event@{event}!atmi\+::event@{atmi\+::event}}
-\subsubsection[{event}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::event\+::event (
+\subsubsection[{\texorpdfstring{event(const char $\ast$evtname=\+N\+U\+L\+L)}{event(const char *evtname=NULL)}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::event\+::event (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{evtname = {\ttfamily NULL}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}
-Use this class to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+L\+L, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+M\+I event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}{}\label{classatmi_1_1event_a64e8905f6b027d052074cb801567b1b3}
+Use this class to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+LL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+MI event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
 
 
 \begin{DoxyParams}{Parameters}
-{\em evtname} & is a N\+U\+L\+L-\/terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.\+”) as this character is reserved by the Oracle tuxedo A\+T\+M\+I system itself. \\
+{\em evtname} & is a N\+U\+L\+L-\/terminated string of at most 31 characters. eventname’s first character cannot be a dot (“.\+”) as this character is reserved by the Oracle tuxedo A\+T\+MI system itself. \\
 \hline
 \end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{\index{atmi\+::event@{atmi\+::event}!post@{post}}
+\index{atmi\+::event@{atmi\+::event}!post@{post}}
 \index{post@{post}!atmi\+::event@{atmi\+::event}}
-\subsubsection[{post}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::event\+::post (
+\subsubsection[{\texorpdfstring{post(const char $\ast$data=\+N\+U\+L\+L, long len=0)}{post(const char *data=NULL, long len=0)}}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::event\+::post (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{data = {\ttfamily NULL}, }
 \item[{long}]{len = {\ttfamily 0}}
 \end{DoxyParamCaption}
-) throw  {\bf tuxedo\+\_\+exception}) }}\label{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}
-The caller uses \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+L\+L, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+M\+I event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
+) throw  {\bf tuxedo\+\_\+exception}) }\hypertarget{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{}\label{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}
+The caller uses \hyperlink{classatmi_1_1event_a0b1f1faae17aa923ce5a4a0d45cfcd07}{post()} to post an event and any accompanying data. The event is named by eventname and data, if not N\+U\+LL, points to the data. The posted event and its data are dispatched by the Oracle tuxedo A\+T\+MI event\+Broker to all subscribers whose subscriptions successfully evaluate against eventname and whose optional filter rules successfully evaluate against data.
 
 
 \begin{DoxyParams}{Parameters}

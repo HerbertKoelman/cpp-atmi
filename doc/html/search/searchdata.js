@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "_flv",
   4: "act",
   5: "o",
-  6: "afh",
+  6: "aefhu",
   7: "cd"
 };
 
