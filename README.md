@@ -46,7 +46,7 @@ This code creates a FML field and passes it to a service called `XATOUPPER`. If 
 
             tp.begin();
 
-            int ret = tp.call ( &buffer );
+            int ret = tp.call ( buffer );
             switch (ret) {
               case 0:
                 break;
@@ -58,7 +58,7 @@ This code creates a FML field and passes it to a service called `XATOUPPER`. If 
                 buffer.print();
             }
 
-            buffer.get ( &name );
+            buffer.get ( name );
             printf ( "Call returned: %s.\n", name.c_str() );
 
             tp.commit();
