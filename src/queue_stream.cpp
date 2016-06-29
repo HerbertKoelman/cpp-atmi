@@ -66,7 +66,7 @@ namespace atmi {
           rc = qs._queue->dequeue ( &message, &len );
 
           // Make sure we have data
-          if ( rc != QMENOMSG && len > 0 ) {
+          if ( (rc != QMENOMSG) && (len > 0) ) {
 
             s = size;
 

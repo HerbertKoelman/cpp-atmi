@@ -67,7 +67,7 @@ namespace atmi {
 
     int rc = -1;
 
-    if ( _qspace == NULL || queue == NULL ) {
+    if ( (_qspace == NULL) || (queue == NULL) ) {
 
       throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
     }
@@ -139,7 +139,7 @@ namespace atmi {
 
     int rc = -1;
 
-    if ( _qspace == NULL || queue == NULL ) {
+    if ( (_qspace == NULL) || (queue == NULL) ) {
 
       throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
     }

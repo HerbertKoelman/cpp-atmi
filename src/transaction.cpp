@@ -37,11 +37,15 @@ namespace atmi {
         switch ( tperrno ) {
           case TPETIME:
           case TPESVCERR:
-            if ( delay > 0 ) sleep (delay);
+            if ( delay > 0 ) {
+              sleep (delay);
+            }
         };
 
       } else {
-        if ( urcode != NULL ) *urcode = tpurcode;
+        if ( urcode != NULL ) {
+          *urcode = tpurcode;
+        }
       }
 
       retry++;
@@ -140,7 +144,9 @@ namespace atmi {
       rc = tpgetrply(&_call_descriptor, data, len, _flags);
     } else {
       rc = tpgetrply(cd, data, len,  _flags);
-      if ( *cd == _call_descriptor ) _call_descriptor = 0;
+      if ( *cd == _call_descriptor ) {
+        _call_descriptor = 0;
+      }
     }
 
     if ( urcode != NULL ) *urcode = tpurcode;

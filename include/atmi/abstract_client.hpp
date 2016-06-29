@@ -27,7 +27,7 @@
 #include <atmi.h>
 #include <fml32.h>
 #include <string>
-#include <stdio.h>
+#include <cstdio>
 #include <memory>
 #include <nl_types.h>
 

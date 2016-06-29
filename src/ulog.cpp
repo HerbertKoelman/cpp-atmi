@@ -1,4 +1,3 @@
-#include <stdarg.h>
 #include <string>
 #include <atmi/ulog.hpp>
 

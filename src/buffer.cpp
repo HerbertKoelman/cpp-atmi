@@ -4,9 +4,7 @@
 
 #include <iostream>
 
-#include <stdarg.h>
 #include <atmi.h>
-#include <fml.h>
 #include <fml32.h>
 #include <string>
 

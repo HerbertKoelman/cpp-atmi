@@ -351,7 +351,7 @@ namespace atmi {
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      Tfield ( const char *n ) {
+      explicit Tfield ( const char *n ) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
@@ -606,7 +606,9 @@ namespace atmi {
 
       virtual ~Tfield() {
 
-        if ( value != NULL) delete[] value;
+        if ( value != NULL) {
+          delete[] value;
+        }
       };
 
       /** @return returns the size of the carray
@@ -623,7 +625,9 @@ namespace atmi {
        */
       void set_char_array ( const char * c, long s ) {
 
-        if ( value == NULL ) delete value;
+        if ( value == NULL ) {
+          delete value;
+        }
 
         len = s;
         value = new char [len];
@@ -708,7 +712,9 @@ namespace atmi {
         if ( v != NULL ) {
 
           len = l;
-          if ( value != NULL ) delete[] value;
+          if ( value != NULL ) {
+            delete[] value;
+          }
 
           value = new char[len];
           memcpy (value, v, len);
