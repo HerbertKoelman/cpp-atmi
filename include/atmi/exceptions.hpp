@@ -23,7 +23,7 @@
 #define __TUXEDO_EXCEPTION__
 
 #include <atmi.h>
-#include <stdarg.h>
+// #include <stdarg.h>
 #include <exception>
 #include <string>
 #include <cstring>
