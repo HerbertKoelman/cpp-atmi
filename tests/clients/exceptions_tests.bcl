@@ -28,7 +28,7 @@ int main ( int argc, char **argv ) {
       throw atmi::buffer_exception ( 4, "Buffer error number %d blabla: %s.", 4, "car");
 
     } catch ( atmi::buffer_exception &err ) {
-      printf("TEST buffer_exception(...): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
+      printf("TEST buffer_exception(...)(file;%s, at:%d): what [%s], message: [%s], error: %d\n\n", __FILE__, __LINE__, err.what(), err.error_message(), err.error());
     }
 
 
@@ -36,7 +36,7 @@ int main ( int argc, char **argv ) {
       throw atmi::unix_exception ( EISCONN, "Unix error number %d blabla: %s.", 4, "car");
 
     } catch ( atmi::unix_exception &err ) {
-      printf("TEST unix_exception(...): what [%s], error: %d\n\n", err.what(), err.error());
+      printf("TEST unix_exception(...): what [%s], error: %d\n\n",__FILE__, __LINE__,  err.what(), err.error());
     }
 
     try {
@@ -81,6 +81,7 @@ int main ( int argc, char **argv ) {
       printf("TEST nomsg_exception(...): what [%s], message: [%s], error: %d\n\n", err.what(), err.error_message(), err.error());
     }
 
+    throw atmi::atmi_exception ("check if exceptions can be catched using std::exception  (thrown: %s, at: %d).", __FILE__, __LINE__);
   } catch ( std::exception &err ) {
     std::cerr << "catched an exception: " << err.what() << std::endl;
   } catch (... ) {
