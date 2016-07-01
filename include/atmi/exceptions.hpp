@@ -75,7 +75,7 @@ namespace atmi {
        * @return user friendly text message
        */
 #if __cplusplus < 201103L
-      virtual const char *what() throw () ;
+      virtual const char *what() const throw () ;
 #else
       virtual const char *what() const noexcept override;
 #endif

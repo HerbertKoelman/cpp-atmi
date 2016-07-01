@@ -82,6 +82,7 @@ int main ( int argc, char **argv ) {
     }
 
     throw atmi::atmi_exception ("check if exceptions can be catched using std::exception  (thrown: %s, at: %d).", __FILE__, __LINE__);
+
   } catch ( std::exception &err ) {
     std::cerr << "catched an exception: " << err.what() << std::endl;
   } catch (... ) {
