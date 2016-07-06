@@ -19,6 +19,6 @@ var searchData=
   ['set_5freply_5fqueue',['set_reply_queue',['../classatmi_1_1queue.html#a216acfef7e80352c8ce8476825f1146e',1,'atmi::queue']]],
   ['setqwait',['setQWait',['../classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a',1,'atmi::queue']]],
   ['setup',['setup',['../classatmi_1_1field.html#a9ca5e61e3e1068770098d20ad1332f24',1,'atmi::field']]],
-  ['size',['size',['../classatmi_1_1buffer.html#a2e24d67c781ef0052d3f1bfd7b958a0f',1,'atmi::buffer::size()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#aea88f61cd27f8f258ee473e0e938790b',1,'atmi::Tfield&lt; std::string &gt;::size()']]],
+  ['size',['size',['../classatmi_1_1buffer.html#a8228f64305e566b8133e8ee746c6d2bb',1,'atmi::buffer::size()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#aea88f61cd27f8f258ee473e0e938790b',1,'atmi::Tfield&lt; std::string &gt;::size()']]],
   ['switch_5fcontext',['switch_context',['../classatmi_1_1tuxedo.html#a90d83b2141d484744a82202f3f66a939',1,'atmi::tuxedo']]]
 ];

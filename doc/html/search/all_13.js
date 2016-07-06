@@ -8,7 +8,7 @@ var searchData=
   ['unset',['unset',['../classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0',1,'atmi::tuxedo']]],
   ['unset_5fcorrid',['unset_corrid',['../classatmi_1_1queue.html#aa74de8091c32580972e7871e7ddf786c',1,'atmi::queue']]],
   ['unset_5fflags',['unset_flags',['../classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633',1,'atmi::tuxedo']]],
-  ['unused',['unused',['../classatmi_1_1buffer.html#a89a04e518cd6bd9538463a3f384462e3',1,'atmi::buffer']]],
+  ['unused',['unused',['../classatmi_1_1buffer.html#a30b054d9d60238f34463d4bcd5ac3e16',1,'atmi::buffer']]],
   ['updateerrno',['updateErrno',['../classatmi_1_1tuxedo.html#a1c1d7f2df43e4357788d03977548ac2e',1,'atmi::tuxedo']]],
-  ['used',['used',['../classatmi_1_1buffer.html#a012274076a2b4f74258746e594ac5e92',1,'atmi::buffer']]]
+  ['used',['used',['../classatmi_1_1buffer.html#a4ab660c5750cb0793eb99782fd36c0fa',1,'atmi::buffer']]]
 ];

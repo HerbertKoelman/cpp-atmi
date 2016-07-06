@@ -1,5 +1,6 @@
-\hypertarget{classatmi_1_1atmi__exception}{}\section{atmi\+:\+:atmi\+\_\+exception Class Reference}
+\hypertarget{classatmi_1_1atmi__exception}{\section{atmi\+:\+:atmi\+\_\+exception Class Reference}
 \label{classatmi_1_1atmi__exception}\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}}
+}
 
 
 {\ttfamily \#include $<$exceptions.\+hpp$>$}
@@ -17,17 +18,17 @@ Inheritance diagram for atmi\+:\+:atmi\+\_\+exception\+:\begin{figure}[H]
 \item 
 \hyperlink{classatmi_1_1atmi__exception_afa30faf28ecbc27a8aeb06dccd3b1de6}{atmi\+\_\+exception} ()
 \item 
-virtual const char $\ast$ \hyperlink{classatmi_1_1atmi__exception_ac4f376d7dc01ce853fa3f3d2d407b3a3}{what} () const  noexcept override
+virtual const char $\ast$ \hyperlink{classatmi_1_1atmi__exception_a7e527bcd2919ba17b332ea827ec28a22}{what} () const noexceptoverride
 \item 
-virtual const char $\ast$ \hyperlink{classatmi_1_1atmi__exception_a4d457a0e0ced6177ce86a241691c8239}{message} () const  noexcept
+virtual const char $\ast$ \hyperlink{classatmi_1_1atmi__exception_a0fddf8efafd5e23acbe913beeccd33fc}{message} () const noexcept
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::string \hyperlink{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}{\+\_\+what}\hypertarget{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}{}\label{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}
+\hypertarget{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}{std\+::string \hyperlink{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}{\+\_\+what}}\label{classatmi_1_1atmi__exception_a04aa0d2991971df8e87f68cbbbaa02b2}
 
 \begin{DoxyCompactList}\small\item\em what message (often the concatenation of message + other infos) \end{DoxyCompactList}\item 
-std\+::string \hyperlink{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}{\+\_\+message}\hypertarget{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}{}\label{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}
+\hypertarget{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}{std\+::string \hyperlink{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}{\+\_\+message}}\label{classatmi_1_1atmi__exception_a709aa3b3b70930ed40d442ec7fbb6b99}
 
 \begin{DoxyCompactList}\small\item\em error message \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -38,14 +39,14 @@ Base class of A\+T\+M\+I++ exception
 Can be used to throw any kind of error message in a consitent way. 
 
 \subsection{Constructor \& Destructor Documentation}
-\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!atmi\+\_\+exception@{atmi\+\_\+exception}}
+\hypertarget{classatmi_1_1atmi__exception_a95882b5a28a14774110080a50601abd5}{\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!atmi\+\_\+exception@{atmi\+\_\+exception}}
 \index{atmi\+\_\+exception@{atmi\+\_\+exception}!atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}}
-\subsubsection[{\texorpdfstring{atmi\+\_\+exception(const char $\ast$msg, const Args \&...\+args)}{atmi\_exception(const char *msg, const Args \&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ atmi\+::atmi\+\_\+exception\+::atmi\+\_\+exception (
+\subsubsection[{atmi\+\_\+exception}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ atmi\+::atmi\+\_\+exception\+::atmi\+\_\+exception (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{msg, }
 \item[{const Args \&...}]{args}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classatmi_1_1atmi__exception_a95882b5a28a14774110080a50601abd5}{}\label{classatmi_1_1atmi__exception_a95882b5a28a14774110080a50601abd5}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1atmi__exception_a95882b5a28a14774110080a50601abd5}
 create a new instance
 
 
@@ -55,35 +56,35 @@ create a new instance
 {\em args} & message parameters \\
 \hline
 \end{DoxyParams}
-\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!atmi\+\_\+exception@{atmi\+\_\+exception}}
+\hypertarget{classatmi_1_1atmi__exception_afa30faf28ecbc27a8aeb06dccd3b1de6}{\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!atmi\+\_\+exception@{atmi\+\_\+exception}}
 \index{atmi\+\_\+exception@{atmi\+\_\+exception}!atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}}
-\subsubsection[{\texorpdfstring{atmi\+\_\+exception()}{atmi\_exception()}}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::atmi\+\_\+exception\+::atmi\+\_\+exception (
+\subsubsection[{atmi\+\_\+exception}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::atmi\+\_\+exception\+::atmi\+\_\+exception (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{classatmi_1_1atmi__exception_afa30faf28ecbc27a8aeb06dccd3b1de6}{}\label{classatmi_1_1atmi__exception_afa30faf28ecbc27a8aeb06dccd3b1de6}
+)}}\label{classatmi_1_1atmi__exception_afa30faf28ecbc27a8aeb06dccd3b1de6}
 default constructor.
 
 set a default message. 
 
 \subsection{Member Function Documentation}
-\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!message@{message}}
+\hypertarget{classatmi_1_1atmi__exception_a0fddf8efafd5e23acbe913beeccd33fc}{\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!message@{message}}
 \index{message@{message}!atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}}
-\subsubsection[{\texorpdfstring{message() const  noexcept}{message() const  noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::atmi\+\_\+exception\+::message (
+\subsubsection[{message}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::atmi\+\_\+exception\+::message (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}\hypertarget{classatmi_1_1atmi__exception_a4d457a0e0ced6177ce86a241691c8239}{}\label{classatmi_1_1atmi__exception_a4d457a0e0ced6177ce86a241691c8239}
+) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classatmi_1_1atmi__exception_a0fddf8efafd5e23acbe913beeccd33fc}
 \begin{DoxyReturn}{Returns}
 explanatory error message. 
 \end{DoxyReturn}
-\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!what@{what}}
+\hypertarget{classatmi_1_1atmi__exception_a7e527bcd2919ba17b332ea827ec28a22}{\index{atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}!what@{what}}
 \index{what@{what}!atmi\+::atmi\+\_\+exception@{atmi\+::atmi\+\_\+exception}}
-\subsubsection[{\texorpdfstring{what() const  noexcept override}{what() const  noexcept override}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::atmi\+\_\+exception\+::what (
+\subsubsection[{what}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::atmi\+\_\+exception\+::what (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\hypertarget{classatmi_1_1atmi__exception_ac4f376d7dc01ce853fa3f3d2d407b3a3}{}\label{classatmi_1_1atmi__exception_ac4f376d7dc01ce853fa3f3d2d407b3a3}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classatmi_1_1atmi__exception_a7e527bcd2919ba17b332ea827ec28a22}
 \begin{DoxyReturn}{Returns}
 user friendly text message 
 \end{DoxyReturn}
