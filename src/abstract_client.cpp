@@ -43,7 +43,7 @@ namespace atmi {
 
     int rc = -1;
 
-    if ( cltname != NULL || usr != NULL || passwd != NULL ) {
+    if ( (cltname != NULL) || (usr != NULL) || (passwd != NULL) ) {
 
       _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (0)  );
 
@@ -80,8 +80,8 @@ namespace atmi {
         }
       }
 
-      if ( group != NULL ) strncpy ( _tpinfo->grpname,  group, MAXTIDENT );
-      if ( cltname != NULL ) strncpy ( _tpinfo->cltname, cltname, MAXTIDENT );
+      if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
+      if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
     }
 
     rc = tpinit ( _tpinfo );

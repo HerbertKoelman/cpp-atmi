@@ -96,7 +96,7 @@ namespace atmi {
       /**
        * Free a previously allocated tuxedo buffer.
        */
-      void free ( char *buffer );
+      void free ( char *buffer ); //NOSONAR named intentionally...
 
       /**
        * Starts XA transaction.
@@ -119,7 +119,7 @@ namespace atmi {
        *
        * @throw transaction_exception if abort failed.
        */
-      int abort ();
+      int abort (); //NOSONAR named intentionally...
 
       /**
        * @return the current errno value

@@ -11,12 +11,11 @@ namespace atmi {
   }
 
 #if __cplusplus < 201103L
-  const char *atmi_exception::what() throw(){
+  const char *atmi_exception::what() const throw(){
 #else
   const char *atmi_exception::what() const noexcept {
 #endif
 
-//    printf("Atmi what:  [%s], what to [%s] (size: %d).\n", _message.c_str(), _what.c_str(), _what.size());
     return (_what.size() > 0 ) ? _what.c_str() : _message.c_str();
   }
 

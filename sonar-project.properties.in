@@ -14,10 +14,10 @@ sonar.projectKey=pmu:cpp-atmi
 
 # Name of the project that will be displayed on the web interface.
 sonar.projectName=pmu:cpp-atmi
-sonar.projectVersion=draft
+sonar.projectVersion=@PACKAGE_VERSION@
 
 # Comma-separated paths to directories containing source files
-#sonar.sources=./
+#sonar.sources=src,include
 # Set the language of the source code to analyze. If not set, a multi-language analysis will be triggered.
 #sonar.language=
 # to exclude source code files

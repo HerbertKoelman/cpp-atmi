@@ -53,7 +53,9 @@ namespace atmi {
        */
       explicit ulog( log_level level = log_level::info);
 
-      virtual ~ulog() {};
+      virtual ~ulog() {
+        // Intentionally unimplemented...
+      };
 
       /** error message
        * 

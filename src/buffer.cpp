@@ -4,9 +4,7 @@
 
 #include <iostream>
 
-#include <stdarg.h>
 #include <atmi.h>
-#include <fml.h>
 #include <fml32.h>
 #include <string>
 
@@ -75,7 +73,7 @@ namespace atmi {
     resize ( used() );
   };
 
-  void buffer::resize ( long extent ){
+  void buffer::resize ( size_t extent ){
 
     _extent = extent;
     _buffer = (FBFR32 *) tuxedo::extend ( (char *) _buffer, _extent );
@@ -131,15 +129,15 @@ namespace atmi {
     return rc;
   };
 
-  long buffer::size () {
+  size_t buffer::size () const {
     return ( _buffer == NULL ? 0 : Fsizeof32 ( _buffer ));
   };
 
-  long buffer::used () {
+  size_t buffer::used () const {
     return ( _buffer == NULL ? 0 : Fused32 ( _buffer ));
   };
 
-  long buffer::unused () {
+  size_t buffer::unused () const {
     return ( _buffer == NULL ? 0 : Funused32 ( _buffer ));
   };
 
@@ -153,12 +151,21 @@ namespace atmi {
     return sum;
   };
 
-  FLDOCC32 buffer::num() {
+  FLDOCC32 buffer::field_count() const {
 
     return Fnum32 ( _buffer );
   };
 
-  void buffer::print () {
+  size_t buffer::print_buffer_size() const {
+
+    return (field_count() * MAXTIDENT) + used();
+  }
+
+  void buffer::print (char *buffer) const {
+    Fsprint32(_buffer, buffer);
+  }
+
+  void buffer::print () const {
 
     Fprint32 ( _buffer );
   };
