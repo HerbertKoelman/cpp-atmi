@@ -69,7 +69,9 @@ namespace atmi {
        */
       atmi_exception();
 
-      virtual ~atmi_exception () throw () { };
+      virtual ~atmi_exception () throw () { 
+        // Intentionally unimplemented... 
+      };
 
       /**
        * @return user friendly text message
@@ -124,7 +126,9 @@ namespace atmi {
        */
       unix_exception();
 
-      virtual ~unix_exception () throw() {};
+      virtual ~unix_exception () throw() {
+        // Intentionally unimplemented... 
+      };
 
       /** @return unix errno
        */
@@ -186,6 +190,7 @@ namespace atmi {
       };
 
       virtual ~tuxedo_exception () throw () {
+        // Intentionally unimplemented...
       };
 
       /**
@@ -231,7 +236,9 @@ namespace atmi {
        */
       template<typename... Args> service_exception( const char *msg, const Args&... args): tuxedo_exception(TPESVCERR, msg, args...){
       };
-      virtual ~service_exception () throw () { };
+      virtual ~service_exception () throw () {
+        // Intentionally unimplemented...
+      };
   };
 
   /**
@@ -246,7 +253,9 @@ namespace atmi {
        */
       template<typename... Args> timeout_exception( const char *msg, const Args&... args): tuxedo_exception(TPETIME, msg, args...){
       };
-      virtual ~timeout_exception () throw (){ };
+      virtual ~timeout_exception () throw (){
+        // Intentionally unimplemented...
+      };
   };
 
   /**
@@ -262,6 +271,7 @@ namespace atmi {
       template<typename... Args> blocking_exception( const char *msg, const Args&... args): tuxedo_exception(TPEBLOCK, msg, args...){
       };
       virtual ~blocking_exception () throw () {
+        // Intentionally unimplemented...
       };
   };
 
@@ -278,6 +288,7 @@ namespace atmi {
       template<typename... Args> interrupt_exception( const char *msg, const Args&... args): tuxedo_exception(TPGOTSIG, msg, args...){
       };
       virtual ~interrupt_exception () throw () {
+        // Intentionally unimplemented...
       };
   };
 
@@ -304,6 +315,7 @@ namespace atmi {
         }
       };
       virtual ~diagnostic_exception ()  throw () {
+        // Intentionally unimplemented...
       };
 
       /**
@@ -336,6 +348,7 @@ namespace atmi {
       template<typename... Args> nomsg_exception( const char *msg, const Args&... args): diagnostic_exception(TPEDIAGNOSTIC, QMENOMSG, msg, args...){
       };
       virtual ~nomsg_exception () throw () {
+        // Intentionally unimplemented...
       };
   };
 
@@ -353,7 +366,9 @@ namespace atmi {
        */
       template<typename... Args> aborted_exception( const char *msg, const Args&... args): diagnostic_exception(TPEDIAGNOSTIC, QMEABORTED, msg, args...){
       };
-      virtual ~aborted_exception () throw () { };
+      virtual ~aborted_exception () throw () {
+        // Intentionally unimplemented...
+      };
   };
 
 /* @} */

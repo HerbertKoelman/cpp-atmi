@@ -61,6 +61,6 @@ fi
 
 AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src)
-AC_CONFIG_FILES([Makefile doxyfile])
+AC_CONFIG_FILES([Makefile sonar-project.properties doxyfile])
 AC_OUTPUT
 
