@@ -27,6 +27,7 @@ autom4te.cache
 
 # misc and project created files
 doc
+sonar-project.properties
 doxyfile
 config.h
 locale

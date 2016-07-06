@@ -49,7 +49,7 @@ namespace atmi {
       }
 
       retry++;
-    } while ( retry <= retries && rc != 0 );
+    } while ( (retry <= retries) && (rc != 0) );
 
     updateErrno ();
 

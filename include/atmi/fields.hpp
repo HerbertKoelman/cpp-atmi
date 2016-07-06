@@ -43,7 +43,9 @@ namespace atmi {
 
       /** Default destructor
        */
-      virtual ~field () { };
+      virtual ~field () {
+        // Intentionally unimplemented...
+      };
 
       /**
        *  Possible values are:
@@ -229,6 +231,7 @@ namespace atmi {
       }
 
       virtual ~Tfield() {
+        // Intentionally unimplemented...
       };
 
       /** @return de length (or size) of the field's data
@@ -362,6 +365,7 @@ namespace atmi {
       }
 
       virtual ~Tfield() {
+        // Intentionally unimplemented...
       };
 
       /** @return the string's length
@@ -578,7 +582,7 @@ namespace atmi {
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      Tfield ( FLDID32 fid ) : len (0), value (NULL) {
+      explicit Tfield ( FLDID32 fid ) : len (0), value (NULL) {
 
         setup ( fid );
 
@@ -594,7 +598,7 @@ namespace atmi {
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      Tfield ( const char *n ) : len (0), value (NULL) {
+      explicit Tfield ( const char *n ) : len (0), value (NULL) {
 
         setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 

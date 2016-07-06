@@ -129,15 +129,15 @@ namespace atmi {
     return rc;
   };
 
-  size_t buffer::size () {
+  size_t buffer::size () const {
     return ( _buffer == NULL ? 0 : Fsizeof32 ( _buffer ));
   };
 
-  size_t buffer::used () {
+  size_t buffer::used () const {
     return ( _buffer == NULL ? 0 : Fused32 ( _buffer ));
   };
 
-  size_t buffer::unused () {
+  size_t buffer::unused () const {
     return ( _buffer == NULL ? 0 : Funused32 ( _buffer ));
   };
 
@@ -151,21 +151,21 @@ namespace atmi {
     return sum;
   };
 
-  FLDOCC32 buffer::field_count() {
+  FLDOCC32 buffer::field_count() const {
 
     return Fnum32 ( _buffer );
   };
 
-  size_t buffer::print_buffer_size(){
+  size_t buffer::print_buffer_size() const {
 
     return (field_count() * MAXTIDENT) + used();
   }
 
-  void buffer::print (char *buffer) {
+  void buffer::print (char *buffer) const {
     Fsprint32(_buffer, buffer);
   }
 
-  void buffer::print () {
+  void buffer::print () const {
 
     Fprint32 ( _buffer );
   };
