@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.1.1)</span>
+   &#160;<span id="projectnumber">(v4.2.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -274,19 +274,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      <span class="keywordtype">long</span>   _count;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordtype">long</span>   _buffer_size;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      <span class="comment">// TODO this was hidding the base class protected declaration.</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      <span class="comment">// long   _flags;</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      <a class="code" href="classatmi_1_1queue.html">queue</a> *_queue;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  };</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;      <a class="code" href="classatmi_1_1queue.html">queue</a> *_queue;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  };</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  <span class="keyword">extern</span> ostream&amp; <a class="code" href="group__atmi.html#gaf3fe9481b5d6e19d1fb56e27baff2154">operator&lt;&lt;</a>(ostream&amp; out, queue_stream&amp; qs);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  <span class="keyword">extern</span> istream&amp; <a class="code" href="group__atmi.html#gadb0ca17e8de1eecddb5c95b86441ffdc">operator&gt;&gt;</a>(istream&amp; in, queue_stream&amp; qs);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;}</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  <span class="keyword">extern</span> ostream&amp; <a class="code" href="group__atmi.html#gaf3fe9481b5d6e19d1fb56e27baff2154">operator&lt;&lt;</a>(ostream&amp; out, queue_stream&amp; qs);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keyword">extern</span> istream&amp; <a class="code" href="group__atmi.html#gadb0ca17e8de1eecddb5c95b86441ffdc">operator&gt;&gt;</a>(istream&amp; in, queue_stream&amp; qs);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html"><div class="ttname"><a href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:53</div></div>
 <div class="ttc" id="classatmi_1_1queue_html_a223fac7945fb8d87f04189aa77ce666a"><div class="ttname"><a href="classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a">atmi::queue::setQWait</a></div><div class="ttdeci">void setQWait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.hpp:170</div></div>
 <div class="ttc" id="classatmi_1_1diagnostic__exception_html"><div class="ttname"><a href="classatmi_1_1diagnostic__exception.html">atmi::diagnostic_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:300</div></div>

@@ -11,10 +11,11 @@ var indexSectionsWithContent =
   1: "abdefinqstu",
   2: "abcdefghilmnopqrstuw~",
   3: "_flv",
-  4: "act",
-  5: "o",
-  6: "aefhu",
-  7: "d"
+  4: "acltu",
+  5: "l",
+  6: "o",
+  7: "aefhu",
+  8: "d"
 };
 
 var indexSectionNames =
@@ -24,9 +25,10 @@ var indexSectionNames =
   2: "functions",
   3: "variables",
   4: "typedefs",
-  5: "related",
-  6: "groups",
-  7: "pages"
+  5: "enums",
+  6: "related",
+  7: "groups",
+  8: "pages"
 };
 
 function convertToId(search)

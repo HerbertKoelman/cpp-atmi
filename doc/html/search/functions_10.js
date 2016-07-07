@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['service',['service',['../classatmi_1_1transaction.html#a16d4442ea8f6582ec4820a064fc9a825',1,'atmi::transaction']]],
+  ['service',['service',['../classatmi_1_1transaction.html#a04ce5f63ca8115964cd952c086221526',1,'atmi::transaction']]],
   ['service_5fexception',['service_exception',['../classatmi_1_1service__exception.html#aaaf22082b56169c161573ec3dfd4a6fd',1,'atmi::service_exception']]],
-  ['set',['set',['../classatmi_1_1buffer.html#a1fe98844cb17328390b3d4e658bd6903',1,'atmi::buffer::set()'],['../classatmi_1_1field.html#a41bb209965d627d2e67c839bece5372c',1,'atmi::field::set()'],['../classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77',1,'atmi::Tfield::set()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9',1,'atmi::Tfield&lt; std::string &gt;::set()'],['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7',1,'atmi::Tfield&lt; char * &gt;::set()'],['../classatmi_1_1tuxedo.html#a73c4c95f165a052ba5a3a29cb2834831',1,'atmi::tuxedo::set()']]],
+  ['set',['set',['../classatmi_1_1buffer.html#a1fe98844cb17328390b3d4e658bd6903',1,'atmi::buffer::set()'],['../classatmi_1_1field.html#a41bb209965d627d2e67c839bece5372c',1,'atmi::field::set()'],['../classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77',1,'atmi::Tfield::set()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9',1,'atmi::Tfield&lt; std::string &gt;::set()'],['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7',1,'atmi::Tfield&lt; char * &gt;::set()'],['../classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f',1,'atmi::tuxedo::set()']]],
   ['set_5fbuffer',['set_buffer',['../classatmi_1_1buffer.html#ade8853e7c2ae10dcd024b34049e99af3',1,'atmi::buffer']]],
   ['set_5fbuffer_5fsize',['set_buffer_size',['../classatmi_1_1queue__stream.html#a500b658e3f3f1a353982a1304ea27801',1,'atmi::queue_stream']]],
   ['set_5fchar_5farray',['set_char_array',['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#a57def5d907b0f5671a5dae41bccd64f1',1,'atmi::Tfield&lt; char * &gt;']]],
@@ -10,6 +10,7 @@ var searchData=
   ['set_5ffield_5foccurence',['set_field_occurence',['../classatmi_1_1field.html#a83412cd9df383c342b5feb195090c9d9',1,'atmi::field']]],
   ['set_5fflags',['set_flags',['../classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875',1,'atmi::tuxedo']]],
   ['set_5fhandling_5fmemory',['set_handling_memory',['../classatmi_1_1buffer.html#a68f05d1dbd040062850feeba5aa188fc',1,'atmi::buffer']]],
+  ['set_5fid',['set_id',['../classatmi_1_1field.html#a1d95c3b0f4ae491037ef51b8586a0083',1,'atmi::field::set_id()'],['../classatmi_1_1_tfield.html#ac458fcdcce36a34d8beed526ca1e385a',1,'atmi::Tfield::set_id()']]],
   ['set_5flog_5flevel',['set_log_level',['../classatmi_1_1ulog.html#a190ffba6f15d00c21578051ac5c7b035',1,'atmi::ulog']]],
   ['set_5fmessage_5fwait',['set_message_wait',['../classatmi_1_1queue.html#a9669776889226a450093d2ddfd921d4b',1,'atmi::queue']]],
   ['set_5fnew_5fcorrid',['set_new_corrid',['../classatmi_1_1queue.html#a2c0511c9f17e939789c5290fe83d1f1f',1,'atmi::queue']]],

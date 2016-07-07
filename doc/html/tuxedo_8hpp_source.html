@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.1.1)</span>
+   &#160;<span id="projectnumber">(v4.2.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;atmi/exceptions.hpp&gt;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// using namespace std;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceatmi.html">atmi</a> {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
@@ -134,17 +134,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> ();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a>();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">char</span> *allocate ( <span class="keyword">const</span> <span class="keywordtype">char</span> *type, <span class="keyword">const</span> <span class="keywordtype">char</span> *subtype, <span class="keywordtype">long</span> size );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1tuxedo.html#a44e77e3e6216a8c3fb8be33d5d8fed93">allocate</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *type, <span class="keyword">const</span> <span class="keywordtype">char</span> *subtype, <span class="keywordtype">long</span> size );</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordtype">char</span> *extend ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1buffer.html">buffer</a>, <span class="keywordtype">long</span> extent );</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1tuxedo.html#a683b79440474b94c471ed78ff3775eb8">extend</a> ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1buffer.html">buffer</a>, <span class="keywordtype">long</span> extent );</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordtype">void</span> free ( <span class="keywordtype">char</span> *buffer ); <span class="comment">//NOSONAR named intentionally...</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#afdcf4b7d25862c6fdaeb47d095609a01">free</a> ( <span class="keywordtype">char</span> *buffer ); <span class="comment">//NOSONAR named intentionally...</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keywordtype">int</span> begin ( <span class="keywordtype">int</span> timeout = 0 );</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1tuxedo.html#ac702cf5e571a3302978bfa76cd314c9b">begin</a> ( <span class="keywordtype">int</span> timeout = 0 );</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordtype">int</span> commit ();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1tuxedo.html#aeff1d0270d6b12de07a4478839ec8b07">commit</a> ();</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordtype">int</span> abort (); <span class="comment">//NOSONAR named intentionally...</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1tuxedo.html#ac5dbf9db596b4bfa05d0067b8a38e11c">abort</a> (); <span class="comment">//NOSONAR named intentionally...</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
 <div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a2f5b4f52ca8095d704dcb23771425690">  127</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span>  <a class="code" href="classatmi_1_1tuxedo.html#a2f5b4f52ca8095d704dcb23771425690">error</a> ()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> _errorno;</div>
@@ -161,8 +161,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">return</span> tpstrerrordetail ( _errornodetail, 0 );</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;      };</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#afa3734356109e8c3ce4d23bfcb94242b">  157</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#afa3734356109e8c3ce4d23bfcb94242b">set_context</a> ( TPCONTEXT_T context) {</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        _context = context;</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#afa3734356109e8c3ce4d23bfcb94242b">  157</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#afa3734356109e8c3ce4d23bfcb94242b">set_context</a> ( TPCONTEXT_T <a class="code" href="classatmi_1_1tuxedo.html#a6d31779e76609264295e0065fdfc008d">context</a>) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        _context = <a class="code" href="classatmi_1_1tuxedo.html#a6d31779e76609264295e0065fdfc008d">context</a>;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">// printf(&quot;DEBUG set_context [%d]:\n&quot;, _context);</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      };</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
@@ -174,114 +174,125 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;      };</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
 <div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">  174</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">return</span> _flags;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a>;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      };</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875">  181</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875">set_flags</a> ( <span class="keywordtype">long</span> flags ) {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        tuxedo::set (_flags, flags);</div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875">  181</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875">set_flags</a> ( <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a> ) {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <a class="code" href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">tuxedo::set</a> (<a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a>, flags);</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      };</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">  188</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">reset_flags</a> ( <span class="keywordtype">long</span> flags ) {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        _flags = TPNOFLAGS;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        tuxedo::set (_flags, flags);</div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">  188</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">reset_flags</a> ( <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a> ) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a> = TPNOFLAGS;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <a class="code" href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">tuxedo::set</a> (<a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a>, flags);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      };</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633">  196</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633">unset_flags</a> ( <span class="keywordtype">long</span> flags ) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        tuxedo::unset (_flags, flags);</div>
+<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633">  196</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633">unset_flags</a> ( <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a> ) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <a class="code" href="classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0">tuxedo::unset</a> (<a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a>, flags);</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;      };</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a79d8805a077e30138729f44c75fcfa5d">  200</a></span>&#160;      <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">long</span> FAILED = -1; </div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a79d8805a077e30138729f44c75fcfa5d">  200</a></span>&#160;      <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#a79d8805a077e30138729f44c75fcfa5d">FAILED</a> = -1; </div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;      <span class="keywordtype">void</span> switch_context ();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a90d83b2141d484744a82202f3f66a939">switch_context</a> ();</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">long</span> unset ( <span class="keywordtype">long</span> bits, <span class="keywordtype">long</span> flags);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0">unset</a> ( <span class="keywordtype">long</span> bits, <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a>);</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">long</span> set ( <span class="keywordtype">long</span>, <span class="keywordtype">long</span> );</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;      <span class="keywordtype">void</span> updateErrno ();</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;</div>
-<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">  233</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;  <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">handle_tperrno</a> ( <span class="keywordtype">int</span> _tperrno, <span class="keyword">const</span> <span class="keywordtype">char</span> *msg, <span class="keyword">const</span> Args&amp;... args) {</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;          <span class="keywordflow">switch</span> ( _tperrno ) {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordflow">case</span> TPEINVAL:</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">case</span> TPEPERM:</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            <span class="keywordflow">case</span> TPENOENT:</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="keywordflow">case</span> TPEITYPE:</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">case</span> TPEOTYPE:</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">case</span> TPETRAN:</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="keywordflow">case</span> TPEPROTO:</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">case</span> TPESYSTEM:</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordflow">case</span> TPEOS:</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            <span class="keywordflow">case</span> TPELIMIT:</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            {                           </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> ( _tperrno, msg, args... );</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            }</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">case</span> TPEBLOCK:</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            {</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1blocking__exception.html">blocking_exception</a> ( msg, args... );</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <span class="keywordflow">case</span> TPGOTSIG:</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1interrupt__exception.html">interrupt_exception</a> ( msg, args... );</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keywordflow">case</span> TPESVCERR:</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            {</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1service__exception.html">service_exception</a> ( msg, args... );</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">case</span> TPETIME:</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1timeout__exception.html">timeout_exception</a> ( msg, args... );</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="keywordflow">case</span> TPESVCFAIL:</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;              <span class="comment">// return application specific error number instead</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;              <span class="comment">// as the application will probably know what to do</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;              _tperrno = ( tpurcode &gt; 0 ? tpurcode : -1 );</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;              <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> (_tperrno, catgets ( _catd, CATD_ATMI_SET, 33,<span class="stringliteral">&quot;Never heard about this tperrno (%d).&quot;</span>), _tperrno );</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;          };</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;          <span class="keywordflow">return</span> _tperrno;</div>
-<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">  281</a></span>&#160;        };</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">set</a> ( <span class="keywordtype">long</span> bits, <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">flags</a>);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1tuxedo.html#a1c1d7f2df43e4357788d03977548ac2e">updateErrno</a> ();</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">  236</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;  <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">handle_tperrno</a> ( <span class="keywordtype">int</span> _tperrno, <span class="keyword">const</span> <span class="keywordtype">char</span> *msg, <span class="keyword">const</span> Args&amp;... args) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;          <span class="keywordflow">switch</span> ( _tperrno ) {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="keywordflow">case</span> TPEINVAL:</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">case</span> TPEPERM:</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">case</span> TPENOENT:</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="keywordflow">case</span> TPEITYPE:</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">case</span> TPEOTYPE:</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordflow">case</span> TPETRAN:</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            <span class="keywordflow">case</span> TPEPROTO:</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <span class="keywordflow">case</span> TPESYSTEM:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordflow">case</span> TPEOS:</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">case</span> TPELIMIT:</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> ( _tperrno, msg, args... );</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            <span class="keywordflow">case</span> TPEBLOCK:</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1blocking__exception.html">blocking_exception</a> ( msg, args... );</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            }</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="keywordflow">case</span> TPGOTSIG:</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1interrupt__exception.html">interrupt_exception</a> ( msg, args... );</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">case</span> TPESVCERR:</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1service__exception.html">service_exception</a> ( msg, args... );</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">case</span> TPETIME:</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1timeout__exception.html">timeout_exception</a> ( msg, args... );</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">case</span> TPESVCFAIL:</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;              <span class="comment">// return application specific error number instead</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;              <span class="comment">// as the application will probably know what to do</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;              _tperrno = ( tpurcode &gt; 0 ? tpurcode : -1 );</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;              <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> (_tperrno, catgets ( <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>, CATD_ATMI_SET, 33,<span class="stringliteral">&quot;Never heard about this tperrno (%d).&quot;</span>), _tperrno );</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;          };</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      <span class="keywordtype">long</span>    _flags; </div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">  284</a></span>&#160;      nl_catd <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>;  </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;          <span class="keywordflow">return</span> _tperrno;</div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">  284</a></span>&#160;        };</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="keywordtype">long</span>        _errorno;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="keywordtype">long</span>        _errornodetail;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      TPCONTEXT_T _context;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  }; <span class="comment">// class tuxedo</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;} <span class="comment">// namespace atmi</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      <span class="keywordtype">long</span>    <a class="code" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">_flags</a>; </div>
+<div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">  287</a></span>&#160;      nl_catd <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>;  </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;      <span class="keywordtype">long</span>        _errorno;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      <span class="keywordtype">long</span>        _errornodetail;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      TPCONTEXT_T _context;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  }; <span class="comment">// class tuxedo</span></div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classatmi_1_1tuxedo_html_ae8715aedf9c8f3178aec71e93ee35be4"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">atmi::tuxedo::handle_tperrno</a></div><div class="ttdeci">int handle_tperrno(int _tperrno, const char *msg, const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:233</div></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;} <span class="comment">// namespace atmi</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_ae8715aedf9c8f3178aec71e93ee35be4"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ae8715aedf9c8f3178aec71e93ee35be4">atmi::tuxedo::handle_tperrno</a></div><div class="ttdeci">int handle_tperrno(int _tperrno, const char *msg, const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:236</div></div>
 <div class="ttc" id="classatmi_1_1interrupt__exception_html"><div class="ttname"><a href="classatmi_1_1interrupt__exception.html">atmi::interrupt_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:281</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a31eb2881e3b9706c515da03728ab6875"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a31eb2881e3b9706c515da03728ab6875">atmi::tuxedo::set_flags</a></div><div class="ttdeci">void set_flags(long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:181</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_ac0714439c1f2e889190471966c9fda2f"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">atmi::tuxedo::_flags</a></div><div class="ttdeci">long _flags</div><div class="ttdoc">Tuxedo flags. </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:284</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a6d31779e76609264295e0065fdfc008d"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a6d31779e76609264295e0065fdfc008d">atmi::tuxedo::context</a></div><div class="ttdeci">TPCONTEXT_T context() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:164</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html"><div class="ttname"><a href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:53</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a683b79440474b94c471ed78ff3775eb8"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a683b79440474b94c471ed78ff3775eb8">atmi::tuxedo::extend</a></div><div class="ttdeci">char * extend(char *buffer, long extent)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:48</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_af962caf2ded45e192ba6a37740b133d0"><div class="ttname"><a href="classatmi_1_1tuxedo.html#af962caf2ded45e192ba6a37740b133d0">atmi::tuxedo::unset</a></div><div class="ttdeci">static long unset(long bits, long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:141</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_ac702cf5e571a3302978bfa76cd314c9b"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ac702cf5e571a3302978bfa76cd314c9b">atmi::tuxedo::begin</a></div><div class="ttdeci">int begin(int timeout=0)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:69</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_ad7bf2370e3edeb091512d0b640093e9d"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ad7bf2370e3edeb091512d0b640093e9d">atmi::tuxedo::error_detail</a></div><div class="ttdeci">const char * error_detail() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:147</div></div>
-<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_ac5dbf9db596b4bfa05d0067b8a38e11c"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ac5dbf9db596b4bfa05d0067b8a38e11c">atmi::tuxedo::abort</a></div><div class="ttdeci">int abort()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:99</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:52</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_adfebbea0b6599ba8ca87743c55157b82"><div class="ttname"><a href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">atmi::tuxedo::flags</a></div><div class="ttdeci">long flags() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:174</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a79d8805a077e30138729f44c75fcfa5d"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a79d8805a077e30138729f44c75fcfa5d">atmi::tuxedo::FAILED</a></div><div class="ttdeci">static const long FAILED</div><div class="ttdoc">Tuxedo error value. </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:200</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a53a772bbe8c5bb75dadec1c001067e4f"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">atmi::tuxedo::set</a></div><div class="ttdeci">static long set(long bits, long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:134</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_afdcf4b7d25862c6fdaeb47d095609a01"><div class="ttname"><a href="classatmi_1_1tuxedo.html#afdcf4b7d25862c6fdaeb47d095609a01">atmi::tuxedo::free</a></div><div class="ttdeci">void free(char *buffer)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:62</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a1c1d7f2df43e4357788d03977548ac2e"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a1c1d7f2df43e4357788d03977548ac2e">atmi::tuxedo::updateErrno</a></div><div class="ttdeci">void updateErrno()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:28</div></div>
 <div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:41</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_ad134373ac62fd2c7e1ac5482bdb7f65e"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ad134373ac62fd2c7e1ac5482bdb7f65e">atmi::tuxedo::error_message</a></div><div class="ttdeci">const char * error_message() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:134</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a649b28c90b5f73439e5d2ceb83a43dbd"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">atmi::tuxedo::reset_flags</a></div><div class="ttdeci">void reset_flags(long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:188</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a2f5b4f52ca8095d704dcb23771425690"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a2f5b4f52ca8095d704dcb23771425690">atmi::tuxedo::error</a></div><div class="ttdeci">long error() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:127</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_afa3734356109e8c3ce4d23bfcb94242b"><div class="ttname"><a href="classatmi_1_1tuxedo.html#afa3734356109e8c3ce4d23bfcb94242b">atmi::tuxedo::set_context</a></div><div class="ttdeci">void set_context(TPCONTEXT_T context)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:157</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a44e77e3e6216a8c3fb8be33d5d8fed93"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a44e77e3e6216a8c3fb8be33d5d8fed93">atmi::tuxedo::allocate</a></div><div class="ttdeci">char * allocate(const char *type, const char *subtype, long size)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:33</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo__exception_html"><div class="ttname"><a href="classatmi_1_1tuxedo__exception.html">atmi::tuxedo_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:179</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a90d83b2141d484744a82202f3f66a939"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a90d83b2141d484744a82202f3f66a939">atmi::tuxedo::switch_context</a></div><div class="ttdeci">void switch_context()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:114</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a77e2902dcd0293a2127a5d106e566a3b"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a77e2902dcd0293a2127a5d106e566a3b">atmi::tuxedo::errnodetail</a></div><div class="ttdeci">int errnodetail() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:141</div></div>
-<div class="ttc" id="classatmi_1_1tuxedo_html_a1193fe16ac0984776678a23da351d00a"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">atmi::tuxedo::_catd</a></div><div class="ttdeci">nl_catd _catd</div><div class="ttdoc">message catalog refenence </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:284</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_a1193fe16ac0984776678a23da351d00a"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">atmi::tuxedo::_catd</a></div><div class="ttdeci">nl_catd _catd</div><div class="ttdoc">message catalog refenence </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:287</div></div>
+<div class="ttc" id="classatmi_1_1tuxedo_html_aeff1d0270d6b12de07a4478839ec8b07"><div class="ttname"><a href="classatmi_1_1tuxedo.html#aeff1d0270d6b12de07a4478839ec8b07">atmi::tuxedo::commit</a></div><div class="ttdeci">int commit()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:84</div></div>
 <div class="ttc" id="classatmi_1_1service__exception_html"><div class="ttname"><a href="classatmi_1_1service__exception.html">atmi::service_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:230</div></div>
 <div class="ttc" id="classatmi_1_1timeout__exception_html"><div class="ttname"><a href="classatmi_1_1timeout__exception.html">atmi::timeout_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:247</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_aeef30e346c61643db72b255872729633"><div class="ttname"><a href="classatmi_1_1tuxedo.html#aeef30e346c61643db72b255872729633">atmi::tuxedo::unset_flags</a></div><div class="ttdeci">void unset_flags(long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:196</div></div>

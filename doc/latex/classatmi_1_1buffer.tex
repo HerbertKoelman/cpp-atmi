@@ -66,9 +66,9 @@ bool \hyperlink{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}{is\+\_\+h
 \item 
 void \hyperlink{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{set\+\_\+handling\+\_\+memory} (bool b)
 \item 
-bool \hyperlink{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}{operator==} (\hyperlink{classatmi_1_1buffer}{buffer} \&)
+bool \hyperlink{classatmi_1_1buffer_aa095219e6aa1470c96dc2b3d4ddeeb98}{operator==} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
-\hyperlink{classatmi_1_1buffer}{buffer} \& \hyperlink{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}{operator=} (\hyperlink{classatmi_1_1buffer}{buffer} \&)
+\hyperlink{classatmi_1_1buffer}{buffer} \& \hyperlink{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{operator=} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -324,15 +324,20 @@ true if this instance willfree allocated memory buffer.
 \begin{DoxyReturn}{Returns}
 the number of occurences of the field into the buffer (Foccur32) 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
+\hypertarget{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
 \index{operator=@{operator=}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a5cb08586cc2e633a3b0e80755dda53cd}
+)}}\label{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}
 Copies the content of a fielded buffer into another
 
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer we are copying\\
+\hline
+\end{DoxyParams}
 Copy's the content of one buffer into the other.
 
 
@@ -343,14 +348,21 @@ Copy's the content of one buffer into the other.
 \begin{DoxyReturn}{Returns}
 target buffer 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}{\index{atmi\+::buffer@{atmi\+::buffer}!operator==@{operator==}}
+\hypertarget{classatmi_1_1buffer_aa095219e6aa1470c96dc2b3d4ddeeb98}{\index{atmi\+::buffer@{atmi\+::buffer}!operator==@{operator==}}
 \index{operator==@{operator==}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::operator== (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a580571a4a3cf75eafe90543e9ab07333}
-Checks equality of two buffers (based upon chksum) \begin{DoxyReturn}{Returns}
+)}}\label{classatmi_1_1buffer_aa095219e6aa1470c96dc2b3d4ddeeb98}
+Checks equality of two buffers (based upon chksum)
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer that we are comparing \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
 true if both checksums are equal. 
 \end{DoxyReturn}
 \hypertarget{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}{\index{atmi\+::buffer@{atmi\+::buffer}!pack@{pack}}

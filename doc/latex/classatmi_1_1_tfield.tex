@@ -14,9 +14,13 @@ Inheritance diagram for atmi\+:\+:Tfield$<$ T $>$\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}{Tfield} (F\+L\+D\+I\+D32 fid)
+\hyperlink{classatmi_1_1_tfield_a533be0f49416e622563e7f437e7e9014}{Tfield} ()
+\item 
+\hyperlink{classatmi_1_1_tfield_a10739dd7cef7fad99e5c32213bc69fca}{Tfield} (F\+L\+D\+I\+D32 field\+\_\+id)
 \item 
 \hyperlink{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{Tfield} (const char $\ast$\hyperlink{classatmi_1_1field_a0fbc5a958a0af8286e339b088ee69bc8}{name})
+\item 
+virtual void \hyperlink{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}{set\+\_\+id} (F\+L\+D\+I\+D32 field\+\_\+id)
 \item 
 virtual F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{length} ()
 \item 
@@ -49,23 +53,37 @@ virtual int \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{g
 Template that handles non pointer data types (short, long, char, double, ...) 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
+\hypertarget{classatmi_1_1_tfield_a533be0f49416e622563e7f437e7e9014}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
 \index{Tfield@{Tfield}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
 \subsubsection[{Tfield}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
 \begin{DoxyParamCaption}
-\item[{F\+L\+D\+I\+D32}]{fid}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classatmi_1_1_tfield_a7bf54162e43037ffb34692409d45241b}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_a533be0f49416e622563e7f437e7e9014}
+default constructor.
+
+The instance cannot be used until set\+\_\+field\+\_\+id is successfully called.
+
+\begin{DoxySince}{Since}
+v4.\+2.\+0 
+\end{DoxySince}
+\hypertarget{classatmi_1_1_tfield_a10739dd7cef7fad99e5c32213bc69fca}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
+\index{Tfield@{Tfield}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
+\subsubsection[{Tfield}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
+\begin{DoxyParamCaption}
+\item[{F\+L\+D\+I\+D32}]{field\+\_\+id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classatmi_1_1_tfield_a10739dd7cef7fad99e5c32213bc69fca}
 Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed field id
 
 The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
 
 
 \begin{DoxyParams}{Parameters}
-{\em fid} & the fml field id to setup (as defined in the F\+M\+L tables) \\
+{\em field\+\_\+id} & the fml field id to setup (as defined in the F\+M\+L tables) \\
 \hline
 \end{DoxyParams}
-This array is used to check that F\+M\+L type matches template \hyperlink{classatmi_1_1_tfield}{Tfield}'s type \hypertarget{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
+\hypertarget{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
 \index{Tfield@{Tfield}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
 \subsubsection[{Tfield}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf atmi\+::\+Tfield}$<$ T $>$\+::{\bf Tfield} (
 \begin{DoxyParamCaption}
@@ -196,6 +214,26 @@ set the value of the field's value
 
 
 Implements \hyperlink{classatmi_1_1field_a41bb209965d627d2e67c839bece5372c}{atmi\+::field}.
+
+\hypertarget{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!set\+\_\+id@{set\+\_\+id}}
+\index{set\+\_\+id@{set\+\_\+id}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
+\subsubsection[{set\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual void {\bf atmi\+::\+Tfield}$<$ T $>$\+::set\+\_\+id (
+\begin{DoxyParamCaption}
+\item[{F\+L\+D\+I\+D32}]{field\+\_\+id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}
+Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed field id
+
+The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+\_\+id} & the fml field id to setup (as defined in the F\+M\+L tables) \\
+\hline
+\end{DoxyParams}
+This array is used to check that F\+M\+L type matches template \hyperlink{classatmi_1_1_tfield}{Tfield}'s type 
+
+Reimplemented from \hyperlink{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}{atmi\+::field}.
 
 
 
