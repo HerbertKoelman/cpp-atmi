@@ -41,6 +41,10 @@ namespace atmi {
 
       friend class buffer;
 
+      /** default constructor
+       */
+      field();
+
       /** Default destructor
        */
       virtual ~field () {
@@ -71,7 +75,14 @@ namespace atmi {
 
       /** @return the field ID of the field
        */
-      FLDID32 id ();
+      FLDID32 id () const;
+
+      /** this will set the current field ID
+       *
+       * @param id field ID
+       * @since v4.2.1
+       */
+      virtual void set_id(FLDID32 id);
 
       /** Extracts the field number from the field identifier.
        *
@@ -130,6 +141,7 @@ namespace atmi {
        * checks if field exists, if so it fetch all available metadata (name, type, ...)
        *
        * @param field_id field identifier.
+       * @deprecated replaced by atmi::field.set_id()
        */
       virtual void setup ( FLDID32 field_id );
 
@@ -170,7 +182,6 @@ namespace atmi {
        */
       virtual int remove ( buffer &b );
 
-      field(): _field_id(0), _field_occurence(0), _field_name(NULL), _ferror(0){};
     private:
 
 
@@ -187,31 +198,23 @@ namespace atmi {
   template <class T> class Tfield : public field {
     public:
 
+      /** default constructor.
+       *
+       * The instance cannot be used until set_field_id is successfully called.
+       *
+       * @since v4.2.0
+       */
+      Tfield(): value(0){};
+
       /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
-       * @param fid the fml field id to setup (as defined in the FML tables)
+       * @param field_id the fml field id to setup (as defined in the FML tables)
        */
-      explicit Tfield ( FLDID32 fid ) {
-
-        /** This array is used to check that FML type matches template Tfield's type */
-        const char *TYPEID_NAMES[5] = { 
-          typeid(short).name(), 
-          typeid(long).name(),
-          typeid(char).name(),
-          typeid(float).name(),
-          typeid(double).name()
-        };
-
-        setup ( fid ); 
-        
-        // check if type is matching
-        if ( type() > 5 ) {
-          throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
-        } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
-          throw atmi_exception ( "Tfield %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
-        }
+      explicit Tfield ( FLDID32 field_id ){
+        set_id(field_id);
+        value = 0; // wa are now sure that this is a number
       }
 
       /** Constructs a Tfield for the passed name
@@ -222,13 +225,41 @@ namespace atmi {
        */
       explicit Tfield ( const char *name ) {
 
-        setup ( (FLDID32) Fldid32 ( const_cast<char *>(name) ) );
+        set_id ( (FLDID32) Fldid32 ( const_cast<char *>(name) ) );
+        value = 0; // wa are now sure that this is a number
 
         // check type matching
         if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
           throw atmi_exception ( "Tfield value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), this->name());
         }
       }
+
+      /** Constructs a Tfield for the passed field id
+       *
+       * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
+       *
+       * @param field_id the fml field id to setup (as defined in the FML tables)
+       */
+      virtual void set_id(FLDID32 field_id){
+
+        /** This array is used to check that FML type matches template Tfield's type */
+        const char *TYPEID_NAMES[5] = { 
+          typeid(short).name(), 
+          typeid(long).name(),
+          typeid(char).name(),
+          typeid(float).name(),
+          typeid(double).name()
+        };
+
+        field::set_id ( field_id ); 
+        
+        // check if type is matching
+        if ( type() > 5 ) {
+          throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
+        } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
+          throw atmi_exception ( "Tfield %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
+        }
+      };
 
       virtual ~Tfield() {
         // Intentionally unimplemented...
@@ -332,6 +363,10 @@ namespace atmi {
   template <> class Tfield<std::string>: public field {
     public:
 
+      Tfield(){
+        // intentional
+      };
+
       /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
@@ -340,7 +375,7 @@ namespace atmi {
        */
       explicit Tfield ( FLDID32 fid ) {
 
-        setup ( fid );
+        set_id ( fid );
 
         // check taht we have a string declaration in the FML table
         if ( type () != 5 ) {
@@ -356,7 +391,7 @@ namespace atmi {
        */
       explicit Tfield ( const char *n ) {
 
-        setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
+        set_id ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
         // check type matching
         if ( type() !=5 ) {
@@ -576,15 +611,19 @@ namespace atmi {
   template <> class Tfield<char *>: public field {
     public:
 
+      Tfield(): len (0), value (NULL) {
+        // intentional
+      };
+
       /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-      explicit Tfield ( FLDID32 fid ) : len (0), value (NULL) {
+       explicit Tfield ( FLDID32 fid ) : len (0), value (NULL) {
 
-        setup ( fid );
+        set_id ( fid );
 
         // check taht we have a string declaration in the FML table
         if ( type () != 6 ) {

@@ -22,11 +22,12 @@ namespace atmi {
   class ulog;
 
 #if __cplusplus < 201103L
-  typedef std::auto_ptr<ulog>   ulog_ptr ;
+  typedef std::auto_ptr<ulog>   ulog_ptr ; //!< auto pointer to a ULOG instance
 #else
-  typedef std::unique_ptr<ulog> ulog_ptr ;
+  typedef std::unique_ptr<ulog> ulog_ptr ; //!< unique pointer to a ULOG instance
 #endif
 
+  /** known logging levels */
   enum log_levels {
     error=4,
     warning=3,
@@ -35,6 +36,7 @@ namespace atmi {
     debug=0
   };
 
+  /** for readability */
   typedef log_levels log_level;
 
   /** Interface og the logging facility 
