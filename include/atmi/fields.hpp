@@ -1,6 +1,6 @@
 /*
  * FML manipulation classes
- * 
+ *
  * author: herbert koelman herbert.koelman@me.com
  * creation date: 1/1/2006
  */
@@ -24,7 +24,7 @@ using namespace std;
 
 namespace atmi {
 
-/** \addtogroup fml 
+/** \addtogroup fml
  *
  * @{
  */
@@ -145,7 +145,7 @@ namespace atmi {
        */
       virtual void setup ( FLDID32 field_id );
 
-      /** Retrieves the value of the field found into the buffer. 
+      /** Retrieves the value of the field found into the buffer.
        *
        * @param b buffer from which to retrieve the field's value
        */
@@ -243,16 +243,16 @@ namespace atmi {
       virtual void set_id(FLDID32 field_id){
 
         /** This array is used to check that FML type matches template Tfield's type */
-        const char *TYPEID_NAMES[5] = { 
-          typeid(short).name(), 
+        const char *TYPEID_NAMES[5] = {
+          typeid(short).name(),
           typeid(long).name(),
           typeid(char).name(),
           typeid(float).name(),
           typeid(double).name()
         };
 
-        field::set_id ( field_id ); 
-        
+        field::set_id ( field_id );
+
         // check if type is matching
         if ( type() > 5 ) {
           throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
@@ -679,7 +679,7 @@ namespace atmi {
 
       /** copy (memcpy) the field's value into carray.
        *
-       * if the given size is smaller than the actual field size, then size characters are copied into your buffer. If size is bigger than 
+       * if the given size is smaller than the actual field size, then size characters are copied into your buffer. If size is bigger than
        * the actual field size then field length characters are copied.
        *
        * @param carray pointer to a previously allocted character buffer

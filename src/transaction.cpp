@@ -149,7 +149,7 @@ namespace atmi {
       }
     }
 
-    if ( urcode != NULL ) *urcode = tpurcode;
+    if ( urcode != NULL ) { *urcode = tpurcode ; }
 
     updateErrno ();
 
@@ -163,10 +163,11 @@ namespace atmi {
 
     int rc = -1;
 
-    if ( cd == 0 )
+    if ( cd == 0 ){
       rc = tpcancel ( _call_descriptor );
-    else
+    }else{
       rc = tpcancel ( cd  );
+    }
 
     updateErrno ();
 

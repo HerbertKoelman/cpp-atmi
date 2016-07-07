@@ -62,14 +62,14 @@ namespace atmi {
   class abstract_client : public tuxedo {
     public:
 
-      /** End any pending operation and free any alloated ressource (tpterm()). 
+      /** End any pending operation and free any alloated ressource (tpterm()).
        *
        * After this call any attempt at using ATMI will fail.
        */
       virtual ~abstract_client ();
 
       /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
        * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
@@ -77,7 +77,7 @@ namespace atmi {
        abstract_client ();
 
       /**
-       * Join a BEA tuxedo ATMI system application by calling tpinit. 
+       * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
        * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.

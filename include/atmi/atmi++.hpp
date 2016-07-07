@@ -38,7 +38,7 @@
 #include <atmi/event.hpp>
 #include <atmi/abstract_client.hpp>
 
-//! \namespace atmi 
+//! \namespace atmi
 namespace atmi {
 
   /** @return the library's current version */

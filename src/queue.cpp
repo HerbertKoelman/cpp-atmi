@@ -51,11 +51,11 @@ namespace atmi {
 
   int queue::dequeue (buffer &data ) {
 
-    int rc = -1;
     long len = 0;
     FBFR32 *b = data.get_buffer();
 
-    if ( (rc = dequeue ( (char **) &b, &len )) != -1 ) {
+    int rc = dequeue ( (char **) &b, &len) ;
+    if ( rc != -1 ) {
 
       data.set_buffer ( b );
     }

@@ -130,5 +130,5 @@ int main ( int argc, char **argv ) {
   }
   std::cout << ", done." << std::endl;
 
-  return 9999;
+  return 0;
 }

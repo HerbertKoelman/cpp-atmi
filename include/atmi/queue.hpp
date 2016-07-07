@@ -21,7 +21,7 @@ using namespace std;
 
 namespace atmi {
 
-/** \addtogroup atmi 
+/** \addtogroup atmi
  *
  * @{
  */
@@ -140,7 +140,7 @@ namespace atmi {
 
       /** set the queue the instance is wrapping.
        *
-       * @param q queue name 
+       * @param q queue name
        * @see set_queue_space make sure the queue name exists in the current queue space.
        */
       inline void set_queue_name ( char *q) {
@@ -319,7 +319,7 @@ namespace atmi {
         return _buffer_size;
       };
 
-      /** use base64 encoding 
+      /** use base64 encoding
        * @param b if true, the encode using base64
        */
       void encode_base64(bool b);
@@ -332,9 +332,6 @@ namespace atmi {
        */
       long   _count;
       long   _buffer_size;
-
-      // TODO this was hidding the base class protected declaration.
-      // long   _flags;
 
       queue *_queue;
   };
@@ -352,7 +349,7 @@ namespace atmi {
    * @param qs queue stream that handles the writing of messages to
    */
   extern istream& operator>>(istream& in, queue_stream& qs);
-  
+ 
   /** @} */
 }
 

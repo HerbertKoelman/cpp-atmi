@@ -28,11 +28,11 @@
 #include <string>
 #include <cstring>
 
-using namespace std;
-
-namespace atmi {
+//using namespace std;
 
 #define ATMI_MESSAGE_LENGTH 1024
+
+namespace atmi {
 
 /** \addtogroup errors Eceptions
  *
@@ -69,8 +69,8 @@ namespace atmi {
        */
       atmi_exception();
 
-      virtual ~atmi_exception () throw () { 
-        // Intentionally unimplemented... 
+      virtual ~atmi_exception () throw () {
+        // Intentionally unimplemented...
       };
 
       /**
@@ -127,7 +127,7 @@ namespace atmi {
       unix_exception();
 
       virtual ~unix_exception () throw() {
-        // Intentionally unimplemented... 
+        // Intentionally unimplemented...
       };
 
       /** @return unix errno
