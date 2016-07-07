@@ -35,6 +35,10 @@ class buffer_test : public atmi::abstract_client {
 
         std::cout << "atmi::buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
 
+        atmi::Tfield<atmi::carray>   unknown_field;
+        unknown_field.set_id(SRVCDAY);
+        unknown_field.set_char_array("salut les amis\0rray", sizeof ("salut les amis\0rray"));
+
         atmi::Tfield<string> prenom ( EMPNAME );
         atmi::Tfield<long>   empid ( EMPID );
         atmi::Tfield<long>   empzip ( EMPZIP );
@@ -49,6 +53,7 @@ class buffer_test : public atmi::abstract_client {
         copy = carray;
 
         std::cout << "Added fields: " << std::endl;
+        b.add(unknown_field);
         b.add ( empid );
         b.add ( nom );
         b.add ( prenom );
@@ -125,5 +130,5 @@ int main ( int argc, char **argv ) {
   }
   std::cout << ", done." << std::endl;
 
-  return 9999;
+  return 0;
 }

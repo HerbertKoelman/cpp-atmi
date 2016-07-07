@@ -17,11 +17,32 @@ namespace atmi {
 
 /* fields --------------------------------------------------------------------*/
 
+  field::field(): _field_id(0), _field_occurence(0), _field_name(NULL), _ferror(0){
+    // intentional
+  }
+
   const char *field::tname () {
     return Ftype32 ( _field_id );
   };
 
-  FLDID32 field::id () {
+  void field::set_id (FLDID32 field_id){
+
+    // we only support FML32
+    _field_name = Fname32( field_id );
+
+    if ( _field_name != NULL ) {
+      this->_field_id = field_id;
+      this->_field_occurence = 0;
+    } else {
+      throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", field_id );
+    }
+  };
+
+  void field::setup( FLDID32 field_id){
+    field::set_id(field_id);
+  }
+
+  FLDID32 field::id () const {
     return _field_id;
   };
 
@@ -78,20 +99,6 @@ namespace atmi {
     }
 
     return rc;
-  };
-
-  void field::setup ( FLDID32 field_id){
-    if ( field_id < 8191 ) {
-      _field_name = Fname( field_id );
-    } else {
-      _field_name = Fname32( field_id );
-    }
-    if ( _field_name != NULL ) {
-      this->_field_id = field_id;
-      this->_field_occurence = 0;
-    } else {
-      throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", field_id );
-    }
   };
 
 //  int field::ferror_handler ( int ferror, const char *format, ... ) {

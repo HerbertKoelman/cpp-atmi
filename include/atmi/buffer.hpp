@@ -42,7 +42,7 @@ namespace atmi {
   typedef auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
 #else
   typedef unique_ptr<carray> ACarray; //!< unique_ptr to a carray.
-  typedef unique_ptr<buffer> Abuffer; //!< unique_ptr to a FML buffer. 
+  typedef unique_ptr<buffer> Abuffer; //!< unique_ptr to a FML buffer.
 #endif
 
   /**
@@ -121,7 +121,7 @@ namespace atmi {
 
       /** Adds a field into the buffer (Fadd32).
        *
-       * Adds an occurence of a field to the buffer. The first call becomes occurence 0. When successfully added the 
+       * Adds an occurence of a field to the buffer. The first call becomes occurence 0. When successfully added the
        * occurence property of the field is set.
        *
        * @param f a pointer to the field to add into the buffer
@@ -215,19 +215,23 @@ namespace atmi {
       // operators -------------------------------------------------------------------------------
 
       /** Checks equality of two buffers (based upon chksum)
+       *
+       * @param b buffer that we are comparing
        * @return true if both checksums are equal.
        */
-      bool operator== ( buffer &);
+      bool operator== ( buffer &b);
 
       /** Copies the content of a fielded buffer into another
+       *
+       * @param b buffer we are copying
        */
-      buffer &operator= (buffer &);
+      buffer &operator= (buffer &b);
 
     private:
-      
-      FBFR32 *_buffer;     //!< FML buffer reference 
+
+      FBFR32 *_buffer;     //!< FML buffer reference
       bool    _allocated;  //!< if true then buffer was allocated by the buffer instance (thus it can be freed when needed).
-      long    _extent;     //!< value by which the buffer size will be extended 
+      long    _extent;     //!< value by which the buffer size will be extended
   };
 
   /** @} */

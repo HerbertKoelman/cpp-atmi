@@ -33,7 +33,7 @@
 #include <atmi/config.h>
 #include <atmi/exceptions.hpp>
 
-using namespace std;
+// using namespace std;
 
 namespace atmi {
 
@@ -56,7 +56,7 @@ namespace atmi {
       virtual ~tuxedo();
 
       /**
-       * Allocate a new buffer. 
+       * Allocate a new buffer.
        *
        * buffer types provided by tuxedo
        * CARRAY	   Character array (possibly containing NULL characters) that is neither encoded nor decoded during transmission
@@ -208,15 +208,18 @@ namespace atmi {
       /** Unset bits in second argument from first argument
        *
        * @param bits bits that should be unset
-       * @param flags flags to unset 
+       * @param flags flags to unset
        */
       static long unset ( long bits, long flags);
 
       /** set bits in second argument in first argument
+       *
+       * @param bits bits that should be unset
+       * @param flags flags to unset
        */
-      static long set ( long, long );
+      static long set ( long bits, long flags);
 
-      /** update current errno and sets what must be set. 
+      /** update current errno and sets what must be set.
        *
        * @deprecated we use exception instead
        */
@@ -243,7 +246,7 @@ namespace atmi {
             case TPESYSTEM:
             case TPEOS:
             case TPELIMIT:
-            {                           
+            {
               throw tuxedo_exception ( _tperrno, msg, args... );
             }
             break;

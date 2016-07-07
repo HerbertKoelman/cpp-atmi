@@ -22,11 +22,12 @@ namespace atmi {
   class ulog;
 
 #if __cplusplus < 201103L
-  typedef std::auto_ptr<ulog>   ulog_ptr ;
+  typedef std::auto_ptr<ulog>   ulog_ptr ; //!< auto pointer to a ULOG instance
 #else
-  typedef std::unique_ptr<ulog> ulog_ptr ;
+  typedef std::unique_ptr<ulog> ulog_ptr ; //!< unique pointer to a ULOG instance
 #endif
 
+  /** known logging levels */
   enum log_levels {
     error=4,
     warning=3,
@@ -35,10 +36,11 @@ namespace atmi {
     debug=0
   };
 
+  /** for readability */
   typedef log_levels log_level;
 
-  /** Interface og the logging facility 
-   * 
+  /** Interface og the logging facility
+   *
    * Verbose is the DEBUG log level (level value 0) and least verbose is ERROR (level value 4).
    * Write messages that matches the current level value and above.
    */
@@ -48,7 +50,7 @@ namespace atmi {
       /** create a ULOG instance.
        *
        * Default is log_atmi::levels::info
-       * 
+       *
        * @param level wanted log level
        */
       explicit ulog( log_level level = log_level::info);
@@ -58,45 +60,45 @@ namespace atmi {
       };
 
       /** error message
-       * 
+       *
        * @param fmt  message format( see stdd:pritnf())
-       * @param args format arguments 
+       * @param args format arguments
        */
       template<typename... Args> void error( const std::string &fmt, const Args&... args){
           log(log_levels::error, fmt, args...);
       };
 
       /** warning message
-       * 
+       *
        * @param fmt  message format( see stdd:pritnf())
-       * @param args format arguments 
+       * @param args format arguments
        */
       template<typename... Args> void warning( const std::string &fmt, const Args&... args){
           log(log_levels::warning, fmt, args...);
       };
 
       /** info message
-       * 
+       *
        * @param fmt  message format( see stdd:pritnf())
-       * @param args format arguments 
+       * @param args format arguments
        */
       template<typename... Args> void info( const std::string &fmt, const Args&... args){
           log(log_levels::info, fmt, args...);
       };
 
       /** finer message
-       * 
+       *
        * @param fmt  message format( see stdd:pritnf())
-       * @param args format arguments 
+       * @param args format arguments
        */
       template<typename... Args> void finer( const std::string &fmt, const Args&... args){
           log(log_levels::finer, fmt, args...);
       };
 
       /** debug message
-       * 
+       *
        * @param fmt  message format( see stdd:pritnf())
-       * @param args format arguments 
+       * @param args format arguments
        */
       template<typename... Args> void debug( const std::string &fmt, const Args&... args){
           log(log_levels::debug, fmt, args...);

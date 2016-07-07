@@ -21,11 +21,11 @@
 #include <atmi/tuxedo.hpp>
 #include <atmi/buffer.hpp>
 
-using namespace std;
+//using namespace std;
 
 namespace atmi {
 
-/** \addtogroup atmi 
+/** \addtogroup atmi
  *
  * @{
  */
@@ -48,7 +48,7 @@ namespace atmi {
   class transaction : public tuxedo {
     public:
       /**
-       * Call service. 
+       * Call service.
        *
        * @param idata a data buffer previously allocated with tpalloc() and hols input data
        * @param ilen  idata buffer lenght.
@@ -170,7 +170,7 @@ namespace atmi {
       };
 
       /** @return transaction/service name */
-      inline string service () {
+      inline std::string service () {
         return _service;
       };
 
@@ -186,7 +186,7 @@ namespace atmi {
     private:
 
       int    _call_descriptor;
-      string _service;
+      std::string _service;
 
   }; // class transaction
 
