@@ -668,7 +668,7 @@ namespace atmi {
        */
       void set_char_array ( const char * c, long s ) {
 
-        if ( value == NULL ) {
+        if ( value != NULL ) {
           delete value;
         }
 

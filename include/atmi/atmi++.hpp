@@ -41,8 +41,15 @@
 //! \namespace atmi
 namespace atmi {
 
+  /** \addtogroup atmi
+   *  \addtogroup fml
+   * @{
+   */
+
   /** @return the library's current version */
   extern "C" const char *cpp_atmi_version();
+
+  /** @} */
 
 }
 #endif
