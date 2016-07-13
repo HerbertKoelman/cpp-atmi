@@ -48,6 +48,8 @@ namespace atmi {
   /**
    * FML buffer
    *
+   * @author herbert koelman(herbert.koelman@me.com)
+   * @example buffer_test.bcl
    */
   class buffer : public tuxedo {
 
