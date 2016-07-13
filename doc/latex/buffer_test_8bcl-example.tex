@@ -1,0 +1,147 @@
+\hypertarget{buffer_test_8bcl-example}{\section{buffer\+\_\+test.\+bcl}
+}
+F\+M\+L buffer
+
+\begin{DoxyAuthor}{Author}
+herbert koelman(\href{mailto:herbert.koelman@me.com}{\tt herbert.\+koelman@me.\+com})
+\end{DoxyAuthor}
+
+\begin{DoxyCodeInclude}
+1 /* $Id$
+2 
+3    Sample Tuxedo client using ATMI++ libray.
+4 
+5  */
+6 #include <stdlib.h>
+7 #include <unistd.h>
+8 #include <string.h>
+9 #include <string>
+10 #include <iostream>
+11 #include <fstream>
+12 #include <typeinfo>
+13 #include "atmi/atmi++.hpp"
+14 
+15 #include "sample\_fml\_table.h"
+16 
+17 class buffer\_test : public atmi::abstract\_client \{
+18   public:
+19     buffer\_test (): atmi::abstract\_client ("btest")\{
+20     \};
+21 
+22     int run ( int argc, char **argv )\{
+23       try \{
+24 
+25         atmi::buffer b (100), a;
+26         /*
+27            const char *types[5] = \{ typeid(short).name(), typeid(int).name() \};
+28            std::cout << "Stored: " << types[0] << std::endl;
+29            std::cout << "Stored: " << types[1] << " is a " << std::endl;
+30            if(strcmp ( typeid(int).name(), types[1]) == 0 )\{
+31            std::cout << "same type int." << std::endl;
+32            \}
+33            std::cout << "Type id " << typeid(long).name() << std::endl;
+34          */
+35 
+36         std::cout << "atmi::buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ",
+       chksum: " << b.chksum() <<  std::endl;
+37 
+38         atmi::Tfield<atmi::carray>   unknown\_field;
+39         unknown\_field.set\_id(SRVCDAY);
+40         unknown\_field.set\_char\_array("salut les amis\(\backslash\)0rray", sizeof ("salut les amis\(\backslash\)0rray"));
+41 
+42         atmi::Tfield<string> prenom ( EMPNAME );
+43         atmi::Tfield<long>   empid ( EMPID );
+44         atmi::Tfield<long>   empzip ( EMPZIP );
+45         atmi::Tfield<string> nom ( EMPNAME );
+46         atmi::Tfield<char *> carray ( SRVCDAY );
+47         atmi::Tfield<char *> copy ( SRVCDAY );
+48 
+49         prenom = "herbert";
+50         nom = "this is a char *";
+51         empid = 2;
+52         carray.set\_char\_array("helloworld\(\backslash\)0rray", sizeof ("helloworld\(\backslash\)0rray"));
+53         copy = carray;
+54 
+55         std::cout << "Added fields: " << std::endl;
+56         b.add(unknown\_field);
+57         b.add ( empid );
+58         b.add ( nom );
+59         b.add ( prenom );
+60         b.add ( carray );
+61         b.add ( copy );
+62         b.print ();
+63 
+64         std::cout << "get copy" << std::endl;
+65         b.get ( copy );
+66 
+67         std::cout << copy.what() << std::endl;
+68         long len = 5;                  //copy.length();
+69         char *cav = new char[len];
+70         copy.get\_char\_array ( cav, len );
+71         for ( int x = 0; x < len; x++ ) \{
+72           std::cout << "'"<< cav[x]<<"',";
+73         \}
+74         std::cout << std::endl;
+75 
+76         std::cout << "Setting (update) empid value: " << std::endl;
+77         empid = 22;
+78         b.set ( empid );
+79         b.print ();
+80 
+81         std::cout << "size : " << b.size();
+82         b.pack ();
+83         std::cout << ", after pack: " << b.size() << std::endl;
+84 
+85         std::cout << "atmi::buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " <<
+       b.size() << ", chksum: " << b.chksum() <<  std::endl;
+86 
+87         std::cout << "wrapping atmi::buffer." << std::endl ;
+88         atmi::buffer wrapper ( b.get\_buffer());
+89         nom = "this was added into a wrapper instance of atmi::buffer.";
+90         wrapper.set (nom );
+91         wrapper.print ();
+92 
+93         std::cout << "transforming a atmi::buffer into a wrapped buffer." << std::endl;
+94         atmi::buffer wrapper1;
+95         wrapper1.set\_buffer ( wrapper.get\_buffer());
+96         prenom = "this was set by a wrapper";
+97         wrapper1.set ( prenom );
+98         wrapper1.print();
+99 
+100       \}catch ( atmi::buffer\_exception &err ) \{
+101         cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
+102       \} catch ( atmi::atmi\_exception &err ) \{
+103         cerr << err.what() << std::endl;
+104       \} catch ( std::exception &err ) \{
+105         cerr << err.what() << std::endl;
+106       \}
+107 
+108       return 9999;
+109     \}
+110 
+111 \};
+112 
+113 // program main -------------------------------------------------
+114 
+115 int main ( int argc, char **argv ) \{
+116 
+117   try \{
+118 
+119     std::cout << "atmi::buffer sample program (" << atmi::cpp\_atmi\_version() <<")." << std::endl;
+120     std::cout << "setting up";
+121     buffer\_test btest;
+122 
+123     std::cout << ", starting up" ;
+124     btest.run ( argc, argv );
+125 
+126   \} catch ( atmi::atmi\_exception &err)\{
+127     cerr << std::endl << err.what() << std::endl;
+128   \} catch ( std::exception &err ) \{
+129     cerr << std::endl << err.what() << std::endl;
+130   \}
+131   std::cout << ", done." << std::endl;
+132 
+133   return 0;
+134 \}
+\end{DoxyCodeInclude}
+ 
