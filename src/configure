@@ -4414,61 +4414,13 @@ fi
 
 
 # C++11 checks
-ac_fn_c_check_header_mongrel "$LINENO" "mutex" "ac_cv_header_mutex" "$ac_includes_default"
-if test "x$ac_cv_header_mutex" = xyes; then :
-  $as_echo "#define HAVE_CPP11_MUTEX 1" >>confdefs.h
-
-fi
-
-
-
-if test "$ac_cv_header_mutex" = "no"
-then
-#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
-   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for cpp_pthread_version in -lcpp-pthread" >&5
-$as_echo_n "checking for cpp_pthread_version in -lcpp-pthread... " >&6; }
-if ${ac_cv_lib_cpp_pthread_cpp_pthread_version+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lcpp-pthread  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char cpp_pthread_version ();
-int
-main ()
-{
-return cpp_pthread_version ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_cpp_pthread_cpp_pthread_version=yes
-else
-  ac_cv_lib_cpp_pthread_cpp_pthread_version=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_cpp_pthread_cpp_pthread_version" >&5
-$as_echo "$ac_cv_lib_cpp_pthread_cpp_pthread_version" >&6; }
-if test "x$ac_cv_lib_cpp_pthread_cpp_pthread_version" = xyes; then :
-  $as_echo "#define HAVE_CPP_PTHREAD 1" >>confdefs.h
- LIBS="$LIBS -lcpp-pthread"
-else
-   as_fn_error $? "missing cpp-pthread library." "$LINENO" 5
-fi
-
-fi
+#AC_CHECK_HEADER([mutex], [AC_DEFINE([HAVE_CPP11_MUTEX])])
+#
+#if test "$ac_cv_header_mutex" = "no"
+#then
+##   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
+#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD]) LIBS="$LIBS -lcpp-pthread"],[ AC_ERROR([missing cpp-pthread library.]) ])
+#fi
 
 OBJECTS="atmi++.o"
 for src in *.cpp
