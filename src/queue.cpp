@@ -3,7 +3,7 @@
 
    Tuxedo queue manipulation helper class.
  */
-//#include <pthread.h>
+#include <pthread.h>
 #include <unistd.h>
 #include <climits>
 #include <cstdarg>
