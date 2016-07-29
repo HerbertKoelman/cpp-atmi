@@ -21,6 +21,14 @@ Documentation is obtained with this command\+: \begin{DoxyVerb}$ make doxygen
 
 The library is documented \href{http://herbertkoelman.github.io/cpp-atmi/doc/html/}{\tt here}.
 
+\subsubsection*{Useful links}
+
+
+\begin{DoxyItemize}
+\item Tuxedo online documentation can be accessed \href{http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/index.html}{\tt here}
+\item A\+T\+M\+I C library is docuemented \href{http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/rf3c/rf3c.html}{\tt here}
+\end{DoxyItemize}
+
 \subsubsection*{How it's used}
 
 This code creates a F\+M\+L field and passes it to a service called {\ttfamily X\+A\+T\+O\+U\+P\+P\+E\+R}. If anything goes wrong, we roll back the transaction and pass the exception ({\ttfamily throw}) so that the diagnostic messages can be displayed. \begin{DoxyVerb}    ...
@@ -32,7 +40,7 @@ This code creates a F\+M\+L field and passes it to a service called {\ttfamily X
       buffer buffer;
 
       Tfield<string> name ( "EMPNAME" );
-      name = (string) "Herbert.Koelman@me.com";
+      name = "Herbert.Koelman@me.com";
 
       buffer.add ( name );
 

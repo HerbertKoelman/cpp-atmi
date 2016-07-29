@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.2.1)</span>
+   &#160;<span id="projectnumber">(v4.2.2)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -92,6 +92,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 $ make
 </pre><p>Documentation is obtained with this command: </p><pre class="fragment">$ make doxygen
 </pre><p>The library is documented <a href="http://herbertkoelman.github.io/cpp-atmi/doc/html/">here</a>.</p>
+<h3>Useful links</h3>
+<ul>
+<li>Tuxedo online documentation can be accessed <a href="http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/index.html">here</a></li>
+<li>ATMI C library is docuemented <a href="http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/rf3c/rf3c.html">here</a></li>
+</ul>
 <h3>How it's used</h3>
 <p>This code creates a FML field and passes it to a service called <code>XATOUPPER</code>. If anything goes wrong, we roll back the transaction and pass the exception (<code>throw</code>) so that the diagnostic messages can be displayed. </p><pre class="fragment">    ...
     transaction tp ( "XATOUPPER" );
@@ -102,7 +107,7 @@ $ make
       buffer buffer;
 
       Tfield&lt;string&gt; name ( "EMPNAME" );
-      name = (string) "Herbert.Koelman@me.com";
+      name = "Herbert.Koelman@me.com";
 
       buffer.add ( name );
 
