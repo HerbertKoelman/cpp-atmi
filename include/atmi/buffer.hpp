@@ -46,7 +46,12 @@ namespace atmi {
 #endif
 
   /**
-   * FML buffer
+   * A fielded buffers, that contain attribute-value pairs called fields.
+   *
+   * The attribute is the field’s identifier, and the associated value represents the field’s data content. Fielded buffers provide an
+   * excellent structure for communicating parameterized data between cooperating processes, by providing named access to a set of
+   * related fields. Programs that need to communicate with other processes can use the FML software to provide access to fields without
+   * concerning themselves with the structures containing them.
    *
    * @author herbert koelman(herbert.koelman@me.com)
    * @example buffer_test.bcl

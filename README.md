@@ -23,6 +23,11 @@ Documentation is obtained with this command:
 
 The library is documented [here](http://herbertkoelman.github.io/cpp-atmi/doc/html/).
 
+### Useful links
+
+- Tuxedo online documentation can be accessed [here](http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/index.html)
+- ATMI C library is docuemented [here](http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/rf3c/rf3c.html)
+
 ###  How it's used
 
 This code creates a FML field and passes it to a service called `XATOUPPER`. If anything goes wrong, we roll back the transaction and pass the exception (`throw`) so that the diagnostic messages can be displayed.
@@ -36,7 +41,7 @@ This code creates a FML field and passes it to a service called `XATOUPPER`. If 
           buffer buffer;
 
           Tfield<string> name ( "EMPNAME" );
-          name = (string) "Herbert.Koelman@me.com";
+          name = "Herbert.Koelman@me.com";
 
           buffer.add ( name );
 

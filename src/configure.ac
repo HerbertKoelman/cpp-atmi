@@ -44,13 +44,13 @@ fi
 AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
 
 # C++11 checks
-AC_CHECK_HEADER([mutex], [AC_DEFINE([HAVE_CPP11_MUTEX])])
-
-if test "$ac_cv_header_mutex" = "no" 
-then
-#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
-   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD]) LIBS="$LIBS -lcpp-pthread"],[ AC_ERROR([missing cpp-pthread library.]) ])
-fi
+#AC_CHECK_HEADER([mutex], [AC_DEFINE([HAVE_CPP11_MUTEX])])
+#
+#if test "$ac_cv_header_mutex" = "no" 
+#then
+##   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
+#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD]) LIBS="$LIBS -lcpp-pthread"],[ AC_ERROR([missing cpp-pthread library.]) ])
+#fi
 
 OBJECTS="atmi++.o"
 for src in *.cpp
