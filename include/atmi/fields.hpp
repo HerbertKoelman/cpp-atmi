@@ -31,9 +31,8 @@ namespace atmi {
 
   // class buffer;
 
-  /** Abstract field class.
-   *
-   * This is the base class of all implemented fields.
+  /** 
+   * When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add.
    */
   class field {
 
@@ -42,6 +41,8 @@ namespace atmi {
       friend class buffer;
 
       /** default constructor
+       *
+       * default occurence value is 0.
        */
       field();
 
@@ -193,7 +194,7 @@ namespace atmi {
   };
 
   /** Template that handles non pointer data types (short, long, char, double, ...)
-   *
+   * \copydoc atmi::field
    */
   template <class T> class Tfield : public field {
     public:
@@ -356,10 +357,11 @@ namespace atmi {
   };
 
 
-/** Specialization of template Tfield which handles string typed fields.
- *
- * This class is using a string object to hold and handle string data
- */
+  /** Specialization of template Tfield which handles string typed fields.
+   *
+   * This class is using a string object to hold and handle string data
+   * \copydoc atmi::field
+   */
   template <> class Tfield<std::string>: public field {
     public:
 
@@ -607,6 +609,7 @@ namespace atmi {
   /** Specialization of template Tfield which handles CARRAY typed fields.
    *
    * This class is using a string object to hold and handle char * data
+   * \copydoc atmi::field
    */
   template <> class Tfield<char *>: public field {
     public:
