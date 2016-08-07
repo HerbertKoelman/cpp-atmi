@@ -9,7 +9,7 @@
 namespace atmi {
 
   call_info &call_info::operator=(atmi::call_info &callinfo)  {
-    _buffer = ci;
+    _buffer = (FBFR32 *) callinfo;
 
     return *this;
   }
