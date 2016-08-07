@@ -32,7 +32,11 @@ class TPtest : public atmi::abstract_client {
 
         try {
 
+          atmi::call_info callinfo;
+          callinfo.set_ecid("salut les copains");
+
           atmi::buffer buffer;
+          buffer.set_call_info(callinfo);
 
           atmi::Tfield<string> name ( "EMPNAME" );
           name = (string) "Herbert";

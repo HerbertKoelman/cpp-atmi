@@ -10,7 +10,8 @@
 
 #include <atmi/buffer.hpp>
 
-using namespace std;
+#include "atmi/fields.hpp"
+#include "atmi/call_info.hpp"
 
 namespace atmi {
 
@@ -39,6 +40,15 @@ namespace atmi {
     if ( _allocated ) {
       free ( (char *) _buffer );
     }
+  }
+
+  void buffer::set_call_info( call_info &callinfo){
+    FBFR32 *cib = callinfo ;
+    tpgetcallinfo((char *) _buffer, &cib, 0 );
+  }
+
+  void buffer::get_call_info( call_info &callinfo){
+    tpsetcallinfo((char *) _buffer, (FBFR32 *) callinfo, 0 );
   }
 
   bool buffer::is_fml32_buffer( char *buffer){
@@ -218,4 +228,19 @@ namespace atmi {
     }
     return *this;
   };
+
+  buffer & buffer::operator= ( FBFR32 *b) {
+
+    int rc = -1;
+
+    rc = Fcpy32 ( _buffer, b );
+    if ( rc == -1 ) {
+      throw buffer_exception ( Ferror32, "FCOPY32 failed.");
+    }
+    return *this;
+  };
+
+  buffer::operator FBFR32 *(){
+    return _buffer;
+  }
 }
