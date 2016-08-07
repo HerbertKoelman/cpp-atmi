@@ -5,7 +5,6 @@
  * creation date: 1/1/2006
  */
 
-
 #include <fml.h>
 #include <fml32.h>
 #include <typeinfo>
@@ -13,11 +12,10 @@
 #include <cstring>
 #include <memory>
 
-#include <atmi/exceptions.hpp>
-
 #ifndef CPP_ATMI_FIELDS_HPP
 #define CPP_ATMI_FIELDS_HPP
 
+#include <atmi/exceptions.hpp>
 #include <atmi/buffer.hpp> // this MUST be here to avoid recursive include
 
 using namespace std;
@@ -28,8 +26,6 @@ namespace atmi {
  *
  * @{
  */
-
-  // class buffer;
 
   /** 
    * When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add.
