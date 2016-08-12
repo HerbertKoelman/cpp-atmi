@@ -73,7 +73,7 @@ namespace atmi {
   //
   // diagnostic exception -----------------------------------
   //
-  
+
   const char *diagnostic_exception::diagnostic_message () const {
     switch ( _diagno ) {
       case QMEINVAL:

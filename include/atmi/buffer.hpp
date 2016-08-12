@@ -3,21 +3,19 @@
  * creation date: 1/1/2006
  */
 
-#include <fml.h>
 #include <fml32.h>
+#include <tpadm.h>
+
 #include <typeinfo>
 #include <string>
 #include <cstring>
 #include <memory>
 
 #include <atmi/exceptions.hpp>
-#include <atmi/fields.hpp>
 #include <atmi/tuxedo.hpp>
 
 #ifndef CPP_ATMI_BUFFER_HPP
 #define CPP_ATMI_BUFFER_HPP
-
-using namespace std;
 
 namespace atmi {
 
@@ -33,16 +31,18 @@ namespace atmi {
  */
 
 //----------------------------------------------------------------------------------------------
+
+  class call_info;
   class buffer;
   class field;
 
   typedef char * carray; //!< character array
 #if __cplusplus < 201103L
-  typedef auto_ptr<carray> Acarray; //!< auto_ptr to a carray.
-  typedef auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
+  typedef std::auto_ptr<carray> Acarray; //!< auto_ptr to a carray.
+  typedef std::auto_ptr<buffer> Abuffer; //!< auto_ptr to a FML buffer.
 #else
-  typedef unique_ptr<carray> ACarray; //!< unique_ptr to a carray.
-  typedef unique_ptr<buffer> Abuffer; //!< unique_ptr to a FML buffer.
+  typedef std::unique_ptr<carray> ACarray; //!< unique_ptr to a carray.
+  typedef std::unique_ptr<buffer> Abuffer; //!< unique_ptr to a FML buffer.
 #endif
 
   /**
@@ -57,7 +57,6 @@ namespace atmi {
    * @example buffer_test.bcl
    */
   class buffer : public tuxedo {
-
     public:
 
       friend class field;
@@ -84,6 +83,18 @@ namespace atmi {
        * If memory was allocated by this instance then it will be freed. Otherwise the buffer is not deallocated.
        */
       ~buffer ();
+
+      /** set call info (TSAM)
+       *
+       * @param callinfo callinfo value to set
+       */
+      void set_call_info( call_info &callinfo);
+
+      /** get call info (TSAM)
+       *
+       * @param callinfo reference to call info instance to fill
+       */
+      void get_call_info ( call_info &callinfo );
 
       /**
        * @return true if it's a FMLTYPE32 buffer type
@@ -221,6 +232,10 @@ namespace atmi {
 
       // operators -------------------------------------------------------------------------------
 
+      /** cast to FBFR32 *
+       */
+      operator FBFR32 *();
+
       /** Checks equality of two buffers (based upon chksum)
        *
        * @param b buffer that we are comparing
@@ -233,6 +248,12 @@ namespace atmi {
        * @param b buffer we are copying
        */
       buffer &operator= (buffer &b);
+
+      /** Copies the content of a fielded buffer into another
+       *
+       * @param b buffer we are copying
+       */
+      buffer &operator= (FBFR32 *b);
 
     private:
 

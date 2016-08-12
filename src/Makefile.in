@@ -42,7 +42,7 @@ ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
 
 # FML buffer objects
-BUFF_OBJS=buffer.o field.o exceptions.o
+BUFF_OBJS=buffer.o field.o exceptions.o call_info.o
 
 CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 

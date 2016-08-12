@@ -27,19 +27,25 @@ class TPtest : public atmi::abstract_client {
 
       try {
 
-        atmi::transaction tp ( "XATOUPPER" );
+        atmi::transaction tp ( "ECHO" );
         int urcode = 0;
 
         try {
 
+          atmi::call_info callinfo;
+          callinfo.set_ecid("hello");
+
           atmi::buffer buffer;
+          buffer.set_call_info(callinfo);
+          printf("Sent call_info\n");
+          callinfo.print();
 
           atmi::Tfield<string> name ( "EMPNAME" );
           name = (string) "Herbert";
 
           buffer.add ( name );
 
-          printf ("Calling service TOUPPER (%s), context: %d.\n", name.c_str() , context());
+          printf ("Calling service %s (%s), context: %d.\n", name.c_str() , context());
 
           try {
 
@@ -56,14 +62,18 @@ class TPtest : public atmi::abstract_client {
               case 0:
                 break;
               case -1:
-                printf ("TOUPPER returned TPFAIL..\n" );
+                printf ("%s returned TPFAIL..\n", tp.service().c_str() );
                 break;
               default:
-                printf ( "TOUPPER returned URCODE: %d (error: %d/%d).\n", ret, tp.error(), tperrno);
+                printf ( "%s returned URCODE: %d (error: %d/%d).\n", tp.service().c_str(), ret, tp.error(), tperrno);
                 buffer.print();
             }
 
             buffer.get ( name );
+            atmi::call_info returned_call_info;
+            printf("Returned call_info\n");
+            buffer.get_call_info(returned_call_info);
+            returned_call_info.print();
             printf ( "Call returned: %s.\n", name.c_str() );
 
             tp.commit();

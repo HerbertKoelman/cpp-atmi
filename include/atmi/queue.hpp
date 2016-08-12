@@ -17,7 +17,7 @@
 #include <atmi/tuxedo.hpp>
 #include <atmi/buffer.hpp>
 
-using namespace std;
+//using namespace std;
 
 namespace atmi {
 
@@ -285,8 +285,8 @@ namespace atmi {
   class queue_stream : public tuxedo {
     public:
 
-      friend ostream& operator<<(ostream& out, queue_stream& qs);
-      friend istream& operator>>(istream& in, queue_stream& qs);
+      friend std::ostream& operator<<(std::ostream& out, queue_stream& qs);
+      friend std::istream& operator>>(std::istream& in, queue_stream& qs);
 
       /** setup a queue stream.
        *
@@ -341,14 +341,14 @@ namespace atmi {
    * @param out output stream
    * @param qs queue stream that will handle the reading of messages
    */
-  extern ostream& operator<<(ostream& out, queue_stream& qs);
+  extern std::ostream& operator<<(std::ostream& out, queue_stream& qs);
 
   /** Global utility to stream in a queue
    *
    * @param in input stream
    * @param qs queue stream that handles the writing of messages to
    */
-  extern istream& operator>>(istream& in, queue_stream& qs);
+  extern std::istream& operator>>(std::istream& in, queue_stream& qs);
  
   /** @} */
 }

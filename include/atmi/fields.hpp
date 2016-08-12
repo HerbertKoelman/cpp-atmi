@@ -5,7 +5,6 @@
  * creation date: 1/1/2006
  */
 
-
 #include <fml.h>
 #include <fml32.h>
 #include <typeinfo>
@@ -13,14 +12,13 @@
 #include <cstring>
 #include <memory>
 
-#include <atmi/exceptions.hpp>
-
 #ifndef CPP_ATMI_FIELDS_HPP
 #define CPP_ATMI_FIELDS_HPP
 
+#include <atmi/exceptions.hpp>
 #include <atmi/buffer.hpp> // this MUST be here to avoid recursive include
 
-using namespace std;
+// using namespace std;
 
 namespace atmi {
 
@@ -28,8 +26,6 @@ namespace atmi {
  *
  * @{
  */
-
-  // class buffer;
 
   /** 
    * When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add.
@@ -59,7 +55,7 @@ namespace atmi {
        *  FLD_CHAR        2       character
        *  FLD_FLOAT       3       single-precision float
        *  FLD_DOUBLE      4       double-precision float
-       *  FLD_STRING      5       string - null terminated
+       *  FLD_STRING      5       std::string - null terminated
        *  FLD_CARRAY      6       character array
        *  FLD_PTR         9       pointer to a buffer
        *  FLD_FML32      10       embedded FML32 buffer
@@ -107,13 +103,13 @@ namespace atmi {
       /** @return number bytes needed to store the fields value */
       virtual long needed ();
 
-      /** @return a string describing the field
+      /** @return a std::string describing the field
        */
       const char *what ();
 
       /** @param value value to assign to the field.
        */
-      virtual field &operator= ( const string &value ) {
+      virtual field &operator= ( const std::string &value ) {
         return *this;
       };
 
@@ -122,7 +118,7 @@ namespace atmi {
       /* Field manipulation error handler.
        *
        * @param ferror Ferror32 value
-       * @param format error message formatting string.
+       * @param format error message formatting std::string.
        * @param ...    error message viariadic
        * @return the handled ferror value.
        * @deprecated TIDO remove this
@@ -184,7 +180,6 @@ namespace atmi {
       virtual int remove ( buffer &b );
 
     private:
-
 
       FLDID32   _field_id;
       FLDOCC32  _field_occurence;
@@ -357,9 +352,9 @@ namespace atmi {
   };
 
 
-  /** Specialization of template Tfield which handles string typed fields.
+  /** Specialization of template Tfield which handles std::string typed fields.
    *
-   * This class is using a string object to hold and handle string data
+   * This class is using a std::string object to hold and handle std::string data
    * \copydoc atmi::field
    */
   template <> class Tfield<std::string>: public field {
@@ -379,9 +374,9 @@ namespace atmi {
 
         set_id ( fid );
 
-        // check taht we have a string declaration in the FML table
+        // check taht we have a std::string declaration in the FML table
         if ( type () != 5 ) {
-          throw atmi_exception ( "Tfield %s's value is of type string and the FML table decalares a type %s.", name (), tname());
+          throw atmi_exception ( "Tfield %s's value is of type std::string and the FML table decalares a type %s.", name (), tname());
         }
       }
 
@@ -397,7 +392,7 @@ namespace atmi {
 
         // check type matching
         if ( type() !=5 ) {
-          throw atmi_exception ( "Tfield value is of type string and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "Tfield value is of type std::string and the FML table decalares a type %s for %s.", tname(), name());
         }
       }
 
@@ -405,29 +400,29 @@ namespace atmi {
         // Intentionally unimplemented...
       };
 
-      /** @return the string's length
+      /** @return the std::string's length
        */
       virtual FLDLEN32 length () {
 
         return (FLDLEN32)value.length();
       };
 
-      /** @return the string's size
+      /** @return the std::string's size
        */
       virtual FLDLEN32 size () {
 
         return (FLDLEN32)value.size();
       };
 
-      /** @return a C string (with \0) of current string's content.
+      /** @return a C std::string (with \0) of current std::string's content.
        */
       const char* c_str ( ) const {
         return value.c_str();
       }
 
-      /** Appends a copy of the argument to the string.
+      /** Appends a copy of the argument to the std::string.
        *
-       * The new string content is the content existing in the string object before the call followed by the content of
+       * The new std::string content is the content existing in the std::string object before the call followed by the content of
        * the argument.
        *
        * The append member function provides a similar functionality with additional options.
@@ -435,45 +430,45 @@ namespace atmi {
        * @param str a copy of the content of this object is appended to the object's content.
        * @return *this
        */
-      string& operator+= ( const string& str ){
+      std::string& operator+= ( const std::string& str ){
 
         return value += str;
       }
 
-      /** Appends a copy of the argument to the string.
+      /** Appends a copy of the argument to the std::string.
        *
-       * The new string content is the content existing in the string object before the call followed by the content of
+       * The new std::string content is the content existing in the std::string object before the call followed by the content of
        * the argument.
        *
        * The append member function provides a similar functionality with additional options.
        *
-       * @param  s  a pointer to an array containing a null-terminated character sequence (C string), which is appended to the object's content.
+       * @param  s  a pointer to an array containing a null-terminated character sequence (C std::string), which is appended to the object's content.
        * @return *this
        */
-      string& operator+= ( const char* s ){
+      std::string& operator+= ( const char* s ){
 
         return value += s;
       }
 
-      /** Appends character to the string field.
+      /** Appends character to the std::string field.
        *
-       * @param c   character. This single character is appended to the string object's content.
+       * @param c   character. This single character is appended to the std::string object's content.
        * @return *this
        */
-      string& operator+= ( char c ){
+      std::string& operator+= ( char c ){
         return value += c;
       }
 
       /**
-       * Returns a reference the character at position pos in the string.
+       * Returns a reference the character at position pos in the std::string.
        *
        * The function actually returns data()[ pos ].
        *
        * The at member function has the same behavior as this operator function, except that at also performs a range
        * check.
        *
-       * @param pos position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size_t is an unsigned integral type.
-       * @return The character at the specified position in the string.
+       * @param pos position within the std::string of the character to be retrieved. Notice that the first character in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @return The character at the specified position in the std::string.
        */
       const char& operator[] ( size_t pos ) const {
 
@@ -481,15 +476,15 @@ namespace atmi {
       }
 
       /**
-       * Returns a reference the character at position pos in the string.
+       * Returns a reference the character at position pos in the std::string.
        *
        * The function actually returns data()[ pos ].
        *
        * The at member function has the same behavior as this operator function, except that at also performs a range
        * check.
        *
-       * @param pos position within the string of the character to be retrieved. Notice that the first character in the string has a position of 0, not 1. size_t is an unsigned integral type.
-       * @return The character at the specified position in the string.
+       * @param pos position within the std::string of the character to be retrieved. Notice that the first character in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @return The character at the specified position in the std::string.
        */
       char& operator[] ( size_t pos ){
 
@@ -497,22 +492,22 @@ namespace atmi {
       }
 
       /**
-       * assigns values to the string field.
+       * assigns values to the std::string field.
        *
        * @param str   null terminated character array.
        */
-      virtual Tfield<string> &operator= ( const char* str ) {
+      virtual Tfield<std::string> &operator= ( const char* str ) {
 
         value = str;
         return *this;
       };
 
       /**
-       * assigns values to the string field.
+       * assigns values to the std::string field.
        *
-       * @param str string to assign
+       * @param str std::string to assign
        */
-      virtual Tfield<string> &operator= ( const string &str ) {
+      virtual Tfield<std::string> &operator= ( const std::string &str ) {
 
         value = str;
 
@@ -520,11 +515,11 @@ namespace atmi {
       };
 
       /**
-       * assigns values to the string field.
+       * assigns values to the std::string field.
        *
        * @param  c  the content is set to a single character.
        */
-      virtual Tfield<string> &operator= ( char &c ) {
+      virtual Tfield<std::string> &operator= ( char &c ) {
 
         value = c;
 
@@ -533,7 +528,7 @@ namespace atmi {
 
       /** casts the field value
        */
-      operator string(){
+      operator std::string(){
 
         return value;
       };
@@ -593,7 +588,7 @@ namespace atmi {
         if ( v != NULL ) {
 
           rc=0;
-          value = v;                    // copy v into string value
+          value = v;                    // copy v into std::string value
           delete v;
 
         } else {
@@ -603,12 +598,12 @@ namespace atmi {
         return rc;
       };
 
-      string value; //!< string field's value
+      std::string value; //!< std::string field's value
   };
 
   /** Specialization of template Tfield which handles CARRAY typed fields.
    *
-   * This class is using a string object to hold and handle char * data
+   * This class is using a std::string object to hold and handle char * data
    * \copydoc atmi::field
    */
   template <> class Tfield<char *>: public field {
@@ -628,7 +623,7 @@ namespace atmi {
 
         set_id ( fid );
 
-        // check taht we have a string declaration in the FML table
+        // check taht we have a std::string declaration in the FML table
         if ( type () != 6 ) {
           throw atmi_exception ( "Tfield %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
         }
@@ -726,11 +721,11 @@ namespace atmi {
             }
           } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
-          };
+          }
 
           rc  = Fadd32 ( b.get_buffer(), id(), value, length() );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add<char *> failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
@@ -750,26 +745,21 @@ namespace atmi {
       virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
-        FLDLEN32 l = 0;
         set_field_occurence(occ);
-        char *v = NULL;
 
-        v = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &l );
-        if ( v != NULL ) {
+        if ( value != NULL ) {
+          delete[] value;
+        }
 
-          len = l;
-          if ( value != NULL ) {
-            delete[] value;
-          }
+        value = CFgetalloc32 ( b.get_buffer(), id(), occurence(), FLD_CARRAY, &len );
+        if ( value != NULL ) {
 
-          value = new char[len];
-          memcpy (value, v, len);
+          printf("DEBUG len is %d\n", len );
 
           rc = 0;
-          delete[] v;
 
         } else {
-          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;
@@ -780,7 +770,7 @@ namespace atmi {
   };
 
   /** Helper that handles the operator << between output streams and field value */
-  ostream &operator<< ( ostream &o, Tfield<string> &f );
+  std::ostream &operator<< ( std::ostream &o, Tfield<std::string> &f );
 
 /** @} */
 } // namespace atmi

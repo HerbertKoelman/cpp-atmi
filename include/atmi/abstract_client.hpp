@@ -36,7 +36,6 @@
 #include <atmi/transaction.hpp>
 #include <atmi/queue.hpp>
 
-using namespace std;
 
 namespace atmi {
 

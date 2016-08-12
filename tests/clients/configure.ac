@@ -32,12 +32,13 @@ AC_CHECK_PROG([RM],[rm],[rm -f],[echo "no rm command found"])
 AC_CHECK_PROG([MKFLDHDR],[mkfldhdr32],[mkfldhdr32],[echo "missing program mkfldhdr32." && exit -1])
 AC_PROG_RANLIB
 
-CFLAGS="-I ../../include -I ./"
+CPPFLAGS="-I ./ -I ../../include "
+CXXFLAGS="$CFLAGS"
 LDFLAGS="$LDFLAGS -L ../../lib "
 
 if test -n "$AUXDIR"
 then
-  CFLAGS="$CFLAGS -I$AUXDIR/include"
+  CPPFLAGS="$CFLAGS -I$AUXDIR/include"
   LDFLAGS="$LDFLAGS -L$AUXDIR/lib"
 fi
 
@@ -64,7 +65,7 @@ then
   AC_MSG_CHECKING([for tuxedo includes])
   test -e $TUXINC && AC_MSG_RESULT(found $TUXINC.) || AC_MSG_ERROR(failed to find $TUXINC directory.)
 
-  CFLAGS="$CFLAGS -I$TUXINC "
+  CPPFLAGS="$CPPFLAGS -I$TUXINC "
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
   AC_CHECK_LIB([tux], [tpcall], [_void="found tux lib."])
@@ -102,8 +103,8 @@ AC_SUBST(OBJECTS,$OBJECTS)
 AC_MSG_CHECKING([for specific $CXX compiler options])
 case "$CXX" in
   xlC_r | xlC)
-	CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not needed anymore -qsourcetype=c++ "
-  CFLAGS="-q$bits -O -qmaxmem=-1 $CFLAGS"
+	CFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert:rvaluereferences -q$bits -O -qmaxmem=-1 $CFLAGS"
+  LDFLAGS="-brtl -bh:5 $LDFLAGS"
   AC_SUBST(TXFLAGS,"-+" )
   AC_MSG_RESULT([yes])
   ;;

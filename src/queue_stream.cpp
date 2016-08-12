@@ -42,7 +42,7 @@ namespace atmi {
 
 /* operators -------------------------------------------------*/
 
-  ostream& operator<<(ostream& out, queue_stream& qs){
+  std::ostream& operator<<(std::ostream& out, queue_stream& qs){
 
     int   rc      = -1;
     char *message = NULL;
@@ -90,7 +90,7 @@ namespace atmi {
               }
             }
 
-            out.write ( buffer, s ) << endl;
+            out.write ( buffer, s ) << std::endl;
             qs._count++;
 
           }
@@ -114,11 +114,11 @@ namespace atmi {
     return out;
   }
 
-  istream& operator>>(istream& in, queue_stream& qs){
+  std::istream& operator>>(std::istream& in, queue_stream& qs){
 
     int rc = -1;
     long len = qs.buffer_size ();
-    string line;
+    std::string line;
     char *message = NULL;
 
     try {
