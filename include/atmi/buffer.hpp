@@ -57,7 +57,6 @@ namespace atmi {
    * @example buffer_test.bcl
    */
   class buffer : public tuxedo {
-
     public:
 
       friend class field;

@@ -26,6 +26,17 @@ AC_PROG_RANLIB
 CXXFLAGS=""
 CFLAGS="-I../include"
 
+AC_CHECK_SIZEOF([long])
+if test $ac_cv_sizeof_long == "8" 
+then
+  AC_SUBST(BITS,"64")
+  bits=64
+else
+  AC_MSG_RESULT([using 32 bits (default)])
+  AC_SUBST(BITS,"32")
+  bits=32
+fi
+
 if test -n "$AUXDIR"
 then
   CFLAGS="$CFLAGS -I$AUXDIR/include"
@@ -42,15 +53,6 @@ fi
 
 # Checks for libraries.
 AC_CHECK_LIB([pthread], [pthread_create],[],[AC_ERROR([missing pthread library.])])
-
-# C++11 checks
-#AC_CHECK_HEADER([mutex], [AC_DEFINE([HAVE_CPP11_MUTEX])])
-#
-#if test "$ac_cv_header_mutex" = "no" 
-#then
-##   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD])],[AC_ERROR([missing cpp-pthread library.])])
-#   AC_CHECK_LIB([cpp-pthread], [cpp_pthread_version],[AC_DEFINE([HAVE_CPP_PTHREAD]) LIBS="$LIBS -lcpp-pthread"],[ AC_ERROR([missing cpp-pthread library.]) ])
-#fi
 
 OBJECTS="atmi++.o"
 for src in *.cpp
@@ -93,15 +95,14 @@ AC_CHECK_FUNCS([memset])
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-	  CPPFLAGS="-qlanglvl=extended0x:decltype:static_assert:rvaluereferences"
-    CFLAGS="-qmaxmem=-1 -qsmp $CFLAGS"
-    CXXFLAGS="-O"
+    CFLAGS="-q$bits -qmaxmem=-1 -qsmp -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
+    CXXFLAGS="-O2"
     LDFLAGS="-brtl -bh:5 $LDFLAGS"
     AC_MSG_RESULT([$CFLAGS $CPPFLAGS $CXXFLAGS])
     ;;
   g++ | gcc)
     CXXFLAGS="-O2"
-    CPPFLAGS="-std=c++11 $CPPFLAGS "
+    CFLAGS="-std=c++11 $CFLAGS "
     AC_MSG_RESULT([$CFLAGS $CPPFLAGS $CXXFLAGS])
     ;;
   *)
