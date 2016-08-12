@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.2.2)</span>
+   &#160;<span id="projectnumber">(v4.3.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -91,6 +91,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html">atmi::buffer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1call__info.html">atmi::call_info</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html">atmi::field</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1_tfield.html">atmi::Tfield&lt; T &gt;</a></td></tr>
@@ -106,21 +108,21 @@ Typedefs</h2></td></tr>
 typedef char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#ga8b57f9a4e2453d8e5d82ac0016e35e87">atmi::carray</a></td></tr>
 <tr class="memdesc:ga8b57f9a4e2453d8e5d82ac0016e35e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">character array <br /></td></tr>
 <tr class="separator:ga8b57f9a4e2453d8e5d82ac0016e35e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga374230d2a2355a879f42c829eb2d70ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga374230d2a2355a879f42c829eb2d70ff"></a>
-typedef unique_ptr&lt; carray &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#ga374230d2a2355a879f42c829eb2d70ff">atmi::ACarray</a></td></tr>
-<tr class="memdesc:ga374230d2a2355a879f42c829eb2d70ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr to a carray. <br /></td></tr>
-<tr class="separator:ga374230d2a2355a879f42c829eb2d70ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga268bae34ffaa2c2e72fabbcb54841934"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga268bae34ffaa2c2e72fabbcb54841934"></a>
-typedef unique_ptr&lt; buffer &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#ga268bae34ffaa2c2e72fabbcb54841934">atmi::Abuffer</a></td></tr>
-<tr class="memdesc:ga268bae34ffaa2c2e72fabbcb54841934"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr to a FML buffer. <br /></td></tr>
-<tr class="separator:ga268bae34ffaa2c2e72fabbcb54841934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga095330dfead97321f0830e3fa204a24a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga095330dfead97321f0830e3fa204a24a"></a>
+typedef std::unique_ptr&lt; carray &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#ga095330dfead97321f0830e3fa204a24a">atmi::ACarray</a></td></tr>
+<tr class="memdesc:ga095330dfead97321f0830e3fa204a24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr to a carray. <br /></td></tr>
+<tr class="separator:ga095330dfead97321f0830e3fa204a24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa6276ba0b9cf18dd00fae53b1ce132f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa6276ba0b9cf18dd00fae53b1ce132f4"></a>
+typedef std::unique_ptr&lt; buffer &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#gaa6276ba0b9cf18dd00fae53b1ce132f4">atmi::Abuffer</a></td></tr>
+<tr class="memdesc:gaa6276ba0b9cf18dd00fae53b1ce132f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">unique_ptr to a FML buffer. <br /></td></tr>
+<tr class="separator:gaa6276ba0b9cf18dd00fae53b1ce132f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga1db5d7cd1f711e43cd63dedbd9e3f8d1"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#ga1db5d7cd1f711e43cd63dedbd9e3f8d1">atmi::cpp_atmi_version</a> ()</td></tr>
 <tr class="separator:ga1db5d7cd1f711e43cd63dedbd9e3f8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf1bf620dc4ebad71a8f2b98e45107e3"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#gaaf1bf620dc4ebad71a8f2b98e45107e3">atmi::operator&lt;&lt;</a> (ostream &amp;o, Tfield&lt; string &gt; &amp;f)</td></tr>
-<tr class="separator:gaaf1bf620dc4ebad71a8f2b98e45107e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0b4f377c31559db649c37f8df6f9c13"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fml.html#gaf0b4f377c31559db649c37f8df6f9c13">atmi::operator&lt;&lt;</a> (std::ostream &amp;o, Tfield&lt; std::string &gt; &amp;f)</td></tr>
+<tr class="separator:gaf0b4f377c31559db649c37f8df6f9c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>A set of C++ classes for defining and manipulating storage structures called fielded buffers, that contain attribute-value pairs called fields. The attribute is the field’s identifier, and the associated value represents the field’s data content.</p>
@@ -142,20 +144,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaaf1bf620dc4ebad71a8f2b98e45107e3"></a>
+<a class="anchor" id="gaf0b4f377c31559db649c37f8df6f9c13"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ostream &amp; atmi::operator&lt;&lt; </td>
+          <td class="memname">std::ostream &amp; atmi::operator&lt;&lt; </td>
           <td>(</td>
-          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
           <td class="paramname"><em>o</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Tfield&lt; string &gt; &amp;&#160;</td>
+          <td class="paramtype">Tfield&lt; std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>f</em>&#160;</td>
         </tr>
         <tr>

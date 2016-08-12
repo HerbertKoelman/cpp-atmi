@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['diagnostic_5fexception',['diagnostic_exception',['../classatmi_1_1diagnostic__exception.html',1,'atmi']]]
+  ['call_5finfo',['call_info',['../classatmi_1_1call__info.html',1,'atmi']]]
 ];

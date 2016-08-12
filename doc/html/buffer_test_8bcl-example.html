@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.2.2)</span>
+   &#160;<span id="projectnumber">(v4.3.0)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -136,7 +136,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        prenom = &quot;herbert&quot;;</div>
 <div class="line">        nom = &quot;this is a char *&quot;;</div>
 <div class="line">        empid = 2;</div>
-<div class="line">        carray.set_char_array(&quot;helloworld\0rray&quot;, sizeof (&quot;helloworld\0rray&quot;));</div>
+<div class="line">        carray.set_char_array(&quot;helloworld\0rray&quot;, strlen (&quot;helloworld\0rray&quot;));</div>
 <div class="line">        copy = carray;</div>
 <div class="line"></div>
 <div class="line">        std::cout &lt;&lt; &quot;Added fields: &quot; &lt;&lt; std::endl;</div>
@@ -145,10 +145,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        b.add ( nom );</div>
 <div class="line">        b.add ( prenom );</div>
 <div class="line">        b.add ( carray );</div>
-<div class="line">        b.add ( copy );</div>
 <div class="line">        b.print ();</div>
 <div class="line"></div>
-<div class="line">        std::cout &lt;&lt; &quot;get copy&quot; &lt;&lt; std::endl;</div>
 <div class="line">        b.get ( copy );</div>
 <div class="line"></div>
 <div class="line">        std::cout &lt;&lt; copy.what() &lt;&lt; std::endl;</div>

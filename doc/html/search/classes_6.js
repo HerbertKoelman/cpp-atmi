@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nomsg_5fexception',['nomsg_exception',['../classatmi_1_1nomsg__exception.html',1,'atmi']]]
+  ['interrupt_5fexception',['interrupt_exception',['../classatmi_1_1interrupt__exception.html',1,'atmi']]]
 ];

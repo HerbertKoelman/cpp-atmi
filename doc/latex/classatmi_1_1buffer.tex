@@ -18,6 +18,10 @@ Inheritance diagram for atmi\+:\+:buffer\+:\begin{figure}[H]
 \item 
 \hyperlink{classatmi_1_1buffer_aa58097eacc94f1f5cc5e99b434ec7135}{$\sim$buffer} ()
 \item 
+void \hyperlink{classatmi_1_1buffer_a51d14f5d63ae22666ce0d5dc46e91728}{set\+\_\+call\+\_\+info} (\hyperlink{classatmi_1_1call__info}{call\+\_\+info} \&callinfo)
+\item 
+void \hyperlink{classatmi_1_1buffer_a84a4bd3782f9ffafa962a2393484b0b7}{get\+\_\+call\+\_\+info} (\hyperlink{classatmi_1_1call__info}{call\+\_\+info} \&callinfo)
+\item 
 size\+\_\+t \hyperlink{classatmi_1_1buffer_a8228f64305e566b8133e8ee746c6d2bb}{size} () const 
 \item 
 size\+\_\+t \hyperlink{classatmi_1_1buffer_a4ab660c5750cb0793eb99782fd36c0fa}{used} () const 
@@ -62,9 +66,13 @@ bool \hyperlink{classatmi_1_1buffer_aae543cf7816b338d20031993c18ce491}{is\+\_\+h
 \item 
 void \hyperlink{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{set\+\_\+handling\+\_\+memory} (bool b)
 \item 
+\hyperlink{classatmi_1_1buffer_a79e82bc3f9dac86efc685604c20ed78d}{operator F\+B\+F\+R32 $\ast$} ()
+\item 
 bool \hyperlink{classatmi_1_1buffer_aa095219e6aa1470c96dc2b3d4ddeeb98}{operator==} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
 \hyperlink{classatmi_1_1buffer}{buffer} \& \hyperlink{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{operator=} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
+\item 
+\hyperlink{classatmi_1_1buffer}{buffer} \& \hyperlink{classatmi_1_1buffer_a4efc77b0773f85c06d391af8a7ebe98a}{operator=} (F\+B\+F\+R32 $\ast$b)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -282,6 +290,20 @@ return F\+M\+L32 buffer reference
 
 the reference the current internal buffer. 
 \end{DoxyReturn}
+\hypertarget{classatmi_1_1buffer_a84a4bd3782f9ffafa962a2393484b0b7}{\index{atmi\+::buffer@{atmi\+::buffer}!get\+\_\+call\+\_\+info@{get\+\_\+call\+\_\+info}}
+\index{get\+\_\+call\+\_\+info@{get\+\_\+call\+\_\+info}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{get\+\_\+call\+\_\+info}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::get\+\_\+call\+\_\+info (
+\begin{DoxyParamCaption}
+\item[{{\bf call\+\_\+info} \&}]{callinfo}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1buffer_a84a4bd3782f9ffafa962a2393484b0b7}
+get call info (T\+S\+A\+M)
+
+
+\begin{DoxyParams}{Parameters}
+{\em callinfo} & reference to call info instance to fill \\
+\hline
+\end{DoxyParams}
 \hypertarget{classatmi_1_1buffer_a38aca9956db23474cb19d4c737b08262}{\index{atmi\+::buffer@{atmi\+::buffer}!is\+\_\+fml32\+\_\+buffer@{is\+\_\+fml32\+\_\+buffer}}
 \index{is\+\_\+fml32\+\_\+buffer@{is\+\_\+fml32\+\_\+buffer}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{is\+\_\+fml32\+\_\+buffer}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::is\+\_\+fml32\+\_\+buffer (
@@ -317,7 +339,14 @@ true if this instance willfree allocated memory buffer.
 \begin{DoxyReturn}{Returns}
 the number of occurences of the field into the buffer (Foccur32) 
 \end{DoxyReturn}
-\hypertarget{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
+\hypertarget{classatmi_1_1buffer_a79e82bc3f9dac86efc685604c20ed78d}{\index{atmi\+::buffer@{atmi\+::buffer}!operator F\+B\+F\+R32 $\ast$@{operator F\+B\+F\+R32 $\ast$}}
+\index{operator F\+B\+F\+R32 $\ast$@{operator F\+B\+F\+R32 $\ast$}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{operator F\+B\+F\+R32 $\ast$}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::buffer\+::operator F\+B\+F\+R32 $\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1buffer_a79e82bc3f9dac86efc685604c20ed78d}
+cast to F\+B\+F\+R32 $\ast$ \hypertarget{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
 \index{operator=@{operator=}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
 \begin{DoxyParamCaption}
@@ -341,6 +370,20 @@ Copy's the content of one buffer into the other.
 \begin{DoxyReturn}{Returns}
 target buffer 
 \end{DoxyReturn}
+\hypertarget{classatmi_1_1buffer_a4efc77b0773f85c06d391af8a7ebe98a}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
+\index{operator=@{operator=}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
+\begin{DoxyParamCaption}
+\item[{F\+B\+F\+R32 $\ast$}]{b}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1buffer_a4efc77b0773f85c06d391af8a7ebe98a}
+Copies the content of a fielded buffer into another
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & buffer we are copying \\
+\hline
+\end{DoxyParams}
 \hypertarget{classatmi_1_1buffer_aa095219e6aa1470c96dc2b3d4ddeeb98}{\index{atmi\+::buffer@{atmi\+::buffer}!operator==@{operator==}}
 \index{operator==@{operator==}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::buffer\+::operator== (
@@ -478,6 +521,20 @@ Set/change a field's value into the buffer (Fchg32)
 Set a new buffer reference. Previous buffer is deallocated before assign the passed value. 
 \begin{DoxyParams}{Parameters}
 {\em b} & set F\+M\+L32 buffer reference \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1buffer_a51d14f5d63ae22666ce0d5dc46e91728}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+call\+\_\+info@{set\+\_\+call\+\_\+info}}
+\index{set\+\_\+call\+\_\+info@{set\+\_\+call\+\_\+info}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{set\+\_\+call\+\_\+info}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+call\+\_\+info (
+\begin{DoxyParamCaption}
+\item[{{\bf call\+\_\+info} \&}]{callinfo}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1buffer_a51d14f5d63ae22666ce0d5dc46e91728}
+set call info (T\+S\+A\+M)
+
+
+\begin{DoxyParams}{Parameters}
+{\em callinfo} & callinfo value to set \\
 \hline
 \end{DoxyParams}
 \hypertarget{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+handling\+\_\+memory@{set\+\_\+handling\+\_\+memory}}

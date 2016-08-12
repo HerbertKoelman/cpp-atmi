@@ -28,9 +28,9 @@ $<$ transaction $>$ \hyperlink{group__atmi_gab8e359f2305eaf285b0b0745d3b41997}{a
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-ostream \& \hyperlink{group__atmi_gaf3fe9481b5d6e19d1fb56e27baff2154}{atmi\+::operator$<$$<$} (ostream \&out, queue\+\_\+stream \&qs)
+std\+::ostream \& \hyperlink{group__atmi_gaf05328bfccb410191dc529104dc3a04f}{atmi\+::operator$<$$<$} (std\+::ostream \&out, queue\+\_\+stream \&qs)
 \item 
-istream \& \hyperlink{group__atmi_gadb0ca17e8de1eecddb5c95b86441ffdc}{atmi\+::operator$>$$>$} (istream \&in, queue\+\_\+stream \&qs)
+std\+::istream \& \hyperlink{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}{atmi\+::operator$>$$>$} (std\+::istream \&in, queue\+\_\+stream \&qs)
 \end{DoxyCompactItemize}
 
 
@@ -38,14 +38,14 @@ istream \& \hyperlink{group__atmi_gadb0ca17e8de1eecddb5c95b86441ffdc}{atmi\+::op
 The main A\+P\+I for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-\/and-\/subscribe message-\/handling functions; service interface functions; and buffer management functions for distributed application communication. 
 
 \subsection{Function Documentation}
-\hypertarget{group__atmi_gaf3fe9481b5d6e19d1fb56e27baff2154}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$<$$<$@{operator$<$$<$}}
+\hypertarget{group__atmi_gaf05328bfccb410191dc529104dc3a04f}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream \& atmi\+::operator$<$$<$ (
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream \& atmi\+::operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{ostream \&}]{out, }
+\item[{std\+::ostream \&}]{out, }
 \item[{queue\+\_\+stream \&}]{qs}
 \end{DoxyParamCaption}
-)}}\label{group__atmi_gaf3fe9481b5d6e19d1fb56e27baff2154}
+)}}\label{group__atmi_gaf05328bfccb410191dc529104dc3a04f}
 Global utility to stream out the content of a queue
 
 
@@ -55,14 +55,14 @@ Global utility to stream out the content of a queue
 {\em qs} & queue stream that will handle the reading of messages \\
 \hline
 \end{DoxyParams}
-\hypertarget{group__atmi_gadb0ca17e8de1eecddb5c95b86441ffdc}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$>$$>$@{operator$>$$>$}}
+\hypertarget{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}istream \& atmi\+::operator$>$$>$ (
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::istream \& atmi\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
-\item[{istream \&}]{in, }
+\item[{std\+::istream \&}]{in, }
 \item[{queue\+\_\+stream \&}]{qs}
 \end{DoxyParamCaption}
-)}}\label{group__atmi_gadb0ca17e8de1eecddb5c95b86441ffdc}
+)}}\label{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}
 Global utility to stream in a queue
 
 
