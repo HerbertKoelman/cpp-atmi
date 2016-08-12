@@ -31,7 +31,7 @@ namespace atmi {
   class call_info {
     public: 
 
-      friend void buffer::get_call_info( call_info &);
+      friend void buffer::get_call_info( call_info &callinfo);
 
       /** @return current ECID value */
       const std::string ecid() ;

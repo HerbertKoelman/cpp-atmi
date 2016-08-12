@@ -75,7 +75,7 @@ namespace atmi {
 
   const char *field::what() {
 
-    stringstream buff;
+    std::stringstream buff;
     buff << "Fid: " << _field_id << ", occurence: " << _field_occurence << ", name: " << _field_name << ", len: " << length() << ", type: " << tname () << ".";
     _what = buff.str();
     return _what.c_str ();
@@ -119,9 +119,9 @@ namespace atmi {
 
 // operators --------------------------------------------------------------------------------
 
-  ostream &operator<< ( ostream &out, Tfield<string> &f ){
+  std::ostream &operator<< ( std::ostream &out, Tfield<std::string> &f ){
 
-    return out << (string)f;
+    return out << (std::string)f;
   };
 
 }

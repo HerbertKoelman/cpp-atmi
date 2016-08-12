@@ -122,9 +122,9 @@ namespace atmi {
   transaction_ptr abstract_client::new_transaction_instance ( const char *svc ){
 
 #if __cplusplus < 201103L
-    auto_ptr<transaction>   ptr;
+    std::auto_ptr<transaction>   ptr;
 #else
-    unique_ptr<transaction> ptr;
+    std::unique_ptr<transaction> ptr;
 #endif
 
     ptr.reset ( new transaction ( svc ));
@@ -135,9 +135,9 @@ namespace atmi {
   queue_ptr abstract_client::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
 #if __cplusplus < 201103L
-    auto_ptr<atmi::queue> ptr;
+    std::auto_ptr<atmi::queue> ptr;
 #else
-    unique_ptr<atmi::queue> ptr;
+    std::unique_ptr<atmi::queue> ptr;
 #endif
     ptr.reset ( new atmi::queue ( qspace, queue, reply ));
     ptr->set_context ( this->context());
