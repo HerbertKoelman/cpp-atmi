@@ -181,7 +181,6 @@ namespace atmi {
 
     private:
 
-
       FLDID32   _field_id;
       FLDOCC32  _field_occurence;
       char     *_field_name;
@@ -726,7 +725,7 @@ namespace atmi {
 
           rc  = Fadd32 ( b.get_buffer(), id(), value, length() );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add<char *> failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
           } else {
             set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
@@ -746,26 +745,21 @@ namespace atmi {
       virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
-        FLDLEN32 l = 0;
         set_field_occurence(occ);
-        char *v = NULL;
 
-        v = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &l );
-        if ( v != NULL ) {
+        if ( value != NULL ) {
+          delete[] value;
+        }
 
-          len = l;
-          if ( value != NULL ) {
-            delete[] value;
-          }
+        value = CFgetalloc32 ( b.get_buffer(), id(), occurence(), FLD_CARRAY, &len );
+        if ( value != NULL ) {
 
-          value = new char[len];
-          memcpy (value, v, len);
+          printf("DEBUG len is %d\n", len );
 
           rc = 0;
-          delete[] v;
 
         } else {
-          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
         }
 
         return rc;

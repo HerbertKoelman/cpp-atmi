@@ -49,7 +49,7 @@ class buffer_test : public atmi::abstract_client {
         prenom = "herbert";
         nom = "this is a char *";
         empid = 2;
-        carray.set_char_array("helloworld\0rray", sizeof ("helloworld\0rray"));
+        carray.set_char_array("helloworld\0rray", strlen ("helloworld\0rray"));
         copy = carray;
 
         std::cout << "Added fields: " << std::endl;
@@ -58,10 +58,8 @@ class buffer_test : public atmi::abstract_client {
         b.add ( nom );
         b.add ( prenom );
         b.add ( carray );
-        b.add ( copy );
         b.print ();
 
-        std::cout << "get copy" << std::endl;
         b.get ( copy );
 
         std::cout << copy.what() << std::endl;

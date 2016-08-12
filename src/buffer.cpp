@@ -42,13 +42,14 @@ namespace atmi {
     }
   }
 
-  void buffer::set_call_info( call_info &callinfo){
+  void buffer::get_call_info( call_info &callinfo){
     FBFR32 *cib = callinfo ;
     tpgetcallinfo((char *) _buffer, &cib, 0 );
+    callinfo._buffer.set_buffer(cib);
   }
 
-  void buffer::get_call_info( call_info &callinfo){
-    tpsetcallinfo((char *) _buffer, (FBFR32 *) callinfo, 0 );
+  void buffer::set_call_info( call_info &callinfo){
+    tpsetcallinfo((char *) _buffer, (FBFR32 *)callinfo, 0 );
   }
 
   bool buffer::is_fml32_buffer( char *buffer){

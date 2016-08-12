@@ -31,15 +31,18 @@ namespace atmi {
   class call_info {
     public: 
 
+      friend void buffer::get_call_info( call_info &);
+
       /** @return current ECID value */
       const std::string ecid() ;
 
-      /** cwupdate/set ECID.
+      /** update/set ECID.
        *
        * @param value ecid
        * @see atmi::buffer::set_cal_info
        */
-      void set_ecid( const std::string &value);
+      //void set_ecid( const std::string &value);
+      void set_ecid( const char *value);
 
       /** print call infos */
       void print() const;
