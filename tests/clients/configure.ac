@@ -33,12 +33,13 @@ AC_CHECK_PROG([MKFLDHDR],[mkfldhdr32],[mkfldhdr32],[echo "missing program mkfldh
 AC_PROG_RANLIB
 
 CPPFLAGS="-I ./ -I ../../include "
-CXXFLAGS="$CFLAGS"
+CXXFLAGS="-g"
+CFLAGS=""
 LDFLAGS="$LDFLAGS -L ../../lib "
 
 if test -n "$AUXDIR"
 then
-  CPPFLAGS="$CFLAGS -I$AUXDIR/include"
+  CPPFLAGS="$CPPFLAGS -I$AUXDIR/include"
   LDFLAGS="$LDFLAGS -L$AUXDIR/lib"
 fi
 
@@ -74,23 +75,6 @@ else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
 fi
 
-#if test -n "$IMSDIR"
-#then
-#  IMSLIB="$IMSDIR/lib"
-#  IMSINC="$IMSDIR/include"
-#
-#  AC_MSG_CHECKING([for ART IMS libraries])
-#  test -e $IMSLIB && AC_MSG_RESULT(found $IMSLIB.) || AC_MSG_ERROR(failed to find $IMSLIB directory.)
-#
-#  AC_MSG_CHECKING([for ART IMS includes])
-#  test -e $IMSINC && AC_MSG_RESULT(found $IMSINC.) || AC_MSG_ERROR(failed to find $IMSINC directory.)
-#
-#  CFLAGS="$CFLAGS -I$IMSINC "
-#  LDFLAGS="$LDFLAGS -L$IMSLIB"
-#
-#else
-#  AC_MSG_ERROR([set env variable IMSDIR or use --enable-imsdir=PATH.])
-#fi
 
 OBJECTS=""
 for src in *.cpp
@@ -103,14 +87,14 @@ AC_SUBST(OBJECTS,$OBJECTS)
 AC_MSG_CHECKING([for specific $CXX compiler options])
 case "$CXX" in
   xlC_r | xlC)
-	CFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert:rvaluereferences -q$bits -O -qmaxmem=-1 $CFLAGS"
+	CFLAGS="-qlanglvl=extended0x:decltype:static_assert:rvaluereferences -q$bits -qmaxmem=-1 $CFLAGS"
   LDFLAGS="-brtl -bh:5 $LDFLAGS"
   AC_SUBST(TXFLAGS,"-+" )
   AC_MSG_RESULT([yes])
   ;;
   g++ | gcc)
 	#permissive is not required anymore - CXXFLAGS="-x c++ -std=c++11 -frtti -fpermissive $CXXFLAGS "
-	CPPFLAGS="-x c++ -std=c++11 -frtti $CPPFLAGS "
+	CFLAGS="-x c++ -std=c++11 -frtti $CLAGS "
   AC_SUBST(TXFLAGS,"" )
   AC_MSG_RESULT([yes])
   ;;

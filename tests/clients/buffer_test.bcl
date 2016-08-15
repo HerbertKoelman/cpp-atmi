@@ -37,7 +37,7 @@ class buffer_test : public atmi::abstract_client {
 
         atmi::Tfield<atmi::carray>   unknown_field;
         unknown_field.set_id(SRVCDAY);
-        unknown_field.set_char_array("salut les amis\0rray", sizeof ("salut les amis\0rray"));
+        unknown_field.set_char_array("salut les amis\0rray", 19);
 
         atmi::Tfield<string> prenom ( EMPNAME );
         atmi::Tfield<long>   empid ( EMPID );
@@ -49,19 +49,62 @@ class buffer_test : public atmi::abstract_client {
         prenom = "herbert";
         nom = "this is a char *";
         empid = 2;
-        carray.set_char_array("helloworld\0rray", strlen ("helloworld\0rray"));
+        carray.set_char_array("hello world\0rray", 16);
+
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
+        std::cout << "Direct carray buffer access" << std::endl ;
+        // const char *direct_access = carray ;
+        // auto direct_access_length = carray.length();
+
+        for ( auto x = 0; x < carray.length() ; x++ ){
+          // printf("%c - %c\n", direct_access[x], carray[x]);
+          printf("%c\n", carray[x]);
+        }
+        printf("\n");
+        carray[1] = 'X' ;
+        printf("changed character 1 to X -> %c\n", carray[1]);
+
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
+        std::cout << "copy carrays" << std::endl;
         copy = carray;
 
-        std::cout << "Added fields: " << std::endl;
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
+        std::cout << "Adding fields into FML buffer: " << std::endl;
         b.add(unknown_field);
         b.add ( empid );
         b.add ( nom );
         b.add ( prenom );
-        b.add ( carray );
+        b.set ( carray );
         b.print ();
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
 
+        std::cout << "get SRVCDAY value from FML buffer" << std::endl;
+        b.get ( copy );
+        std::cout << "there should be enough memory no re-allocation expected" << std::endl;
         b.get ( copy );
 
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
+
+        copy.set_char_array("0123456789", 10);
+        std::cout << "buffer carray contains " << copy.length() << " characters" << std::endl ;
+        //b.remove(copy);
+        b.set(copy);
+        b.print();
+
+        atmi::Tfield<char *> resize_control ( SRVCDAY );
+        std::cout << "resize control initial carray length is  " << resize_control.length() << std::endl;
+        resize_control.set_char_array("012345678901245678900123456789", 30);
+        b.get(resize_control);
+
+        std::cout << "de-allocate ressources" << std::endl ;
+        resize_control.free_ressources();
+        std::cout << "  firt call to get from buffer, size before call " << resize_control.length() << std::endl ;
+        b.get(resize_control);
+        std::cout << "  second call to get from buffer, size before second call " << resize_control.length() << std::endl ;
+        b.get(resize_control);
+        std::cout << "size is " << resize_control.length() << ", backend store size is " << resize_control.buffer_size() << std::endl ;
+
+        std::cout << "--------------------------------------" << std::endl << std::endl ;
         std::cout << copy.what() << std::endl;
         long len = 5;                  //copy.length();
         char *cav = new char[len];
@@ -115,7 +158,6 @@ int main ( int argc, char **argv ) {
   try {
 
     std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
-    std::cout << "setting up";
     buffer_test btest;
 
     std::cout << ", starting up" ;

@@ -32,6 +32,7 @@
 #include <atmi/buffer.hpp>
 #include <atmi/fields.hpp>
 #include <atmi/call_info.hpp>
+#include <atmi/carray_field.hpp>
 
 #include <atmi/tuxedo.hpp>
 #include <atmi/transaction.hpp>
