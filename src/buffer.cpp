@@ -95,6 +95,14 @@ namespace atmi {
     resize ( size() + _extent );
   };
 
+  size_t buffer::extent() const {
+    return _extent;
+  }
+
+  void buffer::set_extent( size_t extent ){
+    _extent = extent ;
+  }
+
   field &buffer::append ( field &f ){
 
     throw atmi_exception ( "Method append is not implemented yet !!??;" ); //NOSONAR this desired implementation.
