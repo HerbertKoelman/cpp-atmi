@@ -121,6 +121,15 @@ namespace atmi {
        */
       void extend ();
 
+      /** @return current extent value */
+      size_t extent() const ;
+
+      /** set a new extent value.
+       *
+       * @param extent number of bytes to allocate when no space is left in buffer.
+       */
+      void set_extent( size_t extent );
+
       /** Extends the buffer size with the given bytes
        *
        * @param extent size in bytes of the extent
@@ -234,7 +243,7 @@ namespace atmi {
 
       /** cast to FBFR32 *
        */
-      operator FBFR32 *();
+      explicit operator FBFR32 *();
 
       /** Checks equality of two buffers (based upon chksum)
        *
