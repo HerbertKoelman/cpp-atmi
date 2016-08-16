@@ -93,13 +93,16 @@ namespace atmi {
        */
       void set_char_array ( const char * carray, FLDLEN32 size ) {
 
-        if ( size > _buffer_size ){ 
+        if ( size > _buffer_size ){
           // there is not enough space in backend buffer, re-allocate a bigger one.
-          free_ressources();
+
+          free_ressources(); // free previous backend
+
           _buffer_size = size ;
-          _value = new char [_buffer_size];
+          _value = new char [_buffer_size]; // allocate new backend
         }
 
+        // data length is equal to size
         _length = size ;
 
         // allocated and util length are equal
@@ -132,14 +135,22 @@ namespace atmi {
       /** de-allocate internal ressources (mainly the caray).
        */
       void free_ressources(){
-        if ( _value != NULL ){
+        if ( _value != NULL ){ // make sure there were allocated ressources
           _buffer_size = 0;
-          _length           = 0;
+          _length      = 0;
+
           delete[] _value;
           _value = NULL ;
         }
       }
 
+      /** gives direct access to characters in the carray.
+       *
+       * this avoids the need to make a copy prior the utilisation of carray's content (shoudl be faster).
+       *
+       * @param index character in the range of 0 - length
+       * @return a reference to the character at position index.
+       */
       char &operator[](int index){
         if ((index < 0) || (index >= _length )){
           std::out_of_range("carray index is out of bound.");
@@ -158,6 +169,10 @@ namespace atmi {
 
     protected:
 
+      /** implement a Fchg32 call for carrays
+       *
+       * @param b buffer to apply the change in
+       */
       virtual int set ( buffer &b) {
 
         int rc = -1;
@@ -170,6 +185,10 @@ namespace atmi {
         return rc;
       };
 
+      /** implement a Fadd32 call for carrays
+       *
+       * @param b buffer to apply the change in
+       */
       virtual int add ( buffer &b) {
 
         int rc = -1;
@@ -196,17 +215,29 @@ namespace atmi {
         return rc;
       };
 
+      /** retreive the current carray content.
+       *
+       * the content is copied into character array (backend). if the backend is too small a bigger one 
+       * is allocated and used.
+       *
+       * @param b buffer to apply the change in
+       */
       virtual int get ( buffer &b ){
 
         return get ( b, occurence() );
       };
 
+      /** \copydoc virtual int get ( buffer &b )
+       *
+       * @param occ field occurence to search for
+       */
       virtual int get ( buffer &b, FLDOCC32 occ ){
 
         int rc = -1;
         set_field_occurence(occ);
 
 
+        // check if be got a carray backend
         if ( _buffer_size == 0 ){
           // we need to allocate a new carray buffer anyway
           _value = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &_buffer_size );
@@ -221,6 +252,7 @@ namespace atmi {
           }
         } else {
 
+          // we already got a carray backend, we try to fill it with the field's content.
           rc = Fget32(b.get_buffer(), id(), occ, _value, &_length);
 
           // carray could be truncated, if so the returned size is greater then _buffer_size
@@ -240,21 +272,19 @@ namespace atmi {
               throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
             }
 
-          } else if ( rc == -1 ){
-            if ( Ferror32 == FNOSPACE ){ // buffer is too small re-allocate a new one
+          } else if (( rc == -1) && ( Ferror32 == FNOSPACE )){ // buffer is too small re-allocate a new one
 
-              free_ressources();
+            free_ressources();
 
-              // allocate a new buffer and move the fields value into it
-              _value = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &_buffer_size );
-              if ( _value != NULL ) {
+            // allocate a new buffer and move the fields value into it
+            _value = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &_buffer_size );
+            if ( _value != NULL ) {
 
-                _length = _buffer_size;
-                rc = 0;
+              _length = _buffer_size;
+              rc = 0;
 
-              } else {
-                throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
-              }
+            } else {
+              throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
             }
           }
         }

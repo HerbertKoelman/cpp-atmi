@@ -27,7 +27,7 @@ namespace atmi {
  * @{
  */
 
-  /** 
+  /**
    * When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add.
    */
   class field {

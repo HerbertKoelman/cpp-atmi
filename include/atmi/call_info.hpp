@@ -14,7 +14,7 @@
 
 namespace atmi {
 
-/** \addtogroup fml 
+/** \addtogroup fml
  *
  * @{
  */
@@ -29,7 +29,7 @@ namespace atmi {
    * @example buffer_test.bcl
    */
   class call_info {
-    public: 
+    public:
 
       friend void buffer::get_call_info( call_info &callinfo);
 
@@ -59,7 +59,7 @@ namespace atmi {
 
       /** create a FBFR32 buffer to hold call infos
        */
-      call_info(); 
+      call_info();
 
     private:
 
