@@ -61,7 +61,7 @@ namespace atmi {
           throw atmi_exception ("failed to put env varaible %s.", tuxconfig );
         }
       }
-      
+
       if ( usr != NULL ) {
         strncpy ( _tpinfo->usrname, usr, MAXTIDENT );
       } else {
@@ -90,7 +90,7 @@ namespace atmi {
       if (  tperrno == TPEPERM ) {
         throw tuxedo_exception  ( tperrno, "TPINIT access to DOMAIN denied. Check user and password." );
       }else{
-        throw tuxedo_exception  ( tperrno, 
+        throw tuxedo_exception  ( tperrno,
             catgets ( _catd, CATD_ATMI_SET, 39, "TPINIT failed. Is application started ? Is either TUXCONFIG or WSNADDR env var Set ? Check ULOG for more.")
             );
       }
@@ -110,7 +110,7 @@ namespace atmi {
           default:
             set_context(ctxt);
         }
-      } 
+      }
 
       std::stringstream buff;
       buff << _tpinfo->cltname << "-context-" << context() ;

@@ -63,7 +63,7 @@ namespace atmi {
   int transaction::call(atmi::buffer &buffer, int *urcode,int retries, int delay ){
 
     int rc = -1;
-    long osize = buffer.size();       // output buffer size 
+    long osize = buffer.size();       // output buffer size
     FBFR32 *b  = buffer.get_buffer(); // FML buffer reference
 
     rc = call ( (char *)b, osize, (char **) &b, &osize, urcode, retries, delay );

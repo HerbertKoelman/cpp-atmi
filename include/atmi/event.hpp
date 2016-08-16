@@ -17,7 +17,7 @@
 #include <atmi/config.h>
 #include <atmi/tuxedo.hpp>
 
-using namespace std;
+//using namespace std;
 
 namespace atmi {
 

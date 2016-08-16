@@ -49,7 +49,7 @@ namespace atmi {
     long  len     = qs._buffer_size;
     long  size    = qs._buffer_size;
     long  s       = 0;
-    char *buffer  = new char[size]; 
+    char *buffer  = new char[size];
 
     memset ( buffer, 0, size); // initialize buffer with 0
     try{

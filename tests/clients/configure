@@ -3413,12 +3413,14 @@ else
 fi
 
 
-CFLAGS="-I ../../include -I ./"
+CPPFLAGS="-I ./ -I ../../include "
+CXXFLAGS="-g"
+CFLAGS=""
 LDFLAGS="$LDFLAGS -L ../../lib "
 
 if test -n "$AUXDIR"
 then
-  CFLAGS="$CFLAGS -I$AUXDIR/include"
+  CPPFLAGS="$CPPFLAGS -I$AUXDIR/include"
   LDFLAGS="$LDFLAGS -L$AUXDIR/lib"
 fi
 
@@ -3878,7 +3880,7 @@ $as_echo_n "checking for tuxedo includes... " >&6; }
   test -e $TUXINC && { $as_echo "$as_me:${as_lineno-$LINENO}: result: found $TUXINC." >&5
 $as_echo "found $TUXINC." >&6; } || as_fn_error $? "failed to find $TUXINC directory." "$LINENO" 5
 
-  CFLAGS="$CFLAGS -I$TUXINC "
+  CPPFLAGS="$CPPFLAGS -I$TUXINC "
   LDFLAGS="$LDFLAGS -L$TUXLIB"
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for tpcall in -ltux" >&5
@@ -3965,23 +3967,6 @@ else
   as_fn_error $? "set env variable TUXDIR or use --enable-tuxdir=PATH." "$LINENO" 5
 fi
 
-#if test -n "$IMSDIR"
-#then
-#  IMSLIB="$IMSDIR/lib"
-#  IMSINC="$IMSDIR/include"
-#
-#  AC_MSG_CHECKING([for ART IMS libraries])
-#  test -e $IMSLIB && AC_MSG_RESULT(found $IMSLIB.) || AC_MSG_ERROR(failed to find $IMSLIB directory.)
-#
-#  AC_MSG_CHECKING([for ART IMS includes])
-#  test -e $IMSINC && AC_MSG_RESULT(found $IMSINC.) || AC_MSG_ERROR(failed to find $IMSINC directory.)
-#
-#  CFLAGS="$CFLAGS -I$IMSINC "
-#  LDFLAGS="$LDFLAGS -L$IMSLIB"
-#
-#else
-#  AC_MSG_ERROR([set env variable IMSDIR or use --enable-imsdir=PATH.])
-#fi
 
 OBJECTS=""
 for src in *.cpp
@@ -3996,8 +3981,8 @@ OBJECTS=$OBJECTS
 $as_echo_n "checking for specific $CXX compiler options... " >&6; }
 case "$CXX" in
   xlC_r | xlC)
-	CPPFLAGS="-brtl -bh:5 -qlanglvl=extended0x:decltype:static_assert::rvaluereferences:rvaluereferences" # this is not needed anymore -qsourcetype=c++ "
-  CFLAGS="-q$bits -O -qmaxmem=-1 $CFLAGS"
+	CFLAGS="-qlanglvl=extended0x:decltype:static_assert:rvaluereferences -q$bits -qmaxmem=-1 $CFLAGS"
+  LDFLAGS="-brtl -bh:5 $LDFLAGS"
   TXFLAGS="-+"
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
@@ -4005,7 +3990,7 @@ $as_echo "yes" >&6; }
   ;;
   g++ | gcc)
 	#permissive is not required anymore - CXXFLAGS="-x c++ -std=c++11 -frtti -fpermissive $CXXFLAGS "
-	CPPFLAGS="-x c++ -std=c++11 -frtti $CPPFLAGS "
+	CFLAGS="-x c++ -std=c++11 -frtti $CLAGS "
   TXFLAGS=""
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
