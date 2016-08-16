@@ -8,7 +8,7 @@
 
 
 
-{\ttfamily \#include $<$fields.\+hpp$>$}
+{\ttfamily \#include $<$carray\+\_\+field.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:Tfield$<$ char $\ast$ $>$\+:\begin{figure}[H]
 \begin{center}
@@ -23,13 +23,19 @@ Inheritance diagram for atmi\+:\+:Tfield$<$ char $\ast$ $>$\+:\begin{figure}[H]
 \item 
 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a197bf4f86d8053adcf8afdcd839b85cc}{Tfield} (const char $\ast$n)
 \item 
+F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a4dbdcf1e58232003aa20bb991f49f2f4}{buffer\+\_\+size} () const 
+\item 
 virtual F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_aa97dec8559724186b62997409f04bf3f}{length} ()
 \item 
-void \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a57def5d907b0f5671a5dae41bccd64f1}{set\+\_\+char\+\_\+array} (const char $\ast$c, long s)
+void \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_aa716c65e01963069f2abbe0ffee894f3}{set\+\_\+char\+\_\+array} (const char $\ast$\hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{carray}, F\+L\+D\+L\+E\+N32 size)
 \item 
-virtual void \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a9ba99e63bbc32091f3a0614b2fe186fe}{get\+\_\+char\+\_\+array} (char $\ast$\hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{carray}, long size)
+virtual void \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a009218c6eec4478fb0e0a4c2741df5c2}{get\+\_\+char\+\_\+array} (char $\ast$\hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{carray}, F\+L\+D\+L\+E\+N32 size)
 \item 
 \hyperlink{classatmi_1_1_tfield}{Tfield}$<$ char $\ast$ $>$ \& \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a486559e383ca6ae8002cb527901b716f}{operator=} (\hyperlink{classatmi_1_1_tfield}{Tfield}$<$ char $\ast$ $>$ \&\hyperlink{group__fml_ga8b57f9a4e2453d8e5d82ac0016e35e87}{carray})
+\item 
+void \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a3bc71ae4ac7ae39aa21dd6533c230fda}{free\+\_\+ressources} ()
+\item 
+char \& \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a0d4241c582c4e0af4e55ea6dfcf8ae8b}{operator\mbox{[}$\,$\mbox{]}} (int index)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -41,14 +47,17 @@ virtual int \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_ae3036c038b361aee
 virtual int \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
 virtual int \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_afaedd7d5902233652bed642bdceb9db1}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b, F\+L\+D\+O\+C\+C32 occ)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em int get ( buffer \&b ) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_ab48401db01ecdb71e41bb929562cbaf2}{F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_ab48401db01ecdb71e41bb929562cbaf2}{len}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_ab48401db01ecdb71e41bb929562cbaf2}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_aa25bb2aa5ab92371fb9b68f0659ced31}{F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_aa25bb2aa5ab92371fb9b68f0659ced31}{\+\_\+length}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_aa25bb2aa5ab92371fb9b68f0659ced31}
 
 \begin{DoxyCompactList}\small\item\em field length (bytes) \end{DoxyCompactList}\item 
-\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a704b8534e0b8680f08b6dde5b06d2317}{char $\ast$ \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a704b8534e0b8680f08b6dde5b06d2317}{value}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a704b8534e0b8680f08b6dde5b06d2317}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a5e7218b977e644a60ed6fbb5d1957e75}{F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a5e7218b977e644a60ed6fbb5d1957e75}{\+\_\+buffer\+\_\+size}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a5e7218b977e644a60ed6fbb5d1957e75}
+
+\begin{DoxyCompactList}\small\item\em back end size(bytes) \end{DoxyCompactList}\item 
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a425204246b56c8e10459b53b563800c9}{char $\ast$ \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a425204246b56c8e10459b53b563800c9}{\+\_\+value}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a425204246b56c8e10459b53b563800c9}
 
 \begin{DoxyCompactList}\small\item\em chacater buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -105,34 +114,48 @@ The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_ae3036c038b361aee2fc357c1c7d1304a}
-add the fiels into the buffer
-
-When successfull the value of occurence is set
+implement a Fadd32 call for carrays
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & buffer in which to add the field. \\
+{\em b} & buffer to apply the change in \\
 \hline
 \end{DoxyParams}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{classatmi_1_1field_a161b9b7037c49fbcf86518fcb35e779c}{occurence} 
-\end{DoxySeeAlso}
 
 
 Implements \hyperlink{classatmi_1_1field_a5441bc87ba4bc3e9eb37c6db6a29688f}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!get@{get}}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a4dbdcf1e58232003aa20bb991f49f2f4}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!buffer\+\_\+size@{buffer\+\_\+size}}
+\index{buffer\+\_\+size@{buffer\+\_\+size}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
+\subsubsection[{buffer\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+L\+E\+N32 {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::buffer\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a4dbdcf1e58232003aa20bb991f49f2f4}
+\begin{DoxyReturn}{Returns}
+backend allocation 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a3bc71ae4ac7ae39aa21dd6533c230fda}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!free\+\_\+ressources@{free\+\_\+ressources}}
+\index{free\+\_\+ressources@{free\+\_\+ressources}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
+\subsubsection[{free\+\_\+ressources}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::free\+\_\+ressources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a3bc71ae4ac7ae39aa21dd6533c230fda}
+de-\/allocate internal ressources (mainly the caray). \hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!get@{get}}
 \index{get@{get}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
 \subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::get (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}
-Retrieves the value of the field found into the buffer.
+retreive the current carray content.
+
+the content is copied into character array (backend). if the backend is too small a bigger one is allocated and used.
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & buffer from which to retrieve the field's value \\
+{\em b} & buffer to apply the change in \\
 \hline
 \end{DoxyParams}
 
@@ -147,35 +170,32 @@ Implements \hyperlink{classatmi_1_1field_aae2d3df756e816b5db8f729039a59a51}{atmi
 \item[{F\+L\+D\+O\+C\+C32}]{occ}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_afaedd7d5902233652bed642bdceb9db1}
-Retrieves the value of the field's occurence found into the buffer
 
-Upon success the value of occurence is set to the retrieved occurence.
+
+int get ( buffer \&b ) 
+
+int get ( buffer \&b )
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & buffer from which to retrieve the field's value \\
-\hline
-{\em occ} & occurence to retreive \\
+{\em occ} & field occurence to search for \\
 \hline
 \end{DoxyParams}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{classatmi_1_1field_a161b9b7037c49fbcf86518fcb35e779c}{occurence} 
-\end{DoxySeeAlso}
 
 
 Implements \hyperlink{classatmi_1_1field_a56ce53fabe290b94463f87936515ec46}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a9ba99e63bbc32091f3a0614b2fe186fe}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!get\+\_\+char\+\_\+array@{get\+\_\+char\+\_\+array}}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a009218c6eec4478fb0e0a4c2741df5c2}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!get\+\_\+char\+\_\+array@{get\+\_\+char\+\_\+array}}
 \index{get\+\_\+char\+\_\+array@{get\+\_\+char\+\_\+array}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
 \subsubsection[{get\+\_\+char\+\_\+array}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::get\+\_\+char\+\_\+array (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{carray, }
-\item[{long}]{size}
+\item[{F\+L\+D\+L\+E\+N32}]{size}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a9ba99e63bbc32091f3a0614b2fe186fe}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a009218c6eec4478fb0e0a4c2741df5c2}
 copy (memcpy) the field's value into carray.
 
-if the given size is smaller than the actual field size, then size characters are copied into your buffer. If size is bigger than the actual field size then field length characters are copied.
+if the given size is smaller than the actual field size, then size characters are copied into your buffer. If size is bigger than the actual field size, then field length characters are copied meaning your data will be truncated.
 
 
 \begin{DoxyParams}{Parameters}
@@ -205,43 +225,62 @@ Implements \hyperlink{classatmi_1_1field_a296771293135085d91aa9aefd108d44d}{atmi
 \item[{{\bf Tfield}$<$ char $\ast$ $>$ \&}]{carray}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a486559e383ca6ae8002cb527901b716f}
-copy the field's value \hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_af7be84fbdff0665d9c94b83872b299b7}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!set@{set}}
+copy the field's value \hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a0d4241c582c4e0af4e55ea6dfcf8ae8b}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}char\& {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a0d4241c582c4e0af4e55ea6dfcf8ae8b}
+gives direct access to characters in the carray.
+
+this avoids the need to make a copy prior the utilisation of carray's content (shoudl be faster).
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & character in the range of 0 -\/ length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the character at position index. 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_af7be84fbdff0665d9c94b83872b299b7}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!set@{set}}
 \index{set@{set}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
 \subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::set (
 \begin{DoxyParamCaption}
 \item[{{\bf buffer} \&}]{b}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_af7be84fbdff0665d9c94b83872b299b7}
-set the value of the field's value
+implement a Fchg32 call for carrays
 
 
 \begin{DoxyParams}{Parameters}
-{\em b} & the buffer in which the value must be changed \\
+{\em b} & buffer to apply the change in \\
 \hline
 \end{DoxyParams}
 
 
 Implements \hyperlink{classatmi_1_1field_a41bb209965d627d2e67c839bece5372c}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_a57def5d907b0f5671a5dae41bccd64f1}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!set\+\_\+char\+\_\+array@{set\+\_\+char\+\_\+array}}
+\hypertarget{classatmi_1_1_tfield_3_01char_01_5_01_4_aa716c65e01963069f2abbe0ffee894f3}{\index{atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}!set\+\_\+char\+\_\+array@{set\+\_\+char\+\_\+array}}
 \index{set\+\_\+char\+\_\+array@{set\+\_\+char\+\_\+array}!atmi\+::\+Tfield$<$ char $\ast$ $>$@{atmi\+::\+Tfield$<$ char $\ast$ $>$}}
 \subsubsection[{set\+\_\+char\+\_\+array}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf atmi\+::\+Tfield}$<$ char $\ast$ $>$\+::set\+\_\+char\+\_\+array (
 \begin{DoxyParamCaption}
-\item[{const char $\ast$}]{c, }
-\item[{long}]{s}
+\item[{const char $\ast$}]{carray, }
+\item[{F\+L\+D\+L\+E\+N32}]{size}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_a57def5d907b0f5671a5dae41bccd64f1}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1_tfield_3_01char_01_5_01_4_aa716c65e01963069f2abbe0ffee894f3}
 Assigns a value to the field
 
 
 \begin{DoxyParams}{Parameters}
-{\em c} & character buffer \\
+{\em carray} & character buffer \\
 \hline
-{\em s} & character buffer size \\
+{\em size} & character buffer size \\
 \hline
 \end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/fields.\+hpp\end{DoxyCompactItemize}
+include/atmi/carray\+\_\+field.\+hpp\end{DoxyCompactItemize}

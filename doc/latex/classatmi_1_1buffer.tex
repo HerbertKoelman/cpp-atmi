@@ -32,7 +32,11 @@ void \hyperlink{classatmi_1_1buffer_ab9294b1a1e54e35717db40cb6bbb6de1}{pack} ()
 \item 
 void \hyperlink{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}{extend} ()
 \item 
-void \hyperlink{classatmi_1_1buffer_a95d13597c2f28bfc8ee5dac4db131179}{resize} (size\+\_\+t extent)
+size\+\_\+t \hyperlink{classatmi_1_1buffer_af35cd2e5a5cdd7499fb396dbdbe3f61a}{extent} () const 
+\item 
+void \hyperlink{classatmi_1_1buffer_a10150940e8fc679b6bdc52bc02e6d016}{set\+\_\+extent} (size\+\_\+t \hyperlink{classatmi_1_1buffer_af35cd2e5a5cdd7499fb396dbdbe3f61a}{extent})
+\item 
+void \hyperlink{classatmi_1_1buffer_a95d13597c2f28bfc8ee5dac4db131179}{resize} (size\+\_\+t \hyperlink{classatmi_1_1buffer_af35cd2e5a5cdd7499fb396dbdbe3f61a}{extent})
 \item 
 \hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1buffer_a1fe98844cb17328390b3d4e658bd6903}{set} (\hyperlink{classatmi_1_1field}{field} \&f)
 \item 
@@ -205,7 +209,17 @@ the current check sum of the buffer
 {}
 \end{DoxyParamCaption}
 )}}\label{classatmi_1_1buffer_a853e2a0585dda4e23ffa04297b824afb}
-Extends the buffer size with the given bytes \hypertarget{classatmi_1_1buffer_a74a6ff6ab31eb1128fc2f40d2a8e020f}{\index{atmi\+::buffer@{atmi\+::buffer}!field\+\_\+count@{field\+\_\+count}}
+Extends the buffer size with the given bytes \hypertarget{classatmi_1_1buffer_af35cd2e5a5cdd7499fb396dbdbe3f61a}{\index{atmi\+::buffer@{atmi\+::buffer}!extent@{extent}}
+\index{extent@{extent}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{extent}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t atmi\+::buffer\+::extent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classatmi_1_1buffer_af35cd2e5a5cdd7499fb396dbdbe3f61a}
+\begin{DoxyReturn}{Returns}
+current extent value 
+\end{DoxyReturn}
+\hypertarget{classatmi_1_1buffer_a74a6ff6ab31eb1128fc2f40d2a8e020f}{\index{atmi\+::buffer@{atmi\+::buffer}!field\+\_\+count@{field\+\_\+count}}
 \index{field\+\_\+count@{field\+\_\+count}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{field\+\_\+count}]{\setlength{\rightskip}{0pt plus 5cm}F\+L\+D\+O\+C\+C32 atmi\+::buffer\+::field\+\_\+count (
 \begin{DoxyParamCaption}
@@ -345,7 +359,7 @@ the number of occurences of the field into the buffer (Foccur32)
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1buffer_a79e82bc3f9dac86efc685604c20ed78d}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classatmi_1_1buffer_a79e82bc3f9dac86efc685604c20ed78d}
 cast to F\+B\+F\+R32 $\ast$ \hypertarget{classatmi_1_1buffer_a878220e2ba9a66a991c77b20fd52ff09}{\index{atmi\+::buffer@{atmi\+::buffer}!operator=@{operator=}}
 \index{operator=@{operator=}!atmi\+::buffer@{atmi\+::buffer}}
 \subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf buffer} \& atmi\+::buffer\+::operator= (
@@ -535,6 +549,20 @@ set call info (T\+S\+A\+M)
 
 \begin{DoxyParams}{Parameters}
 {\em callinfo} & callinfo value to set \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1buffer_a10150940e8fc679b6bdc52bc02e6d016}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+extent@{set\+\_\+extent}}
+\index{set\+\_\+extent@{set\+\_\+extent}!atmi\+::buffer@{atmi\+::buffer}}
+\subsubsection[{set\+\_\+extent}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::buffer\+::set\+\_\+extent (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{extent}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1buffer_a10150940e8fc679b6bdc52bc02e6d016}
+set a new extent value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em extent} & number of bytes to allocate when no space is left in buffer. \\
 \hline
 \end{DoxyParams}
 \hypertarget{classatmi_1_1buffer_a68f05d1dbd040062850feeba5aa188fc}{\index{atmi\+::buffer@{atmi\+::buffer}!set\+\_\+handling\+\_\+memory@{set\+\_\+handling\+\_\+memory}}

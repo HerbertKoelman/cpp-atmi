@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.3.0)</span>
+   &#160;<span id="projectnumber">(v4.3.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -471,161 +471,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;      std::string <a class="code" href="classatmi_1_1_tfield.html#a89852f63b07d2f6d27d9866b030d1c5d">value</a>; </div>
 <div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;  };</div>
 <div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;</div>
-<div class="line"><a name="l00609"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html">  609</a></span>&#160;  <span class="keyword">template</span> &lt;&gt; <span class="keyword">class </span><a class="code" href="classatmi_1_1_tfield.html">Tfield</a>&lt;char *&gt;: <span class="keyword">public</span> <a class="code" href="classatmi_1_1field.html">field</a> {</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;      <a class="code" href="classatmi_1_1_tfield.html">Tfield</a>(): len (0), value (NULL) {</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;        <span class="comment">// intentional</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;      };</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;</div>
-<div class="line"><a name="l00622"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ad16891d15a65e85408962ec962e57bd8">  622</a></span>&#160;       <span class="keyword">explicit</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ad16891d15a65e85408962ec962e57bd8">Tfield</a> ( FLDID32 fid ) : len (0), value (NULL) {</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        set_id ( fid );</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;        <span class="comment">// check taht we have a std::string declaration in the FML table</span></div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;        <span class="keywordflow">if</span> ( type () != 6 ) {</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;          <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;Tfield %s&#39;s value is of type carray and the FML table decalares a type %s.&quot;</span>, name (), tname());</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        }</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;      }</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;</div>
-<div class="line"><a name="l00638"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a197bf4f86d8053adcf8afdcd839b85cc">  638</a></span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a197bf4f86d8053adcf8afdcd839b85cc">Tfield</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *n ) : len (0), value (NULL) {</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        setup ( (FLDID32) Fldid32 ( const_cast&lt;char *&gt;(n) ) );</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;        <span class="comment">// check type matching</span></div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        <span class="keywordflow">if</span> ( type() != 6 ) {</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;          <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;Tfield value is of type carray and the FML table decalares a type %s for %s.&quot;</span>, tname(), name());</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        }</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;      }</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classatmi_1_1_tfield.html">Tfield</a>() {</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        <span class="keywordflow">if</span> ( value != NULL) {</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;          <span class="keyword">delete</span>[] value;</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;        }</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;      };</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;</div>
-<div class="line"><a name="l00657"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">  657</a></span>&#160;      <span class="keyword">virtual</span> FLDLEN32 <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">length</a> () {</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;        <span class="keywordflow">return</span> len;</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;      };</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;</div>
-<div class="line"><a name="l00667"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a57def5d907b0f5671a5dae41bccd64f1">  667</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a57def5d907b0f5671a5dae41bccd64f1">set_char_array</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> * c, <span class="keywordtype">long</span> s ) {</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;        <span class="keywordflow">if</span> ( value != NULL ) {</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;          <span class="keyword">delete</span> value;</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;        }</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        len = s;</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        value = <span class="keyword">new</span> <span class="keywordtype">char</span> [len];</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        memcpy ( value, c, len );</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;      };</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;</div>
-<div class="line"><a name="l00686"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a9ba99e63bbc32091f3a0614b2fe186fe">  686</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a9ba99e63bbc32091f3a0614b2fe186fe">get_char_array</a> ( <span class="keywordtype">char</span> *<a class="code" href="group__fml.html#ga8b57f9a4e2453d8e5d82ac0016e35e87">carray</a>, <span class="keywordtype">long</span> size ) {</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;        memcpy ( carray, value, ( size &lt; length () ? size : length() ) );</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;      };</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;</div>
-<div class="line"><a name="l00693"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a486559e383ca6ae8002cb527901b716f">  693</a></span>&#160;      <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html">Tfield&lt;char *&gt;</a> &amp;operator= ( <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html">Tfield&lt;char*&gt;</a> &amp;<a class="code" href="group__fml.html#ga8b57f9a4e2453d8e5d82ac0016e35e87">carray</a> ){</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        set_char_array ( carray.<a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a704b8534e0b8680f08b6dde5b06d2317">value</a>, carray.<a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ab48401db01ecdb71e41bb929562cbaf2">len</a> );</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;      };</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;</div>
-<div class="line"><a name="l00702"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7">  702</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7">set</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b) {</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;        <span class="keywordtype">int</span> rc = -1;</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        rc = Fchg32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), value, length() );</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        <span class="keywordflow">if</span> ( rc &lt; 0 ) {</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;          <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> ( Ferror32, <span class="stringliteral">&quot;FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        }</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;      };</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;</div>
-<div class="line"><a name="l00714"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">  714</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">add</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b) {</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        <span class="keywordtype">int</span> rc = -1;</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        <span class="keywordflow">if</span> ( length () &gt; 0 ) {</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;          <span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;            <span class="keywordflow">if</span> ( (needed () + b.<a class="code" href="classatmi_1_1buffer.html#a4ab660c5750cb0793eb99782fd36c0fa">used</a>()) &gt;= b.<a class="code" href="classatmi_1_1buffer.html#a8228f64305e566b8133e8ee746c6d2bb">size</a>()) {</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;              b.<a class="code" href="classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb">extend</a> ();</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;            }</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;          } <span class="keywordflow">catch</span> ( <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> &amp;buffErr ) {</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;            <span class="keywordflow">throw</span>  <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;Add failed to estimate needed memory extension. Original message was : %s&quot;</span>, buffErr.<a class="code" href="classatmi_1_1atmi__exception.html#a7e527bcd2919ba17b332ea827ec28a22">what</a>() );</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;          }</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;          rc  = Fadd32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), value, length() );</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;          <span class="keywordflow">if</span> ( rc &lt; 0 ) {</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> ( Ferror32, <span class="stringliteral">&quot;FADD32 Tfield::add&lt;char *&gt; failed for field %s (id: %d, occ: %d)&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;            set_field_occurence ( (b.<a class="code" href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">occurences</a> ( *<span class="keyword">this</span> ) == 0 ? 0 : b.<a class="code" href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">occurences</a> ( *<span class="keyword">this</span> )-1));</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;          }</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;          <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;field %s&#39;s value is empty !!?? Cannot add an empty field value.&quot;</span>, name () );</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;        }</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;        <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;      };</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;</div>
-<div class="line"><a name="l00740"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5df77c9bee99916f6d14f5beeec54dac">  740</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <span class="keyword">get</span> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b ){</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">get</span> ( b, occurence() );</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;      };</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;</div>
-<div class="line"><a name="l00745"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#afaedd7d5902233652bed642bdceb9db1">  745</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <span class="keyword">get</span> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b, FLDOCC32 occ ){</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;        <span class="keywordtype">int</span> rc = -1;</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;        set_field_occurence(occ);</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;        <span class="keywordflow">if</span> ( value != NULL ) {</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;          <span class="keyword">delete</span>[] value;</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;        }</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;        value = CFgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), FLD_CARRAY, &amp;len );</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;        <span class="keywordflow">if</span> ( value != NULL ) {</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;          printf(<span class="stringliteral">&quot;DEBUG len is %d\n&quot;</span>, len );</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;          rc = 0;</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;          <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        }</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;        <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00766"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ab48401db01ecdb71e41bb929562cbaf2">  766</a></span>&#160;      };</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;      FLDLEN32 len;   </div>
-<div class="line"><a name="l00769"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a704b8534e0b8680f08b6dde5b06d2317">  769</a></span>&#160;      <span class="keywordtype">char</span>    *<a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a704b8534e0b8680f08b6dde5b06d2317">value</a>; </div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;  };</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;  std::ostream &amp;operator&lt;&lt; ( std::ostream &amp;o, Tfield&lt;std::string&gt; &amp;f );</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;} <span class="comment">// namespace atmi</span></div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;  std::ostream &amp;operator&lt;&lt; ( std::ostream &amp;o, Tfield&lt;std::string&gt; &amp;f );</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;} <span class="comment">// namespace atmi</span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_a775ddd0103e3e3f0fc85dfda5df72280"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a775ddd0103e3e3f0fc85dfda5df72280">atmi::Tfield&lt; std::string &gt;::c_str</a></div><div class="ttdeci">const char * c_str() const </div><div class="ttdef"><b>Definition:</b> fields.hpp:419</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a7903e881d35805b1477b1ef8f2928f4e"><div class="ttname"><a href="classatmi_1_1_tfield.html#a7903e881d35805b1477b1ef8f2928f4e">atmi::Tfield::operator=</a></div><div class="ttdeci">T operator=(T v)</div><div class="ttdef"><b>Definition:</b> fields.hpp:277</div></div>
 <div class="ttc" id="classatmi_1_1field_html_aa71d28f3df8490e9ed016607f857fae1"><div class="ttname"><a href="classatmi_1_1field.html#aa71d28f3df8490e9ed016607f857fae1">atmi::field::number</a></div><div class="ttdeci">int number()</div><div class="ttdef"><b>Definition:</b> field.cpp:53</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_ab48401db01ecdb71e41bb929562cbaf2"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ab48401db01ecdb71e41bb929562cbaf2">atmi::Tfield&lt; char * &gt;::len</a></div><div class="ttdeci">FLDLEN32 len</div><div class="ttdoc">field length (bytes) </div><div class="ttdef"><b>Definition:</b> fields.hpp:766</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a717c701f07a784f471abb44d7bc95048"><div class="ttname"><a href="classatmi_1_1field.html#a717c701f07a784f471abb44d7bc95048">atmi::field::type</a></div><div class="ttdeci">int type()</div><div class="ttdef"><b>Definition:</b> field.cpp:72</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a0fbc5a958a0af8286e339b088ee69bc8"><div class="ttname"><a href="classatmi_1_1field.html#a0fbc5a958a0af8286e339b088ee69bc8">atmi::field::name</a></div><div class="ttdeci">const char * name()</div><div class="ttdef"><b>Definition:</b> field.cpp:49</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html">atmi::Tfield&lt; char * &gt;</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:609</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a4962b3aa080aba4ecffc7f3fa98be2da"><div class="ttname"><a href="classatmi_1_1_tfield.html#a4962b3aa080aba4ecffc7f3fa98be2da">atmi::Tfield::add</a></div><div class="ttdeci">virtual int add(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:310</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_ac4fdf6b5f9d1929b34bddc97274c6c9b"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#ac4fdf6b5f9d1929b34bddc97274c6c9b">atmi::Tfield&lt; std::string &gt;::length</a></div><div class="ttdeci">virtual FLDLEN32 length()</div><div class="ttdef"><b>Definition:</b> fields.hpp:405</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a533be0f49416e622563e7f437e7e9014"><div class="ttname"><a href="classatmi_1_1_tfield.html#a533be0f49416e622563e7f437e7e9014">atmi::Tfield::Tfield</a></div><div class="ttdeci">Tfield()</div><div class="ttdef"><b>Definition:</b> fields.hpp:203</div></div>
 <div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_ac228a4c4d13e1573fd166a6506d98d87"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#ac228a4c4d13e1573fd166a6506d98d87">atmi::Tfield&lt; std::string &gt;::Tfield</a></div><div class="ttdeci">Tfield(const char *n)</div><div class="ttdef"><b>Definition:</b> fields.hpp:389</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_af7be84fbdff0665d9c94b83872b299b7"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7">atmi::Tfield&lt; char * &gt;::set</a></div><div class="ttdeci">virtual int set(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:702</div></div>
 <div class="ttc" id="classatmi_1_1atmi__exception_html_a7e527bcd2919ba17b332ea827ec28a22"><div class="ttname"><a href="classatmi_1_1atmi__exception.html#a7e527bcd2919ba17b332ea827ec28a22">atmi::atmi_exception::what</a></div><div class="ttdeci">virtual const char * what() const noexceptoverride</div><div class="ttdef"><b>Definition:</b> exceptions.cpp:16</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html_aa9aa5382717ed17a2047db2779f8f0ec"><div class="ttname"><a href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">atmi::buffer::get_buffer</a></div><div class="ttdeci">FBFR32 * get_buffer()</div><div class="ttdef"><b>Definition:</b> buffer.cpp:195</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html_aa9aa5382717ed17a2047db2779f8f0ec"><div class="ttname"><a href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">atmi::buffer::get_buffer</a></div><div class="ttdeci">FBFR32 * get_buffer()</div><div class="ttdef"><b>Definition:</b> buffer.cpp:203</div></div>
 <div class="ttc" id="classatmi_1_1field_html"><div class="ttname"><a href="classatmi_1_1field.html">atmi::field</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:33</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_ae3036c038b361aee2fc357c1c7d1304a"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">atmi::Tfield&lt; char * &gt;::add</a></div><div class="ttdeci">virtual int add(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:714</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a10739dd7cef7fad99e5c32213bc69fca"><div class="ttname"><a href="classatmi_1_1_tfield.html#a10739dd7cef7fad99e5c32213bc69fca">atmi::Tfield::Tfield</a></div><div class="ttdeci">Tfield(FLDID32 field_id)</div><div class="ttdef"><b>Definition:</b> fields.hpp:211</div></div>
 <div class="ttc" id="classatmi_1_1buffer__exception_html"><div class="ttname"><a href="classatmi_1_1buffer__exception.html">atmi::buffer_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:144</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_af17fc3c22ce857f9d96f96d6c175b6d5"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#af17fc3c22ce857f9d96f96d6c175b6d5">atmi::Tfield&lt; std::string &gt;::add</a></div><div class="ttdeci">virtual int add(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:550</div></div>
@@ -636,11 +498,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1_tfield_html_a7bd1997e976116990ad0e2072320db77"><div class="ttname"><a href="classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77">atmi::Tfield::set</a></div><div class="ttdeci">virtual int set(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:298</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_a356a0e794a33bcfc1d3f4d8376e764d9"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9">atmi::Tfield&lt; std::string &gt;::set</a></div><div class="ttdeci">virtual int set(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> fields.hpp:538</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a6f91cba3fca0a77fb7ad229187d689b9"><div class="ttname"><a href="classatmi_1_1field.html#a6f91cba3fca0a77fb7ad229187d689b9">atmi::field::~field</a></div><div class="ttdeci">virtual ~field()</div><div class="ttdef"><b>Definition:</b> fields.hpp:47</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_aa97dec8559724186b62997409f04bf3f"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">atmi::Tfield&lt; char * &gt;::length</a></div><div class="ttdeci">virtual FLDLEN32 length()</div><div class="ttdef"><b>Definition:</b> fields.hpp:657</div></div>
 <div class="ttc" id="classatmi_1_1field_html_ad704c8d557c86b84b2d37bdf2cbdc36c"><div class="ttname"><a href="classatmi_1_1field.html#ad704c8d557c86b84b2d37bdf2cbdc36c">atmi::field::field</a></div><div class="ttdeci">field()</div><div class="ttdef"><b>Definition:</b> field.cpp:20</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a197bf4f86d8053adcf8afdcd839b85cc"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a197bf4f86d8053adcf8afdcd839b85cc">atmi::Tfield&lt; char * &gt;::Tfield</a></div><div class="ttdeci">Tfield(const char *n)</div><div class="ttdef"><b>Definition:</b> fields.hpp:638</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_a46059c3e91ce3847b3109e4500f017f6"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a46059c3e91ce3847b3109e4500f017f6">atmi::Tfield&lt; std::string &gt;::Tfield</a></div><div class="ttdeci">Tfield(FLDID32 fid)</div><div class="ttdef"><b>Definition:</b> fields.hpp:373</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html_a57ff1b2ed449d59d4ec936e9e79a5d1a"><div class="ttname"><a href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">atmi::buffer::occurences</a></div><div class="ttdeci">FLDOCC32 occurences(const field &amp;f)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:133</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html_a57ff1b2ed449d59d4ec936e9e79a5d1a"><div class="ttname"><a href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">atmi::buffer::occurences</a></div><div class="ttdeci">FLDOCC32 occurences(const field &amp;f)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:141</div></div>
 <div class="ttc" id="classatmi_1_1field_html_addd031ecbcf2026116cf6e03534ac862"><div class="ttname"><a href="classatmi_1_1field.html#addd031ecbcf2026116cf6e03534ac862">atmi::field::operator=</a></div><div class="ttdeci">virtual field &amp; operator=(const std::string &amp;value)</div><div class="ttdef"><b>Definition:</b> fields.hpp:112</div></div>
 <div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a6138c508841c4a837ea8c8e089755278"><div class="ttname"><a href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">atmi::Tfield::length</a></div><div class="ttdeci">virtual FLDLEN32 length()</div><div class="ttdef"><b>Definition:</b> fields.hpp:266</div></div>
@@ -648,26 +508,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1field_html_a396b41ad5ae2b1df362e446c5f090640"><div class="ttname"><a href="classatmi_1_1field.html#a396b41ad5ae2b1df362e446c5f090640">atmi::field::what</a></div><div class="ttdeci">const char * what()</div><div class="ttdef"><b>Definition:</b> field.cpp:76</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html_a853e2a0585dda4e23ffa04297b824afb"><div class="ttname"><a href="classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb">atmi::buffer::extend</a></div><div class="ttdeci">void extend()</div><div class="ttdef"><b>Definition:</b> buffer.cpp:93</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_aea88f61cd27f8f258ee473e0e938790b"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#aea88f61cd27f8f258ee473e0e938790b">atmi::Tfield&lt; std::string &gt;::size</a></div><div class="ttdeci">virtual FLDLEN32 size()</div><div class="ttdef"><b>Definition:</b> fields.hpp:412</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a9ba99e63bbc32091f3a0614b2fe186fe"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a9ba99e63bbc32091f3a0614b2fe186fe">atmi::Tfield&lt; char * &gt;::get_char_array</a></div><div class="ttdeci">virtual void get_char_array(char *carray, long size)</div><div class="ttdef"><b>Definition:</b> fields.hpp:686</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a89ff294c8276c6a882f510a8f95ac372"><div class="ttname"><a href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">atmi::field::id</a></div><div class="ttdeci">FLDID32 id() const </div><div class="ttdef"><b>Definition:</b> field.cpp:45</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_ac458fcdcce36a34d8beed526ca1e385a"><div class="ttname"><a href="classatmi_1_1_tfield.html#ac458fcdcce36a34d8beed526ca1e385a">atmi::Tfield::set_id</a></div><div class="ttdeci">virtual void set_id(FLDID32 field_id)</div><div class="ttdef"><b>Definition:</b> fields.hpp:239</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a9ca5e61e3e1068770098d20ad1332f24"><div class="ttname"><a href="classatmi_1_1field.html#a9ca5e61e3e1068770098d20ad1332f24">atmi::field::setup</a></div><div class="ttdeci">virtual void setup(FLDID32 field_id)</div><div class="ttdef"><b>Definition:</b> field.cpp:41</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a57def5d907b0f5671a5dae41bccd64f1"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a57def5d907b0f5671a5dae41bccd64f1">atmi::Tfield&lt; char * &gt;::set_char_array</a></div><div class="ttdeci">void set_char_array(const char *c, long s)</div><div class="ttdef"><b>Definition:</b> fields.hpp:667</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_ad16891d15a65e85408962ec962e57bd8"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ad16891d15a65e85408962ec962e57bd8">atmi::Tfield&lt; char * &gt;::Tfield</a></div><div class="ttdeci">Tfield(FLDID32 fid)</div><div class="ttdef"><b>Definition:</b> fields.hpp:622</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a89852f63b07d2f6d27d9866b030d1c5d"><div class="ttname"><a href="classatmi_1_1_tfield.html#a89852f63b07d2f6d27d9866b030d1c5d">atmi::Tfield::value</a></div><div class="ttdeci">T value</div><div class="ttdoc">field&#39;s current value </div><div class="ttdef"><b>Definition:</b> fields.hpp:348</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html_a8228f64305e566b8133e8ee746c6d2bb"><div class="ttname"><a href="classatmi_1_1buffer.html#a8228f64305e566b8133e8ee746c6d2bb">atmi::buffer::size</a></div><div class="ttdeci">size_t size() const </div><div class="ttdef"><b>Definition:</b> buffer.cpp:143</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html_a8228f64305e566b8133e8ee746c6d2bb"><div class="ttname"><a href="classatmi_1_1buffer.html#a8228f64305e566b8133e8ee746c6d2bb">atmi::buffer::size</a></div><div class="ttdeci">size_t size() const </div><div class="ttdef"><b>Definition:</b> buffer.cpp:151</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a6d8db988f58f3779b0ef528a11b3466f"><div class="ttname"><a href="classatmi_1_1field.html#a6d8db988f58f3779b0ef528a11b3466f">atmi::field::error</a></div><div class="ttdeci">int error()</div><div class="ttdef"><b>Definition:</b> field.cpp:62</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a7d6260dd6f7c3c44de29190c2dfd546e"><div class="ttname"><a href="classatmi_1_1field.html#a7d6260dd6f7c3c44de29190c2dfd546e">atmi::field::tname</a></div><div class="ttdeci">const char * tname()</div><div class="ttdef"><b>Definition:</b> field.cpp:24</div></div>
 <div class="ttc" id="classatmi_1_1field_html_aef2940ef13d554b2a0090ea4052529d8"><div class="ttname"><a href="classatmi_1_1field.html#aef2940ef13d554b2a0090ea4052529d8">atmi::field::needed</a></div><div class="ttdeci">virtual long needed()</div><div class="ttdef"><b>Definition:</b> field.cpp:84</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a704b8534e0b8680f08b6dde5b06d2317"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a704b8534e0b8680f08b6dde5b06d2317">atmi::Tfield&lt; char * &gt;::value</a></div><div class="ttdeci">char * value</div><div class="ttdoc">chacater buffer </div><div class="ttdef"><b>Definition:</b> fields.hpp:769</div></div>
-<div class="ttc" id="group__fml_html_ga8b57f9a4e2453d8e5d82ac0016e35e87"><div class="ttname"><a href="group__fml.html#ga8b57f9a4e2453d8e5d82ac0016e35e87">atmi::carray</a></div><div class="ttdeci">char * carray</div><div class="ttdoc">character array </div><div class="ttdef"><b>Definition:</b> buffer.hpp:37</div></div>
 <div class="ttc" id="classatmi_1_1atmi__exception_html"><div class="ttname"><a href="classatmi_1_1atmi__exception.html">atmi::atmi_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:49</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html"><div class="ttname"><a href="classatmi_1_1_tfield.html">atmi::Tfield</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:194</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a83412cd9df383c342b5feb195090c9d9"><div class="ttname"><a href="classatmi_1_1field.html#a83412cd9df383c342b5feb195090c9d9">atmi::field::set_field_occurence</a></div><div class="ttdeci">virtual void set_field_occurence(FLDOCC32 occ)</div><div class="ttdef"><b>Definition:</b> field.cpp:67</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html">atmi::Tfield&lt; std::string &gt;</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:360</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a296771293135085d91aa9aefd108d44d"><div class="ttname"><a href="classatmi_1_1field.html#a296771293135085d91aa9aefd108d44d">atmi::field::length</a></div><div class="ttdeci">virtual FLDLEN32 length()=0</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a5441bc87ba4bc3e9eb37c6db6a29688f"><div class="ttname"><a href="classatmi_1_1field.html#a5441bc87ba4bc3e9eb37c6db6a29688f">atmi::field::add</a></div><div class="ttdeci">virtual int add(buffer &amp;b)=0</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html_a4ab660c5750cb0793eb99782fd36c0fa"><div class="ttname"><a href="classatmi_1_1buffer.html#a4ab660c5750cb0793eb99782fd36c0fa">atmi::buffer::used</a></div><div class="ttdeci">size_t used() const </div><div class="ttdef"><b>Definition:</b> buffer.cpp:147</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html_a4ab660c5750cb0793eb99782fd36c0fa"><div class="ttname"><a href="classatmi_1_1buffer.html#a4ab660c5750cb0793eb99782fd36c0fa">atmi::buffer::used</a></div><div class="ttdeci">size_t used() const </div><div class="ttdef"><b>Definition:</b> buffer.cpp:155</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

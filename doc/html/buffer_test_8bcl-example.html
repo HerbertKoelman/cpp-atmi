@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.3.0)</span>
+   &#160;<span id="projectnumber">(v4.3.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -124,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line">        atmi::Tfield&lt;atmi::carray&gt;   unknown_field;</div>
 <div class="line">        unknown_field.set_id(SRVCDAY);</div>
-<div class="line">        unknown_field.set_char_array(&quot;salut les amis\0rray&quot;, sizeof (&quot;salut les amis\0rray&quot;));</div>
+<div class="line">        unknown_field.set_char_array(&quot;salut les amis\0rray&quot;, 19);</div>
 <div class="line"></div>
 <div class="line">        atmi::Tfield&lt;string&gt; prenom ( EMPNAME );</div>
 <div class="line">        atmi::Tfield&lt;long&gt;   empid ( EMPID );</div>
@@ -136,19 +136,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        prenom = &quot;herbert&quot;;</div>
 <div class="line">        nom = &quot;this is a char *&quot;;</div>
 <div class="line">        empid = 2;</div>
-<div class="line">        carray.set_char_array(&quot;helloworld\0rray&quot;, strlen (&quot;helloworld\0rray&quot;));</div>
+<div class="line">        carray.set_char_array(&quot;hello world\0rray&quot;, 16);</div>
+<div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
+<div class="line">        std::cout &lt;&lt; &quot;Direct carray buffer access&quot; &lt;&lt; std::endl ;</div>
+<div class="line">        // const char *direct_access = carray ;</div>
+<div class="line">        // auto direct_access_length = carray.length();</div>
+<div class="line"></div>
+<div class="line">        for ( auto x = 0; x &lt; carray.length() ; x++ ){</div>
+<div class="line">          // printf(&quot;%c - %c\n&quot;, direct_access[x], carray[x]);</div>
+<div class="line">          printf(&quot;%c\n&quot;, carray[x]);</div>
+<div class="line">        }</div>
+<div class="line">        printf(&quot;\n&quot;);</div>
+<div class="line">        carray[1] = &#39;X&#39; ;</div>
+<div class="line">        printf(&quot;changed character 1 to X -&gt; %c\n&quot;, carray[1]);</div>
+<div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
+<div class="line">        std::cout &lt;&lt; &quot;copy carrays&quot; &lt;&lt; std::endl;</div>
 <div class="line">        copy = carray;</div>
 <div class="line"></div>
-<div class="line">        std::cout &lt;&lt; &quot;Added fields: &quot; &lt;&lt; std::endl;</div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
+<div class="line">        std::cout &lt;&lt; &quot;Adding fields into FML buffer: &quot; &lt;&lt; std::endl;</div>
 <div class="line">        b.add(unknown_field);</div>
 <div class="line">        b.add ( empid );</div>
 <div class="line">        b.add ( nom );</div>
 <div class="line">        b.add ( prenom );</div>
-<div class="line">        b.add ( carray );</div>
+<div class="line">        b.set ( carray );</div>
 <div class="line">        b.print ();</div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
 <div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;get SRVCDAY value from FML buffer&quot; &lt;&lt; std::endl;</div>
+<div class="line">        b.get ( copy );</div>
+<div class="line">        std::cout &lt;&lt; &quot;there should be enough memory no re-allocation expected&quot; &lt;&lt; std::endl;</div>
 <div class="line">        b.get ( copy );</div>
 <div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
+<div class="line"></div>
+<div class="line">        copy.set_char_array(&quot;0123456789&quot;, 10);</div>
+<div class="line">        std::cout &lt;&lt; &quot;buffer carray contains &quot; &lt;&lt; copy.length() &lt;&lt; &quot; characters&quot; &lt;&lt; std::endl ;</div>
+<div class="line">        //b.remove(copy);</div>
+<div class="line">        b.set(copy);</div>
+<div class="line">        b.print();</div>
+<div class="line"></div>
+<div class="line">        atmi::Tfield&lt;char *&gt; resize_control ( SRVCDAY );</div>
+<div class="line">        std::cout &lt;&lt; &quot;resize control initial carray length is  &quot; &lt;&lt; resize_control.length() &lt;&lt; std::endl;</div>
+<div class="line">        resize_control.set_char_array(&quot;012345678901245678900123456789&quot;, 30);</div>
+<div class="line">        b.get(resize_control);</div>
+<div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;de-allocate ressources&quot; &lt;&lt; std::endl ;</div>
+<div class="line">        resize_control.free_ressources();</div>
+<div class="line">        std::cout &lt;&lt; &quot;  firt call to get from buffer, size before call &quot; &lt;&lt; resize_control.length() &lt;&lt; std::endl ;</div>
+<div class="line">        b.get(resize_control);</div>
+<div class="line">        std::cout &lt;&lt; &quot;  second call to get from buffer, size before second call &quot; &lt;&lt; resize_control.length() &lt;&lt; std::endl ;</div>
+<div class="line">        b.get(resize_control);</div>
+<div class="line">        std::cout &lt;&lt; &quot;size is &quot; &lt;&lt; resize_control.length() &lt;&lt; &quot;, backend store size is &quot; &lt;&lt; resize_control.buffer_size() &lt;&lt; std::endl ;</div>
+<div class="line"></div>
+<div class="line">        std::cout &lt;&lt; &quot;--------------------------------------&quot; &lt;&lt; std::endl &lt;&lt; std::endl ;</div>
 <div class="line">        std::cout &lt;&lt; copy.what() &lt;&lt; std::endl;</div>
 <div class="line">        long len = 5;                  //copy.length();</div>
 <div class="line">        char *cav = new char[len];</div>
@@ -202,7 +245,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">  try {</div>
 <div class="line"></div>
 <div class="line">    std::cout &lt;&lt; &quot;atmi::buffer sample program (&quot; &lt;&lt; atmi::cpp_atmi_version() &lt;&lt;&quot;).&quot; &lt;&lt; std::endl;</div>
-<div class="line">    std::cout &lt;&lt; &quot;setting up&quot;;</div>
 <div class="line">    buffer_test btest;</div>
 <div class="line"></div>
 <div class="line">    std::cout &lt;&lt; &quot;, starting up&quot; ;</div>

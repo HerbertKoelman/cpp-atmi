@@ -49,7 +49,7 @@ herbert koelman(\href{mailto:herbert.koelman@me.com}{\tt herbert.\+koelman@me.\+
 37 
 38         atmi::Tfield<atmi::carray>   unknown\_field;
 39         unknown\_field.set\_id(SRVCDAY);
-40         unknown\_field.set\_char\_array("salut les amis\(\backslash\)0rray", sizeof ("salut les amis\(\backslash\)0rray"));
+40         unknown\_field.set\_char\_array("salut les amis\(\backslash\)0rray", 19);
 41 
 42         atmi::Tfield<string> prenom ( EMPNAME );
 43         atmi::Tfield<long>   empid ( EMPID );
@@ -61,87 +61,132 @@ herbert koelman(\href{mailto:herbert.koelman@me.com}{\tt herbert.\+koelman@me.\+
 49         prenom = "herbert";
 50         nom = "this is a char *";
 51         empid = 2;
-52         carray.set\_char\_array("helloworld\(\backslash\)0rray", strlen ("helloworld\(\backslash\)0rray"));
-53         copy = carray;
-54 
-55         std::cout << "Added fields: " << std::endl;
-56         b.add(unknown\_field);
-57         b.add ( empid );
-58         b.add ( nom );
-59         b.add ( prenom );
-60         b.add ( carray );
-61         b.print ();
-62 
-63         b.get ( copy );
-64 
-65         std::cout << copy.what() << std::endl;
-66         long len = 5;                  //copy.length();
-67         char *cav = new char[len];
-68         copy.get\_char\_array ( cav, len );
-69         for ( int x = 0; x < len; x++ ) \{
-70           std::cout << "'"<< cav[x]<<"',";
-71         \}
-72         std::cout << std::endl;
-73 
-74         std::cout << "Setting (update) empid value: " << std::endl;
-75         empid = 22;
-76         b.set ( empid );
-77         b.print ();
-78 
-79         std::cout << "size : " << b.size();
-80         b.pack ();
-81         std::cout << ", after pack: " << b.size() << std::endl;
-82 
-83         std::cout << "atmi::buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " <<
-       b.size() << ", chksum: " << b.chksum() <<  std::endl;
-84 
-85         std::cout << "wrapping atmi::buffer." << std::endl ;
-86         atmi::buffer wrapper ( b.get\_buffer());
-87         nom = "this was added into a wrapper instance of atmi::buffer.";
-88         wrapper.set (nom );
-89         wrapper.print ();
-90 
-91         std::cout << "transforming a atmi::buffer into a wrapped buffer." << std::endl;
-92         atmi::buffer wrapper1;
-93         wrapper1.set\_buffer ( wrapper.get\_buffer());
-94         prenom = "this was set by a wrapper";
-95         wrapper1.set ( prenom );
-96         wrapper1.print();
-97 
-98       \}catch ( atmi::buffer\_exception &err ) \{
-99         cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
-100       \} catch ( atmi::atmi\_exception &err ) \{
-101         cerr << err.what() << std::endl;
-102       \} catch ( std::exception &err ) \{
-103         cerr << err.what() << std::endl;
-104       \}
-105 
-106       return 9999;
-107     \}
-108 
-109 \};
-110 
-111 // program main -------------------------------------------------
-112 
-113 int main ( int argc, char **argv ) \{
-114 
-115   try \{
+52         carray.set\_char\_array("hello world\(\backslash\)0rray", 16);
+53 
+54         std::cout << "--------------------------------------" << std::endl << std::endl ;
+55         std::cout << "Direct carray buffer access" << std::endl ;
+56         // const char *direct\_access = carray ;
+57         // auto direct\_access\_length = carray.length();
+58 
+59         for ( auto x = 0; x < carray.length() ; x++ )\{
+60           // printf("%c - %c\(\backslash\)n", direct\_access[x], carray[x]);
+61           printf("%c\(\backslash\)n", carray[x]);
+62         \}
+63         printf("\(\backslash\)n");
+64         carray[1] = 'X' ;
+65         printf("changed character 1 to X -> %c\(\backslash\)n", carray[1]);
+66 
+67         std::cout << "--------------------------------------" << std::endl << std::endl ;
+68         std::cout << "copy carrays" << std::endl;
+69         copy = carray;
+70 
+71         std::cout << "--------------------------------------" << std::endl << std::endl ;
+72         std::cout << "Adding fields into FML buffer: " << std::endl;
+73         b.add(unknown\_field);
+74         b.add ( empid );
+75         b.add ( nom );
+76         b.add ( prenom );
+77         b.set ( carray );
+78         b.print ();
+79         std::cout << "--------------------------------------" << std::endl << std::endl ;
+80 
+81         std::cout << "get SRVCDAY value from FML buffer" << std::endl;
+82         b.get ( copy );
+83         std::cout << "there should be enough memory no re-allocation expected" << std::endl;
+84         b.get ( copy );
+85 
+86         std::cout << "--------------------------------------" << std::endl << std::endl ;
+87 
+88         copy.set\_char\_array("0123456789", 10);
+89         std::cout << "buffer carray contains " << copy.length() << " characters" << std::endl ;
+90         //b.remove(copy);
+91         b.set(copy);
+92         b.print();
+93 
+94         atmi::Tfield<char *> resize\_control ( SRVCDAY );
+95         std::cout << "resize control initial carray length is  " << resize\_control.length() << std::endl;
+96         resize\_control.set\_char\_array("012345678901245678900123456789", 30);
+97         b.get(resize\_control);
+98 
+99         std::cout << "de-allocate ressources" << std::endl ;
+100         resize\_control.free\_ressources();
+101         std::cout << "  firt call to get from buffer, size before call " << resize\_control.length() <<
+       std::endl ;
+102         b.get(resize\_control);
+103         std::cout << "  second call to get from buffer, size before second call " <<
+       resize\_control.length() << std::endl ;
+104         b.get(resize\_control);
+105         std::cout << "size is " << resize\_control.length() << ", backend store size is " <<
+       resize\_control.buffer\_size() << std::endl ;
+106 
+107         std::cout << "--------------------------------------" << std::endl << std::endl ;
+108         std::cout << copy.what() << std::endl;
+109         long len = 5;                  //copy.length();
+110         char *cav = new char[len];
+111         copy.get\_char\_array ( cav, len );
+112         for ( int x = 0; x < len; x++ ) \{
+113           std::cout << "'"<< cav[x]<<"',";
+114         \}
+115         std::cout << std::endl;
 116 
-117     std::cout << "atmi::buffer sample program (" << atmi::cpp\_atmi\_version() <<")." << std::endl;
-118     std::cout << "setting up";
-119     buffer\_test btest;
-120 
-121     std::cout << ", starting up" ;
-122     btest.run ( argc, argv );
-123 
-124   \} catch ( atmi::atmi\_exception &err)\{
-125     cerr << std::endl << err.what() << std::endl;
-126   \} catch ( std::exception &err ) \{
-127     cerr << std::endl << err.what() << std::endl;
-128   \}
-129   std::cout << ", done." << std::endl;
-130 
-131   return 0;
-132 \}
+117         std::cout << "Setting (update) empid value: " << std::endl;
+118         empid = 22;
+119         b.set ( empid );
+120         b.print ();
+121 
+122         std::cout << "size : " << b.size();
+123         b.pack ();
+124         std::cout << ", after pack: " << b.size() << std::endl;
+125 
+126         std::cout << "atmi::buffer (in the end): " << b.used() << "/" << b.unused() <<", size: " <<
+       b.size() << ", chksum: " << b.chksum() <<  std::endl;
+127 
+128         std::cout << "wrapping atmi::buffer." << std::endl ;
+129         atmi::buffer wrapper ( b.get\_buffer());
+130         nom = "this was added into a wrapper instance of atmi::buffer.";
+131         wrapper.set (nom );
+132         wrapper.print ();
+133 
+134         std::cout << "transforming a atmi::buffer into a wrapped buffer." << std::endl;
+135         atmi::buffer wrapper1;
+136         wrapper1.set\_buffer ( wrapper.get\_buffer());
+137         prenom = "this was set by a wrapper";
+138         wrapper1.set ( prenom );
+139         wrapper1.print();
+140 
+141       \}catch ( atmi::buffer\_exception &err ) \{
+142         cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
+143       \} catch ( atmi::atmi\_exception &err ) \{
+144         cerr << err.what() << std::endl;
+145       \} catch ( std::exception &err ) \{
+146         cerr << err.what() << std::endl;
+147       \}
+148 
+149       return 9999;
+150     \}
+151 
+152 \};
+153 
+154 // program main -------------------------------------------------
+155 
+156 int main ( int argc, char **argv ) \{
+157 
+158   try \{
+159 
+160     std::cout << "atmi::buffer sample program (" << atmi::cpp\_atmi\_version() <<")." << std::endl;
+161     buffer\_test btest;
+162 
+163     std::cout << ", starting up" ;
+164     btest.run ( argc, argv );
+165 
+166   \} catch ( atmi::atmi\_exception &err)\{
+167     cerr << std::endl << err.what() << std::endl;
+168   \} catch ( std::exception &err ) \{
+169     cerr << std::endl << err.what() << std::endl;
+170   \}
+171   std::cout << ", done." << std::endl;
+172 
+173   return 0;
+174 \}
 \end{DoxyCodeInclude}
  

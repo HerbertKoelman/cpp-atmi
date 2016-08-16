@@ -9,5 +9,6 @@ var searchData=
   ['error_5fdetail',['error_detail',['../classatmi_1_1tuxedo__exception.html#abeb62f07cfb36d1d9d58b6a3aa9ef939',1,'atmi::tuxedo_exception::error_detail()'],['../classatmi_1_1tuxedo.html#ad7bf2370e3edeb091512d0b640093e9d',1,'atmi::tuxedo::error_detail()']]],
   ['error_5fmessage',['error_message',['../classatmi_1_1buffer__exception.html#a6881332c2a607fb71b987eaf811723b7',1,'atmi::buffer_exception::error_message()'],['../classatmi_1_1tuxedo__exception.html#adcf355cbe82b96ba273fabf6753e3bc7',1,'atmi::tuxedo_exception::error_message()'],['../classatmi_1_1tuxedo.html#ad134373ac62fd2c7e1ac5482bdb7f65e',1,'atmi::tuxedo::error_message()']]],
   ['event',['event',['../classatmi_1_1event.html#a64e8905f6b027d052074cb801567b1b3',1,'atmi::event']]],
-  ['extend',['extend',['../classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb',1,'atmi::buffer::extend()'],['../classatmi_1_1tuxedo.html#a683b79440474b94c471ed78ff3775eb8',1,'atmi::tuxedo::extend()']]]
+  ['extend',['extend',['../classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb',1,'atmi::buffer::extend()'],['../classatmi_1_1tuxedo.html#a683b79440474b94c471ed78ff3775eb8',1,'atmi::tuxedo::extend()']]],
+  ['extent',['extent',['../classatmi_1_1buffer.html#af35cd2e5a5cdd7499fb396dbdbe3f61a',1,'atmi::buffer']]]
 ];

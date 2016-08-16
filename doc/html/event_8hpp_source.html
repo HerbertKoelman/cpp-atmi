@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.3.0)</span>
+   &#160;<span id="projectnumber">(v4.3.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -110,15 +110,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;atmi/tuxedo.hpp&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//using namespace std;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceatmi.html">atmi</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classatmi_1_1event.html">   62</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1event.html">event</a> : <span class="keyword">public</span> <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classatmi_1_1event.html">event</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *evtname = NULL);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classatmi_1_1event.html#a64e8905f6b027d052074cb801567b1b3">event</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *evtname = NULL);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">long</span> post ( <span class="keyword">const</span> <span class="keywordtype">char</span> *data = NULL, <span class="keywordtype">long</span> len = 0 ) <span class="keywordflow">throw</span> ( <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1event.html#a0b1f1faae17aa923ce5a4a0d45cfcd07">post</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *data = NULL, <span class="keywordtype">long</span> len = 0 ) <span class="keywordflow">throw</span> ( <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> );</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span> *eventname;</div>
@@ -129,10 +129,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html"><div class="ttname"><a href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:53</div></div>
-<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="classatmi_1_1event_html_a0b1f1faae17aa923ce5a4a0d45cfcd07"><div class="ttname"><a href="classatmi_1_1event.html#a0b1f1faae17aa923ce5a4a0d45cfcd07">atmi::event::post</a></div><div class="ttdeci">long post(const char *data=NULL, long len=0)</div><div class="ttdef"><b>Definition:</b> event.cpp:20</div></div>
 <div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo__exception_html"><div class="ttname"><a href="classatmi_1_1tuxedo__exception.html">atmi::tuxedo_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:179</div></div>
 <div class="ttc" id="classatmi_1_1event_html"><div class="ttname"><a href="classatmi_1_1event.html">atmi::event</a></div><div class="ttdef"><b>Definition:</b> event.hpp:62</div></div>
+<div class="ttc" id="classatmi_1_1event_html_a64e8905f6b027d052074cb801567b1b3"><div class="ttname"><a href="classatmi_1_1event.html#a64e8905f6b027d052074cb801567b1b3">atmi::event::event</a></div><div class="ttdeci">event(const char *evtname=NULL)</div><div class="ttdef"><b>Definition:</b> event.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

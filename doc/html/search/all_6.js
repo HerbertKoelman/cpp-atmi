@@ -7,5 +7,6 @@ var searchData=
   ['finer',['finer',['../classatmi_1_1ulog.html#a23b79b2222930f4363d3150c39b49992',1,'atmi::ulog']]],
   ['flags',['flags',['../classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82',1,'atmi::tuxedo']]],
   ['field_20manipulation_20language',['Field Manipulation Language',['../group__fml.html',1,'']]],
-  ['free',['free',['../classatmi_1_1tuxedo.html#afdcf4b7d25862c6fdaeb47d095609a01',1,'atmi::tuxedo']]]
+  ['free',['free',['../classatmi_1_1tuxedo.html#afdcf4b7d25862c6fdaeb47d095609a01',1,'atmi::tuxedo']]],
+  ['free_5fressources',['free_ressources',['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#a3bc71ae4ac7ae39aa21dd6533c230fda',1,'atmi::Tfield&lt; char * &gt;']]]
 ];

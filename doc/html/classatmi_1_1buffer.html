@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.3.0)</span>
+   &#160;<span id="projectnumber">(v4.3.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -133,7 +133,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab9294b1a1e54e35717db40cb6bbb6de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a853e2a0585dda4e23ffa04297b824afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb">extend</a> ()</td></tr>
 <tr class="separator:a853e2a0585dda4e23ffa04297b824afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95d13597c2f28bfc8ee5dac4db131179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#a95d13597c2f28bfc8ee5dac4db131179">resize</a> (size_t extent)</td></tr>
+<tr class="memitem:af35cd2e5a5cdd7499fb396dbdbe3f61a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#af35cd2e5a5cdd7499fb396dbdbe3f61a">extent</a> () const </td></tr>
+<tr class="separator:af35cd2e5a5cdd7499fb396dbdbe3f61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10150940e8fc679b6bdc52bc02e6d016"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#a10150940e8fc679b6bdc52bc02e6d016">set_extent</a> (size_t <a class="el" href="classatmi_1_1buffer.html#af35cd2e5a5cdd7499fb396dbdbe3f61a">extent</a>)</td></tr>
+<tr class="separator:a10150940e8fc679b6bdc52bc02e6d016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95d13597c2f28bfc8ee5dac4db131179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#a95d13597c2f28bfc8ee5dac4db131179">resize</a> (size_t <a class="el" href="classatmi_1_1buffer.html#af35cd2e5a5cdd7499fb396dbdbe3f61a">extent</a>)</td></tr>
 <tr class="separator:a95d13597c2f28bfc8ee5dac4db131179"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe98844cb17328390b3d4e658bd6903"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classatmi_1_1field.html">field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1buffer.html#a1fe98844cb17328390b3d4e658bd6903">set</a> (<a class="el" href="classatmi_1_1field.html">field</a> &amp;f)</td></tr>
 <tr class="separator:a1fe98844cb17328390b3d4e658bd6903"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -447,6 +451,22 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 
 </div>
 </div>
+<a class="anchor" id="af35cd2e5a5cdd7499fb396dbdbe3f61a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t atmi::buffer::extent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>current extent value </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a74a6ff6ab31eb1128fc2f40d2a8e020f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -657,6 +677,9 @@ the reference the current internal buffer. </dd></dl>
 <a class="anchor" id="a79e82bc3f9dac86efc685604c20ed78d"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">atmi::buffer::operator FBFR32 * </td>
@@ -665,6 +688,11 @@ the reference the current internal buffer. </dd></dl>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>cast to FBFR32 * </p>
 
@@ -955,6 +983,29 @@ the reference the current internal buffer. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callinfo</td><td>callinfo value to set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a10150940e8fc679b6bdc52bc02e6d016"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void atmi::buffer::set_extent </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>extent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>set a new extent value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extent</td><td>number of bytes to allocate when no space is left in buffer. </td></tr>
   </table>
   </dd>
 </dl>
