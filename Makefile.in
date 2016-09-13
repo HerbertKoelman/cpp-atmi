@@ -18,10 +18,12 @@ DOXYGEN=@DOXYGEN@
 CODECHECK=@CODECHECK@
 MKDIR=@MKDIR_P@
 
+PACKAGE_DEVELOP=@PACKAGE_NAME@-@PACKAGE_VERSION@-@build_os@-dev.tar.gz
 PACKAGE=@PACKAGE_NAME@-@PACKAGE_VERSION@-@build_os@.tar.gz
 
 HEADERS=@HEADERS@
-CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
+LIBS=libatmi++.a libcltatmi++.a libfml++.a
+BINS=tmreboot
 
 all:
 	(cd src && $(MAKE) all )
@@ -34,14 +36,17 @@ all:
 pkg:
 	$(MKDIR) distrib
 	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE)
+	tar cf -  bin            | gzip -c > distrib/$(PACKAGE)
 
 clean:
 	( cd src && make clean )
+	( cd utls && make clean )
 
 globber:clean
-	${RM} -R doc html man autom4te.cache distrib
+	${RM} -R distrib doc html man autom4te.cache distrib
 	${RM} confdefs.h config.status 
 	(cd src && $(MAKE) globber)
+	(cd utls && $(MAKE) globber)
 
 doxygen:
 	${DOXYGEN}
@@ -50,14 +55,17 @@ codecheck:
 	$(CODECHECK)
 
 version:
-	touch configure.ac && ( cd src/ && touch configure.ac )
-	autoconf && ( cd src && autoconf )
+	touch configure.ac
+	cd src && touch configure.ac 
+	cd utls && touch configure.ac 
 	-echo "don't forget to run configure."
 
-install: lib/libatmi++.a lib/libcltatmi++.a lib/libfml++.a
-	cd include/atmi && $(MKDIR) $(INCLUDEDIR) && $(INSTALL) *.hpp *.h $(INCLUDEDIR)
-	cd lib && $(INSTALL) $(CPPATMILIBS) @libdir@
+install: 
+	$(MKDIR) $(INCLUDEDIR) && $(INSTALL) include/atmi/*.hpp include/atmi/*.h $(INCLUDEDIR)
+	$(INSTALL) lib/*.a @libdir@
+	$(INSTALL) bin/*   @bindir@
 
 uninstall:
 	$(RM) -R  $(INCLUDEDIR)
-	(cd @libdir@ && $(RM) ${CPPATMILIBS})
+	(cd @libdir@ && $(RM) ${LIBS})
+	(cd @bindir@ && $(RM) $(BINS))
