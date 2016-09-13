@@ -26,6 +26,7 @@ autom4te.cache
 *ULOG*
 
 # misc and project created files
+bin
 doc
 sonar-project.properties
 doxyfile

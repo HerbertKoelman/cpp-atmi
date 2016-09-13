@@ -41,6 +41,7 @@ pkg:
 clean:
 	( cd src && make clean )
 	( cd utls && make clean )
+	$(RM) -R distrib
 
 globber:clean
 	${RM} -R distrib doc html man autom4te.cache distrib
@@ -55,9 +56,9 @@ codecheck:
 	$(CODECHECK)
 
 version:
-	touch configure.ac
-	cd src && touch configure.ac 
-	cd utls && touch configure.ac 
+	touch configure.ac && autoconf
+	cd src && touch configure.ac && autoconf
+	cd utls && touch configure.ac && autoconf
 	-echo "don't forget to run configure."
 
 install: 
