@@ -25,6 +25,7 @@ CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
 all:
 	(cd src && $(MAKE) all )
+	(cd utls && $(MAKE) all )
 
 #demos:
 #	cd samples/atmi++ ; $(MAKE) globber all clean
