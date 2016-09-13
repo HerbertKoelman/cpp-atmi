@@ -65,10 +65,8 @@ cxref:
 
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
-	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)" \
-	buildclient -w -f $< -o $@ -l "$(LIBS)"
 	CC=$(CCC) CFLAGS="-+ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"  \
-	buildclient    -f $< -o $@ -l "$(LIBS)"
+	buildclient    -f $< -o ../bin/$@ -l "$(LIBS)"
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:

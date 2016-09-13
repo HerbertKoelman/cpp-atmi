@@ -35,7 +35,7 @@ all:
 
 pkg:
 	$(MKDIR) distrib
-	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE)
+	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE_DEVELOP)
 	tar cf -  bin            | gzip -c > distrib/$(PACKAGE)
 
 clean:

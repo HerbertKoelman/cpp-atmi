@@ -184,7 +184,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
         Fprint32( bget);
 
         len = sizeof (occ);
-        if (Fget32(bget, TA_OCCURS, 0, &occ, &len) == -1) {
+        if (Fget32(bget, TA_OCCURS, 0, (char *)&occ, (FLDLEN32 *)&len) == -1) {
             fprintf (stderr, "No Field TA_OCCURS : <%d> %s\n", 
                            Ferror32, Fstrerror32(Ferror32));
             fprintf (stdout, " Content of FML32 buffer received \n");
@@ -199,14 +199,14 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
                 cur= nb+i;
 
                 /* Get the SRVGRP & SRVID  for all of them */
-                if (Fget32(bget, TA_SRVGRP, i, myInst[cur].grp, &len) == -1) {
+                if (Fget32(bget, TA_SRVGRP, i, myInst[cur].grp, (FLDLEN32 *)&len) == -1) {
                   fprintf (stderr, "Loop %d: fails get TA_SRVGRP : <%d> %s\n", 
                               cur, Ferror32, Fstrerror32(Ferror32));
                   tpfree ((char *) bget);
                   return (-1);
                }	
                len = 32;
-               if (Fget32(bget, TA_SERVERNAME, i, tmp, &len) == -1) {
+               if (Fget32(bget, TA_SERVERNAME, i, tmp, (FLDLEN32 *)&len) == -1) {
                   fprintf (stderr, "Loop %d: fails get TA_SERVERNAME : <%d> %\n", 
                                  cur, Ferror32, Fstrerror32(Ferror32));
                   tpfree ((char *) bget);
@@ -220,7 +220,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
                else
                   strcat (myInst[cur].srvn, ++Pch);		
                len = sizeof (myInst[cur].id);
-               if (Fget32(bget, TA_SRVID, i, &myInst[cur].id, &len) == -1) {
+               if (Fget32(bget, TA_SRVID, i, (char *)&myInst[cur].id, (FLDLEN32 *)&len) == -1) {
                   fprintf (stderr, "Loop %d: fails get TA_SRVID : <%d> %s\n",
                                  cur, Ferror32, Fstrerror32(Ferror32));
                   tpfree ((char *) bget);
@@ -233,7 +233,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
         nb += occ;
 		
         len = sizeof (mor);
-        if (Fget32(bget, TA_MORE, 0, &mor, &len) == -1) {
+        if (Fget32(bget, TA_MORE, 0, (char *)&mor, (FLDLEN32 *)&len) == -1) {
             fprintf (stderr, "No Field TA_MORE : <%d> %s\n", 
                            Ferror32, Fstrerror32(Ferror32));
             fprintf (stdout, " Content of FML32 buffer received \n");
