@@ -49,7 +49,7 @@ fi
 # Okay, no cppcheck found, maybe we have sonar
 if test -z "$CODECHECK" 
 then
-  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.sources=src/,include/atmi/ -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
+  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
 fi
 
 if test -z "$CODECHECK" 
