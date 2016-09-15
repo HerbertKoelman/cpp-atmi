@@ -1,8 +1,8 @@
 /*
- * restart_srv is a tuxedo client that restart server using MIB calls
+ * tmreboot is a tuxedo client that restart server using MIB calls
  *
  * compilation :
- * buildclient -v -o restart_serv -f restart_serv.c
+ * buildclient  -o tmreboot -f tmreboot.c
  *
  * environnement
  * FLDTBLDIR=$TUXDIR/udataobj
@@ -24,7 +24,7 @@
 #include <fml32.h>
 #include <tpadm.h>
 #include <evt_mib.h>
-#include <libgen.h>
+#include <userlog.h>
 
 #define MAX_INST   300
 #define ERR_GENE    -1
@@ -46,8 +46,8 @@ struct oneInst  {
 struct oneInst myInst[MAX_INST];
 TPCONTEXT_T  ctxt;
 
-void print_usage( char *pgm )
-{
+void print_usage( char *pgm ) {
+
     fprintf(stdout, "usage : %s [-P ubb_pwd] [OPTIONS] [ADD]\n", pgm);
     fprintf(stdout, "This Tuxedo client calls the TMIB to restart server instances.\n");
     fprintf(stdout, "When several to restart, they are restarted one by one.\n");
@@ -67,17 +67,54 @@ void print_usage( char *pgm )
     fprintf(stdout, "     >> restart servers ARTIBMP that have been called at least 100 times\n\n", pgm);
 }
 
+int getAllField ( FBFR32 * bget, int cur, int i) {
+    char  *Pch;
+    char  tmp[60];
+    long  flags, len;
+
+    /* Get the SRVGRP & SRVID  for all of them */
+    len = 30;
+    if (Fget32(bget, TA_SRVGRP,(FLDOCC32) i, myInst[cur].grp,(FLDLEN32 *) &len) == -1) {
+         fprintf (stderr, "Loop: fails get TA_SRVGRP : <%d> %s\n", 
+                        Ferror32, Fstrerror32(Ferror32));
+         return (-1);
+    }	
+    len = 32;
+    if (Fget32(bget, TA_SERVERNAME, i, tmp, (FLDLEN32 *)&len) == -1) {
+        fprintf (stderr, "Loop: fails get TA_SERVERNAME : <%d> %\n", 
+                       Ferror32, Fstrerror32(Ferror32));
+        return (-1);
+    }
+    /*  TA_SERVERNAME contains PGM with full path  */
+    strcpy (myInst[cur].srvn, "");
+    Pch = (char *) strrchr (tmp, PATH_DELIM);
+    if (Pch == NULL) {
+        strcat (myInst[cur].srvn, tmp);
+    } else {
+        strcat (myInst[cur].srvn, ++Pch);		
+    }
+
+    len = sizeof (myInst[cur].id);
+    if (Fget32(bget, TA_SRVID, i,(char *) &myInst[cur].id,(FLDLEN32 *) &len) == -1) {
+        fprintf (stderr, "Loop: fails get TA_SRVID : <%d> %s\n",
+                       Ferror32, Fstrerror32(Ferror32));
+        return(-1);
+    }
+
+    return (1);
+}
+
 int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
 {
     char  ope[8];    /* GET or GETNEXT */
     char  tmp[72];   /* SERVERNAME is full path in */
-    char  *Pch;
-    long  occ, mor, nb;
+    long  occ, mor, reqc;
     long  flags, len;
-    int   i, cur;
+    int   i, cur, ret, first;
     FBFR32 *bget;
-	
-    occ = mor = nb = cur = 0;
+
+    occ = mor = cur = 0;
+    first = 1;
 
     if (tpsetctxt (ctxt, 0) < 0) {
         fprintf(stderr, "Tuxedo cannot set context -GET- %s\n",
@@ -102,11 +139,12 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
 
     do {
         /* get all the active servers based on criteria provided */
-        if (nb == 0)
+        if (first) {
             strcpy (ope, "GET");
-        else
+            first = 0;
+        } else {
             strcpy (ope, "GETNEXT");
-	
+        }
         if (Fchg32(bget, TA_OPERATION, 0, ope, 0) == -1) {
             fprintf(stderr, "Error when Set Field TA_OPERATION : <%d> %s\n",
                           Ferror32, Fstrerror32(Ferror32));
@@ -119,6 +157,16 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
             tpfree ((char *) bget);
             return (-1);
         }    
+        if (nbd) {      /* Need MIB_LOCAL to get metrics  */
+            flags = MIB_LOCAL;
+            len = sizeof (flags);
+            if (Fchg32(bget, TA_FLAGS, 0, (char *)&flags , len) == -1) {
+                fprintf(stderr, "Error when Set Field TA_FLAGS : <%d> %s\n",
+                          Ferror32, Fstrerror32(Ferror32));
+                tpfree ((char *) bget);
+                return (-1);
+            } 
+        }
         /* Only the ACTIVE servers, T_SERVER contains all .. MAX in UBB */
         if (Fchg32(bget, TA_STATE, 0, "ACT", 0) == -1) {
             fprintf(stderr, "Error when Set Field TA_STATE : <%d> %s\n",
@@ -162,29 +210,16 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
             } 
         }
 	
-        if (nbd) {      /* Need MIB_LOCAL to get metrics  */
-            flags = MIB_LOCAL;
-            len = sizeof (flags);
-            if (Fchg32(bget, TA_FLAGS, 0, (char *)&flags , len) == -1) {
-                fprintf(stderr, "Error when Set Field TA_FLAGS : <%d> %s\n",
-                          Ferror32, Fstrerror32(Ferror32));
-                tpfree ((char *) bget);
-                return (-1);
-            } 
-        }
-	
-	flags = TPSIGRSTRT;
+        flags = TPSIGRSTRT;
         if (tpcall(".TMIB", (char *)bget, 0, (char **)&bget, &len, flags) == -1) {
             fprintf(stderr, "Error when GET data from TMIB : <%d> %s\n", 
                           tperrno, tpstrerror(tperrno));
             tpfree ((char *) bget);
             return (-1);
         }
-
-        Fprint32( bget);
-
+        
         len = sizeof (occ);
-        if (Fget32(bget, TA_OCCURS, 0, (char *)&occ, (FLDLEN32 *)&len) == -1) {
+        if (Fget32(bget, TA_OCCURS, 0, (char *)&occ, (FLDLEN32 *) &len) == -1) {
             fprintf (stderr, "No Field TA_OCCURS : <%d> %s\n", 
                            Ferror32, Fstrerror32(Ferror32));
             fprintf (stdout, " Content of FML32 buffer received \n");
@@ -194,46 +229,45 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
         }
 		
         if (occ) {
-            for (i= 0; i < occ; i++) {
-                len = 30;
-                cur= nb+i;
 
-                /* Get the SRVGRP & SRVID  for all of them */
-                if (Fget32(bget, TA_SRVGRP, i, myInst[cur].grp, (FLDLEN32 *)&len) == -1) {
-                  fprintf (stderr, "Loop %d: fails get TA_SRVGRP : <%d> %s\n", 
-                              cur, Ferror32, Fstrerror32(Ferror32));
+           for (i= 0; i < occ; i++) {
+
+              ret = reqc = 0;
+
+              /*  When -N extract servers that did at least N request  */
+              if (nbd) {
+                 /* Get TOTREQC  */
+                 len = sizeof (reqc);
+                 if (Fget32(bget, TA_TOTREQC,(FLDOCC32) i, (char *)&reqc,(FLDLEN32 *) &len) == -1) {
+                     fprintf (stderr, "Loop: fails get TA_TOTREQC: <%d> %s\n", 
+                                    Ferror32, Fstrerror32(Ferror32));
+                     tpfree ((char *) bget);
+                     return (-1);
+                 }
+
+                 if (reqc >= nbd) {
+                      ret = getAllField( bget, cur, i );
+                 }     /* ret not set if not enough calls */
+              } else {
+                  ret = getAllField ( bget, cur, i );
+              }
+
+              if (ret == -1) {
                   tpfree ((char *) bget);
                   return (-1);
-               }	
-               len = 32;
-               if (Fget32(bget, TA_SERVERNAME, i, tmp, (FLDLEN32 *)&len) == -1) {
-                  fprintf (stderr, "Loop %d: fails get TA_SERVERNAME : <%d> %\n", 
-                                 cur, Ferror32, Fstrerror32(Ferror32));
-                  tpfree ((char *) bget);
-                  return (-1);
-               }
-               /*  TA_SERVERNAME contains PGM with full path  */
-               strcpy (myInst[cur].srvn, "");
-               Pch = (char *) strrchr (tmp, PATH_DELIM);
-               if (Pch == NULL)
-                  strcat (myInst[cur].srvn, tmp);
-               else
-                  strcat (myInst[cur].srvn, ++Pch);		
-               len = sizeof (myInst[cur].id);
-               if (Fget32(bget, TA_SRVID, i, (char *)&myInst[cur].id, (FLDLEN32 *)&len) == -1) {
-                  fprintf (stderr, "Loop %d: fails get TA_SRVID : <%d> %s\n",
-                                 cur, Ferror32, Fstrerror32(Ferror32));
-                  tpfree ((char *) bget);
-                  return(-1);
-               }
-               fprintf (stdout, "Loop %d [%s] [%s] [%d]\n",
-                        cur, myInst[cur].grp, myInst[cur].srvn, myInst[cur].id);
+              }
+              
+              if (ret) { 
+                 myInst[cur].nbd = reqc;
+                 fprintf (stdout, "Get  grp[%s] srv[%s] id[%d] req[%d]\n", 
+                      myInst[cur].grp, myInst[cur].srvn, myInst[cur].id, myInst[cur].nbd );
+                 cur++;
+              }
            } /* for */
         }
-        nb += occ;
 		
         len = sizeof (mor);
-        if (Fget32(bget, TA_MORE, 0, (char *)&mor, (FLDLEN32 *)&len) == -1) {
+        if (Fget32(bget, TA_MORE, 0,(char *) &mor,(FLDLEN32 *) &len) == -1) {
             fprintf (stderr, "No Field TA_MORE : <%d> %s\n", 
                            Ferror32, Fstrerror32(Ferror32));
             fprintf (stdout, " Content of FML32 buffer received \n");
@@ -245,11 +279,12 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
     } while (mor);
 
     tpfree ((char *) bget);
+
     /* Return number of servers found */
-    return (nb);
+    return (cur);
 }
 
-int restartServer ( char *pgm , long nb)
+int restartServer ( char *pgm , int nb)
 {
     long  flags, len;
     int   i, done;
@@ -280,10 +315,11 @@ int restartServer ( char *pgm , long nb)
             fprintf(stderr, "Error when INIT FML32 SET buffer -INA- : <%d> %s\n",
                           Ferror32, Fstrerror32(Ferror32));
             tpfree ((char *) bset);
-            if (i)
+            if (i) {
                 return (i);
-            else 
+            } else {
                 return (-1);
+            }
         } 
         if (Fchg32(bset, TA_OPERATION, 0, "SET", 0) == -1) {
             fprintf (stderr, "Loop %d: fails chg TA_OPERATION : <%d> %s\n",
@@ -320,10 +356,11 @@ int restartServer ( char *pgm , long nb)
             fprintf(stderr, "loop %d: fails to call Tuxedo for INA: <%d> %s\n",
                           i, tperrno, tpstrerror(tperrno));
             tpfree ((char *) bset);
-            if (i)
+            if (i) {
                return (i);
-            else 
+            } else {
                return (-1);
+            }
         }
 
         fprintf(stdout, "%s CMD = tmboot -g %s  -i %d\n", 
@@ -333,10 +370,11 @@ int restartServer ( char *pgm , long nb)
             fprintf(stderr, "Error when INIT FML32 SET buffer -ACT- : <%d> %s\n",
                           Ferror32, Fstrerror32(Ferror32));
             tpfree ((char *) bset);
-            if (i)
+            if (i) {
                 return (i);
-            else 
+            } else {
                 return (-1);
+            }
         } 
         if (Fchg32(bset, TA_OPERATION, 0, "SET", 0) == -1) {
             fprintf (stderr, "Loop %d: fails chg TA_OPERATION : <%d> %s\n",
@@ -379,10 +417,11 @@ int restartServer ( char *pgm , long nb)
             fprintf(stderr, "loop %d: fails to call Tuxedo for ACT: <%d> %s\n", 
                           i, tperrno, tpstrerror(tperrno));
             tpfree ((char *) bset);
-            if (i)
+            if (i) {
                return (i);
-            else 
+            } else {
                return (-1);
+            }
         }
         done++;
     }
@@ -401,16 +440,16 @@ int main(int argc, char *argv[])
     extern char  *optarg;
     extern int   optind, opterr;   /* used by getopt line parser */
 
-    /* pgm = basename ( argv[0] ); */
     pgm = (char *) strrchr (argv[0], PATH_DELIM);
-    if (pgm == NULL)
+    if (pgm == NULL) {
         pgm = argv[0];
-    else
-        pgm++;		
+    } else {
+        pgm++;
+    }
 
     if (argc < 2) {
         print_usage( pgm );
-        exit(ERR_GENE); /* EXIT_FAILURE | EXIT_SUCCESS */
+        exit(ERR_GENE);
     }
 
     memset (groupe, '\0', sizeof (groupe));
@@ -423,10 +462,10 @@ int main(int argc, char *argv[])
 	
     while ((opt = getopt(argc, argv, "g:i:o:s:N:P:C")) != -1) {
        switch(opt) {
-         case 'g': strcpy (groupe, optarg); 
+         case 'g': strcpy (groupe, optarg);
                  fprintf (stdout, ">> get servers in GROUPE %s\n", groupe);
                  ok++;
-                  break;
+                 break;
          case 'i': srvid = atoi (optarg);
                  fprintf (stdout, ">> get servers which SRVID is %d\n", srvid);
                  ok++;
@@ -440,10 +479,11 @@ int main(int argc, char *argv[])
                  ok++;
                  break;
          case 'N': nbd = atoi (optarg);
-                 if (nbd < 1)
+                 if (nbd < 1) {
                     fprintf (stdout, " N lower than 1 is not relevant\n");
-                 else 
+                 } else {
                     fprintf (stdout, ">> only servers at least called %d times\n", nbd);
+                 }
                  break;
          case 'P': strcpy (pwd, optarg);
                  break;
@@ -487,7 +527,8 @@ int main(int argc, char *argv[])
         exit(ERR_GENE);
     }
 
-    fprintf (stdout, "INF groupe %s, servname %s, id %d, seq %d, nb %d, test %d\n", groupe, srvname, srvid, seqid, nbd, test);
+    userlog ( "%s- INF groupe[%s], servname[%s], id[%d], seq[%d], nb[%d]", 
+             pgm, groupe, srvname, srvid, seqid, nbd);
 
     nbfound = getServers (groupe, srvname, srvid, seqid , nbd);
     if (nbfound < 0 ) {
@@ -497,19 +538,22 @@ int main(int argc, char *argv[])
         return(ERR_GET);
     }
 
-    if (!nbfound){
-        fprintf (stdout, "No server found with your criteria, check UBB\n");
-    }else{
-        fprintf (stdout, "With your criteria %d server(s) will be restarted\n", nbfound);
+    /* Use userlog to log the fact that tmreboot will restart servers */
+    if (!nbfound) {
+        userlog ("%s- No server found with your criteria, check UBB", pgm);
+    } else {
+        userlog ("%s- With your criteria %d server(s) will be restarted", 
+                 pgm, nbfound);
     }
 	
     /* Don't do the set when test */
-    if (test)
+    if (test) {
         exit (0);
+    }
 
     nbresta = restartServer ( pgm , nbfound);
     if (nbresta < 0) {
-       fprintf (stderr, "ERR:  !!\n");
+       fprintf (stderr, "ERR: No server has been restarted !!\n");
        tpfree ((char *)tpinfo);
        tpterm ();
        return(ERR_SET);
