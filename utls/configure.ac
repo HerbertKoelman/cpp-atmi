@@ -90,10 +90,12 @@ case "$CXX" in
   xlC_r | xlC)
   CFLAGS="-q$bits -qmaxmem=-1 -D__IBMCPP_TR1__ -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
   LDFLAGS="$LDFLAGS -bh:5 -brtl -bmaxdata:0x80000000"
+  AC_SUBST(BFLAGS,"-+")
   AC_MSG_RESULT([yes])
   ;;
   g++ | gcc)
 	CFLAGS="-x c++ -std=c++11 -frtti $CFLAGS "
+#  AC_SUBST(BFLAGS,"")
   AC_MSG_RESULT([yes])
   ;;
   *)
