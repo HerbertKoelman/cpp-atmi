@@ -19,17 +19,6 @@ AC_PROG_MKDIR_P
 
 AC_CANONICAL_BUILD
 
-#HEADERS=""
-#for header in include/atmi/*.hpp include/atmi/*.h
-#do
-#  HEADERS="$HEADERS $header"
-#done
-#for header in include/atmi/*.in
-#do
-#  HEADERS="$HEADERS `basename $header .in`"
-#done
-#AC_SUBST(HEADERS,$HEADERS)
-
 AC_MSG_CHECKING([whether target directory ./lib exists])
 if test -e ./lib
 then
@@ -37,6 +26,15 @@ then
 else
   mkdir -p ./lib
   AC_MSG_RESULT([./lib created.])
+fi
+
+AC_MSG_CHECKING([whether target directory ./bin exists])
+if test -d ./bin
+then
+  AC_MSG_RESULT([already there.])
+else
+  mkdir -p ./bin
+  AC_MSG_RESULT([./bin created.])
 fi
 
 AC_MSG_CHECKING([whether wording directory ./locale exists])
@@ -51,7 +49,7 @@ fi
 # Okay, no cppcheck found, maybe we have sonar
 if test -z "$CODECHECK" 
 then
-  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.sources=src/,include/atmi/ -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
+  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
 fi
 
 if test -z "$CODECHECK" 
@@ -60,7 +58,7 @@ then
 fi
 
 AC_PROG_INSTALL
-AC_CONFIG_SUBDIRS(src)
+AC_CONFIG_SUBDIRS(src utls)
 AC_CONFIG_FILES([Makefile sonar-project.properties doxyfile])
 AC_OUTPUT
 
