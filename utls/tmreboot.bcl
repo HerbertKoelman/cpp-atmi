@@ -440,7 +440,7 @@ int main(int argc, char *argv[])
     long  nbresta = 0;
     int   opt, test;
     bool  ok = false;
-    bool  err = true;
+    bool  err = false;
     TPINIT *tpinfo;
     extern char  *optarg;
     extern int   optind, opterr;   /* used by getopt line parser */
