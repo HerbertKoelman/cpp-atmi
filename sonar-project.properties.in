@@ -17,7 +17,7 @@ sonar.projectName=pmu:cpp-atmi
 sonar.projectVersion=@PACKAGE_VERSION@
 
 # Comma-separated paths to directories containing source files
-#sonar.sources=src,include
+sonar.sources=src,include,utls
 # Set the language of the source code to analyze. If not set, a multi-language analysis will be triggered.
 #sonar.language=
 # to exclude source code files
@@ -29,7 +29,7 @@ sonar.exclusions=**/TST/**/*,**/TST/*
 #sonar.cobol.copy.suffixes=
 
 #sonar.c.file.suffixes=.c,.h
-#sonar.cpp.file.suffixes=.cc,.cpp,.cxx,.c++,.hh,.hpp,.hxx,.h++,.ipp,.kpp,.sqC,.kqp
+sonar.cpp.file.suffixes=.cc,.cpp,.cxx,.c++,.hh,.hpp,.hxx,.h++,.ipp,.kpp,.sqC,.kqp,.bcl,.bsr
 #sonar.cfamily.predefinedMacros=#include "requiredMacros.h"
 #sonar.cfamily.library.directories=/path/to/requiredMacros.h,/path/to/include/files
 
