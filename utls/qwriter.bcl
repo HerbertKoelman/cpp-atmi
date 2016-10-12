@@ -1,0 +1,86 @@
+/* $Id: qwtest.C 79 2007-08-18 17:30:26Z hkoelman $
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <unistd.h>
+#include <libgen.h>
+#include <limits>
+#include <string>
+#include <cstring>
+#include <iostream>
+#include <options.hpp>
+#include <atmi/atmi++.hpp>
+
+class queue_writer : public atmi::abstract_client {
+public:
+
+  queue_writer ( const char *qs, const char *q, const char *user, const char *passwd, const char *group ) : 
+    abstract_client ("qwriter", user, passwd, group),
+    qspace(qs),
+    queue(q)
+  {
+  };
+
+  int run () {
+
+    auto status = EXIT_FAILURE;
+    try {
+        atmi::queue_ptr q = new_queue_instance ( qspace, queue );
+
+        bool stop = false ;
+        size_t size = 0 ;
+
+        while ( ! stop ){
+          std::cout << "enter message text (or \"quit\" to end): " ;
+
+          std::string message;
+          std::getline (std::cin,message);
+
+          stop = message == "quit" ;
+
+          if ( ! stop  && ! message.empty()){
+            size = message.size();
+            char *buffer = allocate("STRING", NULL, size + 1);
+            memset(buffer, 0, size + 1);
+            strncpy(buffer, message.c_str(), size);
+            q->enqueue ( buffer, size );
+          }
+        }
+
+        status = EXIT_SUCCESS;
+
+    } catch (std::exception &err ) {
+      std::cerr << err.what() << std::endl;
+    }
+
+    return status ;
+  };
+
+private:
+  const char *qspace;
+  const char *queue;
+};
+
+int main ( int argc, char **argv ) {
+
+  auto status = EXIT_FAILURE;
+
+  try {
+
+    char *pname = basename(argv[0]);
+    options options(argc,argv);
+
+    if ( (options.qspace != NULL) && (options.queue != NULL)){
+      queue_writer qw(options.qspace, options.queue, options.user, options.passwd, options.group );
+      status= qw.run ();
+    } else {
+      usage(pname, "write STRING typed messages into a queue.");
+    }
+
+  } catch (std::exception &err ) {
+    std::cerr << err.what() << std::endl;
+  }
+
+  return status;
+}
