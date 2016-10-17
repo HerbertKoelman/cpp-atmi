@@ -95,10 +95,10 @@ AC_CHECK_FUNCS([memset])
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-    CFLAGS="-q$bits -qmaxmem=-1 -qsmp -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
+    CFLAGS="-q$bits -D_LARGE_FILES -D__IBMCPP_TR1__ -qmaxmem=-1 -qsmp -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
     CXXFLAGS="-O2"
     LDFLAGS="-brtl -bh:5 $LDFLAGS"
-    AC_MSG_RESULT([$CFLAGS $CPPFLAGS $CXXFLAGS])
+    AC_MSG_RESULT([yes])
     ;;
   g++ | gcc)
     CXXFLAGS="-O2"

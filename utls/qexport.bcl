@@ -1,0 +1,82 @@
+#include "options.hpp"
+#include <atmi/atmi++.hpp>
+#include <cstdlib>
+#include <ostream>
+#include <fstream>
+
+/** export messages found in a given queue
+ *
+ */
+class queue_export: public atmi::abstract_client {
+  public:
+
+    queue_export(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
+    }
+
+    int run (const char *qspace, const char *queue, std::ostream &out) {
+
+      auto status = EXIT_FAILURE;
+
+      try {
+
+#       ifdef DEBUG
+        printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s]\n", __FUNCTION__, queue, qspace);
+#       endif
+
+        atmi::queue_ptr q = new_queue_instance(qspace, queue);
+        q->set_message_wait(false); // don't wait for messages
+
+        atmi::queue_stream qs(*q);
+        out << qs ; // write messages
+         out.flush();
+        std::cerr << "exported : " << qs.count() << " messages." << std::endl ;
+
+        status = EXIT_SUCCESS ;
+
+      } catch ( std::exception &err ){
+        std::cerr << err.what() << std::endl ;
+      }
+
+#     ifdef DEBUG
+      std::cout << "type enter to exit." << std::endl;
+      std::string buffer;
+      std::getline (std::cin,buffer);
+#     endif
+
+      return status ;
+    }
+};
+
+int main ( int argc, char *argv[] ){
+  
+  auto status = EXIT_FAILURE ;
+  try {
+    char *pname = basename(argv[0]);
+    options options(argc, argv);
+
+    if ( (options.qspace != NULL) && (options.queue != NULL) ){
+      queue_export qexport(pname, options.user, options.passwd, options.group);
+      if ( optind < argc ) { // consider firt left argument as a path to a file
+        std::ifstream file;
+        file.open(argv[optind],std::ofstream::out | std::ofstream::app);
+        if (file.is_open()){
+          std::ostream out(file.rdbuf());
+          status = qexport.run(options.qspace, options.queue, out);
+        } else {
+          perror("failed to open export destination file");
+        }
+      } else {
+        std::ostream out(std::cout.rdbuf()); // fall back to stdout
+        status = qexport.run(options.qspace, options.queue, out);
+      }
+
+    }else{
+      usage(pname, "send messages to stdout");
+    }
+
+  }catch ( std::exception &err){
+    std::cerr << err.what() << std::endl ;
+  }
+
+  return status ;
+}
