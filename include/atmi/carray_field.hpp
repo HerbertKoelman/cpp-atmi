@@ -229,6 +229,7 @@ namespace atmi {
 
       /** \copydoc virtual int get ( buffer &b )
        *
+       * @param b   fielded buffer
        * @param occ field occurence to search for
        */
       virtual int get ( buffer &b, FLDOCC32 occ ){

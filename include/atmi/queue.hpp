@@ -51,7 +51,7 @@ namespace atmi {
 #if __cplusplus < 201103L
   typedef std::auto_ptr<atmi::queue>   queue_ptr; //!< @deprecated use unique_ptr instead
 #else
-  typedef std::unique_ptr<atmi::queue> queue_ptr; //<! helper type
+  typedef std::unique_ptr<atmi::queue> queue_ptr; //!< helper type
 #endif
 
   /**
@@ -305,7 +305,20 @@ namespace atmi {
   class queue_stream : public tuxedo {
     public:
 
+      /** friend functions that handle the writting of messages to a stream.
+       *
+       * @param out destination stream
+       * @param qs  stream of messages
+       * @return destination
+       */
       friend std::ostream& ::operator<<(std::ostream& out, atmi::queue_stream& qs);
+
+      /** friend functions that handle the reading of messages from a stream.
+       *
+       * @param in source stream
+       * @param qs stream of messages
+       * @return source
+       */
       friend std::istream& ::operator>>(std::istream& in,  atmi::queue_stream& qs);
 
       /** setup a queue stream.
