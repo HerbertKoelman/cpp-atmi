@@ -15,7 +15,7 @@
 class queue_writer : public atmi::abstract_client {
 public:
 
-  queue_writer ( const char *qs, const char *q, const char *user, const char *passwd, const char *group ) : 
+  queue_writer ( const char *qs, const char *q, const char *user, const char *passwd, const char *group ) :
     abstract_client ("qwriter", user, passwd, group),
     qspace(qs),
     queue(q)

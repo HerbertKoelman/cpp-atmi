@@ -73,7 +73,7 @@ class queue_export: public atmi::abstract_client {
 };
 
 int main ( int argc, char *argv[] ){
-  
+
   auto status = EXIT_FAILURE ;
   try {
 
@@ -95,7 +95,7 @@ int main ( int argc, char *argv[] ){
           perror("failed to open export destination file");
         }
       } else {
-        std::ostream out(std::cout.rdbuf()); // fall back to stdout
+        std::ostream out(std::cout.rdbuf()); // fall back to stdou
         status = qexport.run(options.qspace, options.queue, options.buffer_size, out, options.daemon);
       }
 

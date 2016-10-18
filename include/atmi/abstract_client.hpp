@@ -70,7 +70,7 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        */
        abstract_client ();
@@ -78,7 +78,7 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        *
        * This constructor sets the TPINFO flag TPMULTICONTEXTS if the parameter tuxconfig is passed.

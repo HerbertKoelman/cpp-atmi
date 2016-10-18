@@ -22,10 +22,10 @@ void version(){
 class options{
   public:
 
-    /** create an instance and parse the given argument list
+    /** create an instance and parse the given argument lis
      *
      */
-    options(): 
+    options():
       queue(NULL),
       qspace(NULL),
       user(NULL),
@@ -61,7 +61,7 @@ class options{
       int                 opt = 0;
       extern char        *optarg;
       extern int          optind, optopt, opterr;// used by command line parser
-      
+
       while ((opt = getopt(argc, argv, _arguments.c_str())) != -1) {
         set(opt);
       }

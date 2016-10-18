@@ -191,9 +191,9 @@ namespace atmi {
         set_message_wait (wait);
       };
 
-      /** Check if QWait flag is set
+      /** Check if QWait flag is se
        *
-       * @return true if wait flag is set
+       * @return true if wait flag is se
        * @deprecated use is_message_waiting instead
        */
       inline bool isQWaiting () {

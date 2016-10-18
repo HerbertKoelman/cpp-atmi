@@ -50,11 +50,11 @@ namespace atmi {
 
       /**
        *  Possible values are:
-       *  FLD_SHORT       0       short int
-       *  FLD_LONG        1       long int
+       *  FLD_SHORT       0       short in
+       *  FLD_LONG        1       long in
        *  FLD_CHAR        2       character
-       *  FLD_FLOAT       3       single-precision float
-       *  FLD_DOUBLE      4       double-precision float
+       *  FLD_FLOAT       3       single-precision floa
+       *  FLD_DOUBLE      4       double-precision floa
        *  FLD_STRING      5       std::string - null terminated
        *  FLD_CARRAY      6       character array
        *  FLD_PTR         9       pointer to a buffer
@@ -160,7 +160,7 @@ namespace atmi {
 
       /** add the fiels into the buffer
        *
-       * When successfull the value of occurence is set
+       * When successfull the value of occurence is se
        *
        * @param b buffer in which to add the field.
        * @see occurence

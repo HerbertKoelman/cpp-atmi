@@ -159,7 +159,7 @@ namespace atmi {
         // printf("DEBUG set_context [%d]:\n", _context);
       };
 
-      /** @return the current context
+      /** @return the current contex
        */
       inline TPCONTEXT_T context () const {
 
@@ -191,7 +191,7 @@ namespace atmi {
       };
 
       /** unset flags
-       * @param flags flags to unset
+       * @param flags flags to unse
        */
       inline void unset_flags ( long flags ) {
         tuxedo::unset (_flags, flags);
@@ -205,17 +205,17 @@ namespace atmi {
        */
       void switch_context ();
 
-      /** Unset bits in second argument from first argument
+      /** Unset bits in second argument from first argumen
        *
-       * @param bits bits that should be unset
-       * @param flags flags to unset
+       * @param bits bits that should be unse
+       * @param flags flags to unse
        */
       static long unset ( long bits, long flags);
 
-      /** set bits in second argument in first argument
+      /** set bits in second argument in first argumen
        *
-       * @param bits bits that should be unset
-       * @param flags flags to unset
+       * @param bits bits that should be unse
+       * @param flags flags to unse
        */
       static long set ( long bits, long flags);
 

@@ -53,7 +53,7 @@ class queue_export: public atmi::abstract_client {
 };
 
 int main ( int argc, char *argv[] ){
-  
+
   auto status = EXIT_FAILURE ;
   try {
     char *pname = basename(argv[0]);
@@ -75,7 +75,7 @@ int main ( int argc, char *argv[] ){
           }
         }
       } else {
-        std::istream in(std::cin.rdbuf()); // fall back to stdout
+        std::istream in(std::cin.rdbuf()); // fall back to stdou
         status = qexport.run(options.qspace, options.queue, options.buffer_size, in);
       }
 
