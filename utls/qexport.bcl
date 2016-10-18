@@ -3,6 +3,48 @@
 #include <cstdlib>
 #include <ostream>
 #include <fstream>
+#include <csignal>
+
+class opts {
+  public:
+    opts(): _arg("hv?"){
+    }
+
+    virtual void operator()(int argc, char *argv[]){
+      std::cout << __FUNCTION__ << std::endl;
+    }
+
+    virtual void set(const char opt){
+      std::cout << __FUNCTION__ << ":" << _arg << std::endl;
+    }
+
+  protected:
+    std::string _arg;
+};
+
+class a_opts: public opts {
+  public:
+    a_opts():opts(){
+      _arg += "qdf";
+    }
+
+    virtual void operator()(int argc, char *argv[]){
+      std::cout << __FUNCTION__ << std::endl;
+      set('c');
+    }
+
+    virtual void set(const char opt){
+      std::cout << __FUNCTION__ << std::endl;
+      opts::set(opt);
+    }
+
+};
+
+bool running = true ;
+
+void signal_handler( int signal ){ //NOSONAR what the heck is this warning !?
+    running=false;
+}
 
 /** export messages found in a given queue
  *
@@ -13,23 +55,41 @@ class queue_export: public atmi::abstract_client {
     queue_export(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
     }
 
-    int run (const char *qspace, const char *queue, std::ostream &out) {
+    int run (const char *qspace, const char *queue, size_t buffer_size, std::ostream &out, bool daemon) {
 
       auto status = EXIT_FAILURE;
 
       try {
 
 #       ifdef DEBUG
-        printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s]\n", __FUNCTION__, queue, qspace);
+        printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s], daemon mode %s, buffer size: %d bytes\n", __FUNCTION__,
+            queue,
+            qspace,
+            daemon ? "true" : "false",
+            buffer_size);
 #       endif
 
         atmi::queue_ptr q = new_queue_instance(qspace, queue);
         q->set_message_wait(false); // don't wait for messages
 
-        atmi::queue_stream qs(*q);
-        out << qs ; // write messages
-         out.flush();
-        std::cerr << "exported : " << qs.count() << " messages." << std::endl ;
+        long counter = 0;
+
+        atmi::queue_stream qs(*q, buffer_size);
+        do {
+          out << qs ; // write messages
+          out.flush();
+
+          counter += qs.count();
+
+#       ifdef DEBUG
+        printf("DEBUG %s (line %d): flushed stream, running %s, daemon %s\n", __FUNCTION__, __LINE__,
+          running ? "true" : "false",
+          daemon  ? "true" : "false"
+          );
+#       endif
+        }while( running && daemon);
+
+        std::cerr << "exported : " << counter << " messages." << std::endl ;
 
         status = EXIT_SUCCESS ;
 
@@ -51,8 +111,14 @@ int main ( int argc, char *argv[] ){
   
   auto status = EXIT_FAILURE ;
   try {
+    a_opts arguments;
+    
+
+    signal(SIGINT, signal_handler);
     char *pname = basename(argv[0]);
-    options options(argc, argv);
+
+    export_options options;
+    options.parse(argc, argv);
 
     if ( (options.qspace != NULL) && (options.queue != NULL) ){
       queue_export qexport(pname, options.user, options.passwd, options.group);
@@ -61,17 +127,17 @@ int main ( int argc, char *argv[] ){
         file.open(argv[optind],std::ofstream::out | std::ofstream::app);
         if (file.is_open()){
           std::ostream out(file.rdbuf());
-          status = qexport.run(options.qspace, options.queue, out);
+          status = qexport.run(options.qspace, options.queue, options.buffer_size, out, options.daemon);
         } else {
           perror("failed to open export destination file");
         }
       } else {
         std::ostream out(std::cout.rdbuf()); // fall back to stdout
-        status = qexport.run(options.qspace, options.queue, out);
+        status = qexport.run(options.qspace, options.queue, options.buffer_size, out, options.daemon);
       }
 
     }else{
-      usage(pname, "send messages to stdout");
+      options.usage(pname, "send messages found in a queue to stdout or a file (if last argument is passed).");
     }
 
   }catch ( std::exception &err){
