@@ -6,7 +6,6 @@ AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[her
 AC_LANG(C++)
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
-AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug],[sets #define _DEBUG_]),[AC_DEFINE_UNQUOTED(_DEBUG_,[1],[activate debug traces.])])
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
 
