@@ -149,7 +149,7 @@ namespace atmi {
   };
 
   size_t buffer::size () const {
-    return ( _buffer == NULL ? 0 : Fsizeof32 ( _buffer ));
+    return ( (_buffer == NULL) ? 0 : Fsizeof32 ( _buffer ));
   };
 
   size_t buffer::used () const {
@@ -157,7 +157,7 @@ namespace atmi {
   };
 
   size_t buffer::unused () const {
-    return ( _buffer == NULL ? 0 : Funused32 ( _buffer ));
+    return ( (_buffer == NULL) ? 0 : Funused32 ( _buffer ));
   };
 
   long buffer::chksum() {

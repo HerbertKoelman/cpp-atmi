@@ -39,6 +39,10 @@ class options{
       // intentional
     }
 
+    virtual ~options(){
+      // intentional
+    }
+
     void usage( const char *pname, const char *details = NULL){
       std::cout << "usage : " << pname << " " << _arguments_usage << std::endl ;
       if ( details != NULL ){
@@ -117,6 +121,10 @@ class options{
         case '?':
           fprintf(stderr, "unrecognized option -%c.\n", optopt);
           failed = true;
+          break;
+        default:
+          // intentional
+          break;
       }
     }
 };
@@ -126,6 +134,10 @@ class export_options: public options{
     export_options(): daemon(false), output_file(NULL){
       _arguments += "o:d" ;
       _arguments_usage += " [-d] [-o output file]" ;
+    }
+
+    virtual ~export_options(){
+      // intentional
     }
 
     bool  daemon ;
@@ -157,6 +169,10 @@ class import_options: public options{
   public:
     import_options(){
       _arguments_usage += " file..." ;
+    }
+
+    virtual ~import_options(){
+      // intentional
     }
 
     bool daemon ;

@@ -27,6 +27,7 @@ namespace atmi { class queue_stream; };
  *
  * @param out output stream
  * @param qs queue stream that will handle the reading of messages
+ * @example qexport.bcl
  */
 extern std::ostream& operator<<(std::ostream& out, atmi::queue_stream& qs);
 
@@ -34,6 +35,7 @@ extern std::ostream& operator<<(std::ostream& out, atmi::queue_stream& qs);
  *
  * @param in input stream
  * @param qs queue stream that handles the writing of messages to
+ * @example qimport.bcl
  */
 extern std::istream& operator>>(std::istream& in, atmi::queue_stream& qs);
 

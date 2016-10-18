@@ -66,7 +66,7 @@ namespace atmi {
 
   void field::set_field_occurence( FLDOCC32 occ) {
 
-    _field_occurence = occ < 0 ? 0 : occ;              // check that we don't have a negative occurence
+    _field_occurence = (occ < 0) ? 0 : occ;              // check that we don't have a negative occurence
   };
 
   int field::type () {
@@ -83,7 +83,7 @@ namespace atmi {
 
   long field::needed (){
 
-    int rc = Fneeded32 ( 1, (length() > 0 ? length() : 1 ));
+    int rc = Fneeded32 ( 1, ((length() > 0) ? length() : 1 ));
     if ( rc < 0 ) {
       throw buffer_exception ( Ferror32, "FNEEDED32: failed to estimate needed space for field %s (id: %d, occ: %d). Make sure field contains data (length() > 0).", _field_name, _field_id, _field_occurence );
     }
