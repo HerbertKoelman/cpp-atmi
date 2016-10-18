@@ -123,17 +123,19 @@ class options{
 
 class export_options: public options{
   public:
-    export_options(): daemon(false){
-      _arguments += "d" ;
-      _arguments_usage += " [-d]" ;
+    export_options(): daemon(false), output_file(NULL){
+      _arguments += "o:d" ;
+      _arguments_usage += " [-d] [-o output file]" ;
     }
 
-    bool daemon ;
+    bool  daemon ;
+    char *output_file ;
 
   protected:
 
     virtual void options_usage(){
       options::options_usage();
+      std::cout << "-o dump messages in this file" << std::endl;
       std::cout << "-d start program in daemon mode" << std::endl;
     }
 
@@ -142,9 +144,38 @@ class export_options: public options{
         case 'd':
           daemon = true;
           break;
+        case 'o':
+          output_file = optarg;
+          break;
         default:
           options::set(opt);
       }
     }
+};
+
+class import_options: public options{
+  public:
+    import_options(){
+      _arguments_usage += " file..." ;
+    }
+
+    bool daemon ;
+
+  protected:
+
+    virtual void options_usage(){
+      options::options_usage();
+    }
+
+//    void set( int opt){
+//      switch(opt) {
+//        case 'd':
+//          daemon = true;
+//          break;
+//        default:
+//          options::set(opt);
+//      }
+//    }
+
 };
 #endif
