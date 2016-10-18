@@ -40,7 +40,7 @@ namespace atmi {
             if ( delay > 0 ) {
               sleep (delay);
             }
-        };
+        }
 
       } else {
         if ( urcode != NULL ) {

@@ -316,7 +316,7 @@ namespace atmi {
           }
         } catch ( buffer_exception &buffErr ) {
           throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
-        };
+        }
 
         rc = Fadd32 ( b.get_buffer(), id(), (char *) &value, length() );
         if ( rc < 0 ) {
@@ -557,7 +557,7 @@ namespace atmi {
             }
           } catch ( buffer_exception &buffErr ) {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
-          };
+          }
 
           rc = Fadd32 ( b.get_buffer(), id(), (char *) value.c_str(), length() );
           if ( rc < 0 ) {

@@ -278,7 +278,7 @@ namespace atmi {
 
             default:
               throw tuxedo_exception (_tperrno, catgets ( _catd, CATD_ATMI_SET, 33,"Never heard about this tperrno (%d)."), _tperrno );
-          };
+          }
 
           return _tperrno;
         };
