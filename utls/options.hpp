@@ -150,6 +150,7 @@ class queue_options: public options{
         case 'q':
           qspace = strtok(optarg, ":");
           queue  = strtok(NULL, ":");
+          break;
         default:
           options::set(opt);
       }
