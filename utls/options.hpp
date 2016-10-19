@@ -26,15 +26,13 @@ class options{
      *
      */
     options():
-      queue(NULL),
-      qspace(NULL),
       user(NULL),
       passwd(NULL),
       group(NULL),
       buffer_size(1024),
       failed(false),
-      _arguments(":q:u:p:g:b:v"),
-      _arguments_usage("-q <qspace:queue> [-b buffer size] [-v] [-u user] [-p password] [-g group]")
+      _arguments("u:p:g:b:v"),
+      _arguments_usage("[-b buffer size] [-v] [-u user] [-p password] [-g group]")
     {
       // intentional
     }
@@ -62,14 +60,16 @@ class options{
       extern char        *optarg;
       extern int          optind, optopt, opterr;// used by command line parser
 
+#     ifdef DEBUG
+      printf("DEBUG %s: parsing command line for [%s] argument.\n", __FUNCTION__, _arguments.c_str());
+#     endif
+
       while ((opt = getopt(argc, argv, _arguments.c_str())) != -1) {
         set(opt);
       }
     }
 
     bool       failed;
-    char      *queue;
-    char      *qspace;
     char      *user;
     char      *passwd;
     char      *group;
@@ -81,7 +81,6 @@ class options{
 
     virtual void options_usage(){
 
-      std::cout << "-q queue and queue space" << std::endl;
       std::cout << "-u Tuxedo user"  << std::endl;
       std::cout << "-p Tuxedo user's password"  << std::endl;
       std::cout << "-g group to use"  << std::endl;
@@ -97,10 +96,6 @@ class options{
       switch(opt) {
         case 'v':
           version();
-          break;
-        case 'q':
-          qspace = strtok(optarg, ":");
-          queue  = strtok(NULL, ":");
           break;
         case 'u': // user
           user = optarg;
@@ -129,7 +124,40 @@ class options{
     }
 };
 
-class export_options: public options{
+class queue_options: public options{
+  public:
+    queue_options(): queue(NULL), qspace(NULL){
+      _arguments = ":q:" + _arguments ;
+      _arguments_usage = "-q <qspace:queue> " + _arguments_usage;
+    }
+
+    virtual ~queue_options(){
+      // intentional
+    }
+
+    char      *queue;
+    char      *qspace;
+
+  protected:
+
+    virtual void options_usage(){
+      std::cout << "-q queue and queue space" << std::endl;
+      options::options_usage();
+    }
+
+    void set( int opt){
+      switch(opt) {
+        case 'q':
+          qspace = strtok(optarg, ":");
+          queue  = strtok(NULL, ":");
+        default:
+          options::set(opt);
+      }
+    }
+};
+
+
+class export_options: public queue_options{
   public:
     export_options(): daemon(false), output_file(NULL){
       _arguments += "o:d" ;
@@ -160,12 +188,12 @@ class export_options: public options{
           output_file = optarg;
           break;
         default:
-          options::set(opt);
+          queue_options::set(opt);
       }
     }
 };
 
-class import_options: public options{
+class import_options: public queue_options{
   public:
     import_options(){
       _arguments_usage += " file..." ;
@@ -182,16 +210,6 @@ class import_options: public options{
     virtual void options_usage(){
       options::options_usage();
     }
-
-//    void set( int opt){
-//      switch(opt) {
-//        case 'd':
-//          daemon = true;
-//          break;
-//        default:
-//          options::set(opt);
-//      }
-//    }
 
 };
 #endif

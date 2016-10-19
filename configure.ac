@@ -5,6 +5,17 @@ AC_PREREQ(2.69)
 AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
 AC_LANG(C++)
 
+# AC_ARG_VAR([BUILD], [build name (develop, snapshot, ...)])
+AC_ARG_ENABLE([build], AS_HELP_STRING([--enable-build],[build build.]), BUILD=$enable_build)
+
+if test -z "$BUILD" 
+then
+  BUILD="SNAPSHOT"
+  AC_MSG_NOTICE([using default BUILD name $BUILD])
+fi
+
+AC_SUBST(BUILD,$BUILD)
+
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])

@@ -1,0 +1,117 @@
+#include "options.hpp"
+#include <atmi/atmi++.hpp>
+#include <cstdlib>
+#include <ostream>
+#include <fstream>
+#include <csignal>
+
+/** import messages in a given queue
+ *
+ */
+class decode: public atmi::abstract_client {
+  public:
+
+    decode(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
+    }
+
+    int run (size_t buffer_size, std::istream &in) {
+
+      int rc = -1;
+      char *message = NULL;
+      auto status = EXIT_FAILURE;
+
+      try {
+#       ifdef DEBUG
+        printf("DEBUG %s (%d)\n", __FUNCTION__, __LINE__);
+#       endif
+
+        // allocate a tuxedo buffer
+        message = (char *)allocate (const_cast<char *>("CARRAY"), NULL, buffer_size );
+
+        std::string line;
+        while (getline ( in, line)) {
+
+          long len = 0;
+          rc = tpimport ( (char *)line.c_str(), line.size(), (char **) &message, &len, TPEX_STRING );
+
+          if ( rc < 0 ) {
+            throw atmi::tuxedo_exception ( tperrno, "TPIMPORT failed. Was this message exported using tpexport ?" );
+          }
+
+          // check buffer type and print content accordingly
+          char type[MAXTIDENT];
+          memset(type,0,MAXTIDENT);
+          tptypes(message,type, NULL);
+
+#         ifdef DEBUG
+          printf("DEBUG %s (%d): received a buffer of type %s\n", __FUNCTION__, __LINE__, type);
+#         endif
+
+          if ( strncmp(type,"STRING", MAXTIDENT) == 0 ){
+            std::cout << message << std::endl ;
+          } else if ( strncmp(type,"FML", MAXTIDENT) == 0 ){
+            Fprint32((FBFR32 *)message);
+          } else {
+            std::cerr << "program doesn't support the decoding of " << type << " messages yet." << std::endl;
+          }
+
+        }
+
+        // free the Tuxedo buffer
+        free ( message );
+
+        // if this point is reached, then the client was successful
+        status = EXIT_SUCCESS ;
+
+      } catch (std::exception &err ) {
+        free ( message );
+        std::cerr << err.what() << std::endl ;
+      }
+
+#     ifdef DEBUG
+      std::cout << "type enter to exit." << std::endl;
+      std::string buffer;
+      std::getline (std::cin,buffer);
+#     endif
+
+      return status ;
+    }
+};
+
+int main ( int argc, char *argv[] ){
+
+  auto status = EXIT_FAILURE ;
+  try {
+    char *pname = basename(argv[0]);
+
+    options options;
+    options.parse(argc, argv);
+
+    if ( ! options.failed  ){
+      decode decode(pname, options.user, options.passwd, options.group);
+      if ( optind < argc ) { // consider firt left argument as a path to a file
+        for( ; optind < argc ; optind++ ){
+          std::ifstream file;
+          file.open(argv[optind],std::ofstream::in);
+          if (file.is_open()){
+            std::istream in(file.rdbuf());
+            status = decode.run(options.buffer_size, in);
+          } else {
+            perror("failed to open import file");
+          }
+        }
+      } else {
+        std::istream in(std::cin.rdbuf()); // fall back to stdou
+        status = decode.run(options.buffer_size, in);
+      }
+
+    }else{
+      options.usage(pname, "load messages in a queue.");
+    }
+
+  }catch ( std::exception &err){
+    std::cerr << err.what() << std::endl ;
+  }
+
+  return status ;
+}

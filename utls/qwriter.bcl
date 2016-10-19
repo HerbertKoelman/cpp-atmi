@@ -69,13 +69,14 @@ int main ( int argc, char **argv ) {
   try {
 
     char *pname = basename(argv[0]);
-    options options;
+    queue_options options;
     options.parse(argc,argv);
 
     if ( (options.qspace != NULL) && (options.queue != NULL)){
       queue_writer qw(options.qspace, options.queue, options.user, options.passwd, options.group );
       status= qw.run ();
     } else {
+      std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
       options.usage(pname, "write STRING typed Tuxedo messages into a queue.");
     }
 
