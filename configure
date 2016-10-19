@@ -599,6 +599,7 @@ build
 MKDIR_P
 RM
 DOXYGEN
+BUILD
 target_alias
 host_alias
 build_alias
@@ -640,6 +641,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+enable_build
 enable_localdir
 '
       ac_precious_vars='build_alias
@@ -1257,6 +1259,7 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-build          build build.
   --enable-localdir       adds -I and -L to /usr/local include and lib
                           respectively.
 
@@ -1694,6 +1697,23 @@ ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+# AC_ARG_VAR([BUILD], [build name (develop, snapshot, ...)])
+# Check whether --enable-build was given.
+if test "${enable_build+set}" = set; then :
+  enableval=$enable_build; BUILD=$enable_build
+fi
+
+
+if test -z "$BUILD"
+then
+  BUILD="SNAPSHOT"
+  { $as_echo "$as_me:${as_lineno-$LINENO}: using default BUILD name $BUILD" >&5
+$as_echo "$as_me: using default BUILD name $BUILD" >&6;}
+fi
+
+BUILD=$BUILD
 
 
 # Check whether --enable-localdir was given.

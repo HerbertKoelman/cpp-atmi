@@ -100,6 +100,7 @@ int main ( int argc, char *argv[] ){
       }
 
     }else{
+      std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
       options.usage(pname, "send messages found in a queue to stdout or a file (if last argument is passed).");
     }
 
