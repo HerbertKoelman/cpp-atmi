@@ -40,7 +40,7 @@ namespace atmi {
             if ( delay > 0 ) {
               sleep (delay);
             }
-        };
+        }
 
       } else {
         if ( urcode != NULL ) {
@@ -119,7 +119,7 @@ namespace atmi {
     int ret = -1;
     _call_descriptor = -1;
 
-    // check if need switch context
+    // check if need switch contex
     switch_context ();
 
     ret = tpacall ( (char *) _service.c_str(), idata, ilen, _flags );

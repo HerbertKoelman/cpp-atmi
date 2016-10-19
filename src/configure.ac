@@ -82,7 +82,7 @@ else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
 fi
 
-AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='%H' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
+AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='commit: %h, %cn (%cI)' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
 
 # Checks for header files.
 #AC_CHECK_HEADERS([limits.h nl_types.h cstdlib cstring sys/time.h cunistd])
@@ -95,10 +95,10 @@ AC_CHECK_FUNCS([memset])
 AC_MSG_CHECKING(whether we have specific compiler optimization options for $CXX )
 case "$CXX" in
   xlC_r | xlC)
-    CFLAGS="-q$bits -qmaxmem=-1 -qsmp -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
+    CFLAGS="-q$bits -D_LARGE_FILES -D__IBMCPP_TR1__ -qmaxmem=-1 -qsmp -qlanglvl=extended0x:decltype:static_assert:rvaluereferences $CFLAGS"
     CXXFLAGS="-O2"
     LDFLAGS="-brtl -bh:5 $LDFLAGS"
-    AC_MSG_RESULT([$CFLAGS $CPPFLAGS $CXXFLAGS])
+    AC_MSG_RESULT([yes])
     ;;
   g++ | gcc)
     CXXFLAGS="-O2"

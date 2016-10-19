@@ -79,7 +79,7 @@ int getAllField ( FBFR32 * bget, int cur, int i) {
          fprintf (stderr, "Loop: fails get TA_SRVGRP : <%d> %s\n",
                         Ferror32, Fstrerror32(Ferror32));
          return (-1);
-    }	
+    }
     len = 32;
     if (Fget32(bget, TA_SERVERNAME, i, tmp, (FLDLEN32 *)&len) == -1) {
         fprintf (stderr, "Loop: fails get TA_SERVERNAME : <%d> %\n",

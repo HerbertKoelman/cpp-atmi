@@ -31,6 +31,10 @@ namespace atmi {
   class call_info {
     public:
 
+      /** give private access to this trusted friend :-)
+       *
+       * @param callinfo Tuxedo call metadata
+       */
       friend void buffer::get_call_info( call_info &callinfo);
 
       /** @return current ECID value */

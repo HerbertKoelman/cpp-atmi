@@ -1,0 +1,5 @@
+v4.5.0
+- new utility program qexport
+- new utility program qimport
+- new utility program qwriter (usefull to check Tuxedo setups)
+- new utility program decode  that dumps the content of a buffer.

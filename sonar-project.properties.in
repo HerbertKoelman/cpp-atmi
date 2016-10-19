@@ -10,11 +10,11 @@ sonar.verbose=false
 #sonar.working.directory=/path/to/working/folder/.sonar
 
 # The project key that is unique for each project.
-sonar.projectKey=pmu:cpp-atmi
+sonar.projectKey=ITC-cpp-atmi
 
 # Name of the project that will be displayed on the web interface.
 sonar.projectName=pmu:cpp-atmi
-sonar.projectVersion=@PACKAGE_VERSION@
+sonar.projectVersion=@BUILD@-@PACKAGE_VERSION@
 
 # Comma-separated paths to directories containing source files
 sonar.sources=src,include,utls

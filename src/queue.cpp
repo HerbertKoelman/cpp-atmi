@@ -72,7 +72,7 @@ namespace atmi {
       throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 19, "Enqueue failed, qspace and queue properties have not been set !!??") );
     }
 
-    // check if we need to switch context
+    // check if we need to switch contex
     switch_context ();
 
     rc = tpenqueue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, _flags );
@@ -144,7 +144,7 @@ namespace atmi {
       throw atmi_exception ( catgets ( _catd, CATD_ATMI_SET, 20, "Dequeue failed, qspace and queue properties have not been set !!??") );
     }
 
-    // check if we need to switch context
+    // check if we need to switch contex
     switch_context ();
 
     rc = tpdequeue ( _qspace, queue, (TPQCTL *) &_qctl, data, len, _flags );

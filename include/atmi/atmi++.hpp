@@ -40,7 +40,7 @@
 #include <atmi/event.hpp>
 #include <atmi/abstract_client.hpp>
 
-//! \namespace atmi
+//! Application to Transaction Monitor Interface
 namespace atmi {
 
   /** \addtogroup atmi

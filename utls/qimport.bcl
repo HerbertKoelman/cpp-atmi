@@ -1,0 +1,92 @@
+#include "options.hpp"
+#include <atmi/atmi++.hpp>
+#include <cstdlib>
+#include <ostream>
+#include <fstream>
+#include <csignal>
+
+/** import messages in a given queue
+ *
+ */
+class queue_import: public atmi::abstract_client {
+  public:
+
+    queue_import(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
+    }
+
+    int run (const char *qspace, const char *queue, size_t buffer_size, std::istream &in) {
+
+      auto status = EXIT_FAILURE;
+
+      try {
+
+#       ifdef DEBUG
+        printf("DEBUG %s (%d): exporting messages mporting in queue [%s] from queue space [%s], buffer size: %d bytes\n", __FUNCTION__,__LINE__,
+            queue,
+            qspace,
+            buffer_size);
+#       endif
+
+        atmi::queue_ptr q = new_queue_instance(qspace, queue);
+
+        long counter = 0;
+
+        atmi::queue_stream qs(*q, buffer_size);
+        in >> qs ;
+
+        std::cerr << "imported " << qs.count() << " messages in " << queue << "." << std::endl ;
+
+        status = EXIT_SUCCESS ;
+
+      } catch ( std::exception &err ){
+        std::cerr << err.what() << std::endl ;
+      }
+
+#     ifdef DEBUG
+      std::cout << "type enter to exit." << std::endl;
+      std::string buffer;
+      std::getline (std::cin,buffer);
+#     endif
+
+      return status ;
+    }
+};
+
+int main ( int argc, char *argv[] ){
+
+  auto status = EXIT_FAILURE ;
+  try {
+    char *pname = basename(argv[0]);
+
+    import_options options;
+    options.parse(argc, argv);
+
+    if ( (options.qspace != NULL) && (options.queue != NULL) ){
+      queue_import qimport(pname, options.user, options.passwd, options.group);
+      if ( optind < argc ) { // consider firt left argument as a path to a file
+        for( ; optind < argc ; optind++ ){
+          std::ifstream file;
+          file.open(argv[optind],std::ofstream::in);
+          if (file.is_open()){
+            std::istream in(file.rdbuf());
+            status = qimport.run(options.qspace, options.queue, options.buffer_size, in);
+          } else {
+            perror("failed to open import file");
+          }
+        }
+      } else {
+        std::istream in(std::cin.rdbuf()); // fall back to stdou
+        status = qimport.run(options.qspace, options.queue, options.buffer_size, in);
+      }
+
+    }else{
+      std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
+      options.usage(pname, "load messages in a queue.");
+    }
+
+  }catch ( std::exception &err){
+    std::cerr << err.what() << std::endl ;
+  }
+
+  return status ;
+}

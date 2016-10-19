@@ -50,7 +50,7 @@ namespace atmi {
    *
    * The attribute is the field’s identifier, and the associated value represents the field’s data content. Fielded buffers provide an
    * excellent structure for communicating parameterized data between cooperating processes, by providing named access to a set of
-   * related fields. Programs that need to communicate with other processes can use the FML software to provide access to fields without
+   * related fields. Programs that need to communicate with other processes can use the FML software to provide access to fields withou
    * concerning themselves with the structures containing them.
    *
    * @author herbert koelman(herbert.koelman@me.com)
@@ -66,7 +66,7 @@ namespace atmi {
 
       /** Create a new buffer reference.
        *
-       * Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that
+       * Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume tha
        * the given buffer was allocated elsewhere. And it will be deallocated later.
        *
        * @param b set FML32 buffer reference
@@ -86,7 +86,7 @@ namespace atmi {
 
       /** set call info (TSAM)
        *
-       * @param callinfo callinfo value to set
+       * @param callinfo callinfo value to se
        */
       void set_call_info( call_info &callinfo);
 
@@ -132,7 +132,7 @@ namespace atmi {
 
       /** Extends the buffer size with the given bytes
        *
-       * @param extent size in bytes of the extent
+       * @param extent size in bytes of the exten
        * @throw buffer_exception upon failure
        */
       void resize ( size_t extent );
@@ -176,17 +176,17 @@ namespace atmi {
        *
        * The field's occurence property is used to find the fields value.
        *
-       * @param f the field to set
-       * @return the field when set
+       * @param f the field to se
+       * @return the field when se
        * @throw buffer_exception upon failure
        */
       field &get ( field &f );
 
       /** Get the field value set in the buffer (Fget32).
        *
-       * @param f the field to set
-       * @param occ the field occurence to set
-       * @return the field when set
+       * @param f the field to se
+       * @param occ the field occurence to se
+       * @return the field when se
        * @throw buffer_exception upon failure
        */
       field &get ( field &f, FLDOCC32 occ);

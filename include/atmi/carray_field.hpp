@@ -217,7 +217,7 @@ namespace atmi {
 
       /** retreive the current carray content.
        *
-       * the content is copied into character array (backend). if the backend is too small a bigger one 
+       * the content is copied into character array (backend). if the backend is too small a bigger one
        * is allocated and used.
        *
        * @param b buffer to apply the change in
@@ -229,6 +229,7 @@ namespace atmi {
 
       /** \copydoc virtual int get ( buffer &b )
        *
+       * @param b   fielded buffer
        * @param occ field occurence to search for
        */
       virtual int get ( buffer &b, FLDOCC32 occ ){
@@ -276,7 +277,7 @@ namespace atmi {
 
             free_ressources();
 
-            // allocate a new buffer and move the fields value into it
+            // allocate a new buffer and move the fields value into i
             _value = Fgetalloc32 ( b.get_buffer(), id(), occurence(), &_buffer_size );
             if ( _value != NULL ) {
 

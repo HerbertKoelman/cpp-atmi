@@ -5,6 +5,7 @@
 #ifndef CPP_ATMI_QUEUE_HPP
 #define CPP_ATMI_QUEUE_HPP
 
+#include <iostream>
 #include <typeinfo>
 #include <atmi.h>
 #include <fml32.h>
@@ -19,6 +20,25 @@
 
 //using namespace std;
 
+// forward declaration (needed to declare operator << and >> overloads)
+namespace atmi { class queue_stream; };
+
+/** Global utility to stream out the content of a queue
+ *
+ * @param out output stream
+ * @param qs queue stream that will handle the reading of messages
+ * @example qexport.bcl
+ */
+extern std::ostream& operator<<(std::ostream& out, atmi::queue_stream& qs);
+
+/** Global utility to stream messages in a queue
+ *
+ * @param in input stream
+ * @param qs queue stream that handles the writing of messages to
+ * @example qimport.bcl
+ */
+extern std::istream& operator>>(std::istream& in, atmi::queue_stream& qs);
+
 namespace atmi {
 
 /** \addtogroup atmi
@@ -31,7 +51,7 @@ namespace atmi {
 #if __cplusplus < 201103L
   typedef std::auto_ptr<atmi::queue>   queue_ptr; //!< @deprecated use unique_ptr instead
 #else
-  typedef std::unique_ptr<atmi::queue> queue_ptr; //<! helper type
+  typedef std::unique_ptr<atmi::queue> queue_ptr; //!< helper type
 #endif
 
   /**
@@ -171,9 +191,9 @@ namespace atmi {
         set_message_wait (wait);
       };
 
-      /** Check if QWait flag is set
+      /** Check if QWait flag is se
        *
-       * @return true if wait flag is set
+       * @return true if wait flag is se
        * @deprecated use is_message_waiting instead
        */
       inline bool isQWaiting () {
@@ -285,21 +305,34 @@ namespace atmi {
   class queue_stream : public tuxedo {
     public:
 
-      friend std::ostream& operator<<(std::ostream& out, queue_stream& qs);
-      friend std::istream& operator>>(std::istream& in, queue_stream& qs);
+      /** friend functions that handle the writting of messages to a stream.
+       *
+       * @param out destination stream
+       * @param qs  stream of messages
+       * @return destination
+       */
+      friend std::ostream& ::operator<<(std::ostream& out, atmi::queue_stream& qs);
+
+      /** friend functions that handle the reading of messages from a stream.
+       *
+       * @param in source stream
+       * @param qs stream of messages
+       * @return source
+       */
+      friend std::istream& ::operator>>(std::istream& in,  atmi::queue_stream& qs);
 
       /** setup a queue stream.
        *
        * @param q a queue
        */
-      explicit queue_stream ( queue *q ) ;
+      explicit queue_stream ( queue &q ) ;
 
       /** setup a queue stream.
        *
        * @param q a queue
        * @param bs stream buffer size.
        */
-      queue_stream ( queue *q, long bs );
+      queue_stream ( queue &q, long bs );
 
       /** @return the number of messages handle by last IO operation
        */
@@ -336,21 +369,8 @@ namespace atmi {
       queue *_queue;
   };
 
-  /** Global utility to stream out the content of a queue
-   *
-   * @param out output stream
-   * @param qs queue stream that will handle the reading of messages
-   */
-  extern std::ostream& operator<<(std::ostream& out, queue_stream& qs);
-
-  /** Global utility to stream in a queue
-   *
-   * @param in input stream
-   * @param qs queue stream that handles the writing of messages to
-   */
-  extern std::istream& operator>>(std::istream& in, queue_stream& qs);
- 
-  /** @} */
 }
+
+/** @} */
 
 #endif
