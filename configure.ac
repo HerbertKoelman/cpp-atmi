@@ -2,23 +2,17 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.69)
+
 AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
 AC_LANG(C++)
 
-# AC_ARG_VAR([BUILD], [build name (develop, snapshot, ...)])
-AC_ARG_ENABLE([build], AS_HELP_STRING([--enable-build],[build build.]), BUILD=$enable_build)
-
-if test -z "$BUILD" 
-then
-  BUILD="SNAPSHOT"
-  AC_MSG_NOTICE([using default BUILD name $BUILD])
-fi
-
-AC_SUBST(BUILD,$BUILD)
+AC_CONFIG_AUX_DIR([/usr/bin . bin])
+AC_CANONICAL_BUILD
 
 AC_ARG_ENABLE([localdir], AS_HELP_STRING([--enable-localdir],[adds -I and -L to /usr/local include and lib respectively.]), CFLAGS="-I /usr/local/include -L /usr/local/lib" )
-
-AC_CONFIG_AUX_DIR([/usr/bin . bin])
+AC_ARG_ENABLE([build], AS_HELP_STRING([--enable-build],[build build.]), BUILD=$enable_build)
+AC_ARG_ENABLE([release], AS_HELP_STRING([--enable-release],[build as release.]), BUILD=$PACKAGE_VERSION)
+AC_ARG_ENABLE([repository], AS_HELP_STRING([--enable-repository],[use the given name to locate the remote repository]), AC_MSG_NOTICE([repository set to $enable_repository]) )
 
 AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 
@@ -26,8 +20,31 @@ AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
 AC_CHECK_PROG([RM],[rm],[rm -f])
 AC_PROG_MKDIR_P
+AC_PROG_LN_S
+AC_CHECK_PROG([DEPLOY],[basic_deploy.sh],[basic_deploy.sh],[echo \"please install basic_deploy.sh, make sure it\'s in your PATH and re-run ./configure\"])
 
-AC_CANONICAL_BUILD
+if test -z "$BUILD" 
+then
+  BUILD="SNAPSHOT"
+  AC_MSG_NOTICE([using default BUILD name $BUILD])
+fi
+AC_SUBST(BUILD,$BUILD)
+
+if test ! -z "$enable_repository"
+then
+  AC_SUBST(REPOSITORY,"$enable_repository/$PACKAGE_NAME")
+fi
+
+# Okay, no cppcheck found, maybe we have sonar
+if test -z "$CODECHECK" 
+then
+  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
+fi
+
+if test -z "$CODECHECK" 
+then
+  AC_CHECK_PROG([CODECHECK],[cppcheck],[cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src ./include],[])
+fi
 
 AC_MSG_CHECKING([whether target directory ./lib exists])
 if test -e ./lib
@@ -54,17 +71,6 @@ then
 else
   mkdir -p ./locale/en_US ./locale/fr_FR
   AC_MSG_RESULT([./locale created.])
-fi
-
-# Okay, no cppcheck found, maybe we have sonar
-if test -z "$CODECHECK" 
-then
-  AC_CHECK_PROG([CODECHECK],[sonar-runner],[sonar-runner -Dsonar.cfamily.library.directories=include,/usr/include,$TUXDIR/include],[])
-fi
-
-if test -z "$CODECHECK" 
-then
-  AC_CHECK_PROG([CODECHECK],[cppcheck],[cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src ./include],[])
 fi
 
 AC_PROG_INSTALL
