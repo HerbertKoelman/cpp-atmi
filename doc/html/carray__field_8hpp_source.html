@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>C++ ATMI wrapper: include/atmi/carray_field.hpp Source File</title>
+<title>cpp-atmi: include/atmi/carray_field.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.4.1)</span>
+   <div id="projectname">cpp-atmi
+   &#160;<span id="projectnumber">(v4.5.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
@@ -72,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -255,74 +256,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">get</span> ( b, occurence() );</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;      };</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#afaedd7d5902233652bed642bdceb9db1">  234</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <span class="keyword">get</span> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b, FLDOCC32 occ ){</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordtype">int</span> rc = -1;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        set_field_occurence(occ);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#afaedd7d5902233652bed642bdceb9db1">  235</a></span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <span class="keyword">get</span> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;b, FLDOCC32 occ ){</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordtype">int</span> rc = -1;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        set_field_occurence(occ);</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="comment">// check if be got a carray backend</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">if</span> ( _buffer_size == 0 ){</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          <span class="comment">// we need to allocate a new carray buffer anyway</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;          _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;          <span class="keywordflow">if</span> ( _value != NULL ) {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            _length = _buffer_size;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            rc = 0;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          <span class="comment">// we already got a carray backend, we try to fill it with the field&#39;s content.</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          rc = Fget32(b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occ, _value, &amp;_length);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;          <span class="comment">// carray could be truncated, if so the returned size is greater then _buffer_size</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;          <span class="keywordflow">if</span> ((rc != -1) &amp;&amp; (_length &gt; _buffer_size)){</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="comment">// there was not enough memory to store carray&#39;s content, re-allocate</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            free_ressources();</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="keywordflow">if</span> ( _value != NULL ) {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;              _length = _buffer_size;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;              rc = 0;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            }</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( rc == -1) &amp;&amp; ( Ferror32 == FNOSPACE )){ <span class="comment">// buffer is too small re-allocate a new one</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            free_ressources();</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="comment">// allocate a new buffer and move the fields value into it</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">if</span> ( _value != NULL ) {</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;              _length = _buffer_size;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;              rc = 0;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            }</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;          }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa25bb2aa5ab92371fb9b68f0659ced31">  293</a></span>&#160;      };</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      FLDLEN32 _length;   </div>
-<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">  296</a></span>&#160;      FLDLEN32 <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">_buffer_size</a>;   </div>
-<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">  297</a></span>&#160;      <span class="keywordtype">char</span>    *<a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">_value</a>; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  };</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;} <span class="comment">// namespace atmi</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="comment">// check if be got a carray backend</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="keywordflow">if</span> ( _buffer_size == 0 ){</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;          <span class="comment">// we need to allocate a new carray buffer anyway</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;          _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          <span class="keywordflow">if</span> ( _value != NULL ) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            _length = _buffer_size;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            rc = 0;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          <span class="comment">// we already got a carray backend, we try to fill it with the field&#39;s content.</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          rc = Fget32(b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occ, _value, &amp;_length);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;          <span class="comment">// carray could be truncated, if so the returned size is greater then _buffer_size</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;          <span class="keywordflow">if</span> ((rc != -1) &amp;&amp; (_length &gt; _buffer_size)){</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="comment">// there was not enough memory to store carray&#39;s content, re-allocate</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            free_ressources();</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">if</span> ( _value != NULL ) {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;              _length = _buffer_size;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;              rc = 0;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;          } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( rc == -1) &amp;&amp; ( Ferror32 == FNOSPACE )){ <span class="comment">// buffer is too small re-allocate a new one</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            free_ressources();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="comment">// allocate a new buffer and move the fields value into i</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            _value = Fgetalloc32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), id(), occurence(), &amp;_buffer_size );</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <span class="keywordflow">if</span> ( _value != NULL ) {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;              _length = _buffer_size;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;              rc = 0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> (Ferror32, <span class="stringliteral">&quot;FGETALLOC32 Tfield::get&lt;char *&gt; failed to get field %s (id: %d, occ: %d).&quot;</span>, name(), <span class="keywordtype">id</span>(), occurence() );</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;          }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a name="l00294"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa25bb2aa5ab92371fb9b68f0659ced31">  294</a></span>&#160;      };</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      FLDLEN32 _length;   </div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">  297</a></span>&#160;      FLDLEN32 <a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">_buffer_size</a>;   </div>
+<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">  298</a></span>&#160;      <span class="keywordtype">char</span>    *<a class="code" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">_value</a>; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  };</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;} <span class="comment">// namespace atmi</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a3bc71ae4ac7ae39aa21dd6533c230fda"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a3bc71ae4ac7ae39aa21dd6533c230fda">atmi::Tfield&lt; char * &gt;::free_ressources</a></div><div class="ttdeci">void free_ressources()</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:137</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html">atmi::Tfield&lt; char * &gt;</a></div><div class="ttdef"><b>Definition:</b> carray_field.hpp:32</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a0d4241c582c4e0af4e55ea6dfcf8ae8b"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a0d4241c582c4e0af4e55ea6dfcf8ae8b">atmi::Tfield&lt; char * &gt;::operator[]</a></div><div class="ttdeci">char &amp; operator[](int index)</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:154</div></div>
@@ -332,17 +333,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1buffer_html_aa9aa5382717ed17a2047db2779f8f0ec"><div class="ttname"><a href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">atmi::buffer::get_buffer</a></div><div class="ttdeci">FBFR32 * get_buffer()</div><div class="ttdef"><b>Definition:</b> buffer.cpp:203</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a4dbdcf1e58232003aa20bb991f49f2f4"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a4dbdcf1e58232003aa20bb991f49f2f4">atmi::Tfield&lt; char * &gt;::buffer_size</a></div><div class="ttdeci">FLDLEN32 buffer_size() const </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:78</div></div>
 <div class="ttc" id="classatmi_1_1field_html"><div class="ttname"><a href="classatmi_1_1field.html">atmi::field</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:33</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a425204246b56c8e10459b53b563800c9"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">atmi::Tfield&lt; char * &gt;::_value</a></div><div class="ttdeci">char * _value</div><div class="ttdoc">chacater buffer </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:297</div></div>
+<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a425204246b56c8e10459b53b563800c9"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a425204246b56c8e10459b53b563800c9">atmi::Tfield&lt; char * &gt;::_value</a></div><div class="ttdeci">char * _value</div><div class="ttdoc">chacater buffer </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:298</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_ae3036c038b361aee2fc357c1c7d1304a"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">atmi::Tfield&lt; char * &gt;::add</a></div><div class="ttdeci">virtual int add(buffer &amp;b)</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:192</div></div>
 <div class="ttc" id="classatmi_1_1buffer__exception_html"><div class="ttname"><a href="classatmi_1_1buffer__exception.html">atmi::buffer_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:144</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_aa25bb2aa5ab92371fb9b68f0659ced31"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa25bb2aa5ab92371fb9b68f0659ced31">atmi::Tfield&lt; char * &gt;::_length</a></div><div class="ttdeci">FLDLEN32 _length</div><div class="ttdoc">field length (bytes) </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:293</div></div>
+<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_aa25bb2aa5ab92371fb9b68f0659ced31"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa25bb2aa5ab92371fb9b68f0659ced31">atmi::Tfield&lt; char * &gt;::_length</a></div><div class="ttdeci">FLDLEN32 _length</div><div class="ttdoc">field length (bytes) </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:294</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:59</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_aa97dec8559724186b62997409f04bf3f"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">atmi::Tfield&lt; char * &gt;::length</a></div><div class="ttdeci">virtual FLDLEN32 length()</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:84</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a197bf4f86d8053adcf8afdcd839b85cc"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a197bf4f86d8053adcf8afdcd839b85cc">atmi::Tfield&lt; char * &gt;::Tfield</a></div><div class="ttdeci">Tfield(const char *n)</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:61</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html_a57ff1b2ed449d59d4ec936e9e79a5d1a"><div class="ttname"><a href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">atmi::buffer::occurences</a></div><div class="ttdeci">FLDOCC32 occurences(const field &amp;f)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:141</div></div>
-<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
+<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html_a853e2a0585dda4e23ffa04297b824afb"><div class="ttname"><a href="classatmi_1_1buffer.html#a853e2a0585dda4e23ffa04297b824afb">atmi::buffer::extend</a></div><div class="ttdeci">void extend()</div><div class="ttdef"><b>Definition:</b> buffer.cpp:93</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a5e7218b977e644a60ed6fbb5d1957e75"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">atmi::Tfield&lt; char * &gt;::_buffer_size</a></div><div class="ttdeci">FLDLEN32 _buffer_size</div><div class="ttdoc">back end size(bytes) </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:296</div></div>
+<div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a5e7218b977e644a60ed6fbb5d1957e75"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5e7218b977e644a60ed6fbb5d1957e75">atmi::Tfield&lt; char * &gt;::_buffer_size</a></div><div class="ttdeci">FLDLEN32 _buffer_size</div><div class="ttdoc">back end size(bytes) </div><div class="ttdef"><b>Definition:</b> carray_field.hpp:297</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_ad16891d15a65e85408962ec962e57bd8"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ad16891d15a65e85408962ec962e57bd8">atmi::Tfield&lt; char * &gt;::Tfield</a></div><div class="ttdeci">Tfield(FLDID32 fid)</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:45</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html_a8228f64305e566b8133e8ee746c6d2bb"><div class="ttname"><a href="classatmi_1_1buffer.html#a8228f64305e566b8133e8ee746c6d2bb">atmi::buffer::size</a></div><div class="ttdeci">size_t size() const </div><div class="ttdef"><b>Definition:</b> buffer.cpp:151</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_3_01char_01_5_01_4_html_a009218c6eec4478fb0e0a4c2741df5c2"><div class="ttname"><a href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a009218c6eec4478fb0e0a4c2741df5c2">atmi::Tfield&lt; char * &gt;::get_char_array</a></div><div class="ttdeci">virtual void get_char_array(char *carray, FLDLEN32 size)</div><div class="ttdef"><b>Definition:</b> carray_field.hpp:120</div></div>

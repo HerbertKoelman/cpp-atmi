@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>C++ ATMI wrapper: atmi::buffer Class Reference</title>
+<title>cpp-atmi: atmi::buffer Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.4.1)</span>
+   <div id="projectname">cpp-atmi
+   &#160;<span id="projectnumber">(v4.5.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
@@ -75,7 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -86,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>atmi</b></li><li class="navelem"><a class="el" href="classatmi_1_1buffer.html">buffer</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceatmi.html">atmi</a></li><li class="navelem"><a class="el" href="classatmi_1_1buffer.html">buffer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -293,7 +294,7 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 </div><div class="memdoc">
 <p>Create a new buffer reference.</p>
-<p>Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume that the given buffer was allocated elsewhere. And it will be deallocated later.</p>
+<p>Memory allocation (alloc/free) are not handled by the instance create by this constructor. We assume tha the given buffer was allocated elsewhere. And it will be deallocated later.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">b</td><td>set FML32 buffer reference </td></tr>
@@ -500,11 +501,11 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <p>The field's occurence property is used to find the fields value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">f</td><td>the field to set </td></tr>
+    <tr><td class="paramname">f</td><td>the field to se </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the field when set </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the field when se </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classatmi_1_1buffer__exception.html">buffer_exception</a></td><td>upon failure</td></tr>
@@ -547,12 +548,12 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <p>Get the field value set in the buffer (Fget32).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">f</td><td>the field to set </td></tr>
-    <tr><td class="paramname">occ</td><td>the field occurence to set </td></tr>
+    <tr><td class="paramname">f</td><td>the field to se </td></tr>
+    <tr><td class="paramname">occ</td><td>the field occurence to se </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the field when set </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the field when se </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="classatmi_1_1buffer__exception.html">buffer_exception</a></td><td>upon failure</td></tr>
@@ -901,7 +902,7 @@ the reference the current internal buffer. </dd></dl>
 <p>Extends the buffer size with the given bytes</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">extent</td><td>size in bytes of the extent </td></tr>
+    <tr><td class="paramname">extent</td><td>size in bytes of the exten </td></tr>
   </table>
   </dd>
 </dl>
@@ -982,7 +983,7 @@ the reference the current internal buffer. </dd></dl>
 <p>set call info (TSAM)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callinfo</td><td>callinfo value to set </td></tr>
+    <tr><td class="paramname">callinfo</td><td>callinfo value to se </td></tr>
   </table>
   </dd>
 </dl>

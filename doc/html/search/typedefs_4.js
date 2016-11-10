@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ulog_5fptr',['ulog_ptr',['../group__logging.html#gaa0869c7a6b1f7846685e2454b70b9e7a',1,'atmi']]]
+  ['transaction_5fptr',['transaction_ptr',['../group__atmi.html#gab8e359f2305eaf285b0b0745d3b41997',1,'atmi']]]
 ];

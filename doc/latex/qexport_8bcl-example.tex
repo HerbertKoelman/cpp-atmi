@@ -1,0 +1,130 @@
+\hypertarget{qexport_8bcl-example}{\section{qexport.\+bcl}
+}
+Global utility to stream out the content of a queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & output stream \\
+\hline
+{\em qs} & queue stream that will handle the reading of messages\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCodeInclude}
+1 #include "options.hpp"
+2 #include <atmi/atmi++.hpp>
+3 #include <cstdlib>
+4 #include <ostream>
+5 #include <fstream>
+6 #include <csignal>
+7 
+8 bool running = true ;
+9 
+10 void signal\_handler( int signal )\{ //NOSONAR what the heck is this warning !?
+11     running=false;
+12 \}
+13 
+14 /** export messages found in a given queue
+15  *
+16  */
+17 class queue\_export: public atmi::abstract\_client \{
+18   public:
+19 
+20     queue\_export(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0
+       ): abstract\_client(pname, user, passwd, group)\{
+21     \}
+22 
+23     int run (const char *qspace, const char *queue, size\_t buffer\_size, std::ostream &out, bool daemon) \{
+24 
+25       auto status = EXIT\_FAILURE;
+26 
+27       try \{
+28 
+29 #       ifdef DEBUG
+30         printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s], daemon mode %s,
+       buffer size: %d bytes\(\backslash\)n", \_\_FUNCTION\_\_,
+31             queue,
+32             qspace,
+33             daemon ? "true" : "false",
+34             buffer\_size);
+35 #       endif
+36 
+37         atmi::queue\_ptr q = new\_queue\_instance(qspace, queue);
+38         q->set\_message\_wait(false); // don't wait for messages
+39 
+40         long counter = 0;
+41 
+42         atmi::queue\_stream qs(*q, buffer\_size);
+43         do \{
+44           out << qs ; // write messages
+45           out.flush();
+46 
+47           counter += qs.count();
+48 
+49 #       ifdef DEBUG
+50         printf("DEBUG %s (line %d): flushed stream, running %s, daemon %s\(\backslash\)n", \_\_FUNCTION\_\_, \_\_LINE\_\_,
+51           running ? "true" : "false",
+52           daemon  ? "true" : "false"
+53           );
+54 #       endif
+55         \}while( running && daemon);
+56 
+57         std::cerr << "exported " << counter << " messages from " << queue << "." << std::endl ;
+58 
+59         status = EXIT\_SUCCESS ;
+60 
+61       \} catch ( std::exception &err )\{
+62         std::cerr << err.what() << std::endl ;
+63       \}
+64 
+65 #     ifdef DEBUG
+66       std::cout << "type enter to exit." << std::endl;
+67       std::string buffer;
+68       std::getline (std::cin,buffer);
+69 #     endif
+70 
+71       return status ;
+72     \}
+73 \};
+74 
+75 int main ( int argc, char *argv[] )\{
+76 
+77   auto status = EXIT\_FAILURE ;
+78   try \{
+79 
+80     signal(SIGINT, signal\_handler);
+81     char *pname = basename(argv[0]);
+82 
+83     export\_options options;
+84     options.parse(argc, argv);
+85 
+86     if ( (options.qspace != NULL) && (options.queue != NULL) )\{
+87       queue\_export qexport(pname, options.user, options.passwd, options.group);
+88       if ( options.output\_file != NULL ) \{
+89         std::ifstream file;
+90         file.open(options.output\_file,std::ofstream::out | std::ofstream::app);
+91         if (file.is\_open())\{
+92           std::ostream out(file.rdbuf());
+93           status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
+94         \} else \{
+95           perror("failed to open export destination file");
+96         \}
+97       \} else \{
+98         std::ostream out(std::cout.rdbuf()); // fall back to stdou
+99         status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
+100       \}
+101 
+102     \}else\{
+103       std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
+104       options.usage(pname, "send messages found in a queue to stdout or a file (if last argument is
+       passed).");
+105     \}
+106 
+107   \}catch ( std::exception &err)\{
+108     std::cerr << err.what() << std::endl ;
+109   \}
+110 
+111   return status ;
+112 \}
+\end{DoxyCodeInclude}
+ 

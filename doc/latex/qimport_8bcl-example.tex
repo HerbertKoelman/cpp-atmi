@@ -1,0 +1,109 @@
+\hypertarget{qimport_8bcl-example}{\section{qimport.\+bcl}
+}
+Global utility to stream messages in a queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & input stream \\
+\hline
+{\em qs} & queue stream that handles the writing of messages to\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCodeInclude}
+1 #include "options.hpp"
+2 #include <atmi/atmi++.hpp>
+3 #include <cstdlib>
+4 #include <ostream>
+5 #include <fstream>
+6 #include <csignal>
+7 
+8 /** import messages in a given queue
+9  *
+10  */
+11 class queue\_import: public atmi::abstract\_client \{
+12   public:
+13 
+14     queue\_import(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0
+       ): abstract\_client(pname, user, passwd, group)\{
+15     \}
+16 
+17     int run (const char *qspace, const char *queue, size\_t buffer\_size, std::istream &in) \{
+18 
+19       auto status = EXIT\_FAILURE;
+20 
+21       try \{
+22 
+23 #       ifdef DEBUG
+24         printf("DEBUG %s (%d): exporting messages mporting in queue [%s] from queue space [%s], buffer
+       size: %d bytes\(\backslash\)n", \_\_FUNCTION\_\_,\_\_LINE\_\_,
+25             queue,
+26             qspace,
+27             buffer\_size);
+28 #       endif
+29 
+30         atmi::queue\_ptr q = new\_queue\_instance(qspace, queue);
+31 
+32         long counter = 0;
+33 
+34         atmi::queue\_stream qs(*q, buffer\_size);
+35         in >> qs ;
+36 
+37         std::cerr << "imported " << qs.count() << " messages in " << queue << "." << std::endl ;
+38 
+39         status = EXIT\_SUCCESS ;
+40 
+41       \} catch ( std::exception &err )\{
+42         std::cerr << err.what() << std::endl ;
+43       \}
+44 
+45 #     ifdef DEBUG
+46       std::cout << "type enter to exit." << std::endl;
+47       std::string buffer;
+48       std::getline (std::cin,buffer);
+49 #     endif
+50 
+51       return status ;
+52     \}
+53 \};
+54 
+55 int main ( int argc, char *argv[] )\{
+56 
+57   auto status = EXIT\_FAILURE ;
+58   try \{
+59     char *pname = basename(argv[0]);
+60 
+61     import\_options options;
+62     options.parse(argc, argv);
+63 
+64     if ( (options.qspace != NULL) && (options.queue != NULL) )\{
+65       queue\_import qimport(pname, options.user, options.passwd, options.group);
+66       if ( optind < argc ) \{ // consider firt left argument as a path to a file
+67         for( ; optind < argc ; optind++ )\{
+68           std::ifstream file;
+69           file.open(argv[optind],std::ofstream::in);
+70           if (file.is\_open())\{
+71             std::istream in(file.rdbuf());
+72             status = qimport.run(options.qspace, options.queue, options.buffer\_size, in);
+73           \} else \{
+74             perror("failed to open import file");
+75           \}
+76         \}
+77       \} else \{
+78         std::istream in(std::cin.rdbuf()); // fall back to stdou
+79         status = qimport.run(options.qspace, options.queue, options.buffer\_size, in);
+80       \}
+81 
+82     \}else\{
+83       std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
+84       options.usage(pname, "load messages in a queue.");
+85     \}
+86 
+87   \}catch ( std::exception &err)\{
+88     std::cerr << err.what() << std::endl ;
+89   \}
+90 
+91   return status ;
+92 \}
+\end{DoxyCodeInclude}
+ 

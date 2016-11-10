@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>C++ ATMI wrapper: include/atmi/fields.hpp Source File</title>
+<title>cpp-atmi: include/atmi/fields.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.4.1)</span>
+   <div id="projectname">cpp-atmi
+   &#160;<span id="projectnumber">(v4.5.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
@@ -72,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -273,7 +274,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;          }</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        } <span class="keywordflow">catch</span> ( <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> &amp;buffErr ) {</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;          <span class="keywordflow">throw</span>  <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;Add failed to estimate needed memory extension. Original message was : %s&quot;</span>, buffErr.<a class="code" href="classatmi_1_1atmi__exception.html#a7e527bcd2919ba17b332ea827ec28a22">what</a>() );</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        };</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        rc = Fadd32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), <a class="code" href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">id</a>(), (<span class="keywordtype">char</span> *) &amp;<a class="code" href="classatmi_1_1_tfield.html#a89852f63b07d2f6d27d9866b030d1c5d">value</a>, <a class="code" href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">length</a>() );</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordflow">if</span> ( rc &lt; 0 ) {</div>
@@ -427,7 +428,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;            }</div>
 <div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;          } <span class="keywordflow">catch</span> ( <a class="code" href="classatmi_1_1buffer__exception.html">buffer_exception</a> &amp;buffErr ) {</div>
 <div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;            <span class="keywordflow">throw</span>  <a class="code" href="classatmi_1_1atmi__exception.html">atmi_exception</a> ( <span class="stringliteral">&quot;Add failed to estimate needed memory extension. Original message was : %s&quot;</span>, buffErr.<a class="code" href="classatmi_1_1atmi__exception.html#a7e527bcd2919ba17b332ea827ec28a22">what</a>() );</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;          };</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;          }</div>
 <div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;</div>
 <div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;          rc = Fadd32 ( b.<a class="code" href="classatmi_1_1buffer.html#aa9aa5382717ed17a2047db2779f8f0ec">get_buffer</a>(), <a class="code" href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">id</a>(), (<span class="keywordtype">char</span> *) <a class="code" href="classatmi_1_1_tfield.html#a89852f63b07d2f6d27d9866b030d1c5d">value</a>.c_str(), <a class="code" href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">length</a>() );</div>
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;          <span class="keywordflow">if</span> ( rc &lt; 0 ) {</div>
@@ -502,7 +503,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html_a46059c3e91ce3847b3109e4500f017f6"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a46059c3e91ce3847b3109e4500f017f6">atmi::Tfield&lt; std::string &gt;::Tfield</a></div><div class="ttdeci">Tfield(FLDID32 fid)</div><div class="ttdef"><b>Definition:</b> fields.hpp:373</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html_a57ff1b2ed449d59d4ec936e9e79a5d1a"><div class="ttname"><a href="classatmi_1_1buffer.html#a57ff1b2ed449d59d4ec936e9e79a5d1a">atmi::buffer::occurences</a></div><div class="ttdeci">FLDOCC32 occurences(const field &amp;f)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:141</div></div>
 <div class="ttc" id="classatmi_1_1field_html_addd031ecbcf2026116cf6e03534ac862"><div class="ttname"><a href="classatmi_1_1field.html#addd031ecbcf2026116cf6e03534ac862">atmi::field::operator=</a></div><div class="ttdeci">virtual field &amp; operator=(const std::string &amp;value)</div><div class="ttdef"><b>Definition:</b> fields.hpp:112</div></div>
-<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
+<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1_tfield_html_a6138c508841c4a837ea8c8e089755278"><div class="ttname"><a href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">atmi::Tfield::length</a></div><div class="ttdeci">virtual FLDLEN32 length()</div><div class="ttdef"><b>Definition:</b> fields.hpp:266</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a161b9b7037c49fbcf86518fcb35e779c"><div class="ttname"><a href="classatmi_1_1field.html#a161b9b7037c49fbcf86518fcb35e779c">atmi::field::occurence</a></div><div class="ttdeci">FLDOCC32 occurence()</div><div class="ttdef"><b>Definition:</b> field.cpp:57</div></div>
 <div class="ttc" id="classatmi_1_1field_html_a396b41ad5ae2b1df362e446c5f090640"><div class="ttname"><a href="classatmi_1_1field.html#a396b41ad5ae2b1df362e446c5f090640">atmi::field::what</a></div><div class="ttdeci">const char * what()</div><div class="ttdef"><b>Definition:</b> field.cpp:76</div></div>

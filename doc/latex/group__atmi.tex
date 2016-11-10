@@ -18,9 +18,9 @@ class \hyperlink{classatmi_1_1tuxedo}{atmi\+::tuxedo}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{group__atmi_ga7cfd5961e0e05b148f12be311177a1a8}{typedef std\+::unique\+\_\+ptr\\*
-$<$ \hyperlink{classatmi_1_1queue}{atmi\+::queue} $>$ {\bfseries atmi\+::queue\+\_\+ptr}}\label{group__atmi_ga7cfd5961e0e05b148f12be311177a1a8}
+$<$ \hyperlink{classatmi_1_1queue}{atmi\+::queue} $>$ \hyperlink{group__atmi_ga7cfd5961e0e05b148f12be311177a1a8}{atmi\+::queue\+\_\+ptr}}\label{group__atmi_ga7cfd5961e0e05b148f12be311177a1a8}
 
-\item 
+\begin{DoxyCompactList}\small\item\em helper type \end{DoxyCompactList}\item 
 \hypertarget{group__atmi_gab8e359f2305eaf285b0b0745d3b41997}{typedef std\+::unique\+\_\+ptr\\*
 $<$ transaction $>$ \hyperlink{group__atmi_gab8e359f2305eaf285b0b0745d3b41997}{atmi\+::transaction\+\_\+ptr}}\label{group__atmi_gab8e359f2305eaf285b0b0745d3b41997}
 
@@ -28,9 +28,74 @@ $<$ transaction $>$ \hyperlink{group__atmi_gab8e359f2305eaf285b0b0745d3b41997}{a
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \hyperlink{group__atmi_gaf05328bfccb410191dc529104dc3a04f}{atmi\+::operator$<$$<$} (std\+::ostream \&out, queue\+\_\+stream \&qs)
+\hyperlink{group__atmi_gaf8c86b01e410fe6499a7f53cdf70eb35}{atmi\+::queue\+::queue} (const char $\ast$qspace=N\+U\+L\+L, const char $\ast$queue=N\+U\+L\+L, const char $\ast$reply=N\+U\+L\+L)
 \item 
-std\+::istream \& \hyperlink{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}{atmi\+::operator$>$$>$} (std\+::istream \&in, queue\+\_\+stream \&qs)
+int \hyperlink{group__atmi_ga6b27337fd68ca97236e4905d09b7eb15}{atmi\+::queue\+::enqueue} (char $\ast$data, long len)
+\item 
+int \hyperlink{group__atmi_ga140e0faa2ab1265d3258ebc5f2049c41}{atmi\+::queue\+::dequeue} (char $\ast$$\ast$data, long $\ast$len)
+\item 
+int \hyperlink{group__atmi_ga76cf5d92f7d727b0af48698cca6225c5}{atmi\+::queue\+::enqueue} (buffer \&data)
+\item 
+int \hyperlink{group__atmi_ga656e7c4acd4bfefdbecf098907020fad}{atmi\+::queue\+::dequeue} (buffer \&data)
+\item 
+int \hyperlink{group__atmi_gaa8a60e7609a1c28ec346a898a80f8ea6}{atmi\+::queue\+::dequeue\+Reply} (char $\ast$$\ast$data, long $\ast$len)
+\item 
+int \hyperlink{group__atmi_ga1d0741ce63070da00a80cfc69db50797}{atmi\+::queue\+::dequeue\+Reply} (buffer \&data)
+\item 
+int \hyperlink{group__atmi_ga2ea608bb1f59fdccb2b7592381bcf267}{atmi\+::queue\+::enqueue\+Reply} (char $\ast$data, long len)
+\item 
+int \hyperlink{group__atmi_ga2e04e4731abc851e48f6caf77ba61ef2}{atmi\+::queue\+::enqueue\+Reply} (buffer \&data)
+\item 
+void \hyperlink{group__atmi_ga216acfef7e80352c8ce8476825f1146e}{atmi\+::queue\+::set\+\_\+reply\+\_\+queue} (const char $\ast$q)
+\item 
+const char $\ast$ \hyperlink{group__atmi_gac851146259feb3bf93aed287d6d42cb2}{atmi\+::queue\+::reply\+\_\+queue} ()
+\item 
+void \hyperlink{group__atmi_ga9b8f29fbb2012dda53d6f799ad2110b4}{atmi\+::queue\+::set\+\_\+queue\+\_\+space} (const char $\ast$qs)
+\item 
+const char $\ast$ \hyperlink{group__atmi_gaaf7d8d18008f9ee987b7e7aa2195d1db}{atmi\+::queue\+::queue\+\_\+space} ()
+\item 
+void \hyperlink{group__atmi_ga5d70bbf99076bd41269e2a558bf52475}{atmi\+::queue\+::set\+\_\+queue\+\_\+name} (char $\ast$q)
+\item 
+const char $\ast$ \hyperlink{group__atmi_gadaddc33c75ec6e13f6c57da8d979ad32}{atmi\+::queue\+::queue\+\_\+name} ()
+\item 
+long \hyperlink{group__atmi_ga96f51996c857985c9b8e1b720f726f0c}{atmi\+::queue\+::qctl\+\_\+flags} ()
+\item 
+void \hyperlink{group__atmi_ga9669776889226a450093d2ddfd921d4b}{atmi\+::queue\+::set\+\_\+message\+\_\+wait} (bool wait)
+\item 
+void \hyperlink{group__atmi_ga223fac7945fb8d87f04189aa77ce666a}{atmi\+::queue\+::set\+Q\+Wait} (bool wait)
+\item 
+bool \hyperlink{group__atmi_ga90f5a71979755634b1e625d45ac61412}{atmi\+::queue\+::is\+Q\+Waiting} ()
+\item 
+bool \hyperlink{group__atmi_gac655db1db167f3e833f4fa84e6256428}{atmi\+::queue\+::is\+\_\+message\+\_\+waiting} ()
+\item 
+void \hyperlink{group__atmi_ga0fbca137aadc2946b8f3889b76352af9}{atmi\+::queue\+::set\+\_\+quality\+\_\+of\+\_\+service} (long qos)
+\item 
+int \hyperlink{group__atmi_ga1fabff1d9a56389a41f92542561d570d}{atmi\+::queue\+::diagno} ()
+\item 
+void \hyperlink{group__atmi_ga2c0511c9f17e939789c5290fe83d1f1f}{atmi\+::queue\+::set\+\_\+new\+\_\+corrid} ()
+\item 
+void \hyperlink{group__atmi_gaa74de8091c32580972e7871e7ddf786c}{atmi\+::queue\+::unset\+\_\+corrid} ()
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\int \hyperlink{group__atmi_ga767f80e22a52d4b325d5a5aadc27a343}{atmi\+::queue\+::handle\+\_\+diagnostics} (int tux\+\_\+tperrno, int tux\+\_\+diagno, const char $\ast$msg, const Args \&...args)
+\item 
+\hyperlink{group__atmi_ga4d7ccf78c5bb515968b294d374b8c46a}{atmi\+::queue\+\_\+stream\+::queue\+\_\+stream} (queue \&q)
+\item 
+\hyperlink{group__atmi_ga3521fdad3d06d829f2c1370e3e6819e0}{atmi\+::queue\+\_\+stream\+::queue\+\_\+stream} (queue \&q, long bs)
+\item 
+long \hyperlink{group__atmi_gac4f1e88530a4d9fda0bc4b271301866b}{atmi\+::queue\+\_\+stream\+::count} ()
+\item 
+void \hyperlink{group__atmi_ga500b658e3f3f1a353982a1304ea27801}{atmi\+::queue\+\_\+stream\+::set\+\_\+buffer\+\_\+size} (long s)
+\item 
+long \hyperlink{group__atmi_ga18d01411c5ffeffd190195fd2b4dc61a}{atmi\+::queue\+\_\+stream\+::buffer\+\_\+size} ()
+\item 
+void \hyperlink{group__atmi_ga4a47e7caf329e46c31f44425e3ceb6e3}{atmi\+::queue\+\_\+stream\+::encode\+\_\+base64} (bool b)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{group__atmi_gad6b5307aa800c7d26a1241c7789dff9c}{atmi\+::queue\+\_\+stream\+::operator$<$$<$} (std\+::ostream \&out, \hyperlink{classatmi_1_1queue__stream}{atmi\+::queue\+\_\+stream} \&qs)
+\item 
+std\+::istream \& \hyperlink{group__atmi_gad4508b00249c5b2d93ab08550436ab4e}{atmi\+::queue\+\_\+stream\+::operator$>$$>$} (std\+::istream \&in, \hyperlink{classatmi_1_1queue__stream}{atmi\+::queue\+\_\+stream} \&qs)
 \end{DoxyCompactItemize}
 
 
@@ -38,37 +103,470 @@ std\+::istream \& \hyperlink{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}{atm
 The main A\+P\+I for the Tuxedo system. It includes transaction management functions (routines, verbs); request/response, conversational, queuing, and publish-\/and-\/subscribe message-\/handling functions; service interface functions; and buffer management functions for distributed application communication. 
 
 \subsection{Function Documentation}
-\hypertarget{group__atmi_gaf05328bfccb410191dc529104dc3a04f}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$<$$<$@{operator$<$$<$}}
+\hypertarget{group__atmi_ga18d01411c5ffeffd190195fd2b4dc61a}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!buffer\+\_\+size@{buffer\+\_\+size}}
+\index{buffer\+\_\+size@{buffer\+\_\+size}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{buffer\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::queue\+\_\+stream\+::buffer\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga18d01411c5ffeffd190195fd2b4dc61a}
+\begin{DoxyReturn}{Returns}
+current buffer size 
+\end{DoxyReturn}
+\hypertarget{group__atmi_gac4f1e88530a4d9fda0bc4b271301866b}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!count@{count}}
+\index{count@{count}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::queue\+\_\+stream\+::count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_gac4f1e88530a4d9fda0bc4b271301866b}
+\begin{DoxyReturn}{Returns}
+the number of messages handle by last I\+O operation 
+\end{DoxyReturn}
+\hypertarget{group__atmi_ga140e0faa2ab1265d3258ebc5f2049c41}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!dequeue@{dequeue}}
+\index{dequeue@{dequeue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{dequeue}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::dequeue (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{data, }
+\item[{long $\ast$}]{len}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga140e0faa2ab1265d3258ebc5f2049c41}
+dequeue a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+{\em len} & length of the tuxedo buffer \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga656e7c4acd4bfefdbecf098907020fad}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!dequeue@{dequeue}}
+\index{dequeue@{dequeue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{dequeue}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::dequeue (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga656e7c4acd4bfefdbecf098907020fad}
+dequeue a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo F\+M\+L32 buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_gaa8a60e7609a1c28ec346a898a80f8ea6}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!dequeue\+Reply@{dequeue\+Reply}}
+\index{dequeue\+Reply@{dequeue\+Reply}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{dequeue\+Reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::dequeue\+Reply (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{data, }
+\item[{long $\ast$}]{len}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_gaa8a60e7609a1c28ec346a898a80f8ea6}
+dequeue a reply message
+
+Reply must have been set when queue instance was created. If the flag T\+P T\+P\+Q\+C\+O\+R\+R\+I\+D is set, then the correlation id value is used to retreive the message from the reply queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+{\em len} & length of the tuxedo buffer \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga1d0741ce63070da00a80cfc69db50797}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!dequeue\+Reply@{dequeue\+Reply}}
+\index{dequeue\+Reply@{dequeue\+Reply}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{dequeue\+Reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::dequeue\+Reply (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga1d0741ce63070da00a80cfc69db50797}
+dequeue a reply message
+
+Reply must have been set when queue instance was created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga1fabff1d9a56389a41f92542561d570d}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!diagno@{diagno}}
+\index{diagno@{diagno}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{diagno}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::diagno (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga1fabff1d9a56389a41f92542561d570d}
+\begin{DoxyReturn}{Returns}
+the diagnostic code returned by last call. 
+\end{DoxyReturn}
+\hypertarget{group__atmi_ga4a47e7caf329e46c31f44425e3ceb6e3}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!encode\+\_\+base64@{encode\+\_\+base64}}
+\index{encode\+\_\+base64@{encode\+\_\+base64}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{encode\+\_\+base64}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+\_\+stream\+::encode\+\_\+base64 (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga4a47e7caf329e46c31f44425e3ceb6e3}
+use base64 encoding 
+\begin{DoxyParams}{Parameters}
+{\em b} & if true, the encode using base64 \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga6b27337fd68ca97236e4905d09b7eb15}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{enqueue}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::enqueue (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{long}]{len}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga6b27337fd68ca97236e4905d09b7eb15}
+enqueue a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+{\em len} & length of the tuxedo buffer \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga76cf5d92f7d727b0af48698cca6225c5}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{enqueue}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::enqueue (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga76cf5d92f7d727b0af48698cca6225c5}
+enqueue a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo F\+M\+L32 buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga2ea608bb1f59fdccb2b7592381bcf267}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!enqueue\+Reply@{enqueue\+Reply}}
+\index{enqueue\+Reply@{enqueue\+Reply}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{enqueue\+Reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::enqueue\+Reply (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{long}]{len}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga2ea608bb1f59fdccb2b7592381bcf267}
+enqueue a reply message
+
+The reply queue is identified through the Qctl structure. It is the responability of the caller to set the reply queue value to use.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+{\em len} & length of the tuxedo buffer \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga2e04e4731abc851e48f6caf77ba61ef2}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!enqueue\+Reply@{enqueue\+Reply}}
+\index{enqueue\+Reply@{enqueue\+Reply}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{enqueue\+Reply}]{\setlength{\rightskip}{0pt plus 5cm}int atmi\+::queue\+::enqueue\+Reply (
+\begin{DoxyParamCaption}
+\item[{{\bf buffer} \&}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga2e04e4731abc851e48f6caf77ba61ef2}
+enqueue a reply message
+
+The reply queue is identified through the Qctl structure. It is the responability of the caller to set the reply queue value to use.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & tuxedo buffer (allocated with \hyperlink{classatmi_1_1tuxedo_a44e77e3e6216a8c3fb8be33d5d8fed93}{tuxedo\+::allocate}) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga767f80e22a52d4b325d5a5aadc27a343}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!handle\+\_\+diagnostics@{handle\+\_\+diagnostics}}
+\index{handle\+\_\+diagnostics@{handle\+\_\+diagnostics}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{handle\+\_\+diagnostics}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ int atmi\+::queue\+::handle\+\_\+diagnostics (
+\begin{DoxyParamCaption}
+\item[{int}]{tux\+\_\+tperrno, }
+\item[{int}]{tux\+\_\+diagno, }
+\item[{const char $\ast$}]{msg, }
+\item[{const Args \&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{group__atmi_ga767f80e22a52d4b325d5a5aadc27a343}
+handle queue diagnostic errors
+
+
+\begin{DoxyParams}{Parameters}
+{\em tux\+\_\+tperrno} & tperrno to handle \\
+\hline
+{\em tux\+\_\+diagno} & diagnostic number \\
+\hline
+{\em msg} & related explanatory message. \\
+\hline
+{\em args} & message arguments \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_gac655db1db167f3e833f4fa84e6256428}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!is\+\_\+message\+\_\+waiting@{is\+\_\+message\+\_\+waiting}}
+\index{is\+\_\+message\+\_\+waiting@{is\+\_\+message\+\_\+waiting}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{is\+\_\+message\+\_\+waiting}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::queue\+::is\+\_\+message\+\_\+waiting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_gac655db1db167f3e833f4fa84e6256428}
+\begin{DoxyReturn}{Returns}
+ture if T\+P\+Q\+W\+A\+I\+T flag is set. 
+\end{DoxyReturn}
+\hypertarget{group__atmi_ga90f5a71979755634b1e625d45ac61412}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!is\+Q\+Waiting@{is\+Q\+Waiting}}
+\index{is\+Q\+Waiting@{is\+Q\+Waiting}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{is\+Q\+Waiting}]{\setlength{\rightskip}{0pt plus 5cm}bool atmi\+::queue\+::is\+Q\+Waiting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga90f5a71979755634b1e625d45ac61412}
+Check if Q\+Wait flag is se
+
+\begin{DoxyReturn}{Returns}
+true if wait flag is se 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000005}{Deprecated}]use is\+\_\+message\+\_\+waiting instead \end{DoxyRefDesc}
+\hypertarget{group__atmi_ga96f51996c857985c9b8e1b720f726f0c}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!qctl\+\_\+flags@{qctl\+\_\+flags}}
+\index{qctl\+\_\+flags@{qctl\+\_\+flags}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{qctl\+\_\+flags}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::queue\+::qctl\+\_\+flags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga96f51996c857985c9b8e1b720f726f0c}
+\begin{DoxyReturn}{Returns}
+the current value of Q\+C\+T\+L flags 
+\end{DoxyReturn}
+\hypertarget{group__atmi_gaf8c86b01e410fe6499a7f53cdf70eb35}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!queue@{queue}}
+\index{queue@{queue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{queue}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::queue\+::queue (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{qspace = {\ttfamily NULL}, }
+\item[{const char $\ast$}]{queue = {\ttfamily NULL}, }
+\item[{const char $\ast$}]{reply = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_gaf8c86b01e410fe6499a7f53cdf70eb35}
+Creates an instance of queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em qspace} & qspace that handles the queue \\
+\hline
+{\em queue} & the queue that will be manipulated \\
+\hline
+{\em reply} & name of a reply \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_gadaddc33c75ec6e13f6c57da8d979ad32}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!queue\+\_\+name@{queue\+\_\+name}}
+\index{queue\+\_\+name@{queue\+\_\+name}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{queue\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::queue\+::queue\+\_\+name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_gadaddc33c75ec6e13f6c57da8d979ad32}
+\begin{DoxyReturn}{Returns}
+the currently wrapped queue name 
+\end{DoxyReturn}
+\hypertarget{group__atmi_gaaf7d8d18008f9ee987b7e7aa2195d1db}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!queue\+\_\+space@{queue\+\_\+space}}
+\index{queue\+\_\+space@{queue\+\_\+space}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{queue\+\_\+space}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ atmi\+::queue\+::queue\+\_\+space (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_gaaf7d8d18008f9ee987b7e7aa2195d1db}
+\begin{DoxyReturn}{Returns}
+queue's queque space name 
+\end{DoxyReturn}
+\hypertarget{group__atmi_ga4d7ccf78c5bb515968b294d374b8c46a}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!queue\+\_\+stream@{queue\+\_\+stream}}
+\index{queue\+\_\+stream@{queue\+\_\+stream}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{queue\+\_\+stream}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::queue\+\_\+stream\+::queue\+\_\+stream (
+\begin{DoxyParamCaption}
+\item[{{\bf atmi\+::queue} \&}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{group__atmi_ga4d7ccf78c5bb515968b294d374b8c46a}
+setup a queue stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & a queue \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga3521fdad3d06d829f2c1370e3e6819e0}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!queue\+\_\+stream@{queue\+\_\+stream}}
+\index{queue\+\_\+stream@{queue\+\_\+stream}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{queue\+\_\+stream}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::queue\+\_\+stream\+::queue\+\_\+stream (
+\begin{DoxyParamCaption}
+\item[{{\bf atmi\+::queue} \&}]{queue, }
+\item[{long}]{bs}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga3521fdad3d06d829f2c1370e3e6819e0}
+setup a queue stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & a queue \\
+\hline
+{\em bs} & stream buffer size. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_gac851146259feb3bf93aed287d6d42cb2}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!reply\+\_\+queue@{reply\+\_\+queue}}
+\index{reply\+\_\+queue@{reply\+\_\+queue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{reply\+\_\+queue}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::queue\+::reply\+\_\+queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_gac851146259feb3bf93aed287d6d42cb2}
+reply message are expected to be posted onto this /\+Q queue.
+
+\begin{DoxyReturn}{Returns}
+reply queue name 
+\end{DoxyReturn}
+\hypertarget{group__atmi_ga500b658e3f3f1a353982a1304ea27801}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+buffer\+\_\+size@{set\+\_\+buffer\+\_\+size}}
+\index{set\+\_\+buffer\+\_\+size@{set\+\_\+buffer\+\_\+size}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+buffer\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+\_\+stream\+::set\+\_\+buffer\+\_\+size (
+\begin{DoxyParamCaption}
+\item[{long}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga500b658e3f3f1a353982a1304ea27801}
+set the stream buffer size. 
+\begin{DoxyParams}{Parameters}
+{\em s} & buffer size (bytes) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga9669776889226a450093d2ddfd921d4b}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+message\+\_\+wait@{set\+\_\+message\+\_\+wait}}
+\index{set\+\_\+message\+\_\+wait@{set\+\_\+message\+\_\+wait}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+message\+\_\+wait}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+message\+\_\+wait (
+\begin{DoxyParamCaption}
+\item[{bool}]{wait}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga9669776889226a450093d2ddfd921d4b}
+Wait until a message is enqueued.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wait} & if true queue waits for a message \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga2c0511c9f17e939789c5290fe83d1f1f}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+new\+\_\+corrid@{set\+\_\+new\+\_\+corrid}}
+\index{set\+\_\+new\+\_\+corrid@{set\+\_\+new\+\_\+corrid}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+new\+\_\+corrid}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+new\+\_\+corrid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga2c0511c9f17e939789c5290fe83d1f1f}
+Calculate and set qctl corid
+
+Correlation I\+D is made of pid+threadid+current\+\_\+time (in milliseconds). When the correlation is set the flags T\+P\+Q\+G\+E\+T\+B\+Y\+C\+O\+R\+R\+I\+D and T\+P\+Q\+C\+O\+R\+R\+I\+D are also set. This means that subsequent calls to dequeue methods will get only message with the correleation id that was last set. \hypertarget{group__atmi_ga0fbca137aadc2946b8f3889b76352af9}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+quality\+\_\+of\+\_\+service@{set\+\_\+quality\+\_\+of\+\_\+service}}
+\index{set\+\_\+quality\+\_\+of\+\_\+service@{set\+\_\+quality\+\_\+of\+\_\+service}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+quality\+\_\+of\+\_\+service}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+quality\+\_\+of\+\_\+service (
+\begin{DoxyParamCaption}
+\item[{long}]{qos}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga0fbca137aadc2946b8f3889b76352af9}
+Set the desired persistence mode (memory, disk, default) Accepted values are \+: T\+P\+Q\+Q\+O\+S\+D\+E\+F\+A\+U\+L\+T\+P\+E\+R\+S\+I\+S\+T\+: uses the persistence mode defined with queue T\+P\+Q\+Q\+O\+S\+P\+E\+R\+S\+I\+S\+T\+E\+N\+T\+: message are written onto persistent storage T\+P\+Q\+Q\+O\+S\+N\+O\+N\+P\+E\+R\+S\+I\+S\+T\+E\+N\+T\+: message are written into memory only (message are lost if the queue manager is interrupted)
+
+
+\begin{DoxyParams}{Parameters}
+{\em qos} & desired flags \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga5d70bbf99076bd41269e2a558bf52475}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+queue\+\_\+name@{set\+\_\+queue\+\_\+name}}
+\index{set\+\_\+queue\+\_\+name@{set\+\_\+queue\+\_\+name}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+queue\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+queue\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga5d70bbf99076bd41269e2a558bf52475}
+set the queue the instance is wrapping.
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & queue name \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__atmi_ga9b8f29fbb2012dda53d6f799ad2110b4}{set\+\_\+queue\+\_\+space} make sure the \hyperlink{classatmi_1_1queue}{queue} name exists in the current \hyperlink{classatmi_1_1queue}{queue} space. 
+\end{DoxySeeAlso}
+\hypertarget{group__atmi_ga9b8f29fbb2012dda53d6f799ad2110b4}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+queue\+\_\+space@{set\+\_\+queue\+\_\+space}}
+\index{set\+\_\+queue\+\_\+space@{set\+\_\+queue\+\_\+space}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+queue\+\_\+space}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+queue\+\_\+space (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{qs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga9b8f29fbb2012dda53d6f799ad2110b4}
+Set the queuespace name to wich this queue associated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em qs} & queue space name (32 characters max) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga216acfef7e80352c8ce8476825f1146e}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+\_\+reply\+\_\+queue@{set\+\_\+reply\+\_\+queue}}
+\index{set\+\_\+reply\+\_\+queue@{set\+\_\+reply\+\_\+queue}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+\_\+reply\+\_\+queue}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+\_\+reply\+\_\+queue (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{q}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_ga216acfef7e80352c8ce8476825f1146e}
+indicate in wich queue the replies should be posted in.
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & reply queue, if N\+U\+L\+L then current reply queue is unset. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__atmi_ga223fac7945fb8d87f04189aa77ce666a}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!set\+Q\+Wait@{set\+Q\+Wait}}
+\index{set\+Q\+Wait@{set\+Q\+Wait}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{set\+Q\+Wait}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::set\+Q\+Wait (
+\begin{DoxyParamCaption}
+\item[{bool}]{wait}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__atmi_ga223fac7945fb8d87f04189aa77ce666a}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000004}{Deprecated}]use set\+\_\+message\+\_\+wait instead \end{DoxyRefDesc}
+\hypertarget{group__atmi_gaa74de8091c32580972e7871e7ddf786c}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!unset\+\_\+corrid@{unset\+\_\+corrid}}
+\index{unset\+\_\+corrid@{unset\+\_\+corrid}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
+\subsubsection[{unset\+\_\+corrid}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+::unset\+\_\+corrid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__atmi_gaa74de8091c32580972e7871e7ddf786c}
+Reset flags and value related to correlation id to off. 
+
+\subsection{Friends}
+\hypertarget{group__atmi_gad6b5307aa800c7d26a1241c7789dff9c}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream \& atmi\+::operator$<$$<$ (
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{std\+::ostream \&}]{out, }
-\item[{queue\+\_\+stream \&}]{qs}
+\item[{{\bf atmi\+::queue\+\_\+stream} \&}]{qs}
 \end{DoxyParamCaption}
-)}}\label{group__atmi_gaf05328bfccb410191dc529104dc3a04f}
-Global utility to stream out the content of a queue
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{group__atmi_gad6b5307aa800c7d26a1241c7789dff9c}
+friend functions that handle the writting of messages to a stream.
 
 
 \begin{DoxyParams}{Parameters}
-{\em out} & output stream \\
+{\em out} & destination stream \\
 \hline
-{\em qs} & queue stream that will handle the reading of messages \\
+{\em qs} & stream of messages \\
 \hline
 \end{DoxyParams}
-\hypertarget{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$>$$>$@{operator$>$$>$}}
+\begin{DoxyReturn}{Returns}
+destination 
+\end{DoxyReturn}
+\hypertarget{group__atmi_gad4508b00249c5b2d93ab08550436ab4e}{\index{Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!Application-\/to-\/\+Transaction Monitor Interface@{Application-\/to-\/\+Transaction Monitor Interface}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::istream \& atmi\+::operator$>$$>$ (
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::istream\& operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{std\+::istream \&}]{in, }
-\item[{queue\+\_\+stream \&}]{qs}
+\item[{{\bf atmi\+::queue\+\_\+stream} \&}]{qs}
 \end{DoxyParamCaption}
-)}}\label{group__atmi_ga0be52e17b198d28a9436b17b59efcca6}
-Global utility to stream in a queue
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{group__atmi_gad4508b00249c5b2d93ab08550436ab4e}
+friend functions that handle the reading of messages from a stream.
 
 
 \begin{DoxyParams}{Parameters}
-{\em in} & input stream \\
+{\em in} & source stream \\
 \hline
-{\em qs} & queue stream that handles the writing of messages to \\
+{\em qs} & stream of messages \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+source 
+\end{DoxyReturn}

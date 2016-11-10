@@ -14,148 +14,30 @@ Inheritance diagram for atmi\+:\+:queue\+\_\+stream\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classatmi_1_1queue__stream_a775623d6cd91a8a3cd40d9bb1e492c60}{queue\+\_\+stream} (\hyperlink{classatmi_1_1queue}{queue} $\ast$q)
+\hyperlink{group__atmi_ga4d7ccf78c5bb515968b294d374b8c46a}{queue\+\_\+stream} (\hyperlink{classatmi_1_1queue}{queue} \&q)
 \item 
-\hyperlink{classatmi_1_1queue__stream_af05f48449db9ed2282643d9e7c148944}{queue\+\_\+stream} (\hyperlink{classatmi_1_1queue}{queue} $\ast$q, long bs)
+\hyperlink{group__atmi_ga3521fdad3d06d829f2c1370e3e6819e0}{queue\+\_\+stream} (\hyperlink{classatmi_1_1queue}{queue} \&q, long bs)
 \item 
-long \hyperlink{classatmi_1_1queue__stream_ac4f1e88530a4d9fda0bc4b271301866b}{count} ()
+long \hyperlink{group__atmi_gac4f1e88530a4d9fda0bc4b271301866b}{count} ()
 \item 
-void \hyperlink{classatmi_1_1queue__stream_a500b658e3f3f1a353982a1304ea27801}{set\+\_\+buffer\+\_\+size} (long s)
+void \hyperlink{group__atmi_ga500b658e3f3f1a353982a1304ea27801}{set\+\_\+buffer\+\_\+size} (long s)
 \item 
-long \hyperlink{classatmi_1_1queue__stream_a18d01411c5ffeffd190195fd2b4dc61a}{buffer\+\_\+size} ()
+long \hyperlink{group__atmi_ga18d01411c5ffeffd190195fd2b4dc61a}{buffer\+\_\+size} ()
 \item 
-void \hyperlink{classatmi_1_1queue__stream_a4a47e7caf329e46c31f44425e3ceb6e3}{encode\+\_\+base64} (bool b)
+void \hyperlink{group__atmi_ga4a47e7caf329e46c31f44425e3ceb6e3}{encode\+\_\+base64} (bool b)
 \end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \hyperlink{classatmi_1_1queue__stream_a8be6df3d0274f2b2090e42eda42f7301}{operator$<$$<$} (std\+::ostream \&out, \hyperlink{classatmi_1_1queue__stream}{queue\+\_\+stream} \&qs)
+std\+::ostream \& \hyperlink{group__atmi_gad6b5307aa800c7d26a1241c7789dff9c}{operator$<$$<$} (std\+::ostream \&out, \hyperlink{classatmi_1_1queue__stream}{atmi\+::queue\+\_\+stream} \&qs)
 \item 
-std\+::istream \& \hyperlink{classatmi_1_1queue__stream_a78e4b1a78a980af524e6e851c9ff4d3c}{operator$>$$>$} (std\+::istream \&in, \hyperlink{classatmi_1_1queue__stream}{queue\+\_\+stream} \&qs)
+std\+::istream \& \hyperlink{group__atmi_gad4508b00249c5b2d93ab08550436ab4e}{operator$>$$>$} (std\+::istream \&in, \hyperlink{classatmi_1_1queue__stream}{atmi\+::queue\+\_\+stream} \&qs)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
 Handles in/out operation on a queue 
-
-\subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1queue__stream_a775623d6cd91a8a3cd40d9bb1e492c60}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!queue\+\_\+stream@{queue\+\_\+stream}}
-\index{queue\+\_\+stream@{queue\+\_\+stream}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{queue\+\_\+stream}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::queue\+\_\+stream\+::queue\+\_\+stream (
-\begin{DoxyParamCaption}
-\item[{{\bf atmi\+::queue} $\ast$}]{q}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classatmi_1_1queue__stream_a775623d6cd91a8a3cd40d9bb1e492c60}
-setup a queue stream.
-
-
-\begin{DoxyParams}{Parameters}
-{\em q} & a queue \\
-\hline
-\end{DoxyParams}
-\hypertarget{classatmi_1_1queue__stream_af05f48449db9ed2282643d9e7c148944}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!queue\+\_\+stream@{queue\+\_\+stream}}
-\index{queue\+\_\+stream@{queue\+\_\+stream}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{queue\+\_\+stream}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::queue\+\_\+stream\+::queue\+\_\+stream (
-\begin{DoxyParamCaption}
-\item[{{\bf atmi\+::queue} $\ast$}]{queue, }
-\item[{long}]{bs}
-\end{DoxyParamCaption}
-)}}\label{classatmi_1_1queue__stream_af05f48449db9ed2282643d9e7c148944}
-setup a queue stream.
-
-
-\begin{DoxyParams}{Parameters}
-{\em q} & a queue \\
-\hline
-{\em bs} & stream buffer size. \\
-\hline
-\end{DoxyParams}
-
-
-\subsection{Member Function Documentation}
-\hypertarget{classatmi_1_1queue__stream_a18d01411c5ffeffd190195fd2b4dc61a}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!buffer\+\_\+size@{buffer\+\_\+size}}
-\index{buffer\+\_\+size@{buffer\+\_\+size}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{buffer\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::queue\+\_\+stream\+::buffer\+\_\+size (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1queue__stream_a18d01411c5ffeffd190195fd2b4dc61a}
-\begin{DoxyReturn}{Returns}
-current buffer size 
-\end{DoxyReturn}
-\hypertarget{classatmi_1_1queue__stream_ac4f1e88530a4d9fda0bc4b271301866b}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!count@{count}}
-\index{count@{count}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}long atmi\+::queue\+\_\+stream\+::count (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1queue__stream_ac4f1e88530a4d9fda0bc4b271301866b}
-\begin{DoxyReturn}{Returns}
-the number of messages handle by last I\+O operation 
-\end{DoxyReturn}
-\hypertarget{classatmi_1_1queue__stream_a4a47e7caf329e46c31f44425e3ceb6e3}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!encode\+\_\+base64@{encode\+\_\+base64}}
-\index{encode\+\_\+base64@{encode\+\_\+base64}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{encode\+\_\+base64}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+\_\+stream\+::encode\+\_\+base64 (
-\begin{DoxyParamCaption}
-\item[{bool}]{b}
-\end{DoxyParamCaption}
-)}}\label{classatmi_1_1queue__stream_a4a47e7caf329e46c31f44425e3ceb6e3}
-use base64 encoding 
-\begin{DoxyParams}{Parameters}
-{\em b} & if true, the encode using base64 \\
-\hline
-\end{DoxyParams}
-\hypertarget{classatmi_1_1queue__stream_a500b658e3f3f1a353982a1304ea27801}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!set\+\_\+buffer\+\_\+size@{set\+\_\+buffer\+\_\+size}}
-\index{set\+\_\+buffer\+\_\+size@{set\+\_\+buffer\+\_\+size}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{set\+\_\+buffer\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::queue\+\_\+stream\+::set\+\_\+buffer\+\_\+size (
-\begin{DoxyParamCaption}
-\item[{long}]{s}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classatmi_1_1queue__stream_a500b658e3f3f1a353982a1304ea27801}
-set the stream buffer size. 
-\begin{DoxyParams}{Parameters}
-{\em s} & buffer size (bytes) \\
-\hline
-\end{DoxyParams}
-
-
-\subsection{Friends And Related Function Documentation}
-\hypertarget{classatmi_1_1queue__stream_a8be6df3d0274f2b2090e42eda42f7301}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
-\begin{DoxyParamCaption}
-\item[{std\+::ostream \&}]{out, }
-\item[{{\bf queue\+\_\+stream} \&}]{qs}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classatmi_1_1queue__stream_a8be6df3d0274f2b2090e42eda42f7301}
-Global utility to stream out the content of a queue
-
-
-\begin{DoxyParams}{Parameters}
-{\em out} & output stream \\
-\hline
-{\em qs} & queue stream that will handle the reading of messages \\
-\hline
-\end{DoxyParams}
-\hypertarget{classatmi_1_1queue__stream_a78e4b1a78a980af524e6e851c9ff4d3c}{\index{atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}!operator$>$$>$@{operator$>$$>$}}
-\index{operator$>$$>$@{operator$>$$>$}!atmi\+::queue\+\_\+stream@{atmi\+::queue\+\_\+stream}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std\+::istream\& operator$>$$>$ (
-\begin{DoxyParamCaption}
-\item[{std\+::istream \&}]{in, }
-\item[{{\bf queue\+\_\+stream} \&}]{qs}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classatmi_1_1queue__stream_a78e4b1a78a980af524e6e851c9ff4d3c}
-Global utility to stream in a queue
-
-
-\begin{DoxyParams}{Parameters}
-{\em in} & input stream \\
-\hline
-{\em qs} & queue stream that handles the writing of messages to \\
-\hline
-\end{DoxyParams}
-
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

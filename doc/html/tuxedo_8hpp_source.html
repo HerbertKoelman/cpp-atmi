@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>C++ ATMI wrapper: include/atmi/tuxedo.hpp Source File</title>
+<title>cpp-atmi: include/atmi/tuxedo.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.4.1)</span>
+   <div id="projectname">cpp-atmi
+   &#160;<span id="projectnumber">(v4.5.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
@@ -72,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -248,7 +249,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;              <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1tuxedo__exception.html">tuxedo_exception</a> (_tperrno, catgets ( <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>, CATD_ATMI_SET, 33,<span class="stringliteral">&quot;Never heard about this tperrno (%d).&quot;</span>), _tperrno );</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;          };</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;          }</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;          <span class="keywordflow">return</span> _tperrno;</div>
 <div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classatmi_1_1tuxedo.html#ac0714439c1f2e889190471966c9fda2f">  284</a></span>&#160;        };</div>
@@ -283,7 +284,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1tuxedo_html_a53a772bbe8c5bb75dadec1c001067e4f"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">atmi::tuxedo::set</a></div><div class="ttdeci">static long set(long bits, long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:134</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_afdcf4b7d25862c6fdaeb47d095609a01"><div class="ttname"><a href="classatmi_1_1tuxedo.html#afdcf4b7d25862c6fdaeb47d095609a01">atmi::tuxedo::free</a></div><div class="ttdeci">void free(char *buffer)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:62</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a1c1d7f2df43e4357788d03977548ac2e"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a1c1d7f2df43e4357788d03977548ac2e">atmi::tuxedo::updateErrno</a></div><div class="ttdeci">void updateErrno()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:28</div></div>
-<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
+<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_ad134373ac62fd2c7e1ac5482bdb7f65e"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ad134373ac62fd2c7e1ac5482bdb7f65e">atmi::tuxedo::error_message</a></div><div class="ttdeci">const char * error_message() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:134</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a649b28c90b5f73439e5d2ceb83a43dbd"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a649b28c90b5f73439e5d2ceb83a43dbd">atmi::tuxedo::reset_flags</a></div><div class="ttdeci">void reset_flags(long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:188</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a2f5b4f52ca8095d704dcb23771425690"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a2f5b4f52ca8095d704dcb23771425690">atmi::tuxedo::error</a></div><div class="ttdeci">long error() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:127</div></div>

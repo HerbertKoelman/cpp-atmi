@@ -11,7 +11,7 @@ var searchData=
   ['add',['add',['../classatmi_1_1buffer.html#a5f30826d8273b619380e8b4f039af094',1,'atmi::buffer::add()'],['../classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a',1,'atmi::Tfield&lt; char * &gt;::add()'],['../classatmi_1_1field.html#a5441bc87ba4bc3e9eb37c6db6a29688f',1,'atmi::field::add()'],['../classatmi_1_1_tfield.html#a4962b3aa080aba4ecffc7f3fa98be2da',1,'atmi::Tfield::add()'],['../classatmi_1_1_tfield_3_01std_1_1string_01_4.html#af17fc3c22ce857f9d96f96d6c175b6d5',1,'atmi::Tfield&lt; std::string &gt;::add()']]],
   ['allocate',['allocate',['../classatmi_1_1tuxedo.html#a44e77e3e6216a8c3fb8be33d5d8fed93',1,'atmi::tuxedo']]],
   ['append',['append',['../classatmi_1_1buffer.html#a4a9abeb69354fa575c8b27c9af170e79',1,'atmi::buffer']]],
-  ['application_2dto_2dtransaction_20monitor_20interface',['Application-to-Transaction Monitor Interface',['../group__atmi.html',1,'']]],
+  ['atmi',['atmi',['../namespaceatmi.html',1,'atmi'],['../group__atmi.html',1,'(Global Namespace)']]],
   ['atmi_5fexception',['atmi_exception',['../classatmi_1_1atmi__exception.html#a95882b5a28a14774110080a50601abd5',1,'atmi::atmi_exception::atmi_exception(const char *msg, const Args &amp;...args)'],['../classatmi_1_1atmi__exception.html#afa30faf28ecbc27a8aeb06dccd3b1de6',1,'atmi::atmi_exception::atmi_exception()']]],
   ['atmi_5fexception',['atmi_exception',['../classatmi_1_1atmi__exception.html',1,'atmi']]]
 ];

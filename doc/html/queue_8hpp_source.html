@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>C++ ATMI wrapper: include/atmi/queue.hpp Source File</title>
+<title>cpp-atmi: include/atmi/queue.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">C++ ATMI wrapper
-   &#160;<span id="projectnumber">(v4.4.1)</span>
+   <div id="projectname">cpp-atmi
+   &#160;<span id="projectnumber">(v4.5.1)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li><a href="examples.html"><span>Examples</span></a></li>
@@ -72,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Modules</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -98,231 +99,234 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef CPP_ATMI_QUEUE_HPP</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define CPP_ATMI_QUEUE_HPP</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;typeinfo&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;atmi.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;fml32.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;nl_types.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;atmi/tuxedo.hpp&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;atmi/buffer.hpp&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//using namespace std;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceatmi.html">atmi</a> {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">class </span>queue;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#if __cplusplus &lt; 201103L</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">typedef</span> std::auto_ptr&lt;atmi::queue&gt;   queue_ptr; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">typedef</span> std::unique_ptr&lt;atmi::queue&gt; queue_ptr; <span class="comment">//&lt;! helper type</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html">   40</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1queue.html">queue</a> : <span class="keyword">public</span> <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <a class="code" href="classatmi_1_1queue.html#af8c86b01e410fe6499a7f53cdf70eb35">queue</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *qspace = NULL, <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a> = NULL, <span class="keyword">const</span> <span class="keywordtype">char</span> *reply = NULL );</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;typeinfo&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;atmi.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;fml32.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;nl_types.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;atmi/tuxedo.hpp&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;atmi/buffer.hpp&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//using namespace std;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// forward declaration (needed to declare operator &lt;&lt; and &gt;&gt; overloads)</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceatmi.html">atmi</a> { <span class="keyword">class </span>queue_stream; };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">extern</span> std::ostream&amp; <a class="code" href="group__fml.html#gaf0b4f377c31559db649c37f8df6f9c13">operator&lt;&lt;</a>(std::ostream&amp; out, <a class="code" href="classatmi_1_1queue__stream.html">atmi::queue_stream</a>&amp; qs);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">extern</span> std::istream&amp; operator&gt;&gt;(std::istream&amp; in, <a class="code" href="classatmi_1_1queue__stream.html">atmi::queue_stream</a>&amp; qs);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceatmi.html">atmi</a> {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="group__atmi.html#ga7cfd5961e0e05b148f12be311177a1a8">   49</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1queue.html">queue</a>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#if __cplusplus &lt; 201103L</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">typedef</span> std::auto_ptr&lt;atmi::queue&gt;   <a class="code" href="group__atmi.html#ga7cfd5961e0e05b148f12be311177a1a8">queue_ptr</a>; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">typedef</span> std::unique_ptr&lt;atmi::queue&gt; <a class="code" href="group__atmi.html#ga7cfd5961e0e05b148f12be311177a1a8">queue_ptr</a>; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html">   60</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1queue.html">queue</a> : <span class="keyword">public</span> <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <a class="code" href="group__atmi.html#gaf8c86b01e410fe6499a7f53cdf70eb35">queue</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *qspace = NULL, <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a> = NULL, <span class="keyword">const</span> <span class="keywordtype">char</span> *reply = NULL );</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#aa8a60e7609a1c28ec346a898a80f8ea6">dequeueReply</a> ( <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#aa8a60e7609a1c28ec346a898a80f8ea6">dequeueReply</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a2ea608bb1f59fdccb2b7592381bcf267">enqueueReply</a> ( <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a2ea608bb1f59fdccb2b7592381bcf267">enqueueReply</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a216acfef7e80352c8ce8476825f1146e">set_reply_queue</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *q );</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html#ac851146259feb3bf93aed287d6d42cb2">reply_queue</a> ();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a9b8f29fbb2012dda53d6f799ad2110b4">  132</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a9b8f29fbb2012dda53d6f799ad2110b4">set_queue_space</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *qs) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        _qspace = <span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span> *<span class="keyword">&gt;</span>(qs);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      };</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#aaf7d8d18008f9ee987b7e7aa2195d1db">  137</a></span>&#160;      <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html#aaf7d8d18008f9ee987b7e7aa2195d1db">queue_space</a> () {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">return</span> _qspace;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      };</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#gaa8a60e7609a1c28ec346a898a80f8ea6">dequeueReply</a> ( <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#gaa8a60e7609a1c28ec346a898a80f8ea6">dequeueReply</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga2ea608bb1f59fdccb2b7592381bcf267">enqueueReply</a> ( <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga2ea608bb1f59fdccb2b7592381bcf267">enqueueReply</a> ( <a class="code" href="classatmi_1_1buffer.html">buffer</a> &amp;data );</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga216acfef7e80352c8ce8476825f1146e">set_reply_queue</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *q );</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a5d70bbf99076bd41269e2a558bf52475">  146</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a5d70bbf99076bd41269e2a558bf52475">set_queue_name</a> ( <span class="keywordtype">char</span> *q) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        _queue = q;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      };</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#adaddc33c75ec6e13f6c57da8d979ad32">  151</a></span>&#160;      <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html#adaddc33c75ec6e13f6c57da8d979ad32">queue_name</a> () {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keywordflow">return</span> _queue;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      };</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a96f51996c857985c9b8e1b720f726f0c">  158</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1queue.html#a96f51996c857985c9b8e1b720f726f0c">qctl_flags</a> () {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordflow">return</span> _qctl.flags;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      };</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a9669776889226a450093d2ddfd921d4b">set_message_wait</a> ( <span class="keywordtype">bool</span> wait );</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a">  170</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a">setQWait</a> ( <span class="keywordtype">bool</span> wait ) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <a class="code" href="classatmi_1_1queue.html#a9669776889226a450093d2ddfd921d4b">set_message_wait</a> (wait);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      };</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a90f5a71979755634b1e625d45ac61412">  179</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classatmi_1_1queue.html#a90f5a71979755634b1e625d45ac61412">isQWaiting</a> () {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classatmi_1_1queue.html#ac655db1db167f3e833f4fa84e6256428">is_message_waiting</a> ();</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      };</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#ac655db1db167f3e833f4fa84e6256428">  184</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classatmi_1_1queue.html#ac655db1db167f3e833f4fa84e6256428">is_message_waiting</a> () {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> ((_qctl.flags &amp; TPQWAIT) == TPQWAIT);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;      };</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="group__atmi.html#gac851146259feb3bf93aed287d6d42cb2">reply_queue</a> ();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="group__atmi.html#ga9b8f29fbb2012dda53d6f799ad2110b4">  152</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga9b8f29fbb2012dda53d6f799ad2110b4">set_queue_space</a> ( <span class="keyword">const</span> <span class="keywordtype">char</span> *qs) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        _qspace = <span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span> *<span class="keyword">&gt;</span>(qs);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      };</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="group__atmi.html#gaaf7d8d18008f9ee987b7e7aa2195d1db">  157</a></span>&#160;      <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="group__atmi.html#gaaf7d8d18008f9ee987b7e7aa2195d1db">queue_space</a> () {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">return</span> _qspace;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      };</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="group__atmi.html#ga5d70bbf99076bd41269e2a558bf52475">  166</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga5d70bbf99076bd41269e2a558bf52475">set_queue_name</a> ( <span class="keywordtype">char</span> *q) {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        _queue = q;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      };</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="group__atmi.html#gadaddc33c75ec6e13f6c57da8d979ad32">  171</a></span>&#160;      <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="group__atmi.html#gadaddc33c75ec6e13f6c57da8d979ad32">queue_name</a> () {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">return</span> _queue;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      };</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="group__atmi.html#ga96f51996c857985c9b8e1b720f726f0c">  178</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="group__atmi.html#ga96f51996c857985c9b8e1b720f726f0c">qctl_flags</a> () {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">return</span> _qctl.flags;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      };</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga9669776889226a450093d2ddfd921d4b">set_message_wait</a> ( <span class="keywordtype">bool</span> wait );</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a0fbca137aadc2946b8f3889b76352af9">set_quality_of_service</a> ( <span class="keywordtype">long</span> qos);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a1fabff1d9a56389a41f92542561d570d">  200</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a1fabff1d9a56389a41f92542561d570d">diagno</a> () {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> _diagno;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;      };</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#a2c0511c9f17e939789c5290fe83d1f1f">set_new_corrid</a>();</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue.html#aa74de8091c32580972e7871e7ddf786c">unset_corrid</a>();</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classatmi_1_1queue.html#a767f80e22a52d4b325d5a5aadc27a343">  225</a></span>&#160;      <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt; <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a767f80e22a52d4b325d5a5aadc27a343">handle_diagnostics</a> ( <span class="keywordtype">int</span> tux_tperrno, <span class="keywordtype">int</span> tux_diagno, <span class="keyword">const</span> <span class="keywordtype">char</span> *msg, <span class="keyword">const</span> Args&amp;... args) {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        _diagno = tux_diagno;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keywordflow">switch</span> ( _diagno ) {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;          <span class="keywordflow">case</span> QMEINVAL:</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;          <span class="keywordflow">case</span> QMEBADRMID:</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;          <span class="keywordflow">case</span> QMENOTOPEN:</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;          <span class="keywordflow">case</span> QMETRAN:</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;          <span class="keywordflow">case</span> QMEBADMSGID:</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;          <span class="keywordflow">case</span> QMESYSTEM:</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;          <span class="keywordflow">case</span> QMEOS:</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;          <span class="keywordflow">case</span> QMEPROTO:</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;          <span class="keywordflow">case</span> QMEBADQUEUE:</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;          <span class="keywordflow">case</span> QMENOSPACE:</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;          <span class="keywordflow">case</span> QMERELEASE:</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;          <span class="keywordflow">case</span> QMESHARE:</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1diagnostic__exception.html">diagnostic_exception</a> ( tux_tperrno, _diagno, msg, args... );</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;          }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;          <span class="keywordflow">case</span> QMEABORTED:</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;          {</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1aborted__exception.html">aborted_exception</a> ( msg, args... );</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;          }</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          <span class="comment">/* these are not errors */</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          <span class="keywordflow">case</span> QMENOMSG:</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            <span class="comment">// not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1diagnostic__exception.html">diagnostic_exception</a> ( tux_tperrno, _diagno, catgets ( <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>, CATD_ATMI_SET, 33, <span class="stringliteral">&quot;Never heard about this diagno %d (tperrno: %d) !!??&quot;</span>), _diagno, tux_tperrno);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">return</span> _diagno;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a>,  <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classatmi_1_1queue.html#a140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a>,  <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      <span class="keywordtype">char</span>   *_qspace;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;      <span class="keywordtype">char</span>   *_queue;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      <span class="keywordtype">int</span>    _diagno;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      TPQCTL _qctl;</div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="group__atmi.html#ga223fac7945fb8d87f04189aa77ce666a">  190</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga223fac7945fb8d87f04189aa77ce666a">setQWait</a> ( <span class="keywordtype">bool</span> wait ) {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <a class="code" href="group__atmi.html#ga9669776889226a450093d2ddfd921d4b">set_message_wait</a> (wait);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;      };</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="group__atmi.html#ga90f5a71979755634b1e625d45ac61412">  199</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="group__atmi.html#ga90f5a71979755634b1e625d45ac61412">isQWaiting</a> () {</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="group__atmi.html#gac655db1db167f3e833f4fa84e6256428">is_message_waiting</a> ();</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;      };</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="group__atmi.html#gac655db1db167f3e833f4fa84e6256428">  204</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="group__atmi.html#gac655db1db167f3e833f4fa84e6256428">is_message_waiting</a> () {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">return</span> ((_qctl.flags &amp; TPQWAIT) == TPQWAIT);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;      };</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga0fbca137aadc2946b8f3889b76352af9">set_quality_of_service</a> ( <span class="keywordtype">long</span> qos);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="group__atmi.html#ga1fabff1d9a56389a41f92542561d570d">  220</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga1fabff1d9a56389a41f92542561d570d">diagno</a> () {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">return</span> _diagno;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      };</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga2c0511c9f17e939789c5290fe83d1f1f">set_new_corrid</a>();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#gaa74de8091c32580972e7871e7ddf786c">unset_corrid</a>();</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="group__atmi.html#ga767f80e22a52d4b325d5a5aadc27a343">  245</a></span>&#160;      <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt; <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga767f80e22a52d4b325d5a5aadc27a343">handle_diagnostics</a> ( <span class="keywordtype">int</span> tux_tperrno, <span class="keywordtype">int</span> tux_diagno, <span class="keyword">const</span> <span class="keywordtype">char</span> *msg, <span class="keyword">const</span> Args&amp;... args) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        _diagno = tux_diagno;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">switch</span> ( _diagno ) {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          <span class="keywordflow">case</span> QMEINVAL:</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          <span class="keywordflow">case</span> QMEBADRMID:</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          <span class="keywordflow">case</span> QMENOTOPEN:</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          <span class="keywordflow">case</span> QMETRAN:</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          <span class="keywordflow">case</span> QMEBADMSGID:</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          <span class="keywordflow">case</span> QMESYSTEM:</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          <span class="keywordflow">case</span> QMEOS:</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;          <span class="keywordflow">case</span> QMEPROTO:</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;          <span class="keywordflow">case</span> QMEBADQUEUE:</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;          <span class="keywordflow">case</span> QMENOSPACE:</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;          <span class="keywordflow">case</span> QMERELEASE:</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;          <span class="keywordflow">case</span> QMESHARE:</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1diagnostic__exception.html">diagnostic_exception</a> ( tux_tperrno, _diagno, msg, args... );</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;          }</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;          <span class="keywordflow">case</span> QMEABORTED:</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;          {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1aborted__exception.html">aborted_exception</a> ( msg, args... );</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;          }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;          <span class="comment">/* these are not errors */</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;          <span class="keywordflow">case</span> QMENOMSG:</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="comment">// not an error - throw nomsg_exception ( _tperrno, _diagno, msg, ap );</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classatmi_1_1diagnostic__exception.html">diagnostic_exception</a> ( tux_tperrno, _diagno, catgets ( <a class="code" href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">_catd</a>, CATD_ATMI_SET, 33, <span class="stringliteral">&quot;Never heard about this diagno %d (tperrno: %d) !!??&quot;</span>), _diagno, tux_tperrno);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      <span class="keywordtype">void</span> setQCTL();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  };</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">return</span> _diagno;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      }</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classatmi_1_1queue__stream.html">  285</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1queue__stream.html">queue_stream</a> : <span class="keyword">public</span> <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> {</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga6b27337fd68ca97236e4905d09b7eb15">enqueue</a> ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a>,  <span class="keywordtype">char</span> *data, <span class="keywordtype">long</span> len );</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="classatmi_1_1queue__stream.html#a8be6df3d0274f2b2090e42eda42f7301">operator&lt;&lt;</a>(std::ostream&amp; out, <a class="code" href="classatmi_1_1queue__stream.html">queue_stream</a>&amp; qs);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      <span class="keyword">friend</span> std::istream&amp; <a class="code" href="classatmi_1_1queue__stream.html#a78e4b1a78a980af524e6e851c9ff4d3c">operator&gt;&gt;</a>(std::istream&amp; in, <a class="code" href="classatmi_1_1queue__stream.html">queue_stream</a>&amp; qs);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classatmi_1_1queue__stream.html#a775623d6cd91a8a3cd40d9bb1e492c60">queue_stream</a> ( <a class="code" href="classatmi_1_1queue.html">queue</a> *q ) ;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;      <span class="keywordtype">int</span> <a class="code" href="group__atmi.html#ga140e0faa2ab1265d3258ebc5f2049c41">dequeue</a> ( <span class="keywordtype">char</span> *<a class="code" href="classatmi_1_1queue.html">queue</a>,  <span class="keywordtype">char</span> **data, <span class="keywordtype">long</span> *len );</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <span class="keywordtype">char</span>   *_qspace;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;      <span class="keywordtype">char</span>   *_queue;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      <span class="keywordtype">int</span>    _diagno;</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;      <a class="code" href="classatmi_1_1queue__stream.html#a775623d6cd91a8a3cd40d9bb1e492c60">queue_stream</a> ( <a class="code" href="classatmi_1_1queue.html">queue</a> *q, <span class="keywordtype">long</span> bs );</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
-<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="classatmi_1_1queue__stream.html#ac4f1e88530a4d9fda0bc4b271301866b">  306</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1queue__stream.html#ac4f1e88530a4d9fda0bc4b271301866b">count</a> () {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keywordflow">return</span> _count;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;      };</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;</div>
-<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="classatmi_1_1queue__stream.html#a500b658e3f3f1a353982a1304ea27801">  313</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue__stream.html#a500b658e3f3f1a353982a1304ea27801">set_buffer_size</a> ( <span class="keywordtype">long</span> s ) {</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        _buffer_size = s;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;      };</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
-<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="classatmi_1_1queue__stream.html#a18d01411c5ffeffd190195fd2b4dc61a">  318</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="classatmi_1_1queue__stream.html#a18d01411c5ffeffd190195fd2b4dc61a">buffer_size</a> () {</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">return</span> _buffer_size;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      };</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classatmi_1_1queue__stream.html#a4a47e7caf329e46c31f44425e3ceb6e3">encode_base64</a>(<span class="keywordtype">bool</span> b);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      <span class="keywordtype">long</span>   _count;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordtype">long</span>   _buffer_size;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      <a class="code" href="classatmi_1_1queue.html">queue</a> *_queue;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  };</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  <span class="keyword">extern</span> std::ostream&amp; <a class="code" href="group__atmi.html#gaf05328bfccb410191dc529104dc3a04f">operator&lt;&lt;</a>(std::ostream&amp; out, queue_stream&amp; qs);</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keyword">extern</span> std::istream&amp; <a class="code" href="group__atmi.html#ga0be52e17b198d28a9436b17b59efcca6">operator&gt;&gt;</a>(std::istream&amp; in, queue_stream&amp; qs);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classatmi_1_1queue_html_aa74de8091c32580972e7871e7ddf786c"><div class="ttname"><a href="classatmi_1_1queue.html#aa74de8091c32580972e7871e7ddf786c">atmi::queue::unset_corrid</a></div><div class="ttdeci">void unset_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:247</div></div>
-<div class="ttc" id="group__atmi_html_gaf05328bfccb410191dc529104dc3a04f"><div class="ttname"><a href="group__atmi.html#gaf05328bfccb410191dc529104dc3a04f">atmi::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;out, queue_stream &amp;qs)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:45</div></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;      TPQCTL _qctl;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      <span class="keywordtype">void</span> setQCTL();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  };</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="classatmi_1_1queue__stream.html">  305</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classatmi_1_1queue__stream.html">queue_stream</a> : <span class="keyword">public</span> <a class="code" href="classatmi_1_1tuxedo.html">tuxedo</a> {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;      <span class="keyword">friend</span> std::ostream&amp; ::operator&lt;&lt;(std::ostream&amp; out, <a class="code" href="classatmi_1_1queue__stream.html">atmi::queue_stream</a>&amp; qs);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      <span class="keyword">friend</span> std::istream&amp; ::operator&gt;&gt;(std::istream&amp; in,  <a class="code" href="classatmi_1_1queue__stream.html">atmi::queue_stream</a>&amp; qs);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="group__atmi.html#ga4d7ccf78c5bb515968b294d374b8c46a">queue_stream</a> ( <a class="code" href="classatmi_1_1queue.html">queue</a> &amp;q ) ;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      <a class="code" href="group__atmi.html#ga4d7ccf78c5bb515968b294d374b8c46a">queue_stream</a> ( <a class="code" href="classatmi_1_1queue.html">queue</a> &amp;q, <span class="keywordtype">long</span> bs );</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="group__atmi.html#gac4f1e88530a4d9fda0bc4b271301866b">  339</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="group__atmi.html#gac4f1e88530a4d9fda0bc4b271301866b">count</a> () {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="keywordflow">return</span> _count;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;      };</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="group__atmi.html#ga500b658e3f3f1a353982a1304ea27801">  346</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga500b658e3f3f1a353982a1304ea27801">set_buffer_size</a> ( <span class="keywordtype">long</span> s ) {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        _buffer_size = s;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;      };</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
+<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="group__atmi.html#ga18d01411c5ffeffd190195fd2b4dc61a">  351</a></span>&#160;      <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="group__atmi.html#ga18d01411c5ffeffd190195fd2b4dc61a">buffer_size</a> () {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <span class="keywordflow">return</span> _buffer_size;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;      };</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="group__atmi.html#ga4a47e7caf329e46c31f44425e3ceb6e3">encode_base64</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <span class="keywordtype">long</span>   _count;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;      <span class="keywordtype">long</span>   _buffer_size;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      <a class="code" href="classatmi_1_1queue.html">queue</a> *_queue;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  };</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;}</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html"><div class="ttname"><a href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:53</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_af8c86b01e410fe6499a7f53cdf70eb35"><div class="ttname"><a href="classatmi_1_1queue.html#af8c86b01e410fe6499a7f53cdf70eb35">atmi::queue::queue</a></div><div class="ttdeci">queue(const char *qspace=NULL, const char *queue=NULL, const char *reply=NULL)</div><div class="ttdef"><b>Definition:</b> queue.cpp:25</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a78e4b1a78a980af524e6e851c9ff4d3c"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a78e4b1a78a980af524e6e851c9ff4d3c">atmi::queue_stream::operator&gt;&gt;</a></div><div class="ttdeci">friend std::istream &amp; operator&gt;&gt;(std::istream &amp;in, queue_stream &amp;qs)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:117</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a223fac7945fb8d87f04189aa77ce666a"><div class="ttname"><a href="classatmi_1_1queue.html#a223fac7945fb8d87f04189aa77ce666a">atmi::queue::setQWait</a></div><div class="ttdeci">void setQWait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.hpp:170</div></div>
+<div class="ttc" id="group__atmi_html_gadaddc33c75ec6e13f6c57da8d979ad32"><div class="ttname"><a href="group__atmi.html#gadaddc33c75ec6e13f6c57da8d979ad32">atmi::queue::queue_name</a></div><div class="ttdeci">const char * queue_name()</div><div class="ttdef"><b>Definition:</b> queue.hpp:171</div></div>
+<div class="ttc" id="group__atmi_html_gac655db1db167f3e833f4fa84e6256428"><div class="ttname"><a href="group__atmi.html#gac655db1db167f3e833f4fa84e6256428">atmi::queue::is_message_waiting</a></div><div class="ttdeci">bool is_message_waiting()</div><div class="ttdef"><b>Definition:</b> queue.hpp:204</div></div>
+<div class="ttc" id="group__atmi_html_ga216acfef7e80352c8ce8476825f1146e"><div class="ttname"><a href="group__atmi.html#ga216acfef7e80352c8ce8476825f1146e">atmi::queue::set_reply_queue</a></div><div class="ttdeci">void set_reply_queue(const char *q)</div><div class="ttdef"><b>Definition:</b> queue.cpp:182</div></div>
+<div class="ttc" id="group__atmi_html_ga2ea608bb1f59fdccb2b7592381bcf267"><div class="ttname"><a href="group__atmi.html#ga2ea608bb1f59fdccb2b7592381bcf267">atmi::queue::enqueueReply</a></div><div class="ttdeci">int enqueueReply(char *data, long len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:125</div></div>
+<div class="ttc" id="group__atmi_html_ga140e0faa2ab1265d3258ebc5f2049c41"><div class="ttname"><a href="group__atmi.html#ga140e0faa2ab1265d3258ebc5f2049c41">atmi::queue::dequeue</a></div><div class="ttdeci">int dequeue(char **data, long *len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:169</div></div>
+<div class="ttc" id="group__atmi_html_ga90f5a71979755634b1e625d45ac61412"><div class="ttname"><a href="group__atmi.html#ga90f5a71979755634b1e625d45ac61412">atmi::queue::isQWaiting</a></div><div class="ttdeci">bool isQWaiting()</div><div class="ttdef"><b>Definition:</b> queue.hpp:199</div></div>
 <div class="ttc" id="classatmi_1_1diagnostic__exception_html"><div class="ttname"><a href="classatmi_1_1diagnostic__exception.html">atmi::diagnostic_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:300</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_ac655db1db167f3e833f4fa84e6256428"><div class="ttname"><a href="classatmi_1_1queue.html#ac655db1db167f3e833f4fa84e6256428">atmi::queue::is_message_waiting</a></div><div class="ttdeci">bool is_message_waiting()</div><div class="ttdef"><b>Definition:</b> queue.hpp:184</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a4a47e7caf329e46c31f44425e3ceb6e3"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a4a47e7caf329e46c31f44425e3ceb6e3">atmi::queue_stream::encode_base64</a></div><div class="ttdeci">void encode_base64(bool b)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:32</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a775623d6cd91a8a3cd40d9bb1e492c60"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a775623d6cd91a8a3cd40d9bb1e492c60">atmi::queue_stream::queue_stream</a></div><div class="ttdeci">queue_stream(queue *q)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:21</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a2c0511c9f17e939789c5290fe83d1f1f"><div class="ttname"><a href="classatmi_1_1queue.html#a2c0511c9f17e939789c5290fe83d1f1f">atmi::queue::set_new_corrid</a></div><div class="ttdeci">void set_new_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:235</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a500b658e3f3f1a353982a1304ea27801"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a500b658e3f3f1a353982a1304ea27801">atmi::queue_stream::set_buffer_size</a></div><div class="ttdeci">void set_buffer_size(long s)</div><div class="ttdef"><b>Definition:</b> queue.hpp:313</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_adaddc33c75ec6e13f6c57da8d979ad32"><div class="ttname"><a href="classatmi_1_1queue.html#adaddc33c75ec6e13f6c57da8d979ad32">atmi::queue::queue_name</a></div><div class="ttdeci">const char * queue_name()</div><div class="ttdef"><b>Definition:</b> queue.hpp:151</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a5d70bbf99076bd41269e2a558bf52475"><div class="ttname"><a href="classatmi_1_1queue.html#a5d70bbf99076bd41269e2a558bf52475">atmi::queue::set_queue_name</a></div><div class="ttdeci">void set_queue_name(char *q)</div><div class="ttdef"><b>Definition:</b> queue.hpp:146</div></div>
+<div class="ttc" id="group__fml_html_gaf0b4f377c31559db649c37f8df6f9c13"><div class="ttname"><a href="group__fml.html#gaf0b4f377c31559db649c37f8df6f9c13">atmi::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;o, Tfield&lt; std::string &gt; &amp;f)</div><div class="ttdef"><b>Definition:</b> field.cpp:122</div></div>
+<div class="ttc" id="group__atmi_html_ga4d7ccf78c5bb515968b294d374b8c46a"><div class="ttname"><a href="group__atmi.html#ga4d7ccf78c5bb515968b294d374b8c46a">atmi::queue_stream::queue_stream</a></div><div class="ttdeci">queue_stream(queue &amp;q)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:22</div></div>
+<div class="ttc" id="group__atmi_html_gac851146259feb3bf93aed287d6d42cb2"><div class="ttname"><a href="group__atmi.html#gac851146259feb3bf93aed287d6d42cb2">atmi::queue::reply_queue</a></div><div class="ttdeci">const char * reply_queue()</div><div class="ttdef"><b>Definition:</b> queue.cpp:191</div></div>
+<div class="ttc" id="group__atmi_html_ga4a47e7caf329e46c31f44425e3ceb6e3"><div class="ttname"><a href="group__atmi.html#ga4a47e7caf329e46c31f44425e3ceb6e3">atmi::queue_stream::encode_base64</a></div><div class="ttdeci">void encode_base64(bool b)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:33</div></div>
+<div class="ttc" id="group__atmi_html_ga9b8f29fbb2012dda53d6f799ad2110b4"><div class="ttname"><a href="group__atmi.html#ga9b8f29fbb2012dda53d6f799ad2110b4">atmi::queue::set_queue_space</a></div><div class="ttdeci">void set_queue_space(const char *qs)</div><div class="ttdef"><b>Definition:</b> queue.hpp:152</div></div>
+<div class="ttc" id="group__atmi_html_gaa74de8091c32580972e7871e7ddf786c"><div class="ttname"><a href="group__atmi.html#gaa74de8091c32580972e7871e7ddf786c">atmi::queue::unset_corrid</a></div><div class="ttdeci">void unset_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:247</div></div>
+<div class="ttc" id="group__atmi_html_ga0fbca137aadc2946b8f3889b76352af9"><div class="ttname"><a href="group__atmi.html#ga0fbca137aadc2946b8f3889b76352af9">atmi::queue::set_quality_of_service</a></div><div class="ttdeci">void set_quality_of_service(long qos)</div><div class="ttdef"><b>Definition:</b> queue.cpp:205</div></div>
+<div class="ttc" id="group__atmi_html_ga6b27337fd68ca97236e4905d09b7eb15"><div class="ttname"><a href="group__atmi.html#ga6b27337fd68ca97236e4905d09b7eb15">atmi::queue::enqueue</a></div><div class="ttdeci">int enqueue(char *data, long len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:93</div></div>
 <div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:59</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a9669776889226a450093d2ddfd921d4b"><div class="ttname"><a href="classatmi_1_1queue.html#a9669776889226a450093d2ddfd921d4b">atmi::queue::set_message_wait</a></div><div class="ttdeci">void set_message_wait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.cpp:196</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_aaf7d8d18008f9ee987b7e7aa2195d1db"><div class="ttname"><a href="classatmi_1_1queue.html#aaf7d8d18008f9ee987b7e7aa2195d1db">atmi::queue::queue_space</a></div><div class="ttdeci">const char * queue_space()</div><div class="ttdef"><b>Definition:</b> queue.hpp:137</div></div>
-<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_aa8a60e7609a1c28ec346a898a80f8ea6"><div class="ttname"><a href="classatmi_1_1queue.html#aa8a60e7609a1c28ec346a898a80f8ea6">atmi::queue::dequeueReply</a></div><div class="ttdeci">int dequeueReply(char **data, long *len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:107</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a18d01411c5ffeffd190195fd2b4dc61a"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a18d01411c5ffeffd190195fd2b4dc61a">atmi::queue_stream::buffer_size</a></div><div class="ttdeci">long buffer_size()</div><div class="ttdef"><b>Definition:</b> queue.hpp:318</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a140e0faa2ab1265d3258ebc5f2049c41"><div class="ttname"><a href="classatmi_1_1queue.html#a140e0faa2ab1265d3258ebc5f2049c41">atmi::queue::dequeue</a></div><div class="ttdeci">int dequeue(char **data, long *len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:169</div></div>
+<div class="ttc" id="group__atmi_html_ga223fac7945fb8d87f04189aa77ce666a"><div class="ttname"><a href="group__atmi.html#ga223fac7945fb8d87f04189aa77ce666a">atmi::queue::setQWait</a></div><div class="ttdeci">void setQWait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.hpp:190</div></div>
+<div class="ttc" id="group__atmi_html_ga5d70bbf99076bd41269e2a558bf52475"><div class="ttname"><a href="group__atmi.html#ga5d70bbf99076bd41269e2a558bf52475">atmi::queue::set_queue_name</a></div><div class="ttdeci">void set_queue_name(char *q)</div><div class="ttdef"><b>Definition:</b> queue.hpp:166</div></div>
+<div class="ttc" id="group__atmi_html_gaf8c86b01e410fe6499a7f53cdf70eb35"><div class="ttname"><a href="group__atmi.html#gaf8c86b01e410fe6499a7f53cdf70eb35">atmi::queue::queue</a></div><div class="ttdeci">queue(const char *qspace=NULL, const char *queue=NULL, const char *reply=NULL)</div><div class="ttdef"><b>Definition:</b> queue.cpp:25</div></div>
+<div class="ttc" id="group__atmi_html_ga1fabff1d9a56389a41f92542561d570d"><div class="ttname"><a href="group__atmi.html#ga1fabff1d9a56389a41f92542561d570d">atmi::queue::diagno</a></div><div class="ttdeci">int diagno()</div><div class="ttdef"><b>Definition:</b> queue.hpp:220</div></div>
+<div class="ttc" id="group__atmi_html_ga96f51996c857985c9b8e1b720f726f0c"><div class="ttname"><a href="group__atmi.html#ga96f51996c857985c9b8e1b720f726f0c">atmi::queue::qctl_flags</a></div><div class="ttdeci">long qctl_flags()</div><div class="ttdef"><b>Definition:</b> queue.hpp:178</div></div>
+<div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
+<div class="ttc" id="group__atmi_html_ga2c0511c9f17e939789c5290fe83d1f1f"><div class="ttname"><a href="group__atmi.html#ga2c0511c9f17e939789c5290fe83d1f1f">atmi::queue::set_new_corrid</a></div><div class="ttdeci">void set_new_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:235</div></div>
+<div class="ttc" id="group__atmi_html_ga767f80e22a52d4b325d5a5aadc27a343"><div class="ttname"><a href="group__atmi.html#ga767f80e22a52d4b325d5a5aadc27a343">atmi::queue::handle_diagnostics</a></div><div class="ttdeci">int handle_diagnostics(int tux_tperrno, int tux_diagno, const char *msg, const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> queue.hpp:245</div></div>
+<div class="ttc" id="group__atmi_html_gaaf7d8d18008f9ee987b7e7aa2195d1db"><div class="ttname"><a href="group__atmi.html#gaaf7d8d18008f9ee987b7e7aa2195d1db">atmi::queue::queue_space</a></div><div class="ttdeci">const char * queue_space()</div><div class="ttdef"><b>Definition:</b> queue.hpp:157</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a1193fe16ac0984776678a23da351d00a"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a1193fe16ac0984776678a23da351d00a">atmi::tuxedo::_catd</a></div><div class="ttdeci">nl_catd _catd</div><div class="ttdoc">message catalog refenence </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:287</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a0fbca137aadc2946b8f3889b76352af9"><div class="ttname"><a href="classatmi_1_1queue.html#a0fbca137aadc2946b8f3889b76352af9">atmi::queue::set_quality_of_service</a></div><div class="ttdeci">void set_quality_of_service(long qos)</div><div class="ttdef"><b>Definition:</b> queue.cpp:205</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a9b8f29fbb2012dda53d6f799ad2110b4"><div class="ttname"><a href="classatmi_1_1queue.html#a9b8f29fbb2012dda53d6f799ad2110b4">atmi::queue::set_queue_space</a></div><div class="ttdeci">void set_queue_space(const char *qs)</div><div class="ttdef"><b>Definition:</b> queue.hpp:132</div></div>
-<div class="ttc" id="classatmi_1_1queue_html"><div class="ttname"><a href="classatmi_1_1queue.html">atmi::queue</a></div><div class="ttdef"><b>Definition:</b> queue.hpp:40</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a767f80e22a52d4b325d5a5aadc27a343"><div class="ttname"><a href="classatmi_1_1queue.html#a767f80e22a52d4b325d5a5aadc27a343">atmi::queue::handle_diagnostics</a></div><div class="ttdeci">int handle_diagnostics(int tux_tperrno, int tux_diagno, const char *msg, const Args &amp;...args)</div><div class="ttdef"><b>Definition:</b> queue.hpp:225</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_ac4f1e88530a4d9fda0bc4b271301866b"><div class="ttname"><a href="classatmi_1_1queue__stream.html#ac4f1e88530a4d9fda0bc4b271301866b">atmi::queue_stream::count</a></div><div class="ttdeci">long count()</div><div class="ttdef"><b>Definition:</b> queue.hpp:306</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a2ea608bb1f59fdccb2b7592381bcf267"><div class="ttname"><a href="classatmi_1_1queue.html#a2ea608bb1f59fdccb2b7592381bcf267">atmi::queue::enqueueReply</a></div><div class="ttdeci">int enqueueReply(char *data, long len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:125</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html_a8be6df3d0274f2b2090e42eda42f7301"><div class="ttname"><a href="classatmi_1_1queue__stream.html#a8be6df3d0274f2b2090e42eda42f7301">atmi::queue_stream::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;out, queue_stream &amp;qs)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:45</div></div>
-<div class="ttc" id="classatmi_1_1queue__stream_html"><div class="ttname"><a href="classatmi_1_1queue__stream.html">atmi::queue_stream</a></div><div class="ttdef"><b>Definition:</b> queue.hpp:285</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a96f51996c857985c9b8e1b720f726f0c"><div class="ttname"><a href="classatmi_1_1queue.html#a96f51996c857985c9b8e1b720f726f0c">atmi::queue::qctl_flags</a></div><div class="ttdeci">long qctl_flags()</div><div class="ttdef"><b>Definition:</b> queue.hpp:158</div></div>
+<div class="ttc" id="group__atmi_html_ga9669776889226a450093d2ddfd921d4b"><div class="ttname"><a href="group__atmi.html#ga9669776889226a450093d2ddfd921d4b">atmi::queue::set_message_wait</a></div><div class="ttdeci">void set_message_wait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.cpp:196</div></div>
+<div class="ttc" id="classatmi_1_1queue_html"><div class="ttname"><a href="classatmi_1_1queue.html">atmi::queue</a></div><div class="ttdef"><b>Definition:</b> queue.hpp:60</div></div>
+<div class="ttc" id="classatmi_1_1queue__stream_html"><div class="ttname"><a href="classatmi_1_1queue__stream.html">atmi::queue_stream</a></div><div class="ttdef"><b>Definition:</b> queue.hpp:305</div></div>
+<div class="ttc" id="group__atmi_html_ga7cfd5961e0e05b148f12be311177a1a8"><div class="ttname"><a href="group__atmi.html#ga7cfd5961e0e05b148f12be311177a1a8">atmi::queue_ptr</a></div><div class="ttdeci">std::unique_ptr&lt; atmi::queue &gt; queue_ptr</div><div class="ttdoc">helper type </div><div class="ttdef"><b>Definition:</b> queue.hpp:49</div></div>
+<div class="ttc" id="group__atmi_html_gac4f1e88530a4d9fda0bc4b271301866b"><div class="ttname"><a href="group__atmi.html#gac4f1e88530a4d9fda0bc4b271301866b">atmi::queue_stream::count</a></div><div class="ttdeci">long count()</div><div class="ttdef"><b>Definition:</b> queue.hpp:339</div></div>
+<div class="ttc" id="group__atmi_html_ga18d01411c5ffeffd190195fd2b4dc61a"><div class="ttname"><a href="group__atmi.html#ga18d01411c5ffeffd190195fd2b4dc61a">atmi::queue_stream::buffer_size</a></div><div class="ttdeci">long buffer_size()</div><div class="ttdef"><b>Definition:</b> queue.hpp:351</div></div>
+<div class="ttc" id="group__atmi_html_ga500b658e3f3f1a353982a1304ea27801"><div class="ttname"><a href="group__atmi.html#ga500b658e3f3f1a353982a1304ea27801">atmi::queue_stream::set_buffer_size</a></div><div class="ttdeci">void set_buffer_size(long s)</div><div class="ttdef"><b>Definition:</b> queue.hpp:346</div></div>
 <div class="ttc" id="classatmi_1_1aborted__exception_html"><div class="ttname"><a href="classatmi_1_1aborted__exception.html">atmi::aborted_exception</a></div><div class="ttdef"><b>Definition:</b> exceptions.hpp:358</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a90f5a71979755634b1e625d45ac61412"><div class="ttname"><a href="classatmi_1_1queue.html#a90f5a71979755634b1e625d45ac61412">atmi::queue::isQWaiting</a></div><div class="ttdeci">bool isQWaiting()</div><div class="ttdef"><b>Definition:</b> queue.hpp:179</div></div>
-<div class="ttc" id="group__atmi_html_ga0be52e17b198d28a9436b17b59efcca6"><div class="ttname"><a href="group__atmi.html#ga0be52e17b198d28a9436b17b59efcca6">atmi::operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;in, queue_stream &amp;qs)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:117</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_ac851146259feb3bf93aed287d6d42cb2"><div class="ttname"><a href="classatmi_1_1queue.html#ac851146259feb3bf93aed287d6d42cb2">atmi::queue::reply_queue</a></div><div class="ttdeci">const char * reply_queue()</div><div class="ttdef"><b>Definition:</b> queue.cpp:191</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a216acfef7e80352c8ce8476825f1146e"><div class="ttname"><a href="classatmi_1_1queue.html#a216acfef7e80352c8ce8476825f1146e">atmi::queue::set_reply_queue</a></div><div class="ttdeci">void set_reply_queue(const char *q)</div><div class="ttdef"><b>Definition:</b> queue.cpp:182</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a6b27337fd68ca97236e4905d09b7eb15"><div class="ttname"><a href="classatmi_1_1queue.html#a6b27337fd68ca97236e4905d09b7eb15">atmi::queue::enqueue</a></div><div class="ttdeci">int enqueue(char *data, long len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:93</div></div>
-<div class="ttc" id="classatmi_1_1queue_html_a1fabff1d9a56389a41f92542561d570d"><div class="ttname"><a href="classatmi_1_1queue.html#a1fabff1d9a56389a41f92542561d570d">atmi::queue::diagno</a></div><div class="ttdeci">int diagno()</div><div class="ttdef"><b>Definition:</b> queue.hpp:200</div></div>
+<div class="ttc" id="group__atmi_html_gaa8a60e7609a1c28ec346a898a80f8ea6"><div class="ttname"><a href="group__atmi.html#gaa8a60e7609a1c28ec346a898a80f8ea6">atmi::queue::dequeueReply</a></div><div class="ttdeci">int dequeueReply(char **data, long *len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
