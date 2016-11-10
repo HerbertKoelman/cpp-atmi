@@ -17,13 +17,20 @@ RM=@RM@
 DOXYGEN=@DOXYGEN@
 CODECHECK=@CODECHECK@
 MKDIR=@MKDIR_P@
+LN_S=@LN_S@
+DEPLOY=@DEPLOY@
+REPOSITORY=@REPOSITORY@
 
-PACKAGE_DEVELOP=@PACKAGE_NAME@-@BUILD@-@PACKAGE_VERSION@-@build_os@-dev.tar.gz
-PACKAGE=@PACKAGE_NAME@-@BUILD@-@PACKAGE_VERSION@-@build_os@.tar.gz
+PACKAGE_NAME=@PACKAGE_NAME@
+PACKAGE_DEVELOP=@PACKAGE_NAME@-@BUILD@-@build_os@-dev.tar.gz
+PACKAGE=@PACKAGE_NAME@-@BUILD@-@build_os@.tar.gz
 
 HEADERS=@HEADERS@
-LIBS=libatmi++.a libcltatmi++.a libfml++.a
-BINS=tmreboot
+LIBATMI=libatmi++.a
+LIBCLTATMI=libcltatmi++.a
+LIBFML=libfml++.a
+LIBS=$(LIBATMI) $(LIBCLTATMI) $(LIBFML)
+BINS=decode qexport qimport qwriter tmreboot
 
 all:
 	(cd src && $(MAKE) all )
@@ -33,15 +40,22 @@ all:
 #	cd samples/atmi++ ; $(MAKE) globber all clean
 #	cd samples/utl ; $(MAKE) globber all clean
 
-pkg:
+pkg: clean all
 	$(MKDIR) distrib
-	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE_DEVELOP)
-	tar cf -  bin            | gzip -c > distrib/$(PACKAGE)
+	tar cf - include lib  | gzip -c > distrib/$(PACKAGE_DEVELOP)
+	tar cf -  bin         | gzip -c > distrib/$(PACKAGE)
+
+# this target can only be used if REPOSITORY is set (hence the test)
+deploy: pkg
+	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE_DEVELOP) $(REPOSITORY) 2> /dev/null ) || echo "WARNING use ./configure --enable-repository to enable deploy target"
+	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE) $(REPOSITORY) 2> /dev/null ) || echo "WARNING use ./configure --enable-repository to enable deploy target"
+	@echo "deployed $(PACKAGE_DEVELOP) and $(PACKAGE) in $(REPOSITORY)"
 
 clean:
 	( cd src && make clean )
 	( cd utls && make clean )
 	$(RM) -R distrib
+	$(RM) bin/*
 
 globber:clean
 	${RM} -R distrib doc html man autom4te.cache distrib
@@ -62,8 +76,9 @@ version:
 	-echo "don't forget to run configure."
 
 install: 
-	$(MKDIR) $(INCLUDEDIR) && $(INSTALL) include/atmi/*.hpp include/atmi/*.h $(INCLUDEDIR)
-	$(INSTALL) lib/*.a @libdir@
+	$(MKDIR) $(INCLUDEDIR)
+	$(INSTALL) include/atmi/*.hpp include/atmi/*.h $(INCLUDEDIR)
+	$(INSTALL) lib/$(LIBATMI) lib/$(LIBCLTATMI) lib/$(LIBFML) @libdir@
 	$(INSTALL) bin/*   @bindir@
 
 uninstall:
