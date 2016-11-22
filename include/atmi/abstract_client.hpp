@@ -54,8 +54,8 @@ namespace atmi {
    * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
    * only for native clients.
    *
-   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
-   * which are auto pointers. which is probaly the best way to avoid memory leaks.
+   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). 
+   * These methods return tp_auto_ptr and queue_auto_ptr which are auto pointers. which is probaly the best way to avoid memory leaks.
    *
    */
   class abstract_client : public tuxedo {
@@ -89,11 +89,12 @@ namespace atmi {
        *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
+       * @param sys_passwd Tuxedo domain passwd (TPSYSAUTH, default NULL)
+       * @param app_passwd application password (TPAPPAUTH,default NULL)
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param tuxconfig used located the DOMAIN
        */
-      explicit abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
+      explicit abstract_client ( const char *cltname, const char *usr = NULL, const char *sys_passwd = NULL, const char *app_passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
 
       /** This method must overriden  to run the client application.
        *
