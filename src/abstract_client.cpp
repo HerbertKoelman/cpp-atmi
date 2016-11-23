@@ -46,12 +46,14 @@ namespace atmi {
     // these will store copies of char buffers
     const char *spasswd = NULL; // reference to system passwd
     const char *apasswd = NULL; // reference to application passwd
+    size_t      apasswd_size = 0;
 
     auto authentication_requirement = tpchkauth(); // check if authentification is required
 
     switch (authentication_requirement){
       case TPAPPAUTH:
         apasswd = ( app_passwd != NULL ? app_passwd : getpass ("enter application password: "));
+        apasswd_size = strlen(apasswd) + 1 ;
 
       case TPSYSAUTH:
         spasswd = ( sys_passwd != NULL ? sys_passwd : getpass ("enter system (DOMAIN) password: "));
@@ -59,10 +61,22 @@ namespace atmi {
     }
 
     // allocate INIT structure and set fields
-    _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (strlen(apasswd))  );
+    _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (10)  );
 
-    if ( app_passwd != NULL ) { strncpy ( (char *)_tpinfo->data,    apasswd, strlen(apasswd) ); }
-    if ( sys_passwd != NULL ) { strncpy ( _tpinfo->passwd,  spasswd, MAXTIDENT ); }
+    if ( apasswd != NULL ) {
+      strcpy ( (char *)&_tpinfo->data, apasswd );
+      _tpinfo->datalen = apasswd_size ;
+#     ifdef DEBUG
+      printf("DEBUG app pass: %s -> %s(datalen: %d, len: %d)\n", apasswd, (char *) &_tpinfo->data, _tpinfo->datalen, apasswd_size);
+#     endif
+    }
+
+    if ( spasswd != NULL ) {
+      strncpy ( _tpinfo->passwd, spasswd, MAXTIDENT );
+#     ifdef DEBUG
+      printf("DEBUG sys pass: %s -> %s\n", spasswd, _tpinfo->passwd );
+#     endif
+    }
 
     // when we receive this parameter we setup things so they can run in a multi context mode.
     if ( tuxconfig != NULL ) {
