@@ -17,7 +17,8 @@ void signal_handler( int signal ){ //NOSONAR what the heck is this warning !?
 class queue_export: public atmi::abstract_client {
   public:
 
-    queue_export(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
+    queue_export(const char *pname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group, int wait = 0 ):
+      abstract_client(pname, user, sys_passwd, app_passwd, group){
     }
 
     int run (const char *qspace, const char *queue, size_t buffer_size, std::ostream &out, bool daemon) {
@@ -84,7 +85,7 @@ int main ( int argc, char *argv[] ){
     options.parse(argc, argv);
 
     if ( (options.qspace != NULL) && (options.queue != NULL) ){
-      queue_export qexport(pname, options.user, options.passwd, options.group);
+      queue_export qexport(pname, options.user, options.sys_passwd, options.app_passwd, options.group);
       if ( options.output_file != NULL ) {
         std::ifstream file;
         file.open(options.output_file,std::ofstream::out | std::ofstream::app);

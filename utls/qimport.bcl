@@ -11,7 +11,8 @@
 class queue_import: public atmi::abstract_client {
   public:
 
-    queue_import(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){
+    queue_import(const char *pname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group, int wait = 0 ):
+      abstract_client(pname, user, sys_passwd, app_passwd, group){
     }
 
     int run (const char *qspace, const char *queue, size_t buffer_size, std::istream &in) {
@@ -62,7 +63,7 @@ int main ( int argc, char *argv[] ){
     options.parse(argc, argv);
 
     if ( (options.qspace != NULL) && (options.queue != NULL) ){
-      queue_import qimport(pname, options.user, options.passwd, options.group);
+      queue_import qimport(pname, options.user, options.sys_passwd, options.app_passwd, options.group);
       if ( optind < argc ) { // consider firt left argument as a path to a file
         for( ; optind < argc ; optind++ ){
           std::ifstream file;

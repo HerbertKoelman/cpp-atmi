@@ -27,12 +27,13 @@ class options{
      */
     options():
       user(NULL),
-      passwd(NULL),
+      sys_passwd(NULL),
+      app_passwd(NULL),
       group(NULL),
       buffer_size(1024),
       failed(false),
-      _arguments("u:p:g:b:v"),
-      _arguments_usage("[-b buffer size] [-v] [-u user] [-p password] [-g group]")
+      _arguments("u:p:s:g:b:v"),
+      _arguments_usage("[-b buffer size] [-v] [-u user] [-p password] [-s system password] [-g group]")
     {
       // intentional
     }
@@ -71,7 +72,8 @@ class options{
 
     bool       failed;
     char      *user;
-    char      *passwd;
+    char      *sys_passwd;
+    char      *app_passwd;
     char      *group;
     size_t     buffer_size;
 
@@ -82,7 +84,8 @@ class options{
     virtual void options_usage(){
 
       std::cout << "-u Tuxedo user"  << std::endl;
-      std::cout << "-p Tuxedo user's password"  << std::endl;
+      std::cout << "-p Tuxedo user's application password"  << std::endl;
+      std::cout << "-s Tuxedo system (DOMAIN) password"  << std::endl;
       std::cout << "-g group to use"  << std::endl;
       std::cout << "-b buffer size (in bytes defaults to 1024)"  << std::endl;
       std::cout << "-v print version info and exit"  << std::endl;
@@ -100,8 +103,11 @@ class options{
         case 'u': // user
           user = optarg;
           break;
+        case 's': // system passwd
+          sys_passwd = optarg;
+          break;
         case 'p': // passwd
-          passwd = optarg;
+          app_passwd = optarg;
           break;
         case 'g': // group
           group = optarg;

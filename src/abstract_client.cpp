@@ -39,50 +39,71 @@ namespace atmi {
 
   }
 
-  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
 
-    if ( (cltname != NULL) || (usr != NULL) || (passwd != NULL) ) {
+    // these will store copies of char buffers
+    const char *spasswd = NULL; // reference to system passwd
+    const char *apasswd = NULL; // reference to application passwd
+    size_t      apasswd_size = 0;
 
-      _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (0)  );
+    auto authentication_requirement = tpchkauth(); // check if authentification is required
 
-      // when we receive this parameter we setup things so they can run in a multi context mode.
-      if ( tuxconfig != NULL ) {
-        _tuxconfig = tuxconfig;
-        _tpinfo->flags = TPMULTICONTEXTS;
+    switch (authentication_requirement){
+      case TPAPPAUTH:
+        apasswd = ( app_passwd != NULL ? app_passwd : getpass ("enter application password: "));
+        apasswd_size = strlen(apasswd) + 1 ;
 
-        // tuxconfig parameter is a path to an UBB file, to make sure that the env var TUXCONFIG is
-        // indeed referencing this path, we set this variable through an explicit call to tuxputenv.
-        // The function tuxputenv expect a string in form of "key=value".
-        std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; // create env variable entry (key=value)
-
-        if ( tuxputenv(const_cast<char *>(tuxconfig_kv.c_str()) ) != 0 ) {
-          throw atmi_exception ("failed to put env varaible %s.", tuxconfig );
-        }
-      }
-
-      if ( usr != NULL ) {
-        strncpy ( _tpinfo->usrname, usr, MAXTIDENT );
-      } else {
-        strncpy (
-            _tpinfo->usrname,
-            (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")),
-            MAXTIDENT );
-      }
-
-      if ( passwd != NULL ) {
-        strncpy ( _tpinfo->passwd,  passwd, MAXTIDENT );
-      }else {
-        if (tpchkauth() == TPSYSAUTH ) {
-          char *p = getpass ("enter application password: ");
-          strncpy ( _tpinfo->passwd,  p, MAXTIDENT );
-        }
-      }
-
-      if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
-      if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
+      case TPSYSAUTH:
+        spasswd = ( sys_passwd != NULL ? sys_passwd : getpass ("enter system (DOMAIN) password: "));
+        break;
     }
+
+    // allocate INIT structure and set fields
+    _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (10)  );
+
+    if ( apasswd != NULL ) {
+      strcpy ( (char *)&_tpinfo->data, apasswd );
+      _tpinfo->datalen = apasswd_size ;
+#     ifdef DEBUG
+      printf("DEBUG app pass: %s -> %s(datalen: %d, len: %d)\n", apasswd, (char *) &_tpinfo->data, _tpinfo->datalen, apasswd_size);
+#     endif
+    }
+
+    if ( spasswd != NULL ) {
+      strncpy ( _tpinfo->passwd, spasswd, MAXTIDENT );
+#     ifdef DEBUG
+      printf("DEBUG sys pass: %s -> %s\n", spasswd, _tpinfo->passwd );
+#     endif
+    }
+
+    // when we receive this parameter we setup things so they can run in a multi context mode.
+    if ( tuxconfig != NULL ) {
+      _tuxconfig = tuxconfig;
+      _tpinfo->flags = TPMULTICONTEXTS;
+
+      // tuxconfig parameter is a path to an UBB file, to make sure that the env var TUXCONFIG is
+      // indeed referencing this path, we set this variable through an explicit call to tuxputenv.
+      // The function tuxputenv expect a string in form of "key=value".
+      std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; // create env variable entry (key=value)
+
+      if ( tuxputenv(const_cast<char *>(tuxconfig_kv.c_str()) ) != 0 ) {
+        throw atmi_exception ("failed to put env varaible %s.", tuxconfig );
+      }
+    }
+
+    if ( usr != NULL ) {
+      strncpy ( _tpinfo->usrname, usr, MAXTIDENT );
+    } else {
+      strncpy (
+          _tpinfo->usrname,
+          (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")),
+          MAXTIDENT );
+    }
+
+    if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
+    if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
 
     rc = tpinit ( _tpinfo );
 
