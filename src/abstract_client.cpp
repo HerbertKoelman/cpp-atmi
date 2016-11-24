@@ -35,7 +35,7 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client (): abstract_client((const char *)NULL) {// cltname is passed as NULL
+  abstract_client::abstract_client (): abstract_client(NULL, NULL, NULL, NULL, NULL, NULL) {// cltname is passed as NULL
 
   }
 

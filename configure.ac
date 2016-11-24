@@ -46,6 +46,15 @@ then
   AC_CHECK_PROG([CODECHECK],[cppcheck],[cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src ./include],[])
 fi
 
+AC_MSG_CHECKING([whether target directory ./app exists])
+if test -e ./app
+then
+  AC_MSG_RESULT([already there.])
+else
+  mkdir -p ./app
+  AC_MSG_RESULT([./app created.])
+fi
+
 AC_MSG_CHECKING([whether target directory ./lib exists])
 if test -e ./lib
 then

@@ -623,6 +623,8 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+SRV_LIBS
+CLT_LIBS
 BFLAGS
 TARGETS
 OBJECTS
@@ -3865,6 +3867,11 @@ do
   obj=`basename $src .bcl`
   TARGETS="$TARGETS $obj"
 done
+for src in *.bsr
+do
+  obj=`basename $src .bsr`
+  TARGETS="$TARGETS $obj"
+done
 TARGETS=$TARGETS
 
 
@@ -4081,17 +4088,55 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_cltatmipp_getenv" >&5
 $as_echo "$ac_cv_lib_cltatmipp_getenv" >&6; }
 if test "x$ac_cv_lib_cltatmipp_getenv" = xyes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBCLTATMI__ 1
-_ACEOF
-
-  LIBS="-lcltatmi++ $LIBS"
-
+  CLT_LIBS="$CLT_LIBS -lcltatmi++"
 else
   as_fn_error $? "missing cltatmi++ library." "$LINENO" 5
 fi
 
-# AC_CHECK_LIB([cpp-utils], [cpp_utils_version],[],[AC_ERROR([missing cpp-utils library.])])
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for getenv in -latmi++" >&5
+$as_echo_n "checking for getenv in -latmi++... " >&6; }
+if ${ac_cv_lib_atmipp_getenv+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-latmi++  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char getenv ();
+int
+main ()
+{
+return getenv ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_link "$LINENO"; then :
+  ac_cv_lib_atmipp_getenv=yes
+else
+  ac_cv_lib_atmipp_getenv=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_atmipp_getenv" >&5
+$as_echo "$ac_cv_lib_atmipp_getenv" >&6; }
+if test "x$ac_cv_lib_atmipp_getenv" = xyes; then :
+  SRV_LIBS="$SRV_LIBS -latmi++"
+else
+  as_fn_error $? "missing atmi++ library." "$LINENO" 5
+fi
+
+
+
 
 # Checks for header files.
 

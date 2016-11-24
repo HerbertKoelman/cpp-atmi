@@ -2067,6 +2067,18 @@ fi
 
 fi
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether target directory ./app exists" >&5
+$as_echo_n "checking whether target directory ./app exists... " >&6; }
+if test -e ./app
+then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: already there." >&5
+$as_echo "already there." >&6; }
+else
+  mkdir -p ./app
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: ./app created." >&5
+$as_echo "./app created." >&6; }
+fi
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether target directory ./lib exists" >&5
 $as_echo_n "checking whether target directory ./lib exists... " >&6; }
 if test -e ./lib
