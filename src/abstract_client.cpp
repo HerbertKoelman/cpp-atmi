@@ -35,8 +35,28 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client (): abstract_client(NULL, NULL, NULL, NULL, NULL, NULL) {// cltname is passed as NULL
+  abstract_client::abstract_client (): 
+    abstract_client(NULL, NULL, NULL, NULL, NULL, NULL)
+  { 
+    // intentional.
+  }
 
+  abstract_client::abstract_client ( const char *cltname):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, NULL)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *tuxconfig):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, tuxconfig)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group):
+    abstract_client(cltname, usr, sys_passwd, app_passwd, group, NULL)
+  {
+    // intentional.
   }
 
   abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group, const char *tuxconfig){
