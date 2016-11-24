@@ -1,5 +1,6 @@
 v4.6.0
 - now abstract_client handles system and application authentication
+- new AUTH_PROXY server (useful when debugging authentication services)
 v4.5.0
 - new utility program qexport
 - new utility program qimport
