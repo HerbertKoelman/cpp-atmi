@@ -20,14 +20,13 @@
 #include <cstring>
 #include <unistd.h>
 #include <sys/types.h>
-#include <atmi.h>
-#include <fml32.h>
+#include <atmi/atmi++.hpp>
+#include "options.hpp" // basename, class options
 #include <tpadm.h>
 #include <evt_mib.h>
 #include <userlog.h>
 
 #define MAX_INST   300
-#define ERR_GENE    -1
 #define ERR_GET     -2
 #define ERR_SET     -3
 
@@ -46,13 +45,108 @@ struct oneInst  {
 struct oneInst myInst[MAX_INST];
 TPCONTEXT_T  ctxt;
 
-void print_usage( char *pgm ) {
+/** search servers entries and stop/start them.
+ *
+ * @since v4.6.0
+ */
+class admin: public atmi::abstract_client {
+  public:
 
-    fprintf(stdout, "usage : %s [-P ubb_pwd] [OPTIONS] [ADD]\n", pgm);
+    /** connect to Tuxedo domain and setup class.
+     *
+     * this client uses a privileged user which avoids authentication.
+     *
+     * @param pname program name
+     */
+    admin(const char *pname): abstract_client("tpsysadm", "tpsysadm", (char *) "syspass", (char *) "apppass", (char *) NULL, (char *) NULL ) {
+      // intentional
+    }
+
+    /** reboot function
+     *
+     * @param server_name server name
+     * @param server_id server ID
+     * @param group server group
+     * @param sequence boot sequence
+     * @return number servers successfully restarted.
+     */
+    unsigned long reboot(const char *server_name, const int server_id, const char *group, const int sequence){
+
+      unsigned long counter = 0;
+
+      try {
+        long flags = 0;
+
+        atmi::buffer entries(Fneeded32(6, 1024)); 
+        atmi::buffer query  (Fneeded32(6, 1024));
+
+        atmi::transaction_ptr MIB = new_transaction_instance(".TMIB"); // MIB service
+
+        atmi::Tfield<std::string> ta_operation(TA_OPERATION);
+        atmi::Tfield<std::string> ta_class(TA_CLASS);
+        atmi::Tfield<long>        ta_flags(TA_FLAGS);
+        atmi::Tfield<std::string> ta_state(TA_STATE);
+
+        atmi::Tfield<std::string> ta_servername(TA_SERVERNAME);
+        atmi::Tfield<long>        ta_srvid(TA_SRVID);
+        atmi::Tfield<long>        ta_sequence(TA_SEQUENCE);
+        atmi::Tfield<std::string> ta_srvgrp(TA_SRVGRP);
+
+        atmi::Tfield<long>        ta_more(TA_MORE);
+        atmi::Tfield<long>        ta_occurences(TA_OCCURS);
+
+        ta_class = "T_SERVER" ;
+        ta_state = "ACT";
+        ta_flags = flags; // if nbd (true)
+        ta_operation = "GET"; // first call -> GET, next calls -> GETNEXT
+
+        entries.set(ta_class);
+        entries.set(ta_state);
+        entries.set(ta_operation);
+
+        if ( server_name != NULL ){ ta_servername = server_name ; entries.set(ta_servername);}
+        if ( server_id   != 0 )   { ta_srvid = server_id ; entries.set(ta_srvid);}
+        if ( sequence    != 0 )   { ta_sequence = sequence ; entries.set(ta_sequence);}
+        if ( group       != NULL ){ ta_srvgrp = group ; entries.set(ta_srvgrp);}
+
+        MIB->call(entries);
+
+        entries.get(ta_more);
+        entries.get(ta_occurences);
+        // entries.print();
+
+        std::cout << "--------------------------------" << std::endl ;
+        for ( long occurence = ta_occurences - 1 ; occurence >= 0 ; occurence--){
+          entries.get(ta_servername, occurence);
+          entries.get(ta_srvid, occurence);
+
+          if ( ta_srvid == 0 ){
+            std::cerr << "cannot restart BBL" << std::endl;
+          } else if ( ta_srvid > 30000 ){
+            std::cout << "restart TMS (id:" << ta_srvid <<", occurence:" << occurence << "): " << ta_servername << std::endl;
+          } else {
+            std::cout << "restart server name (id:" << ta_srvid <<", occurence:" << occurence << "): " << ta_servername << std::endl;
+          }
+        }
+
+        std::cout << "--------------------------------" << std::endl ;
+        // entries.print();
+
+      } catch ( std::exception &err ){
+        std::cerr << "reboot failed: " << err.what() << std::endl;
+      }
+      return counter;
+    }
+
+};
+
+void print_usage( char *pname ) {
+
+    fprintf(stdout, "usage : %s [-P ubb_pwd] [OPTIONS] [ADD]\n", pname);
     fprintf(stdout, "This Tuxedo client calls the TMIB to restart server instances.\n");
     fprintf(stdout, "When several to restart, they are restarted one by one.\n");
     fprintf(stdout, "  primary OPTIONS :\n");
-    fprintf(stdout, "      -g groupe_name\n");
+    fprintf(stdout, "      -g group_name\n");
     fprintf(stdout, "      -i server instance\n");
     fprintf(stdout, "      -s servername\n");
     fprintf(stdout, "      -o sequence number\n");
@@ -61,10 +155,10 @@ void print_usage( char *pgm ) {
     fprintf(stdout, "      -C   Check only servers will not be restarted\n");
     fprintf(stdout, "  At least one primary option is required.\n");
     fprintf(stdout, "  Examples:\n");
-    fprintf(stdout, "    %s -g GRP1 -s ARTIMPP_UDB \n", pgm);
-    fprintf(stdout, "     >> restart servers ARTIMMP from group GRP1\n", pgm);
-    fprintf(stdout, "    %s -s ARTIBMP_UDB -N 100 \n", pgm);
-    fprintf(stdout, "     >> restart servers ARTIBMP that have been called at least 100 times\n\n", pgm);
+    fprintf(stdout, "    %s -g GRP1 -s ARTIMPP_UDB \n", pname);
+    fprintf(stdout, "     >> restart servers ARTIMMP from group GRP1\n", pname);
+    fprintf(stdout, "    %s -s ARTIBMP_UDB -N 100 \n", pname);
+    fprintf(stdout, "     >> restart servers ARTIBMP that have been called at least 100 times\n\n", pname);
 }
 
 int getAllField ( FBFR32 * bget, int cur, int i) {
@@ -86,7 +180,7 @@ int getAllField ( FBFR32 * bget, int cur, int i) {
                        Ferror32, Fstrerror32(Ferror32));
         return (-1);
     }
-    /*  TA_SERVERNAME contains PGM with full path  */
+    /*  TA_SERVERNAME contains pname with full path  */
     myInst[cur].srvn[0] = 0;
     //strcpy (myInst[cur].srvn, "");
     Pch = (char *) strrchr (tmp, PATH_DELIM);
@@ -106,7 +200,7 @@ int getAllField ( FBFR32 * bget, int cur, int i) {
     return (1);
 }
 
-int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
+int getServers (char *group, char *srvname, long srvid, long seqid, long nbd)
 {
     char  ope[8];    /* GET or GETNEXT */
     char  tmp[72];   /* SERVERNAME is full path in */
@@ -127,6 +221,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
                       tpstrerror(tperrno));
         return (0);
     }
+    
 
     bget = (FBFR32 *)tpalloc("FML32", NULL, Fneeded32(6, 1024));
     if (bget == NULL) {
@@ -151,6 +246,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
         } else {
             strncpy (ope, "GETNEXT", 8);
         }
+
         if (Fchg32(bget, TA_OPERATION, 0, ope, 0) == -1) {
             fprintf(stderr, "Error when Set Field TA_OPERATION : <%d> %s\n",
                           Ferror32, Fstrerror32(Ferror32));
@@ -173,6 +269,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
                 return (-1);
             }
         }
+
         /* Only the ACTIVE servers, T_SERVER contains all .. MAX in UBB */
         if (Fchg32(bget, TA_STATE, 0, "ACT", 0) == -1) {
             fprintf(stderr, "Error when Set Field TA_STATE : <%d> %s\n",
@@ -180,7 +277,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
             tpfree ((char *) bget);
             return (-1);
         }
-        if ((*groupe != '\0') && (Fchg32(bget, TA_SRVGRP, 0, groupe, 0) == -1)){
+        if ((*group != '\0') && (Fchg32(bget, TA_SRVGRP, 0, group, 0) == -1)){
           fprintf(stderr, "Error when Set Field TA_SRVGRP : <%d> %s\n",
                         Ferror32, Fstrerror32(Ferror32));
           tpfree ((char *) bget);
@@ -205,7 +302,6 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
           tpfree ((char *) bget);
           return (-1);
         }
-
         flags = TPSIGRSTRT;
         if (tpcall(".TMIB", (char *)bget, 0, (char **)&bget, &len, flags) == -1) {
             fprintf(stderr, "Error when GET data from TMIB : <%d> %s (%s,%d)\n",
@@ -283,7 +379,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
     return (cur);
 }
 
-int restartServer ( char *pgm , int nb)
+int restartServer ( char *pname , int nb)
 {
     long  flags, len;
     int   i, done;
@@ -309,7 +405,7 @@ int restartServer ( char *pgm , int nb)
     for (i=0; i < nb; i++) {
         flags=0;
         fprintf(stdout, "%s CMD tmshutdown -g %s  -i %d\n",
-                      pgm, myInst[i].grp, myInst[i].id);
+                      pname, myInst[i].grp, myInst[i].id);
         Finit32(bset, Fneeded32(10, 1024));
         if (Finit32(bset, Fneeded32(10, 1024)) == -1) {
             fprintf(stderr, "Error when INIT FML32 SET buffer -INA- : <%d> %s\n",
@@ -364,7 +460,7 @@ int restartServer ( char *pgm , int nb)
         }
 
         fprintf(stdout, "%s CMD = tmboot -g %s  -i %d\n",
-                      pgm, myInst[i].grp, myInst[i].id);
+                      pname, myInst[i].grp, myInst[i].id);
         Finit32(bset, Fneeded32(10, 1024));
         if (Finit32(bset, Fneeded32(10, 1024)) == -1) {
             fprintf(stderr, "Error when INIT FML32 SET buffer -ACT- : <%d> %s\n",
@@ -429,124 +525,95 @@ int restartServer ( char *pgm , int nb)
     return (done);
 }
 
-int main(int argc, char *argv[])
-{
-    char  groupe[30], srvname[32], pwd[32];
-    char  *pgm;
-    long  srvid = 0;
-    long  seqid = 0;
-    long  nbd = 0;
-    long  nbfound = 0; // number of server found (-1 means error, 0 means nothing found, > 0 number of servers)
-    long  nbresta = 0;
-    int   opt, test;
-    bool  ok = false;
-    bool  err = false;
-    TPINIT *tpinfo;
-    extern char  *optarg;
-    extern int   optind, opterr;   /* used by getopt line parser */
+int main(int argc, char *argv[]) {
 
-    pgm = (char *) strrchr (argv[0], PATH_DELIM);
-    if (pgm == NULL) {
-        pgm = argv[0];
-    } else {
-        pgm++;
-    }
+  auto status = EXIT_FAILURE;
 
-    if (argc < 2) {
-        print_usage( pgm );
-        exit(ERR_GENE);
-    }
+  char  *group = NULL;
+  char  *srvname = NULL; 
+  long  srvid = 0;
+  long  seqid = 0;
 
-    memset (groupe, '\0', sizeof (groupe));
-    memset (srvname, '\0', sizeof (srvname));
-    memset (pwd, '\0', sizeof (pwd));
-    test  = 0 ;
-    opt = '\0';
+  char  *pwd = NULL;
+  char  *pname = basename(argv[0]); // get program name
 
-    while ((opt = getopt(argc, argv, "g:i:o:s:N:P:C")) != -1) { // NOSONAR usual implementation
-       switch(opt) {
-         case 'g': strncpy (groupe, optarg, 30);
-                 fprintf (stdout, ">> get servers in GROUPE %s\n", groupe);
-                 ok = true;
-                 break;
-         case 'i': srvid = atoi (optarg);
-                 fprintf (stdout, ">> get servers which SRVID is %d\n", srvid);
-                 ok = true;
-                 break;
-         case 'o': seqid = atoi (optarg);
-                 fprintf (stdout, ">> get servers with SEQUENCE %d\n", seqid);
-                 ok = true;
-                 break;
-         case 's': strncpy (srvname, optarg, 32);
-                 fprintf (stdout, ">> get servers which name is %s\n", srvname);
-                 ok = true;
-                 break;
-         case 'N': nbd = atoi (optarg);
-                 if (nbd < 1) {
-                    fprintf (stdout, " N lower than 1 is not relevant\n");
-                 } else {
-                    fprintf (stdout, ">> only servers at least called %d times\n", nbd);
-                 }
-                 break;
-         case 'P': strncpy (pwd, optarg, 32);
-                 break;
-         case 'C': test = 1;
-                 fprintf (stdout, ">> get servers only - NO RESTART TO DO\n", seqid);
-                 break;
-         default : fprintf (stderr, "Unknown option ... EXITING \n");
-                  err=true;
-       } /* end switch */
-    }
+  long  nbd = 0;
+  long  nbfound = 0; // number of server found (-1 means error, 0 means nothing found, > 0 number of servers)
+  long  nbresta = 0;
+  int   opt, test;
+  bool  ok = false;
+  bool  err = false;
 
-    if ((!ok) || (err)) {
-        print_usage( pgm );
-        exit(ERR_GENE);
-    }
+  /* used by getopt line parser */
+  extern char *optarg;
+  extern int   optind;
+  extern int   opterr;   
 
-    if((tpinfo = (TPINIT *) tpalloc("TPINIT", NULL, TPINITNEED(0))) == NULL) {
-        fprintf(stderr, "Fails tpalloc TPINIT : <%d> %s\n",
-                      tperrno, tpstrerror(tperrno));
-        exit(ERR_GENE);
-    }
+  test  = 0 ;
+  opt = '\0';
 
-    if (pwd[0] != '\0') {
-       strcpy(tpinfo->passwd, pwd);
-    }
-    strcpy(tpinfo->usrname, "tpsysadm");
-    strcpy(tpinfo->cltname, "tpsysadm");
-    tpinfo->flags=TPMULTICONTEXTS;
+  while ((opt = getopt(argc, argv, "g:i:o:s:N:P:n")) != -1) { // NOSONAR usual implementation
+    switch(opt) {
+      case 'g':
+        group = optarg;
+        ok = true;
+        break;
+      case 'i':
+        srvid = atoi (optarg);
+        ok = true;
+        break;
+      case 'o':
+        seqid = atoi (optarg);
+        ok = true;
+        break;
+      case 's':
+        srvname = optarg;
+        ok = true;
+        break;
+      case 'N':
+        nbd = atoi (optarg);
+        if (nbd < 1) {
+          fprintf (stdout, " N lower than 1 is not relevant\n");
+        } else {
+          fprintf (stdout, ">> only servers at least called %d times\n", nbd);
+        }
+        break;
+      case 'P':
+        pwd = optarg;
+        break;
+      case 'n':
+        test = 1;
+        break;
+      default :
+        fprintf (stderr, "Unknown option ... EXITING \n");
+        err=true;
+    } /* end switch */
+  }
 
-    if (tpinit(tpinfo) == -1) {
-        fprintf(stderr, "Tuxedo init fails : <%d> %s\n",
-                      tperrno, tpstrerror(tperrno));
-        tpfree ((char *) tpinfo);
-        exit(ERR_GENE);
-    }
+  try {
+    // connect client
+    admin admin("tpsysadm");
 
-    if (tpgetctxt(&ctxt, 0) < 0) {
-        fprintf(stderr, "Tuxedo can't retreive context: %s\n",
-                      tpstrerror(tperrno));
-        tpfree ((char *) tpinfo);
-        exit(ERR_GENE);
-    }
+    admin.reboot(NULL, 0, NULL, 0);
 
-    userlog ( "%s- INF groupe[%s], servname[%s], id[%d], seq[%d], nb[%d]",
-             pgm, groupe, srvname, srvid, seqid, nbd);
+  } catch ( std::exception &err ){
+    std::cerr << err.what() << std::endl ;
+  }
 
-    nbfound = getServers (groupe, srvname, srvid, seqid , nbd);
-    if (nbfound < 0 ) {
-        fprintf (stderr, "ERR: when get servers, restart not initiated !!\n");
-        tpfree ((char *)tpinfo);
-        tpterm ();
-        return(ERR_GET);
-    }
+  if (ok || (! err)) {
+    // reboot sequence starts here
+    //
+    userlog ( "%s- INF group[%s], servname[%s], id[%d], seq[%d], nb[%d]",
+             pname, group, srvname, srvid, seqid, nbd);
+
+    nbfound = getServers (group, srvname, srvid, seqid , nbd);
 
     /* Use userlog to log the fact that tmreboot will restart servers */
     if (nbfound == 0) {
-        userlog ("%s- No server found with your criteria, check UBB", pgm);
+        userlog ("%s- No server found with your criteria, check UBB", pname);
     } else {
         userlog ("%s- With your criteria %d server(s) will be restarted",
-                 pgm, nbfound);
+                 pname, nbfound);
     }
 
     /* Don't do the set when test */
@@ -554,16 +621,14 @@ int main(int argc, char *argv[])
         exit (0);
     }
 
-    nbresta = restartServer ( pgm , nbfound);
-    if (nbresta < 0) {
-       fprintf (stderr, "ERR: No server has been restarted !!\n");
-       tpfree ((char *)tpinfo);
-       tpterm ();
-       return(ERR_SET);
-    }
+    nbresta = restartServer ( pname , nbfound);
 
-    tpfree ((char *)tpinfo);
-    tpterm();
-    exit(nbresta);
+    status = EXIT_SUCCESS;
+
+  }else {
+    print_usage( pname );
+  }
+
+  exit(status);
 }
 
