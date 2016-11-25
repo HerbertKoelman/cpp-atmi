@@ -93,7 +93,7 @@ int getAllField ( FBFR32 * bget, int cur, int i) {
     if (Pch == NULL) {
         strncat (myInst[cur].srvn, tmp, 32);
     } else {
-        strncat (myInst[cur].srvn, ++Pch, 32);		
+        strncat (myInst[cur].srvn, ++Pch, 32);
     }
 
     len = sizeof (myInst[cur].id);
@@ -134,7 +134,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
                       tperrno, tpstrerror(tperrno));
         return (-1);
     }
-	
+
     /* Init before first request */
     if (Finit32(bget, Fneeded32(6, 1024)) == -1) {
        fprintf(stderr, "Error when INIT FML32 GET buffer : <%d> %s\n",
@@ -205,7 +205,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
           tpfree ((char *) bget);
           return (-1);
         }
-	
+
         flags = TPSIGRSTRT;
         if (tpcall(".TMIB", (char *)bget, 0, (char **)&bget, &len, flags) == -1) {
             fprintf(stderr, "Error when GET data from TMIB : <%d> %s (%s,%d)\n",
@@ -225,7 +225,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
             tpfree ((char *) bget);
             return (-1);
         }
-		
+
         if (occ) {
 
            for ( int i = 0; i < occ; i++) {
@@ -264,7 +264,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
               }
            } /* for */
         }
-		
+
         len = sizeof (mor);
         if (Fget32(bget, TA_MORE, 0,(char *) &mor,(FLDLEN32 *) &len) == -1) {
             fprintf (stderr, "No Field TA_MORE : <%d> %s\n",
@@ -274,7 +274,7 @@ int getServers (char *groupe, char *srvname, long srvid, long seqid, long nbd)
             tpfree ((char *) bget);
             return (-1);
         }
-		
+
     } while (mor);
 
     tpfree ((char *) bget);
@@ -294,7 +294,7 @@ int restartServer ( char *pgm , int nb)
                       tpstrerror(tperrno));
         return (0);
     }
-	
+
     /* Allocate buffer to update server state  */
     bset = (FBFR32 *)tpalloc("FML32", NULL, Fneeded32(10, 1024));
     if (bset == NULL){
@@ -304,7 +304,7 @@ int restartServer ( char *pgm , int nb)
     }
 
     done = 0;
-	
+
     /* Stop and start each instance get from Tuxedo MIB */
     for (i=0; i < nb; i++) {
         flags=0;
@@ -462,7 +462,7 @@ int main(int argc, char *argv[])
     memset (pwd, '\0', sizeof (pwd));
     test  = 0 ;
     opt = '\0';
-	
+
     while ((opt = getopt(argc, argv, "g:i:o:s:N:P:C")) != -1) { // NOSONAR usual implementation
        switch(opt) {
          case 'g': strncpy (groupe, optarg, 30);
@@ -548,7 +548,7 @@ int main(int argc, char *argv[])
         userlog ("%s- With your criteria %d server(s) will be restarted",
                  pgm, nbfound);
     }
-	
+
     /* Don't do the set when test */
     if (test) {
         exit (0);

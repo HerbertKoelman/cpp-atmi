@@ -62,6 +62,11 @@ do
   obj=`basename $src .bcl`
   TARGETS="$TARGETS $obj"
 done
+for src in *.bsr
+do
+  obj=`basename $src .bsr`
+  TARGETS="$TARGETS $obj"
+done
 AC_SUBST(TARGETS,$TARGETS)
 
 # Setting things up for ATMI builds
@@ -107,8 +112,10 @@ esac
 # WARNING if some library depends on other, they must check in the order of dependency
 #
 AC_CHECK_LIB([fml++], [strerror],[],[AC_ERROR([missing fml++ library.])])
-AC_CHECK_LIB([cltatmi++], [getenv],[],[AC_ERROR([missing cltatmi++ library.])])
-# AC_CHECK_LIB([cpp-utils], [cpp_utils_version],[],[AC_ERROR([missing cpp-utils library.])])
+AC_CHECK_LIB([cltatmi++], [getenv],[CLT_LIBS="$CLT_LIBS -lcltatmi++"],[AC_ERROR([missing cltatmi++ library.])])
+AC_CHECK_LIB([atmi++],    [getenv],[SRV_LIBS="$SRV_LIBS -latmi++"],[AC_ERROR([missing atmi++ library.])])
+AC_SUBST(CLT_LIBS)
+AC_SUBST(SRV_LIBS)
 
 # Checks for header files.
 

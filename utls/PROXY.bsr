@@ -1,0 +1,79 @@
+//
+//  PROXY
+//
+//  Created by herbert koelman on Thu Sep  8 17:35:57 CEST 2016
+//  Copyright © 2016 urbix-software. All rights reserved.
+//
+
+#include <cstdlib>
+#include <libgen.h>
+#include <iostream>
+#include <unistd.h>
+#include <csignal>
+
+#include <atmi/atmi++.hpp>
+
+const char *name = NULL;
+
+/** server init routine
+ *
+ * @param argc CLOPT argument coun
+ * @param argv CLOPT arguments
+ * @return a negative value mean exi
+ */
+extern "C" int tpsvrinit(int argc, char **argv){
+
+  auto status = -1; // -1 means exit gracefully
+
+  name = basename(argv[0]);
+
+  userlog("starting up server %s (%s)",name, atmi::cpp_atmi_version());
+  userlog("this server will dump FML buffers and call \"prxy_\" + request->name");
+
+  try {
+
+  }catch( std::exception &err ){
+    userlog("fatal error, going down. %s", err.what());
+  }
+
+  return status ;
+}
+
+/** Tuxedo service
+ *
+ * @param request service infos (buffer, ...)
+ */
+extern "C" void proxy_service( TPSVCINFO *request ){
+
+  auto status = TPFAIL ;
+
+  try {
+    atmi::buffer buffer((FBFR32 *) request->data);
+
+    std::cout << "request" << std::endl;
+
+    buffer.print();
+
+    std::string proxy_svc_name = request->name ;
+    proxy_svc_name = "prxy_" + proxy_svc_name ;
+
+    userlog ( "calling %s destination service", proxy_svc_name.c_str());
+    atmi::transaction tran(proxy_svc_name.c_str());
+
+    tran.call(buffer);
+    std::cout << "response " << std::endl;
+
+    status = TPSUCCESS;
+
+  }catch ( std::exception &err ){
+    userlog("service %s %s failed. %s", __FUNCTION__, request->name, err.what());
+  }
+
+  tpreturn (status, 0, NULL, 0, 0);
+}
+
+extern "C" void tpsvrdone(void){
+
+  userlog("server down");
+}
+

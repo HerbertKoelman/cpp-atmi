@@ -35,8 +35,28 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client (): abstract_client((const char *)NULL) {// cltname is passed as NULL
+  abstract_client::abstract_client ():
+    abstract_client(NULL, NULL, NULL, NULL, NULL, NULL)
+  {
+    // intentional.
+  }
 
+  abstract_client::abstract_client ( const char *cltname):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, NULL)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *tuxconfig):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, tuxconfig)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group):
+    abstract_client(cltname, usr, sys_passwd, app_passwd, group, NULL)
+  {
+    // intentional.
   }
 
   abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group, const char *tuxconfig){
@@ -50,13 +70,13 @@ namespace atmi {
 
     auto authentication_requirement = tpchkauth(); // check if authentification is required
 
-    switch (authentication_requirement){
-      case TPAPPAUTH:
-        apasswd = ( app_passwd != NULL ? app_passwd : getpass ("enter application password: "));
+    switch (authentication_requirement){ //NOSONAR
+      case TPAPPAUTH: // NOSONAR if application authentication is required then system is also required. Hence the absence of break
+        apasswd = ((app_passwd != NULL) ? app_passwd : getpass ("enter application password: "));
         apasswd_size = strlen(apasswd) + 1 ;
 
       case TPSYSAUTH:
-        spasswd = ( sys_passwd != NULL ? sys_passwd : getpass ("enter system (DOMAIN) password: "));
+        spasswd = ((sys_passwd != NULL)? sys_passwd : getpass ("enter system (DOMAIN) password: "));
         break;
     }
 
@@ -64,7 +84,7 @@ namespace atmi {
     _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (10)  );
 
     if ( apasswd != NULL ) {
-      strcpy ( (char *)&_tpinfo->data, apasswd );
+      memcpy ( (char *)&_tpinfo->data, apasswd, apasswd_size );
       _tpinfo->datalen = apasswd_size ;
 #     ifdef DEBUG
       printf("DEBUG app pass: %s -> %s(datalen: %d, len: %d)\n", apasswd, (char *) &_tpinfo->data, _tpinfo->datalen, apasswd_size);
@@ -105,6 +125,7 @@ namespace atmi {
     if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
     if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
 
+    // connect to Tuxedo DOMAIN
     rc = tpinit ( _tpinfo );
 
     if ( rc < 0 ) {
@@ -139,30 +160,18 @@ namespace atmi {
     }
   }
 
-
   transaction_ptr abstract_client::new_transaction_instance ( const char *svc ){
 
-#if __cplusplus < 201103L
-    std::auto_ptr<transaction>   ptr;
-#else
-    std::unique_ptr<transaction> ptr;
-#endif
-
-    ptr.reset ( new transaction ( svc ));
-    ptr->set_context ( this->context() );
-    return ptr;
+    transaction_ptr _transaction ( new transaction(svc));
+    _transaction->set_context ( this->context() );
+    return _transaction;
   }
 
   queue_ptr abstract_client::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
-#if __cplusplus < 201103L
-    std::auto_ptr<atmi::queue> ptr;
-#else
-    std::unique_ptr<atmi::queue> ptr;
-#endif
-    ptr.reset ( new atmi::queue ( qspace, queue, reply ));
-    ptr->set_context ( this->context());
-    return ptr;
+    queue_ptr _queue(new atmi::queue ( qspace, queue, reply ));
+    _queue->set_context ( this->context());
+    return _queue;
   }
 
 }

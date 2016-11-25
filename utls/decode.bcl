@@ -5,6 +5,12 @@
 #include <fstream>
 #include <csignal>
 
+typedef const char * password_t;
+
+void function( password_t password ){
+  std::cout << "password: " << password << std::endl;
+}
+
 /** import messages in a given queue
  *
  */
@@ -84,6 +90,8 @@ int main ( int argc, char *argv[] ){
   auto status = EXIT_FAILURE ;
   try {
     char *pname = basename(argv[0]);
+
+    function(pname);
 
     options options;
     options.parse(argc, argv);

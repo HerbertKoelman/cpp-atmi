@@ -1,0 +1,71 @@
+#include <cstdio>
+#include <cstring>
+#include <cctype>
+#include <atmi/atmi++.hpp>
+#include <userlog.h>    /* TUXEDO */
+#include <libgen.h> // basename()
+
+const char *name    = NULL; //!< server name
+const char *svcname = NULL ; //!< authentication service name
+
+/** authentication proxy service.
+ */
+extern "C" void AUTHSVC(TPSVCINFO *rqst) {
+
+  userlog("%s is running (PROXY) service %s", name, rqst->name);
+  TPINIT  *tpinit;
+  long     rcode; // this will be used as the appkey
+  auto     status = TPFAIL;
+
+  // cast TPINIT structure into local stucture reference.
+  tpinit = (TPINIT *)rqst->data;
+
+  //make sure we have an ending \0 character.
+  char app_passwd[tpinit->datalen + 1];
+  memcpy(app_passwd, (char *) &tpinit->data, tpinit->datalen);
+  app_passwd[tpinit->datalen]=0;
+
+  // trace infos
+  userlog ("  usrname = '%s'", tpinit->usrname);
+  userlog ("  cltname = '%s'", tpinit->cltname);
+  userlog ("  passwd  = '%s'", tpinit->passwd);
+  userlog ("  application passwd  = '%s'", app_passwd);
+
+  if ( svcname != NULL ){
+    userlog ("  calling authentication service %s", svcname );
+    try {
+      int urcode = -1;
+
+      atmi::transaction authsvc(svcname);
+      authsvc.call((char *)rqst, 0L, (char **) &rqst, 0L, &urcode );
+      rcode = urcode;
+      status = TPSUCCESS;
+
+    } catch (std::exception &err){
+      std::cerr << "call to " << svcname << " failed: " << err.what() << std::endl;
+      userlog("call to %s failed.", svcname );
+    }
+  }else {
+    status = TPSUCCESS;
+    rcode = (long) 500; // success
+  }
+
+  userlog ("proxy athentication done (rcode: %d)", rcode);
+
+  tpreturn(status, rcode, (char *)NULL, 0L, 0);
+}
+
+/** initialize server
+ */
+extern "C" int tpsvrinit(int argc, char *argv[]) {
+  name = basename(argv[0]);
+  userlog ("authentication proxy %s server started (%s)", name, atmi::cpp_atmi_version());
+
+  return(0);
+}
+
+/** cleanup things
+ */
+void tpsvrdone(void) {
+  userlog ("authentication proxy %s server is going down", name);
+}

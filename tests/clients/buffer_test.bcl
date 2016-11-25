@@ -39,10 +39,10 @@ class buffer_test : public atmi::abstract_client {
         unknown_field.set_id(SRVCDAY);
         unknown_field.set_char_array("salut les amis\0rray", 19);
 
-        atmi::Tfield<string> prenom ( EMPNAME );
+        atmi::Tfield<std::string> prenom ( EMPNAME );
         atmi::Tfield<long>   empid ( EMPID );
         atmi::Tfield<long>   empzip ( EMPZIP );
-        atmi::Tfield<string> nom ( EMPNAME );
+        atmi::Tfield<std::string> nom ( EMPNAME );
         atmi::Tfield<char *> carray ( SRVCDAY );
         atmi::Tfield<char *> copy ( SRVCDAY );
 
@@ -139,11 +139,11 @@ class buffer_test : public atmi::abstract_client {
         wrapper1.print();
 
       }catch ( atmi::buffer_exception &err ) {
-        cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
+        std::cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
       } catch ( atmi::atmi_exception &err ) {
-        cerr << err.what() << std::endl;
+        std::cerr << err.what() << std::endl;
       } catch ( std::exception &err ) {
-        cerr << err.what() << std::endl;
+        std::cerr << err.what() << std::endl;
       }
 
       return 9999;
@@ -164,9 +164,9 @@ int main ( int argc, char **argv ) {
     btest.run ( argc, argv );
 
   } catch ( atmi::atmi_exception &err){
-    cerr << std::endl << err.what() << std::endl;
+    std::cerr << std::endl << err.what() << std::endl;
   } catch ( std::exception &err ) {
-    cerr << std::endl << err.what() << std::endl;
+    std::cerr << std::endl << err.what() << std::endl;
   }
   std::cout << ", done." << std::endl;
 
