@@ -39,7 +39,7 @@ public:
 
           stop = message == "quit" ;
 
-          if ( ! stop  && ! message.empty()){
+          if ((! stop) && (! message.empty())){
             size = message.size();
             char *buffer = allocate("STRING", NULL, size + 1);
             memset(buffer, 0, size + 1);

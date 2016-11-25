@@ -54,7 +54,7 @@ namespace atmi {
    * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
    * only for native clients.
    *
-   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). 
+   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance).
    * These methods return tp_auto_ptr and queue_auto_ptr which are auto pointers. which is probaly the best way to avoid memory leaks.
    *
    * If authentication is needed, user is prompted for system and/or application password.
@@ -76,7 +76,7 @@ namespace atmi {
        *
        * If authentication is needed, user is prompted for system and/or application password.
        *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it must
+       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        */
        abstract_client ();

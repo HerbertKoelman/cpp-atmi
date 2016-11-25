@@ -65,7 +65,7 @@ class options{
       printf("DEBUG %s: parsing command line for [%s] argument.\n", __FUNCTION__, _arguments.c_str());
 #     endif
 
-      while ((opt = getopt(argc, argv, _arguments.c_str())) != -1) {
+      while ((opt = getopt(argc, argv, _arguments.c_str())) != -1) { // NOSONAR
         set(opt);
       }
     }

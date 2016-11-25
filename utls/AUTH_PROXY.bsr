@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cstring>
+#include <cctype>
 #include <atmi/atmi++.hpp>
 #include <userlog.h>    /* TUXEDO */
 #include <libgen.h> // basename()
@@ -37,7 +37,7 @@ extern "C" void AUTHSVC(TPSVCINFO *rqst) {
       int urcode = -1;
 
       atmi::transaction authsvc(svcname);
-      authsvc.call((char *)rqst, 0L, (char **) &rqst, 0L, &urcode ); 
+      authsvc.call((char *)rqst, 0L, (char **) &rqst, 0L, &urcode );
       rcode = urcode;
       status = TPSUCCESS;
 
@@ -52,7 +52,7 @@ extern "C" void AUTHSVC(TPSVCINFO *rqst) {
 
   userlog ("proxy athentication done (rcode: %d)", rcode);
 
-  tpreturn(TPSUCCESS, rcode, (char *)NULL, 0L, 0);
+  tpreturn(status, rcode, (char *)NULL, 0L, 0);
 }
 
 /** initialize server
@@ -67,4 +67,5 @@ extern "C" int tpsvrinit(int argc, char *argv[]) {
 /** cleanup things
  */
 void tpsvrdone(void) {
+  userlog ("authentication proxy %s server is going down", name);
 }

@@ -17,17 +17,17 @@ const char *name = NULL;
 
 /** server init routine
  *
- * @param argc CLOPT argument count
+ * @param argc CLOPT argument coun
  * @param argv CLOPT arguments
- * @return a negative value mean exit
+ * @return a negative value mean exi
  */
-extern "C" int tpsvrinit(int argc, char **argv){ 
+extern "C" int tpsvrinit(int argc, char **argv){
 
   auto status = -1; // -1 means exit gracefully
 
   name = basename(argv[0]);
 
-  userlog("starting up server %s (%s)",name, atmi::cpp_atmi_version()); 
+  userlog("starting up server %s (%s)",name, atmi::cpp_atmi_version());
   userlog("this server will dump FML buffers and call \"prxy_\" + request->name");
 
   try {
