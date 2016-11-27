@@ -27,13 +27,13 @@ extern "C" int tpsvrinit(int argc, char **argv){
 
   name = basename(argv[0]);
 
-  userlog("starting up server %s (%s)",name, atmi::cpp_atmi_version());
-  userlog("this server will dump FML buffers and call \"prxy_\" + request->name");
+  userlog((char *)"starting up server %s (%s)", name, atmi::cpp_atmi_version());
+  userlog((char *)"this server will dump FML buffers and call \"prxy_\" + request->name");
 
   try {
 
   }catch( std::exception &err ){
-    userlog("fatal error, going down. %s", err.what());
+    userlog((char *)"fatal error, going down. %s", err.what());
   }
 
   return status ;
@@ -57,7 +57,7 @@ extern "C" void proxy_service( TPSVCINFO *request ){
     std::string proxy_svc_name = request->name ;
     proxy_svc_name = "prxy_" + proxy_svc_name ;
 
-    userlog ( "calling %s destination service", proxy_svc_name.c_str());
+    userlog ( (char *)"calling %s destination service", proxy_svc_name.c_str());
     atmi::transaction tran(proxy_svc_name.c_str());
 
     tran.call(buffer);
@@ -66,7 +66,7 @@ extern "C" void proxy_service( TPSVCINFO *request ){
     status = TPSUCCESS;
 
   }catch ( std::exception &err ){
-    userlog("service %s %s failed. %s", __FUNCTION__, request->name, err.what());
+    userlog((char *)"service %s %s failed. %s", __FUNCTION__, request->name, err.what());
   }
 
   tpreturn (status, 0, NULL, 0, 0);
@@ -74,6 +74,6 @@ extern "C" void proxy_service( TPSVCINFO *request ){
 
 extern "C" void tpsvrdone(void){
 
-  userlog("server down");
+  userlog((char *)"server down");
 }
 
