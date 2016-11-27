@@ -27,6 +27,7 @@ autom4te.cache
 
 # misc and project created files
 bin
+app
 doc
 sonar-project.properties
 doxyfile
