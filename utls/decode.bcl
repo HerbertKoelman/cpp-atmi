@@ -89,7 +89,9 @@ int main ( int argc, char *argv[] ){
     options.parse(argc, argv);
 
     if ( ! options.failed  ){
+
       decode decode(pname, options.user, options.sys_passwd, options.app_passwd, options.group);
+
       if ( optind < argc ) { // consider firt left argument as a path to a file
         for( ; optind < argc ; optind++ ){
           std::ifstream file;

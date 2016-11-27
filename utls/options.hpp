@@ -99,6 +99,7 @@ class options{
       switch(opt) {
         case 'v':
           version();
+          failed = true ; // this will let programs a chance to interrupt execution
           break;
         case 'u': // user
           user = optarg;
