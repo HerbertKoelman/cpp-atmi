@@ -7,6 +7,7 @@
 #include <userlog.h>
 #include <memory>
 #include <string>
+#include <atmi/definitions.hpp>
 
 #ifndef CPP_ATMI_ULOG_HPP
 #define CPP_ATMI_ULOG_HPP

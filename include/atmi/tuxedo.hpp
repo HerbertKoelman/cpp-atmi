@@ -30,7 +30,7 @@
 #include <memory>
 #include <nl_types.h>
 
-#include <atmi/config.h>
+#include <atmi/definitions.hpp>
 #include <atmi/exceptions.hpp>
 
 // using namespace std;

@@ -32,6 +32,7 @@ extern "C" int tpsvrinit(int argc, char **argv){
 
   try {
 
+    status = 0;
   }catch( std::exception &err ){
     userlog((char *)"fatal error, going down. %s", err.what());
   }

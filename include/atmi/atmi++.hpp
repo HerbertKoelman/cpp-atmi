@@ -24,8 +24,6 @@
 #ifndef CPP_ATMI_PLUS_PLUS_HPP
 #define CPP_ATMI_PLUS_PLUS_HPP
 
-#include <atmi/config.h> // configuration file (config.h.in)
-
 #include <atmi/ulog.hpp>
 #include <atmi/exceptions.hpp>
 
