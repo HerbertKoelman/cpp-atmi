@@ -1,7 +1,7 @@
 /*
  * tmreboot is a tuxedo client that restart server using MIB calls
  *
- * environment
+ * environmen
  * FLDTBLDIR=$TUXDIR/udataobj
  * FIELDTBLS=tpadm,evt_mib
  *
@@ -17,6 +17,7 @@
 #include <tpadm.h>
 #include <evt_mib.h>
 #include <userlog.h>
+#include <sstream> // std::stringstream
 
 enum server_state {
   ACTIVE,
@@ -36,7 +37,7 @@ class domain: public atmi::abstract_client {
      *
      * @param pname program name
      */
-    domain(const char *pname): 
+    explicit domain(const char *pname):
       abstract_client("tpsysadm", "tpsysadm", (char *) "syspass", (char *) "apppass", (char *) NULL, (char *) NULL ),
       _program_name(pname),
       _counter(0),
@@ -53,14 +54,10 @@ class domain: public atmi::abstract_client {
      * @param sequence boot sequence
      * @return number servers successfully restarted.
      */
-    void reboot(const char *server_name, const int server_id, const char *group, const int sequence){
+    void reboot(const char *server_name, const int server_id, const char *group, const int sequence, const char *lmid){
 
       try {
-        if ( ! _dry_run ){
-          userlog ((char *) "tmreboot criterions:  server %s, group %s, srvid %d, sequence %d", server_name, group, server_id, sequence);
-        }
-
-        atmi::buffer entries(Fneeded32(6, 1024)); 
+        atmi::buffer entries(Fneeded32(6, 1024));
 
         atmi::transaction_ptr MIB = new_transaction_instance(".TMIB"); // MIB service
 
@@ -69,13 +66,17 @@ class domain: public atmi::abstract_client {
         atmi::Tfield<long>        ta_flags(TA_FLAGS);
         atmi::Tfield<std::string> ta_state(TA_STATE);
 
+        // search criterions
         atmi::Tfield<std::string> ta_servername(TA_SERVERNAME);
         atmi::Tfield<long>        ta_srvid(TA_SRVID);
         atmi::Tfield<long>        ta_sequence(TA_SEQUENCE);
         atmi::Tfield<std::string> ta_srvgrp(TA_SRVGRP);
+        atmi::Tfield<std::string> ta_lmid(TA_LMID);
 
         atmi::Tfield<long>        ta_more(TA_MORE);
         atmi::Tfield<long>        ta_occurences(TA_OCCURS);
+        atmi::Tfield<long>        ta_error(TA_ERROR); // error code (TA_ERROR != 1 means failed)
+        atmi::Tfield<std::string> ta_status(TA_STATUS);
 
         ta_class = "T_SERVER" ;
         ta_state = "ACT";
@@ -91,10 +92,17 @@ class domain: public atmi::abstract_client {
         if ( server_id   != 0 )   { ta_srvid = server_id ; entries.set(ta_srvid);}
         if ( sequence    != 0 )   { ta_sequence = sequence ; entries.set(ta_sequence);}
         if ( group       != NULL ){ ta_srvgrp = group ; entries.set(ta_srvgrp);}
+        if ( lmid        != NULL ){ ta_lmid = lmid ; entries.set(ta_lmid);}
 
         do{
           // serahc for server entires.
           MIB->call(entries);
+          entries.get(ta_error);
+          if ( ta_error < 0 ){
+            entries.print();
+            entries.get(ta_status);
+            fprintf(stderr,"error %d, %s\n", (long)ta_error, ta_status.c_str());
+          }
 
           entries.get(ta_more);
           if ( ta_more > 0 ) {
@@ -155,12 +163,10 @@ class domain: public atmi::abstract_client {
 
     void change_server_state( const std::string &state, int server_id, const std::string &group){
 
-      atmi::buffer query; 
+      atmi::buffer query;
       atmi::Tfield<std::string> ta_status(TA_STATUS);
 
       try{
-        // userlog((char *) "stopping server %d in group %s", server_id, group.c_str() );
-
         atmi::transaction_ptr MIB = new_transaction_instance(".TMIB"); // MIB service
 
         atmi::Tfield<std::string> ta_operation(TA_OPERATION);
@@ -185,11 +191,24 @@ class domain: public atmi::abstract_client {
 
         MIB->call(query);
 
+        // check if an error was reported.
+        query.get(ta_error);
+        if ( ta_error < 0 ){
+          query.get(ta_status);
+          printf ("   state change failed (%s): %s\n", state.c_str(), ta_status.c_str());
+        } else {
+          //printf ("   success.\n");
+        }
+
         //query.print();
 
       } catch ( std::exception &err ){
-        query.get(ta_status);
-        throw atmi::atmi_exception("failed to change server state to %s. %s, %s", state.c_str(), err.what(), ta_status.c_str());
+        if ( query.occurences(ta_status) > 0 ){
+          query.get(ta_status);
+          throw atmi::atmi_exception("failed to change server state to %s. %s, %s", state.c_str(), err.what(), ta_status.c_str());
+        } else {
+          throw atmi::atmi_exception("failed to change server state to %s. %s", state.c_str(), err.what());
+        }
       }
     }
 
@@ -210,7 +229,7 @@ class domain: public atmi::abstract_client {
     }
 
     long counter() const {
-      return _counter ; 
+      return _counter ;
     }
   private:
     bool        _dry_run ;
@@ -218,16 +237,34 @@ class domain: public atmi::abstract_client {
     std::string _program_name;
 };
 
-void print_usage( char *pname ) {
+void print_usage( const char *pname ) {
 
-    fprintf(stdout, "usage : %s [-n] -g grpname | -i srvid | -s srvname -o seqno\n\n", pname);
+    fprintf(stdout, "usage : %s [-n] -g grpname | -i srvid | -s srvname -o seqno | -l lmid\n\n", pname);
     fprintf(stdout, "restart server processes.\n");
     fprintf(stdout, "-g group name\n");
+    fprintf(stdout, "-g logical machine name (LMID)\n");
     fprintf(stdout, "-i server ID\n");
     fprintf(stdout, "-s server name\n");
     fprintf(stdout, "-o sequence number\n");
     fprintf(stdout, "-n dry run, displays what would have been restarted.\n");
-    fprintf(stdout, "-N restart only if the number requests done is greater then this value\n");
+    fprintf(stdout, "-N restart only if the number of requests done is greater then this value\n");
+}
+
+/** re-create the command line is about to be run.
+ *
+ * @parma pname program name
+ * @param argc argument coun
+ * @param argv argument values
+ */
+void audit( const char *pname, int argc, char *argv[]){
+  std::stringstream buffer ;
+  buffer << pname << " ";
+  for ( int x = 1 ; x < argc ; x++){
+    buffer << argv[x] << " ";
+  }
+  buffer << std::endl;
+
+  userlog((char *) "%s", buffer.str().c_str());
 }
 
 int main(int argc, char *argv[]) {
@@ -235,42 +272,50 @@ int main(int argc, char *argv[]) {
   auto status = EXIT_FAILURE;
 
   char  *group = NULL;
-  char  *srvname = NULL; 
+  char  *srvname = NULL;
+  char  *lmid = NULL;
   long   srvid = 0;
   long   seqid = 0;
 
-  char  *pname = basename(argv[0]); // get program name
+  const char  *pname = basename(argv[0]); // get program name
 
   long  nbd = 0;
   int   opt;
-  int arguments = 0; // number of arguments found
-  bool  err = false;
+  int   arguments = 0; // number of command line arguments found
+  bool  execute = true ; // when false no command should be executed, this is useful to handle special command line arguments (-v or -?)
 
   /* used by getopt line parser */
   extern char *optarg;
   extern int   optind;
-  extern int   opterr;   
+  extern int   opterr;
 
   opt = '\0';
 
   try {
-    // connect client
+    // connect clien
     domain admin(pname);
 
-    while ((opt = getopt(argc, argv, "g:i:o:s:N:n")) != -1) { // NOSONAR usual implementation
+    // dump command line about to be run
+    audit(pname, argc, argv);
+
+    while ((opt = getopt(argc, argv, "l:g:i:o:s:N:nv")) != -1) { // NOSONAR usual implementation
       switch(opt) {
-        case 'g':
+        case 'g': // group name
           group = optarg;
           arguments++;
           break;
-        case 'i':
+        case 'l': // LMID name
+          lmid = optarg;
+          arguments++;
+          break;
+        case 'i': // server ID
           srvid = atoi (optarg);
           break;
-        case 'o':
+        case 'o': // boot/shutdown sequence
           seqid = atoi (optarg);
           arguments++;
           break;
-        case 's':
+        case 's': // server name
           srvname = optarg;
           arguments++;
           break;
@@ -282,27 +327,42 @@ int main(int argc, char *argv[]) {
             fprintf (stdout, ">> only servers at least called %d times\n", nbd);
           }
           break;
-        case 'n':
+        case 'n': // dry run
+          userlog((char *)"dry run.");
           admin.set_dry_run(true);
+          break;
+        case 'v':
+          fprintf(stdout, "%s %s\n", pname, atmi::cpp_atmi_version());
+          execute = false;
+          break;
+        case ':':       /* -f or -o without operand */
+          fprintf(stderr, "option -%c requires an operand\n. ", optopt);
+          print_usage(pname);
+          break;
+        case '?':
+          fprintf(stderr, "unrecognized option -%c.\n", optopt);
+          print_usage(pname);
+          execute = false;
           break;
         default :
           fprintf (stderr, "Unknown option ... EXITING \n");
-          err=true;
       } /* end switch */
     }
 
-    if ( arguments > 0 ){
-      admin.reboot(srvname, srvid, group, seqid);
+    if ( execute && (arguments > 0)){
+      admin.reboot(srvname, srvid, group, seqid, lmid);
       std::cout << admin.counter() << " processes restarted." << std::endl;
       status = EXIT_SUCCESS;
     } else {
-      std::cerr << "missing argument." << std::endl << std::endl ;
-      print_usage(pname);
+      if ( execute && ( arguments == 0 )) { // display message only if execution was se
+        fprintf(stderr, "missing argument.\n\n");
+        print_usage(pname);
+      }
     }
 
   } catch ( std::exception &err ){
     std::cerr << err.what() << std::endl ;
   }
 
-  exit(status);
+  return(status);
 }
