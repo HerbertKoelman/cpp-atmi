@@ -1796,11 +1796,7 @@ $as_echo "$as_me: repository set to $enable_repository" >&6;}
 fi
 
 
-
-cat >>confdefs.h <<_ACEOF
-#define CPP_ATMI_VERSION "$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"
-_ACEOF
-
+# TODO remove this AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 
 # Check for optional use of doxygen
 # Extract the first word of "doxygen", so it can be a program name with args.

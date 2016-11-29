@@ -11,6 +11,7 @@
 #include <string>
 #include <cstring>
 #include <memory>
+#include <atmi/definitions.hpp>
 
 #ifndef CPP_ATMI_FIELDS_HPP
 #define CPP_ATMI_FIELDS_HPP

@@ -36,12 +36,14 @@ locale
 html
 man
 distrib
+*SERV
 .*
 ULOG*
 access*
-src/atmi++.cpp
 *.tar
 *orig
+*.out
+*.err
 
 # sample programs
 ulog_test

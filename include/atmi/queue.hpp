@@ -14,7 +14,7 @@
 #include <memory>
 #include <nl_types.h>
 
-#include <atmi/config.h>
+#include <atmi/definitions.hpp>
 #include <atmi/tuxedo.hpp>
 #include <atmi/buffer.hpp>
 
