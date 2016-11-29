@@ -1,4 +1,5 @@
 v4.6.0
+- migrated tmreboot from C/ATMI to C++/ATMI++
 - fixed issues detected by SONAR
 - now abstract_client handles system and application authentication
 - new AUTH_PROXY server (useful when debugging authentication services)
