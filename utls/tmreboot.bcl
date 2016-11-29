@@ -120,7 +120,7 @@ class domain: public atmi::abstract_client {
 
             if ( ta_srvid == 0 ){
               std::cerr << "cannot restart BBL" << std::endl;
-            } else {
+            } else if ((ta_srvid > 0) && (ta_srvid <= 30000)) {
               if ( _dry_run ){
                 _counter++ ; // increment the number of restarted server
                 printf ("DRY RUN would have restarted server %s (srvid: %d, group: %s)\n", basename((char *)ta_servername.c_str()), (long) ta_srvid, ta_srvgrp.c_str());
