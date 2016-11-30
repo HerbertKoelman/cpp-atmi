@@ -14,6 +14,45 @@
 
 #include "sample_fml_table.h"
 
+template< class T, FLDID32 F = 0 >
+class _field: public atmi::Tfield<T> {
+  public:
+    _field(): atmi::Tfield<T>(F){
+    }
+
+    _field( FLDID32 id ): atmi::Tfield<T>(id){
+    }
+
+    T operator=( T v ){
+      atmi::Tfield<T>::value = v;
+
+      return atmi::Tfield<T>::value ;
+    }
+};
+
+typedef _field<std::string,EMPNAME> prenom_t;
+typedef _field<long,EMPID>   empid_t;
+typedef _field<std::string>  void_t;
+
+class fields {
+  public:
+    fields(){
+      prenom = "hello world" ;
+      std::cout << __FUNCTION__ << ": " << prenom << std::endl ;
+    }
+
+  private:
+    prenom_t prenom ;
+};
+
+
+class field_empid: public atmi::Tfield<long> {
+  public:
+    field_empid(): atmi::Tfield<long>(EMPID){
+    }
+
+};
+
 class buffer_test : public atmi::abstract_client {
   public:
     buffer_test (): atmi::abstract_client ("btest"){
@@ -159,6 +198,16 @@ int main ( int argc, char **argv ) {
 
     std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
     buffer_test btest;
+
+    fields f;
+    _field<std::string> v(EMPNAME);
+
+    prenom_t prenom ;
+    prenom = "hello prenom_t" ;
+    std::cout << prenom.what() <<" " << prenom << "." << std::endl;
+    atmi::buffer buffer;
+    buffer.set(prenom);
+    buffer.print();
 
     std::cout << ", starting up" ;
     btest.run ( argc, argv );
