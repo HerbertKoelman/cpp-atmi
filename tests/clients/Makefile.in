@@ -35,7 +35,8 @@ CODECHECK=@CODECHECK@
 
 OBJECTS=@OBJECTS@
 FMLTABLES=sample_fml_table
-TARGETS=ulog_test queue_test transaction_test exceptions_tests buffer_test multi_context_test # evtest qtest qwriter
+TUXCLT=@TUXCLT@
+TARGETS=$(TUXCLT)
 
 all:fml-tbl ${TARGETS}
 

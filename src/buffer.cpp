@@ -140,9 +140,11 @@ namespace atmi {
 
   FLDOCC32 buffer::occurences ( const field &f ){
 
-    int rc = Foccur32 ( _buffer, f._field_id );
+    int rc = Foccur32 ( _buffer, f.id() );
     if ( rc < 0 ) {
-      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f._field_name, f._field_id );
+      throw buffer_exception ( Ferror32, "Failed to find occurences  of field %s (%d) in buffer.",
+          f.name().c_str(),
+          f.id() );
     }
 
     return rc;

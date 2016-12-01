@@ -625,6 +625,7 @@ ac_includes_default="\
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 TXFLAGS
+TUXCLT
 OBJECTS
 BITS
 EGREP
@@ -3967,7 +3968,6 @@ else
   as_fn_error $? "set env variable TUXDIR or use --enable-tuxdir=PATH." "$LINENO" 5
 fi
 
-
 OBJECTS=""
 for src in *.cpp
 do
@@ -3975,6 +3975,15 @@ do
   OBJECTS="$OBJECTS $obj"
 done
 OBJECTS=$OBJECTS
+
+
+TUXCLT=""
+for src in *.bcl
+do
+  clt=`basename $src .bcl`
+  TUXCLT="$TUXCLT $clt"
+done
+TUXCLT=$TUXCLT
 
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for specific $CXX compiler options" >&5

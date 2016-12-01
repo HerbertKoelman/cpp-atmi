@@ -43,9 +43,7 @@ namespace atmi {
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-       explicit Tfield ( FLDID32 fid ) : _length (0),_buffer_size(0), _value (NULL) {
-
-        set_id ( fid );
+       explicit Tfield ( FLDID32 fid ) : _length (0),_buffer_size(0), _value (NULL), field(fid) {
 
         // check taht we have a std::string declaration in the FML table
         if ( type () != 6 ) {
@@ -59,9 +57,9 @@ namespace atmi {
        *
        * @param n the fml field name to setup (as defined in the FML tables)
        */
-      explicit Tfield ( const char *n ) : _length (0),_buffer_size(0), _value (NULL) {
+      explicit Tfield ( const char *n ) : _length (0),_buffer_size(0), _value (NULL), field(n) {
 
-        setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
+        // setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
 
         // check type matching
         if ( type() != 6 ) {

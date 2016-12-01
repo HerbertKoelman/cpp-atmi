@@ -75,7 +75,6 @@ else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
 fi
 
-
 OBJECTS=""
 for src in *.cpp
 do
@@ -83,6 +82,14 @@ do
   OBJECTS="$OBJECTS $obj"
 done
 AC_SUBST(OBJECTS,$OBJECTS)
+
+TUXCLT=""
+for src in *.bcl
+do
+  clt=`basename $src .bcl`
+  TUXCLT="$TUXCLT $clt"
+done
+AC_SUBST(TUXCLT,$TUXCLT)
 
 AC_MSG_CHECKING([for specific $CXX compiler options])
 case "$CXX" in

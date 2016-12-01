@@ -32,16 +32,9 @@ namespace atmi {
    * When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add.
    */
   class field {
-
     public:
 
       friend class buffer;
-
-      /** default constructor
-       *
-       * default occurence value is 0.
-       */
-      field();
 
       /** Default destructor
        */
@@ -52,21 +45,21 @@ namespace atmi {
       /** Tuxedo field type.
        *
        *  Possible values are:
-       *  FLD_SHORT       0       short in
-       *  FLD_LONG        1       long in
-       *  FLD_CHAR        2       character
-       *  FLD_FLOAT       3       single-precision floa
-       *  FLD_DOUBLE      4       double-precision floa
-       *  FLD_STRING      5       std::string - null terminated
-       *  FLD_CARRAY      6       character array
-       *  FLD_PTR         9       pointer to a buffer
-       *  FLD_FML32      10       embedded FML32 buffer
-       *  FLD_VIEW32     11       embedded VIEW32 buffer
-       *  FLD_MBSTRING   12       multibyte character array
+       *  - FLD_SHORT       0       short in
+       *  - FLD_LONG        1       long in
+       *  - FLD_CHAR        2       character
+       *  - FLD_FLOAT       3       single-precision floa
+       *  - FLD_DOUBLE      4       double-precision floa
+       *  - FLD_STRING      5       std::string - null terminated
+       *  - FLD_CARRAY      6       character array
+       *  - FLD_PTR         9       pointer to a buffer
+       *  - FLD_FML32      10       embedded FML32 buffer
+       *  - FLD_VIEW32     11       embedded VIEW32 buffer
+       *  - FLD_MBSTRING   12       multibyte character array
        *
        * @return the field's type
        */
-      int type ();
+      field_type type ();
 
       /** @return the name of the fml field type
        */
@@ -81,7 +74,8 @@ namespace atmi {
        * @param id field ID
        * @since v4.2.1
        */
-      virtual void set_id(FLDID32 id);
+      // TODO remove this
+      //virtual void set_id(FLDID32 id);
 
       /** Extracts the field number from the field identifier.
        *
@@ -90,7 +84,7 @@ namespace atmi {
       int number ();
 
       /** @return the name of the field */
-      const char *name ();
+      const std::string name () const ;
 
       /** @return the fields occurence (as last found in a buffer)*/
       FLDOCC32 occurence ();
@@ -116,6 +110,26 @@ namespace atmi {
       };
 
     protected:
+
+      /** default constructor
+       *
+       * default occurence value is 0.
+       */
+      field();
+
+      /** new field instance
+       *
+       * @param id field ID
+       */
+      explicit field( FLDID32 id);
+
+      /** new field instance.
+       *
+       * the name field must exists in known FML table (see FIELDTBLS32 and FLDTBLDIR32).
+       *
+       * @param name field name 
+       */
+      explicit field( const std::string &name);
 
       /* Field manipulation error handler.
        *
@@ -183,18 +197,23 @@ namespace atmi {
 
     private:
 
-      FLDID32   _field_id;
-      FLDOCC32  _field_occurence;
-      char     *_field_name;
-      int       _ferror;
+      FLDID32     _field_id;
+      FLDOCC32    _field_occurence;
+      std::string _field_name;
+      int         _ferror;
       std::string _what; // used to return a desciption
   };
 
-  /** Template that handles short, long, char, double data type.
+  /** Template that handles short, long, char, double data types.
    *
    * \copydoc atmi::field
+   *
+   * @tparam T field's backend data type.
+   * @tparam fid field ID (defaults to BADFLDID )
+   *
    */
-  template <class T> class Tfield : public field {
+  template <class T, FLDID32 fid = BADFLDID>
+  class Tfield : public field {
     public:
 
       /** default constructor.
@@ -203,7 +222,8 @@ namespace atmi {
        *
        * @since v4.2.0
        */
-      Tfield(): value(0){};
+      Tfield(): _value(0), field(fid){
+      };
 
       /** Constructs a Tfield for the passed field id
        *
@@ -211,9 +231,9 @@ namespace atmi {
        *
        * @param field_id the fml field id to setup (as defined in the FML tables)
        */
-      explicit Tfield ( FLDID32 field_id ){
-        set_id(field_id);
-        value = 0; // wa are now sure that this is a number
+      explicit Tfield ( FLDID32 field_id ): _value(0), field(field_id){
+        // check data type is compatible
+        check_type_match();
       }
 
       /** Constructs a Tfield for the passed name
@@ -222,15 +242,11 @@ namespace atmi {
        *
        * @param name the fml field name to setup (as defined in the FML tables)
        */
-      explicit Tfield ( const char *name ) {
+      explicit Tfield ( const std::string &name ): _value(0), field (name) {
 
-        set_id ( (FLDID32) Fldid32 ( const_cast<char *>(name) ) );
-        value = 0; // wa are now sure that this is a number
+        // check data type is compatible
+        check_type_match();
 
-        // check type matching
-        if ( strcmp (typeid(this->value).name (), tname ()) != 0 ) {
-          throw atmi_exception ( "Tfield value is of type %s and the FML table decalares a type %s for %s.", typeid(this->value).name (), tname(), this->name());
-        }
       }
 
       /** set field id.
@@ -239,36 +255,46 @@ namespace atmi {
        *
        * @param field_id the fml field id to setup (as defined in the FML tables)
        */
-      virtual void set_id(FLDID32 field_id){
+// TODO remove
+//      virtual void set_id(FLDID32 field_id){
+//
+//        /** This array is used to check that FML type matches template Tfield's type */
+//        const char *TYPEID_NAMES[5] = {
+//          typeid(short).name(),
+//          typeid(long).name(),
+//          typeid(char).name(),
+//          typeid(float).name(),
+//          typeid(double).name()
+//        };
+//
+//        field::set_id ( field_id );
+//
+//        // check if type is matching declaration in FML table
+//        if ( type() >= FLD_STRING ) { // 0..FLD_STRING(5) correspond to numerical types
+//
+//          throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
+//
+//        } else if ( strcmp (typeid(_value).name (), TYPEID_NAMES[type()]) != 0 ) {
+//
+//          throw atmi_exception ( "Tfield [%s] (id: %d) value is of type %s and the FML table decalares a type %s.",
+//              name().c_str(),
+//              field_id,
+//              typeid(_value).name(),
+//              tname());
+//        }
+//      };
 
-        /** This array is used to check that FML type matches template Tfield's type */
-        const char *TYPEID_NAMES[5] = {
-          typeid(short).name(),
-          typeid(long).name(),
-          typeid(char).name(),
-          typeid(float).name(),
-          typeid(double).name()
-        };
-
-        field::set_id ( field_id );
-
-        // check if type is matching declaration in FML table
-        if ( type() >= FLD_STRING ) { // 0..FLD_STRING(5) correspond to numerical types
-          throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
-        } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
-          throw atmi_exception ( "Tfield %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
-        }
-      };
-
+      /** dispose of resources
+       */
       virtual ~Tfield() {
-        // Intentionally unimplemented...
+        // Intentional...
       };
 
       /** @return de length (or size) of the field's data
        */
       virtual FLDLEN32 length () {
 
-        return sizeof ( value );
+        return sizeof ( _value );
       };
 
       /** Assigns a value to the field
@@ -277,9 +303,9 @@ namespace atmi {
        * f = 156 ; // Set value to 156
        * ...
        */
-      T operator= ( T v) {
+      T operator= ( T value) {
 
-        value = v;
+        _value = value;
 
         return *this;
       };
@@ -293,7 +319,7 @@ namespace atmi {
        */
       operator T(){
 
-        return value;
+        return _value;
       };
 
     protected:
@@ -302,9 +328,12 @@ namespace atmi {
 
         int rc = -1;
 
-        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) &value, length() );
+        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) &_value, length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)",
+              name().c_str(),
+              id(),
+              occurence() );
         }
 
         return rc;
@@ -321,9 +350,12 @@ namespace atmi {
           throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
         }
 
-        rc = Fadd32 ( b.get_buffer(), id(), (char *) &value, length() );
+        rc = Fadd32 ( b.get_buffer(), id(), (char *) &_value, length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)",
+              name().c_str(),
+              id(),
+              occurence() );
         } else {
           set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
         }
@@ -342,15 +374,31 @@ namespace atmi {
         FLDLEN32 l = length();
         set_field_occurence (occ);
 
-        rc = Fget32 ( b.get_buffer(), id(), occurence(), (char *) &value, &l );
+        rc = Fget32 ( b.get_buffer(), id(), occurence(), (char *) &_value, &l );
         if ( rc == -1 ) {
-          throw buffer_exception (Ferror32, "FGET32 failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGET32 failed to get field %s (id: %d, occ: %d).",
+              name().c_str(),
+              id(),
+              occurence() );
         }
 
         return rc;
       };
 
-      T value; //!< field's current value
+      /** check if backend type is compatible with FML type
+       */
+      void check_type_match(){
+        // check type matching
+        if (strcmp (typeid(_value).name(), tname ()) != 0 ) {
+          throw atmi_exception ( "Tfield [%s] (id: %d) backend value is of type %s and the FML table decalares a type %s.",
+              name().c_str(),
+              id(),
+              typeid(_value).name(),
+              tname());
+        }
+      }
+
+      T _value; //!< field's current value
 
   };
 
@@ -358,45 +406,44 @@ namespace atmi {
   /** Specialization of template Tfield which handles std::string typed fields.
    *
    * This class is using a std::string object to hold and handle std::string data
+   *
    * \copydoc atmi::field
+   *
+   * @tparam T field's backend data type.
+   * @tparam fid field ID 
    */
-  template <> class Tfield<std::string>: public field {
+  template <FLDID32 fid > 
+  class Tfield<std::string, fid>: public field {
     public:
 
-      Tfield(){
+      /** new instance.
+       */
+      Tfield(): _value(""), field(fid){
         // intentional
       };
 
-      /** Constructs a Tfield for the passed field id
+      /** Constructs a Tfield for the passed field id.
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
-       * @param fid the fml field id to setup (as defined in the FML tables)
+       * @param id the fml field id to setup (as defined in the FML tables)
        */
-      explicit Tfield ( FLDID32 fid ) {
+      explicit Tfield ( FLDID32 id ): _value(""), field(id) {
 
-        set_id ( fid );
-
-        // check taht we have a std::string declaration in the FML table
-        if ( type () != 5 ) {
-          throw atmi_exception ( "Tfield %s's value is of type std::string and the FML table decalares a type %s.", name (), tname());
-        }
+        // check type mismatch
+        check_type_match();
       }
 
-      /** Constructs a Tfield for the passed name
+      /** Constructs a Tfield for the passed name.
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
-       * @param n the fml field name to setup (as defined in the FML tables)
+       * @param name the fml field name to setup (as defined in the FML tables)
        */
-      explicit Tfield ( const char *n ) {
+      explicit Tfield ( const char *name ): _value(""), field(name) {
 
-        set_id ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
-
-        // check type matching
-        if ( type() !=5 ) {
-          throw atmi_exception ( "Tfield value is of type std::string and the FML table decalares a type %s for %s.", tname(), name());
-        }
+        // check type mismatch
+        check_type_match();
       }
 
       virtual ~Tfield() {
@@ -407,20 +454,20 @@ namespace atmi {
        */
       virtual FLDLEN32 length () {
 
-        return (FLDLEN32)value.length();
+        return (FLDLEN32)_value.length();
       };
 
       /** @return the std::string's size
        */
       virtual FLDLEN32 size () {
 
-        return (FLDLEN32)value.size();
+        return (FLDLEN32)_value.size();
       };
 
       /** @return a C std::string (with \0) of current std::string's content.
        */
       const char* c_str ( ) const {
-        return value.c_str();
+        return _value.c_str();
       }
 
       /** Appends a copy of the argument to the std::string.
@@ -435,8 +482,8 @@ namespace atmi {
        */
       std::string& operator+= ( const std::string& str ){
 
-        value += str;
-        return value;
+        _value += str;
+        return _value;
       }
 
       /** Appends a copy of the argument to the std::string.
@@ -446,13 +493,13 @@ namespace atmi {
        *
        * The append member function provides a similar functionality with additional options.
        *
-       * @param  s  a pointer to an array containing a null-terminated character sequence (C std::string), which is appended to the object's content.
+       * @param  str  a pointer to an array containing a null-terminated character sequence (C std::string), which is appended to the object's content.
        * @return *this
        */
-      std::string& operator+= ( const char* s ){
+      std::string& operator+= ( const char* str ){
 
-        value += s;
-        return value;
+        _value += str;
+        return _value;
       }
 
       /** Appends character to the std::string field.
@@ -461,8 +508,8 @@ namespace atmi {
        * @return *this
        */
       std::string& operator+= ( char c ){
-        value += c;
-        return value;
+        _value += c;
+        return _value;
       }
 
       /**
@@ -473,12 +520,14 @@ namespace atmi {
        * The at member function has the same behavior as this operator function, except that at also performs a range
        * check.
        *
-       * @param pos position within the std::string of the character to be retrieved. Notice that the first character in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @param pos position within the std::string of the character to be retrieved. Notice that the first character 
+       * in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       *
        * @return The character at the specified position in the std::string.
        */
       const char& operator[] ( size_t pos ) const {
 
-        return value[pos];
+        return _value[pos];
       }
 
       /**
@@ -489,12 +538,14 @@ namespace atmi {
        * The at member function has the same behavior as this operator function, except that at also performs a range
        * check.
        *
-       * @param pos position within the std::string of the character to be retrieved. Notice that the first character in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       * @param pos position within the std::string of the character to be retrieved. Notice that the first character 
+       * in the std::string has a position of 0, not 1. size_t is an unsigned integral type.
+       *
        * @return The character at the specified position in the std::string.
        */
       char& operator[] ( size_t pos ){
 
-        return value[pos];
+        return _value[pos];
       }
 
       /**
@@ -504,7 +555,7 @@ namespace atmi {
        */
       virtual Tfield<std::string> &operator= ( const char* str ) {
 
-        value = str;
+        _value = str;
         return *this;
       };
 
@@ -515,7 +566,7 @@ namespace atmi {
        */
       virtual Tfield<std::string> &operator= ( const std::string &str ) {
 
-        value = str;
+        _value = str;
 
         return *this;
       };
@@ -527,7 +578,7 @@ namespace atmi {
        */
       virtual Tfield<std::string> &operator= ( char &c ) {
 
-        value = c;
+        _value = c;
 
         return *this;
       };
@@ -536,7 +587,7 @@ namespace atmi {
        */
       operator std::string(){
 
-        return value;
+        return _value;
       };
 
     protected:
@@ -545,9 +596,12 @@ namespace atmi {
 
         int rc = -1;
 
-        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) value.c_str(), length() );
+        rc = Fchg32 ( b.get_buffer(), id(), occurence(), (char *) _value.c_str(), length() );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set failed for field %s (id: %d, occ: %d)",
+              name().c_str(),
+              id(),
+              occurence() );
         }
 
         return rc;
@@ -565,14 +619,18 @@ namespace atmi {
             throw  atmi_exception ( "Add failed to estimate needed memory extension. Original message was : %s", buffErr.what() );
           }
 
-          rc = Fadd32 ( b.get_buffer(), id(), (char *) value.c_str(), length() );
+          rc = Fadd32 ( b.get_buffer(), id(), (char *) _value.c_str(), length() );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add failed for field %s (id: %d, occ: %d)",
+                name().c_str(),
+                id(),
+                occurence() );
           } else {
             set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
         } else {
-          throw atmi_exception ("field %s's value is empty !!?? Cannot add an empty field value.", name ());
+          throw atmi_exception ("field %s's value is empty !!?? Cannot add an empty field value.",
+              name ().c_str());
         }
 
         return rc;
@@ -594,17 +652,31 @@ namespace atmi {
         if ( v != NULL ) {
 
           rc=0;
-          value = v;                    // copy v into std::string value
+          _value = v;                    // copy v into std::string value
           delete v;
 
         } else {
-          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+          throw buffer_exception (Ferror32, "FGETSA32 Tfield::get failed to get field %s (id: %d, occ: %d).",
+              name().c_str(),
+              id(),
+              occurence() );
         }
 
         return rc;
       };
 
-      std::string value; //!< std::string field's value
+      void check_type_match(){
+        // check type matching
+        if ( type() !=5 ) {
+          throw atmi_exception ( "Tfield [%s] (id: %d) value is of type %s and the FML table decalares a type %s.",
+              name().c_str(),
+              id(),
+              typeid(_value).name(),
+              tname());
+        }
+      }
+
+      std::string _value; //!< std::string field's value
   };
 
   /** Helper that handles the operator << between output streams and field value */

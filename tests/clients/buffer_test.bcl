@@ -199,16 +199,13 @@ int main ( int argc, char **argv ) {
     std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
     buffer_test btest;
 
-    fields f;
-    _field<std::string> v(EMPNAME);
-
-    prenom_t prenom ;
-    prenom = "hello prenom_t" ;
-    std::cout << prenom.what() <<" " << prenom << "." << std::endl;
-    atmi::buffer buffer;
-    buffer.set(prenom);
-    buffer.print();
-
+//    prenom_t prenom ;
+//    prenom = "hello prenom_t" ;
+//    std::cout << prenom.what() <<" " << prenom << "." << std::endl;
+//    atmi::buffer buffer;
+//    buffer.set(prenom);
+//    buffer.print();
+//
     std::cout << ", starting up" ;
     btest.run ( argc, argv );
 
