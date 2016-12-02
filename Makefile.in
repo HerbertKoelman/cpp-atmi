@@ -77,7 +77,7 @@ version:
 
 install: 
 	$(MKDIR) $(INCLUDEDIR)
-	$(INSTALL) include/atmi/*.hpp include/atmi/*.h $(INCLUDEDIR)
+	$(INSTALL) include/atmi/*.hpp $(INCLUDEDIR)
 	$(INSTALL) lib/$(LIBATMI) lib/$(LIBCLTATMI) lib/$(LIBFML) @libdir@
 	$(INSTALL) bin/*   @bindir@
 
