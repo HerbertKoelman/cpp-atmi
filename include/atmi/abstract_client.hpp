@@ -102,7 +102,7 @@ namespace atmi {
        * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
        * @param cltname client program name (default NULL)
-       * @param usr user name (default NULL)
+       * @param user user name (default NULL)
        * @param sys_passwd Tuxedo domain passwd (TPSYSAUTH)
        * @param app_passwd application password (TPAPPAUTH)
        * @param group is used to associate the client with a resource manager group name
