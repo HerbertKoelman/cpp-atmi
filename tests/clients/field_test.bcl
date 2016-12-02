@@ -1,0 +1,121 @@
+/* $Id$
+
+   Sample Tuxedo client using ATMI++ libray.
+
+ */
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <typeinfo>
+#include "atmi/atmi++.hpp"
+
+#include "sample_fml_table.h"
+
+template< class T, FLDID32 F = 0 >
+class _field: public atmi::Tfield<T> {
+  public:
+    _field(): atmi::Tfield<T>(F){
+    }
+
+    _field( FLDID32 id ): atmi::Tfield<T>(id){
+    }
+
+    T operator=( T v ){
+      atmi::Tfield<T>::value = v;
+
+      return atmi::Tfield<T>::value ;
+    }
+};
+
+typedef _field<std::string,EMPNAME> prenom_t;
+typedef _field<long,EMPID>   empid_t;
+typedef _field<std::string>  void_t;
+
+class fields {
+  public:
+    fields(){
+      prenom = "hello world" ;
+      std::cout << __FUNCTION__ << ": " << prenom << std::endl ;
+    }
+
+  private:
+    prenom_t prenom ;
+};
+
+
+class field_empid: public atmi::Tfield<long> {
+  public:
+    field_empid(): atmi::Tfield<long>(EMPID){
+    }
+
+};
+
+// program main -------------------------------------------------
+
+int main ( int argc, char **argv ) {
+
+  auto status = EXIT_FAILURE;
+  try {
+
+    std::cout << "field sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
+
+    std::cout << std::endl << "---------------------------" << std::endl << std::endl;
+
+    {
+      std::cout << "TEST >>>> IMPID field ID: " << std::endl;
+
+      atmi::Tfield<long> empid_(EMPID);
+      std::auto_ptr<atmi::field> empid_ptr(new atmi::Tfield<long, EMPID>);
+      std::cout << empid_ptr->name() << "(PTR): " << empid_ptr->what() << std::endl;
+
+      atmi::Tfield<long, EMPID> empid;
+      empid = 10;
+      std::cout << empid.name() << ": " << empid << std::endl << "  " << empid.what() << std::endl;
+
+      std::cout << "TEST >>>> succesful" << std::endl ;
+    }
+
+    {
+      std::cout << "TEST >>>> IMPID field name: " << std::endl;
+
+      atmi::Tfield<long> empid("EMPID");
+      empid = 10;
+      std::cout << empid.name() << ": " << empid << std::endl << "  " << empid.what() << std::endl;
+
+      std::cout << "TEST >>>> succesful" << std::endl ;
+    }
+
+    std::cout << std::endl << "---------------------------" << std::endl << std::endl;
+
+    {
+      std::cout << "TEST >>>> Tfields type mismatch detection: " << std::endl;
+
+      try {
+        atmi::Tfield<short> empid(EMPID);
+      }catch ( std::exception &err ){
+        std::cerr << "field test failed. " << err.what() << std::endl;
+      }
+
+      try {
+        atmi::Tfield<short> empid("EMPID");
+      }catch ( std::exception &err ){
+        std::cerr << "field test failed. " << err.what() << std::endl;
+      }
+
+      std::cout << "TEST >>>> succesful" << std::endl ;
+    }
+
+    std::cout << std::endl << "---------------------------" << std::endl << std::endl;
+
+    std::cout << "END of field sample program" << std::endl ;
+    status = EXIT_SUCCESS;
+
+  } catch ( std::exception &err ) {
+    std::cerr << "field test failed. " << err.what() << std::endl;
+  }
+
+  return status;
+}

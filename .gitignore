@@ -46,11 +46,4 @@ access*
 *.err
 
 # sample programs
-ulog_test
-exceptions_tests
-buffer_test        
-multi_context_test 
-queue_test          
-transaction_test
-sample_fml_table.h
-
+*test
