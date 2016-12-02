@@ -28,6 +28,12 @@ CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
 
+# used to build clients (needs tpinit.o)
+CLT_LIBS=@CLT_LIBS@
+
+# used to build servers
+SRV_LIBS=@SRV_LIBS@
+
 TARGETS=@TARGETS@
 
 all:${TARGETS}
@@ -66,9 +72,9 @@ cxref:
 # Build a simple Tuxedo client program (buildclient)
 .bcl:
 	CC=$(CCC) CFLAGS="@BFLAGS@ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"  \
-	buildclient    -f $< -o ../bin/$@ -l "$(LIBS)"
+	buildclient    -f $< -o ../bin/$@ -l "$(CLT_LIBS) $(LIBS)"
 
 # Buil a simple Tuxedo server (buildserver). Exported functions are provide through a file <targetname>.func.
 .bsr:
 	CC=$(CCC) CFLAGS="@BFLAGS@ $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)" \
-	buildserver -s @$@.func -f $< -o $@ -l "$(LIBS)"
+	buildserver -s @$@.func -f $< -o ../app/$@ -l "$(SRV_LIBS) $(LIBS)"

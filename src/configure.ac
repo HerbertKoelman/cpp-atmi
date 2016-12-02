@@ -3,7 +3,6 @@
 
 AC_PREREQ(2.69)
 AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
-AC_CONFIG_HEADERS([../include/atmi/config.h])
 
 AC_CONFIG_SRCDIR([tuxedo.cpp])
 
@@ -14,8 +13,16 @@ AC_ARG_ENABLE([auxdir], AS_HELP_STRING([--enable-auxdir=PATH],[set AUXDIR to poi
 
 AC_ARG_VAR([TUXDIR], [Tuxedo home directory])
 AC_ARG_ENABLE([tuxdir], AS_HELP_STRING([--enable-tuxdir=PATH],[set TUXDIR to point to this path]), TUXDIR=$enable_tuxdir)
+AC_ARG_ENABLE([release], AS_HELP_STRING([--enable-release],[build as release.]), BUILD=$PACKAGE_VERSION)
 
-AC_USE_SYSTEM_EXTENSIONS
+if test -z "$BUILD" 
+then
+  BUILD="SNAPSHOT"
+  AC_MSG_NOTICE([using default BUILD name $BUILD])
+fi
+AC_SUBST(BUILD,$BUILD)
+
+#AC_USE_SYSTEM_EXTENSIONS
 
 # Checks for programs.
 AC_PROG_CC
@@ -82,7 +89,7 @@ else
   AC_MSG_ERROR([set env variable TUXDIR or use --enable-tuxdir=PATH.])
 fi
 
-AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $PACKAGE_VERSION - $(git log --pretty='commit: %h, %cn (%cI)' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
+AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_NAME $BUILD - $(git log --pretty='commit: %h, %cn (%cI)' | head -1) - compiled on `uname -sv` for `basename $TUXDIR`."], [Tuxedo ATMI C++ wrapper.])
 
 # Checks for header files.
 #AC_CHECK_HEADERS([limits.h nl_types.h cstdlib cstring sys/time.h cunistd])
@@ -109,6 +116,7 @@ case "$CXX" in
     AC_MSG_RESULT([none found.])
 esac
 
-AC_CONFIG_FILES([atmi++.cpp Makefile])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

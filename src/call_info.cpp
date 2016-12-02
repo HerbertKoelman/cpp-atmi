@@ -27,7 +27,6 @@ namespace atmi {
     return _ecid;
   }
 
-  // TODO(herbert) check why this signature fails to link void call_info::set_ecid( const std::string &value){
   void call_info::set_ecid( const char *value){
     // if (value.size() <= MAXECIDLEN ){
     if (strlen(value) <= MAXECIDLEN  ){

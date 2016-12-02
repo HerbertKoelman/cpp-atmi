@@ -7,6 +7,7 @@
 #include <cstring>
 #include <tpadm.h>
 
+#include <atmi/definitions.hpp>
 #include <atmi/fields.hpp>
 
 #ifndef CPP_ATMI_CALL_INFO_HPP

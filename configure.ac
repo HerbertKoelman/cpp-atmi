@@ -14,7 +14,7 @@ AC_ARG_ENABLE([build], AS_HELP_STRING([--enable-build],[build build.]), BUILD=$e
 AC_ARG_ENABLE([release], AS_HELP_STRING([--enable-release],[build as release.]), BUILD=$PACKAGE_VERSION)
 AC_ARG_ENABLE([repository], AS_HELP_STRING([--enable-repository],[use the given name to locate the remote repository]), AC_MSG_NOTICE([repository set to $enable_repository]) )
 
-AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
+# TODO remove this AC_DEFINE_UNQUOTED(CPP_ATMI_VERSION, ["$PACKAGE_VERSION compiled on `uname -sv`.`uname -r` for `basename $TUXDIR`"], [package description string])
 
 # Check for optional use of doxygen
 AC_CHECK_PROG([DOXYGEN], [doxygen], [doxygen])
@@ -44,6 +44,15 @@ fi
 if test -z "$CODECHECK" 
 then
   AC_CHECK_PROG([CODECHECK],[cppcheck],[cppcheck --template='{file}:{line},{severity},{id}:\n    {message}\n' --enable=all -I include ./src ./include],[])
+fi
+
+AC_MSG_CHECKING([whether target directory ./app exists])
+if test -e ./app
+then
+  AC_MSG_RESULT([already there.])
+else
+  mkdir -p ./app
+  AC_MSG_RESULT([./app created.])
 fi
 
 AC_MSG_CHECKING([whether target directory ./lib exists])

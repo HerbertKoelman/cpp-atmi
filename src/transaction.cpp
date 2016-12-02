@@ -6,6 +6,7 @@
 
 #include <atmi/transaction.hpp>
 #include <unistd.h>
+//#include <atmi.h>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ namespace atmi {
   transaction::transaction ( const char *service ): _service(service), _call_descriptor(0) {
 
     // length 32 chars (see definition in atmi.h
-    if ( _service.size() > 32 ) {
+    if ( _service.size() > (MAXTIDENT + 2)  ) { // max /T identifier length + 2
       throw tuxedo_exception ( 0, "Given service name '%s' is too long.", service );
     }
   }
@@ -34,12 +35,13 @@ namespace atmi {
       rc = tpcall ( (char *) _service.c_str(), idata, ilen, odata, olen, _flags );
       if (rc < 0 ) {
 
-        switch ( tperrno ) {
+        switch ( tperrno ) { // NOSONAR
           case TPETIME:
           case TPESVCERR:
             if ( delay > 0 ) {
               sleep (delay);
             }
+            break;
         }
 
       } else {

@@ -31,7 +31,7 @@
 #include <memory>
 #include <nl_types.h>
 
-#include <atmi/config.h>
+#include <atmi/definitions.hpp>
 #include <atmi/exceptions.hpp>
 #include <atmi/transaction.hpp>
 #include <atmi/queue.hpp>
@@ -54,9 +54,13 @@ namespace atmi {
    * need to pass a valid TUXCONFIG file when constructing an abstract_client instance. The multiconext mode is available
    * only for native clients.
    *
-   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr
-   * which are auto pointers. which is probaly the best way to avoid memory leaks.
+   * Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance).
+   * These methods return tp_auto_ptr and queue_auto_ptr which are auto pointers. which is probaly the best way to avoid memory leaks.
    *
+   * If authentication is needed, user is prompted for system and/or application password.
+   *
+   * @author herbert koelman
+   * @since 1.0.0
    */
   class abstract_client : public tuxedo {
     public:
@@ -70,6 +74,8 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
+       * If authentication is needed, user is prompted for system and/or application password.
+       *
        * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus
        * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
        */
@@ -78,22 +84,46 @@ namespace atmi {
       /**
        * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
-       * Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus
-       * first join a BEA tuxedo ATMI system application by explicitly using tpinit.
+       * @param cltname client program name
+       * @since v4.6.0
+       */
+       explicit abstract_client (const char *cltname);
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit.
+       *
+       * @param cltname client program name
+       * @param tuxconfig used located the DOMAIN (multi context is activated)
+       * @since v4.6.0
+       */
+       abstract_client (const char *cltname, const char *tuxconfig);
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit.
+       *
+       * @param cltname client program name (default NULL)
+       * @param user user name (default NULL)
+       * @param sys_passwd Tuxedo domain passwd (TPSYSAUTH)
+       * @param app_passwd application password (TPAPPAUTH)
+       * @param group is used to associate the client with a resource manager group name
+       *
+       * @since v4.6.0
+       */
+       abstract_client (const char *cltname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group);
+
+      /**
+       * Join a BEA tuxedo ATMI system application by calling tpinit.
        *
        * This constructor sets the TPINFO flag TPMULTICONTEXTS if the parameter tuxconfig is passed.
        *
-       * In a multi threaded application it is good practice to initiliaze all your clients before starting the threads.
-       *
-       * If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.
-       *
        * @param cltname client program name (default NULL)
        * @param usr user name (default NULL)
-       * @param passwd user's password (default NULL)
+       * @param sys_passwd Tuxedo domain passwd (TPSYSAUTH, default NULL)
+       * @param app_passwd application password (TPAPPAUTH,default NULL)
        * @param group is used to associate the client with a resource manager group name (default NULL)
        * @param tuxconfig used located the DOMAIN
        */
-      explicit abstract_client ( const char *cltname, const char *usr = NULL, const char *passwd = NULL, const char *group = NULL, const char *tuxconfig = NULL );
+       abstract_client (const char *cltname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group, const char *tuxconfig);
 
       /** This method must overriden  to run the client application.
        *

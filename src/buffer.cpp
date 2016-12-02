@@ -153,7 +153,7 @@ namespace atmi {
   };
 
   size_t buffer::used () const {
-    return ( _buffer == NULL ? 0 : Fused32 ( _buffer ));
+    return ((_buffer == NULL)? 0 : Fused32 ( _buffer ));
   };
 
   size_t buffer::unused () const {

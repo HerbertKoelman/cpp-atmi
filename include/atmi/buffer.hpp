@@ -11,6 +11,7 @@
 #include <cstring>
 #include <memory>
 
+#include <atmi/definitions.hpp>
 #include <atmi/exceptions.hpp>
 #include <atmi/tuxedo.hpp>
 

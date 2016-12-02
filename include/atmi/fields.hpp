@@ -11,6 +11,7 @@
 #include <string>
 #include <cstring>
 #include <memory>
+#include <atmi/definitions.hpp>
 
 #ifndef CPP_ATMI_FIELDS_HPP
 #define CPP_ATMI_FIELDS_HPP
@@ -48,7 +49,8 @@ namespace atmi {
         // Intentionally unimplemented...
       };
 
-      /**
+      /** Tuxedo field type.
+       *
        *  Possible values are:
        *  FLD_SHORT       0       short in
        *  FLD_LONG        1       long in
@@ -188,7 +190,8 @@ namespace atmi {
       std::string _what; // used to return a desciption
   };
 
-  /** Template that handles non pointer data types (short, long, char, double, ...)
+  /** Template that handles short, long, char, double data type.
+   *
    * \copydoc atmi::field
    */
   template <class T> class Tfield : public field {
@@ -230,9 +233,9 @@ namespace atmi {
         }
       }
 
-      /** Constructs a Tfield for the passed field id
+      /** set field id.
        *
-       * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
+       * This template only handles numerical field IDs.
        *
        * @param field_id the fml field id to setup (as defined in the FML tables)
        */
@@ -249,8 +252,8 @@ namespace atmi {
 
         field::set_id ( field_id );
 
-        // check if type is matching
-        if ( type() > 5 ) {
+        // check if type is matching declaration in FML table
+        if ( type() >= FLD_STRING ) { // 0..FLD_STRING(5) correspond to numerical types
           throw atmi_exception ( "This template doesn't support the given type Tfield<%s>.", tname ());
         } else if ( strcmp (typeid(this->value).name (), TYPEID_NAMES[type()]) != 0 ) {
           throw atmi_exception ( "Tfield %s's value is of type %s and the FML table decalares a type %s.", name (), typeid(this->value).name (), tname());
@@ -432,7 +435,8 @@ namespace atmi {
        */
       std::string& operator+= ( const std::string& str ){
 
-        return value += str;
+        value += str;
+        return value;
       }
 
       /** Appends a copy of the argument to the std::string.
@@ -447,7 +451,8 @@ namespace atmi {
        */
       std::string& operator+= ( const char* s ){
 
-        return value += s;
+        value += s;
+        return value;
       }
 
       /** Appends character to the std::string field.
@@ -456,7 +461,8 @@ namespace atmi {
        * @return *this
        */
       std::string& operator+= ( char c ){
-        return value += c;
+        value += c;
+        return value;
       }
 
       /**

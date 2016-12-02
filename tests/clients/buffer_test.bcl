@@ -14,6 +14,45 @@
 
 #include "sample_fml_table.h"
 
+template< class T, FLDID32 F = 0 >
+class _field: public atmi::Tfield<T> {
+  public:
+    _field(): atmi::Tfield<T>(F){
+    }
+
+    _field( FLDID32 id ): atmi::Tfield<T>(id){
+    }
+
+    T operator=( T v ){
+      atmi::Tfield<T>::value = v;
+
+      return atmi::Tfield<T>::value ;
+    }
+};
+
+typedef _field<std::string,EMPNAME> prenom_t;
+typedef _field<long,EMPID>   empid_t;
+typedef _field<std::string>  void_t;
+
+class fields {
+  public:
+    fields(){
+      prenom = "hello world" ;
+      std::cout << __FUNCTION__ << ": " << prenom << std::endl ;
+    }
+
+  private:
+    prenom_t prenom ;
+};
+
+
+class field_empid: public atmi::Tfield<long> {
+  public:
+    field_empid(): atmi::Tfield<long>(EMPID){
+    }
+
+};
+
 class buffer_test : public atmi::abstract_client {
   public:
     buffer_test (): atmi::abstract_client ("btest"){
@@ -39,10 +78,10 @@ class buffer_test : public atmi::abstract_client {
         unknown_field.set_id(SRVCDAY);
         unknown_field.set_char_array("salut les amis\0rray", 19);
 
-        atmi::Tfield<string> prenom ( EMPNAME );
+        atmi::Tfield<std::string> prenom ( EMPNAME );
         atmi::Tfield<long>   empid ( EMPID );
         atmi::Tfield<long>   empzip ( EMPZIP );
-        atmi::Tfield<string> nom ( EMPNAME );
+        atmi::Tfield<std::string> nom ( EMPNAME );
         atmi::Tfield<char *> carray ( SRVCDAY );
         atmi::Tfield<char *> copy ( SRVCDAY );
 
@@ -139,11 +178,11 @@ class buffer_test : public atmi::abstract_client {
         wrapper1.print();
 
       }catch ( atmi::buffer_exception &err ) {
-        cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
+        std::cerr << err.what() << ". Ferror : " << err.error() <<std::endl;
       } catch ( atmi::atmi_exception &err ) {
-        cerr << err.what() << std::endl;
+        std::cerr << err.what() << std::endl;
       } catch ( std::exception &err ) {
-        cerr << err.what() << std::endl;
+        std::cerr << err.what() << std::endl;
       }
 
       return 9999;
@@ -160,13 +199,23 @@ int main ( int argc, char **argv ) {
     std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
     buffer_test btest;
 
+    fields f;
+    _field<std::string> v(EMPNAME);
+
+    prenom_t prenom ;
+    prenom = "hello prenom_t" ;
+    std::cout << prenom.what() <<" " << prenom << "." << std::endl;
+    atmi::buffer buffer;
+    buffer.set(prenom);
+    buffer.print();
+
     std::cout << ", starting up" ;
     btest.run ( argc, argv );
 
   } catch ( atmi::atmi_exception &err){
-    cerr << std::endl << err.what() << std::endl;
+    std::cerr << std::endl << err.what() << std::endl;
   } catch ( std::exception &err ) {
-    cerr << std::endl << err.what() << std::endl;
+    std::cerr << std::endl << err.what() << std::endl;
   }
   std::cout << ", done." << std::endl;
 

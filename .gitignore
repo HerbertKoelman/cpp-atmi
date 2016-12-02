@@ -27,6 +27,7 @@ autom4te.cache
 
 # misc and project created files
 bin
+app
 doc
 sonar-project.properties
 doxyfile
@@ -35,12 +36,14 @@ locale
 html
 man
 distrib
+*SERV
 .*
 ULOG*
 access*
-src/atmi++.cpp
 *.tar
 *orig
+*.out
+*.err
 
 # sample programs
 ulog_test

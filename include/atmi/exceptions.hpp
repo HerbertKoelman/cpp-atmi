@@ -22,8 +22,8 @@
 #ifndef __TUXEDO_EXCEPTION__
 #define __TUXEDO_EXCEPTION__
 
+#include <atmi/definitions.hpp>
 #include <atmi.h>
-// #include <stdarg.h>
 #include <exception>
 #include <string>
 #include <cstring>

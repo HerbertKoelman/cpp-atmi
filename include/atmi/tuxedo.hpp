@@ -30,7 +30,7 @@
 #include <memory>
 #include <nl_types.h>
 
-#include <atmi/config.h>
+#include <atmi/definitions.hpp>
 #include <atmi/exceptions.hpp>
 
 // using namespace std;
@@ -273,7 +273,7 @@ namespace atmi {
             case TPESVCFAIL:
               // return application specific error number instead
               // as the application will probably know what to do
-              _tperrno = ( tpurcode > 0 ? tpurcode : -1 );
+              _tperrno = ((tpurcode > 0)? tpurcode : -1 );
               break;
 
             default:

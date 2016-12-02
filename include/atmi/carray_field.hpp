@@ -12,7 +12,8 @@
 #include <cstring>
 #include <memory>
 #include <stdexcept>
-#include "fields.hpp"
+#include <atmi/definitions.hpp>
+#include <atmi/fields.hpp>
 
 #ifndef CPP_ATMI_CARRAY_FIELD_HPP
 #define CPP_ATMI_CARRAY_FIELD_HPP

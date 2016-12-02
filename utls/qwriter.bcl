@@ -15,8 +15,8 @@
 class queue_writer : public atmi::abstract_client {
 public:
 
-  queue_writer ( const char *qs, const char *q, const char *user, const char *passwd, const char *group ) :
-    abstract_client ("qwriter", user, passwd, group),
+  queue_writer ( const char *qs, const char *q, const char *user, const char *sys_passwd, const char *app_passwd, const char *group ) :
+    abstract_client ("qwriter", user, sys_passwd, app_passwd, group),
     qspace(qs),
     queue(q)
   {
@@ -39,7 +39,7 @@ public:
 
           stop = message == "quit" ;
 
-          if ( ! stop  && ! message.empty()){
+          if ((! stop) && (! message.empty())){
             size = message.size();
             char *buffer = allocate("STRING", NULL, size + 1);
             memset(buffer, 0, size + 1);
@@ -73,7 +73,7 @@ int main ( int argc, char **argv ) {
     options.parse(argc,argv);
 
     if ( (options.qspace != NULL) && (options.queue != NULL)){
-      queue_writer qw(options.qspace, options.queue, options.user, options.passwd, options.group );
+      queue_writer qw(options.qspace, options.queue, options.user, options.sys_passwd, options.app_passwd, options.group );
       status= qw.run ();
     } else {
       std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;

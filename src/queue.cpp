@@ -235,9 +235,7 @@ namespace atmi {
   void queue::set_new_corrid() {
     // set correlation ID
     ostringstream corrid;
-    timeb tb;
-    ftime(&tb);
-    corrid << getpid() << pthread_self() << (tb.millitm + (tb.time & 0xfffff) * 1000);
+    corrid << "ID" << getpid() << pthread_self() << time(NULL);
 
     memset ( _qctl.corrid, 0, TMCORRIDLEN);
     strncpy ( _qctl.corrid, corrid.str().c_str(), (corrid.str().length() > TMCORRIDLEN ? TMCORRIDLEN : corrid.str().length()));

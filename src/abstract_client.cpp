@@ -35,55 +35,97 @@ namespace atmi {
     tpterm ();
   };
 
-  abstract_client::abstract_client (): abstract_client((const char *)NULL) {// cltname is passed as NULL
-
+  abstract_client::abstract_client ():
+    abstract_client(NULL, NULL, NULL, NULL, NULL, NULL)
+  {
+    // intentional.
   }
 
-  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *passwd, const char *group, const char *tuxconfig){
+  abstract_client::abstract_client ( const char *cltname):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, NULL)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *tuxconfig):
+    abstract_client(cltname, NULL, NULL, NULL, NULL, tuxconfig)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group):
+    abstract_client(cltname, usr, sys_passwd, app_passwd, group, NULL)
+  {
+    // intentional.
+  }
+
+  abstract_client::abstract_client ( const char *cltname, const char *usr, const char *sys_passwd, const char *app_passwd, const char *group, const char *tuxconfig){
 
     int rc = -1;
 
-    if ( (cltname != NULL) || (usr != NULL) || (passwd != NULL) ) {
+    // these will store copies of char buffers
+    const char *spasswd = NULL; // reference to system passwd
+    const char *apasswd = NULL; // reference to application passwd
+    size_t      apasswd_size = 0;
 
-      _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (0)  );
+    auto authentication_requirement = tpchkauth(); // check if authentification is required
 
-      // when we receive this parameter we setup things so they can run in a multi context mode.
-      if ( tuxconfig != NULL ) {
-        _tuxconfig = tuxconfig;
-        _tpinfo->flags = TPMULTICONTEXTS;
+    switch (authentication_requirement){ //NOSONAR
+      case TPAPPAUTH: // NOSONAR if application authentication is required then system is also required. Hence the absence of break
+        apasswd = ((app_passwd != NULL) ? app_passwd : getpass ("enter application password: "));
+        apasswd_size = strlen(apasswd) + 1 ;
 
-        // tuxconfig parameter is a path to an UBB file, to make sure that the env var TUXCONFIG is
-        // indeed referencing this path, we set this variable through an explicit call to tuxputenv.
-        // The function tuxputenv expect a string in form of "key=value".
-        std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; // create env variable entry (key=value)
-
-        if ( tuxputenv(const_cast<char *>(tuxconfig_kv.c_str()) ) != 0 ) {
-          throw atmi_exception ("failed to put env varaible %s.", tuxconfig );
-        }
-      }
-
-      if ( usr != NULL ) {
-        strncpy ( _tpinfo->usrname, usr, MAXTIDENT );
-      } else {
-        strncpy (
-            _tpinfo->usrname,
-            (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")),
-            MAXTIDENT );
-      }
-
-      if ( passwd != NULL ) {
-        strncpy ( _tpinfo->passwd,  passwd, MAXTIDENT );
-      }else {
-        if (tpchkauth() == TPSYSAUTH ) {
-          char *p = getpass ("enter application password: ");
-          strncpy ( _tpinfo->passwd,  p, MAXTIDENT );
-        }
-      }
-
-      if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
-      if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
+      case TPSYSAUTH:
+        spasswd = ((sys_passwd != NULL)? sys_passwd : getpass ("enter system (DOMAIN) password: "));
+        break;
     }
 
+    // allocate INIT structure and set fields
+    _tpinfo = (TPINIT *) tpalloc ( const_cast<char *>("TPINIT"), NULL, TPINITNEED (10)  );
+
+    if ( apasswd != NULL ) {
+      memcpy ( (char *)&_tpinfo->data, apasswd, apasswd_size );
+      _tpinfo->datalen = apasswd_size ;
+#     ifdef DEBUG
+      printf("DEBUG app pass: %s -> %s(datalen: %d, len: %d)\n", apasswd, (char *) &_tpinfo->data, _tpinfo->datalen, apasswd_size);
+#     endif
+    }
+
+    if ( spasswd != NULL ) {
+      strncpy ( _tpinfo->passwd, spasswd, MAXTIDENT );
+#     ifdef DEBUG
+      printf("DEBUG sys pass: %s -> %s\n", spasswd, _tpinfo->passwd );
+#     endif
+    }
+
+    // when we receive this parameter we setup things so they can run in a multi context mode.
+    if ( tuxconfig != NULL ) {
+      _tuxconfig = tuxconfig;
+      _tpinfo->flags = TPMULTICONTEXTS;
+
+      // tuxconfig parameter is a path to an UBB file, to make sure that the env var TUXCONFIG is
+      // indeed referencing this path, we set this variable through an explicit call to tuxputenv.
+      // The function tuxputenv expect a string in form of "key=value".
+      std::string tuxconfig_kv = std::string("TUXCONFIG=")+_tuxconfig ; // create env variable entry (key=value)
+
+      if ( tuxputenv(const_cast<char *>(tuxconfig_kv.c_str()) ) != 0 ) {
+        throw atmi_exception ("failed to put env varaible %s.", tuxconfig );
+      }
+    }
+
+    if ( usr != NULL ) {
+      strncpy ( _tpinfo->usrname, usr, MAXTIDENT );
+    } else {
+      strncpy (
+          _tpinfo->usrname,
+          (getenv ("LOGNAME") == NULL ? "void" : getenv ("LOGNAME")),
+          MAXTIDENT );
+    }
+
+    if ( group != NULL ) { strncpy ( _tpinfo->grpname,  group, MAXTIDENT ); }
+    if ( cltname != NULL ) {strncpy ( _tpinfo->cltname, cltname, MAXTIDENT ); }
+
+    // connect to Tuxedo DOMAIN
     rc = tpinit ( _tpinfo );
 
     if ( rc < 0 ) {
@@ -118,30 +160,18 @@ namespace atmi {
     }
   }
 
-
   transaction_ptr abstract_client::new_transaction_instance ( const char *svc ){
 
-#if __cplusplus < 201103L
-    std::auto_ptr<transaction>   ptr;
-#else
-    std::unique_ptr<transaction> ptr;
-#endif
-
-    ptr.reset ( new transaction ( svc ));
-    ptr->set_context ( this->context() );
-    return ptr;
+    transaction_ptr _transaction ( new transaction(svc));
+    _transaction->set_context ( this->context() );
+    return _transaction;
   }
 
   queue_ptr abstract_client::new_queue_instance ( const char *qspace, const char *queue, const char *reply ){
 
-#if __cplusplus < 201103L
-    std::auto_ptr<atmi::queue> ptr;
-#else
-    std::unique_ptr<atmi::queue> ptr;
-#endif
-    ptr.reset ( new atmi::queue ( qspace, queue, reply ));
-    ptr->set_context ( this->context());
-    return ptr;
+    queue_ptr _queue(new atmi::queue ( qspace, queue, reply ));
+    _queue->set_context ( this->context());
+    return _queue;
   }
 
 }

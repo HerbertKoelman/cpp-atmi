@@ -1,3 +1,11 @@
+v4.6.0
+- tmreboot: removed TA_FLAGS from MIB query buffer.
+- now cpp_atmi_version returns SNAPSHOT when --enable-release is not set
+- migrated tmreboot from C/ATMI to C++/ATMI++
+- fixed issues detected by SONAR
+- now abstract_client handles system and application authentication
+- new AUTH_PROXY server (useful when debugging authentication services)
+- new PROXY server (useful when debugging service messages)
 v4.5.0
 - new utility program qexport
 - new utility program qimport
