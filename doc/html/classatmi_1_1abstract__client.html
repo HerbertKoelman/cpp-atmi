@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.5.1)</span>
+   &#160;<span id="projectnumber">(SNAPSHOT)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -116,8 +116,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a789a662f195c11cd9d9b6d091caa0874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10a6aa2b44cb98ceab7d4e637757437e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a10a6aa2b44cb98ceab7d4e637757437e">abstract_client</a> ()</td></tr>
 <tr class="separator:a10a6aa2b44cb98ceab7d4e637757437e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d65b7ec70b83b7fc55260256ac4fd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a67d65b7ec70b83b7fc55260256ac4fd0">abstract_client</a> (const char *cltname, const char *usr=NULL, const char *passwd=NULL, const char *group=NULL, const char *<a class="el" href="classatmi_1_1abstract__client.html#af2a6efcd7a45c09251cb129d04d7aa85">tuxconfig</a>=NULL)</td></tr>
-<tr class="separator:a67d65b7ec70b83b7fc55260256ac4fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1949a3885943d5316cd569e672adacd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a1949a3885943d5316cd569e672adacd8">abstract_client</a> (const char *cltname)</td></tr>
+<tr class="separator:a1949a3885943d5316cd569e672adacd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3080bb9b9b153c40b8f3ffacd109f53"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#ac3080bb9b9b153c40b8f3ffacd109f53">abstract_client</a> (const char *cltname, const char *<a class="el" href="classatmi_1_1abstract__client.html#af2a6efcd7a45c09251cb129d04d7aa85">tuxconfig</a>)</td></tr>
+<tr class="separator:ac3080bb9b9b153c40b8f3ffacd109f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f32cbbc3eed531f5f4131069269391"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a03f32cbbc3eed531f5f4131069269391">abstract_client</a> (const char *cltname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group)</td></tr>
+<tr class="separator:a03f32cbbc3eed531f5f4131069269391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4d0eb4fa3005afbaae8fef9a56d042"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#acf4d0eb4fa3005afbaae8fef9a56d042">abstract_client</a> (const char *cltname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group, const char *<a class="el" href="classatmi_1_1abstract__client.html#af2a6efcd7a45c09251cb129d04d7aa85">tuxconfig</a>)</td></tr>
+<tr class="separator:acf4d0eb4fa3005afbaae8fef9a56d042"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a090bac30edb1055da2a0c980167bfe19"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a090bac30edb1055da2a0c980167bfe19">run</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a090bac30edb1055da2a0c980167bfe19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9449f2df2136afd5b253389418265c87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__atmi.html#gab8e359f2305eaf285b0b0745d3b41997">transaction_ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1abstract__client.html#a9449f2df2136afd5b253389418265c87">new_transaction_instance</a> (const char *svc)</td></tr>
@@ -198,7 +204,10 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <div class="textblock"><p>Helper class to implement tuxedo application.</p>
 <p>Extending this class ensures that tpterm and tpinit is called when client programs are run.</p>
 <p><a class="el" href="classatmi_1_1abstract__client.html">abstract_client</a> has two modes of operation: single-context mode and multicontext mode. To run in multicontext mode you'll need to pass a valid TUXCONFIG file when constructing an <a class="el" href="classatmi_1_1abstract__client.html">abstract_client</a> instance. The multiconext mode is available only for native clients.</p>
-<p>Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr which are auto pointers. which is probaly the best way to avoid memory leaks. </p>
+<p>Two factory methods are available to construct transaction and queue class instances (new_tp_instance and new_queue_instance). These methods return tp_auto_ptr and queue_auto_ptr which are auto pointers. which is probaly the best way to avoid memory leaks.</p>
+<p>If authentication is needed, user is prompted for system and/or application password.</p>
+<dl class="section author"><dt>Author</dt><dd>herbert koelman </dd></dl>
+<dl class="section since"><dt>Since</dt><dd>1.0.0 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a789a662f195c11cd9d9b6d091caa0874"></a>
 <div class="memitem">
@@ -238,16 +247,46 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
       </table>
 </div><div class="memdoc">
 <p>Join a BEA tuxedo ATMI system application by calling tpinit.</p>
+<p>If authentication is needed, user is prompted for system and/or application password.</p>
 <p>Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus first join a BEA tuxedo ATMI system application by explicitly using tpinit. </p>
 
 </div>
 </div>
-<a class="anchor" id="a67d65b7ec70b83b7fc55260256ac4fd0"></a>
+<a class="anchor" id="a1949a3885943d5316cd569e672adacd8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::abstract_client::abstract_client </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>cltname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Join a BEA tuxedo ATMI system application by calling tpinit.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cltname</td><td>client program name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section since"><dt>Since</dt><dd>v4.6.0 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac3080bb9b9b153c40b8f3ffacd109f53"></a>
+<div class="memitem">
+<div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">atmi::abstract_client::abstract_client </td>
@@ -259,25 +298,7 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>usr</em> = <code>NULL</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>passwd</em> = <code>NULL</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>group</em> = <code>NULL</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>tuxconfig</em> = <code>NULL</code>&#160;</td>
+          <td class="paramname"><em>tuxconfig</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -285,22 +306,130 @@ nl_catd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Join a BEA tuxedo ATMI system application by calling tpinit.</p>
-<p>Before a client can use any of the BEA tuxedo ATMI system communication or transaction routines, it mus first join a BEA tuxedo ATMI system application by explicitly using tpinit.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cltname</td><td>client program name </td></tr>
+    <tr><td class="paramname">tuxconfig</td><td>used located the DOMAIN (multi context is activated) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section since"><dt>Since</dt><dd>v4.6.0 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a03f32cbbc3eed531f5f4131069269391"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::abstract_client::abstract_client </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>cltname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sys_passwd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>app_passwd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Join a BEA tuxedo ATMI system application by calling tpinit.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cltname</td><td>client program name (default NULL) </td></tr>
+    <tr><td class="paramname">user</td><td>user name (default NULL) </td></tr>
+    <tr><td class="paramname">sys_passwd</td><td>Tuxedo domain passwd (TPSYSAUTH) </td></tr>
+    <tr><td class="paramname">app_passwd</td><td>application password (TPAPPAUTH) </td></tr>
+    <tr><td class="paramname">group</td><td>is used to associate the client with a resource manager group name</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section since"><dt>Since</dt><dd>v4.6.0 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acf4d0eb4fa3005afbaae8fef9a56d042"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::abstract_client::abstract_client </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>cltname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sys_passwd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>app_passwd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>tuxconfig</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Join a BEA tuxedo ATMI system application by calling tpinit.</p>
 <p>This constructor sets the TPINFO flag TPMULTICONTEXTS if the parameter tuxconfig is passed.</p>
-<p>In a multi threaded application it is good practice to initiliaze all your clients before starting the threads.</p>
-<p>If passwd is NULL then the constructor checks if authentication is needed. If so it promps the user for a password.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cltname</td><td>client program name (default NULL) </td></tr>
     <tr><td class="paramname">usr</td><td>user name (default NULL) </td></tr>
-    <tr><td class="paramname">passwd</td><td>user's password (default NULL) </td></tr>
+    <tr><td class="paramname">sys_passwd</td><td>Tuxedo domain passwd (TPSYSAUTH, default NULL) </td></tr>
+    <tr><td class="paramname">app_passwd</td><td>application password (TPAPPAUTH,default NULL) </td></tr>
     <tr><td class="paramname">group</td><td>is used to associate the client with a resource manager group name (default NULL) </td></tr>
     <tr><td class="paramname">tuxconfig</td><td>used located the DOMAIN </td></tr>
   </table>

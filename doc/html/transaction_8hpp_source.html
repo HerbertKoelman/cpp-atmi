@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.5.1)</span>
+   &#160;<span id="projectnumber">(SNAPSHOT)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -111,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;nl_types.h&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;atmi/definitions.hpp&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;atmi/tuxedo.hpp&gt;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;atmi/buffer.hpp&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
@@ -171,18 +171,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;} <span class="comment">// namespace atmi</span></div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classatmi_1_1transaction_html_a810c7fdad2bc26722027d4d0565f4c9a"><div class="ttname"><a href="classatmi_1_1transaction.html#a810c7fdad2bc26722027d4d0565f4c9a">atmi::transaction::reply</a></div><div class="ttdeci">int reply(char **data, long *len, int *urcode=NULL, int *cd=NULL)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:139</div></div>
+<div class="ttc" id="classatmi_1_1transaction_html_a810c7fdad2bc26722027d4d0565f4c9a"><div class="ttname"><a href="classatmi_1_1transaction.html#a810c7fdad2bc26722027d4d0565f4c9a">atmi::transaction::reply</a></div><div class="ttdeci">int reply(char **data, long *len, int *urcode=NULL, int *cd=NULL)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:141</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html"><div class="ttname"><a href="classatmi_1_1tuxedo.html">atmi::tuxedo</a></div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:53</div></div>
 <div class="ttc" id="classatmi_1_1transaction_html_a11018dd9689a5a66d0510ae78bb048da"><div class="ttname"><a href="classatmi_1_1transaction.html#a11018dd9689a5a66d0510ae78bb048da">atmi::transaction::call_descriptor</a></div><div class="ttdeci">int call_descriptor()</div><div class="ttdef"><b>Definition:</b> transaction.hpp:168</div></div>
-<div class="ttc" id="classatmi_1_1transaction_html_a1251381692ec4e235ca9179a84273484"><div class="ttname"><a href="classatmi_1_1transaction.html#a1251381692ec4e235ca9179a84273484">atmi::transaction::call</a></div><div class="ttdeci">int call(char *idata, long ilen, char **odata, long *olen, int *urcode=NULL, int retries=0, int delay=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:23</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:59</div></div>
-<div class="ttc" id="classatmi_1_1transaction_html_a380d536258d33a801973100d6e2ae622"><div class="ttname"><a href="classatmi_1_1transaction.html#a380d536258d33a801973100d6e2ae622">atmi::transaction::cancel</a></div><div class="ttdeci">int cancel(int cd=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:162</div></div>
-<div class="ttc" id="classatmi_1_1transaction_html_abf3ecf74af155274d4b500df2e6ec69b"><div class="ttname"><a href="classatmi_1_1transaction.html#abf3ecf74af155274d4b500df2e6ec69b">atmi::transaction::acall</a></div><div class="ttdeci">int acall(char *idata=NULL, long ilen=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:117</div></div>
+<div class="ttc" id="classatmi_1_1transaction_html_a1251381692ec4e235ca9179a84273484"><div class="ttname"><a href="classatmi_1_1transaction.html#a1251381692ec4e235ca9179a84273484">atmi::transaction::call</a></div><div class="ttdeci">int call(char *idata, long ilen, char **odata, long *olen, int *urcode=NULL, int retries=0, int delay=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:24</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:60</div></div>
+<div class="ttc" id="classatmi_1_1transaction_html_a380d536258d33a801973100d6e2ae622"><div class="ttname"><a href="classatmi_1_1transaction.html#a380d536258d33a801973100d6e2ae622">atmi::transaction::cancel</a></div><div class="ttdeci">int cancel(int cd=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:164</div></div>
+<div class="ttc" id="classatmi_1_1transaction_html_abf3ecf74af155274d4b500df2e6ec69b"><div class="ttname"><a href="classatmi_1_1transaction.html#abf3ecf74af155274d4b500df2e6ec69b">atmi::transaction::acall</a></div><div class="ttdeci">int acall(char *idata=NULL, long ilen=0)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:119</div></div>
 <div class="ttc" id="classatmi_1_1transaction_html_a04ce5f63ca8115964cd952c086221526"><div class="ttname"><a href="classatmi_1_1transaction.html#a04ce5f63ca8115964cd952c086221526">atmi::transaction::service</a></div><div class="ttdeci">std::string service()</div><div class="ttdef"><b>Definition:</b> transaction.hpp:173</div></div>
 <div class="ttc" id="group__atmi_html_gab8e359f2305eaf285b0b0745d3b41997"><div class="ttname"><a href="group__atmi.html#gab8e359f2305eaf285b0b0745d3b41997">atmi::transaction_ptr</a></div><div class="ttdeci">std::unique_ptr&lt; transaction &gt; transaction_ptr</div><div class="ttdoc">allocation handling type </div><div class="ttdef"><b>Definition:</b> transaction.hpp:35</div></div>
 <div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1transaction_html"><div class="ttname"><a href="classatmi_1_1transaction.html">atmi::transaction</a></div><div class="ttdef"><b>Definition:</b> transaction.hpp:48</div></div>
-<div class="ttc" id="classatmi_1_1transaction_html_a0cb59a4954d3fc4b903c0f2876dd00b3"><div class="ttname"><a href="classatmi_1_1transaction.html#a0cb59a4954d3fc4b903c0f2876dd00b3">atmi::transaction::transaction</a></div><div class="ttdeci">transaction(const char *service)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:14</div></div>
+<div class="ttc" id="classatmi_1_1transaction_html_a0cb59a4954d3fc4b903c0f2876dd00b3"><div class="ttname"><a href="classatmi_1_1transaction.html#a0cb59a4954d3fc4b903c0f2876dd00b3">atmi::transaction::transaction</a></div><div class="ttdeci">transaction(const char *service)</div><div class="ttdef"><b>Definition:</b> transaction.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

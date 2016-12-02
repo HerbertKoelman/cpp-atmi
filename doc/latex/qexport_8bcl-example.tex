@@ -30,101 +30,102 @@ Global utility to stream out the content of a queue
 17 class queue\_export: public atmi::abstract\_client \{
 18   public:
 19 
-20     queue\_export(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0
-       ): abstract\_client(pname, user, passwd, group)\{
-21     \}
-22 
-23     int run (const char *qspace, const char *queue, size\_t buffer\_size, std::ostream &out, bool daemon) \{
-24 
-25       auto status = EXIT\_FAILURE;
-26 
-27       try \{
-28 
-29 #       ifdef DEBUG
-30         printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s], daemon mode %s,
+20     queue\_export(const char *pname, const char *user, const char *sys\_passwd, const char *app\_passwd, const
+       char *group, int wait = 0 ):
+21       abstract\_client(pname, user, sys\_passwd, app\_passwd, group)\{
+22     \}
+23 
+24     int run (const char *qspace, const char *queue, size\_t buffer\_size, std::ostream &out, bool daemon) \{
+25 
+26       auto status = EXIT\_FAILURE;
+27 
+28       try \{
+29 
+30 #       ifdef DEBUG
+31         printf("DEBUG %s: exporting messages found in queue [%s] from queue space [%s], daemon mode %s,
        buffer size: %d bytes\(\backslash\)n", \_\_FUNCTION\_\_,
-31             queue,
-32             qspace,
-33             daemon ? "true" : "false",
-34             buffer\_size);
-35 #       endif
-36 
-37         atmi::queue\_ptr q = new\_queue\_instance(qspace, queue);
-38         q->set\_message\_wait(false); // don't wait for messages
-39 
-40         long counter = 0;
-41 
-42         atmi::queue\_stream qs(*q, buffer\_size);
-43         do \{
-44           out << qs ; // write messages
-45           out.flush();
-46 
-47           counter += qs.count();
-48 
-49 #       ifdef DEBUG
-50         printf("DEBUG %s (line %d): flushed stream, running %s, daemon %s\(\backslash\)n", \_\_FUNCTION\_\_, \_\_LINE\_\_,
-51           running ? "true" : "false",
-52           daemon  ? "true" : "false"
-53           );
-54 #       endif
-55         \}while( running && daemon);
-56 
-57         std::cerr << "exported " << counter << " messages from " << queue << "." << std::endl ;
-58 
-59         status = EXIT\_SUCCESS ;
-60 
-61       \} catch ( std::exception &err )\{
-62         std::cerr << err.what() << std::endl ;
-63       \}
-64 
-65 #     ifdef DEBUG
-66       std::cout << "type enter to exit." << std::endl;
-67       std::string buffer;
-68       std::getline (std::cin,buffer);
-69 #     endif
-70 
-71       return status ;
-72     \}
-73 \};
-74 
-75 int main ( int argc, char *argv[] )\{
-76 
-77   auto status = EXIT\_FAILURE ;
-78   try \{
-79 
-80     signal(SIGINT, signal\_handler);
-81     char *pname = basename(argv[0]);
-82 
-83     export\_options options;
-84     options.parse(argc, argv);
-85 
-86     if ( (options.qspace != NULL) && (options.queue != NULL) )\{
-87       queue\_export qexport(pname, options.user, options.passwd, options.group);
-88       if ( options.output\_file != NULL ) \{
-89         std::ifstream file;
-90         file.open(options.output\_file,std::ofstream::out | std::ofstream::app);
-91         if (file.is\_open())\{
-92           std::ostream out(file.rdbuf());
-93           status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
-94         \} else \{
-95           perror("failed to open export destination file");
-96         \}
-97       \} else \{
-98         std::ostream out(std::cout.rdbuf()); // fall back to stdou
-99         status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
-100       \}
-101 
-102     \}else\{
-103       std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
-104       options.usage(pname, "send messages found in a queue to stdout or a file (if last argument is
+32             queue,
+33             qspace,
+34             daemon ? "true" : "false",
+35             buffer\_size);
+36 #       endif
+37 
+38         atmi::queue\_ptr q = new\_queue\_instance(qspace, queue);
+39         q->set\_message\_wait(false); // don't wait for messages
+40 
+41         long counter = 0;
+42 
+43         atmi::queue\_stream qs(*q, buffer\_size);
+44         do \{
+45           out << qs ; // write messages
+46           out.flush();
+47 
+48           counter += qs.count();
+49 
+50 #       ifdef DEBUG
+51         printf("DEBUG %s (line %d): flushed stream, running %s, daemon %s\(\backslash\)n", \_\_FUNCTION\_\_, \_\_LINE\_\_,
+52           running ? "true" : "false",
+53           daemon  ? "true" : "false"
+54           );
+55 #       endif
+56         \}while( running && daemon);
+57 
+58         std::cerr << "exported " << counter << " messages from " << queue << "." << std::endl ;
+59 
+60         status = EXIT\_SUCCESS ;
+61 
+62       \} catch ( std::exception &err )\{
+63         std::cerr << err.what() << std::endl ;
+64       \}
+65 
+66 #     ifdef DEBUG
+67       std::cout << "type enter to exit." << std::endl;
+68       std::string buffer;
+69       std::getline (std::cin,buffer);
+70 #     endif
+71 
+72       return status ;
+73     \}
+74 \};
+75 
+76 int main ( int argc, char *argv[] )\{
+77 
+78   auto status = EXIT\_FAILURE ;
+79   try \{
+80 
+81     signal(SIGINT, signal\_handler);
+82     char *pname = basename(argv[0]);
+83 
+84     export\_options options;
+85     options.parse(argc, argv);
+86 
+87     if ( (options.qspace != NULL) && (options.queue != NULL) )\{
+88       queue\_export qexport(pname, options.user, options.sys\_passwd, options.app\_passwd, options.group);
+89       if ( options.output\_file != NULL ) \{
+90         std::ifstream file;
+91         file.open(options.output\_file,std::ofstream::out | std::ofstream::app);
+92         if (file.is\_open())\{
+93           std::ostream out(file.rdbuf());
+94           status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
+95         \} else \{
+96           perror("failed to open export destination file");
+97         \}
+98       \} else \{
+99         std::ostream out(std::cout.rdbuf()); // fall back to stdou
+100         status = qexport.run(options.qspace, options.queue, options.buffer\_size, out, options.daemon);
+101       \}
+102 
+103     \}else\{
+104       std::cerr << "missing arguments, please provide a queue space and queue name (-q)." << std::endl;
+105       options.usage(pname, "send messages found in a queue to stdout or a file (if last argument is
        passed).");
-105     \}
-106 
-107   \}catch ( std::exception &err)\{
-108     std::cerr << err.what() << std::endl ;
-109   \}
-110 
-111   return status ;
-112 \}
+106     \}
+107 
+108   \}catch ( std::exception &err)\{
+109     std::cerr << err.what() << std::endl ;
+110   \}
+111 
+112   return status ;
+113 \}
 \end{DoxyCodeInclude}
  

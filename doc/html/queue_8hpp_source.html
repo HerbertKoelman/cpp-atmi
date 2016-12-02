@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.5.1)</span>
+   &#160;<span id="projectnumber">(SNAPSHOT)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;nl_types.h&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;atmi/definitions.hpp&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;atmi/tuxedo.hpp&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;atmi/buffer.hpp&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
@@ -304,10 +304,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="group__atmi_html_gac851146259feb3bf93aed287d6d42cb2"><div class="ttname"><a href="group__atmi.html#gac851146259feb3bf93aed287d6d42cb2">atmi::queue::reply_queue</a></div><div class="ttdeci">const char * reply_queue()</div><div class="ttdef"><b>Definition:</b> queue.cpp:191</div></div>
 <div class="ttc" id="group__atmi_html_ga4a47e7caf329e46c31f44425e3ceb6e3"><div class="ttname"><a href="group__atmi.html#ga4a47e7caf329e46c31f44425e3ceb6e3">atmi::queue_stream::encode_base64</a></div><div class="ttdeci">void encode_base64(bool b)</div><div class="ttdef"><b>Definition:</b> queue_stream.cpp:33</div></div>
 <div class="ttc" id="group__atmi_html_ga9b8f29fbb2012dda53d6f799ad2110b4"><div class="ttname"><a href="group__atmi.html#ga9b8f29fbb2012dda53d6f799ad2110b4">atmi::queue::set_queue_space</a></div><div class="ttdeci">void set_queue_space(const char *qs)</div><div class="ttdef"><b>Definition:</b> queue.hpp:152</div></div>
-<div class="ttc" id="group__atmi_html_gaa74de8091c32580972e7871e7ddf786c"><div class="ttname"><a href="group__atmi.html#gaa74de8091c32580972e7871e7ddf786c">atmi::queue::unset_corrid</a></div><div class="ttdeci">void unset_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:247</div></div>
+<div class="ttc" id="group__atmi_html_gaa74de8091c32580972e7871e7ddf786c"><div class="ttname"><a href="group__atmi.html#gaa74de8091c32580972e7871e7ddf786c">atmi::queue::unset_corrid</a></div><div class="ttdeci">void unset_corrid()</div><div class="ttdef"><b>Definition:</b> queue.cpp:245</div></div>
 <div class="ttc" id="group__atmi_html_ga0fbca137aadc2946b8f3889b76352af9"><div class="ttname"><a href="group__atmi.html#ga0fbca137aadc2946b8f3889b76352af9">atmi::queue::set_quality_of_service</a></div><div class="ttdeci">void set_quality_of_service(long qos)</div><div class="ttdef"><b>Definition:</b> queue.cpp:205</div></div>
 <div class="ttc" id="group__atmi_html_ga6b27337fd68ca97236e4905d09b7eb15"><div class="ttname"><a href="group__atmi.html#ga6b27337fd68ca97236e4905d09b7eb15">atmi::queue::enqueue</a></div><div class="ttdeci">int enqueue(char *data, long len)</div><div class="ttdef"><b>Definition:</b> queue.cpp:93</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:59</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:60</div></div>
 <div class="ttc" id="group__atmi_html_ga223fac7945fb8d87f04189aa77ce666a"><div class="ttname"><a href="group__atmi.html#ga223fac7945fb8d87f04189aa77ce666a">atmi::queue::setQWait</a></div><div class="ttdeci">void setQWait(bool wait)</div><div class="ttdef"><b>Definition:</b> queue.hpp:190</div></div>
 <div class="ttc" id="group__atmi_html_ga5d70bbf99076bd41269e2a558bf52475"><div class="ttname"><a href="group__atmi.html#ga5d70bbf99076bd41269e2a558bf52475">atmi::queue::set_queue_name</a></div><div class="ttdeci">void set_queue_name(char *q)</div><div class="ttdef"><b>Definition:</b> queue.hpp:166</div></div>
 <div class="ttc" id="group__atmi_html_gaf8c86b01e410fe6499a7f53cdf70eb35"><div class="ttname"><a href="group__atmi.html#gaf8c86b01e410fe6499a7f53cdf70eb35">atmi::queue::queue</a></div><div class="ttdeci">queue(const char *qspace=NULL, const char *queue=NULL, const char *reply=NULL)</div><div class="ttdef"><b>Definition:</b> queue.cpp:25</div></div>

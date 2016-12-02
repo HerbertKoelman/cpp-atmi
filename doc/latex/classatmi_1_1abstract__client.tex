@@ -18,7 +18,13 @@ virtual \hyperlink{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa08
 \item 
 \hyperlink{classatmi_1_1abstract__client_a10a6aa2b44cb98ceab7d4e637757437e}{abstract\+\_\+client} ()
 \item 
-\hyperlink{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}{abstract\+\_\+client} (const char $\ast$cltname, const char $\ast$usr=N\+U\+L\+L, const char $\ast$passwd=N\+U\+L\+L, const char $\ast$group=N\+U\+L\+L, const char $\ast$\hyperlink{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{tuxconfig}=N\+U\+L\+L)
+\hyperlink{classatmi_1_1abstract__client_a1949a3885943d5316cd569e672adacd8}{abstract\+\_\+client} (const char $\ast$cltname)
+\item 
+\hyperlink{classatmi_1_1abstract__client_ac3080bb9b9b153c40b8f3ffacd109f53}{abstract\+\_\+client} (const char $\ast$cltname, const char $\ast$\hyperlink{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{tuxconfig})
+\item 
+\hyperlink{classatmi_1_1abstract__client_a03f32cbbc3eed531f5f4131069269391}{abstract\+\_\+client} (const char $\ast$cltname, const char $\ast$user, const char $\ast$sys\+\_\+passwd, const char $\ast$app\+\_\+passwd, const char $\ast$group)
+\item 
+\hyperlink{classatmi_1_1abstract__client_acf4d0eb4fa3005afbaae8fef9a56d042}{abstract\+\_\+client} (const char $\ast$cltname, const char $\ast$user, const char $\ast$sys\+\_\+passwd, const char $\ast$app\+\_\+passwd, const char $\ast$group, const char $\ast$\hyperlink{classatmi_1_1abstract__client_af2a6efcd7a45c09251cb129d04d7aa85}{tuxconfig})
 \item 
 virtual int \hyperlink{classatmi_1_1abstract__client_a090bac30edb1055da2a0c980167bfe19}{run} (int argc, char $\ast$$\ast$argv)
 \item 
@@ -42,7 +48,17 @@ Extending this class ensures that tpterm and tpinit is called when client progra
 
 \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} has two modes of operation\+: single-\/context mode and multicontext mode. To run in multicontext mode you'll need to pass a valid T\+U\+X\+C\+O\+N\+F\+I\+G file when constructing an \hyperlink{classatmi_1_1abstract__client}{abstract\+\_\+client} instance. The multiconext mode is available only for native clients.
 
-Two factory methods are available to construct transaction and queue class instances (new\+\_\+tp\+\_\+instance and new\+\_\+queue\+\_\+instance). These methods return tp\+\_\+auto\+\_\+ptr and queue\+\_\+auto\+\_\+ptr which are auto pointers. which is probaly the best way to avoid memory leaks. 
+Two factory methods are available to construct transaction and queue class instances (new\+\_\+tp\+\_\+instance and new\+\_\+queue\+\_\+instance). These methods return tp\+\_\+auto\+\_\+ptr and queue\+\_\+auto\+\_\+ptr which are auto pointers. which is probaly the best way to avoid memory leaks.
+
+If authentication is needed, user is prompted for system and/or application password.
+
+\begin{DoxyAuthor}{Author}
+herbert koelman 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+1.\+0.\+0 
+\end{DoxySince}
+
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classatmi_1_1abstract__client_a789a662f195c11cd9d9b6d091caa0874}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!````~abstract\+\_\+client@{$\sim$abstract\+\_\+client}}
@@ -63,26 +79,89 @@ After this call any attempt at using A\+T\+M\+I will fail. \hypertarget{classatm
 )}}\label{classatmi_1_1abstract__client_a10a6aa2b44cb98ceab7d4e637757437e}
 Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
 
-Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it mus first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit. \hypertarget{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+If authentication is needed, user is prompted for system and/or application password.
+
+Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it mus first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit. \hypertarget{classatmi_1_1abstract__client_a1949a3885943d5316cd569e672adacd8}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
+\subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{cltname}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classatmi_1_1abstract__client_a1949a3885943d5316cd569e672adacd8}
+Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cltname} & client program name \\
+\hline
+\end{DoxyParams}
+\begin{DoxySince}{Since}
+v4.\+6.\+0 
+\end{DoxySince}
+\hypertarget{classatmi_1_1abstract__client_ac3080bb9b9b153c40b8f3ffacd109f53}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
 \index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
 \subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{cltname, }
-\item[{const char $\ast$}]{usr = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{passwd = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{group = {\ttfamily NULL}, }
-\item[{const char $\ast$}]{tuxconfig = {\ttfamily NULL}}
+\item[{const char $\ast$}]{tuxconfig}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classatmi_1_1abstract__client_a67d65b7ec70b83b7fc55260256ac4fd0}
+)}}\label{classatmi_1_1abstract__client_ac3080bb9b9b153c40b8f3ffacd109f53}
 Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
 
-Before a client can use any of the B\+E\+A tuxedo A\+T\+M\+I system communication or transaction routines, it mus first join a B\+E\+A tuxedo A\+T\+M\+I system application by explicitly using tpinit.
+
+\begin{DoxyParams}{Parameters}
+{\em cltname} & client program name \\
+\hline
+{\em tuxconfig} & used located the D\+O\+M\+A\+I\+N (multi context is activated) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySince}{Since}
+v4.\+6.\+0 
+\end{DoxySince}
+\hypertarget{classatmi_1_1abstract__client_a03f32cbbc3eed531f5f4131069269391}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
+\subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{cltname, }
+\item[{const char $\ast$}]{user, }
+\item[{const char $\ast$}]{sys\+\_\+passwd, }
+\item[{const char $\ast$}]{app\+\_\+passwd, }
+\item[{const char $\ast$}]{group}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1abstract__client_a03f32cbbc3eed531f5f4131069269391}
+Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cltname} & client program name (default N\+U\+L\+L) \\
+\hline
+{\em user} & user name (default N\+U\+L\+L) \\
+\hline
+{\em sys\+\_\+passwd} & Tuxedo domain passwd (T\+P\+S\+Y\+S\+A\+U\+T\+H) \\
+\hline
+{\em app\+\_\+passwd} & application password (T\+P\+A\+P\+P\+A\+U\+T\+H) \\
+\hline
+{\em group} & is used to associate the client with a resource manager group name\\
+\hline
+\end{DoxyParams}
+\begin{DoxySince}{Since}
+v4.\+6.\+0 
+\end{DoxySince}
+\hypertarget{classatmi_1_1abstract__client_acf4d0eb4fa3005afbaae8fef9a56d042}{\index{atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}!abstract\+\_\+client@{abstract\+\_\+client}}
+\index{abstract\+\_\+client@{abstract\+\_\+client}!atmi\+::abstract\+\_\+client@{atmi\+::abstract\+\_\+client}}
+\subsubsection[{abstract\+\_\+client}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::abstract\+\_\+client\+::abstract\+\_\+client (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{cltname, }
+\item[{const char $\ast$}]{user, }
+\item[{const char $\ast$}]{sys\+\_\+passwd, }
+\item[{const char $\ast$}]{app\+\_\+passwd, }
+\item[{const char $\ast$}]{group, }
+\item[{const char $\ast$}]{tuxconfig}
+\end{DoxyParamCaption}
+)}}\label{classatmi_1_1abstract__client_acf4d0eb4fa3005afbaae8fef9a56d042}
+Join a B\+E\+A tuxedo A\+T\+M\+I system application by calling tpinit.
 
 This constructor sets the T\+P\+I\+N\+F\+O flag T\+P\+M\+U\+L\+T\+I\+C\+O\+N\+T\+E\+X\+T\+S if the parameter tuxconfig is passed.
-
-In a multi threaded application it is good practice to initiliaze all your clients before starting the threads.
-
-If passwd is N\+U\+L\+L then the constructor checks if authentication is needed. If so it promps the user for a password.
 
 
 \begin{DoxyParams}{Parameters}
@@ -90,7 +169,9 @@ If passwd is N\+U\+L\+L then the constructor checks if authentication is needed.
 \hline
 {\em usr} & user name (default N\+U\+L\+L) \\
 \hline
-{\em passwd} & user's password (default N\+U\+L\+L) \\
+{\em sys\+\_\+passwd} & Tuxedo domain passwd (T\+P\+S\+Y\+S\+A\+U\+T\+H, default N\+U\+L\+L) \\
+\hline
+{\em app\+\_\+passwd} & application password (T\+P\+A\+P\+P\+A\+U\+T\+H,default N\+U\+L\+L) \\
 \hline
 {\em group} & is used to associate the client with a resource manager group name (default N\+U\+L\+L) \\
 \hline

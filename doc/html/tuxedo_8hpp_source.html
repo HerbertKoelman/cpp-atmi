@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.5.1)</span>
+   &#160;<span id="projectnumber">(SNAPSHOT)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -124,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;nl_types.h&gt;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;atmi/config.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;atmi/definitions.hpp&gt;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;atmi/exceptions.hpp&gt;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// using namespace std;</span></div>
@@ -244,7 +244,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">case</span> TPESVCFAIL:</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;              <span class="comment">// return application specific error number instead</span></div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;              <span class="comment">// as the application will probably know what to do</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;              _tperrno = ( tpurcode &gt; 0 ? tpurcode : -1 );</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;              _tperrno = ((tpurcode &gt; 0)? tpurcode : -1 );</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;              <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">default</span>:</div>
@@ -278,7 +278,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1tuxedo_html_ac702cf5e571a3302978bfa76cd314c9b"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ac702cf5e571a3302978bfa76cd314c9b">atmi::tuxedo::begin</a></div><div class="ttdeci">int begin(int timeout=0)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:69</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_ad7bf2370e3edeb091512d0b640093e9d"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ad7bf2370e3edeb091512d0b640093e9d">atmi::tuxedo::error_detail</a></div><div class="ttdeci">const char * error_detail() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:147</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_ac5dbf9db596b4bfa05d0067b8a38e11c"><div class="ttname"><a href="classatmi_1_1tuxedo.html#ac5dbf9db596b4bfa05d0067b8a38e11c">atmi::tuxedo::abort</a></div><div class="ttdeci">int abort()</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:99</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:59</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html"><div class="ttname"><a href="classatmi_1_1buffer.html">atmi::buffer</a></div><div class="ttdef"><b>Definition:</b> buffer.hpp:60</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_adfebbea0b6599ba8ca87743c55157b82"><div class="ttname"><a href="classatmi_1_1tuxedo.html#adfebbea0b6599ba8ca87743c55157b82">atmi::tuxedo::flags</a></div><div class="ttdeci">long flags() const </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:174</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a79d8805a077e30138729f44c75fcfa5d"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a79d8805a077e30138729f44c75fcfa5d">atmi::tuxedo::FAILED</a></div><div class="ttdeci">static const long FAILED</div><div class="ttdoc">Tuxedo error value. </div><div class="ttdef"><b>Definition:</b> tuxedo.hpp:200</div></div>
 <div class="ttc" id="classatmi_1_1tuxedo_html_a53a772bbe8c5bb75dadec1c001067e4f"><div class="ttname"><a href="classatmi_1_1tuxedo.html#a53a772bbe8c5bb75dadec1c001067e4f">atmi::tuxedo::set</a></div><div class="ttdeci">static long set(long bits, long flags)</div><div class="ttdef"><b>Definition:</b> tuxedo.cpp:134</div></div>

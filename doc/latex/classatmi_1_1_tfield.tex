@@ -57,7 +57,9 @@ virtual int \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{g
 
 
 
-Template that handles non pointer data types (short, long, char, double, ...) When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add. 
+Template that handles short, long, char, double data type.
+
+When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add. 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classatmi_1_1_tfield_a533be0f49416e622563e7f437e7e9014}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!Tfield@{Tfield}}
@@ -229,9 +231,9 @@ Implements \hyperlink{classatmi_1_1field_a41bb209965d627d2e67c839bece5372c}{atmi
 \item[{F\+L\+D\+I\+D32}]{field\+\_\+id}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}
-Constructs a \hyperlink{classatmi_1_1_tfield}{Tfield} for the passed field id
+set field id.
 
-The search is done in the tables identified by F\+L\+D\+T\+B\+L\+D\+I\+R32 and F\+I\+E\+L\+D\+T\+B\+L\+S32
+This template only handles numerical field I\+Ds.
 
 
 \begin{DoxyParams}{Parameters}

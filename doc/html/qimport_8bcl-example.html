@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.5.1)</span>
+   &#160;<span id="projectnumber">(SNAPSHOT)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -104,7 +104,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">class queue_import: public atmi::abstract_client {</div>
 <div class="line">  public:</div>
 <div class="line"></div>
-<div class="line">    queue_import(const char *pname, const char *user, const char *passwd, const char *group, int wait = 0 ): abstract_client(pname, user, passwd, group){</div>
+<div class="line">    queue_import(const char *pname, const char *user, const char *sys_passwd, const char *app_passwd, const char *group, int wait = 0 ):</div>
+<div class="line">      abstract_client(pname, user, sys_passwd, app_passwd, group){</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    int run (const char *qspace, const char *queue, size_t buffer_size, std::istream &amp;in) {</div>
@@ -155,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    options.parse(argc, argv);</div>
 <div class="line"></div>
 <div class="line">    if ( (options.qspace != NULL) &amp;&amp; (options.queue != NULL) ){</div>
-<div class="line">      queue_import qimport(pname, options.user, options.passwd, options.group);</div>
+<div class="line">      queue_import qimport(pname, options.user, options.sys_passwd, options.app_passwd, options.group);</div>
 <div class="line">      if ( optind &lt; argc ) { // consider firt left argument as a path to a file</div>
 <div class="line">        for( ; optind &lt; argc ; optind++ ){</div>
 <div class="line">          std::ifstream file;</div>
