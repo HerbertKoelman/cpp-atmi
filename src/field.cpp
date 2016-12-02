@@ -9,7 +9,7 @@
 #include <string>
 #include <sstream>
 
-#include <atmi/fields.hpp>
+#include <atmi/field.hpp>
 
 namespace atmi {
 
@@ -51,25 +51,6 @@ namespace atmi {
   const char *field::tname () {
     return Ftype32 ( _field_id );
   };
-
-// TODO remove
-//  void field::set_id (FLDID32 field_id){
-//
-//    if ( field_id == 0 ){
-//      // check that field exists in FML table referenced by FIELDTBLS32 
-//      // and FLDTBLDIR32
-//      _field_name = Fname32( field_id ); 
-//
-//      if ( ! _field_name.empty() ) { // Fname32 found the field
-//        _field_id = field_id;
-//        _field_occurence = 0;
-//      } else {
-//        throw buffer_exception ( Ferror32, "Failed to initialize field %d. Check the values of FIELDTBLS32 and FLDTBLDIR32.", field_id );
-//      }
-//    } else {
-//      _field_id = 0 ;
-//    }
-//  };
 
   void field::setup( FLDID32 field_id){
     //TODO remove  field::set_id(field_id);
@@ -145,9 +126,10 @@ namespace atmi {
 
 // operators --------------------------------------------------------------------------------
 
-  std::ostream &operator<< ( std::ostream &out, Tfield<std::string> &f ){
+  std::ostream &operator<< ( std::ostream &out, field &f ){
 
-    return out << (std::string)f;
+    std::cout << __FUNCTION__ << std::endl;
+    return out << f.to_string();
   };
 
 }

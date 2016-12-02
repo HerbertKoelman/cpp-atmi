@@ -73,7 +73,8 @@ libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
 	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
+
+libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/field.hpp $(INCDIR)/carray_field.hpp $(INCDIR)/string_field.hpp $(INCDIR)/template_field.hpp
 	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 

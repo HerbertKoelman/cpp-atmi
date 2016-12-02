@@ -28,9 +28,11 @@
 #include <atmi/exceptions.hpp>
 
 #include <atmi/buffer.hpp>
-#include <atmi/fields.hpp>
+#include <atmi/field.hpp>
+#include <atmi/template_field.hpp>
 #include <atmi/call_info.hpp>
 #include <atmi/carray_field.hpp>
+#include <atmi/string_field.hpp>
 
 #include <atmi/tuxedo.hpp>
 #include <atmi/transaction.hpp>

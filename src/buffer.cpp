@@ -10,7 +10,7 @@
 
 #include <atmi/buffer.hpp>
 
-#include "atmi/fields.hpp"
+#include "atmi/field.hpp"
 #include "atmi/call_info.hpp"
 
 namespace atmi {

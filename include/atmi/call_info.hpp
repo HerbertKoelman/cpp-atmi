@@ -8,7 +8,7 @@
 #include <tpadm.h>
 
 #include <atmi/definitions.hpp>
-#include <atmi/fields.hpp>
+#include <atmi/field.hpp>
 
 #ifndef CPP_ATMI_CALL_INFO_HPP
 #define CPP_ATMI_CALL_INFO_HPP
@@ -69,7 +69,7 @@ namespace atmi {
     private:
 
       buffer              _buffer;
-      Tfield<std::string> _ecid;
+      Tfield<std::string,TA_ECID> _ecid;
   };
 
   /** @} */

@@ -13,7 +13,7 @@
 #include <memory>
 #include <stdexcept>
 #include <atmi/definitions.hpp>
-#include <atmi/fields.hpp>
+#include <atmi/field.hpp>
 
 #ifndef CPP_ATMI_CARRAY_FIELD_HPP
 #define CPP_ATMI_CARRAY_FIELD_HPP
@@ -29,11 +29,17 @@ namespace atmi {
    *
    * This class is using a std::string object to hold and handle char * data
    * \copydoc atmi::field
+   *
+   * @tparam T field's backend data type.
+   * @tparam fid field ID 
    */
-  template <> class Tfield<char *>: public field {
+  template <FLDID32 fid> class Tfield<char *, fid>: public field {
     public:
 
-      Tfield(): _length (0),_buffer_size(0), _value (NULL) {
+      /** create an instance of a specific FML field.
+       *
+       */
+      Tfield(): _length (0),_buffer_size(0), _value (NULL), field(fid) {
         // intentional
       };
 
@@ -157,14 +163,9 @@ namespace atmi {
         return _value[index];
       }
 
-      /* if you need to change the field's value, get a copy by calling get_char_array.
-       *
-       * @return address of first character in carray (is NULL if no carray data is available)
-       */
-//      operator const char * () const {
-//        return _value ;
-//      }
-
+      const std::string to_string() const {
+        return __FUNCTION__;
+      }
 
     protected:
 
