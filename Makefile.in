@@ -78,7 +78,7 @@ version:
 	-echo "don't forget to run configure."
 
 install: 
-	$(MKDIR) $(INCLUDEDIR)
+	$(MKDIR) $(INCLUDEDIR) @libdir@ @bindir@
 	$(INSTALL) include/atmi/*.hpp $(INCLUDEDIR)
 	$(INSTALL) lib/$(LIBATMI) lib/$(LIBCLTATMI) lib/$(LIBFML) @libdir@
 	$(INSTALL) bin/*   @bindir@

@@ -1,3 +1,5 @@
+%define         prefix /usr/local
+
 Name:           @PACKAGE_NAME@
 Version:        @BUILD@
 Release:        1%{?dist}
@@ -5,28 +7,29 @@ Summary:        Set of C++ classes to help develop Tuxedo servers and/or clients
 Group:          Development/Middleware
 License:        GNU
 URL:            https://github.com/HerbertKoelman/@PACKAGE_NAME@
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:      %{_buildroot}
 Source:         %{name}-%{version}.tar.gz
+Prefix:         %{prefix}
 %description
 Set of C++ classes to help develop Tuxedo servers and/or clients.
 
-
 %prep
-# %setup -q
+%setup -qc
 
 %build
-./configure --prefix=rpms
-make %{?_smp_mflags}
+./configure --prefix=%_buildroot/%{prefix}
+make 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %_buildroot
+make install
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %_buildroot
 
 %files
-%defattr(-,root,root,-)
-%doc
+%defattr(755,-,-,-)
+%{prefix}/include
+%{prefix}/lib
 
 %changelog

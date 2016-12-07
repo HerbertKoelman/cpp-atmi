@@ -66,15 +66,15 @@ globber: clean
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
 libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
-	${AR} ${LIBDIR}/$@ $(ATMI_CLT_OBJS)
+	${AR} -rv ${LIBDIR}/$@ $(ATMI_CLT_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
 libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
-	${AR} ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
+	${AR} -rv ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
 libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
-	${AR} ${LIBDIR}/$@ $(BUFF_OBJS)
+	${AR} -rv ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
 # Implicit rules ------------------------------------------
