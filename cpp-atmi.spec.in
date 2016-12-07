@@ -1,0 +1,35 @@
+%define         prefix /usr/local
+
+Name:           @PACKAGE_NAME@
+Version:        @BUILD@
+Release:        1%{?dist}
+Summary:        Set of C++ classes to help develop Tuxedo servers and/or clients.
+Group:          Development/Middleware
+License:        GNU
+URL:            https://github.com/HerbertKoelman/@PACKAGE_NAME@
+BuildRoot:      %{_buildroot}
+Source:         %{name}-%{version}.tar.gz
+Prefix:         %{prefix}
+%description
+Set of C++ classes to help develop Tuxedo servers and/or clients.
+
+%prep
+%setup -qc
+
+%build
+./configure --prefix=%_buildroot/%{prefix}
+make 
+
+%install
+rm -rf %_buildroot
+make install
+
+%clean
+rm -rf %_buildroot
+
+%files
+%defattr(755,-,-,-)
+%{prefix}/include
+%{prefix}/lib
+
+%changelog

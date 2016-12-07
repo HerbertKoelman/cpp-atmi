@@ -23,6 +23,20 @@ Documentation is obtained with this command:
 
 The library is documented [here](http://herbertkoelman.github.io/cpp-atmi/doc/html/).
 
+### Create an rpm
+
+An RPM spec file is generated when configure is executed. You can then copy the tar.gz into the SOURCES directory and run `rpm -bb cpp-atmi.spec`.
+
+The following commands prepare and builds an RPM for the release v4.6.1:
+
+   $ ./configure --enable-release && make pkg
+   $ cp distrib/cpp-atmi-v4.6.1.tar.gz ~/rpmbuild/SOURCES
+   $ rpm -bb cpp-atmi.spec
+
+ The makefile comes with a `rpm` target which will setup and produce a RPM in the dirctory `rpmbuild`.
+
+   $ ./configure --enable-release && make rpm
+
 ### Useful links
 
 - Tuxedo online documentation can be accessed [here](http://docs.oracle.com/cd/E35855_01/tuxedo/docs12c/index.html)

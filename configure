@@ -2208,7 +2208,7 @@ test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 
 subdirs="$subdirs src utls"
 
-ac_config_files="$ac_config_files Makefile sonar-project.properties doxyfile"
+ac_config_files="$ac_config_files Makefile cpp-atmi.spec sonar-project.properties doxyfile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2919,6 +2919,7 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "cpp-atmi.spec") CONFIG_FILES="$CONFIG_FILES cpp-atmi.spec" ;;
     "sonar-project.properties") CONFIG_FILES="$CONFIG_FILES sonar-project.properties" ;;
     "doxyfile") CONFIG_FILES="$CONFIG_FILES doxyfile" ;;
 

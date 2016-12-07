@@ -84,6 +84,6 @@ fi
 
 AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src utls)
-AC_CONFIG_FILES([Makefile sonar-project.properties doxyfile])
+AC_CONFIG_FILES([Makefile cpp-atmi.spec sonar-project.properties doxyfile])
 AC_OUTPUT
 

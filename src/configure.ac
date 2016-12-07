@@ -27,7 +27,7 @@ AC_SUBST(BUILD,$BUILD)
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
-AC_CHECK_PROG([AR],[ar],[ar -rv])
+AC_CHECK_PROG([AR],[ar],[ar])
 AC_PROG_RANLIB
 
 CXXFLAGS=""
