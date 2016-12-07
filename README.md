@@ -29,13 +29,13 @@ An RPM spec file is generated when configure is executed. You can then copy the 
 
 The following commands prepare and builds an RPM for the release v4.6.1:
 
-   $ ./configure --enable-release && make pkg
-   $ cp distrib/cpp-atmi-v4.6.1.tar.gz ~/rpmbuild/SOURCES
-   $ rpm -bb cpp-atmi.spec
+    $ ./configure --enable-release && make pkg
+    $ cp distrib/cpp-atmi-v4.6.1.tar.gz ~/rpmbuild/SOURCES
+    $ rpm -bb cpp-atmi.spec
 
  The makefile comes with a `rpm` target which will setup and produce a RPM in the dirctory `rpmbuild`.
 
-   $ ./configure --enable-release && make rpm
+    $ ./configure --enable-release && make rpm
 
 ### Useful links
 
