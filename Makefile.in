@@ -53,10 +53,15 @@ deploy: pkg
 	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE_DEVELOP) $(REPOSITORY) 2> /dev/null && echo "deployed $(PACKAGE_DEVELOP)") || echo "WARNING use ./configure --enable-repository to enable deploy target"
 	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE) $(REPOSITORY) 2> /dev/null && echo "deployed $(PACKAGE)") || echo "WARNING use ./configure --enable-repository to enable deploy target"
 
+rpm: pkg
+	mkdir -p rpmbuild/BUILD rpmbuild/RPMS rpmbuild/SOURCES rpmbuild/SPECS rpmbuild/SRPMS rpmbuild/tmp
+	cp distrib/$(PACKAGE_SRC) rpmbuild/SOURCES
+	rpm --define "_topdir ${PWD}/rpmbuild" -bb cpp-atmi.spec && echo "your RPM is here rpmbuild/RPMS"
+
 clean:
 	( cd src && make clean )
 	( cd utls && make clean )
-	$(RM) -R distrib
+	$(RM) -R distrib rpmbuild
 	$(RM) bin/*
 
 globber:clean
