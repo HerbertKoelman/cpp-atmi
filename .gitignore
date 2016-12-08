@@ -39,7 +39,7 @@ locale
 html
 man
 distrib
-rmpbuild
+rpmbuild
 *SERV
 .*
 ULOG*

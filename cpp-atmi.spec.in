@@ -6,12 +6,16 @@ Release:        1%{?dist}
 Summary:        Set of C++ classes to help develop Tuxedo servers and/or clients.
 Group:          Development/Middleware
 License:        GNU
-URL:            https://github.com/HerbertKoelman/@PACKAGE_NAME@
+URL:            @PACKAGE_URL@
 BuildRoot:      %{_buildroot}
 Source:         %{name}-%{version}.tar.gz
 Prefix:         %{prefix}
 %description
-Set of C++ classes to help develop Tuxedo servers and/or clients.
+ATMI, for Application-to-Transaction Monitor Interface, is the main API for the Tuxedo system(Oracle). It includes transaction 
+management functions (routines, verbs); request/response, conversational, queuing, and publish-and-subscribe message-handling
+functions; service interface functions; and buffer management functions for distributed application communication.
+
+ATMI++ is a C++ wrapping of this API. 
 
 %prep
 %setup -qc

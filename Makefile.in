@@ -56,7 +56,7 @@ deploy: pkg
 rpm: pkg
 	mkdir -p rpmbuild/BUILD rpmbuild/RPMS rpmbuild/SOURCES rpmbuild/SPECS rpmbuild/SRPMS rpmbuild/tmp
 	cp distrib/$(PACKAGE_SRC) rpmbuild/SOURCES
-	rpm --define "_topdir ${PWD}/rpmbuild" -bb cpp-atmi.spec && echo "your RPM is here rpmbuild/RPMS"
+	rpm --define "_topdir ${PWD}/rpmbuild" -bb @PACKAGE_NAME@.spec && echo "your RPM is here rpmbuild/RPMS"
 
 clean:
 	( cd src && make clean )

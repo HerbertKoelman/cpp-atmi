@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.69)
 
-AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
+AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/cpp-atmi/])
 AC_LANG(C++)
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
