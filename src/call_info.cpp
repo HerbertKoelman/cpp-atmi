@@ -37,6 +37,6 @@ namespace atmi {
     }
   }
 
-  call_info::call_info(): _buffer(2048), _ecid(TA_ECID){
+  call_info::call_info(): _buffer(2048), _ecid("TA_ECID"){
   };
 }

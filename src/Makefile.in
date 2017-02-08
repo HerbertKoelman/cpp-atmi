@@ -42,7 +42,7 @@ ATMI_SRV_OBJS=event.o transaction.o queue.o queue_stream.o tuxedo.o exceptions.o
 ATMI_CLT_OBJS=abstract_client.o ${ATMI_SRV_OBJS}
 
 # FML buffer objects
-BUFF_OBJS=buffer.o field.o exceptions.o call_info.o
+BUFF_OBJS=buffer.o field.o exceptions.o call_info.o string_field.o
 
 CPPATMILIBS=libatmi++.a libcltatmi++.a libfml++.a
 
@@ -65,15 +65,18 @@ globber: clean
 	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
 
-libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+# libcltatmi++.a: $(ATMI_CLT_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+libcltatmi++.a: $(ATMI_CLT_OBJS) 
 	${AR} -rv ${LIBDIR}/$@ $(ATMI_CLT_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+# libatmi++.a: $(ATMI_SRV_OBJS) $(INCDIR)/tuxedo.hpp $(INCDIR)/exceptions.hpp
+libatmi++.a: $(ATMI_SRV_OBJS)
 	${AR} -rv ${LIBDIR}/$@ $(ATMI_SRV_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 
-libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/fields.hpp $(INCDIR)/exceptions.hpp
+# libfml++.a: $(BUFF_OBJS) $(INCDIR)/buffer.hpp $(INCDIR)/field.hpp $(INCDIR)/exceptions.hpp
+libfml++.a: $(BUFF_OBJS) 
 	${AR} -rv ${LIBDIR}/$@ $(BUFF_OBJS)
 	$(RANLIB) ${LIBDIR}/$@
 

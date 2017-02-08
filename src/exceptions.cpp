@@ -40,6 +40,12 @@ namespace atmi {
     return _error;
   }
 
+  // field_exception ---------------------------------------
+  //
+
+  field_exception::field_exception (): field_exception(Ferror32,"FML fml error occured.") {
+  }
+
   // buffer_exception ---------------------------------------
   //
 
@@ -120,3 +126,4 @@ namespace atmi {
     }
   }
 }
+

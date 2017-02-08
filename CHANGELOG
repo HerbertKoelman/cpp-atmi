@@ -1,3 +1,8 @@
+v4.6.2
+- enhanced error handling
+- bug fixings
+v4.6.1
+- bug fixings
 v4.6.0
 - configure now creates a cpp-atmi.spec that can be used to create an RPM
 - tmreboot: removed TA_FLAGS from MIB query buffer.
