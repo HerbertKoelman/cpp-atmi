@@ -8,7 +8,7 @@
 #include <tpadm.h>
 
 #include <atmi/definitions.hpp>
-#include <atmi/fields.hpp>
+#include <atmi/string_field.hpp>
 
 #ifndef CPP_ATMI_CALL_INFO_HPP
 #define CPP_ATMI_CALL_INFO_HPP

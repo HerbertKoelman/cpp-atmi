@@ -14,48 +14,10 @@
 
 #include "sample_fml_table.h"
 
-template< class T, FLDID32 F = 0 >
-class _field: public atmi::Tfield<T> {
-  public:
-    _field(): atmi::Tfield<T>(F){
-    }
-
-    _field( FLDID32 id ): atmi::Tfield<T>(id){
-    }
-
-    T operator=( T v ){
-      atmi::Tfield<T>::value = v;
-
-      return atmi::Tfield<T>::value ;
-    }
-};
-
-typedef _field<std::string,EMPNAME> prenom_t;
-typedef _field<long,EMPID>   empid_t;
-typedef _field<std::string>  void_t;
-
-class fields {
-  public:
-    fields(){
-      prenom = "hello world" ;
-      std::cout << __FUNCTION__ << ": " << prenom << std::endl ;
-    }
-
-  private:
-    prenom_t prenom ;
-};
-
-
-class field_empid: public atmi::Tfield<long> {
-  public:
-    field_empid(): atmi::Tfield<long>(EMPID){
-    }
-
-};
 
 class buffer_test : public atmi::abstract_client {
   public:
-    buffer_test (): atmi::abstract_client ("btest"){
+    buffer_test (): class_field_empname("EMPNAME"), atmi::abstract_client ("btest"){
     };
 
     int run ( int argc, char **argv ){
@@ -74,9 +36,24 @@ class buffer_test : public atmi::abstract_client {
 
         std::cout << "atmi::buffer b: " << b.used() << "/" << b.unused() <<", size: " << b.size() << ", chksum: " << b.chksum() <<  std::endl;
 
-        atmi::Tfield<atmi::carray>   unknown_field;
-        unknown_field.set_id(SRVCDAY);
-        unknown_field.set_char_array("salut les amis\0rray", 19);
+        class_field_empname = "Hello" ;
+        std::cout << "class_field_empname (" << class_field_empname.what() << "): " << class_field_empname << std::endl;
+
+        try {
+
+          atmi::Tfield<std::string> prenom ( "EMPNAMEE" );
+
+        }catch ( std::exception &err ){
+          std::cerr << "field name error: " << err.what() << std::endl ;
+        }
+
+        try {
+
+          atmi::Tfield<long> prenom ( EMPNAME );
+
+        }catch ( std::exception &err ){
+          std::cerr << "field type error: " << err.what() << std::endl ;
+        }
 
         atmi::Tfield<std::string> prenom ( EMPNAME );
         atmi::Tfield<long>   empid ( EMPID );
@@ -109,7 +86,6 @@ class buffer_test : public atmi::abstract_client {
 
         std::cout << "--------------------------------------" << std::endl << std::endl ;
         std::cout << "Adding fields into FML buffer: " << std::endl;
-        b.add(unknown_field);
         b.add ( empid );
         b.add ( nom );
         b.add ( prenom );
@@ -188,6 +164,9 @@ class buffer_test : public atmi::abstract_client {
       return 9999;
     }
 
+  private:
+    atmi::Tfield<std::string> class_field_empname;
+
 };
 
 // program main -------------------------------------------------
@@ -198,16 +177,6 @@ int main ( int argc, char **argv ) {
 
     std::cout << "atmi::buffer sample program (" << atmi::cpp_atmi_version() <<")." << std::endl;
     buffer_test btest;
-
-    fields f;
-    _field<std::string> v(EMPNAME);
-
-    prenom_t prenom ;
-    prenom = "hello prenom_t" ;
-    std::cout << prenom.what() <<" " << prenom << "." << std::endl;
-    atmi::buffer buffer;
-    buffer.set(prenom);
-    buffer.print();
 
     std::cout << ", starting up" ;
     btest.run ( argc, argv );

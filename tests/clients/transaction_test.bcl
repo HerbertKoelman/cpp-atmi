@@ -34,6 +34,7 @@ class TPtest : public atmi::abstract_client {
 
           atmi::call_info callinfo;
           callinfo.set_ecid("hello");
+          printf("created call info\n");
 
           atmi::buffer buffer;
           buffer.set_call_info(callinfo);

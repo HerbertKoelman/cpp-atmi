@@ -173,6 +173,28 @@ namespace atmi {
       int _error; //!< related Ferror32 error number.
   };
 
+  /** FML field related exceptions.
+   *
+   */
+  class field_exception : public buffer_exception {
+    public:
+      /** new exception.
+       *
+       * @param err  Ferror32 value
+       * @param msg  error message
+       * @param args error message parameters (variadic).
+       */
+      template<typename... Args> field_exception( int err, const char *msg, const Args&... args): buffer_exception(err, msg, args...){
+        _what = _message + " " + error_message();
+      };
+
+      /** default constructor.
+       *
+       * set error message to strerror.
+       */
+      field_exception();
+  };
+
   /** Tuxedo TP related exceptions
    *
    */

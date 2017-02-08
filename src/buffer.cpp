@@ -10,7 +10,10 @@
 
 #include <atmi/buffer.hpp>
 
-#include "atmi/fields.hpp"
+#include "atmi/field.hpp"
+#include "atmi/template_field.hpp"
+#include "atmi/string_field.hpp"
+#include "atmi/carray_field.hpp"
 #include "atmi/call_info.hpp"
 
 namespace atmi {
@@ -142,7 +145,7 @@ namespace atmi {
 
     int rc = Foccur32 ( _buffer, f._field_id );
     if ( rc < 0 ) {
-      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f._field_name, f._field_id );
+      throw buffer_exception ( Ferror32, "Get field occurences in buffer failed for %s (%d).", f._field_name.c_str(), f._field_id );
     }
 
     return rc;
