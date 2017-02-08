@@ -582,7 +582,7 @@ PACKAGE_TARNAME='cpp-atmi'
 PACKAGE_VERSION='v4.6.1'
 PACKAGE_STRING='cpp-atmi v4.6.1'
 PACKAGE_BUGREPORT='herbert.koelman@me.com'
-PACKAGE_URL='http://herbertkoelman.github.io/atmiplusplus/'
+PACKAGE_URL='http://herbertkoelman.github.io/cpp-atmi/'
 
 enable_option_checking=no
 ac_subst_vars='LTLIBOBJS
@@ -1271,7 +1271,7 @@ Optional Features:
   --enable-repository     use the given name to locate the remote repository
 
 Report bugs to <herbert.koelman@me.com>.
-cpp-atmi home page: <http://herbertkoelman.github.io/atmiplusplus/>.
+cpp-atmi home page: <http://herbertkoelman.github.io/cpp-atmi/>.
 _ACEOF
 ac_status=$?
 fi
@@ -2800,7 +2800,7 @@ Configuration files:
 $config_files
 
 Report bugs to <herbert.koelman@me.com>.
-cpp-atmi home page: <http://herbertkoelman.github.io/atmiplusplus/>."
+cpp-atmi home page: <http://herbertkoelman.github.io/cpp-atmi/>."
 
 _ACEOF
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1

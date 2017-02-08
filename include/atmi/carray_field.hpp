@@ -206,7 +206,7 @@ namespace atmi {
           }
 
         } else {
-          throw atmi_exception ( "field %s's value is empty !!?? Cannot add an empty field _value.", name () );
+          throw atmi_exception ( "field %s's value is empty !!?? Cannot add an empty field _value.", name ().c_str() );
         }
 
         return rc;
