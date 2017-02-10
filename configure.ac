@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.69)
 
-AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/atmiplusplus/])
+AC_INIT([cpp-atmi],[m4_esyscmd_s(echo $(git describe --always --abbrev=0))],[herbert.koelman@me.com],[],[http://herbertkoelman.github.io/cpp-atmi/])
 AC_LANG(C++)
 
 AC_CONFIG_AUX_DIR([/usr/bin . bin])
@@ -84,6 +84,6 @@ fi
 
 AC_PROG_INSTALL
 AC_CONFIG_SUBDIRS(src utls)
-AC_CONFIG_FILES([Makefile sonar-project.properties doxyfile])
+AC_CONFIG_FILES([Makefile cpp-atmi.spec sonar-project.properties doxyfile])
 AC_OUTPUT
 

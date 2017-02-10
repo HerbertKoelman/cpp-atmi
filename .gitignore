@@ -22,6 +22,9 @@ confdefs.h
 config.status
 autom4te.cache
 
+# RPM build
+*.spec
+
 # Tuxedo specific files
 *ULOG*
 
@@ -36,6 +39,7 @@ locale
 html
 man
 distrib
+rpmbuild
 *SERV
 .*
 ULOG*

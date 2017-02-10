@@ -23,6 +23,7 @@ REPOSITORY=@REPOSITORY@
 
 PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE_DEVELOP=@PACKAGE_NAME@-@BUILD@-@build_os@-dev.tar.gz
+PACKAGE_SRC=@PACKAGE_NAME@-@BUILD@.tar.gz
 PACKAGE=@PACKAGE_NAME@-@BUILD@-@build_os@.tar.gz
 
 HEADERS=@HEADERS@
@@ -42,19 +43,25 @@ all:
 
 pkg: clean all
 	$(MKDIR) distrib
+	tar cf - `git ls-files`  | gzip -c > distrib/$(PACKAGE_SRC)
 	tar cf - include lib  | gzip -c > distrib/$(PACKAGE_DEVELOP)
 	tar cf -  bin         | gzip -c > distrib/$(PACKAGE)
 
 # this target can only be used if REPOSITORY is set (hence the test)
 deploy: pkg
-	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE_DEVELOP) $(REPOSITORY) 2> /dev/null ) || echo "WARNING use ./configure --enable-repository to enable deploy target"
-	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE) $(REPOSITORY) 2> /dev/null ) || echo "WARNING use ./configure --enable-repository to enable deploy target"
-	@echo "deployed $(PACKAGE_DEVELOP) and $(PACKAGE) in $(REPOSITORY)"
+	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE_SRC) $(REPOSITORY) 2> /dev/null && echo "deployed $(PACKAGE_SRC)") || echo "WARNING use ./configure --enable-repository to enable deploy target"
+	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE_DEVELOP) $(REPOSITORY) 2> /dev/null && echo "deployed $(PACKAGE_DEVELOP)") || echo "WARNING use ./configure --enable-repository to enable deploy target"
+	@test ! -z "$(REPOSITORY)" && ( cd distrib && $(DEPLOY) $(PACKAGE) $(REPOSITORY) 2> /dev/null && echo "deployed $(PACKAGE)") || echo "WARNING use ./configure --enable-repository to enable deploy target"
+
+rpm: pkg
+	mkdir -p rpmbuild/BUILD rpmbuild/RPMS rpmbuild/SOURCES rpmbuild/SPECS rpmbuild/SRPMS rpmbuild/tmp
+	cp distrib/$(PACKAGE_SRC) rpmbuild/SOURCES
+	rpm --define "_topdir ${PWD}/rpmbuild" --define "_rpmdir ${PWD}/distrib" -bb @PACKAGE_NAME@.spec && echo "your RPM is here ./ditrib"
 
 clean:
 	( cd src && make clean )
 	( cd utls && make clean )
-	$(RM) -R distrib
+	$(RM) -R distrib rpmbuild
 	$(RM) bin/*
 
 globber:clean
@@ -76,7 +83,7 @@ version:
 	-echo "don't forget to run configure."
 
 install: 
-	$(MKDIR) $(INCLUDEDIR)
+	$(MKDIR) $(INCLUDEDIR) @libdir@ @bindir@
 	$(INSTALL) include/atmi/*.hpp $(INCLUDEDIR)
 	$(INSTALL) lib/$(LIBATMI) lib/$(LIBCLTATMI) lib/$(LIBFML) @libdir@
 	$(INSTALL) bin/*   @bindir@

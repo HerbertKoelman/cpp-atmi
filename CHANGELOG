@@ -1,4 +1,11 @@
+v4.6.2
+- enhanced error handling
+- bug fixings
+- call_info now uses the name "TA_ECID" insteadof the #define TA_ECCID
+v4.6.1
+- bug fixings
 v4.6.0
+- configure now creates a cpp-atmi.spec that can be used to create an RPM
 - tmreboot: removed TA_FLAGS from MIB query buffer.
 - now cpp_atmi_version returns SNAPSHOT when --enable-release is not set
 - migrated tmreboot from C/ATMI to C++/ATMI++

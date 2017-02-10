@@ -13,7 +13,7 @@
 #include <memory>
 #include <stdexcept>
 #include <atmi/definitions.hpp>
-#include <atmi/fields.hpp>
+#include <atmi/template_field.hpp>
 
 #ifndef CPP_ATMI_CARRAY_FIELD_HPP
 #define CPP_ATMI_CARRAY_FIELD_HPP
@@ -33,39 +33,29 @@ namespace atmi {
   template <> class Tfield<char *>: public field {
     public:
 
-      Tfield(): _length (0),_buffer_size(0), _value (NULL) {
-        // intentional
-      };
-
       /** Constructs a Tfield for the passed field id
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
        * @param fid the fml field id to setup (as defined in the FML tables)
        */
-       explicit Tfield ( FLDID32 fid ) : _length (0),_buffer_size(0), _value (NULL) {
+      explicit Tfield ( FLDID32 fid ) : _length (0),_buffer_size(0), _value (NULL), field(fid) {
 
-        set_id ( fid );
-
-        // check taht we have a std::string declaration in the FML table
-        if ( type () != 6 ) {
-          throw atmi_exception ( "Tfield %s's value is of type carray and the FML table decalares a type %s.", name (), tname());
-        }
       }
 
       /** Constructs a Tfield for the passed name
        *
        * The search is done in the tables identified by FLDTBLDIR32  and FIELDTBLS32
        *
-       * @param n the fml field name to setup (as defined in the FML tables)
+       * @param name the fml field name to setup (as defined in the FML tables)
        */
-      explicit Tfield ( const char *n ) : _length (0),_buffer_size(0), _value (NULL) {
-
-        setup ( (FLDID32) Fldid32 ( const_cast<char *>(n) ) );
+      explicit Tfield ( const char *field_name ) : _length (0),_buffer_size(0), _value (NULL), field(field_name) {
 
         // check type matching
         if ( type() != 6 ) {
-          throw atmi_exception ( "Tfield value is of type carray and the FML table decalares a type %s for %s.", tname(), name());
+          throw atmi_exception ( "Tfield value is of type carray and the FML table decalares a type %s for %s.",
+              tname(),
+              name().c_str());
         }
       }
 
@@ -180,7 +170,10 @@ namespace atmi {
 
         rc = Fchg32 ( b.get_buffer(), id(), occurence(), _value, _length );
         if ( rc < 0 ) {
-          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set<char *> failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+          throw buffer_exception ( Ferror32, "FCHG32 Tfield::set<char *> failed for field %s (id: %d, occ: %d)",
+              name().c_str(),
+              id(),
+              occurence() );
         }
 
         return rc;
@@ -204,13 +197,16 @@ namespace atmi {
 
           rc  = Fadd32 ( b.get_buffer(), id(), _value, _length );
           if ( rc < 0 ) {
-            throw buffer_exception ( Ferror32, "FADD32 Tfield::add<char *> failed for field %s (id: %d, occ: %d)", name(), id(), occurence() );
+            throw buffer_exception ( Ferror32, "FADD32 Tfield::add<char *> failed for field %s (id: %d, occ: %d)",
+                name().c_str(),
+                id(),
+                occurence() );
           } else {
             set_field_occurence ( (b.occurences ( *this ) == 0 ? 0 : b.occurences ( *this )-1));
           }
 
         } else {
-          throw atmi_exception ( "field %s's value is empty !!?? Cannot add an empty field _value.", name () );
+          throw atmi_exception ( "field %s's value is empty !!?? Cannot add an empty field _value.", name ().c_str() );
         }
 
         return rc;
@@ -250,7 +246,10 @@ namespace atmi {
             rc = 0;
 
           } else {
-            throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+            throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).",
+                name().c_str(),
+                id(),
+                occurence() );
           }
         } else {
 
@@ -271,7 +270,10 @@ namespace atmi {
               rc = 0;
 
             } else {
-              throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+              throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).",
+                  name().c_str(),
+                  id(),
+                  occurence() );
             }
 
           } else if (( rc == -1) && ( Ferror32 == FNOSPACE )){ // buffer is too small re-allocate a new one
@@ -286,7 +288,10 @@ namespace atmi {
               rc = 0;
 
             } else {
-              throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).", name(), id(), occurence() );
+              throw buffer_exception (Ferror32, "FGETALLOC32 Tfield::get<char *> failed to get field %s (id: %d, occ: %d).",
+                  name().c_str(),
+                  id(),
+                  occurence() );
             }
           }
         }
