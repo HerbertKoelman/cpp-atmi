@@ -1,6 +1,7 @@
 v4.6.2
 - enhanced error handling
 - bug fixings
+- call_info now uses the name "TA_ECID" insteadof the #define TA_ECCID
 v4.6.1
 - bug fixings
 v4.6.0
