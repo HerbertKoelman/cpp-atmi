@@ -7,6 +7,7 @@ var searchData=
   ['call_5finfo',['call_info',['../classatmi_1_1call__info.html#a536f61bc22398ff5422f90679fde8e70',1,'atmi::call_info']]],
   ['cancel',['cancel',['../classatmi_1_1transaction.html#a380d536258d33a801973100d6e2ae622',1,'atmi::transaction']]],
   ['carray',['carray',['../group__fml.html#ga8b57f9a4e2453d8e5d82ac0016e35e87',1,'atmi']]],
+  ['check_5ftype_5fmatch',['check_type_match',['../classatmi_1_1_tfield.html#a6631793392b63932e0cb89be1827f866',1,'atmi::Tfield']]],
   ['chksum',['chksum',['../classatmi_1_1buffer.html#a4ae9fa419098eb136ae3681ad90ccafb',1,'atmi::buffer']]],
   ['commit',['commit',['../classatmi_1_1tuxedo.html#aeff1d0270d6b12de07a4478839ec8b07',1,'atmi::tuxedo']]],
   ['context',['context',['../classatmi_1_1tuxedo.html#a6d31779e76609264295e0065fdfc008d',1,'atmi::tuxedo']]],

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.6.1)</span>
+   &#160;<span id="projectnumber">(v4.6.2)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;tpadm.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;atmi/definitions.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;atmi/fields.hpp&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;atmi/string_field.hpp&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef CPP_ATMI_CALL_INFO_HPP</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define CPP_ATMI_CALL_INFO_HPP</span></div>
@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <a class="code" href="classatmi_1_1call__info.html">call_info</a> &amp;<a class="code" href="classatmi_1_1call__info.html#aadf1ac5874546447738af60a05d11ad1">operator=</a>( <a class="code" href="classatmi_1_1call__info.html">call_info</a> &amp;callinfo );</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keyword">operator</span> FBFR32 *() ;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keyword">explicit</span> <span class="keyword">operator</span> FBFR32 *() ;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="classatmi_1_1call__info.html#a536f61bc22398ff5422f90679fde8e70">call_info</a>();</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
@@ -145,8 +145,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classatmi_1_1call__info_html_a536f61bc22398ff5422f90679fde8e70"><div class="ttname"><a href="classatmi_1_1call__info.html#a536f61bc22398ff5422f90679fde8e70">atmi::call_info::call_info</a></div><div class="ttdeci">call_info()</div><div class="ttdef"><b>Definition:</b> call_info.cpp:40</div></div>
 <div class="ttc" id="namespaceatmi_html"><div class="ttname"><a href="namespaceatmi.html">atmi</a></div><div class="ttdoc">Application to Transaction Monitor Interface. </div><div class="ttdef"><b>Definition:</b> abstract_client.hpp:40</div></div>
 <div class="ttc" id="classatmi_1_1call__info_html"><div class="ttname"><a href="classatmi_1_1call__info.html">atmi::call_info</a></div><div class="ttdef"><b>Definition:</b> call_info.hpp:32</div></div>
-<div class="ttc" id="classatmi_1_1buffer_html_a84a4bd3782f9ffafa962a2393484b0b7"><div class="ttname"><a href="classatmi_1_1buffer.html#a84a4bd3782f9ffafa962a2393484b0b7">atmi::buffer::get_call_info</a></div><div class="ttdeci">void get_call_info(call_info &amp;callinfo)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:45</div></div>
-<div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html">atmi::Tfield&lt; std::string &gt;</a></div><div class="ttdef"><b>Definition:</b> fields.hpp:363</div></div>
+<div class="ttc" id="classatmi_1_1buffer_html_a84a4bd3782f9ffafa962a2393484b0b7"><div class="ttname"><a href="classatmi_1_1buffer.html#a84a4bd3782f9ffafa962a2393484b0b7">atmi::buffer::get_call_info</a></div><div class="ttdeci">void get_call_info(call_info &amp;callinfo)</div><div class="ttdef"><b>Definition:</b> buffer.cpp:48</div></div>
+<div class="ttc" id="classatmi_1_1_tfield_3_01std_1_1string_01_4_html"><div class="ttname"><a href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html">atmi::Tfield&lt; std::string &gt;</a></div><div class="ttdef"><b>Definition:</b> string_field.hpp:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

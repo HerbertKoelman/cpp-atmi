@@ -8,7 +8,7 @@
 
 
 
-{\ttfamily \#include $<$fields.\+hpp$>$}
+{\ttfamily \#include $<$template\+\_\+field.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:Tfield$<$ T $>$\+:\begin{figure}[H]
 \begin{center}
@@ -23,9 +23,7 @@ Inheritance diagram for atmi\+:\+:Tfield$<$ T $>$\+:\begin{figure}[H]
 \item 
 \hyperlink{classatmi_1_1_tfield_a10739dd7cef7fad99e5c32213bc69fca}{Tfield} (F\+L\+D\+I\+D32 field\+\_\+id)
 \item 
-\hyperlink{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{Tfield} (const char $\ast$\hyperlink{classatmi_1_1field_a0fbc5a958a0af8286e339b088ee69bc8}{name})
-\item 
-virtual void \hyperlink{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}{set\+\_\+id} (F\+L\+D\+I\+D32 field\+\_\+id)
+\hyperlink{classatmi_1_1_tfield_a9718a2fcffa95fda6e31f18815d05dbe}{Tfield} (const char $\ast$\hyperlink{classatmi_1_1field_a94aab112ec52966a2a772d219e87a965}{name})
 \item 
 virtual F\+L\+D\+L\+E\+N32 \hyperlink{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{length} ()
 \item 
@@ -43,11 +41,13 @@ virtual int \hyperlink{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}{a
 virtual int \hyperlink{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b)
 \item 
 virtual int \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{get} (\hyperlink{classatmi_1_1buffer}{buffer} \&b, F\+L\+D\+O\+C\+C32 occ)
+\item 
+void \hyperlink{classatmi_1_1_tfield_a6631793392b63932e0cb89be1827f866}{check\+\_\+type\+\_\+match} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{T \hyperlink{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}{value}}\label{classatmi_1_1_tfield_a89852f63b07d2f6d27d9866b030d1c5d}
+\hypertarget{classatmi_1_1_tfield_a08270bcbbb9a8b325782c8ed70f9a5d7}{T \hyperlink{classatmi_1_1_tfield_a08270bcbbb9a8b325782c8ed70f9a5d7}{\+\_\+value}}\label{classatmi_1_1_tfield_a08270bcbbb9a8b325782c8ed70f9a5d7}
 
 \begin{DoxyCompactList}\small\item\em field's current value \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -134,7 +134,14 @@ When successfull the value of occurence is se
 
 Implements \hyperlink{classatmi_1_1field_a5441bc87ba4bc3e9eb37c6db6a29688f}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
+\hypertarget{classatmi_1_1_tfield_a6631793392b63932e0cb89be1827f866}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!check\+\_\+type\+\_\+match@{check\+\_\+type\+\_\+match}}
+\index{check\+\_\+type\+\_\+match@{check\+\_\+type\+\_\+match}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
+\subsubsection[{check\+\_\+type\+\_\+match}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf atmi\+::\+Tfield}$<$ T $>$\+::check\+\_\+type\+\_\+match (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{classatmi_1_1_tfield_a6631793392b63932e0cb89be1827f866}
+check if backend type is compatible with F\+M\+L type \hypertarget{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!get@{get}}
 \index{get@{get}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
 \subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual int {\bf atmi\+::\+Tfield}$<$ T $>$\+::get (
 \begin{DoxyParamCaption}
@@ -224,28 +231,8 @@ set the value of the field's value
 
 Implements \hyperlink{classatmi_1_1field_a41bb209965d627d2e67c839bece5372c}{atmi\+::field}.
 
-\hypertarget{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}{\index{atmi\+::\+Tfield@{atmi\+::\+Tfield}!set\+\_\+id@{set\+\_\+id}}
-\index{set\+\_\+id@{set\+\_\+id}!atmi\+::\+Tfield@{atmi\+::\+Tfield}}
-\subsubsection[{set\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual void {\bf atmi\+::\+Tfield}$<$ T $>$\+::set\+\_\+id (
-\begin{DoxyParamCaption}
-\item[{F\+L\+D\+I\+D32}]{field\+\_\+id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}
-set field id.
-
-This template only handles numerical field I\+Ds.
-
-
-\begin{DoxyParams}{Parameters}
-{\em field\+\_\+id} & the fml field id to setup (as defined in the F\+M\+L tables) \\
-\hline
-\end{DoxyParams}
-This array is used to check that F\+M\+L type matches template \hyperlink{classatmi_1_1_tfield}{Tfield}'s type 
-
-Reimplemented from \hyperlink{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}{atmi\+::field}.
-
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/fields.\+hpp\end{DoxyCompactItemize}
+include/atmi/template\+\_\+field.\+hpp\end{DoxyCompactItemize}

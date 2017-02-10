@@ -21,6 +21,20 @@ Documentation is obtained with this command\+: \begin{DoxyVerb}$ make doxygen
 
 The library is documented \href{http://herbertkoelman.github.io/cpp-atmi/doc/html/}{\tt here}.
 
+\subsubsection*{Create an rpm}
+
+An R\+P\+M spec file is generated when configure is executed. You can then copy the tar.\+gz into the S\+O\+U\+R\+C\+E\+S directory and run {\ttfamily rpm -\/bb cpp-\/atmi.\+spec}.
+
+The following commands prepare and builds an R\+P\+M for the release v4.\+6.\+1\+: \begin{DoxyVerb}$ ./configure --enable-release && make pkg
+$ cp distrib/cpp-atmi-v4.6.1.tar.gz ~/rpmbuild/SOURCES
+$ rpm -bb cpp-atmi.spec
+\end{DoxyVerb}
+
+
+The makefile comes with a {\ttfamily rpm} target which will setup and produce a R\+P\+M in the dirctory {\ttfamily rpmbuild}.
+
+\$ ./configure --enable-\/release \&\& make rpm
+
 \subsubsection*{Useful links}
 
 

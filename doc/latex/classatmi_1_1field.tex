@@ -3,7 +3,7 @@
 }
 
 
-{\ttfamily \#include $<$fields.\+hpp$>$}
+{\ttfamily \#include $<$field.\+hpp$>$}
 
 Inheritance diagram for atmi\+:\+:field\+:\begin{figure}[H]
 \begin{center}
@@ -14,8 +14,6 @@ Inheritance diagram for atmi\+:\+:field\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}{field} ()
-\item 
 virtual \hyperlink{classatmi_1_1field_a6f91cba3fca0a77fb7ad229187d689b9}{$\sim$field} ()
 \item 
 int \hyperlink{classatmi_1_1field_a717c701f07a784f471abb44d7bc95048}{type} ()
@@ -24,11 +22,9 @@ const char $\ast$ \hyperlink{classatmi_1_1field_a7d6260dd6f7c3c44de29190c2dfd546
 \item 
 F\+L\+D\+I\+D32 \hyperlink{classatmi_1_1field_a89ff294c8276c6a882f510a8f95ac372}{id} () const 
 \item 
-virtual void \hyperlink{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}{set\+\_\+id} (F\+L\+D\+I\+D32 \hyperlink{classatmi_1_1field_a89ff294c8276c6a882f510a8f95ac372}{id})
-\item 
 int \hyperlink{classatmi_1_1field_aa71d28f3df8490e9ed016607f857fae1}{number} ()
 \item 
-const char $\ast$ \hyperlink{classatmi_1_1field_a0fbc5a958a0af8286e339b088ee69bc8}{name} ()
+const std\+::string \hyperlink{classatmi_1_1field_a94aab112ec52966a2a772d219e87a965}{name} () const 
 \item 
 F\+L\+D\+O\+C\+C32 \hyperlink{classatmi_1_1field_a161b9b7037c49fbcf86518fcb35e779c}{occurence} ()
 \item 
@@ -44,6 +40,12 @@ virtual \hyperlink{classatmi_1_1field}{field} \& \hyperlink{classatmi_1_1field_a
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\hyperlink{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}{field} ()
+\item 
+\hyperlink{classatmi_1_1field_a21cc47cdfd63932953b6476ca3c51183}{field} (F\+L\+D\+I\+D32 \hyperlink{classatmi_1_1field_a89ff294c8276c6a882f510a8f95ac372}{id})
+\item 
+\hyperlink{classatmi_1_1field_a6cc3f06d7251a520f6cb29a56ff5ccea}{field} (const std\+::string \&\hyperlink{classatmi_1_1field_a94aab112ec52966a2a772d219e87a965}{name})
 \item 
 virtual void \hyperlink{classatmi_1_1field_a83412cd9df383c342b5feb195090c9d9}{set\+\_\+field\+\_\+occurence} (F\+L\+D\+O\+C\+C32 occ)
 \item 
@@ -71,23 +73,53 @@ virtual int \hyperlink{classatmi_1_1field_a783484fe641f66f5773f9eed7fd4be39}{rem
 When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}{\index{atmi\+::field@{atmi\+::field}!field@{field}}
-\index{field@{field}!atmi\+::field@{atmi\+::field}}
-\subsubsection[{field}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::field\+::field (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}
-default constructor
-
-default occurence value is 0. \hypertarget{classatmi_1_1field_a6f91cba3fca0a77fb7ad229187d689b9}{\index{atmi\+::field@{atmi\+::field}!````~field@{$\sim$field}}
+\hypertarget{classatmi_1_1field_a6f91cba3fca0a77fb7ad229187d689b9}{\index{atmi\+::field@{atmi\+::field}!````~field@{$\sim$field}}
 \index{````~field@{$\sim$field}!atmi\+::field@{atmi\+::field}}
 \subsubsection[{$\sim$field}]{\setlength{\rightskip}{0pt plus 5cm}virtual atmi\+::field\+::$\sim$field (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classatmi_1_1field_a6f91cba3fca0a77fb7ad229187d689b9}
-Default destructor 
+Default destructor \hypertarget{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}{\index{atmi\+::field@{atmi\+::field}!field@{field}}
+\index{field@{field}!atmi\+::field@{atmi\+::field}}
+\subsubsection[{field}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::field\+::field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classatmi_1_1field_ad704c8d557c86b84b2d37bdf2cbdc36c}
+default constructor
+
+default occurence value is 0. \hypertarget{classatmi_1_1field_a21cc47cdfd63932953b6476ca3c51183}{\index{atmi\+::field@{atmi\+::field}!field@{field}}
+\index{field@{field}!atmi\+::field@{atmi\+::field}}
+\subsubsection[{field}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::field\+::field (
+\begin{DoxyParamCaption}
+\item[{F\+L\+D\+I\+D32}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}}\label{classatmi_1_1field_a21cc47cdfd63932953b6476ca3c51183}
+new field instance
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & field I\+D \\
+\hline
+\end{DoxyParams}
+\hypertarget{classatmi_1_1field_a6cc3f06d7251a520f6cb29a56ff5ccea}{\index{atmi\+::field@{atmi\+::field}!field@{field}}
+\index{field@{field}!atmi\+::field@{atmi\+::field}}
+\subsubsection[{field}]{\setlength{\rightskip}{0pt plus 5cm}atmi\+::field\+::field (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}}\label{classatmi_1_1field_a6cc3f06d7251a520f6cb29a56ff5ccea}
+new field instance.
+
+the name field must exists in known F\+M\+L table (see F\+I\+E\+L\+D\+T\+B\+L\+S32 and F\+L\+D\+T\+B\+L\+D\+I\+R32).
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & field name \\
+\hline
+\end{DoxyParams}
+
 
 \subsection{Member Function Documentation}
 \hypertarget{classatmi_1_1field_a5441bc87ba4bc3e9eb37c6db6a29688f}{\index{atmi\+::field@{atmi\+::field}!add@{add}}
@@ -111,7 +143,7 @@ When successfull the value of occurence is se
 \end{DoxySeeAlso}
 
 
-Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_af17fc3c22ce857f9d96f96d6c175b6d5}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_ae3036c038b361aee2fc357c1c7d1304a}{atmi\+::\+Tfield$<$ char $\ast$ $>$}.
+Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_af17fc3c22ce857f9d96f96d6c175b6d5}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_ae3036c038b361aee2fc357c1c7d1304a}{atmi\+::\+Tfield$<$ char $\ast$ $>$}, and \hyperlink{classatmi_1_1_tfield_a4962b3aa080aba4ecffc7f3fa98be2da}{atmi\+::\+Tfield$<$ T $>$}.
 
 \hypertarget{classatmi_1_1field_a6d8db988f58f3779b0ef528a11b3466f}{\index{atmi\+::field@{atmi\+::field}!error@{error}}
 \index{error@{error}!atmi\+::field@{atmi\+::field}}
@@ -139,7 +171,7 @@ Retrieves the value of the field found into the buffer.
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_afecf8218a3c312df34c36f334c995ac7}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}{atmi\+::\+Tfield$<$ char $\ast$ $>$}.
+Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_afecf8218a3c312df34c36f334c995ac7}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_a5df77c9bee99916f6d14f5beeec54dac}{atmi\+::\+Tfield$<$ char $\ast$ $>$}, and \hyperlink{classatmi_1_1_tfield_aa70ce8893913c8f3d968cae72f2cdd11}{atmi\+::\+Tfield$<$ T $>$}.
 
 \hypertarget{classatmi_1_1field_a56ce53fabe290b94463f87936515ec46}{\index{atmi\+::field@{atmi\+::field}!get@{get}}
 \index{get@{get}!atmi\+::field@{atmi\+::field}}
@@ -165,7 +197,7 @@ Upon success the value of occurence is set to the retrieved occurence.
 \end{DoxySeeAlso}
 
 
-Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_a34f9956af4b0b98730595258e6c251e2}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_afaedd7d5902233652bed642bdceb9db1}{atmi\+::\+Tfield$<$ char $\ast$ $>$}.
+Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_a34f9956af4b0b98730595258e6c251e2}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_afaedd7d5902233652bed642bdceb9db1}{atmi\+::\+Tfield$<$ char $\ast$ $>$}, and \hyperlink{classatmi_1_1_tfield_ae8de2dd360d04fc2465e4169b239c222}{atmi\+::\+Tfield$<$ T $>$}.
 
 \hypertarget{classatmi_1_1field_a89ff294c8276c6a882f510a8f95ac372}{\index{atmi\+::field@{atmi\+::field}!id@{id}}
 \index{id@{id}!atmi\+::field@{atmi\+::field}}
@@ -189,15 +221,15 @@ the length of the field's value
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_ac4fdf6b5f9d1929b34bddc97274c6c9b}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_aa97dec8559724186b62997409f04bf3f}{atmi\+::\+Tfield$<$ char $\ast$ $>$}.
+Implemented in \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_aa97dec8559724186b62997409f04bf3f}{atmi\+::\+Tfield$<$ char $\ast$ $>$}, \hyperlink{classatmi_1_1_tfield_a6138c508841c4a837ea8c8e089755278}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_ac4fdf6b5f9d1929b34bddc97274c6c9b}{atmi\+::\+Tfield$<$ std\+::string $>$}.
 
-\hypertarget{classatmi_1_1field_a0fbc5a958a0af8286e339b088ee69bc8}{\index{atmi\+::field@{atmi\+::field}!name@{name}}
+\hypertarget{classatmi_1_1field_a94aab112ec52966a2a772d219e87a965}{\index{atmi\+::field@{atmi\+::field}!name@{name}}
 \index{name@{name}!atmi\+::field@{atmi\+::field}}
-\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::field\+::name (
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string atmi\+::field\+::name (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classatmi_1_1field_a0fbc5a958a0af8286e339b088ee69bc8}
+) const}}\label{classatmi_1_1field_a94aab112ec52966a2a772d219e87a965}
 \begin{DoxyReturn}{Returns}
 the name of the field 
 \end{DoxyReturn}
@@ -279,7 +311,7 @@ set the value of the field's value
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_a356a0e794a33bcfc1d3f4d8376e764d9}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_a7bd1997e976116990ad0e2072320db77}{atmi\+::\+Tfield$<$ T $>$}, and \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_af7be84fbdff0665d9c94b83872b299b7}{atmi\+::\+Tfield$<$ char $\ast$ $>$}.
+Implemented in \hyperlink{classatmi_1_1_tfield_3_01std_1_1string_01_4_a356a0e794a33bcfc1d3f4d8376e764d9}{atmi\+::\+Tfield$<$ std\+::string $>$}, \hyperlink{classatmi_1_1_tfield_3_01char_01_5_01_4_af7be84fbdff0665d9c94b83872b299b7}{atmi\+::\+Tfield$<$ char $\ast$ $>$}, and \hyperlink{classatmi_1_1_tfield_a7bd1997e976116990ad0e2072320db77}{atmi\+::\+Tfield$<$ T $>$}.
 
 \hypertarget{classatmi_1_1field_a83412cd9df383c342b5feb195090c9d9}{\index{atmi\+::field@{atmi\+::field}!set\+\_\+field\+\_\+occurence@{set\+\_\+field\+\_\+occurence}}
 \index{set\+\_\+field\+\_\+occurence@{set\+\_\+field\+\_\+occurence}!atmi\+::field@{atmi\+::field}}
@@ -297,27 +329,6 @@ Occurences start counting from 0.
 {\em occ} & occurence. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}{\index{atmi\+::field@{atmi\+::field}!set\+\_\+id@{set\+\_\+id}}
-\index{set\+\_\+id@{set\+\_\+id}!atmi\+::field@{atmi\+::field}}
-\subsubsection[{set\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::field\+::set\+\_\+id (
-\begin{DoxyParamCaption}
-\item[{F\+L\+D\+I\+D32}]{id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}
-this will set the current field I\+D
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & field I\+D \\
-\hline
-\end{DoxyParams}
-\begin{DoxySince}{Since}
-v4.\+2.\+1 
-\end{DoxySince}
-
-
-Reimplemented in \hyperlink{classatmi_1_1_tfield_ac458fcdcce36a34d8beed526ca1e385a}{atmi\+::\+Tfield$<$ T $>$}.
-
 \hypertarget{classatmi_1_1field_a9ca5e61e3e1068770098d20ad1332f24}{\index{atmi\+::field@{atmi\+::field}!setup@{setup}}
 \index{setup@{setup}!atmi\+::field@{atmi\+::field}}
 \subsubsection[{setup}]{\setlength{\rightskip}{0pt plus 5cm}void atmi\+::field\+::setup (
@@ -335,7 +346,7 @@ checks if field exists, if so it fetch all available metadata (name, type, ...)
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000003}{Deprecated}]replaced by \hyperlink{classatmi_1_1field_a1d95c3b0f4ae491037ef51b8586a0083}{atmi\+::field.\+set\+\_\+id()} \end{DoxyRefDesc}
+\item[\hyperlink{deprecated__deprecated000003}{Deprecated}]replaced by atmi\+::field.\+set\+\_\+id() \end{DoxyRefDesc}
 \hypertarget{classatmi_1_1field_a7d6260dd6f7c3c44de29190c2dfd546e}{\index{atmi\+::field@{atmi\+::field}!tname@{tname}}
 \index{tname@{tname}!atmi\+::field@{atmi\+::field}}
 \subsubsection[{tname}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ atmi\+::field\+::tname (
@@ -374,5 +385,5 @@ a std\+::string describing the field
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/atmi/fields.\+hpp\item 
+include/atmi/field.\+hpp\item 
 src/field.\+cpp\end{DoxyCompactItemize}

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">cpp-atmi
-   &#160;<span id="projectnumber">(v4.6.1)</span>
+   &#160;<span id="projectnumber">(v4.6.2)</span>
    </div>
    <div id="projectbrief">Simple C++ wrapper to ATMI functions.</div>
   </td>
@@ -101,7 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="fields_8hpp_source.html">fields.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="field_8hpp_source.html">field.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for atmi::field:</div>
 <div class="dyncontent">
@@ -116,8 +116,6 @@ Inheritance diagram for atmi::field:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad704c8d557c86b84b2d37bdf2cbdc36c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#ad704c8d557c86b84b2d37bdf2cbdc36c">field</a> ()</td></tr>
-<tr class="separator:ad704c8d557c86b84b2d37bdf2cbdc36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f91cba3fca0a77fb7ad229187d689b9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a6f91cba3fca0a77fb7ad229187d689b9">~field</a> ()</td></tr>
 <tr class="separator:a6f91cba3fca0a77fb7ad229187d689b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a717c701f07a784f471abb44d7bc95048"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a717c701f07a784f471abb44d7bc95048">type</a> ()</td></tr>
@@ -126,12 +124,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7d6260dd6f7c3c44de29190c2dfd546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89ff294c8276c6a882f510a8f95ac372"><td class="memItemLeft" align="right" valign="top">FLDID32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">id</a> () const </td></tr>
 <tr class="separator:a89ff294c8276c6a882f510a8f95ac372"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d95c3b0f4ae491037ef51b8586a0083"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a1d95c3b0f4ae491037ef51b8586a0083">set_id</a> (FLDID32 <a class="el" href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">id</a>)</td></tr>
-<tr class="separator:a1d95c3b0f4ae491037ef51b8586a0083"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa71d28f3df8490e9ed016607f857fae1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#aa71d28f3df8490e9ed016607f857fae1">number</a> ()</td></tr>
 <tr class="separator:aa71d28f3df8490e9ed016607f857fae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fbc5a958a0af8286e339b088ee69bc8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a0fbc5a958a0af8286e339b088ee69bc8">name</a> ()</td></tr>
-<tr class="separator:a0fbc5a958a0af8286e339b088ee69bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94aab112ec52966a2a772d219e87a965"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a94aab112ec52966a2a772d219e87a965">name</a> () const </td></tr>
+<tr class="separator:a94aab112ec52966a2a772d219e87a965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a161b9b7037c49fbcf86518fcb35e779c"><td class="memItemLeft" align="right" valign="top">FLDOCC32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a161b9b7037c49fbcf86518fcb35e779c">occurence</a> ()</td></tr>
 <tr class="separator:a161b9b7037c49fbcf86518fcb35e779c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d8db988f58f3779b0ef528a11b3466f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a6d8db988f58f3779b0ef528a11b3466f">error</a> ()</td></tr>
@@ -147,6 +143,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad704c8d557c86b84b2d37bdf2cbdc36c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#ad704c8d557c86b84b2d37bdf2cbdc36c">field</a> ()</td></tr>
+<tr class="separator:ad704c8d557c86b84b2d37bdf2cbdc36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21cc47cdfd63932953b6476ca3c51183"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a21cc47cdfd63932953b6476ca3c51183">field</a> (FLDID32 <a class="el" href="classatmi_1_1field.html#a89ff294c8276c6a882f510a8f95ac372">id</a>)</td></tr>
+<tr class="separator:a21cc47cdfd63932953b6476ca3c51183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc3f06d7251a520f6cb29a56ff5ccea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a6cc3f06d7251a520f6cb29a56ff5ccea">field</a> (const std::string &amp;<a class="el" href="classatmi_1_1field.html#a94aab112ec52966a2a772d219e87a965">name</a>)</td></tr>
+<tr class="separator:a6cc3f06d7251a520f6cb29a56ff5ccea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83412cd9df383c342b5feb195090c9d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a83412cd9df383c342b5feb195090c9d9">set_field_occurence</a> (FLDOCC32 occ)</td></tr>
 <tr class="separator:a83412cd9df383c342b5feb195090c9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca5e61e3e1068770098d20ad1332f24"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classatmi_1_1field.html#a9ca5e61e3e1068770098d20ad1332f24">setup</a> (FLDID32 field_id)</td></tr>
@@ -171,23 +173,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>When a new instance is created, occurence is set to 0 making it possible to set values withour a prior call to add. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad704c8d557c86b84b2d37bdf2cbdc36c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">atmi::field::field </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>default constructor</p>
-<p>default occurence value is 0. </p>
-
-</div>
-</div>
 <a class="anchor" id="a6f91cba3fca0a77fb7ad229187d689b9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -209,6 +194,94 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Default destructor </p>
+
+</div>
+</div>
+<a class="anchor" id="ad704c8d557c86b84b2d37bdf2cbdc36c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::field::field </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>default constructor</p>
+<p>default occurence value is 0. </p>
+
+</div>
+</div>
+<a class="anchor" id="a21cc47cdfd63932953b6476ca3c51183"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::field::field </td>
+          <td>(</td>
+          <td class="paramtype">FLDID32&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>new field instance</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>field ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6cc3f06d7251a520f6cb29a56ff5ccea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">atmi::field::field </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>new field instance.</p>
+<p>the name field must exists in known FML table (see FIELDTBLS32 and FLDTBLDIR32).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>field name </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -244,7 +317,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classatmi_1_1field.html#a161b9b7037c49fbcf86518fcb35e779c">occurence</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#af17fc3c22ce857f9d96f96d6c175b6d5">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#a4962b3aa080aba4ecffc7f3fa98be2da">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">atmi::Tfield&lt; char * &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#af17fc3c22ce857f9d96f96d6c175b6d5">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#ae3036c038b361aee2fc357c1c7d1304a">atmi::Tfield&lt; char * &gt;</a>, and <a class="el" href="classatmi_1_1_tfield.html#a4962b3aa080aba4ecffc7f3fa98be2da">atmi::Tfield&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -293,7 +366,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#afecf8218a3c312df34c36f334c995ac7">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#aa70ce8893913c8f3d968cae72f2cdd11">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5df77c9bee99916f6d14f5beeec54dac">atmi::Tfield&lt; char * &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#afecf8218a3c312df34c36f334c995ac7">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#a5df77c9bee99916f6d14f5beeec54dac">atmi::Tfield&lt; char * &gt;</a>, and <a class="el" href="classatmi_1_1_tfield.html#aa70ce8893913c8f3d968cae72f2cdd11">atmi::Tfield&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -339,7 +412,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classatmi_1_1field.html#a161b9b7037c49fbcf86518fcb35e779c">occurence</a> </dd></dl>
 
-<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a34f9956af4b0b98730595258e6c251e2">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#ae8de2dd360d04fc2465e4169b239c222">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#afaedd7d5902233652bed642bdceb9db1">atmi::Tfield&lt; char * &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a34f9956af4b0b98730595258e6c251e2">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#afaedd7d5902233652bed642bdceb9db1">atmi::Tfield&lt; char * &gt;</a>, and <a class="el" href="classatmi_1_1_tfield.html#ae8de2dd360d04fc2465e4169b239c222">atmi::Tfield&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -381,19 +454,19 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the length of the field's value </dd></dl>
 
-<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#ac4fdf6b5f9d1929b34bddc97274c6c9b">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">atmi::Tfield&lt; char * &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#aa97dec8559724186b62997409f04bf3f">atmi::Tfield&lt; char * &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#a6138c508841c4a837ea8c8e089755278">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#ac4fdf6b5f9d1929b34bddc97274c6c9b">atmi::Tfield&lt; std::string &gt;</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0fbc5a958a0af8286e339b088ee69bc8"></a>
+<a class="anchor" id="a94aab112ec52966a2a772d219e87a965"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char * atmi::field::name </td>
+          <td class="memname">const std::string atmi::field::name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -550,7 +623,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77">atmi::Tfield&lt; T &gt;</a>, and <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7">atmi::Tfield&lt; char * &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classatmi_1_1_tfield_3_01std_1_1string_01_4.html#a356a0e794a33bcfc1d3f4d8376e764d9">atmi::Tfield&lt; std::string &gt;</a>, <a class="el" href="classatmi_1_1_tfield_3_01char_01_5_01_4.html#af7be84fbdff0665d9c94b83872b299b7">atmi::Tfield&lt; char * &gt;</a>, and <a class="el" href="classatmi_1_1_tfield.html#a7bd1997e976116990ad0e2072320db77">atmi::Tfield&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -586,40 +659,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1d95c3b0f4ae491037ef51b8586a0083"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void atmi::field::set_id </td>
-          <td>(</td>
-          <td class="paramtype">FLDID32&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>this will set the current field ID</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>field ID </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section since"><dt>Since</dt><dd>v4.2.1 </dd></dl>
-
-<p>Reimplemented in <a class="el" href="classatmi_1_1_tfield.html#ac458fcdcce36a34d8beed526ca1e385a">atmi::Tfield&lt; T &gt;</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a9ca5e61e3e1068770098d20ad1332f24"></a>
 <div class="memitem">
 <div class="memproto">
@@ -649,7 +688,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>replaced by <a class="el" href="classatmi_1_1field.html#a1d95c3b0f4ae491037ef51b8586a0083">atmi::field.set_id()</a> </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>replaced by atmi::field.set_id() </dd></dl>
 
 </div>
 </div>
@@ -704,7 +743,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/atmi/<a class="el" href="fields_8hpp_source.html">fields.hpp</a></li>
+<li>include/atmi/<a class="el" href="field_8hpp_source.html">field.hpp</a></li>
 <li>src/field.cpp</li>
 </ul>
 </div><!-- contents -->
