@@ -46,7 +46,7 @@ namespace atmi {
   }
 
   void buffer::get_call_info( call_info &callinfo){
-    FBFR32 *cib = callinfo ;
+    FBFR32 *cib = (FBFR32 *)callinfo ;
     tpgetcallinfo((char *) _buffer, &cib, 0 );
     callinfo._buffer.set_buffer(cib);
   }
