@@ -60,7 +60,7 @@ namespace atmi {
       call_info &operator=( call_info &callinfo );
 
       /** @return  a FBFR32 * buffer that contains the call infos */
-      operator FBFR32 *() ;
+      explicit operator FBFR32 *() ;
 
       /** create a FBFR32 buffer to hold call infos
        */
