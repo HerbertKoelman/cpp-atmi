@@ -60,7 +60,7 @@ clean:
 	${RM} *.o core
 
 globber: clean
-	$(RM) *.log ULO* access* atmi++.cpp
+	$(RM) *.log ULO* access*
 	${RM} -R autom4te.cache
 	( cd $(LIBDIR) && rm $(CPPATMILIBS) ${LOCALEDIR}/en_US/atmi++.cat ${LOCALEDIR}/fr_FR/atmi++.cat )
 	$(RM) $(INCDIR)/*unc-backup*~ *unc-backup*~
